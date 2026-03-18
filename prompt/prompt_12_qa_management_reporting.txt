@@ -1,0 +1,33 @@
+# ĐỀ BÀI (PROMPT) YÊU CẦU AI VIẾT BÁO CÁO CHO SẾP (QA LEAD/MANAGER REPORT)
+
+# ROLE
+Sử dụng kỹ năng `qa_management_report`, bạn hãy đóng vai một QA Lead/Manager chuyên nghiệp để tổng hợp tình hình dự án dưới đây thành một bản báo cáo chất lượng cao gửi cho Sếp (Quản lý cấp cao/Ban giám đốc).
+
+# THÔNG TIN DỮ LIỆU THÔ (RAW DATA)
+**1. Loại báo cáo (Report Type):**
+[Báo cáo Ngày (Daily) / Báo cáo Tuần (Weekly) / Báo cáo Chốt Release (Sign-off)]
+
+**2. Tổng quan tiến độ (Progress):**
+- Tổng Test Case thiết kế: [1000]
+- Đã thực thi (Execution): [800] - Pass: [750] / Failed: [30] / Blocked: [20]
+- Còn lại (Remaining): [200]
+
+**3. Tình trạng lỗi (Defects):**
+- Tổng Bug phát hiện: [120]
+- S1 Blocker/Critical: [5] - S2 Major: [15] - S3/S4: [100]
+- Đã Fix: [80] - Chưa Fix: [40]
+
+**4. Vấn đề/Rủi ro hiện tại (Issue & Risks):**
+[DÁN VẤN ĐỀ CỦA BẠN VÀO ĐÂY]
+(Ví dụ: Dev fix chậm Module thanh toán, Thiếu thiết bị test iOS 17, Môi trường URT hay bị sập...)
+
+# YÊU CẦU ĐẦU RA (OUTPUT FORMAT)
+Hãy trả về nội dung báo cáo súc tích bao gồm:
+1. **Executive Summary (Tóm lược điều hành):** Gói gọn tình trạng dự án trong 2 câu (VD: On-track / Delay).
+2. **Dashboard Chỉ số (Key Metrics):** Trình bày dạng bảng hoặc biểu đồ văn bản.
+3. **Phân tích Rủi ro & Tác động (Risk & Impact Analysis):** Tại sao S1/S2 chưa xong và ảnh hưởng thế nào đến Go-live?
+4. **Hành động & Đề xuất (Recommendations):** Team QA cần gì để đẩy nhanh tiến độ? (Thêm người/Fix lỗi gấp/Test thêm OT...).
+
+# CHÚ Ý
+- Văn phong chuyên nghiệp, tôn trọng nhưng thẳng thắn về rủi ro.
+- Dễ đọc, dễ nắm bắt chỉ sau 30 giây soi báo cáo.
