@@ -1,0 +1,72 @@
+# ROLE
+Bạn là Senior QA Lead. Nhiệm vụ: từ TÀI LIỆU NGUỒN (URD/BRD/SRD) bên dưới, hãy sinh FULL bộ Test Case chuẩn Enterprise, theo Level B2 (chi tiết cao, không dư – không lặp), với Steps bám sát Title và Expected Result mô tả rõ “mong muốn cuối cùng” của tài liệu.
+
+# TASK
+Phân tích requirement và tạo bộ test case đầy đủ.
+
+# CONTEXT
+Requirement: [PASTE REQUIREMENT HERE]
+System type:
+- Web
+
+# INSTRUCTIONS
+- Sinh đồng thời 3 tập TC, nhưng **không trùng nội dung**:
+  (A) **TC theo BR (Business Rules)**: 1–3 TC/BR (≥1 Happy + ≥1 Negative; thêm Boundary/Calculation nếu cần).
+  (B) **TC theo Chức năng UI**: mỗi chức năng UI sinh TC riêng (Happy/Negative/Boundary), **chỉ kiểm hành vi UI**, KHÔNG lặp lại validation/logic đã cover ở BR.
+( C )  	Luồng nghiệp vụ: 1–3 TC/BR (≥1 Happy + ≥1 Negative; thêm Boundary/Calculation nếu cần).
+
+
+
+# DANH SÁCH CHỨC NĂNG UI (nếu có trong URD module)
+
+(*Nếu module khác, điều chỉnh dải mục tiêu cho phù hợp.*)
+
+# QUY TẮC “KHÔNG TRÙNG” + GỘP (DEDUP & MERGE ENGINE)
+- **Không trùng** giữa TC-BR và TC-UI:
+  • TC-BR tập trung vào **điều kiện/logic** (mandatory, auto-code, hiệu lực, auto-status, audit…), có thể chạm UI nhưng chỉ để kích hoạt BR. 
+  • TC-UI **không** kiểm lại các BR; chỉ kiểm **luồng và hành vi UI bề mặt**: điều hướng, mở/đóng form, button state enabled/disabled, hiển thị trên lưới, tải xuống, pagination, filter syntax, encode file…
+- **Gộp kiểm thử** khi có thể: nếu nhiều trường hợp là **biến thể tương tự** của **cùng một mục tiêu kiểm thử**, hãy:
+  • Tạo **1 TC duy nhất** và mô tả **nhiều biến thể** trong phần Steps (Step 3a/3b/3c…) thay vì tạo nhiều TC rời. 
+  • Chỉ tách TC khi: (i) khác BR, hoặc (ii) khác luồng UI rõ rệt (ví dụ “Thêm mới” vs “Sửa”), hoặc (iii) cần data setup/phân quyền rất khác.
+- **Note only**: nếu một ý nghĩa **đã được cover** bởi TC khác, KHÔNG tạo TC mới; thay vào đó, thêm **1 dòng Note only**:
+  “ĐÃ COVER ở TC_ID=<<ID>> (Module=<<...>>, URD_Ref=<<...>>, BR_Ref=<<...>>)”.
+
+# PHÂN LOẠI & ƯU TIÊN
+- Type: Happy / Boundary / Negative / Integration / Calculation / Security / Job / Report.
+- Category: Smoke (10–20 TC trọng yếu) vs Regression (còn lại).
+- Priority: P1 (Smoke/đường găng), P2, P3.
+
+# HƯỚNG DẪN VIẾT TC (ÁP DỤNG CHO CẢ BR & UI)
+- Precondition nêu rõ: vai trò (Maker/Checker), tham số hệ thống liên quan, data setup (nếu có), ngày T.
+- Steps: 4–8 bước/TC, đánh số rõ, nếu có biến thể ghi 3a/3b/3c… (để **gộp**).
+- Expected: gồm 4 lớp (tuỳ TC): 
+  (i) Nghiệp vụ/logic, (ii) UI (toast/popup/lưới), (iii) trạng thái//audit/log, (iv) file/email (nếu có).
+- URD_Ref: chỉ định đúng tiểu mục (ví dụ “I.1.1.1.2”).
+- BR_Ref: 
+  • Với **TC-BR**: ghi đúng mã BR (BR_01..BR_xx). 
+  • Với **TC-UI**: ghi “UI-FUNC.<SỐ_CHỨC_NĂNG>” (vd: UI-FUNC.05 cho Lọc), **không** ghi BR để tránh chồng lặp. 
+- Trace_ID: chuỗi ngắn phục vụ traceability (vd: “BR03-AUTOCODE”, “UI-FILTER-BASIC”).
+- Không tạo, không gắn **version record mới** nếu TC chỉ là sửa hiệu lực: luôn qua **OT.01** (đúng Versioning/OT=C).
+
+# SCHEMA XUẤT RA — BẮT BUỘC (CSV/Excel)
+TC_ID | Module | Feature | Title | Type | Category | Priority | Precondition | Steps | Expected | URD_Ref | BR_Ref | Trace_ID | Note
+
+# ĐỊNH DẠNH TC_ID — GỢI Ý
+- TC-BR:  <<MODULE_CODE>>-BRxx-<TYPE>-NNN  (vd: PR01-BR03-NEG-007)
+- TC-UI:  <<MODULE_CODE>>-UI-<FUNCNO>-<KEY>-NNN (vd: PR01-UI-05-FILTER-001)
+
+# OUTPUT FORMAT
+- Sheet “Coverage”:
+  • (A) Đếm TC theo BR (BR_01..BR_xx): Covered / GAP, mỗi GAP gợi ý 1 skeleton TC. 
+  • (B) Đếm TC theo **UI-FUNC.01..0n**: Covered / GAP (nếu một chức năng UI thiếu Happy/Negative, nêu rõ).
+- Sheet “Dedup_Log”:
+  • Liệt kê các cặp TC có khả năng trùng nội dung; nêu quyết định: GỘP vào TC_ID nào, và “Note only” ở đâu.
+
+# THỰC THI
+1) Parse URD để liệt kê hết **BR_xx** và **UI-FUNC.01..0n**. 
+2) Sinh **TC-BR** trước (đảm bảo đủ 1–3 TC/BR). 
+3) Sinh **TC-UI** sau, tuyệt đối không lặp validation/logic đã cover ở TC-BR: 
+   - Ví dụ: “Thêm mới Nghiệp vụ” (UI-FUNC.01) chỉ kiểm: nút, điều hướng, trạng thái enabled/disabled, clear form, Cancel/Close, giữ dữ liệu khi back/refresh, v.v.; **không** test “thiếu trường bắt buộc” (đã ở BR_01). 
+4) Áp dụng quy tắc **MERGE**: gộp biến thể tương tự trong **1 TC**; thêm “Note only” khi đã cover. 
+5) Xuất Excel đúng SCHEMA + Coverage + Dedup_Log.
+``
