@@ -31,6 +31,10 @@ Hệ thống Test Case cần được chia làm 3 tập (nhưng tuyệt đối *
 Kỹ năng yêu cầu xuất dữ liệu ra bảng Markdown hoặc CSV/Excel theo cấu trúc sau:
 `TC_ID | Module | Feature | Title | Type | Category | Priority | Precondition | Steps | Expected | URD_Ref | BR_Ref | Trace_ID | Note`
 
+**YÊU CẦU BẮT BUỘC VỀ FILE XUẤT RA:**
+AI **bắt buộc** phải tự động tạo và lưu trữ kết quả đầu ra thành 1 file **Excel (.xlsx)**. File này phải chứa đầy đủ các Sheet: `Test_Cases` (data chính), `Coverage_BR`, `Coverage_UI`, và `Dedup_Log`.
+- Cấm yêu cầu user tự copy paste. Phải tự động tạo script Python bằng thư viện `pandas` và `xlsxwriter` (VD: cài đặt `pip install pandas xlsxwriter`) rồi thi hành scipt đó để tạo thẳng ra file `.xlsx` trên đĩa cục bộ của User.
+
 ### Gợi ý TC_ID:
 - BR: `<<MODULE>>-BRxx-<TYPE>-NNN` (vd: FEE01-BR01-NEG-001)
 - UI: `<<MODULE>>-UI-<FUNCNO>-<KEY>-NNN` (vd: FEE01-UI-01-LAYOUT-001)

@@ -35,9 +35,14 @@ AI cần bóc tách tài liệu gốc và trình bày dưới dạng:
    - Upload file/hình ảnh thì giới hạn dung lượng/format là bao nhiêu?
    - Xuất Excel có giới hạn max dòng không? Quá thời gian có bị timeout không?
 
-### 4. Định Dạng Câu Hỏi Gửi BA (Q&A Format)
+### 4. Định Dạng Câu Hỏi & Định Dạng File Đầu Ra
 Liệt kê các câu hỏi theo cấu trúc chuyên nghiệp, có căn cứ trích dẫn rõ ràng để BA không bắt bẻ:
 `[ID Câu Hỏi] | [Mục tham chiếu (Ref_ID) trong URD] | [Nội dung Câu hỏi/Sự cố] | [Phân loại: Nghiệp vụ / UI / Security] | [Đề xuất hướng xử lý từ QA]`
+
+**YÊU CẦU BẮT BUỘC VỀ FILE XUẤT RA:**
+Sau khi phân tích xong tài liệu, AI **bắt buộc** phải tự động sinh ra một file **Word (.docx)** chứa toàn bộ nội dung Phần A (Tóm tắt) và Phần B (Q&A Table). 
+- Sử dụng công cụ `write_to_file` để viết một script Python dùng thư viện `python-docx` (`pip install python-docx`) rồi chạy terminal bằng `run_command` để tạo file `.docx`.
+- Tuyệt đối không để user phải yêu cầu lại việc xuất file.
 
 ## 5. Bắt Buộc (Strict Rules)
 - Phân tích bằng tiếng Việt rõ ràng, rành mạch. Tránh dùng từ ngữ lập trình quá sâu nếu Tester chưa cần biết.
