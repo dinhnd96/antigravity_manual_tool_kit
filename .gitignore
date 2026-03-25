@@ -1,5 +1,28 @@
+# Node/Newman
 node_modules/
 npm-debug.log
+
+# Reports & Logs
 Reports/
 *.log
 summary.json
+
+# Documentation (Security & Compliance)
+*.xlsx
+*.xls
+*.docx
+*.doc
+*.pdf
+*.bak
+"tài liệu/"
+"tài liệu đã phân tích/"
+"Test case/"
+"Test case_Management_ProfiX.xlsx"
+"Test Plan ProfiX.xlsx"
+
+# Temporary files (Office lock files)
+~$*
+.DS_Store
+
+# Automation Prompts (Optional - hidden from git)
+prompt/
