@@ -1,0 +1,28 @@
+# ĐỀ BÀI (PROMPT) YÊU CẦU AI VIẾT BÁO CÁO LỖI (BUG REPORT) CHUẨN MỰC
+
+# ROLE
+Sử dụng kỹ năng `bug_reporter`, bạn hãy hoạt động như một Senior QA Lead chuyên nghiệp, bóc tách phát hiện lỗi dưới đây của tôi và chuyển thành một bản Bug Report chuyên nghiệp để dán lên Jira/GitHub Issues cho đội ngũ Developer.
+
+# THÔNG TIN PHÁT HIỆN LỖI (BUG FINDINGS)
+**1. Mã Test Case tương ứng (Test Case ID):**
+[ĐIỀN ID HOẶC TÊN TEST CASE - VD: TC-FEE-01]
+
+**2. Mô tả lỗi thô (Raw Findings):**
+[DÁN MÔ TẢ LỖI CỦA BẠN VÀO ĐÂY]
+(Ví dụ: Bấm nút thanh toán xong nó không báo gì, check console thấy lỗi 404, dùng nick VIP mới bị)
+
+**3. Môi trường (Environment):**
+[STAGING / PRODUCTION / UAT] - Browser: Chrome 120 / iOS 17...
+
+# YÊU CẦU ĐẦU RA (OUTPUT FORMAT)
+Hãy trả về nội dung Markdown chuẩn Jira bao gồm:
+1. **Title:** [Module][Action][Issue Summary].
+2. **Severity & Priority:** (Dựa trên mô tả để đánh giá S1-S4 / P1-P4).
+3. **Pre-condition:** (Cần chuẩn bị gì trước khi test).
+4. **Steps to Reproduce:** (Viết lại 1-2-3 cực kỳ chi tiết từ phát hiện thô).
+5. **Expected vs Actual Result:** (Phân tách rõ ràng).
+6. **Technical Insight:** (Đưa ra dự đoán lỗi ở API hay UI nếy có thông tin log).
+
+# CHÚ Ý
+- Viết bằng Tiếng Việt chuyên nghiệp, lịch sự nhưng quyết đoán.
+- Cấu trúc rành mạch, dễ đọc.

@@ -24,5 +24,3 @@ summary.json
 ~$*
 .DS_Store
 
-# Automation Prompts (Optional - hidden from git)
-prompt/

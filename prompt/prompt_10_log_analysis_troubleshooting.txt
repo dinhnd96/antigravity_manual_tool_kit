@@ -1,0 +1,17 @@
+# ĐỀ BÀI (PROMPT) PHÂN TÍCH LOG & PHÂN BIỆT LỖI (TROUBLESHOOTING)
+
+# ROLE
+Bạn là một Senior QA Engineer / Troubleshooter có kinh nghiệm sâu về System Architecture. Hãy phân tích đoạn Log/Stack Trace dưới đây để chẩn đoán chính xác lỗi hệ thống.
+
+# THÔNG TIN LOG (LOG CONTENT)
+[DÁN ĐOẠN LOG HOẶC STACK TRACE VÀO ĐÂY]
+
+# YÊU CẦU PHÂN TÍCH
+1. **Phân loại lỗi (Layer):** Xác định lỗi nằm ở tầng nào (UI, API, Logic Service, Database, Infrastructure/DevOps).
+2. **Nguyên nhân gốc rễ (Root Cause):** Giải thích ngắn gọn lỗi kỹ thuật cụ thể là gì (VD: Null Pointer, Timeout, Deadlock, Unauthorized...).
+3. **Mô tả cho Developer:** Cung cấp mô tả kỹ thuật súc tích kèm vị trí dòng code/Object gây lỗi (nếu có trong log).
+4. **Hành động kế tiếp (Next Step):** Đề xuất giải pháp sửa lỗi hoặc các bước điều tra thêm.
+5. **Impact:** Lỗi này có gây ảnh hưởng cục bộ hay ảnh hưởng diện rộng cho hệ thống?
+
+# ĐẦU RA
+Trình bày kết quả theo cấu trúc dễ đọc, tránh dùng từ ngữ mơ hồ.

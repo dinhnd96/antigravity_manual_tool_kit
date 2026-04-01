@@ -1,0 +1,31 @@
+---
+name: prompt_14_qa_test_case_reviewer
+description: Prompt chuyên dụng cho việc Review Test Case bằng kỹ năng Senior QA Lead
+---
+
+### Mẫu 1: Review Tổng Thể (Dành cho bộ Test Case mới soạn xong)
+Hãy đóng vai **Senior QA Lead**, sử dụng kỹ năng `qa_test_case_reviewer` để thực hiện review bộ Test Case tại: [Đường dẫn file Test Case] dựa trên tài liệu đặc tả tại: [Đường dẫn file URD/FSD].
+
+**Yêu cầu chi tiết:**
+1. **Traceability Matrix:** Đối soát từng Business Rule (BR) trong tài liệu nguồn. Tìm các điểm nghiệp vụ bị bỏ sót (Gap Analysis).
+2. **Logic Validation & Anti-Pattern Check:** Kiểm tra các bước thực hiện và Expected Result có khớp 100% với Rule trong URD không. Đặc biệt lưu ý các công thức tính toán và trạng thái dữ liệu.
+   > **❌ BẮT LỖI TRÙNG LẶP & COPY-PASTE (CRITICAL CHECK):**
+   > - **Lỗi Trùng TC_ID:** Quét toàn bộ file để phát hiện các Test Case có cùng `TC_ID` => Yêu cầu đánh lại ID duy nhất.
+   > - **Lỗi Trùng 100% Content:** Bắt các nhóm TC có **cả Steps và Expected Result GIỐNG HỆT NHAU** nhưng nằm ở các tính năng/BR khác nhau (dấu hiệu copy-paste quên sửa).
+   > - **Lỗi Expected Result Dập Khuôn (Luồng chung chung):** Bắt lỗi nếu nhiều TC dùng chung 1 template Expected hời hợt (VD: *"Thông tin được xử lý thành công"* hoặc *"Đóng form, không lưu dữ liệu"* lặp lại cho hàng chục TC khác nhau). Mỗi chức năng phải có một Expected tường minh cho mục tiêu đó.
+   > - **Lỗi Logic Copy-Paste:** Soi kỹ các TC kiểm tra UI (Luồng Xem/Đóng/Hủy). Nếu Expected Result chứa *"Lưu thành công, sinh bản ghi"* hoặc Steps chứa *"Nhấn xác nhận"* => BẮT LỖI NGAY.
+   > - **Lỗi Chia Nhỏ Luồng (Flow Fragmentation):** Bắt lỗi các Test Case Luồng Nghiệp Vụ (Flow / E2E) bị băm nhỏ thành từng step giống như test Business Rule (BR). Vi phạm này tạo ra các TC Flow giả, thực chất chỉ đi test một câu chữ báo lỗi hay một validation nhỏ (VD: Flow mà chỉ test "nhấn nút Đóng" hoặc "báo lỗi trùng tên"). Một TC Flow chuẩn phải là **Continuous End-to-End**: đi liền mạch qua nhiều màn hình/chức năng (VD: Maker soạn -> Submit -> Pending -> Checker Reject -> Maker sửa -> Checker Approve -> Active). Yêu cầu đánh cờ đỏ các TC Flow vụn vặt và yêu cầu gộp hoặc xóa bỏ do đã lặp lại kịch bản của phần BR.
+   > - **Lỗi Test Nhầm Trường Tự Sinh:** Bắt lỗi các TC test Negative validations cho các trường do hệ thống tự sinh (như 'Ngày tạo', 'Mã tự sinh').
+3. **Double-Check:** Kiểm tra tính nhất quán về vai trò người dùng (Maker/Checker) và các tiền điều kiện (Pre-conditions).
+4. **Báo cáo:** Trình bày kết quả theo dạng bảng chuyên nghiệp gồm: BR_ID / TC_ID, Loại phát hiện (Duplicate, Gap, Logic, Ambiguity), Mô tả sự cố, Mức độ nghiêm trọng và Đề xuất sửa đổi cụ thể.
+
+---
+
+### Mẫu 2: Review Chuyên Sâu Luồng Lỗi & Ngoại Lệ (Edge Cases)
+Dựa trên kỹ năng `qa_test_case_reviewer`, hãy thực hiện "Challenge" bộ Test Case này: [Đường dẫn file TC] so với tài liệu: [Đường dẫn file URD].
+
+**Nhiệm vụ trọng tâm:**
+- Tìm kiếm các luồng ngoại lệ (Negative Flows), các trường hợp dữ liệu biên (Boundaries) mà bộ TC đang bỏ sót.
+- Phân tích các điểm giao thoa hệ thống (Integration Points) giữa các module/hệ thống liên quan để tìm các kịch bản lỗi tiềm ẩn.
+- Chỉ ra các điểm nghiệp vụ chưa rõ ràng (Ambiguity) trong tài liệu mà TC đang giả định sai.
+- Đề xuất bổ sung các Test Case quan trọng để tăng độ bao phủ (Coverage) cho hệ thống.
