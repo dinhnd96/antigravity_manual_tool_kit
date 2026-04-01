@@ -22,3 +22,52 @@ Các file Test Case (TC) thường bị phân mảnh (nằm trong các file nhá
 
 # VẬN HÀNH (EXECUTION)
 Mỗi quá trình cập nhật kết thúc, phải ghi report ra console hoặc chatbox về số file đã duyệt, số bug copy-paste đã cắt gọt và số sheet đã được format thành công.
+
+---
+
+## MODULE 5: CẬP NHẬT CÔNG THỨC TỰ ĐỘNG CHO SHEET QUẢN LÝ
+
+### 5.1. Sheet "📊 Dashboard" — Tổng hợp Chất lượng theo Module
+
+**Cấu trúc bắt buộc:**
+- **Hàng 1:** Tiêu đề `PROFIX — QUALITY DASHBOARD SUMMARY` (Merge toàn hàng, Bold, in đậm).
+- **Hàng 2:** Header cố định gồm các cột:
+  `STT | Module | Total TC | Passed | Failed | Blocked | N/A | Execution % | Pass Rate %`
+
+**Công thức bắt buộc cho từng dòng Module (bắt đầu từ hàng 3):**
+- `Total TC (C)` = `=COUNTA('{SheetName}'!A:A)-2` *(Trừ 2 hàng Header)*
+- `Passed (D)` = `=COUNTIF('{SheetName}'!U:U,"Pass")` *(Cột U = Final Status)*
+- `Failed (E)` = `=COUNTIF('{SheetName}'!U:U,"Fail")`
+- `Blocked (F)` = `=COUNTIF('{SheetName}'!U:U,"Blocked")`
+- `N/A (G)` = `=COUNTIF('{SheetName}'!U:U,"N/A")`
+- `Execution % (H)` = `=IF(C{n}>0,(D{n}+E{n}+F{n})/C{n},0)` — Format `0.00%`
+- `Pass Rate % (I)` = `=IF(C{n}>0,D{n}/C{n},0)` — Format `0.00%`
+
+**Hàng cuối (TOTAL):** Dùng `=SUM(...)` tổng hợp từng cột C→I, in đậm.
+
+---
+
+### 5.2. Sheet "📅 Daily Tracking" — Theo dõi Tiến độ Cá nhân Hàng ngày
+
+**Cấu trúc bắt buộc:**
+- **Hàng 1:** Tiêu đề `DAILY EXECUTION TRACKING — TEAM PROFIX` (Merge toàn hàng).
+- **Hàng 2:** Header cố định gồm các cột:
+  `Date | Định | Vân | Vân Anh | Thanh | Hiền | Thủy | Total/Day | Tổng lũy kế`
+
+**Quy tắc công thức cho cột từng thành viên (cột B → G):**
+Mỗi ô của thành viên = **Đếm số TC trong ngày hôm đó** mà member đó thực thi.
+Công thức dựa trên COUNTIFS tổng hợp từ tất cả Sheet TC (không phải 3 sheet quản lý):
+```
+=SUMPRODUCT(COUNTIFS('{SheetName}'!R:R, "<tên member>", '{SheetName}'!T:T, A{n}))
+```
+Trong đó: Cột R = Tester (người thực thi), Cột T = Date R1 (ngày thực thi).
+
+**Danh sách thành viên cố định (thứ tự header):**
+`Định | Vân | Vân Anh | Thanh | Hiền | Thủy`
+
+**Cột tổng:**
+- `Total/Day (H)` = `=SUM(B{n}:G{n})` — Tổng TC của cả team trong ngày đó.
+- `Tổng lũy kế (I)` = `=SUM(H$3:H{n})` — Tích lũy tổng từ đầu đến hàng hiện tại.
+
+**Phạm vi dữ liệu:** Sinh công thức từ hàng 3 trở xuống đến hàng 60 (cover ~2 tháng).
+

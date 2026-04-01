@@ -37,6 +37,7 @@ System type:
 - Priority: P1 (Smoke/đường găng), P2, P3.
 
 # HƯỚNG DẪN VIẾT TC (ÁP DỤNG CHO CẢ BR & UI)
+- Title (Tiêu đề): BẮT BUỘC phải viết rõ ràng, cụ thể và mô tả trực diện mục tiêu kiểm thử. Đọc vào Title phải hiểu ngay Test Case đang test hành vi gì, với điều kiện/dữ liệu đầu vào nào, và mong đợi kết quả nào (Ví dụ: "Kiểm tra hệ thống báo lỗi đỏ dưới field khi bỏ trống trường bắt buộc [Mã Khách Hàng]", "Kiểm tra Thêm mới loại phí thành công (sinh dòng Chờ duyệt) khi nhập đúng định dạng các trường"). Tuyệt đối KHÔNG đặt Title chung chung, sáo rỗng kiểu như "Test chức năng Thêm mới", "Kiểm tra BR_01", "Kiểm tra theo Happy case".
 - Precondition nêu rõ: vai trò (Maker/Checker), tham số hệ thống liên quan, data setup (nếu có), ngày T.
 - Steps: 4–8 bước/TC, đánh số rõ, nếu có biến thể ghi 3a/3b/3c… (để **gộp**).
 - Expected: gồm 4 lớp (tuỳ TC): 
