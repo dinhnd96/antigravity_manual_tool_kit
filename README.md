@@ -1,61 +1,48 @@
-# Antigravity Testing Kit 🚀
+# 🚀 ProfiX Test Management Toolkit
 
-👋Chào mừng bạn đến với **Antigravity Testing Kit**!
-
-Đây là bộ Kit được xây dựng và phát triển bởi **Anh Tester**, dành riêng cho **cộng đồng Tester**. Mục tiêu của repo này là cung cấp sẵn các thiết lập, quy tắc hành vi (Rules), kỹ năng (Skills), và quy trình (Workflows) chuẩn theo docs của Antigravity để hỗ trợ sử dụng AI Agent trên phần mềm **Antigravity**.
-
-Thông qua bộ công cụ này, việc triển khai Test Automation với sự hỗ trợ của AI sẽ trở nên dễ dàng, hiệu quả, giữ được tính ổn định và tuân thủ các best practices trong ngành kiểm thử phần mềm.
+Chào mừng các bạn Junior Tester đến với kho lưu trữ quản lý chất lượng dự án **ProfiX**. Đây là nơi lưu trữ toàn bộ "linh hồn" của quá trình kiểm thử, từ Test Cases cho đến các công cụ hỗ trợ AI.
 
 ---
 
-## 🌟 Tính Năng Nổi Bật
+## 📂 1. Cấu trúc Thư mục Quan trọng
 
-- **Tối ưu cho QA/Tester:** Tất cả các prompt, rule và workflow đều được tinh chỉnh dựa trên tư duy và quy trình làm việc thực tế của Automation Engineer.
-- **Hỗ trợ Đa Nền Tảng:** Tương thích với các framework phổ biến như Web (Playwright, Selenium), Mobile (Appium), và API (Playwright, REST Assured).
-- **Tuân thủ Tiêu Chuẩn Cao (Strict Rules):** Đảm bảo AI luôn đi theo cấu trúc Page Object Model (POM), viết code rõ ràng, không đoán bừa locator và tự động sửa lỗi (Self-fix).
-- **Giao Tiếp Bằng Tiếng Việt:** AI được cấu hình để trao đổi, giải thích và báo cáo hoàn toàn bằng Tiếng Việt, thân thiện với người dùng Việt Nam.
-
----
-
-## 📂 Cấu Trúc Thư Mục Chính
-
-Repo này tập trung vào thư mục `.agent`, bao gồm các thành phần quan trọng để định hình hành vi của AI:
-
-- **📄 `rules/`**: Chứa các file quy tắc bắt buộc AI phải tuân theo (ví dụ: `GEMINI.md`, `automation_rules.md`, `playwright_rules.md`...).
-- **🛠️ `skills/`**: Chứa các kỹ năng chuyên biệt mà AI có thể sử dụng giải quyết các bài toán tester khó (như phân tích flaky test).
-- **🔄 `workflows/`**: Chứa các kịch bản thực thi từng bước (step-by-step), giúp AI thực hiện các công việc phức tạp như: Sinh testcase từ requirements, tạo test suite tự động, v.v.
+| Thư mục/File | Ý nghĩa |
+| :--- | :--- |
+| `Test case/Test case_Management_ProfiX.xlsx` | **File Master duy nhất.** Chứa toàn bộ kịch bản kiểm thử (PR.01 -> PR.14, SE.01...). |
+| `Huong_dan_Git_cho_Junior.docx` | Tài liệu hướng dẫn chi tiết các bước làm việc với Git & AI (Nên đọc đầu tiên). |
+| `.agent/` | Chứa các "Skills" thông minh giúp AI hiểu và rà soát nghiệp vụ ProfiX cho bạn. |
 
 ---
 
-## ✳️ Hướng Dẫn Sử Dụng Trong Antigravity
+## 🛠 2. Quy trình làm việc hàng ngày (Best Practice)
 
-1. **Clone Repo này về máy:**
-   Hoặc bạn có thể copy trực tiếp thư mục `.agent` từ repo này.
-   
-2. **Tích hợp vào dự án của bạn:**
-   Copy thư mục `.agent` vào thư mục gốc (root directory) của dự án Automation hoặc Manual Test mà bạn đang làm việc.
+Để đảm bảo dữ liệu luôn đồng nhất và không bị mất mát, các bạn hãy tuân thủ 3 bước sau thông qua **AI Antigravity**:
 
-3. **Bắt đầu trò chuyện với AI trên Antigravity:**
-   Khi mở dự án lên Antigravity, AI tự động nhận diện thư mục `.agent` và sẽ áp dụng ngay các Rule, Skill, Workflow của **Anh Tester** đã thiết lập sẵn.
+### **Bước 1: Lấy bản mới nhất**
+Trước khi bắt đầu làm bất cứ việc gì, hãy nhắn với AI:
+> *"Cập nhật bản mới nhất từ GitHub về máy tôi với"*
 
----
+### **Bước 2: Chỉnh sửa & Rà soát**
+Khi viết Test Case mới vào file Excel, hãy chú ý cấu trúc chuẩn:
+- **BR_Reference (Cột A)**: Luôn điền mã Business Rule từ URD (VD: BR_01, BR_02...).
+- **TC_ID (Cột B)**: Dùng Keyword (VD: `PR03-COPY-HAP-001`) thay vì số thứ tự để tránh nhảy tên khi tài liệu cập nhật.
+- **Expected Result**: Ghi rõ format (VD: YYYY-MM-DD), trạng thái (VD: Chờ duyệt).
 
-## 🤝 Hỗ Trợ & Đóng Góp
-
-- Nếu bạn gặp khó khăn trong quá trình sử dụng hoặc muốn đóng góp để bộ công cụ này hoàn thiện hơn, đừng ngần ngại tạo **Issue** hoặc **Pull Request**.
-- Tham gia cộng đồng **Anh Tester** để cùng trao đổi, học hỏi thêm nhiều kiến thức bổ ích về Automation Testing!
-  - 📘 **Fanpage Facebook:** [Anh Tester](https://www.facebook.com/anhtester)
-  - 👥 **Group Facebook Automation:** [Cộng đồng Automation Testing](https://www.facebook.com/groups/automationtest)
-  - 👥 **Group Facebook Manual:** [Cộng đồng Manual Testing](https://www.facebook.com/groups/manualtest)
-  - ✈️ **Telegram Automation:** [Cộng đồng Automation Testing](https://t.me/+kSUGJ3pVvxkyZWU1)
-  - ✈️ **Telegram Manual:** [Cộng đồng Manual Testing](https://t.me/+8eChRz7OVqliZWRl)
+### **Bước 3: Sao lưu lên GitHub**
+Cuối ngày, hãy nhờ AI đẩy dữ liệu lên để Team Leader có thể Review:
+> *"Sao lưu thay đổi lên GitHub giúp tôi, ghi chú là: [Ghi công việc bạn đã làm]"*
 
 ---
 
-## 📄 License
+## 💡 3. Các mẹo nhỏ cho Junior
 
-Dự án này được phân phối dưới giấy phép nguồn mở **[MIT License](LICENSE)**.
+1. **Đừng sợ hỏng file**: Mọi thay đổi của bạn đều được GitHub ghi lại. Nếu lỡ tay xóa mất 1 sheet, hãy nhờ AI: *"Khôi phục lại file Excel về bản sáng nay giúp tôi"*.
+2. **Tận dụng AI để Review**: Trước khi gửi Team Lead duyệt, hãy nhắn: *"Review giúp tôi các Test Case tại sheet II.5.1.3 xem có bị lỗi logic hay chung chung không"*.
+3. **Quy tắc Naming**: Tuyệt đối không đặt tên file Excel khác. Chỉ dùng duy nhất file Master trong thư mục `Test case/`.
 
 ---
-Anh Tester Automation Testing 🎯
-https://anhtester.com
+
+## 📞 Hỗ trợ
+Nếu gặp khó khăn trong việc cài đặt môi trường hoặc dùng lệnh Git, các bạn hãy liên hệ trực tiếp với **Team Lead** để được hướng dẫn thêm.
+
+**Chúc các bạn làm việc hiệu quả và bắt được nhiều Bug! 🐞**
