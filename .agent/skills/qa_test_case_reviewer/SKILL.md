@@ -18,6 +18,7 @@ Khi được yêu cầu review bộ Test Case, AI cần thực hiện rà soát 
 2.  **Tính Chính Xác Logic (Logic & Rule Validation):**
     *   Đối chiếu trực tiếp từng bước hạch toán, công thức tính toán, trạng thái dữ liệu (Status) giữa FSD và **Expected Result** của TC.
     *   Phát hiện mâu thuẫn: Ví dụ, FSD yêu cầu trạng thái "A", nhưng TC lại kỳ vọng trạng thái "B".
+    *   **⚠️ Truy lùng lỗi Copy-Paste dập khuôn (Anti-pattern):** Nhận diện ngay và đánh cờ đỏ (Flag) đối với các kịch bản chức năng UI dạng Đóng (Close) hoặc Xem (View) nhưng lại chứa Expected Result làm thay đổi Data State (như: *"Lưu thành công, sinh bản ghi Chờ duyệt"*). Tương tự, bắt lỗi các case test Validation (Negative) ngớ ngẩn nhằm vào các trường dữ liệu do hệ thống tự động sinh (Auto-generated).
 
 3.  **Các Luồng Ngoại Lệ & Biên (Edge Cases & Boundaries):**
     *   Khai quật các luồng lỗi (Negative Flows), xử lý hệ thống khi gặp lỗi (Timeout, Crash, API Error) mà bộ Test Case đang bỏ sót.

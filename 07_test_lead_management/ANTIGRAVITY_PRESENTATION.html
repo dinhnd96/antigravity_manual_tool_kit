@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antigravity Presentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --secondary: #ec4899;
+            --bg: #0f172a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text: #f8fafc;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        .slide {
+            min-width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--primary), transparent 70%);
+            opacity: 0.1;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #818cf8, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: #818cf8;
+            margin-bottom: 30px;
+        }
+
+        p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 80%;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .card h3 {
+            color: #f472b6;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+
+        .indicator {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+    <div class="indicator" id="indicator">Slide 1 / 8</div>
+    <div class="container" id="container">
+        <!-- Slide 1 -->
+        <div class="slide">
+            <h1>ANTIGRAVITY</h1>
+            <h2>Trợ lý AI thế hệ mới cho BA & TEST</h2>
+            <p>Từ lý thuyết đến hành động thực tế - Nâng tầm hiệu suất công việc lên gấp đôi.</p>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+            <h2>"Nỗi đau" của chúng ta hiện nay?</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>🕒 Quá tải</h3>
+                    <p>Mất hàng giờ để đọc và hiểu các bản URD dài dằng dặc.</p>
+                </div>
+                <div class="card">
+                    <h3>📝 Thủ công</h3>
+                    <p>Viết hàng trăm Test Case lặp đi lặp lại một cách nhạt nhẽo.</p>
+                </div>
+                <div class="card">
+                    <h3>🔄 Thay đổi</h3>
+                    <p>Mỗi lần URD thay đổi là một lần "đau đầu" cập nhật lại mọi thứ.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+            <h2>Antigravity là gì?</h2>
+            <p>Không chỉ là Chatbot trả lời câu hỏi, Antigravity là một <strong>AI AGENT</strong> có khả năng:</p>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>📂 Đọc file</h3>
+                    <p>Hiểu cấu trúc file, thư mục ngay tại máy tính của bạn.</p>
+                </div>
+                <div class="card">
+                    <h3>🖥️ Trình duyệt</h3>
+                    <p>Tự mình lướt web tìm kiếm thông tin theo yêu cầu.</p>
+                </div>
+                <div class="card">
+                    <h3>✍️ Thực thi</h3>
+                    <p>Viết code, sửa file, tạo báo cáo trực tiếp.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+            <h2>Đặc quyền cho BA</h2>
+            <div class="card-grid" style="grid-template-columns: 1fr 1fr">
+                <div class="card">
+                    <h3>⚡ Phân tích tức thì</h3>
+                    <p>Trích xuất Business Rules từ URD trong vài giây.</p>
+                </div>
+                <div class="card">
+                    <h3>💎 User Story chuẩn</h3>
+                    <p>Tự động xây dựng Acceptance Criteria (AC) chi tiết và đầy đủ.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+            <h2>Sức mạnh cho TESTER</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>🤖 Auto Test Case</h3>
+                    <p>Sinh toàn bộ Test Case từ yêu cầu nghiệp vụ chỉ với 1 click.</p>
+                </div>
+                <div class="card">
+                    <h3>🔍 Review cực nhanh</h3>
+                    <p>Tự động so sánh hai bản URD để tìm ra các điểm cần cập nhật Test.</p>
+                </div>
+                <div class="card">
+                    <h3>💻 Automation</h3>
+                    <p>Hỗ trợ viết script test (Playwright, Selenium) mượt mà.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6 (NEW) -->
+        <div class="slide">
+            <h2>Tại sao CON NGƯỜI vẫn là số 1?</h2>
+            <p>AI là công cụ, nhưng <strong>BA & TESTER</strong> mới là người làm chủ sự thành bại.</p>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>⚖️ Trách nhiệm</h3>
+                    <p>AI không thể "ký duyệt" chất lượng. Con người mới là người ra quyết định cuối cùng.</p>
+                </div>
+                <div class="card">
+                    <h3>🧩 Tư duy nghiệp vụ</h3>
+                    <p>Những tình huống "oái oăm" (Edge Cases) chỉ có kinh nghiệm thực tế của bạn mới phát hiện ra.</p>
+                </div>
+                <div class="card">
+                    <h3>❤️ Thấu cảm UX</h3>
+                    <p>AI không biết "cảm nhận" phần mềm. Chỉ con người mới biết người dùng thực sự cần gì.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide">
+            <h2>Kết quả thực tế</h2>
+            <h1 style="font-size: 8rem;">-50%</h1>
+            <p>Thời gian làm các công việc "chân tay" lặp lại.</p>
+            <p>Tập trung 100% vào tư duy nghiệp vụ và chất lượng sản phẩm.</p>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide">
+            <h1>BẮT ĐẦU NGAY!</h1>
+            <p>Hãy coi Antigravity như một thành viên mới trong team.</p>
+            <p>Sẵn sàng hỗ trợ 24/7.</p>
+            <h2 style="margin-top: 50px;">Cảm ơn mọi người đã lắng nghe!</h2>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button onclick="prev()">Trước</button>
+        <button onclick="next()">Sau</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 8;
+        const container = document.getElementById('container');
+        const indicator = document.getElementById('indicator');
+
+        function updateSlide() {
+            container.style.transform = `translateX(-${currentSlide * 100}vw)`;
+            indicator.innerText = `Slide ${currentSlide + 1} / ${totalSlides}`;
+        }
+
+        function next() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prev() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') next();
+            if (e.key === 'ArrowLeft') prev();
+        });
+    </script>
+</body>
+</html>
