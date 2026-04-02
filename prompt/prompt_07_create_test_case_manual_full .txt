@@ -26,7 +26,7 @@ System type:
   • TC-BR tập trung vào **điều kiện/logic** (mandatory, auto-code, hiệu lực, auto-status, audit…), có thể chạm UI nhưng chỉ để kích hoạt BR. 
   • TC-UI **không** kiểm lại các BR; chỉ kiểm **luồng và hành vi UI bề mặt**: điều hướng, mở/đóng form, button state enabled/disabled, hiển thị trên lưới, tải xuống, pagination, filter syntax, encode file…
 - **Gộp kiểm thử** khi có thể: nếu nhiều trường hợp là **biến thể tương tự** của **cùng một mục tiêu kiểm thử**, hãy:
-  • Tạo **1 TC duy nhất** và mô tả **nhiều biến thể** trong phần Steps (Step 3a/3b/3c…) thay vì tạo nhiều TC rời. 
+  • Tạo **1 TC duy nhất** và mô tả **nhiều biến thể** trong phần Steps (Step 3a/3b/3c…) thay vì tạo nhiều TC rời. **Ghi chú tại cột Note: "Gộp các trường hợp: [Liệt kê các biến thể/trường hợp được gộp]".**
   • Chỉ tách TC khi: (i) khác BR, hoặc (ii) khác luồng UI rõ rệt (ví dụ “Thêm mới” vs “Sửa”), hoặc (iii) cần data setup/phân quyền rất khác.
 - **Note only**: nếu một ý nghĩa **đã được cover** bởi TC khác, KHÔNG tạo TC mới; thay vào đó, thêm **1 dòng Note only**:
   “ĐÃ COVER ở TC_ID=<<ID>> (Module=<<...>>, URD_Ref=<<...>>, BR_Ref=<<...>>)”.
@@ -40,8 +40,11 @@ System type:
 - Title (Tiêu đề): BẮT BUỘC phải viết rõ ràng, cụ thể và mô tả trực diện mục tiêu kiểm thử. Đọc vào Title phải hiểu ngay Test Case đang test hành vi gì, với điều kiện/dữ liệu đầu vào nào, và mong đợi kết quả nào (Ví dụ: "Kiểm tra hệ thống báo lỗi đỏ dưới field khi bỏ trống trường bắt buộc [Mã Khách Hàng]", "Kiểm tra Thêm mới loại phí thành công (sinh dòng Chờ duyệt) khi nhập đúng định dạng các trường"). Tuyệt đối KHÔNG đặt Title chung chung, sáo rỗng kiểu như "Test chức năng Thêm mới", "Kiểm tra BR_01", "Kiểm tra theo Happy case".
 - Precondition nêu rõ: vai trò (Maker/Checker), tham số hệ thống liên quan, data setup (nếu có), ngày T.
 - Steps: 4–8 bước/TC, đánh số rõ, nếu có biến thể ghi 3a/3b/3c… (để **gộp**).
-- Expected: gồm 4 lớp (tuỳ TC): 
-  (i) Nghiệp vụ/logic, (ii) UI (toast/popup/lưới), (iii) trạng thái//audit/log, (iv) file/email (nếu có).
+- Expected: BẮT BUỘC liệt kê đủ 4 lớp dữ liệu (theo định dạng i, ii, iii, iv): 
+  (i) Nghiệp vụ/Logic: Kết quả xử lý, chặn/lưu thành công.
+  (ii) UI: Toast, Popup, Grid reload, Focus bôi đỏ ô lỗi.
+  (iii) Trạng thái/Audit: Trạng thái bản ghi (Chờ duyệt/Duyệt), ghi log Audit (Maker/Checker).
+  (iv) Output: File (.xlsx), Message Topic (Kafka), Email thông báo.
   > **❌ QUY TẮC CHỐNG LỖI LOGIC & CẤM COPY-PASTE (ĐẶC BIỆT CHO UI TC):**
   > - **Luồng Xem(View)/Đóng(Close/Cancel):** TUYỆT ĐỐI KHÔNG copy-paste cụm từ *"Lưu dữ liệu/Sinh trạng thái Chờ duyệt"* vào Expected Result. Chức năng Xem/Đóng KHÔNG LÀM THAY ĐỔI CSDL. Các bước thao tác cũng không được chèn lệnh *"Nhấn xác nhận/Kiểm tra thông báo"*.
   > - **Luồng Lưu/Submit:** Phân biệt rành mạch kết quả báo "Lỗi Validation" (Không sinh dòng) và "Lưu thành công" (Báo toast xanh, sinh dòng Chờ duyệt).
@@ -66,6 +69,7 @@ TC_ID | BR_Ref | URD_Ref | Module | Feature | Title | Type | Category | Priority
 # ĐỊNH DẠNH TC_ID — GỢI Ý
 - TC-BR:  <<MODULE_CODE>>-BRxx-<TYPE>-NNN  (vd: PR01-BR03-NEG-007)
 - TC-UI:  <<MODULE_CODE>>-UI-<FUNCNO>-<KEY>-NNN (vd: PR01-UI-05-FILTER-001)
+*Lưu ý: Luôn thay <<MODULE_CODE>> bằng mã module thực tế (VD: SA09, PR02).*
 
 # OUTPUT FORMAT
 - Sheet “Coverage”:
@@ -79,6 +83,6 @@ TC_ID | BR_Ref | URD_Ref | Module | Feature | Title | Type | Category | Priority
 2) Sinh **TC-BR** trước (đảm bảo đủ 1–3 TC/BR). 
 3) Sinh **TC-UI** sau, tuyệt đối không lặp validation/logic đã cover ở TC-BR: 
    - Ví dụ: “Thêm mới Nghiệp vụ” (UI-FUNC.01) chỉ kiểm: nút, điều hướng, trạng thái enabled/disabled, clear form, Cancel/Close, giữ dữ liệu khi back/refresh, v.v.; **không** test “thiếu trường bắt buộc” (đã ở BR_01). 
-4) Áp dụng quy tắc **MERGE**: gộp biến thể tương tự trong **1 TC**; thêm “Note only” khi đã cover. 
+4) Áp dụng quy tắc **MERGE**: gộp biến thể tương tự trong **1 TC** (ghi chú rõ việc gộp vào cột Note); thêm “Note only” khi đã cover. 
 5) Xuất Excel đúng SCHEMA + Coverage + Dedup_Log.
 ``

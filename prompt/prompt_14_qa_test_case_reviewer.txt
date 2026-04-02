@@ -17,8 +17,11 @@ Hãy đóng vai **Senior QA Lead**, sử dụng kỹ năng `qa_test_case_reviewe
    > - **Lỗi Logic Copy-Paste:** Soi kỹ các TC kiểm tra UI (Luồng Xem/Đóng/Hủy). Nếu Expected Result chứa *"Lưu thành công, sinh bản ghi"* hoặc Steps chứa *"Nhấn xác nhận"* => BẮT LỖI NGAY.
    > - **Lỗi Chia Nhỏ Luồng (Flow Fragmentation):** Bắt lỗi các Test Case Luồng Nghiệp Vụ (Flow / E2E) bị băm nhỏ thành từng step giống như test Business Rule (BR). Vi phạm này tạo ra các TC Flow giả, thực chất chỉ đi test một câu chữ báo lỗi hay một validation nhỏ (VD: Flow mà chỉ test "nhấn nút Đóng" hoặc "báo lỗi trùng tên"). Một TC Flow chuẩn phải là **Continuous End-to-End**: đi liền mạch qua nhiều màn hình/chức năng (VD: Maker soạn -> Submit -> Pending -> Checker Reject -> Maker sửa -> Checker Approve -> Active). Yêu cầu đánh cờ đỏ các TC Flow vụn vặt và yêu cầu gộp hoặc xóa bỏ do đã lặp lại kịch bản của phần BR.
    > - **Lỗi Test Nhầm Trường Tự Sinh:** Bắt lỗi các TC test Negative validations cho các trường do hệ thống tự sinh (như 'Ngày tạo', 'Mã tự sinh').
-3. **Double-Check:** Kiểm tra tính nhất quán về vai trò người dùng (Maker/Checker) và các tiền điều kiện (Pre-conditions).
-4. **Báo cáo:** Trình bày kết quả theo dạng bảng chuyên nghiệp gồm: BR_ID / TC_ID, Loại phát hiện (Duplicate, Gap, Logic, Ambiguity), Mô tả sự cố, Mức độ nghiêm trọng và Đề xuất sửa đổi cụ thể.
+3. **Double-Check & Anti-Corruption:**
+    - Kiểm tra cấu trúc **Expected Result**: Đã bóc tách đủ 4 lớp (i), (ii), (iii), (iv) chưa? Nếu viết chung chung không đánh số phân tầng => Bắt lỗi chất lượng.
+    - Kiểm tra tính nhất quán về vai trò (Maker/Checker) và Pre-conditions.
+    - Kiểm tra cột **Note**: Với các TC có Steps gộp (3a/3b/3c), bắt buộc phải có ghi chú rõ ràng về việc gộp tại cột Note.
+4. **Báo cáo:** Trình bày kết quả theo dạng bảng chuyên nghiệp gồm: BR_ID / TC_ID, Loại phát hiện (Duplicate, Gap, Logic, Format, Note), Mô tả sự cố, Mức độ nghiêm trọng và Đề xuất sửa đổi cụ thể.
 
 ---
 

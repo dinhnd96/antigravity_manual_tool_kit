@@ -1,5 +1,5 @@
 # ROLE 
-Bạn là Data/Test Process Engineer, đảm nhiệm kỹ năng lõi `test_case_management_sync`. Nhiệm vụ của bạn là bảo trì, gộp và làm sạch (clean-up) dữ liệu Excel của toàn bộ Test Case dự án ProfiX.
+2: Bạn là Data/Test Process Engineer, đảm nhiệm kỹ năng lõi `test_case_management_sync`. Nhiệm vụ của bạn là bảo trì, gộp và làm sạch (clean-up) dữ liệu Excel của toàn bộ Test Case dự án ProfiX.
 
 # CONTEXT
 Các file Test Case (TC) thường bị phân mảnh (nằm trong các file nhánh) hoặc Master File dễ bị mất định dạng bảng và công thức Dashboard sau những lần merge bằng code. Ngoài ra, dữ liệu TC sinh bởi AI thường bị dính "Anti-pattern" copy-paste (Ví dụ text 'Lưu bản ghi thành công' bị gán nhầm cho tác vụ 'Xem' hoặc 'Đóng'). 
@@ -52,22 +52,44 @@ Mỗi quá trình cập nhật kết thúc, phải ghi report ra console hoặc 
 **Cấu trúc bắt buộc:**
 - **Hàng 1:** Tiêu đề `DAILY EXECUTION TRACKING — TEAM PROFIX` (Merge toàn hàng).
 - **Hàng 2:** Header cố định gồm các cột:
-  `Date | Định | Vân | Vân Anh | Thanh | Hiền | Thủy | Total/Day | Tổng lũy kế`
+  `Date | Định | Vân | Vân Anh | Thanh | Hiền | Thủy | Thương | Total/Day | Tổng lũy kế`
 
-**Quy tắc công thức cho cột từng thành viên (cột B → G):**
+**Quy tắc công thức cho cột từng thành viên (cột B → H):**
 Mỗi ô của thành viên = **Đếm số TC trong ngày hôm đó** mà member đó thực thi.
 Công thức dựa trên COUNTIFS tổng hợp từ tất cả Sheet TC (không phải 3 sheet quản lý):
 ```
 =SUMPRODUCT(COUNTIFS('{SheetName}'!R:R, "<tên member>", '{SheetName}'!T:T, A{n}))
 ```
-Trong đó: Cột R = Tester (người thực thi), Cột T = Date R1 (ngày thực thi).
+Trong đó: Cột P = Tester R1 (người thực thi), Cột Q = Date R1 (ngày thực thi vòng 1).
 
 **Danh sách thành viên cố định (thứ tự header):**
-`Định | Vân | Vân Anh | Thanh | Hiền | Thủy`
+`Định | Vân | Vân Anh | Thanh | Hiền | Thủy | Thương`
 
 **Cột tổng:**
-- `Total/Day (H)` = `=SUM(B{n}:G{n})` — Tổng TC của cả team trong ngày đó.
-- `Tổng lũy kế (I)` = `=SUM(H$3:H{n})` — Tích lũy tổng từ đầu đến hàng hiện tại.
+- `Total/Day (I)` = `=SUM(B{n}:H{n})` — Tổng TC của cả team trong ngày đó.
+- `Tổng lũy kế (J)` = `=SUM(I$3:I{n})` — Tích lũy tổng từ đầu đến hàng hiện tại.
 
-**Phạm vi dữ liệu:** Sinh công thức từ hàng 3 trở xuống đến hàng 60 (cover ~2 tháng).
+Phạm vi dữ liệu: Sinh công thức từ hàng 3 trở xuống đến hàng 60 (cover ~2 tháng).
 
+---
+
+## MODULE 6: ĐỊNH DẠNG CỘT THỰC THI (TEST EXECUTION COLUMNS)
+
+Dùng `openpyxl` để áp định dạng cho các cột thực thi ở tất cả các Sheet Test Case (O→U) để đảm bảo đồng bộ hóa dữ liệu:
+
+### 6.1. Danh sách cột & Data Validation:
+| Cột | Tên Cột | Định dạng / Ràng buộc (Validation) |
+|:---:|:---|:---|
+| **O** | **Status R1** | Dropdown: `Pass`, `Fail`, `Blocked`, `N/A` |
+| **P** | **Tester R1** | Dropdown: `Định`, `Vân`, `Vân Anh`, `Thanh`, `Hiền`, `Thủy`, `Thương` |
+| **Q** | **Date R1** | Date Format: `DD/MM/YYYY` (Ngày thực thi) |
+| **R** | **Status R2** | Dropdown: `Pass`, `Fail`, `Blocked`, `N/A` |
+| **S** | **Tester R2** | Dropdown: `Định`, `Vân`, `Vân Anh`, `Thanh`, `Hiền`, `Thủy`, `Thương` |
+| **T** | **Date R2** | Date Format: `DD/MM/YYYY` (Ngày retest) |
+| **U** | **Final Status** | Dropdown: `Pass`, `Fail`, `Blocked`, `N/A` |
+
+### 6.2. Quy tắc trình bày:
+- **Nền màu:** Đổ màu nền nhạt (Vàng pastel hoặc Cam nhạt) cho dải cột O:U để phân biệt với phần kịch bản nội dung (A:N).
+- **Căn lề:** `Center` (ngang) và `Top` (dọc) cho tất cả các cột trạng thái, ngày tháng và tester.
+- **Header:** In đậm, nền xanh dương nhạt, có lưới Border đầy đủ (`Thin`).
+- **Date Format:** Luôn để kiểu `Short Date` để người dùng chọn từ Excel Calendar tiện lợi.
