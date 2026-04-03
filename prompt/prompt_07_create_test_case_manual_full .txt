@@ -38,7 +38,7 @@ System type:
 
 # HƯỚNG DẪN VIẾT TC (ÁP DỤNG CHO CẢ BR & UI)
 - Title (Tiêu đề): BẮT BUỘC phải viết rõ ràng, cụ thể và mô tả trực diện mục tiêu kiểm thử. Đọc vào Title phải hiểu ngay Test Case đang test hành vi gì, với điều kiện/dữ liệu đầu vào nào, và mong đợi kết quả nào (Ví dụ: "Kiểm tra hệ thống báo lỗi đỏ dưới field khi bỏ trống trường bắt buộc [Mã Khách Hàng]", "Kiểm tra Thêm mới loại phí thành công (sinh dòng Chờ duyệt) khi nhập đúng định dạng các trường"). Tuyệt đối KHÔNG đặt Title chung chung, sáo rỗng kiểu như "Test chức năng Thêm mới", "Kiểm tra BR_01", "Kiểm tra theo Happy case".
-- Precondition nêu rõ: vai trò (Maker/Checker), tham số hệ thống liên quan, data setup (nếu có), ngày T.
+- Precondition nêu rõ: vai trò (Maker/Checker), tham số hệ thống liên quan, data setup (nếu có), ngày T. BẮT BUỘC nếu có nhiều ý tách biệt nhau thì phải đánh số thứ tự và xuống dòng cho từng ý.
 - Steps: 4–8 bước/TC, đánh số rõ, nếu có biến thể ghi 3a/3b/3c… (để **gộp**).
 - Expected: BẮT BUỘC liệt kê đủ 4 lớp dữ liệu CÓ XUỐNG DÒNG RÕ RÀNG (theo đúng cú pháp i, ii, iii, iv dưới đây). Tuyệt đối không được viết chung chung: 
   (i) Nghiệp vụ/Logic: Kết quả xử lý, chặn/lưu thành công.
@@ -62,17 +62,18 @@ System type:
 - Trace_ID: chuỗi ngắn phục vụ traceability (vd: “BR03-AUTOCODE”, “UI-FILTER-BASIC”).
 - Không tạo, không gắn **version record mới** nếu TC chỉ là sửa hiệu lực: luôn qua **OT.01** (đúng Versioning/OT=C).
 
-# SCHEMA XUẤT RA — BẮT BUỘC (CSV/Excel)
-TC_ID | BR_Ref | URD_Ref | Module | Feature | Title | Type | Category | Priority | Precondition | Steps | Expected | Trace_ID | Note
+# SCHEMA XUẤT RA VÀ HÌNH THỨC TRẢ KẾT QUẢ — BẮT BUỘC
+Tuyệt đối KHÔNG in dữ liệu Test Case dạng bảng Markdown hay CSV dạng Text ra màn hình Chat. 
+BẮT BUỘC bạn phải tự viết và chạy một Script Python (sử dụng thư viện pandas và openpyxl) để tạo trực tiếp file `.xlsx` gồm 3 sheet: "Coverage", "Dedup_Log", và "Test Cases" lưu ngay vào máy của người dùng.
 
-# ⚠️ LƯU Ý THỨ TỰ CỘT (khớp với Master File Test case_Management_ProfiX.xlsx):
-# Cột A=TC_ID | B=BR_Ref | C=URD_Ref | D=Module | E=Feature | F=Title
-# G=Type | H=Category | I=Priority | J=Precondition
-# K=Steps | L=Expected | M=Trace_ID | N=Note | O..U=Execution columns
-# → Giữ đúng thứ tự này để paste trực tiếp vào Master File không bị lệch cột.
+Cột dữ liệu của sheet "Test Cases" phải đảm bảo thứ tự nguyên vẹn và bao gồm đủ 21 cột (để dán khớp vào Master File):
+- A=TC_ID | B=BR_Ref | C=URD_Ref | D=Module | E=Feature | F=Title
+- G=Type | H=Category | I=Priority | J=Precondition
+- K=Steps | L=Expected | M=Trace_ID | N=Note
+- Các cột Thực thi (để trống khi mới tạo TC): O=Status R1 | P=Tester R1 | Q=Date R1 | R=Status R2 | S=Tester R2 | T=Date R2 | U=Final Status
 
 # ĐỊNH DẠNH TC_ID — GỢI Ý
-- TC-BR:  <<MODULE_CODE>-<TYPE>-NNN  (vd: PR01-NEG-007)
+- TC-BR:  <<MODULE_CODE>>-<TYPE>-NNN  (vd: PR01-NEG-007)
 - TC-UI:  <<MODULE_CODE>>-UI-<FUNCNO>-<KEY>-NNN (vd: PR01-UI-05-FILTER-001)
 *Lưu ý: Luôn thay <<MODULE_CODE>> bằng mã module thực tế (VD: SA09, PR02).*
 
@@ -89,5 +90,6 @@ TC_ID | BR_Ref | URD_Ref | Module | Feature | Title | Type | Category | Priority
 3) Sinh **TC-UI** sau, tuyệt đối không lặp validation/logic đã cover ở TC-BR: 
    - Ví dụ: “Thêm mới Nghiệp vụ” (UI-FUNC.01) chỉ kiểm: nút, điều hướng, trạng thái enabled/disabled, clear form, Cancel/Close, giữ dữ liệu khi back/refresh, v.v.; **không** test “thiếu trường bắt buộc” (đã ở BR_01). 
 4) Áp dụng quy tắc **MERGE**: gộp biến thể tương tự trong **1 TC** (ghi chú rõ việc gộp vào cột Note); thêm “Note only” khi đã cover. 
-5) Xuất Excel đúng SCHEMA + Coverage + Dedup_Log.
-``
+5) Viết mã Python để nạp dữ liệu vào 3 DataFrames (Coverage, Dedup_Log, Test Cases).
+6) Chạy script để tự động xuất ra file `.xlsx` (Ví dụ: `Feature_N_Test_Cases.xlsx`) ngay trong thư mục dự án.
+7) Trả lời người dùng (bằng Tiếng Việt) rằng file Excel đã được sinh thành công và cung cấp đường dẫn để họ kiểm tra.
