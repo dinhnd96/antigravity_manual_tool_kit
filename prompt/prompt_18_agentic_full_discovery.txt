@@ -1,0 +1,31 @@
+# PROMPT 18: AGENTIC FULL DISCOVERY (AI KHÁM PHÁ TOÀN DIỆN UI/API)
+
+## 🎯 MỤC TIÊU (OBJECTIVE)
+Sử dụng AI để tự động khám phá toàn bộ giao diện người dùng (UI), thực hiện các thao tác nghiệp vụ thực tế, thu thập dữ liệu Network để sinh bộ kịch bản Postman đầy đủ và chính xác 100% cho mọi Module trong hệ thống.
+
+## 🛠️ QUY TRÌNH "HÀNH ĐỘNG" CỦA AGENT (AI AGENT BEHAVIOR)
+
+### 1. Đăng nhập & Xác thực (Auth Session)
+- Truy cập URL gốc (@[URL]).
+- Thực hiện Đăng nhập bằng tài khoản được cấp (@[Credentials]).
+- Kiểm tra session và đảm bảo Cookie/Token đã được thiết lập thành công.
+
+### 2. Quét Cấu trúc (Structure Scanning)
+- Duyệt qua thanh Side-menu để lấy danh sách tất cả các Module/Trang khả dụng.
+- Phân loại các Module theo chức năng (Sản phẩm, Khách hàng, Biểu phí, Phê duyệt...).
+
+### 3. Thực thi Nghiệp vụ (Action Discovery)
+- Với mỗi Module, Agent sẽ thực hiện vòng đời CRUD (Thêm, Sửa, Xóa):
+  - **Tạo mới:** Tự tìm nút "Thêm/Tạo", sử dụng dữ liệu thông minh (Faker) để điền vào tất cả các trường.
+  - **Duyệt/Tìm kiếm:** Thực hiện các hành vi Filtering, Searching, Pagination.
+  - **Chi tiết:** Click vào row để xem chi tiết dữ liệu.
+  - **Xóa:** Thực hiện thao tác gỡ bỏ bản ghi mẫu vừa tạo.
+
+### 4. Thu thập & Ghép nối (Capture & Data Chaining)
+- Ghi lại các API Request ứng với mỗi thao tác UI.
+- Xác định mối quan hệ giữa các API: Ví dụ, API tạo sản phẩm sinh ra `ID` ➔ Dùng `ID` đó cho API sửa sản phẩm.
+
+## 📜 KẾT QUẢ "CÀY QUÉT" (DISCOVERY OUTPUT)
+- Báo cáo Danh mục tính năng (Feature List) đã tìm thấy.
+- Thư mục Postman Collection đầy đủ, chia theo từng Folder Module.
+- Toàn bộ tham số đã được "Smart Chaining" thông minh.

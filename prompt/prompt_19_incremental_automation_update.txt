@@ -1,0 +1,25 @@
+# PROMPT 19: INCREMENTAL AUTOMATION UPDATE (CẬP NHẬT BỔ SUNG)
+
+## 🎯 MỤC TIÊU (OBJECTIVE)
+Nâng cấp bộ Postman Collection hiện có bằng cách chỉ thêm/sửa các API mới mà không làm mất đi các cấu trúc cũ, các biến môi trường và kịch bản Chaining đã thiết lập. TIẾT KIỆM TỐI ĐA TOKEN.
+
+## 🛠️ CHIẾN LƯỢC THỰC HIỆN
+
+### 1. Phân tích Thay đổi (Change Analysis)
+- Nhận diện đầu vào mới: URL tính năng mới, file HAR mới, hoặc Swagger mới.
+- So sánh với cấu trúc Collection hiện tại (@[Collection.json]).
+- Chỉ liệt kê các sự thay đổi (Delta): API thêm mới, API thay đổi tham số, API đã bị gỡ bỏ.
+
+### 2. Sinh kịch bản "Nối tiếp" (Append Generation)
+- Chỉ sinh mã kiểm thử và chaining cho các phần MỚI.
+- Ký thừa các biến môi trường cũ (baseUrl, token, v.v.).
+- Nếu API mới cần lấy dữ liệu từ API cũ ➔ Tự động thiết lập Chaining nối tiếp.
+
+### 3. Gộp & Dọn dẹp (Merging)
+- Thực hiện Gộp (Merge) bản nâng cấp vào bản gốc.
+- Đảm bảo không trùng lặp các Folder.
+- Giữ nguyên các kịch bản Assertions tùy chỉnh mà người dùng đã viết tay trước đó.
+
+## 📜 KẾT QUẢ
+- Bộ Collection phiên bản mới (v.X+1) đầy đủ tính năng.
+- Báo cáo tóm tắt các API đã được bổ sung/sửa đổi.

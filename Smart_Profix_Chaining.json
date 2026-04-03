@@ -1,0 +1,59 @@
+{
+	"info": {
+		"name": "Profix Smart CHAIN Robust",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "0. Login",
+			"event": [{
+				"listen": "test",
+				"script": { "exec": [
+					"var jsonData = pm.response.json();",
+					"var token = jsonData.token || (jsonData.data && (jsonData.data.token || jsonData.data.accessToken));",
+					"if (token) { pm.collectionVariables.set(\"token\", token); }"
+				]}
+			}],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": { "mode": "raw", "raw": "{\"username\": \"john_doe\", \"password\": \"Welcome@1\"}", "options": { "raw": { "language": "json" } } },
+				"url": { "raw": "{{baseUrl}}/user/login", "host": ["{{baseUrl}}"], "path": ["user", "login"] }
+			}
+		},
+		{
+			"name": "1. GET Product List",
+			"event": [{
+				"listen": "test",
+				"script": { "exec": [
+					"var jsonData = pm.response.json();",
+					"var content = jsonData.data || jsonData.content || (jsonData.data && jsonData.data.content);",
+					"if (content && content.length > 0) {",
+					"    pm.collectionVariables.set(\"productId\", content[0].id || content[0].productId);",
+					"}"
+				]}
+			}],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": { "mode": "raw", "raw": "{\"page\": 0, \"size\": 10}", "options": { "raw": { "language": "json" } } },
+				"url": { "raw": "{{baseUrl}}/product-service-catalog/list", "host": ["{{baseUrl}}"], "path": ["product-service-catalog", "list"] }
+			}
+		},
+		{
+			"name": "2. Get Detail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": { "mode": "raw", "raw": "{\"id\": \"{{productId}}\"}", "options": { "raw": { "language": "json" } } },
+				"url": { "raw": "{{baseUrl}}/product-service-catalog/detail", "host": ["{{baseUrl}}"], "path": ["product-service-catalog", "detail"] }
+			}
+		}
+	],
+	"auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+	"variable": [
+		{ "key": "baseUrl", "value": "http://115.146.122.156:8083", "type": "string" },
+		{ "key": "token", "value": "", "type": "string" },
+		{ "key": "productId", "value": "", "type": "string" }
+	]
+}

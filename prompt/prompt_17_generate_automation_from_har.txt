@@ -1,0 +1,35 @@
+# PROMPT 17: GENERATE POSTMAN AUTOMATION FROM HAR FILE (NETWORK TO API)
+
+## 🎯 MỤC TIÊU (OBJECTIVE)
+Chuyển đổi dữ liệu Network Traffic thực tế từ file HAR (HTTP Archive) thành một bộ kịch bản Postman thông minh, có trình tự nghiệp vụ (Sequence) và khả năng truyền biến động (Data Chaining) dựa trên dữ liệu thật của Front-end.
+
+## 🛠️ QUY TRÌNH THỰC HIỆN (WORKFLOW)
+
+### 1. Phân tích & Lọc (Recon & Filter)
+- Đọc nội dung file JSON của tệp HAR (@[File.har]).
+- Lọc (White-listing) các request thuộc domain chính (ví dụ: `115.146.122.156:8083`).
+- Loại bỏ các request không cần thiết: Images (.png, .jpg), CSS, JS, Fonts, hoặc các API của bên thứ 3 (Google Analytics, v.v.).
+
+### 2. Trích xuất Payload (Payload Extraction)
+- Xác định Phương thức (Method: POST, GET, PUT, DELETE).
+- Lấy chính xác Header (Đặc biệt là `Authorization`, `Content-Type`).
+- Trích xuất Request Body (JSON Raw) đang hoạt động thành công trên Front-end.
+- Sắp xếp các Request theo trình tự thời gian (Start Time) để đảm bảo tính logic của nghiệp vụ.
+
+### 3. "Smart Chaining" từ Dữ liệu thực (Dynamic Variable Induction)
+- Phân tích Response của API N và so sánh với Request Body của API N+1.
+- Tự động nhận diện các giá trị ID, Code, Token được sinh ra và tái sử dụng ở các bước sau.
+- Nhúng script `pm.collectionVariables.set` cho các nguồn dữ liệu và `{{variable}}` cho các đích đến.
+
+### 4. Đóng gói Collection (Postman Generation)
+- Sinh file JSON chuẩn Postman Collection v2.1.0.
+- Gom nhóm (Grouping) các API vào thư mục theo Luồng (Flow) dựa trên URL Path (ví dụ: /user, /fee-code).
+- Nhúng bộ Assertion chuẩn: Status 200, Response Time < 1s, JSON Schema check.
+
+## 📜 KẾT QUẢ ĐẦU RA (OUTPUT)
+- Một file `.json` Postman Collection có thể chạy ngay lập tức.
+- Báo cáo phân tích các điểm "Dữ liệu liên kết" (Data Linking) đã tìm thấy trong file HAR.
+
+---
+> [!IMPORTANT]
+> Agent phải đảm bảo các giá trị nhạy cảm (như mật khẩu) trong file HAR được bảo mật hoặc thay thế bằng biến môi trường (Environment Variables).
