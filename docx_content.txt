@@ -1,0 +1,90 @@
+SA.09- Quản lý nhóm code phí định kỳ
+Mô tả nhóm chức năng
+	•	Mục đích: Chức năng này được sử dụng để quản lý các code phí thu định kỳ cần quản lý chung theo nghiệp vụ (ví dụ: Các code phí quản lý tài khoản dành cho Khách hàng cá nhân). Mỗi Nhóm code phí sẽ được gán với 01 job sinh dữ liệu thu phí định kỳ trong hệ thống.
+
+	•	Các chức năng chi tiết trên màn hình:
+
+STT
+Chức năng
+Mô tả
+	•	
+Thêm mới
+Cho phép thêm mới bản ghi
+	•	
+Kiểm tra
+Tại chức năng thêm mới nhóm code phí định kỳ, cho phép NSD chọn nhiều code phí từ cây SPDV và hiển thị lên lưới danh sách code phí trực thuộc Nhóm code phí
+	•	
+Sửa
+Cho phép sửa bản ghi
+	•	
+Xem
+Cho phép xem bản ghi
+	•	
+Xóa
+Cho phép xóa bản ghi
+	•	
+Tìm kiếm
+Cho phép tìm kiếm dữ liệu trên lưới
+	•	
+Tải xuống
+Cho phép tải xuống dữ liệu trên lưới
+
+	•	Màn hình tham khảo:
+
+
+Thêm mới Nhóm code phí
+Thông tin chung:
+
+Objective
+Thêm mới nhóm code phí thu định kỳ
+Ví dụ: Thêm mới nhóm code phí quản lý tài khoản dành cho KHDN
+Actor
+Người dùng
+Trigger
+Người dùng click vào nút “Thêm mới” tại chức năng “Quản lý nhóm code phí định kỳ”
+Pre-condition
+Người dùng được phân quyền, tồn tại tối thiểu một Code phí định kỳ đã được khai báo trong hệ thống 
+Post-condition
+Thêm mới thành công Nhóm code phí thu định kỳ
+
+Luồng nghiệp vụ:
+Step
+Actor
+Description
+	•	
+Người dùng
+Chọn nút “Thêm mới” tại chức năng “Quản lý nhóm code phí định kỳ”
+	•	
+Hệ thống
+Hiển thị màn hình Thêm mới Nhóm code phí định kỳ
+	•	
+Người dùng
+Nhập các thông tin của Nhóm code phí
+Nhấn “Xác nhận”
+	•	
+Hệ thống
+Kiểm tra tính hợp lệ của các thông tin vừa nhập
+	•	
+Người dùng
+Nhận thông báo “Thêm mới nhóm code phí định kỳ thành công”
+
+Business Rules:
+
+BR Code
+Description
+BR_01
+Người dùng cần nhập đầy đủ các trường bắt buộc (dấu *) trước khi chọn “Xác nhận”
+BR_02
+Người dùng chọn “Đóng”, hệ thống sẽ không lưu các thông tin vừa nhập
+BR_03
+Mã nhóm Code phí phải là duy nhất
+BR_04
+Sau khi người dùng nhập Tần suất, Ngày thu/Ngày thu theo dữ liệu, hệ thống chỉ hiển thị các code phí có Loại tính phí = Định kỳ và các tham số về tần suất tương ứng để người dùng chọn
+BR_05
+Tại một thời điểm, một Code phí chỉ được nằm trong một nhóm phí 
+BR_06
+Người dùng được định nghĩa mức độ ưu tiên của nghiệp vụ cần thu phí áp dụng trong trường hợp tại một ngày có nhiều nghiệp vụ (nhóm code phí) cần thu trên 1 tài khoản/thẻ. Dữ liệu phí đến hạn định kỳ cần thu sẽ có trường dữ liệu về mức độ ưu tiên tương ứng với giá trị được cấu hình theo Nhóm code phí. Khi ProfiX ghi thông tin phí định kỳ đến hạn cần thu vào Topic sẽ thực hiện ghi theo thứ tự ưu tiên từ thấp đến cao (1, 2, 3…).
+
+Màn hình tham khảo:
+
+

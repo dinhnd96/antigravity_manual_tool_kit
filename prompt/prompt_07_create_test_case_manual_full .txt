@@ -38,7 +38,7 @@ System type:
 
 # HƯỚNG DẪN VIẾT TC (ÁP DỤNG CHO CẢ BR & UI)
 - Title (Tiêu đề): BẮT BUỘC phải viết rõ ràng, cụ thể và mô tả trực diện mục tiêu kiểm thử. Đọc vào Title phải hiểu ngay Test Case đang test hành vi gì, với điều kiện/dữ liệu đầu vào nào, và mong đợi kết quả nào (Ví dụ: "Kiểm tra hệ thống báo lỗi đỏ dưới field khi bỏ trống trường bắt buộc [Mã Khách Hàng]", "Kiểm tra Thêm mới loại phí thành công (sinh dòng Chờ duyệt) khi nhập đúng định dạng các trường"). Tuyệt đối KHÔNG đặt Title chung chung, sáo rỗng kiểu như "Test chức năng Thêm mới", "Kiểm tra BR_01", "Kiểm tra theo Happy case".
-- Precondition nêu rõ: vai trò (Maker/Checker), tham số hệ thống liên quan, data setup (nếu có), ngày T. BẮT BUỘC nếu có nhiều ý tách biệt nhau thì phải đánh số thứ tự và xuống dòng cho từng ý.
+- Precondition nêu rõ: vai trò (Maker/Checker), tham số hệ thống liên quan, data setup (nếu có), ngày T. BẮT BUỘC luôn phải đánh số thứ tự (1., 2., 3...). Ngay cả trong trường hợp chỉ có 1 điều kiện duy nhất, BẮT BUỘC vẫn phải thêm "1. " ở đầu câu. Nếu có nhiều ý thì phải ngắt dòng (\n) rõ ràng cho từng ý.
 - Steps: 4–8 bước/TC, đánh số rõ, nếu có biến thể ghi 3a/3b/3c… (để **gộp**).
 - Expected: BẮT BUỘC liệt kê đủ 4 lớp dữ liệu CÓ XUỐNG DÒNG RÕ RÀNG (theo đúng cú pháp i, ii, iii, iv dưới đây). Tuyệt đối không được viết chung chung: 
   (i) Nghiệp vụ/Logic: Kết quả xử lý, chặn/lưu thành công.
@@ -54,11 +54,12 @@ System type:
   > - **Luồng Xem(View)/Đóng(Close/Cancel):** TUYỆT ĐỐI KHÔNG copy-paste cụm từ *"Lưu dữ liệu/Sinh trạng thái Chờ duyệt"* vào Expected Result. Chức năng Xem/Đóng KHÔNG LÀM THAY ĐỔI CSDL. Các bước thao tác cũng không được chèn lệnh *"Nhấn xác nhận/Kiểm tra thông báo"*.
   > - **Luồng Lưu/Submit:** Phân biệt rành mạch kết quả báo "Lỗi Validation" (Không sinh dòng) và "Lưu thành công" (Báo toast xanh, sinh dòng Chờ duyệt).
   > - **Trường tự sinh (Auto-generated/Audit logs):** Không bao giờ sinh kịch bản Negative UI Test (bắt lỗi nhập liệu chèn text đỏ) cho các trường mà hệ thống tự gán (như 'Ngày tạo', 'Người tạo').
-  > - **❌ CẤM DẬP KHUÔN STEPS (NO GENERIC STEPS):** Tuyệt đối không dùng chung một bộ 4-5 bước "mẫu" (VD: 1. Mở - 2. Nhập - 3. Xác nhận) cho tất cả các TC trong cùng một module. Các bước thao tác (Steps) phải mô tả cụ thể hành động, điều kiện hoặc dữ liệu đặc thù gắn liền với mục tiêu kiểm thử của TC đó để đảm bảo tính tường minh khi thực hiện.
+  > - **❌ CẤM DẬP KHUÔN STEPS (NO GENERIC STEPS):** Tuyệt đối không dùng chung một bộ 4-5 bước "mẫu" cho tất cả các TC. Các bước thao tác phải mô tả cụ thể hành động, gắn liền với mục tiêu kiểm thử.
+  > - **Test Logic So Sánh / Sắp Xếp (Priority/Sorting):** Đối với các quy tắc liên quan đến thứ tự ưu tiên hoặc sắp xếp, BẮT BUỘC kịch bản (Pre-condition & Steps) phải thiết lập dữ liệu với ít nhất n=02 (02 items/records) có giá trị khác nhau để chứng minh được hệ thống có khả năng sắp xếp hoặc đối chiếu đúng đắn.
 - URD_Ref: chỉ định đúng tiểu mục (ví dụ “I.1.1.1.2”).
 - BR_Ref: 
   • Với **TC-BR**: ghi đúng mã BR (BR_01..BR_xx). 
-  • Với **TC-UI**: ghi “UI-FUNC.<SỐ_CHỨC_NĂNG>” (vd: UI-FUNC.05 cho Lọc), **không** ghi BR để tránh chồng lặp. 
+  • Với **TC-UI**: ghi “UI-FUNC.<SỐ_CHỨC_NĂNG>” (vd: UI-FUNC.05 cho Lọc), **không** ghi BR. Tuyệt đối KHÔNG map sai râu ông nọ cắm cằm bà kia (VD: TC Tìm Kiếm nhưng map mã UI-FUNC của Thêm Mới). BẮT BUỘC rà soát Ma trận để mỗi UI-FUNC có trong URD đều phải có ít nhất 1 TC kiểm chứng (bao gồm cả các luồng Sửa, Xóa).
 - Trace_ID: chuỗi ngắn phục vụ traceability (vd: “BR03-AUTOCODE”, “UI-FILTER-BASIC”).
 - Không tạo, không gắn **version record mới** nếu TC chỉ là sửa hiệu lực: luôn qua **OT.01** (đúng Versioning/OT=C).
 
@@ -72,9 +73,14 @@ Cột dữ liệu của sheet "Test Cases" phải đảm bảo thứ tự nguyê
 - K=Steps | L=Expected | M=Trace_ID | N=Note
 - Các cột Thực thi (để trống khi mới tạo TC): O=Status R1 | P=Tester R1 | Q=Date R1 | R=Status R2 | S=Tester R2 | T=Date R2 | U=Final Status
 
-# ĐỊNH DẠNH TC_ID — GỢI Ý
-- TC-BR:  <<MODULE_CODE>>-<TYPE>-NNN  (vd: PR01-NEG-007)
-- TC-UI:  <<MODULE_CODE>>-UI-<FUNCNO>-<KEY>-NNN (vd: PR01-UI-05-FILTER-001)
+# ĐỊNH DẠNG TC_ID — QUY TẮC BẮT BUỘC DÀNH CHO TC_ID
+- Tuyệt đối KHÔNG nhúng các mã rule cụ thể (VD: BR01, BR02) vào TC_ID để tránh rủi ro đứt gãy index khi tài liệu URD thay đổi nghiệp vụ.
+- Đối với Test Case BR (TC-BR): BẮT BUỘC bỏ cụm số "0x", chỉ giữ lại chữ "BR" để phân biệt với TC UI. Cấu trúc:
+  • Mảng Happy Path: <<MODULE_CODE>>-BR-HAP-001, 002...
+  • Mảng Negative/Boundary: <<MODULE_CODE>>-BR-NEG-001, 002...
+- Đối với Test Case UI (TC-UI):
+  • Mảng Tính năng UI: <<MODULE_CODE>>-UI-001, 002, 003...
+*(Ví dụ chuẩn tham chiếu: SA09-BR-HAP-001, SA09-BR-NEG-001, SA09-UI-001).*
 *Lưu ý: Luôn thay <<MODULE_CODE>> bằng mã module thực tế (VD: SA09, PR02).*
 
 # OUTPUT FORMAT (⚠️ GHI NHỚ: CỘT EXPECTED BẮT BUỘC NGHIÊM NGẶT THEO ĐÚNG FORMAT 4 LỚP i, ii, iii, iv CHO TỪNG RECORD)
