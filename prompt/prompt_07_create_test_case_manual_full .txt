@@ -9,6 +9,10 @@ Requirement: [PASTE REQUIREMENT HERE]
 System type:
 - Web
 
+# XỬ LÝ HÌNH ẢNH TRONG TÀI LIỆU DOCX (OPTIONAL)
+- Trích xuất ảnh siêu tốc: Nếu tài liệu nguồn là file `.docx` và chứa các hình ảnh quan trọng (Mockup UI, Flowchart, Diagram), BẮT BUỘC sử dụng script/lệnh giải nén file `.docx` (truy cập nhanh thư mục `word/media/`) để lấy các hình ảnh đính kèm ra.
+- Phân tích ảnh an toàn: Chọn lọc đọc (Vision/OCR) từ 2 đến 3 hình ảnh cốt lõi nhất (như màn hình chính, sơ đồ luồng) để hiểu sâu về thiết kế UI và Flow mà text không diễn đạt hết. Tránh load cùng lúc quá nhiều ảnh để đảm bảo tốc độ. Điều này giúp viết Test Case UI và E2E chính xác hơn bản text.
+
 # INSTRUCTIONS
 - Sinh đồng thời 3 tập TC, nhưng **không trùng nội dung**:
   (A) **TC theo BR (Business Rules)**: 1–3 TC/BR (≥1 Happy + ≥1 Negative; thêm Boundary/Calculation nếu cần).
