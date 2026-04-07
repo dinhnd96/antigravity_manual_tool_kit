@@ -14,6 +14,7 @@ System type:
 - Phân tích ảnh an toàn: Chọn lọc đọc (Vision/OCR) từ 2 đến 3 hình ảnh cốt lõi nhất (như màn hình chính, sơ đồ luồng) để hiểu sâu về thiết kế UI và Flow mà text không diễn đạt hết. Tránh load cùng lúc quá nhiều ảnh để đảm bảo tốc độ. Điều này giúp viết Test Case UI và E2E chính xác hơn bản text.
 
 # INSTRUCTIONS
+- **BẮT BUỘC GIỮ NGUYÊN TÊN FIELD/ITEM**: Khi viết Test Case, AI phải lấy đúng và đầy đủ tên các field, item, button... từ tài liệu được gửi lên. Tuyệt đối không cắt gọn, không rút gọn tên và không tự ý sáng tạo hay thêm thắt các trường/tên ngoài tài liệu nguồn.
 - Sinh đồng thời 3 tập TC, nhưng **không trùng nội dung**:
   (A) **TC theo BR (Business Rules)**: 1–3 TC/BR (≥1 Happy + ≥1 Negative; thêm Boundary/Calculation nếu cần).
   (B) **TC theo Chức năng UI**: mỗi chức năng UI sinh TC riêng (Happy/Negative/Boundary), **chỉ kiểm hành vi UI**, KHÔNG lặp lại validation/logic đã cover ở BR.
