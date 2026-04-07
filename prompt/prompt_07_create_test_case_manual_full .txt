@@ -32,7 +32,8 @@ System type:
   • TC-UI **không** kiểm lại các BR; chỉ kiểm **luồng và hành vi UI bề mặt**: điều hướng, mở/đóng form, button state enabled/disabled, hiển thị trên lưới, tải xuống, pagination, filter syntax, encode file…
 - **Gộp kiểm thử** khi có thể: nếu nhiều trường hợp là **biến thể tương tự** của **cùng một mục tiêu kiểm thử**, hãy:
   • Tạo **1 TC duy nhất** và mô tả **nhiều biến thể** trong phần Steps (Step 3a/3b/3c…) thay vì tạo nhiều TC rời. **Ghi chú tại cột Note: "Gộp các trường hợp: [Liệt kê các biến thể/trường hợp được gộp]".**
-  • Chỉ tách TC khi: (i) khác BR, hoặc (ii) khác luồng UI rõ rệt (ví dụ “Thêm mới” vs “Sửa”), hoặc (iii) cần data setup/phân quyền rất khác.
+  • **NGOẠI LỆ NGHIÊM NGẶT (KHÔNG GỘP TRẠNG THÁI):** Khi các trường hợp kiểm tra cấu thành bởi nhiều trạng thái (Status/State) khác nhau (Ví dụ: kiểm tra với trạng thái Hoạt động, Ngừng hoạt động, Chờ duyệt), TUYỆT ĐỐI KHÔNG GỘP chung vào một Test Case để tránh rủi ro sót bug khi test bằng tay hay automation. BẮT BUỘC phải viết test case tách biệt riêng rẽ cho từng điều kiện trạng thái đầu vào cụ thể.
+  • Chỉ tách TC khi: (i) khác BR, hoặc (ii) khác luồng UI rõ rệt (ví dụ “Thêm mới” vs “Sửa”), hoặc (iii) cần data setup/phân quyền rất khác, hoặc (iv) đối với các trạng thái (Status) độc lập như quy định trên.
 - **Note only**: nếu một ý nghĩa **đã được cover** bởi TC khác, KHÔNG tạo TC mới; thay vào đó, thêm **1 dòng Note only**:
   “ĐÃ COVER ở TC_ID=<<ID>> (Module=<<...>>, URD_Ref=<<...>>, BR_Ref=<<...>>)”.
 
