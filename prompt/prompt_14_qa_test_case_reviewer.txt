@@ -8,6 +8,7 @@ Hãy đóng vai **Senior QA Lead**, sử dụng kỹ năng `qa_test_case_reviewe
 
 **Yêu cầu chi tiết:**
 1. **Traceability Matrix:** Đối soát từng Business Rule (BR) trong tài liệu nguồn. Tìm các điểm nghiệp vụ bị bỏ sót (Gap Analysis).
+   > **🔄 KIỂM TRA CHUYỂN ĐỔI TRẠNG THÁI (STATE TRANSITION CHECK):** Đặc biệt rà soát lỗi thiếu hụt kịch bản State Transition. Khi tài liệu có nhắc đến các luồng thay đổi trạng thái (Ví dụ: Chờ duyệt -> Duyệt, Hoạt động -> Không hoạt động), BẮT BUỘC phải soi xem bộ Test Case đã có đầy đủ các kịch bản kiểm tra luồng đi và luồng đảo ngược (Reverse logic) như từ Không hoạt động về lại Hoạt động chưa. Nếu thiếu các nhánh chuyển đổi của vòng đời dữ liệu, phải đánh dấu là Gap Analysis và yêu cầu bổ sung ngay.
    > **🔎 ĐỐI SOÁT HÌNH ẢNH TRONG TÀI LIỆU DOCX:**
    > - **Trích xuất ảnh:** Nếu tài liệu URD/FSD là file `.docx`, BẮT BUỘC sử dụng script/lệnh giải nén để lấy ảnh từ thư mục `word/media/` ra.
    > - **Phân tích (Vision/OCR):** Chỉ xem lọc 2-3 hình ảnh quan trọng nhất (như Mockup Màn hình, Sơ đồ luồng) nhằm đối chiếu khắt khe thiết kế giao diện thực tế và sơ đồ so với bộ Test Case, bắt chặt các lỗi về UI (nút bấm, input ẩn hiện) hoặc Flow bị sót. Tránh load tất cả ảnh làm chậm hệ thống.

@@ -62,6 +62,7 @@ System type:
   > - **Trường tự sinh (Auto-generated/Audit logs):** Không bao giờ sinh kịch bản Negative UI Test (bắt lỗi nhập liệu chèn text đỏ) cho các trường mà hệ thống tự gán (như 'Ngày tạo', 'Người tạo').
   > - **❌ CẤM DẬP KHUÔN STEPS (NO GENERIC STEPS):** Tuyệt đối không dùng chung một bộ 4-5 bước "mẫu" cho tất cả các TC. Các bước thao tác phải mô tả cụ thể hành động, gắn liền với mục tiêu kiểm thử.
   > - **Test Logic So Sánh / Sắp Xếp (Priority/Sorting):** Đối với các quy tắc liên quan đến thứ tự ưu tiên hoặc sắp xếp, BẮT BUỘC kịch bản (Pre-condition & Steps) phải thiết lập dữ liệu với ít nhất n=02 (02 items/records) có giá trị khác nhau để chứng minh được hệ thống có khả năng sắp xếp hoặc đối chiếu đúng đắn.
+  > - **🔄 BẮT BUỘC SỬ DỤNG KỸ THUẬT STATE TRANSITION (CHUYỂN ĐỔI TRẠNG THÁI):** Đối với dữ liệu có nhiều mốc vòng đời (Status/State), phải chú trọng sinh đủ kịch bản chiều đi và chiều về (Reverse logic). Ví dụ: Không chỉ test luồng xuôi "Hoạt động -> Không hoạt động", mà phải bắt buộc sinh thêm kịch bản test luồng ngược lại "Không hoạt động -> Hoạt động". Khai thác triệt để các hướng chuyển động của trạng thái để đảm bảo không bị bỏ sót Gap.
 - URD_Ref: chỉ định đúng tiểu mục (ví dụ “I.1.1.1.2”).
 - BR_Ref: 
   • Với **TC-BR**: ghi đúng mã BR (BR_01..BR_xx). 
