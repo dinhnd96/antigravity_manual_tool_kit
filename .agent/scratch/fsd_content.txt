@@ -1,0 +1,4691 @@
+
+
+
+
+NGÂN HÀNG TMCP ĐẠI CHÚNG VIỆT NAM
+  
+
+
+ 
+
+Tài liệu phân tích thiết kế chức năng theo User Story
+Hệ thống quản lý Phí tập trung ProfiX – Phase 1
+  
+
+
+Phiên bản tài liệu
+Version 0.1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+HÀ NỘI, 2026
+TRANG KÝ
+ 
+Hà Nội, ngày ____________________
+ 
+ 
+PHÊ DUYỆT CỦA CÔNG TY TNHH HTC HOLDINGS VIỆT NAM
+ 
+ 
+ 
+Đại diện HTC Holdings Việt Nam
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+Nguyễn Ngọc Tấn
+ 
+ 
+ 
+  
+PHÊ DUYỆT CỦA NGÂN HÀNG TMCP ĐẠI CHÚNG VIỆT NAM
+ 
+ 
+
+
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+Ông/Bà …
+ 
+ 
+ 
+ 
+
+ 
+ 
+Ông/Bà …
+ 
+ 
+ 
+
+ 
+ 
+ 
+Ông/Bà … 
+
+
+
+LỊCH SỬ PHIÊN BẢN
+
+Ngày thay đổi
+Người cập nhật
+Phiên bản
+Mô tả thay đổi
+27/03/2026
+HTC
+0.1
+Tạo mới
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GIẢI THÍCH THUẬT NGỮ
+
+STT
+Ký hiệu/
+Từ viết tắt
+Giải thích
+	•	
+◎
+Trường ở dạng disable, không cho phép nhập/sửa
+	•	
+★
+Trường bắt buộc phải nhập
+	•	
+－
+Trường không bắt buộc nhập
+	•	
+KH
+Khách hàng
+	•	
+KHCN
+Khách hàng cá nhân
+	•	
+KHTC
+Khách hàng doanh nghiệp lớn/Khách hàng doanh nghiệp vừa và nhỏ
+	•	
+DNSN
+Khách hàng doanh nghiệp siêu nhỏ
+	•	
+CBNV
+Cán bộ nhân viên
+	•	
+SPDV
+Sản phẩm dịch vụ
+	•	
+CTƯĐ
+Chương trình ưu đãi
+	•	
+MTD
+Month to date
+
+
+
+
+
+
+
+MỤC LỤC
+
+LỊCH SỬ PHIÊN BẢN	3
+GIẢI THÍCH THUẬT NGỮ	3
+I.	TỔNG QUAN	5
+I.1. Hiện trạng	5
+I.1.1. Nghiệp vụ	5
+I.1.2. Hệ thống	5
+I.2. Đề xuất	5
+I.2.1. Đề xuất	5
+I.2.2. Phương pháp, chỉ tiêu đo lường tính hiệu quả của sản phẩm, dịch vụ	5
+I.2.3. Đánh giá ảnh hưởng tác động	5
+I.2.4. Các rủi ro (nếu có làm hoặc rủi ro nếu không làm)	5
+I.2.5. Đầu mối liên hệ làm việc thuộc đơn vị yêu cầu	5
+I.2.6. Ngân sách	5
+II.	Quy trình nghiệp vụ	6
+II.1. Danh sách User Story	6
+II.2. Mô tả nghiệp vụ	7
+II.2.1. US01 - Là người dùng, tôi muốn khai báo các dịch vụ/sản phẩm tại ngân hàng theo mô hình cây phân cấp để dễ dàng quản lý các dịch vụ/sản phẩm phát sinh phí	7
+II.2.2. US02 - Là người dùng, …	7
+II.2.3. US15 - Là người dùng, tôi muốn xem toàn bộ danh mục SPDV	8
+II.2.4. US16 - Là người dùng, tôi muốn xem danh mục biểu phí	23
+II.2.5. US17 - Là người dùng, tôi muốn xem danh sách CTƯĐ và toàn bộ lịch sử khai báo	28
+II.2.6. US18 - Là người dùng, tôi muốn xem danh sách code phí áp dụng cho một khách hàng	32
+II.2.7. US19 - Là người dùng, tôi muốn xem lịch sử thu phí theo khách hàng	36
+II.2.8. US20 - Là người dùng, tôi muốn tra cứu lịch thu phí dự kiến theo khách hàng	39
+II.2.9. US21 - Là người dùng, tôi muốn xem danh sách Chương trình ưu đãi theo khách hàng	42
+III.	Phụ lục	46
+III.1. Quy tắc chung	46
+III.1.1. Các loại định dạng trường trong hệ thống	46
+III.1.2. Tìm kiếm	47
+III.1.3. Lọc nâng cao	48
+III.1.4. Tra cứu	50
+III.1.5. Tải xuống	51
+III.1.6. Phân trang	52
+III.1.7. Upload file	52
+III.1.8. Lịch sử tác động	53
+III.2. Mã lỗi	54
+
+
+TỔNG QUAN
+Hiện trạng
+
+Nghiệp vụ
+Hệ thống
+
+Đề xuất
+Đề xuất
+Phương pháp, chỉ tiêu đo lường tính hiệu quả của sản phẩm, dịch vụ
+Đánh giá ảnh hưởng tác động
+Các rủi ro (nếu có làm hoặc rủi ro nếu không làm)
+Đầu mối liên hệ làm việc thuộc đơn vị yêu cầu
+STT
+Nhân sự
+Bộ phận
+Email
+	•	
+
+
+
+	•	
+
+
+
+	•	
+
+
+
+
+Ngân sách
+
+
+	
+Quy trình nghiệp vụ
+Danh sách User Story 
+STT
+User Story
+US01
+Là người dùng, tôi muốn khai báo các dịch vụ/sản phẩm tại ngân hàng theo mô hình cây phân cấp để dễ dàng quản lý các dịch vụ/sản phẩm phát sinh phí.
+US02
+Là người dùng, tôi muốn khai báo 1 code phí với các thông tin chi tiết về mức phí cho từng Phân khúc Khách hàng (KHCN, KHTC,...)  và điều kiện áp dụng để đảm bảo tính chính xác trong thanh toán.
+US03
+Là người dùng, tôi muốn khai báo 1 code phí bằng cách nhân bản để khai báo nhanh với các phương thức tính có bộ quy tắc cài đặt tương tự nhau 
+US04
+Là người dùng, tôi muốn hệ thống tự động sinh mã code phí theo nguyên tắc để dễ dàng quản lý theo từng Phân khúc Khách hàng, từng Nhóm SPDV, từng biểu phí
+US05
+Là người dùng, tôi muốn định nghĩa công thức tính phí cho từng code phí để áp dụng đúng mức phí cho từng đối tượng khách hàng và tùy chỉnh theo từng thời kỳ
+US06
+Là người dùng, tôi muốn khai báo 1 biểu phí
+US07
+Là người dùng, tôi muốn khai báo 1 biểu phí bằng cách upload file Excel hoặc CSV) để tiết kiệm thời gian khai báo
+US08
+Là người dùng, tôi muốn sao chép 1 biểu phí để tạo mới với những thay đổi nhỏ dễ dàng
+US09
+Là người dùng, tôi muốn chuyển đổi code phí giữa các biểu phí mà không làm mất thông tin cũ
+US10
+Là người dùng, tôi muốn khai báo các chương trình ưu đãi theo thể lệ thỏa mãn nhiều tiêu chí để thu hút khách hàng theo từng thời kỳ
+US11
+Là người dùng, tôi muốn khai báo 1 chương trình ưu đãi dành cho một danh sách khách hàng xác định
+US12
+Là người dùng, tôi muốn khai báo 1 chương trình ưu đãi theo theo từng code phí/ biểu phí
+US13
+Là người dùng, tôi muốn hệ thống tự động sinh mã CTUD theo nguyên tắc để dễ dàng quản lý theo Khối, thời gian,...
+US14
+Là người dùng, tôi muốn xem toàn bộ danh mục SPDV & toàn bộ lịch sử khai báo
+US15
+Là người dùng, tôi muốn xem danh sách và toàn bộ lịch sử thay đổi Biểu phí 
+US16
+Là người dùng, tôi muốn xem danh sách Chương trình ưu đãi & toàn bộ lịch sử khai báo
+US17
+Là người dùng, tôi muốn xem danh sách code phí áp dụng cho một khách hàng
+US18
+Là người dùng, tôi muốn xem lịch sử thu phí theo khách hàng
+US19
+Là người dùng, tôi muốn tra cứu lịch thu phí dự kiến theo khách hàng
+US20
+Là người dùng, tôi muốn xem danh sách Chương trình ưu đãi theo Khách hàng
+US21
+Là người dùng, tôi muốn đăng nhập vào hệ thống
+US22
+Là người dùng, tôi muốn đăng xuất khỏi hệ thống
+US23
+Là người quản trị, tôi muốn thay đổi nhóm quyền của một user
+US24
+Là người quản trị, tôi muốn khai báo một nhóm quyền trên hệ thống
+US25
+Là người quản trị, tôi muốn cấu hình được ma trận phê duyệt cho các tác vụ khai báo tham số phí
+US26
+Là người quản trị, tôi muốn thiết lập quy tắc của một điều kiện tính phí
+US27
+Là người quản trị, tôi muốn thiết lập quy tắc xác định nhóm khách hàng trong từng thời kỳ
+US28
+Là người dùng, tôi muốn xuất sao kê chi tiết giao dịch thu phí
+US29
+Là người dùng, tôi muốn xuất báo cáo danh sách khách hàng còn nợ phí
+US30
+Là người dùng, tôi muốn xuất báo cáo dự thu phí dịch vụ kỳ tiếp theo
+US31
+Là người dùng, tôi muốn xuất báo cáo tổng doanh thu phí
+US32
+Là người dùng, tôi muốn xem một trang báo cáo tổng quan về hoạt động thu phí
+US33
+Là người dùng, khi khách hàng phát sinh giao dịch với ngân hàng trên kênh online, tôi muốn hệ thống tự động tính toán số tiền phí cần thu
+US34
+Là người dùng, khi phát sinh giao dịch với khách hàng trên kênh quầy/nội bộ, tôi muốn hệ thống tự động tính toán số tiền phí cần thu
+US35
+Là người dùng, tôi muốn hệ thống tự động thu các loại phí định kỳ cần thu theo lịch
+US36
+Là người dùng, tôi muốn hệ thống tự động truy thu và tận thu các loại phí định kỳ mà khách hàng còn nợ
+US37
+Là người dùng, tôi muốn khởi tạo chương trình ưu đãi từ kết quả phê duyệt ngoại lệ trên hệ thống phê duyệt miễn/giảm phí
+
+
+Mô tả nghiệp vụ 
+
+US01 - Là người dùng, tôi muốn khai báo các dịch vụ/sản phẩm tại ngân hàng theo mô hình cây phân cấp để dễ dàng quản lý các dịch vụ/sản phẩm phát sinh phí
+Yêu cầu nghiệp vụ
+Khai báo Nghiệp vụ
+.n: Khi muốn khai báo các dịch vụ/sản phẩm tại ngân hàng, người dùng truy cập chức năng: Tham số >> Danh mục sản phẩm dịch vụ >> Thêm mới Nghiệp vụ
+
+Màn hình Thêm mới nghiệp vụ bao gồm các trường thông tin: Mã nghiệp vụ, Tên Nghiệp vụ, Mô tả, Ngày hiệu lực, Ngày hết hiệu lực.
+	•	Nghiệp vụ được hiểu là Sản phẩm dịch cấp đầu tiên (cấp 1) trong hệ thống.
+	•	Mã nghiệp vụ do hệ thống tự động sinh theo nguyên tắc:
+	•	Là số duy nhất và là số tự tăng có 2 chữ số bắt đầu từ 01 đến 99
+	•	Không trùng với các Mã nghiệp vụ đã tồn tại
+	•	Trạng thái Nghiệp vụ bao gồm:
+	•	Hoạt động: Cấp Nghiệp vụ đang được vận hành và sử dụng
+	•	Không hoạt động: Cấp Nghiệp vụ chưa hoặc không còn được vận hành và sử dụng
+	•	Ngày hiệu lực, Ngày hết hiệu lực đều phải >= Ngày hệ thống và Ngày hết hiệu lực >= Ngày hiệu lực
+	•	Sau khi Maker khai báo thành công, bản ghi Nghiệp vụ sẽ ở trạng thái chờ duyệt với hành động là Thêm mới và chỉ hiển thị trên lưới Danh mục SPDV sau khi cấp duyệt cuối cùng phê duyệt theo nguyên tắc mô tả tại US25 về Ma trận phê duyệt.
+Bản ghi Nghiệp vụ sau khi duyệt thành công sẽ được hiển thị trên lưới chức năng và cho phép chỉnh sửa. Khi người dùng chỉnh sửa Nghiệp vụ, hệ thống chỉ cho phép chỉnh sửa Ngày hiệu lực, Ngày hết hiệu lực.
+	•	Ngày hiệu lực, Ngày hết hiệu lực chỉ được sửa >= Ngày hệ thống và Ngày hết hiệu lực >= Ngày hiệu lực
+	•	Ngày hiệu lực phải <= Ngày hiệu lực của các SPDV chi tiết và Ngày hết hiệu lực phải >= Ngày hết hiệu lực của các SPDV chi tiết
+	•	Sau khi Maker chỉnh sửa thành công, bản ghi Nghiệp vụ sẽ ở trạng thái chờ duyệt với hành động là Sửa và chỉ hiển thị thông tin sau sửa trên lưới Danh mục SPDV sau khi cấp duyệt cuối cùng phê duyệt theo nguyên tắc mô tả tại US25 về Ma trận phê duyệt.
+Hằng ngày, tại thời điểm đầu ngày, hệ thống tự động kiểm tra ngày hiệu lực và ngày hết hiệu lực của tất cả bản ghi Nghiệp vụ và cập nhật theo nguyên tắc:
+	•	Trường hợp ngày T = Ngày hiệu lực và trạng thái hoạt động của Nghiệp vụ = Không hoạt động: Hệ thống cập nhật trạng thái Nghiệp vụ = Hoạt động.
+	•	Trường hợp ngày T > Ngày hết hiệu lực, trạng thái hoạt động của Nghiệp vụ = Hoạt động: Hệ thống cập nhật trạng thái Nghiệp vụ = Không hoạt động.
+Khai báo Sản phẩm, dịch vụ chi tiết
+Navigation: Khi muốn khai báo các dịch vụ/sản phẩm tại ngân hàng, người dùng truy cập chức năng: Tham số >> Danh mục sản phẩm dịch vụ và Code phí >> Thêm mới Sản phẩm dịch vụ
+
+Màn hình Thêm mới SPDV chi tiết bao gồm các trường thông tin: Mã SPDV, Tên SPDV, Mã – Tên SPDV liền trước, Mô tả, Ngày hiệu lực, Ngày hết hiệu lực.
+	•	Người dùng được phép chọn khai báo SPDV cấp chi tiết theo SPDV cấp cha và tại màn hình Thêm mới SPDV, hệ thống tự động hiển thị Mã – Tên SPDV liền trước
+	•	Mã SPDV chi tiết do hệ thống tự động sinh theo nguyên tắc:
+	•	Mã nghiệp vụ/SPDV cấp cha liền trước + 02 ký tự số tự tăng bắt đầu từ 01 đến 99
+	•	Là số duy nhất và không trùng với những bản ghi mã SPDV chi tiết đã tồn tại trên hệ thống
+	•	Các yêu cầu khác tương tự như màn hình Thêm mới Nghiệp vụ
+Bản ghi SPDV chi tiết sau khi duyệt thành công sẽ được hiển thị trên lưới chức năng và cho phép chỉnh sửa. Khi người dùng chỉnh sửa SPDV chi tiết, hệ thống chỉ cho phép chỉnh sửa Ngày hiệu lực, Ngày hết hiệu lực.
+	•	Ngày hiệu lực của Nghiệp vụ/SPDV chi tiết cấp cha <= Ngày hiệu lực <= Ngày hiệu lực của các SPDV chi tiết cấp con
+	•	Ngày hết hiệu lực của Nghiệp vụ/SPDV chi tiết cấp cha >= Ngày hết hiệu lực >= Ngày hết hiệu lực của các SPDV chi tiết
+	•	Các nguyên tắc khác tương tự với yêu cầu Chỉnh sửa về Nghiệp vụ
+Các nguyên tắc khác tương tự với yêu cầu về Nghiệp vụ.
+Lưu đồ và diễn giải
+Khai báo Nghiệp vụ
+Lưu đồ Thêm mới Nghiệp vụ
+
+Lưu đồ Chỉnh sửa Nghiệp vụ
+
+Diễn giải lưu đồ:
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+	•	
+Thêm mới Nghiệp vụ
+
+Chọn nút “+ Thêm mới” trên thanh header của màn hình Danh sách sản phẩm dịch vụ
+Maker
+	•	
+
+Hiển thị màn hình Thêm mới Nghiệp vụ cho phép người dùng khai báo các thông tin Nghiệp vụ, Cấp sản phẩm dịch vụ tự động hiển thị = 1
+Hệ thống
+	•	
+
+Khai báo các thông tin Nghiệp vụ và ấn chọn “Xác nhận”
+Maker
+	•	
+
+Kiểm tra các trường bắt buộc nhập đã được được khai báo đầy đủ và đúng định dạng 
+Hệ thống
+	•	
+
+Lưu thành công bản ghi Nghiệp vụ ở trạng thái “Chờ duyệt”
+
+	•	
+
+Hiển thị bản ghi Thêm mới Nghiệp vụ này tại màn hình “Tác vụ Pending của tôi” của Maker và màn hình Tác vụ chờ duyệt của Checker
+
+	•	
+
+Nhận thông báo Thêm mới thành công Nghiệp vụ
+Maker
+	•	
+Sửa Nghiệp vụ
+Chọn nút “Chỉnh sửa” tại bản ghi Nghiệp vụ cần sửa
+Maker
+	•	
+
+Hiển thị màn hình Chỉnh sửa Nghiệp vụ
+Hệ thống
+	•	
+
+Chỉnh sửa trường Ngày hiệu lực và/hoặc Ngày hết hiệu lực
+Maker
+	•	
+
+Kiểm tra Ngày hết hiệu lực, Ngày hiệu lực có thay đổi so với dữ liệu trước sửa không?
+Hệ thống
+	•	
+
+Tạo mới bản ghi với thông tin vừa sửa ở trạng thái Chờ duyệt
+
+	•	
+
+Hiển thị bản ghi “Sửa Nghiệp vụ” này tại màn hình “Tác vụ Pending của tôi” của Maker và màn hình Tác vụ chờ duyệt của Checker
+
+	•	
+
+Nhận thông báo tạo yêu cầu Sửa thành công Nghiệp vụ
+Maker
+
+Khai báo Sản phẩm, dịch vụ chi tiết
+Lưu đồ Thêm mới SPDV chi tiết:
+
+
+Lưu đồ Chỉnh sửa SPDV chi tiết:
+
+Diễn giải lưu đồ:
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+	•	
+Thêm mới SPDV chi tiết
+
+Chọn nút “+” tại bản ghi SPDV cấp cha liền trước
+Maker
+	•	
+
+Hiển thị màn hình Thêm mới SPDV chi tiết cho phép người dùng khai báo các thông tin SPDV chi tiết
+Hệ thống
+	•	
+
+Khai báo các thông tin SPDV chi tiết và ấn chọn “Xác nhận”
+Maker
+	•	
+
+Kiểm tra các trường bắt buộc nhập đã được được khai báo đầy đủ và đúng định dạng 
+Hệ thống
+	•	
+
+Lưu thành công bản ghi SPDV chi tiết ở trạng thái “Chờ duyệt”
+
+	•	
+
+Hiển thị bản ghi Thêm mới SPDV chi tiết này tại màn hình “Tác vụ Pending của tôi” của Maker và màn hình Tác vụ chờ duyệt của Checker
+
+	•	
+
+Nhận thông báo Thêm mới thành công SPDV chi tiết
+Maker
+	•	
+Sửa SPDV chi tiết
+Chọn nút “Chỉnh sửa” tại bản ghi SPDV chi tiết cần sửa
+Maker
+	•	
+
+Hiển thị màn hình Chỉnh sửa SPDV chi tiết
+Hệ thống
+	•	
+
+Chỉnh sửa trường Ngày hiệu lực và/hoặc Ngày hết hiệu lực
+Maker
+	•	
+
+Kiểm tra Ngày hết hiệu lực, Ngày hiệu lực có thay đổi so với dữ liệu trước sửa không?
+Hệ thống
+	•	
+
+Tạo mới bản ghi với thông tin vừa sửa ở trạng thái Chờ duyệt
+
+	•	
+
+Hiển thị bản ghi “Sửa SPDV chi tiết” này tại màn hình “Tác vụ Pending của tôi” của Maker và màn hình Tác vụ chờ duyệt của Checker
+
+	•	
+
+Nhận thông báo tạo yêu cầu Sửa thành công SPDV chi tiết
+Maker
+
+Giao diện
+Khai báo Nghiệp vụ
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+	•	
+Xác nhận
+★
+Button
+
+Lưu dữ liệu vào hệ thống
+	•	
+Đóng
+★
+Button
+
+Thoát khỏi màn hình
+CÁC TRƯỜNG THÔNG TIN
+	•	
+Cấp sản phẩm dịch vụ
+◎
+Number
+Mặc định: 1
+Không cho phép thay đổi
+Cấp Nghiệp vụ là cấp cao nhất trong cây SPDV
+	•	
+Tên Nghiệp vụ
+★
+Text
+
+Nhập text
+	•	
+Mã Nghiệp vụ
+◎
+Number
+Không cho phép khai báo
+
+Chỉ hiển thị Mã Nghiệp vụ khi khai báo thành công
+
+Số duy nhất và là số tự sinh theo nguyên tắc:
+- Là số tự tăng có 2 chữ số bắt đầu từ 01 đến 99. Trường hợp số tự tăng >99 hệ thống báo lỗi và không cho phép lưu
+- Không trùng với các Mã nghiệp vụ đã tồn tại trên hệ thống
+	•	
+Mô tả
+★
+Text
+
+Nhập text
+Trường mô tả thông tin cụ thể của Nghiệp vụ
+	•	
+Ngày hiệu lực
+★
+Date
+Không chọn ngày quá khứ
+Hiển thị lịch và cho phép chọn 1 giá trị
+- Nếu Ngày hiện tại của hệ thống = Ngày hiệu lực => Trạng thái hoạt động của cấp Nghiệp vụ = Hoạt động
+- Nếu Ngày hiện tại của hệ thống < Ngày hiệu lực => Trạng thái hoạt động của cấp Nghiệp vụ = Không hoạt động
+	•	
+Ngày hết hiệu lực
+★
+Date
+Không chọn ngày quá khứ
+Hiển thị lịch và cho phép chọn 1 giá trị
+Ngày hết hiệu lực >= Ngày hiệu lực
+
+Khai báo Sản phẩm, dịch vụ chi tiết
+
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+	•	
+Xác nhận
+★
+Button
+
+Lưu dữ liệu vào hệ thống
+	•	
+Đóng
+★
+Button
+
+Thoát khỏi màn hình
+CÁC TRƯỜNG THÔNG TIN
+	•	
+Tên
+★
+Text
+
+Nhập text
+Trường lưu tên SPDV chi tiết
+	•	
+Mã
+◎
+Number
+Không cho phép khai báo
+
+Chỉ hiển thị Mã SPDV chi tiết khi khai báo thành công
+
+Số duy nhất và là số tự sinh theo nguyên tắc:
+- Mã nghiệp vụ/SPDV cấp cha liền trước + 02 ký tự số tự tăng bắt đầu từ 01 đến 99. Trường hợp số tự tăng >99 hệ thống báo lỗi và không cho phép lưu
+- Không trùng với những bản ghi mã SPDV chi tiết đã tồn tại trên hệ thống
+Ví dụ: Mã 0601 (SPDV chi tiết: “Tài khoản thanh toán” thuộc Nghiệp vụ “Tài khoản”)
+	•	
+Mô tả
+★
+Text
+
+Nhập text
+Trường mô tả thông tin cụ thể của SPDV chi tiết
+	•	
+Cấp SPDV liền trước
+◎
+Text
+Không cho phép khai báo
+Hiển thị dữ liệu: “Mã SPDV liền trước - Tên SPDV liền trước”
+	•	
+Ngày hiệu lực
+★
+Date
+Không chọn ngày quá khứ
+
+>= Ngày hiệu lực của các cấp cha trong cây SPDV
+Hiển thị lịch và cho phép chọn 1 giá trị
+- Nếu Ngày hiện tại của hệ thống = Ngày hiệu lực => Trạng thái hoạt động SPDV chi tiết = Hoạt động
+- Nếu Ngày hiện tại của hệ thống < Ngày hiệu lực => Trạng thái hoạt động của SPDV chi tiết = Không hoạt động
+	•	
+Ngày hết hiệu lực
+★
+Date
+Không chọn ngày quá khứ
+
+<= Ngày hết hiệu lực của các cấp cha trong cây SPDV
+Hiển thị lịch và cho phép chọn 1 giá trị
+Ngày hết hiệu lực >= Ngày hiệu lực
+	•	
+Đây là cấp cuối cùng trong cây sơ đồ sản phẩm dịch vụ
+◎
+Label
+
+Chỉ hiển thị khi cấp khai báo là cấp cuối
+
+US02 - Là người dùng, tôi muốn khai báo 1 code phí với các thông tin chi tiết về mức phí cho từng Phân khúc Khách hàng (KHCN, KHTC,...)  và điều kiện áp dụng để đảm bảo tính chính xác trong thanh toán.
+Yêu cầu nghiệp vụ
+Navigation: Khi muốn khai báo các code phí, người dùng truy cập chức năng: Tham số >> Danh mục sản phẩm dịch vụ >> SPDV cấp cuối >> Thêm mới Code phí >> Thiết lập Quy tắc tính phí (Quy tắc tính phí)
+
+Code phí là cấp khai báo cuối cùng trong cây Danh mục SPDV, một code phí được gán trực tiếp với một SPDV cấp cuối. Các thông tin được khai báo bao gồm: Thông tin chung của Code phí, Điều kiện tính phí, Quy tắc tính phí
+	•	Các thông tin chung của Code phí cần quản lý: Mã phí, Tên phí, Loại tiền tệ, VAT, Phí đã bao gồm VAT, Đối tượng thu phí, Loại Khách hàng, Loại tính phí, Tần suất, Ngày thu, Loại tiền tối thiểu/tối đa, Mã hạch toán category, Trạng thái
+	•	Mã phí do hệ thống tự sinh và người dùng không được phép chỉnh sửa. Nguyên tắc tự sinh mã phí được mô tả tại US04 về Tự động sinh mã Code phí.
+	•	Loại tiền tệ chính là Loại tiền tệ của Code phí.
+	•	VAT: Giá trị % thuế suất VAT
+	•	Trường hợp Code phí không phải chịu VAT, người dùng bỏ trống không nhập thông tin
+	•	Trường hợp Code phí chịu VAT, bắt buộc nhập giá trị là số > 0 và <100 (Ví dụ thuế suất là 10% nhập số 10)
+	•	Phí đã bao gồm VAT: Số tiền phí hệ thống tính ra đã bao gồm VAT hay chưa?
+	•	Nếu ko tích chọn trường Phí đã bao gồm VAT, trường VAT nhập giá trị, số tiền phí thực thu của khách hàng = Số tiền phí hệ thống tính ra + VAT*Số tiền phí hệ thống tính ra
+	•	Nếu tích chọn trường phí đã bao gồm VAT, trường VAT bắt buộc phải nhập giá trị là số >0 và <=100, số tiền phí thực thu của khách hàng = Số tiền phí hệ thống tính ra
+	•	Đối tượng thu phí: Người dùng lựa chọn Khách hàng hoặc Merchant
+	•	Khách hàng
+	•	Merchant: Các đối tác của PVCB là đơn vị chấp nhận thanh toán
+	•	Loại khách hàng: Bao gồm 4 loại khách hàng:
+	•	KHCN: Khách hàng cá nhân
+	•	KHTC: Khách hàng doanh nghiệp lớn/Khách hàng doanh nghiệp vừa và nhỏ
+	•	DNSN: Khách hàng doanh nghiệp siêu nhỏ và hộ kinh doanh
+	•	CBNV: Khách hàng là cán bộ nhân viên của ngân hàng
+	•	Loại tính phí: Bao gồm 2 loại:
+	•	Theo giao dịch
+	•	Định kỳ
+	•	Loại tiền tối thiểu/tối đa là Loại tiền tệ của Số tiền phí tối thiểu, Số tiền phí tối đa và có thể khác với Loại tiền tệ của Code phí
+	•	Trạng thái của code phí bao gồm
+	•	Chưa gán: Code phí chưa được gán với Biểu phí nào
+	•	Hoạt động: Code phí đang gán với một Biểu phí Đang hiệu lực/Chưa hiệu lực
+	•	Ngừng hoạt động: Các biểu phí mà Code trực thuộc đều đang ở trạng thái Hết hiệu lực 
+	•	Hủy: Code phí khai báo sai thông tin và không thể tái sử dụng
+Trạng thái mặc định của Code phí khi Thêm mới = Chờ gán
+	•	Các loại điều kiện tính phí bao gồm: Điều kiện theo khách hàng, Điều kiện theo Tài khoản, Điều kiện theo Thẻ, Điều kiện theo giao dịch. 
+	•	Trường điều kiện: Người dùng được chọn từ danh sách điều kiện có sẵn trong hệ thống và đã được cấu hình nguồn dữ liệu tương ứng.
+	•	Operator là các toán tử được dùng để so sánh giữa Trường điều kiện và Giá trị
+	•	Giá trị là trường người dùng nhập các giá trị cụ thể tương ứng với Trường điều kiện và làm cơ sở để so sánh khi thực hiện giao dịch
+	•	Về Quy tắc tính phí: Người dùng được thiết lập công thức tính phí cho Code phí theo mô tả tại US06
+Khi khai báo code phí, người dùng bắt buộc phải khái báo trước các thông tin về Loại tiền tệ, Loại khách hàng, Loại tính phí và Loại tiền tối thiểu/tối đa để làm căn cứ xác định các thông tin về Điều kiện tính phí và Quy tắc tính phí
+	•	Loại tiền tệ: Người dùng chọn loại tiền tệ của code phí trước khi chọn loại tiền tệ tối thiểu/tối đa, trường loại tiền tối thiểu/tối đa sẽ tự động cập nhật theo loại tiền tệ của code phí
+	•	Loại khách hàng
+	•	Loại tính phí:
+	•	Nếu Loại tính phí = Theo giao dịch, người dùng được phép khai báo Điều kiện tính phí theo Khách hàng, theo Giao dịch và theo Tài khoản
+	•	Nếu Loại tính phí = Định kỳ, người dùng được phép khai báo Điều kiện tính phí theo Khách hàng và theo Tài khoản/Thẻ
+	•	Loại tiền tối thiểu/tối đa: 
+	•	Trường hợp người dùng chọn loại tiền tối thiểu/tối đa trước, chọn loại tiền tệ của code phí sau, hệ thống sẽ không cập nhật loại tiền tối thiểu/tối đa theo loại tiền của code phí
+	•	Loại tiền tối thiểu/tối đa = VND/JPY, người dùng chỉ được nhập giá trị phí tối thiểu và tối đa dưới dạng số nguyên dương
+	•	Loại tiền tối thiểu/tối đa <> VND/JPY, người dùng được phép nhập giá trị phí tối thiểu và tối đa dưới dạng số thập phân với tối đa 2 số sau dấu thập phân
+	•	Sau khi Maker khai báo thành công, bản ghi Code phí sẽ ở trạng thái chờ duyệt với hành động là Thêm mới và chỉ hiển thị trên lưới Danh mục SPDV sau khi cấp duyệt cuối cùng phê duyệt theo nguyên tắc mô tả tại US25 về Ma trận phê duyệt.
+Bản ghi Code phí sau khi duyệt thành công sẽ được hiển thị trên lưới chức năng và cho phép chỉnh sửa. Khi người dùng chỉnh sửa Code phí, hệ thống chỉ cho phép chỉnh sửa Trạng thái Code phí
+	•	Chỉ cho phép chỉnh sửa thành trạng thái Hủy
+	•	Sau khi Maker chỉnh sửa thành công, bản ghi Code phí sẽ ở trạng thái chờ duyệt với hành động là Sửa và chỉ hiển thị thông tin sau sửa trên lưới Danh mục SPDV sau khi cấp duyệt cuối cùng phê duyệt theo nguyên tắc mô tả tại US25 về Ma trận phê duyệt.
+Hằng ngày, tại thời điểm đầu ngày, hệ thống tự động kiểm tra ngày hiệu lực và ngày hết hiệu lực của Biểu phí mà code phí trực thuộc, trạng thái hoạt động của code phí sẽ được cập nhật theo trạng thái hoạt động của biểu phí. Nguyên tắc cập nhật trạng thái được mô tả tại US06 về Khai báo Biểu phí.
+Lưu đồ và diễn giải
+Lưu đồ
+
+Diễn giải
+
+Giao diện
+Màn hình
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+	•	
+Xác nhận
+★
+Button
+
+Lưu dữ liệu vào hệ thống
+	•	
+Đóng
+★
+Button
+
+Thoát khỏi màn hình
+CÁC TRƯỜNG THÔNG TIN
+Thông tin chung
+	•	
+Mã phí
+◎
+Text
+Hệ thống tự sinh và không cho phép thay đổi
+Nguyên tắc tự sinh Mã phí tham chiếu tới US04
+	•	
+Tên phí
+★
+Text
+
+Nhập text
+	•	
+Loại tiền tệ
+★
+Dropdown list
+
+Hiển thị danh sách và chọn 1 loại tiền tệ của Code phí
+	•	
+VAT
+－
+Number
+Trường không bắt buộc nhập, nếu người dùng nhập bắt buộc phải là số nguyên dương >0 và <=100
+Giá trị thuế VAT
+VD: Nếu Phí tính thuế VAT 10% thì chỉ nhập số 10
+	•	
+Phí đã bao gồm VAT
+－
+Checkbox
+
+Mức phí được khai báo tại phân vùng Công thức tính phí đã bao gồm VAT hay chưa
+Trường hợp tích chọn Phí đã bao gồm VAT, bắt buộc người dùng phải điền tỷ lệ % VAT tại trường VAT
+	•	
+Đối tượng thu phí
+★
+Radio Button
+
+Chỉ cho phép chọn 1 trong 2 giá trị:
+	•	Khách hàng: Code phí được khai báo và áp dụng cho các khách hàng
+	•	Merchant: Code phí được khai báo và áp dụng cho các đối tác là đơn vị chấp nhận thanh toán
+	•	
+Loại Khách hàng
+★
+Dropdown list
+
+Chọn 1 trong danh sách các giá trị:
+	•	KHCN: Khách hàng cá nhân
+	•	KHTC: Khách hàng doanh nghiệp lớn và doanh nghiệp vừa & nhỏ
+	•	DNSN: Khách hàng là doanh nghiệp siêu nhỏ và hộ kinh doanh
+	•	CBNV: Khách hàng là cán bộ nhân viên của ngân hàng (Không hiển thị trong danh sách khi trường Đối tượng thu phí = Merchant)
+	•	
+Khai báo theo phân khúc
+－
+Checkbox
+
+Quy tắc tính phí được thiết lập áp dụng chung hoặc áp dụng riêng cho từng nhóm khách hàng
+	•	
+Loại tính phí
+★
+Dropdown list
+
+Hiển thị danh sách cho phép chọn 1 trong các giá trị:
+Loại tính phí = Theo giao dịch
+	•	Hiển thị Điều kiến tính phí theo Giao dịch, Điều kiện tính phí theo Khách hàng và Điều kiện tính phí theo Tài khoản
+
+Loại tính phí = Định kỳ
+	•	Hiển thị Điều kiện tính phí theo Khách hàng, Điều kiện tính phí theo Tài khoản và Điều kiến tính phí theo Thẻ
+	•	
+Loại tiền tối thiểu/ tối đa
+－
+Dropdown list
+
+Hiển thị danh sách và chọn 1 loại tiền tệ cho giá trị tiền tối thiểu, tối đa
+
+Khi chọn loại tiền tệ của code phí trước, chọn loại tiền tệ tối thiểu/tối đa sau, trường loại tiền tối thiểu/tối đa sẽ tự động cập nhật theo loại tiền tệ của code phí
+
+Khi chọn loại tiền tối thiểu/tối đa trước, chọn loại tiền tệ của code phí sau, hệ thống sẽ không cập nhật loại tiền tối thiểu/tối đa theo loại tiền của code phí
+	•	
+Tần suất
+－
+Dropdown list
+Chỉ hiển thị và bắt buộc nếu Loại tính phí = Định kỳ
+Nếu Phương thức tính phí = Định kỳ, hệ thống Hiển thị danh sách cho phép chọn 1 trong các giá trị:
+	•	Hàng năm
+	•	Hàng tháng
+	•	
+Ngày thu
+－
+Radio Button
+Chỉ hiển thị nếu Loại tính phí = Định kỳ
+Ngày thu là 1 ngày cố định trong tháng hoặc trong năm
+
+Nếu Tần suất thu phí = Hàng năm, hệ thống cho phép người dùng nhập giá trị theo định dạng DD/MM. Đối với tháng 2, hệ thống chỉ cho phép nhập tối đa là ngày 28/02. Các tháng còn lại được phép nhập giá trị theo bộ lịch chuẩn
+
+Nếu Tần suất thu phí = Hàng tháng, hệ thống cho phép người dùng nhập số từ 1-31. Đối với những tháng không có ngày 31 mặc định hiểu là ngày cuối cùng của tháng 
+
+Trường hợp Ngày thu phí xác định động theo dữ liệu thì người dùng không cần nhập thông tin này.
+	•	
+Ngày thu theo dữ liệu
+－
+Radio Button
+Chỉ hiển thị nếu Loại tính phí = Định kỳ
+Chọn 1 trong 2 phương thức Ngày thu hoặc Ngày thu theo dữ liệu
+
+Ngày thu phí Định kỳ có thể thay đổi theo từng khách hàng
+	•	
+Bảng dữ liệu
+－
+Dropdown list
+Chỉ hiển thị nếu Loại tính phí = Định kỳ và Ngày thu theo dữ liệu
+Chọn 1 trong danh sách các bảng:
+	•	ETL Khách hàng
+	•	ETL Tài khoản
+	•	ETL Thẻ
+	•	
+Trường dữ liệu
+－
+Combobox
+Chỉ hiển thị nếu Loại tính phí = Định kỳ và Ngày thu theo dữ liệu
+Trường dữ liệu mapping lấy thông tin thu phí định kỳ
+
+Chọn từ danh sách điều kiện có sẵn trong hệ thống và đã được cấu hình Bảng dữ liệu tương ứng
+	•	
+Mã hạch toán Category
+－
+Number
+
+Nhập text
+Mã hạch toán Category
+	•	
+Ghi chú
+－
+Text
+
+Nhập text
+	•	
+Trạng thái
+◎
+Label
+Không cho phép chỉnh sửa
+Mặc định là “Chờ gắn” khi thêm mới Code phí
+Điều kiện tính phí theo Giao dịch/ Điều kiện tính phí theo Khách hàng/ Điều kiện tính phí theo Tài khoản/ Điều kiện tính phí theo Thẻ
+Khi Loại tính phí = Định kỳ và Ngày thu theo dữ liệu, khi người dùng ấn xác nhận, về thống cần thực hiện kiểm tra trường Bảng dữ liệu tại phân vùng Quy tắc chung và …
+	•	
+Trường điều kiện
+★
+Combobox
+
+Hiển thị danh sách các điều kiện tính phí có trạng thái = Hoạt động, cho phép người dùng chọn các trường điều kiện
+	•	Tại Điều kiện tính phí theo Giao dịch: Hiển thị các trường điều kiện được khai báo với Nguồn dữ liệu = API
+	•	Tại Điều kiện tính phí theo Khách hàng: Hiển thị các trường điều kiện được khai báo với Nguồn dữ liệu = ETL và Bảng dữ liệu = Khách hàng
+	•	Tại Điều kiện tính phí theo Thẻ: Hiển thị các trường điều kiện được khai báo với Nguồn dữ liệu = ETL và Bảng dữ liệu = Thẻ
+	•	Tại Điều kiện tính phí theo Tài khoản: Hiển thị các trường điều kiện được khai báo với Nguồn dữ liệu = ETL và Bảng dữ liệu = Tài khoản
+
+Tại mỗi phân vùng điều kiện tính phí, người dùng có thể thêm nhiều điều kiện, các điều kiện không được trùng lặp
+	•	
+Mô tả
+－
+Text
+
+Nhập text
+	•	
+Operator
+★
+Dropdown list
+
+Hiển thị các toán tử tương ứng với kiểu dữ liệu của trường điều kiện tính phí
+	•	String: =, <>, IN, NOT IN
+	•	Number: =, <>, IN, NOT IN, >, >=, <, <=
+	•	Boolean: YES, NO
+	•	Date: =, >, >=, <, <=
+	•	DateTime: =, >, >=, <, <=
+	•	
+Giá trị
+★
+Text
+
+NSD nhập giá trị cụ thể tương ứng với Trường điều kiện
+Quy tắc tính phí: Tham chiếu tới US06 - Là người dùng, tôi muốn định nghĩa công thức tính phí cho từng code phí để áp dụng đúng mức phí cho từng đối tượng khách hàng và tùy chỉnh theo từng thời kỳ
+
+US06 - Là người dùng, tôi muốn định nghĩa công thức tính phí cho từng code phí để áp dụng đúng mức phí cho từng đối tượng khách hàng và tùy chỉnh theo từng thời kỳ
+Yêu cầu nghiệp vụ
+Navigation: Khi muốn khai báo các code phí, người dùng truy cập chức năng: Tham số >> Danh mục sản phẩm dịch vụ >> SPDV cấp cuối >> Thêm mới Code phí >> Thiết lập Quy tắc tính phí (Quy tắc tính phí)
+
+Khi khai báo code phí, người dùng cần định nghĩa được công thức tính phí cho Màn hình Khai báo Quy tắc tính phí cho từng code phí. 
+	•	Màn hình Quy tắc tính phí bao gồm các trường thông tin: Công thức, Tối thiểu, Tối đa
+	•	Công thức tính phí là công thức toán học, mỗi code phí có thể có 1 hoặc nhiều công thức khác nhau
+	•	Khi người dùng không lựa chọn Khai báo theo nhóm khách hàng khi khai báo Thông tin chung của Code phí, chỉ được khai báo 1 Công thức tính phí và được áp dụng chung
+	•	Khi người dùng lựa chọn Khai báo theo nhóm khách hàng khi khai báo Thông tin chung của Code phí, màn hình Quy tắc tính phí hiển thị thêm trường Nhóm khách hàng.
+	•	Được khai báo nhiều Công thức tính phí, mỗi công thức áp dụng riêng cho mỗi nhóm khách hàng
+	•	Để khai báo các Nhóm khách hàng người dùng ấn chọn Thêm nhóm khách hàng
+	•	Số tiền phí tính ra theo công thức có Loại tiền tệ chính là Loại tiền tệ của Code phí.
+	•	Cùng với công thức, hệ thống cho phép người dùng khai báo Số tiền phí tối thiểu, tối đa và Loại tiền tệ của Số tiền phí tối thiểu, tối đa có thể khác với Loại tiền tệ của Code phí
+Nguyên tắc nhập Công thức tính phí: 
+	•	Các biến được phép sử dụng: 
+Người dùng được định nghĩa các biến được sử dụng trong Công thức tính phí từ một danh sách có sẵn trong hệ thống tương ứng với một trong các trường dữ liệu do các hệ thống yêu cầu tính phí gửi vào tùy theo từng loại giao dịch
+	•	Các hàm được phép sử dụng:
+	•	MONTHS_BETWEEN: Hàm tính số tháng giữa 2 ngày, kết quả trả về có thể là số thập phân
+	•	DATE_DIFF: Hàm tính số ngày giữa 2 ngày, kết quả trả về là số nguyên
+	•	ROUND: Hàm làm tròn số học theo nguyên tắc toán học (>=0.5 làm tròn lên; <0.5 làm tròn xuống)
+	•	ROUNDUP: Hàm làm tròn số học luôn làm tròn lên
+	•	ROUNDDOWN: Hàm làm tròn số học luôn làm tròn xuống
+	•	Max: Hàm lấy giá trị lớn nhất
+	•	Min: Hàm lấy giá trị nhỏ nhất
+	•	Các toán tử được phép sử dụng:
+	•	+ Phép cộng
+	•	- Phép trừ
+	•	x Phép nhân
+	•	: Phép chia
+	•	Các ký tự được phép sử dụng:
+	•	( Ký tự mở ngoặc
+	•	) Ký tự đóng ngoặc
+	•	. Ký tự phân cách giữa số nguyên và số thập phân
+	•	, Ký tự phân cách giữa 2 ngày 
+	•	# Ký tự bọc ngoài nhận diện các biến được khai báo
+	•	0; 1; 2; 3; 4; 5; 6; 7; 8; 9; 10: Các ký tự số
+	•	Xác thực Công thức tính phí: Hệ thống thực hiện Xác thực khi Maker ấn “Xác nhận” tại màn hình Thiết lập công thức
+	•	Khi công thức nhập 2 hoặc nhiều cấu phần, trong đó có 2 cấu là các giá trị số học cụ thể, hệ thống báo lỗi và không cho phép lưu
+	•	Các hàm MONTHS_BETWEEN, DATE_DIFF, ROUND, ROUNDUP, ROUNDDOWN, MIN, MAX bắt buộc phải đi kèm ký tự ( và ký tự )
+	•	Hàm MONTHS_BETWEEN, DATE_DIFF bắt buộc phải nhập 2 tham số có định dạng là ngày phân cách bằng ký tự , và nằm trong 2 ký tự (  ). Hệ thống sẽ báo lỗi và không cho phép lưu khi kết hợp 2 hàm MONTHS_BETWEEN và DATE_DIFF trong cùng 1 cấu phần của công thức
+	•	Hàm MIN/MAX và hàm MONTHS_BETWEEN/DATE_DIFF không được phép kết hợp với nhau trong cùng 1 cấu phần của công thức
+Công thức tính phí là 1 cấu phần thuộc Code phí, việc phê duyệt Công thức tính phí được thực hiện đồng thời với việc phê duyệt Code phí. Tham chiếu tới luồng phê duyệt Code phí tại US02 về khai báo 1 code phí.
+Bản ghi Thêm mới code phí đã được phê duyệt thành công và dữ liệu đã được hiển thị trên lưới, chỉ được chỉnh sửa các giá trị là số học; không cho phép sửa các hàm tính toán và các giá trị tính phí. Maker thực hiện sửa bằng cách upload lại danh sách code phí tại biểu phí. Tham chiếu tới US07 về luồng upload danh sách code phí tại biểu phí
+Việc chỉnh sửa Công thức tính phí cũng được thực hiện thông qua việc chỉnh sửa code phí
+Lưu đồ và diễn giải
+Lưu đồ
+
+Diễn giải
+Bước
+Mô tả chi tiết
+Đơn vị thực hiện
+	•	
+Khai báo Thông tin chung của Code phí
+
+Maker
+	•	
+Hiển thị màn hình Thêm mới Nghiệp vụ cho phép người dùng khai báo các thông tin Nghiệp vụ, Cấp sản phẩm dịch vụ tự động hiển thị = 1
+Hệ thống
+	•	
+Khai báo các thông tin Nghiệp vụ và ấn chọn “Xác nhận”
+Maker
+	•	
+Kiểm tra các trường bắt buộc nhập đã được được khai báo đầy đủ và đúng định dạng 
+Hệ thống
+	•	
+Lưu thành công bản ghi Nghiệp vụ ở trạng thái “Chờ duyệt”
+
+	•	
+Hiển thị bản ghi Thêm mới Nghiệp vụ này tại màn hình “Tác vụ Pending của tôi” của Maker và màn hình Tác vụ chờ duyệt của Checker
+
+	•	
+Nhận thông báo Thêm mới thành công Nghiệp vụ
+Maker
+
+Giao diện
+Màn hình
+Màn hình Thêm mới Code phí khi lựa chọn khai báo theo nhóm khách
+
+Màn hình Thêm mới Code phí khi lựa chọn Không khai báo theo nhóm khách hàng (chung quy tắc tính phí).
+
+Màn hình Thiết lập công thức
+
+Mô tả chi tiết các trường
+Quy tắc tính phí
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+	•	
+
+★
+Button
+
+Hiển thị màn hình Thiết lập công thức
+	•	
+
+-
+Button
+Chỉ hiển thị khi tích chọn trường “Khai báo theo nhóm khách hàng” tại phân vùng Thông tin chung
+Hiển thị thêm trường Nhóm khách hàng
+Người dùng có thể khai báo nhiều nhóm khách hàng với các công thức khác nhau
+CÁC TRƯỜNG THÔNG TIN
+Khi công thức là 1 giá trị số học cụ thể, khi người dùng ấn Xác nhận để khai báo Code phí, Loại tiền tệ khác với Loại tiền tối thiểu/tối đa, hệ thống sẽ báo lỗi và không cho phép lưu
+	•	
+Nhóm khách hàng
+-
+Dropdown list
+
+Hiển thị danh sách Nhóm khách hàng tương ứng với từng loại khách hàng đã được khai báo trên hệ thống
+	•	
+Công thức
+★
+Text
+
+Hiển thị công thức do người dùng thiết lập tại màn hình Thiết lập công thức
+	•	
+Tối thiểu
+★
+Number
+
+Mức phí tối thiểu của code phí
+	•	
+Tối đa
+★
+Number
+
+Mức phí tối đa của code phí
+Công thức tính phí
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+	•	
+Xác nhận
+★
+Button
+
+Lưu dữ liệu vào hệ thống
+	•	
+Đóng
+★
+Button
+
+Thoát khỏi màn hình
+CÁC TRƯỜNG THÔNG TIN
+	•	
+Trường giá trị tính phí
+◎
+Combobox
+
+Loại tính phí = Theo giao dịch, hiển thị danh sách các trường điều kiện tính phí với Nguồn dữ liệu = API
+
+Loại tính phí = Định kỳ và Ngày thu theo dữ liệu, hiển thị danh sách các điều kiện có sẵn trong hệ thống với nguồn dữ liệu = Bảng dữ liệu tương ứng tại Thông tin chung
+
+Loại tính phí = Định kỳ và Ngày thu cố định…
+	•	
+Công thức
+◎
+Text
+Nhập tối đa 300 ký tự
+Hệ thống hiển thị và chỉ cho phép nhập:
+	•	Các giá trị là số học
+	•	Các toán tử + - x :  
+	•	Các hàm:  MONTHS_BETWEEN, DATE_DIFF, ROUND, ROUNDUP, ROUNDDOWN, MIN, MAX
+	•	Các ký tự ) ( , . # và ký tự số học
+Người dùng Click vào trường giá trị tính phí nào sẽ hiển thị trường đó tại phân vùng Công thức dưới định dạng #Field# ở vị trí đặt con trỏ
+
+Ngoài ra, người dùng có thể nhập tên trường theo định dạng #Field#. Khi nhập các ký tự sau dấu #, hệ thống sẽ hiển thị các trường gợi ý gần đúng
+
+Hệ thống hiển thị chữ viết hoa các thông tin người dùng nhập vào hệ thống
+
+US15 - Là người dùng, tôi muốn xem toàn bộ danh mục SPDV
+Yêu cầu nghiệp vụ
+Navigation: 
+	•	Khi muốn xem thông tin sản phẩm dịch vụ để khai báo các cấp SPDV chi tiết hơn hoặc khai báo code phí trực thuộc, người dùng truy cập: Tham số >> Danh mục SPDV và code phí >> Danh sách sản phẩm dịch vụ/ Danh sách code phí chưa sử dụng (1)
+	•	Khi muốn xem thông tin sản phẩm dịch vụ theo sơ đồ hình cây và mối liên quan tới các biểu phí, code phí, người dùng truy cập: Tra cứu >> Xem nghiệp vụ theo cây thư mục (2)
+
+Xem thông tin SPDV tại chức năng quản lý Danh mục sản phẩm dịch vụ và code phí:
+Người dùng lựa chọn Danh mục SPDV, hệ thống hiển thị màn hình gồm 2 tab: Danh mục sản phẩm dịch vụ (Mặc định) và Danh sách code phí chưa sử dụng.
+	•	Tab danh mục sản phẩm dịch vụ: Hiển thị tất cả danh mục sản phẩm dịch vụ đang có của hệ thống
+	•	Tab danh mục sản phẩm dịch vụ gồm: Tìm kiếm nhanh, Lọc nâng cao, Tải xuống, Lưới Danh mục sản phẩm dịch vụ
+	•	Tìm kiếm nhanh: Người dùng nhập mã/tên để tìm kiếm nhanh và gần đúng dữ liệu.
+	•	Lọc nâng cao: Người dùng nhấn Lọc nâng cao, hệ thống hiển thị màn hình để người dùng nhập các điều kiện muốn lọc. Điều kiện lọc bao gồm: Cấp khai báo, Tên, Từ ngày, Đến ngày
+	•	Cấp khai báo: Người dùng chọn 1 cấp khai báo, danh sách cấp khai báo kiểm tra theo tham số hệ thống về cấp khai báo để hiển thị danh sách cấp khai báo
+	•	Tên: Người dùng nhập tên danh mục sản phẩm để tìm kiếm tương tự
+	•	Từ ngày: Người dùng chọn ngày, tìm kiếm theo trường ngày hiệu lực
+	•	Đến ngày: Người dùng chọn ngày, tìm kiếm theo trường ngày hiệu lực
+	•	Lưới Danh mục sản phẩm dịch vụ:
+	•	Các trường hiển thị trong lưới kết quả gồm có: Mã code phí, loại, mã SPDV, tên SPDV, Trạng thái, Ngày tạo, Ngày hiệu lực, Ngày hết hiệu lực, Người tạo, Ngày duyệt, Người duyệt, Ngày sửa, Người sửa. 
+	•	Người dùng nhấn mã danh mục SPDV, hệ thống hiển thị màn hình chi tiết sản phẩm dịch vụ. Các trường gồm có: Tên, Mã SPDV, Mô tả, Cấp SPDV, ngày tạo, người tạo, ngày duyệt, Người duyệt, Ngày sửa, Người sửa, Ngày hiệu lực, Ngày hết hiệu lực, Trạng thái, Code phí
+	•	Tại Sản phẩm dịch vụ cấp cuối, hiển thị các code phí đang hiệu lực được gắn với sản phẩm dịch vụ cấp đó và người dùng có thể thêm code phí mới. Nếu người dùng nhấn vào xem chi tiết 1 code phí, hệ thống hiển thị thông tin chi tiết của code phí đó, các trường hiển thị giống như màn thêm mới.
+	•	Trạng thái của Sản phẩm dịch vụ gồm: 
+Trạng thái
+Mô tả
+Hoạt động
+Sản phẩm dịch vụ đang có hiệu lực 
+Không hoạt động
+Sản phẩm dịch vụ chưa đến ngày hiệu lực hoặc đã hết hiệu lực
+	•	Sau khi tìm kiếm theo các điều kiện, hệ thống trả kết quả trên lưới Danh mục sản phẩm dịch vụ, hiển thị đến các cấp phù hợp với điều kiện lọc theo quy tắc tìm kiếm chung của hệ thống.
+	•	Tải xuống: Cho phép người dùng kết xuất file danh sách SPDV theo dữ liệu kết quả tìm kiếm đang hiển thị lưới và theo quy tắc tải xuống chung của hệ thống.
+	•	Tab danh mục code phí chưa sử dụng: 
+	•	Mục đích: Hiển thị danh sách các code phí chưa được gán vào Biểu phí để đảm bảo các code phí cần vận hành đã được gắn đầy đủ vào các biểu phí hoặc người dùng có thể tra cứu được các code phí theo trạng thái.
+	•	Các trạng thái của code phí bao gồm: 
+Trạng thái
+Mô tả
+Hoạt động
+Code phí đang gán với một Biểu phí có hiệu lực 
+Ngừng hoạt động
+Code phí đang gán với một Biểu phí hết hiệu lực
+Chờ gán
+Code phí chưa được gán với Biểu phí nào 
+Hủy
+Code phí khai báo sai thông tin và không thể tái sử dụng
+	•	Tab danh sách code phí chưa sử dụng gồm có: Tìm kiếm nhanh, Lọc nâng cao, Tải xuống, Lưới Danh sách code phí chưa sử dụng
+	•	Tìm kiếm nhanh: Người dùng nhập mã/tên để tìm kiếm nhanh và gần đúng dữ liệu.
+	•	Lọc nâng cao: Người dùng nhấn chọn lọc nâng cao, hệ thống hiển thị màn hình để người dùng nhập các điều kiện muốn lọc. Điều kiện lọc bao gồm: Tên, Từ ngày, Đến ngày
+	•	Tên: Người dùng nhập tên code phí để tìm kiếm gần đúng
+	•	Từ ngày: Người dùng chọn ngày, tìm kiếm theo trường ngày tạo
+	•	Đến ngày: Người dùng chọn ngày, tìm kiếm theo trường ngày tạo
+	•	Lưới Danh sách code phí chưa sử dụng:
+	•	Các trường hiển thị trong lưới kết quả gồm có: Code phí, Tên phí, Mã SPDV, Tên SPDV, Trạng thái, Ngày tạo, Người tạo, Ngày sửa, Người sửa. 
+	•	Người dùng nhấn vào xem chi tiết 1 code phí, hệ thống hiển thị thông tin chi tiết của code phí đó, các trường hiển thị giống như màn thêm mới/chỉnh sửa. Tại màn xem chi tiết của code phí, người dùng nhấn vào “Lịch sử tác động”, hệ thống hiển thị popup Lịch sử tác động (tham khảo tại mục Lịch sử tác động của Quy tắc chung)
+	•	Sau khi tìm kiếm theo các điều kiện, hệ thống trả kết quả trên lưới Code phí chưa sử dụng, hiển thị các code phí phù hợp với điều kiện lọc theo quy tắc tìm kiếm chung của hệ thống.
+	•	Tải xuống: Cho phép người dùng kết xuất file danh sách Code phí theo dữ liệu kết quả tìm kiếm đang hiển thị lưới và theo quy tắc tải xuống chung của hệ thống.
+Xem thông tin SPDV, code phí, biểu phí tại chức năng Xem nghiệp vụ theo cây thư mục:  
+Người dùng chọn “Xem nghiệp vụ theo cây thư mục”, hệ thống hiển thị màn hình gồm 2 cấu phần tìm kiếm dữ liệu: “Danh mục toàn hàng” và “Danh mục sản phẩm dịch vụ/ Danh mục biểu phí”, người dùng có thể tìm kiếm độc lập giữa các cấu phần.
+	•	Danh mục toàn hàng: Người dùng tìm kiếm các SPDV theo cây thư mục, từ cây thư mục có thể xem chi tiết SPDV, danh sách code phí/ biểu phí đi kèm
+	•	Layout danh mục toàn hàng gồm có: Tìm kiếm nhanh theo tên SPDV, cây thư mục SPDV
+	•	Tìm kiếm nhanh: Người dùng nhập tên SPDV muốn tìm kiếm, hệ thống hiển thị các SPDV phù hợp với đến tất cả cấp, hiển thị đến cấp đó
+	•	Cây thư mục SPDV: 
+	•	Mặc định: Hiển thị toàn bộ SPDV cấp 1
+	•	Người dùng có thể mở rộng/thụ gọn đến cấp cuối của 1 cấp, hiển thị theo dạng cây
+	•	Người dùng nhấn vào 1 SPDV, hệ thống hiển thị chi tiết và hyperlink “Xem biểu phí/ code phí đi kèm”. 
+	•	Nếu là SPDV cấp cuối thì hiển thị hyperlink “Xem code phí đi kèm”.
+	•	Nếu không phải SPDV cấp cuối thì hiển thị hyperlink “Xem biểu phí đi kèm” 
+	•	Người dùng nhấn vào hyperlink để xem danh sách biểu phí, code phí tương ứng.
+	•	Tại màn Danh sách biểu phí, các trường trên lưới gồm: Mã biểu phí (Click vào để xem chi tiết biểu phí), Tên biểu phí, Tên văn bản, Ngày ban hành, Ngày hiệu lực, Ngày hết hiệu lực, Trạng thái, Người tạo, Ngày tạo, Người sửa, Ngày sửa, Người duyệt, Ngày duyệt
+	•	Tại màn danh sách code phí, các trường trên lưới gồm:  button Tải xuống, Mã code phí (Click vào để xem chi tiết code phí), tên code phí, công thức tính phí, người tạo, ngày tạo, người sửa, ngày sửa, người duyệt, ngày duyệt
+	•	Tải xuống: Cho phép người dùng kết xuất file danh sách code phí/ biểu phí theo dữ liệu kết quả tìm kiếm đang hiển thị trên màn hình và theo quy tắc tải xuống chung của hệ thống.
+	•	Phân trang: Hệ thống hiển thị 20 SPDV cấp 1 trên 1 trang, người dùng nhấn vào button tiếp theo/ số trang để xem các SPDV tại trang đó
+	•	Danh mục sản phẩm dịch vụ: Tra cứu các sản phẩm dịch vụ theo các điều kiện khác nhau
+	•	Màn hình danh mục sản phẩm dịch vụ gồm có: Điều kiện tra cứu, Tra cứu, Tải xuống, Lưới Danh mục sản phẩm dịch vụ
+	•	Khi người dùng vào Tab Danh mục sản phẩm dịch vụ, mặc định không hiển thị danh sách sản phẩm dịch vụ. 
+	•	Sau khi nhập điều kiện và nhấn “Tra cứu”, hệ thống trả kết quả trên Lưới Danh mục sản phẩm dịch vụ, hiển thị các SPDV phù hợp với điều kiện lọc theo quy tắc tìm kiếm chung của hệ thống
+	•	Các điều kiện tra cứu gồm: 
+	•	Cấp khai báo: Người dùng lựa chọn 1 trong các cấp khai báo trong dropdown list. Cấp khai báo sẽ được hiển thị đến cấp cuối cùng theo tham số được cấu hình 
+	•	Tên: Người dùng nhập tên sản phẩm, dịch vụ
+	•	Từ ngày - đến ngày: người dùng chọn ngày, hệ thống tìm kiếm theo ngày hiệu lực
+	•	Lưới Danh mục sản phẩm dịch vụ: Mã SPDV, Tên SPDV, Loại (là cấp của SPDV), mã Code phí, Trạng thái, Trạng thái, Ngày tạo, Ngày hiệu lực, Ngày hết hiệu lực, Người tạo, Ngày duyệt, Người duyệt, Ngày sửa, Người sửa.
+	•	Người dùng nhấn vào mã SPDV, mã code phí thì hiển thị màn hình chi tiết SPDV/Code phí tương ứng.
+	•	Tải xuống: Cho phép người dùng kết xuất file danh mục SPDV theo dữ liệu kết quả tìm kiếm đang hiển thị trên màn hình và theo quy tắc tải xuống chung của hệ thống.
+	•	Danh mục biểu phí: Tra cứu biểu phí theo các điều kiện khác nhau
+	•	Màn hình danh mục biểu phí gồm có: Các điều kiện lọc, Tải xuống, Lưới danh mục biểu phí
+	•	Khi người dùng vào Tab Danh mục biểu phí mặc định không hiển thị dữ liệu trên Lưới danh mục biểu phí. 
+	•	Sau khi nhập điều kiện và nhấn “Tra cứu”, hệ thống trả kết quả trên Lưới Danh mục biểu phí, hiển thị các biểu phí phù hợp với điều kiện lọc theo quy tắc tìm kiếm chung của hệ thống
+	•	Các điều kiện tra cứu gồm: 
+	•	Tên biểu phí: Người dùng nhập tên biểu phí để tìm kiếm gần đúng
+	•	Số văn bản: Người dùnh nhập số văn bản
+	•	Tên văn bản: Người dùng nhập tên văn 
+	•	Loại khách hàng: người dùng chọn: KHCN, KHTC, KHDNSN, CBNV
+	•	Từ ngày - đến ngày: người dùng chọn ngày, hệ thống tìm kiếm theo ngày hiệu lực
+	•	Trạng thái: Người dùng lựa chọn 1 trong các trạng thái của biểu phí bao gồm:
+Trạng thái
+Mô tả
+Đang hiệu lực 
+Khi ngày hiệu lực bắt đầu, nằm trong khoảng thời gian ngày hiệu lực và ngày hết hiệu lực
+Chưa hiệu lực 
+Khi ngày hiểu lực chưa bắt đầu
+Hết hiệu lực
+Khi ngày hết hiệu lực bắt đầu
+	•	Danh sách biểu phí: Mã biểu phí, Tên biểu phí, Số văn bản, Tên văn bản, Trạng thái, Ngày hiệu lực, Ngày hết hiệu lực, Ngày tạo, Người tạo, Ngày duyệt, Người duyệt, Ngày sửa, Người sửa
+	•	Người dùng nhấn vào mã biểu phí thì hiển thị màn hình chi tiết biểu phí tương ứng
+	•	Tải xuống: Cho phép người dùng xuất file danh sách biểu phí theo dữ liệu kết quả tìm kiếm đang hiển thị trên màn hình và theo quy tắc tải xuống chung của hệ thống
+Lưu đồ và diễn giải
+Quản lý Danh mục sản phẩm dịch vụ (Tham số)
+Lưu đồ
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Tìm kiếm danh mục sản phẩm dịch vụ theo chức năng
+Chọn "Danh mục sản phẩm dịch vụ và code phí" tại menu  
+Người dùng
+2
+
+Hiển thị 2 tab: Danh mục SPDV (default) và Code phí chưa sử dụng
+Frontend
+3
+
+Gửi yêu cầu lấy danh sách SPDV
+Backend
+4
+
+Lấy danh sách sản phẩm dịch vụ
+Người dùng
+5
+
+Hiển thị màn hình sản phẩm dịch vụ theo chức năng
+Frontend
+6
+
+Lựa chọn: 
++ Nhập mã tìm kiếm
++ Lọc nâng cao
++ Tải xuống
++ Nhấn mã SPDV
++ Nhấn xem chi tiết Code phí ở SPDV cấp cuối
+Người dùng
+6.1
+
+Nhập mã tìm kiếm
+Người dùng
+7
+
+Hiển thị danh sách SPDV => Kết thúc
+Frontend
+6.2
+
+Lọc nâng cao
+Người dùng
+8
+
+Hiển thị màn hình lọc sản phẩm dịch vụ
+Frontend
+9
+
+Nhập các điều kiện lọc
+Người dùng
+10
+
+Lựa chọn: 
++ Xoá lọc
++ Áp dụng
+Người dùng
+10.1
+
+Xoá lọc
+Người dùng
+11
+
+Đóng màn hình Lọc sản phẩm dịch vụ => Kết thúc
+Frontend
+
+11.2
+
+Áp dụng
+Người dùng
+12
+
+Hiển thị Danh mục sản phẩm dịch vụ => Kết thúc
+Frontend
+
+6.3
+
+Tải xuống
+Người dùng
+13
+
+Tham chiếu quy tắc Tải xuống tại mục Quy tắc chung => Kết thúc
+Frontend
+6.4
+
+Nhấn mã Mã danh mục SPDV
+Người dùng
+14
+
+Hiển thị màn hình chi tiết 1 SPDV
+Frontend
+6.5
+
+Nhấn xem chi tiết Code phí ở SPDV cấp cuối
+Người dùng
+15
+
+Gửi yêu cầu xem chi tiết code phí
+Frontend
+16
+
+Nhận yêu cầu và xử lý
+Backend
+17
+
+Hiển thị màn hình xem chi tiết code phí
+=> Kết thúc
+Frontend
+
+Quản lý Danh sách code phí chưa sử dụng (Tham số)
+Lưu đồ
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Danh sách Code phí chưa sử dụng
+Chọn menu "Danh mục sản phẩm dịch vụ và code phí" tại Menu  
+Người dùng
+2
+
+Hiển thị 2 tab: Danh mục SPDV (default) và Code phí chưa sử dụng
+Frontend
+3
+
+Chọn tab Code phí chưa sử dụng
+Người dùng
+4
+
+Gửi yêu cầu lấy danh sách code phí chưa sử dụng
+Frontend
+6
+
+Lấy danh sách code phí chưa sử dụng
+Backend
+7
+
+Hiển thị màn hình code phí chưa sử dụng
+Frontend
+8
+
+Người dùng lựa chọn: 
++ Nhập mã (code phí) tìm kiếm
++ Lọc nâng cao
++ Tải xuống
++ Xem chi tiết code phí
+Người dùng
+8.1
+
+Nhập mã tìm kiếm
+Người dùng
+9
+
+Hiển thị kết quả  danh sách code phí => Kết thúc
+Frontend
+8.2
+
+Lọc nâng cao
+Người dùng
+10
+
+Hiển thị màn hình Lọc code phí chưa sử dụng
+Frontend
+11
+
+Nhập các điều kiện lọc
+Người dùng
+12
+
+Người dùng lựa chọn: 
++ Xoá lọc
++ Áp dụng
+Người dùng
+12.1
+
+Xoá lọc
+Người dùng
+13
+
+Đóng màn hình lọc code phí chưa sử dụng
+=> Kết thúc
+Frontend
+12.2
+
+Áp dụng
+Người dùng
+14
+
+Hiển thị danh sách code phí theo điều kiện đã lọc => Kết thúc
+Frontend
+8.3
+
+Tải xuống
+Người dùng
+15
+
+Tham chiếu mục Tải xuống tại Quy tắc chung => Kết thúc
+Frontend
+8.4
+
+Xem chi tiết code phí
+Người dùng
+16
+
+Gửi yêu cầu xem chi tiết code phí
+Frontend
+17
+
+Lấy chi tiết 1 code phí
+Backend
+18
+
+Hiển thị màn hình thông tin chi tiết code phí
+Frontend
+
+Xem nghiệp vụ theo cây thư mục (Tra cứu)
+Lưu đồ
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Tra cứu cây SPDV, code phí, biểu phí
+Chọn  "Xem nghiệp vụ theo cây thư mục”
+Người dùng
+2
+
+Hiển thị màn hình gồm 2 phần: Cây thư mục và phần thông tin chi tiết
+Frontend
+3
+
+Lựa chọn tab chức năng: 
++ Chọn “ Danh mục toàn hàng” của Cây thư mục => đến bước 3.1
++ Chọn Tab “Danh mục Sản phầm dịch vụ” => đến bước 3.2
++ Chọn  Tab “ Danh mục biểu phí” => đến bước 3.3
+Người dùng
+3.1
+
+Chọn Danh mục toàn hàng của Cây thư mục
+Người dùng
+4
+
+Hiển thị toàn bộ danh mục sản phẩm cấp 1
+Frontend
+5
+
+Lựa chọn: 
++ Nhập tìm kiếm => đến bước 5.1 
++ Nhấn expand/collapse => đến bước 5.2
++ Nhấn vào 1 SPDV => đến bước 5.3
+Người dùng
+5.1
+
+Nhập tìm kiếm
+Người dùng
+6
+
+Hiển thị kết quả tìm kiếm
+Frontend
+5.2
+
+Nhấn expand/collapse
+Người dùng
+7
+
+Hiển thị thêm/thu gọn các thư mục SPDV
+Frontend
+5.3
+
+Nhấn vào 1 SPDV
+Người dùng
+8
+
+Hệ thống kiểm tra có phải SPDV cấp cuối không?
++ Nếu không -> đến bước 8.1
++ Nếu có -> đến bước 8.2
+Frontend
+8.1
+
+Hiển thị thông tin chi tiết + Hyperlink “Xem biểu phí đi kèm”
+Frontend
+8.2
+
+Hiển thị thông tin chi tiết + Hyperlink “Xem code phí đi kèm”
+Frontend
+9
+
+Người dùng lựa chọn: 
++ Nhấn vào hyperlink “Xem biểu phí đi kèm” => đến bước 9.1
++ Nhấn vào hyperlink “Xem code phí đi kèm” => đến bước 9.2
++ Tải xuống (List code phí/biểu phí đi kèm) => đến bước 9.3
+Người dùng
+9.1
+
+Nhấn vào hyperlink “Xem biểu phí đi kèm”
+Người dùng
+10
+
+Gửi yêu cầu lấy danh sách biểu phí đi kèm
+Frontend
+11
+
+Nhận yêu cầu và xử lý dữ liệu 
+Backend
+12
+
+Hiển thị danh sách biểu phí 
+Frontend
+9.2
+
+Nhấn vào hyperlink “Xem code phí đi kèm”
+Người dùng
+13
+
+Gửi yêu cầu xem code phí đi kèm
+Frontend
+14
+
+Nhận yêu cầu và xử lý dữ liệu
+Backend
+15
+
+Hiển thị danh sách code phí đi kèm
+Frontend
+9.3
+
+Nhấn tải xuống 
+(tại màn danh sách code phí hoặc biểu phí để download file)
+Người dùng
+16
+
+Tham chiếu quy tắc tải xuống tại mục Quy tắc chung
+Frontend
+3.2
+
+Chọn Tab Danh mục sản phẩm dịch vụ => Tiếp tục bước 17
+Người dùng
+17
+
+Hiển thị màn hình danh mục SPDV
+Frontend
+18
+
+Nhập các điều kiện lọc và nhấn Tìm kiếm
+Người dùng
+19
+
+Gửi yêu cầu tìm kiếm
+Frontend
+20
+
+Nhận yêu cầu và xử lý dữ liệu 
+Backend
+21
+
+Hiển thị danh sách SPDV => Kết thúc
+Frontend
+3.3
+
+Chọn tab “Danh mục biểu phí” => Tiếp bước 22
+Người dùng
+22
+
+Hiển thị màn hình Danh mục Biểu phí
+Frontend
+23
+
+Nhập các điều kiện lọc và “Tìm kiếm”
+Người dùng
+24
+
+Gửi yêu cầu tìm kiếm
+Frontend
+25
+
+Nhận yêu cầu và xử lý dữ liệu
+Backend
+26
+
+Hiển thị danh sách biểu phí => Kết thúc
+Frontend
+
+Giao diện
+Tìm kiếm danh mục sản phẩm dịch vụ (Tham số)
+Màn hình
+
+
+
+Mô tả các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+1
+Tìm kiếm nhanh
+
+Search bar
+
+Người dùng tìm kiếm nhanh mã/tên SPDV
+2
+Lọc nâng cao
+
+Button
+
+Các điều kiện Lọc, bao gồm: Cấp khai báo, Tên, Từ ngày - đến ngày: 
++ Cấp khai báo: Chọn danh sách cấp khai báo
++ Tên: Người dùng nhập tên SPDV
++ Từ ngày - đến ngày: lựa chọn ngày, và tìm kiếm theo ngày hiệu lực
+3
+Thêm mới
+
+Button
+
+Thêm mới Nghiệp vụ
+4
+Tải xuống
+
+Button
+
+Tải xuống file dạng excel
+CÁC TRƯỜNG THÔNG TIN TRÊN LƯỚI
+1
+Tên
+
+Text
+
+Tên sản phẩm dịch vụ
+2
+Mã
+
+Text
+
++ Mã sản phẩm dịch vụ, người dùng click vào mã để xem chi tiết một mã sản phẩm dịch vụ
++ Các trường thông tin như màn chỉnh sửa và thêm mới một SPDV
+3
+Mô tả
+
+Text
+
+Mô tả
+4
+Cấp
+
+Text
+
+
+Cấp sản phẩm dịch vụ
+5
+Code phí
+
+Text
+
+
++ Hiển thị mã code phí (nếu có) 
++ Nếu là sản phẩm dịch vụ cấp cuối thì hệ thống hiển thị button xem, chỉnh sửa, thêm code phí
++ Button chuyển đổi code phí hiển thị khi có ít nhất 1 code phí và ở cấp cuối của SPDV
+6
+Trạng thái
+
+Text
+
+Hiển thị trạng thái của sản phẩm dịch vụ gồm: 
++ Đang hoạt động
++ Không hoạt động
+7
+Ngày tạo
+
+Date
+
+Ngày tạo sản phẩm dịch vụ
+8
+Người tạo
+
+Text
+
+Người tạo sản phẩm dịch vụ
+9
+Ngày duyệt
+
+Date
+
+Ngày duyệt cấp cuối của sản phẩm dịch vụ
+10
+Người duyệt
+
+Text
+
+Người duyệt cấp cuối của sản phẩm dịch vụ
+11
+Ngày sửa
+
+Date
+
+Ngày sửa sản phẩm dịch vụ
+12
+Người sửa
+
+Date
+
+Người sửa sản phẩm dịch vụ
+13
+Ngày hiệu lực
+
+Date
+
+Ngày hiệu lực của sản phẩm dịch vụ
+14
+Ngày hết hiệu lực
+
+Date
+
+Ngày hết hiệu lực của sản phẩm dịch vụ
+15
+Hành động
+
+-
+
+Người dùng click vào button hành động, hiển thị danh sách button gồm: Thêm mới, chỉnh sửa
+ 
+Xem danh sách code phí chưa sử dụng
+Màn hình
+
+
+Mô tả các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+1
+Tìm kiếm nhanh
+
+Search bar
+
+Người dùng tìm kiếm nhanh bằng mã/tên code phí
+2
+Lọc nâng cao
+
+Button
+
+Các điều kiện Lọc, bao gồm: Tên, Từ ngày - đến ngày
++ Tên: Người dùng nhập tên Code phí
++ Từ ngày - đến ngày: lựa chọn ngày, và tìm kiếm theo ngày tạo
+3
+Tải xuống
+
+Button
+
+Tải xuống file dạng excel
+CÁC TRƯỜNG THÔNG TIN
+1
+Code phí
+
+Text
+
++ Hiển thị mã code phí + Người dùng click vào Mã, hệ thống hiển thị màn hình chi tiết code phí
+2
+Tên 
+
+Text
+
+Tên code phí
+3
+Mã SPDV
+
+Text
+
+Mã sản phẩm dịch vụ
+4
+Tên SPDV
+
+Text
+
+Tên SPDV
+5
+Trạng thái
+
+Text
+
+Hiển thị trạng thái của  code phí  gồm:
++ Huỷ
++ Ngừng hoạt động
++ Chờ gán
+6
+Ngày tạo
+
+Date
+
+Ngày tạo code phí
+7
+Người tạo
+
+Text
+
+Người tạo code phí
+8
+Ngày sửa
+
+Date
+
+Ngày sửa code phí
+9
+Người sửa
+
+Date
+
+Người sửa code phí
+
+Xem nghiệp vụ theo cây thư mục (Tra cứu)
+Màn hình
+Màn hình danh mục toàn hàng
+
+
+Màn hình danh mục Sản phẩm dịch vụ
+Màn hình Danh mục biểu phí
+
+Mô tả các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+DANH MỤC TOÀN HÀNG
+NÚT CHỨC NĂNG
+1
+Tìm kiếm nhanh
+
+Search bar
+
+Người dùng tìm kiếm nhanh bằng mã/tên sản phẩm dịch vụ
+2
+Expand/ Collapse
+
+Button
+
++ Người dùng nhấn vào Expand button icon để mở rộng các cấp SPDV 
++ Người dùng nhấn vào Collapse button icon để thu gọn các cấp SPDV
+CÁC TRƯỜNG THÔNG TIN
+1
+Tên SPDV
+
+Text
+
++ Hiển thị tên SPDV theo thư mục hình cây
++ Người dùng nhấn vào 1 SPDV để xem chi tiết thông tin SPDV
+DANH MỤC SẢN PHẨM DỊCH VỤ
+NÚT CHỨC NĂNG
+1
+Tra cứu
+
+Button
+
+Người dùng nhấn vào Tra cứu button để tìm kiếm theo các điều kiện 
+2
+Xoá tra cứu
+
+Button
+
+Người dùng nhấn vào button xoá tra cứu để bỏ các điều kiện tra cứu
+3
+Tải xuống
+
+Button
+
+Tải xuống file dạng excel, hiển thị khi trên lưới có dữ liệu 
+CÁC TRƯỜNG THÔNG TIN
+Các điều kiện tra cứu
+1
+Tên
+
+Textbox
+
+Người dùng nhập tên SPDV
+2
+Cấp khai báo
+
+Dropdown list
+
+Chọn danh sách cấp khai báo
+3
+Từ ngày - đến ngày
+
+Date
+
+Người dùng lựa chọn ngày, hệ thống tìm kiếm theo ngày tạo
+Lưới Danh mục sản phẩm dịch vụ
+4
+Mã code phí
+
+Text
+
++ Hiển thị mã code phí + Người dùng click vào Mã, hệ thống hiển thị màn hình chi tiết code phí
+5
+Loại SPDV
+
+Text
+
+Hiển thị cấp của SPDV
+6
+Mã SPDV
+
+Text
+
++ Mã sản phẩm dịch vụ + Người dùng nhấn vào Mã SPDV, hệ thống hiển thị chi tiết mã SPDV
+7
+Tên SPDV
+
+Text
+
+Tên SPDV
+8
+Trạng thái
+
+Text
+
+Trạng thái của SPDV: Hoạt động/Không hoạt động
+9
+Ngày hiệu lực
+
+Date
+
+Ngày hiệu lực của SPDV
+10
+Ngày hết hiệu lực
+
+Date
+
+Ngày hết hiệu lực của SPDV
+11
+Ngày tạo
+
+Date
+
+Ngày tạo SPDV
+12
+Người tạo
+
+Text
+
+Người tạo SPDV
+13
+Ngày sửa
+
+Date
+
+Ngày sửa SPDV
+14
+Người sửa
+
+Text
+
+Người sửa SPDV
+15
+Ngày duyệt
+
+Date
+
+Ngày duyệt SPDV
+16
+Người duyệt
+
+Text
+
+Người duyệt SPDV
+DANH MỤC BIỂU PHÍ
+NÚT CHỨC NĂNG
+1
+Tra cứu 
+
+Button
+
+Người dùng nhấn vào Tra cứu để tìm kiếm theo các điều kiện
+2
+Xoá tra cứu 
+
+Button
+
+Người dùng nhấn vào button Xoá tra cứu để bỏ các điều kiện tra cứu
+3
+Tải xuống
+
+Button
+
+Tải xuống file dạng excel
+CÁC TRƯỜNG THÔNG TIN
+Các điều kiện tra cứu 
+1
+Tên biểu phí
+
+Textbox
+
+Người dùng nhập tên biểu phí 
+2
+Trạng thái
+
+Dropdown list
+
+Người dùng chọn trạng thái của biểu phí
+3
+Từ ngày - đến ngày
+
+Date
+
+Người dùng chọn ngày, tìm kiếm theo ngày hiệu lực
+4
+Số văn bản
+
+Textbox
+
+Người dùng nhập số văn bản
+5
+Tên văn bản
+
+Textbox
+
+Người dùng nhập tên văn bản
+6
+Loại khách hàng
+
+Dropdown list
+
+Người dùng chọn loại khách hàng gồm: 
++ KHCN
++ KHTC
++ KHDNSN
++ CBNV
+Lưới Danh sách biểu phí
+7
+Mã biểu phí
+
+Text
+
++ Hiển thị mã biểu phí
++ Người dùng click vào Mã biểu phí, hệ thống hiển thị màn hình chi tiết biểu phí
+8
+Tên biểu phí
+
+Text
+
+Tên biểu phí
+9
+Số văn bản
+
+Text
+
+Số văn bản
+10
+Tên văn bản
+
+Text
+
+Tên văn bản
+11
+Trạng thái
+
+Text
+
+Hiển thị trạng thái của biểu phí  gồm: 
++ Đang hiệu lực
++ Chưa hiệu lực 
++ Hết hiệu lực
+12
+Ngày hiệu lực
+
+Date
+
+Hiển thị ngày hiệu lực của biểu phí
+13
+Ngày hết hiệu lực
+
+Date
+
+Hiển thị ngày hết hiệu lực của biểu phí
+14
+Ngày tạo
+
+Date
+
+Ngày tạo biểu phí
+15
+Người tạo
+
+Text
+
+Người tạo biểu phí
+16
+Ngày sửa
+
+Date
+
+Ngày sửa biểu phí
+17
+Người sửa
+
+Date
+
+Người sửa biểu phí
+18
+Ngày duyệt
+
+Date
+
+Ngày duyệt của biểu phí
+19
+Người duyệt
+
+Text
+
+Hiển thị username người duyệt của biểu phí
+
+US16 - Là người dùng, tôi muốn xem danh mục biểu phí 
+Yêu cầu nghiệp vụ
+Navigation: Khi muốn xem thông tin về biểu phí, người dùng truy cập chức năng: Tham số >> Quản lý Danh mục biểu phí
+Màn hình “Danh mục biểu phí”: Hiển thị tất cả danh sách biếu phí đang có của hệ thống. Màn hình này gồm có: Lọc nâng cao, lưới danh sách biểu phí, Tải xuống 
+	•	Button Lọc nâng cao: Người dùng nhấn vào button này, hệ thống hiển thị màn hình Lọc Biểu phí. Màn hình Lọc Biểu phí gồm có: 
+	•	Tên biểu phí: Người dùng nhập tên biểu phí để tìm kiếm gần đúng
+	•	Trạng thái: Người dùng chọn 1 trạng thái, các trạng thái gồm: Chưa hiệu lực/Đang hiệu lực/Hết hiệu lực
+	•	Từ ngày - đến ngày : dd/mm/yyyy, người dùng chọn ngày, hệ thống tìm theo ngày hiệu lực
+	•	Button Xoá lọc: Người dùng nhấn vào button này để xoá thông tin trên các trường người dùng đã nhập/chọn
+	•	Button Áp dụng: Người dùng nhấn vào button này để áp dụng lọc với thông tin trên các trường người dùng đã nhập/chọn
+	•	Lưới danh sách biểu phí gồm: 
+	•	Mã biểu phí: Người dùng nhấn vào mã biểu phí để xem chi tiết 1 biểu phí
+	•	Tên biểu phí: Hiển thị tên biểu phí
+	•	Trạng thái: Trạng thái biểu phí, trạng thái gồm: Chưa hiệu lực, Đang hiệu lực, Hết hiệu lực
+	•	Ngày hiệu lực: dd/mm/yyyy
+	•	Ngày hết hiệu lực: dd/mm/yyyy. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Ngày tạo: hh:mm:ss – dd/mm/yyyy
+	•	Người tạo: Hiển thị username của người tạo
+	•	Ngày sửa: hh:mm:ss – dd/mm/yyyy. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Người sửa:Hiển thị username của người sửa. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Ngày duyệt: hh:mm:ss – dd/mm/yyyy
+	•	Người duyệt:Hiển thị username của người duyệt. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Sau khi lọc theo các điều kiện, hệ thống trả kết quả, hiển thị các biểu phí phù hợp với điều kiện lọc theo quy tắc chung của hệ thống.
+	•	Tải xuống: Người dùng có thể tải xuống file danh sách biểu phí theo dữ liệu kết quả tìm  kiếm đang hiển thị trên màn hình và theo quy tắc tải xuống tại mục Quy tắc chung của hệ thống.
+	•	Màn hình Xem chi tiết 1 biểu phí: cho phép xem các trường thông tin hiển thị như ở màn tạo/chỉnh sửa và Lịch sử tác động theo Quy tắc chung của hệ thống. Tại màn xem chi tiết của biểu phí, người dùng nhấn vào “Lịch sử tác động”, hệ thống hiển thị popup Lịch sử tác động (tham khảo tại mục Lịch sử tác động của Quy tắc chung)
+
+Lưu đồ và diễn giải
+Lưu đồ
+
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Xem danh sách CTƯĐ 
+Chọn menu “Danh mục biểu phí”
+Người dùng
+2
+
+Gửi yêu cầu lấy danh sách biểu phí
+Frontend
+3
+
+Nhận yêu cầu và xử lý
+Hệ thống
+4
+
+Hiển thị danh sách biểu phí
+Frontend
+5
+
+Lựa chọn: 
++ Lọc nâng cao => Bước 5.1
++ Tải xuống => Bước 5.2
++ Xem chi tiết biểu phí => Bước 5.3
+Người dùng
+5.1
+
+Lọc nâng cao
+Người dùng
+6
+
+Hiển thị màn hình “Lọc Biểu phí”
+Frontend
+7
+
+Nhập các điều kiện lọc
+Người dùng
+8
+
+Người dùng lựa chọn: 
++ Xoá lọc => Bước 8.1
++ Áp dụng => Bước 8.2
+Người dùng
+8.1
+
+Xoá lọc
+Người dùng
+9
+
+Đóng màn hình Lọc Biểu phí => Kết thúc
+Frontend
+8.2
+
+Áp dụng
+Người dùng
+10
+
+Hiển thị danh sách Biểu phí theo điều kiện => Kết thúc
+Frontend
+5.2
+
+Tải xuống
+Người dùng
+10
+
+Tham chiếu quy tắc Tải xuống tại mục Quy tắc chung => Kết thúc
+Frontend
+5.3
+
+Xem chi tiết Biểu phí
+Người dùng
+11
+
+Gửi yêu cầu xem chi tiết Biểu phí
+Frontend
+12
+
+Nhận yêu cầu và xử lý
+Backend
+13
+
+Hiển thị màn chi tiết Biểu phí => Kết thúc
+Frontend
+
+Giao diện
+Màn hình
+Màn hình danh mục biểu phí
+Màn hình lọc biểu phí
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+1
+Lọc nâng cao
+
+Button
+
+Người dùng click vào button “Lọc nâng cao” để nhập các điều kiện lọc
+2
+Thêm mới
+
+Button
+
+Người dùng click vào button Thêm mới để thêm mới 1 biểu phí
+3
+Tải xuống
+
+Button
+
+Tải xuống file danh sách biểu phí
+4
+Sao chép
+
+Button
+
+Người dùng nhấn vào button này để sao chép 1 biểu phí
+CÁC TRƯỜNG THÔNG TIN
+1
+Mã biểu phí
+
+Text
+
++ Hiển thị mã biểu phí
++ Người dùng nhấn vào mã biểu phí. Hệ thống hiển thị màn hình thông tin chi tiết của biểu phí
+2
+Tên biểu phí
+
+Text
+
+Hiển thị tên biểu phí
+3
+Trạng thái
+
+Text
+
+Hiển thị trạng thái của biểu phí: 
++ Đang hiệu lực
++ Chưa hiệu lực
++ Hết hiệu lực
+4
+Ngày hiệu lực
+
+Date 
+
++ Hiển thị ngày hiệu lực của biểu phí
++ Format: dd/mm/yyyy
+5
+Ngày hết hiệu lực
+
+Date
+
++ Hiển thị ngày hết hiệu lực của biểu phí
++ Format: dd/mm/yyyy
+6
+Ngày tạo
+
+Date time
+
++ Ngày tạo biểu phí
++ Format: hh:mm:ss – dd/mm/yyyy
+7
+Người tạo
+
+Text
+
++ username của người tạo biểu phí
+8
+Ngày sửa
+
+Date time
+
++ Ngày sửa biểu phí
++ Format: hh:mm:ss – dd/mm/yyyy
++ Không có thông tin, hệ thống show “-”
+9
+Người sửa
+
+Text
+
++ Username người sửa biểu phí
++ Không có thông tin, hệ thống show “-”
+10
+Người duyệt
+
+Text
+
++ Username của gười duyệt biểu phí
++ Không có thông tin, hệ thống show “-”
+11
+Ngày duyệt
+
+Date time
+
++ Ngày duyệt biểu phí
++ Format: hh:mm:ss – dd/mm/yyyy
++ Không có thông tin, hệ thống show “-”
+
+US17 - Là người dùng, tôi muốn xem danh sách CTƯĐ và toàn bộ lịch sử khai báo
+Yêu cầu nghiệp vụ
+Navigation: Khi muốn xem thông tin về chương trình ưu đãi, người dùng truy cập: Tham số >> Chương trình ưu đãi >> Quản lý Chương trình ưu đãi
+Màn hình “Quản lý chương trình ưu đãi”: Hiển thị tất cả danh sách chương trình ưu đãi đang có của hệ thống. 
+	•	Màn hình này gồm có: Ưu đãi có đánh giá định kỳ/ Ưu đãi không đánh giá định kỳ, Lọc nâng cao, Lưới danh sách CTƯĐ, Tải xuống
+	•	Ưu đãi có đánh giá định kỳ/ Ưu đãi không đánh giá định kỳ: Người dùng chọn ưu đãi có đánh định kỳ hoặc không. Hệ thống mặc định hiển thị Ưu đãi có đánh giá định kỳ khi vào màn hình “Danh sách chương trình ưu đãi”
+	•	Button Lọc nâng cao: Người dùng nhấn vào button này, hệ thống hiển thị màn hình Lọc Chương trình ưu đãi
+	•	Màn hình Lọc chương trình ưu đãi gồm có: 
+	•	Mã CTƯĐ: Người dùng nhập mã CTƯĐ
+	•	Tên CTƯĐ: Người dùng nhập tên CTƯĐ
+	•	Trạng thái: Người dùng chọn 1 trạng thái, các trạng thái gồm: Hoạt động, Tạm dừng
+	•	Ngày hiệu lực: dd/mm/yyyy
+	•	Ngày hết hiệu lực: dd/mm/yyyy
+	•	Loại ưu đãi: Chọn 1 loại ưu đãi, các loại ưu đãi gồm: Ưu đãi theo biểu phí, Ưu đãi theo code phí
+	•	Button Xoá lọc: Người dùng nhấn vào button này để xoá thông tin trên các trường người dùng đã nhập/chọn
+	•	Button Áp dụng: Người dùng nhấn vào button này để áp dụng lọc với thông tin trên các trường người dùng đã nhập/chọn
+	•	Lưới danh sách chương trình ưu đãi gồm: 
+	•	Mã CTƯĐ: Người dùng nhấn vào mã CTƯĐ để xem chi tiết 1 CTƯĐ
+	•	Tên CTƯĐ
+	•	Trạng thái: Trạng thái CTƯĐ gồm: Hoạt động/Tạm dừng
+	•	Ngày hiệu lực: dd/mm/yyyy
+	•	Ngày hết hiệu lực: dd/mm/yyyy. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Ngày tạo: hh:mm:ss – dd/mm/yyyy
+	•	Người tạo: Hiển thị username của người tạo
+	•	Ngày sửa: hh:mm:ss – dd/mm/yyyy. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Người sửa: Hiển thị username của người sửa. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Ngày duyệt: hh:mm:ss – dd/mm/yyyy
+	•	Người duyệt: Hiển thị username của người duyệt. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Sau khi lọc theo các điều kiện, hệ thống trả kết quả, hiển thị các CTƯĐ phù hợp với điều kiện lọc theo quy tắc tìm kiếm chung của hệ thống
+	•	Tải xuống: Người dùng có thể tải xuống file danh sách CTƯĐ theo dữ liệu kết quả tìm kiếm đang hiển thị trên màn hình và theo quy tắc tải xuống chung của hệ thống.
+	•	Màn hình Xem chi tiết một chương trình ưu đãi: các trường hiển thị như ở màn tạo/chỉnh sửa, Lịch sử tác động. Người dùng nhấn vào Lịch sử tác động, hệ thống hiển thị popup, tham khảo mục Lịch sử tác động  tại Quy tắc chung.
+Lưu đồ và diễn giải
+Lưu đồ
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Xem danh sách CTƯĐ 
+Chọn “Chương trình ưu đãi
+Người dùng
+2
+
+Gửi yêu cầu lấy danh sách ưu đãi
+Frontend
+3
+
+Nhận yêu cầu và xử lý
+Backend
+4
+
+Hiển thị danh sách ưu đãi 
+Frontend
+5
+
+Lựa chọn: 
++ Lọc nâng cao => Bước 5.1
++ Tải xuống => Bước 5.2
++ Xem chi tiết chương trình ưu đãi => Bước 5.3
+Người dùng
+5.1
+
+Lọc nâng cao
+Người dùng
+6
+
+Hiển thị màn hình “Lọc chương trình ưu đãi”
+Frontend
+7
+
+Nhập các điều kiện lọc
+Người dùng
+8
+
+Người dùng lựa chọn: 
++ Xoá lọc => Bước 8.1
++ Áp dụng => Bước 8.2
+Người dùng
+8.1
+
+Xoá lọc
+Người dùng
+9
+
+Đóng màn hình Lọc chương trình ưu đãi => Kết thúc
+Frontend
+8.2
+
+Áp dụng
+Người dùng
+10
+
+Hiển thị danh sách CTƯĐ theo điều kiện => Kết thúc
+Frontend
+5.2
+
+Tải xuống
+Người dùng
+10
+
+Tham chiếu quy tắc Tải xuống tại mục Quy tắc chung => Kết thúc
+Frontend
+5.3
+
+Xem chi tiết CTƯĐ
+Người dùng
+11
+
+Gửi yêu cầu xem chi tiết CTƯĐ
+Frontend
+12
+
+Nhận yêu cầu và xử lý
+Backend
+13
+
+Hiển thị màn chi tiết CTƯĐ
+=> Kết thúc
+Frontend
+
+Giao diện
+Màn hình
+Màn hình xem danh sách chương trình ưu đãi
+Màn hình Lọc Chương trình ưu đãi
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+1
+Lọc nâng cao
+
+Button
+
+Người dùng click vào button “Lọc nâng cao” để nhập các điều kiện lọc
+2
+Thêm mới
+
+Button
+
+Người dùng click vào button Thêm mới để thêm mới 1 CTƯĐ
+3
+Tải xuống
+
+Button
+
+Tải xuống file danh sách CTƯĐ
+4
+Ưu đãi có đánh giá định kỳ/ Ưu đãi không đánh giá định kỳ
+
+Dropdwn list
+
++ Người dùng chọn ưu đãi có đánh định kỳ hoặc không
++ Hệ thống mặc định hiển thị Ưu đãi có đánh giá định kỳ khi vào màn hình “Danh sách chương trình ưu đãi”
+CÁC TRƯỜNG THÔNG TIN
+1
+Mã CTƯĐ
+
+Text
+
++ Hiển thị mã CTƯĐ 
++ Người dùng nhấn vào mã CTƯĐ Hệ thống hiển thị màn hình thông tin chi tiết của CTƯĐ
+2
+Tên CTƯĐ
+
+Text
+
+Hiển thị tên CTƯĐ
+3
+Trạng thái
+
+Text
+
+Hiển thị trạng thái của CTƯĐ: Hoạt động/Tạm dừng
+4
+Ngày hiệu lực
+
+Date 
+
++ Hiển thị ngày hiệu lực của CTƯĐ
++ Format: dd/mm/yyyy
+5
+Ngày hết hiệu lực
+
+Date
+
++ Hiển thị ngày hết hiệu lực của CTƯĐ
++ Format: dd/mm/yyyy
+6
+Ngày tạo
+
+Date time
+
++ Ngày tạo CTƯĐ
++ Format: hh:mm:ss – dd/mm/yyyy
+7
+Người tạo
+
+Text
+
++ username của người tạo CTƯĐ
+8
+Ngày sửa
+
+Date time
+
++ Ngày sửa CTƯĐ
++ Format: hh:mm:ss – dd/mm/yyyy
++ Không có thông tin, hệ thống show “-”
+9
+Người sửa
+
+Text
+
++ Username người sửa CTƯĐ
++ Không có thông tin, hệ thống show “-”
+10
+Người duyệt
+
+Text
+
++ Username của gười duyệt CTƯĐ
++ Không có thông tin, hệ thống show “-”
+11
+Ngày duyệt
+
+Date time
+
++ Ngày duyệt CTƯĐ
++ Format: hh:mm:ss – dd/mm/yyyy
++ Không có thông tin, hệ thống show “-”
+
+
+US18 - Là người dùng, tôi muốn xem danh sách code phí áp dụng cho một khách hàng
+Yêu cầu nghiệp vụ
+Navigation: Khi muốn xem các code phí đang được áp dụng với một CIF cụ thể, người dùng truy cập: Tra cứu >> Xem code phí theo khách hàng >> Tra cứu
+Màn hình “Xem code phí theo khách hàng” gồm có: Các điều kiện tra cứu, Lưới Danh sách code phí theo khách hàng, Button Tra cứu CIF, Button Tra cứu, Button Tải xuống.
+	•	Các điều kiện tìm kiếm: Mã CIF, Sản phẩm dịch vụ
+	•	Mã CIF: Người dùng nhập 1 mã CIF để tìm kiếm
+	•	Sản phẩm dịch vụ: Người dùng nhập tên SPDV/Code phí để tìm kiếm SPDV/code phí và chọn 1/nhiều sản phẩm dịch vụ/code phí
+	•	Lưới Danh sách code phí theo khách hàng gồm có các trường: STT, CIF áp dụng, Code, Tên, Biểu phí, Sản phẩm dịch vụ, Công thức tính phí, Người tạo, Ngày tạo, Người sửa, Ngày sửa, Người duyệt, Ngày duyệt
+	•	Sau khi tìm kiếm theo các điều kiện, hệ thống trả kết quả, hiển thị đến các cấp phù hợp với điều kiện lọc theo quy tắc tìm kiếm chung của hệ thống
+	•	Tải xuống: Cho phép người dùng xuất file danh sách code phí theo khách hàng theo dữ liệu kết quả tìm kiếm đang hiển thị trên màn hình và theo quy tắc tải xuống chung của hệ thống
+	•	Button “Tra cứu CIF”: Người dùng chọn button Tra cứu CIF để tìm kiếm CIF theo các thông tin thể nhân của Khách hàng. Màn hình “Tra cứu CIF” gồm có:
+	•	Các điều kiện để tra cứu CIF: Số điện thoại, Phân khúc khách hàng, Chi nhánh quản lý, Tỉnh, Phường/xã, Trạng thái
+	•	Lưới Danh sách khách hàng gồm có các trường: STT, CIF áp dụng, Số điện thoại, Tên, Chi nhánh quản lý, Tỉnh, Trạng thái
+Lưu đồ và diễn giải
+Lưu đồ
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Xem danh sách code phí áp dụng cho một khách hàng
+Chọn Tra cứu/Xem code phí theo khách hàng
+Người dùng
+2
+
+Hiển thị màn hình Tra cứu code phí theo khách hàng
+Frontend
+3
+
+Người dùng lựa chọn:
++ Nhấn vào Tra cứu CIF => Bước 3.1
++ Nhập điều kiện tìm kiếm và nhấn Tìm kiếm => Bước 3.2
+Người dùng
+3.1
+
+Nhấn vào Tra cứu CIF
+Người dùng
+4
+
+Hiển thị màn hình Tra cứu CIF
+Frontend
+5
+
+Nhập các điều kiện lọc và nhấn Tra cứu
+Người dùng
+6
+
+Gửi yêu cầu xử lý
+Frontend
+7
+
+Nhận yêu cầu và xử lý
+Backend
+8
+
+Hiển thị kết quả danh sách CIF
+Frontend
+9
+
+Click vào 1 CIF
+Người dùng
+10
+
+Hệ thống fill số CIF vào box nhập mã CIF tại màn hình Tra cứu Code phí theo Khách hàng => bước 3.2
+Frontend
+3.2
+
+Nhập điều kiện tìm kiếm và nhấn tìm kiếm
+Người dùng
+11
+
+Gửi yêu cầu xử lý 
+Frontend
+12
+
+Nhận yêu cầu và xử lý dữ liệu
+Backend
+13
+
+Hiển thị kết quả code phí áp dụng cho CIF
+Frontend
+14
+
+Lựa chọn: 
++ Nhấn vào Tải xuống => Bước 14.1
++ Nhấn vào mã code phí => Bước 14.2
+Người dùng
+14.1
+
+Nhấn vào Tải xuống
+Người dùng
+15
+
+Tham chiếu quy tắc Tải xuống tại mục Quy tắc chung => Kết thúc
+Frontend
+14.2
+
+Nhấn vào mã code phí
+Người dùng
+16
+
+Gửi yêu cầu đến xử lý
+Frontend
+17
+
+Nhận yêu cầu và xử lý
+Backend
+18
+
+Hiển thị chi tiết code phí => Kết thúc
+Frontend
+
+Giao diện
+Tra cứu code phí theo khách hàng
+Màn hình
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+1
+Tra cứu 
+
+Button
+
+Người dùng nhấn vào Tra cứu, hệ thống ghi nhận và tìm kiếm
+2
+Xoá tra cứu
+
+Button
+
+Người dùng click vào button Xoá tra cứu, hệ thống xoá các điều kiện lọc
+3
+Tải xuống
+
+Button
+
+Tải xuống file danh sách CIF áp dụng với các code phí
+4
+Tra cứu CIF
+
+Button
+
+Người dùng click vào button Tra cứu CIF, hệ thống hiển thị màn hình Tra cứu CIF
+CÁC TRƯỜNG THÔNG TIN
+1
+Mã CIF
+Y
+Text box
+
++ Người dùng nhập mã CIF, chỉ nhập 1 mã CIF
++ Người dùng phải nhập mã CIF để tìm kiếm
+2
+Sản phẩm dịch vụ
+
+Multiple select dropdown
+
+
++ Người dùng được chọn 1/nhiều sản phẩm dịch vụ/code phí 
++ Người dùng có thể tìm kiếm tên SPDV/Code phí tại dropdown box
+3
+STT
+
+Text
+
+Số thứ tự 
+4
+CIF áp dụng
+
+Text
+
+Hiển thị CIF áp dụng
+5
+Code
+
+Text
+
++ Hiển thị mã code phí
++ Người dùng nhấn vào mã code phí và hiển thị màn hình chi tiết code phí
+6
+Tên
+
+Text
+
++ Hiển thị tên code phí
+7
+Biểu phí
+
+Text
+
+Hiển thị tên biểu phí mà code phí được gắn 
+8
+Sản phẩm dịch vụ
+
+Text
+
+Hiển thị tên sản phẩm dịch vụ mà code phí dó được gắn
+9
+Công thức tính phí
+
+Text
+
+Hiển thị công thức tính phí 
+10
+Ngày tạo
+
+Date
+
+Ngày tạo code phí
+11
+Người tạo
+
+Text
+
+Người tạo code phí
+12
+Ngày sửa
+
+Date
+
+Ngày sửa code phí
+13
+Người sửa
+
+Text
+
+Người sửa code phí
+14
+Người duyệt
+
+Date
+
+Người duyệt code phí
+15
+Ngày duyệt
+
+Text
+
+Ngày duyệt code phí
+16
+Phân trang
+
+-
+
+Hiển thị danh sách SPDV trên trang và số trạng hiện tại
+
+Tra cứu CIF
+Màn hình tra cứu CIF
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+1
+Tra cứu 
+
+Button
+
+Người dùng nhấn vào button Tra cứu, hệ thống ghi nhận và tìm kiếm
+2
+Xoá tra cứu
+
+Button
+
+Người dùng click vào button Xoá tra cứu, hệ thống xoá các điều kiện lọc
+CÁC TRƯỜNG THÔNG TIN
+1
+Số điện thoại
+Y
+Text box
+
++ Người dùng nhập số điện thoại + Người dùng phải nhập số điện thoại để tìm kiếm
+2
+Loại khách hàng
+
+Dropdown list
+
++ Người dùng chọn 1 trong danh sách
++ Danh sách loại khách hàng gồm: KHCN, KHTC, KHDNSN, CBNV
+3
+Chi nhánh quản lý
+
+Dropdown list
+
+Người dùng chọn 1 chi nhánh quản lý 
+4
+Tỉnh
+
+Dropdown list
+Người dùng phải chọn tỉnh, rồi mới chọn được Phường/xã
+Người dùng chọn 1 tỉnh 
+5
+Phường/Xã
+
+Dropdown list
+
+Người dùng chọn phường/xã trong tỉnh người dùng đã chọn
+6
+Trạng thái
+
+Dropdown list
+
+Người dùng chọn trạng thái: Hoạt động/Tạm dừng
+8
+STT
+
+Text
+
+STT
+9
+CIF
+
+Text
+
+Mã CIF, người dùng nhấn vào mã CIF, hệ thống tự động back và fill vào trường Mã CIF ở màn Tra cứu code phí theo khách hàng
+10
+Số điện thoại
+
+Text
+
+Số điện thoại
+11
+Tên
+
+Text
+
+Tên khách hàng
+12
+Chi nhánh quản lý
+
+Text
+
+Chi nhánh quản lý
+13
+Tỉnh
+
+Text
+
+Hiển thị tên tỉnh
+14
+Trạng thái
+
+Text
+
+Hiển thị trạng thái của CIF
+
+US19 - Là người dùng, tôi muốn xem lịch sử thu phí theo khách hàng
+Yêu cầu nghiệp vụ
+Navigation: Khi muốn xem lịch sử thu phí theo khách hàng, người dùng truy cập: Tra cứu >> Xem lịch sử thu phí theo khách hàng >> Tra cứu
+Màn hình “Xem lịch sử thu phí theo khách hàng” gồm có: Các điều kiện tra cứu, Lưới lịch sử thu phí theo khách hàng, Button Tra cứu, Button Tải xuống, Button Tra cứu CIF
+	•	Các điều kiện tra cứu: Mã CIF, Sản phẩm dịch vụ, Biểu phí, Code phí, Từ ngày - Đến ngày 
+	•	Lưới Lịch sử thu phí theo khách hàng gồm có các trường: STT, CIF áp dụng, Tài khoản thu phí, Code phí, Loại tiền code phí, Biểu phí, Sản phẩm dịch vụ, VAT, Số tiền phí nguyên tệ, Số tiền phí quy đổi VNĐ, Ngày thu
+	•	Sau khi tìm kiếm theo các điều kiện, hệ thống trả kết quả trên Lưới lịch sử thu phí theo khách hàng, hiển thị đến các cấp phù hợp với điều kiện lọc theo quy tắc tìm kiếm chung của hệ thống.
+	•	Tải xuống: Cho phép người dùng xuất file lịch sử thu phí theo khách hàng theo dữ liệu kết quả tìm kiếm đang hiển thị trên lưới và theo quy tắc tải xuống chung của hệ thống.
+	•	Tra cứu CIF: Người dùng nhấn vào button này, hệ thống hiển thị màn hình Tra cứu CIF (Xem chi tiết tại Tra cứu CIF tại US 19: Là người dùng, tôi muốn xem danh sách code phí áp dụng cho một khách hàng
+Lưu đồ và diễn giải
+Lưu đồ
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Xem lịch sử thu phí theo khách hàng
+Chọn Tra cứu/Xem lịch sử thu phí theo khách hàng
+Người dùng
+2
+
+Hiển thị màn “Xem lịch sử thu phí theo khách hàng”
+Frontend
+3
+
+Người dùng lựa chọn:
++ Nhấn vào Tra cứu CIF => Bước 3.1
++ Nhập/chọn điều kiện và nhấn Tìm kiếm => Bước 3.2
++ Tải xuống => Bước 3.3
+Người dùng
+3.1
+
+Người dùng nhấn vào Tra cứu CIF
+Người dùng
+4
+
+Hiển thị màn hình tra cứu CIF
+Frontend
+5
+
+Nhập các điều kiện lọc và nhấn Tra cứu
+Người dùng
+6
+
+Gửi yêu cầu xử lý
+Frontend
+7
+
+Nhận yêu cầu xử lý
+Backend
+8
+
+Hiển thị kết quả danh sách CIF
+Frontend
+9
+
+Nhấn vào 1 CIF
+Người dùng
+10
+
+Hệ thống fill số CIF vào box nhập mã CIF
+Frontend
+3.2
+
+Người dùng nhập/chọn điều kiện và nhấn Tìm kiếm 
+Người dùng
+11
+
+Gửi yêu cầu tìm kiếm
+Frontend
+12
+
+Nhận yêu cầu và xử lý logic
+Backend
+13
+
+Nhận response và hiển thị kết quả tìm kiếm => Kết thúc
+Frontend
+3.3
+
+Tải xuống
+Người dùng
+14
+
+Tham chiếu quy tắc Tải xuống tại Mục Quy tắc chung => Kết thúc
+Frontend
+
+Giao diện
+Màn hình
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+1
+Tra cứu
+
+Button
+
+Người dùng chọn tra cứu button để tìm kiếm lịch sử thu khách hàng theo điều kiện tìm kiếm
+2
+Xoá tra cứu
+
+Button
+
+Người dùng click vào button Xoá tra cứu, hệ thống xoá các điều kiện lọc
+3
+Tải xuống
+
+Button
+
+Tải xuống file danh sách
+4
+Tra cứu CIF
+
+
+
+Người dùng nhấn váo button Tra cứu CIF, hệ thống hiển thị màn hình Tra cứu CIF
+(màn hình Tra cứu CIF tham khảo tại mục Tra cứu CIF của US 19)
+CÁC TRƯỜNG THÔNG TIN
+1
+Mã CIF
+Y
+Text box
+
+Người dùng nhập mã CIF 
+2
+Sản phẩm dịch vụ 
+
+Multiple select dropdown
+
++ Người dùng nhấn vào sản phẩm dịch, hệ thống hiển thị danh sách SPDV theo cây thư mục. Người dùng có thể expand/collapse SPDV các cấp
++ Người dùng nhập tên SPDV để tìm kiếm
++ Người dùng có thể chọn 1 hoặc nhiều SPDV
+3
+Biểu phí
+
+Multiple select dropdown
+
+
++ Người dùng nhấn vào Biểu phí, hệ thống hiển thị danh sách biểu phí (format: Mã biểu phí - Tên biểu phí)
++ Người dùng nhập mã biểu phí hoặc Tên biểu phí để tìm kiếm
+4
+Code phí
+
+Multiple select dropdown
+
+
++ Người dùng nhấn vào Code phí, hệ thống hiển thị danh sách Code phí (format: Mã code phí - Tên code phí)
++ Người dùng nhập mã code phí hoặc Tên code phí để tìm kiếm
+5
+Từ ngày - đến ngay
+
+Date
+
++ Người dùng chọn ngày muốn tìm kiếm
++ Hệ thống sẽ tìm kiếm theo ngày thu 
+
+6
+STT
+
+Text
+
+STT
+8
+CIF áp dụg
+
+Text
+
+Mã CIF áp dụng
+9
+Tải khoản thu phí
+
+Text
+
+Hiển thị tải khoản thu phí
+10
+Code phí
+
+Text
+
+Hiển thị format: mã code phí - tên code phí
+11
+Loại tiền code phí
+
+Text
+
+Hệ thống hiển thị loại tiền code phí
+12
+Biểu phí
+
+Text
+
+Hiển thị tên biểu phí
+13
+Sản phẩm dịch vụ
+
+Text
+
+Hiển thị tên sản phẩm dịch vụ
+14
+VAT
+
+Number
+
+Hiển thị số tiền thuế VAT đã thu
+15
+Số tiền phí nguyên tệ
+
+Number
+
+Hiển thị số tiền phí hệ thống đã thu
+16
+Số tiền phí quy đổi VNĐ
+
+Number
+
+Hiển thị số tiền phí đã được quy đổi sang VNĐ từ số tiền phí nguyên tệ
+17
+Ngày thu
+
+Date
+
++ Hiển thị ngày thu phí
++ Format: hh:mm:ss - dd/mm/yyyy
+
+US20 - Là người dùng, tôi muốn tra cứu lịch thu phí dự kiến theo khách hàng
+Yêu cầu nghiệp vụ
+
+Navigation: Khi muốn xem lịch thu phí dự kiến theo khách hàng, người dùng truy cập: Tra cứu >> Xem lịch thu phí dự kiến theo khách hàng >> Tra cứu
+Màn hình “Xem lịch thu phí dự kiến theo khách hàng” gồm có: Các điều kiện tra cứu, Lưới lịch thu phí dự kiến theo khách hàng, Button Tra cứu, Button Tải xuống, Button Tra cứu CIF 
+	•	Các điều kiện tra cứu: Mã CIF, Sản phẩm dịch vụ, Biểu phí, Code phí, Từ ngày - Đến ngày 
+	•	Lưới lịch thu phí dự kiến theo khách hàng gồm có các trường: STT, CIF áp dụng, Tài khoản thu phí, Số thẻ, Code phí, Loại tiền Code phí, Biểu phí, Sản phẩm dịch vụ, VAT, Số tiền phí nguyên tệ, Số tiền phí quy đổi VNĐ, Ngày thu dự kiến
+	•	Sau khi tìm kiếm theo các điều kiện, hệ thống trả kết quả trên Lưới lịch thu phí dự kiến, hiển thị đến các cấp phù hợp với điều kiện lọc theo quy tắc tìm kiếm chung của hệ thống.
+	•	Tải xuống: Cho phép người dùng xuất file lịch thu phí dự kiến theo khách hàng theo dữ liệu kết quả tìm kiếm đang hiển thị trên màn hình và theo quy tắc tải xuống chung của hệ thống.
+
+Lưu đồ và diễn giải
+Lưu đồ
+
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Xem lịch thu phí dự kiến theo khách hàng
+Chọn Tra cứu/Xem lịch thu phí dự kiến theo khách hàng
+Người dùng
+2
+
+Hiển thị màn “Xem lịch thu phí dự kiến theo khách hàng”
+Frontend
+3
+
+Người dùng lựa chọn:
++ Nhấn vào Tra cứu CIF => Bước 3.1
++ Nhập/chọn điều kiện và nhấn Tìm kiếm => Bước 3.2
++ Tải xuống => Bước 3.3
+Người dùng
+3.1
+
+Người dùng nhấn vào Tra cứu CIF
+Người dùng
+4
+
+Hiển thị màn hình tra cứu CIF
+Frontend
+5
+
+Nhập các điều kiện lọc và nhấn Tra cứu
+Người dùng
+6
+
+Gửi yêu cầu xử lý
+Frontend
+7
+
+Nhận yêu cầu xử lý
+Backend
+8
+
+Hiển thị kết quả danh sách CIF
+Frontend
+9
+
+Nhấn vào 1 CIF
+Người dùng
+10
+
+Hệ thống fill số CIF vào box nhập mã CIF
+Frontend
+3.2
+
+Người dùng nhập/chọn điều kiện và nhấn Tìm kiếm 
+Người dùng
+11
+
+Gửi yêu cầu tìm kiếm
+Frontend
+12
+
+Nhận yêu cầu và xử lý logic
+Backend
+13
+
+Nhận response và hiển thị kết quả tìm kiếm => Kết thúc
+Frontend
+3.3
+
+Tải xuống
+Người dùng
+14
+
+Tham chiếu quy tắc Tải xuống tại Mục Quy tắc chung => Kết thúc
+Frontend
+
+Giao diện
+Màn hình
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+1
+Tìm kiếm
+
+Button
+
+Người dùng chọn tìm kiếm button để tìm kiếm lịch sử thu khách hàng theo điều kiện tìm kiếm
+2
+Xoá tra cứu
+
+Button
+
+Người dùng click vào button Xoá tra cứu, hệ thống xoá các điều kiện lọc
+3
+Tải xuống
+
+Button
+
+Tải xuống file danh sách
+4
+Tra cứu CIF
+
+Button
+
+Người dùng nhấn váo button Tra cứu CIF, hệ thống hiển thị màn hình Tra cứu CIF
+(màn hình Tra cứu CIF tham khảo tại mục Tra cứu CIF của US 19)
+CÁC TRƯỜNG THÔNG TIN
+1
+Mã CIF
+Y
+Text box
+
+Người dùng nhập mã CIF 
+2
+Sản phẩm dịch vụ 
+
+Searchable and Multiple select dropdown
+
++ Người dùng nhấn vào sản phẩm dịch, hệ thống hiển thị danh sách SPDV theo cây thư mục. Người dùng có thể expand/collapse SPDV các cấp
++ Người dùng nhập tên SPDV để tìm kiếm
++ Người dùng có thể cọn 1 hoặc nhiều SPDV
+3
+Biểu phí
+
+Searchable and Multiple select dropdown
+
++ Người dùng nhấn vào Biểu phí, hệ thống hiển thị danh sách biểu phí (format: Mã biểu phí - Tên biểu phí)
++ Người dùng nhập mã biểu phí hoặc Tên biểu phí để tìm kiếm
+4
+Code phí
+
+Searchable and Multiple select dropdown
+
++ Người dùng nhấn vào Code phí, hệ thống hiển thị danh sách Code phí (format: Mã code phí - Tên code phí)
++ Người dùng nhập mã code phí hoặc Tên code phí để tìm kiếm
+5
+Từ ngày - đến ngay
+
+Date
+
++ Người dùng chọn ngày muốn tìm kiếm
++ Hệ thống sẽ tìm kiếm theo ngày thu 
+
+6
+STT
+
+Text
+
+STT
+8
+CIF áp dụg
+
+Text
+
+Mã CIF áp dụng
+9
+Tải khoản thu phí
+
+Text
+
+Hiển thị tài khoản thu phí
+10
+Số thẻ
+
+Text
+
+Hiển thị số thẻ
+11
+Code
+
+Text
+
+Hiển thị format: mã code phí - tên code phí
+12
+Loại tiền code phí
+
+Text
+
+Hệ thống hiển thị loại tiền code phí
+13
+Biểu phí
+
+Text
+
+Hiển thị tên biểu phí
+14
+Sản phẩm dịch vụ
+
+Text
+
+Hiển thị tên sản phẩm dịch vụ
+15
+VAT
+
+Number
+
+Hiển thị số tiền thuế VAT dự kiến thu
+16
+Số tiền phí nguyên tệ
+
+Number
+
+Hiển thị số tiền phí nguyên tệ dự kiến thu
+17
+Số tiền phí quy đổi VNĐ
+
+Number
+
+Hiển thị số tiền phí dự kiến được quy đổi sang VNĐ từ số tiền phí nguyên tệ
+18
+Ngày thu dự kiến
+
+Date
+
++ Hiển thị ngày thu phí dự kiến
++ Format: dd/mm/yyyy
+
+US21 - Là người dùng, tôi muốn xem danh sách Chương trình ưu đãi theo khách hàng
+Yêu cầu nghiệp vụ
+
+Navigation: Khi muốn xem các CTƯĐ đang được áp dụng với một CIF cụ thể, người dùng truy cập: Tra cứu >> Xem CTƯĐ theo khách hàng >> Tìm kiếm
+Màn hình “Xem CTƯĐ theo khách hàng” gồm có: Các điều kiện tìm kiếm, Lưới danh sách CTƯĐ theo khách hàng, Button Tra cứu, Button Tải xuống, Button Tra cứu CIF
+	•	Các điều kiện tìm kiếm: Mã CIF, Sản phẩm dịch vụ
+	•	Mã CIF: Người dùng nhập 1 mã CIF để tìm kiếm
+	•	Sản phẩm dịch vụ: Người dùng nhập tên SPDV/Code phí để tìm kiếm SPDV/code phí và chọn 1/nhiều sản phẩm dịch vụ/code phí
+	•	Từ ngày - đến ngày: Người dùng chọn ngày, format: dd/mm/yyyy, tìm kiếm theo ngày hiệu lực
+	•	Loại khách hàng: Người dùng chọn loại khách hàng gồm: KHCN, KHTC, KHDNSN, CBNV
+	•	Lưới Danh sách CTƯĐ theo khách hàng gồm có các trường: STT, CIF áp dụng, Code phí, Tên, Biểu phí, Sản phẩm dịch vụ, Công thức tính phí, mã CTƯĐ, Tên CTƯĐ, Người tạo, Ngày tạo, Người sửa, Ngày sửa, Người duyệt, Ngày duyệt.
+	•	Sau khi tìm kiếm theo các điều kiện, hệ thống trả kết quả trên Lưới Chương trình ưu đãi theo khách hàng, hiển thị đến các cấp phù hợp với điều kiện lọc theo quy tắc tìm kiếm chung của hệ thống.
+	•	Tải xuống: Cho phép người dùng xuất file danh sách CTƯĐ theo khách hàng theo dữ liệu kết quả tìm kiếm đang hiển thị trên lưới và theo quy tắc tải xuống chung của hệ thống.
+	•	Button Tra cứu CIF: Người dùng chọn button Tra cứu CIF, hệ thống hiển thị màn hình Tra cứu CIF.
+	•	Màn hình “Tra cứu CIF”: Refer đến US 19: Xem danh sách code phí theo khách hàng.
+Lưu đồ và diễn giải
+Lưu đồ
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Xem danh sách CTƯĐ áp dụng cho một khách hàng
+Chọn Tra cứu/Xem CTƯĐ theo khách hàng
+Người dùng
+2
+
+Hiển thị màn hình Tra cứu CTƯĐ theo khách hàng
+Frontend
+3
+
+Người dùng lựa chọn:
++ Nhấn vào Tra cứu CIF => Bước 3.1
++ Nhập điều kiện tìm kiếm và nhấn Tra cứu => Bước 3.2
+Người dùng
+3.1
+
+Nhấn vào Tra cứu CIF
+Người dùng
+4
+
+Hiển thị màn hình Tra cứu CIF
+Frontend
+5
+
+Nhập các điều kiện lọc và nhấn Tra cứu
+Người dùng
+6
+
+Gửi yêu cầu xử lý
+Frontend
+7
+
+Nhận yêu cầu và xử lý
+Backend
+8
+
+Hiển thị kết quả danh sách CIF
+Frontend
+9
+
+Click vào 1 CIF
+Người dùng
+10
+
+Hệ thống fill số CIF vào box nhập mã CIF tại màn hình Tra cứu CTƯĐ theo Khách hàng => bước 3.2
+Frontend
+3.2
+
+Nhập điều kiện tìm kiếm và nhấn tìm kiếm
+Người dùng
+11
+
+Gửi yêu cầu xử lý 
+Frontend
+12
+
+Nhận yêu cầu và xử lý dữ liệu
+Backend
+13
+
+Hiển thị kết quả code phí áp dụng cho CIF
+Frontend
+14
+
+Lựa chọn: 
++ Nhấn vào Tải xuống => Bước 14.1
++ Nhấn vào mã CTƯĐ => Bước 14.2
+Người dùng
+14.1
+
+Nhấn vào Tải xuống
+Người dùng
+15
+
+Tham chiếu quy tắc Tải xuống tại mục Quy tắc chung => Kết thúc
+Frontend
+14.2
+
+Nhấn vào mã CTƯĐ
+Người dùng
+16
+
+Gửi yêu cầu đến xử lý
+Frontend
+17
+
+Nhận yêu cầu và xử lý
+Backend
+18
+
+Hiển thị chi tiết CTƯĐ => Kết thúc
+Frontend
+
+Giao diện
+Màn hình
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+1
+Tra cứu
+
+Button
+
+Người dùng nhấn vào Tra cứu, hệ thống ghi nhận và tìm kiếm theo các điều kiện
+2
+Xoá tra cứu
+
+Button
+
+Người dùng click vào button Xoá tra cứu, hệ thống xoá các điều kiện lọc
+3
+Tải xuống
+
+Button
+
+Tải xuống file danh sách CIF áp dụng với các code phí
+4
+Tra cứu CIF
+
+Button
+
+Người dùng click vào button Tra cứu CIF, hệ thống hiển thị màn hình Tra cứu CIF
+CÁC TRƯỜNG THÔNG TIN
+1
+Mã CIF
+Y
+Text box
+
++ Người dùng nhập mã CIF, chỉ nhập 1 mã CIF
++ Người dùng phải nhập mã CIF để tìm kiếm
+2
+Sản phẩm dịch vụ
+
+Searchable and Dropdown
+
++ Người dùng được chọn 1/nhiều sản phẩm dịch vụ/code phí 
++ Người dùng có thể tìm kiếm tên SPDV/Code phí tại dropdown box
+3
+STT
+
+Text
+
+Số thứ tự 
+4
+CIF áp dụng
+
+Text
+
+Hiển thị CIF áp dụng
+5
+Code
+
+Text
+
++ Hiển thị mã code phí
++ Người dùng nhấn vào mã code phí và hiển thị màn hình chi tiết code phí
+6
+Tên
+
+Text
+
++ Hiển thị tên code phí
+7
+Biểu phí
+
+Text
+
+Hiển thị tên biểu phí mà code phí được gắn 
+8
+Sản phẩm dịch vụ
+
+Text
+
+Hiển thị tên sản phẩm dịch vụ mà code phí dó được gắn
+9
+Công thức tính phí
+
+Text
+
+Hiển thị công thức tính phí 
+10
+Mã CTƯĐ
+
+Text
+
++ Hiển thị mã CTƯĐ, người dùng nhấn vào mã CTƯĐ
++ Hệ thống hiển thị màn hình thông tin chi tiết của CTƯĐ
+11
+Tên CTƯĐ
+
+Text
+
+Hiển thị tên CTƯĐ
+12
+Ngày hiệu lực
+
+Date 
+
+Hiển thị ngày hiệu lực của CTƯĐ
+13
+Ngày hết hiệu lực
+
+Date
+
+Hiển thị ngày hết hiệu lực của CTƯĐ
+14
+Ngày tạo
+
+Date
+
+Ngày tạo CTƯĐ
+15
+Người tạo
+
+Text
+
+Người tạo CTƯĐ
+16
+Ngày sửa
+
+Date
+
+Ngày sửa CTƯĐ
+18
+Người sửa
+
+Text
+
+Người sửa CTƯĐ
+19
+Người duyệt
+
+Date
+
+Người duyệt CTƯĐ
+20
+Ngày duyệt
+
+Text
+
+Ngày duyệt CTƯĐ
+                     
+US22 – Là người dùng, tôi muốn đăng nhập vào hệ thống
+Yêu cầu nghiệp vụ
+Navigation: Khi muốn đăng nhập hệ thống, người dùng truy cập link hệ thống, hệ thống hiển thị màn hình đăng nhập
+	•	Người dùng nhập “Tên đăng nhập”, “ Mật khẩu” và nhấn vào button “Đăng nhập”, hệ thống kiểm tra thông tin người dùng nhập vào có hợp lệ và xác thực thông tin: Hệ thống kiểm tra “Tên đăng nhập” có tồn tại trên hệ thống và trạng thái của người dùng là Hoạt động, Mật khẩu chính xác: 
+	•	Nếu thông tin tên đăng nhập không tồn tại trên hệ thống, hệ thống thông báo “Tên đăng nhập không tồn tại trên hệ thống”
+	•	Nếu trạng thái của người dùng đang đăng nhập không phải “Hoạt động”, hệ thống thông báo “Tài khoản hiện đang không hoạt động. Vui lòng liên hệ quản trị viên”
+	•	Nếu tên đăng nhập hoặc mật khẩu người dùng không đúng, hệ thống thông báo “Tên đăng nhập hoặc Mật khẩu không hợp lệ”
+	•	Người dùng không nhập Tên đăng nhập, Mật khẩu, hệ thống thông báo “Tên đăng nhập/Mật khẩu không được để trống”
+	•	Khoảng thời gian hệ thống sẽ tự động đăng xuất nếu người dùng không có thao tác sau n phút: Được quy định tham số SESSION_TIMEOUT tại Quản trị hệ thống >> Quản lý tham số mặc định, hết thời gian session hệ thống tự động cho người dùng đăng xuất
+	•	Tại mỗi thời điểm mỗi tài khoản chỉ được phép đăng nhập trên 1 phiên làm việc (session) đang hoạt động. Khi người dùng đăng nhập mới (trên cùng hoặc khác thiết bị), phiên làm việc hiện tại sẽ kết thúc, hệ thống đăng xuất người dùng khỏi hệ thống 
+Lưu đồ và diễn giải
+Lưu đồ
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Đăng nhập
+Nhập Tên đăng nhập, Mật khẩu và chọn button “Đăng nhập”
+Người dùng
+2
+
+Kiểm tra thông tin hợp lệ không?
++ Valid => Bước 3
++ Invalid => Bước 2.1
+ProfiX
+2.1
+
+Hiển thị thông báo đăng nhập không thành công
+ProfiX
+3
+
+Xác thực thông tin
++ Valid => Bước 4
++ Invalid => Bước 2.1
+Hệ thống quản lý nhân sự
+4
+
+Đăng nhập thành công và hiển thị màn hình Trang chủ => Kết thúc
+ProfiX
+
+Giao diện
+Màn hình
+Màn hình đăng nhập
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+1
+Đăng nhập
+Y
+Button
+
+Người dùng nhấn vào button “Đăng nhập, hệ thông ghi nhận và xử lý
+2
+Xem 
+N
+Button
+
+Người dùng nhấn vào icon “xem” lần  để xem mật khẩu
+CÁC TRƯỜNG THÔNG TIN
+3
+Tên đăng nhập
+Y
+Button
+
+Người dùng nhập username
+4
+Mật khẩu
+Y
+Button
+
+Người dùng nhập mật khẩu
+
+US23 – Là người dùng, tôi muốn đăng xuất hệ thống 
+Yêu cầu nghiệp vụ
+	•	Navigation: Khi muốn đăng xuất hệ thống, tại thông tin user ở góc trái màn hình, người dùng chọn “Đăng xuất”
+	•	Hệ thống có 3 trường hợp đăng xuất khỏi hệ thống gồm: 
+	•	Người dùng chọn Đăng xuất, hệ thống hiển thị Popup Xác nhận,
+	•	Người dùng nhấn vào “Xác nhận”  đăng xuất người dùng đó khỏi, hệ thống đăng xuất người dùng đó khỏi phiên làm việc. Sau khi đăng xuất, hệ thống hiển thị màn hình Đăng nhập
+	•	Người dùng nhấn vào “Huỷ”, hệ thống không đăng xuất, đóng popup “Xác nhận đăng xuất”
+	•	Tự động đăng xuất: 
+	•	Khoảng thời gian hệ thống sẽ tự động đăng xuất nếu người dùng không có thao tác sau n phút: Được quy định tham số SESSION_TIMEOUT tại Quản trị hệ thống >> Quản lý tham số mặc định
+	•	Hết thời gian session, hệ thống tự động đăng xuất người dùng và hiển thị popup thông báo “Phiên đăng nhập của bạn hết hạn. Vui lòng đăng nhập lại”. Người dùng chọn button “Đăng nhập”, hệ thống hiển thị màn hình Đăng nhập. Chi tiết về luồng Đăng nhập, xem tại US22 – Là người dùng, tôi muốn đăng nhập vào hệ thống
+	•	Đăng xuất khi đăng nhập phiên làm việc mới hoặc thiết bị mới: Hệ thống đăng xuất người dùng khỏi hệ thống ở phiên làm việc trước đó. Sau khi đăng xuất, hệ thống hiển thị màn hình Đăng nhập
+	•	Các tác vụ đang thực hiện không được lưu khi người dùng Đăng xuất
+Lưu đồ và diễn giải
+Lưu đồ
+
+Diễn giải
+
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Đăng xuất
+Chọn button “Đăng xuất”
+Người dùng
+2
+
+Hiển thị Popup Xác nhận đăng xuất hệ thống
+Frontend
+3
+
+Người dùng lựa chọn: 
++ Xác nhận => Bước 3.1
++ Huỷ => Bước 3.2
+Người dùng
+3.1.
+
+Xác nhận
+Người dùng
+4
+
+Gửi yêu cầu đăng xuất
+Frontend
+5
+
+Nhận yêu cầu và xử lý đăng xuất
+Backend
+6
+
+Kết thúc phiên làm việc và hiển thị màn hình đăng nhập => Kết thúc
+Frontend
+3.2
+
+Huỷ
+Người dùng
+7
+
+Đóng popup Xác nhận đăng xuất hệ thống => Kết thúc
+Frontend
+
+Giao diện
+Màn hình
+
+
+Popup Xác nhận đăng xuất hệ thống (đợi FE để bổ sung)
+
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+
+
+
+
+
+
+NÚT CHỨC NĂNG
+1
+Đăng xuất
+
+Button
+
+Người dùng nhấn vào button “Đăng xuất”, hệ thống hiển thị Popup Xác nhận đăng xuất hệ thống
+Popup Xác nhận đăng xuất hệ thống
+2
+Xác nhận
+
+Button
+
+Người dùng nhấn vào button “Xác nhận”, hệ thống ghi nhận và xử lý đăng xuất
+3
+Huỷ
+
+Button
+
+Người dùng nhấn vào button “Huỷ”, hệ thống đóng popup Xác nhận đăng xuất hệ thống
+
+US24 – Là người dùng, tôi muốn  hệ thống
+Yêu cầu nghiệp vụ
+
+Lưu đồ và diễn giải
+Lưu đồ
+Diễn giải
+Giao diện
+Màn hình
+Mô tả chi tiết các trường
+
+US25 – Là người dùng, tôi muốn hệ thống
+Yêu cầu nghiệp vụ
+
+Lưu đồ và diễn giải
+Lưu đồ
+Diễn giải
+Giao diện
+Màn hình
+Mô tả chi tiết các trường
+
+US26 – Là người dùng, tôi muốn hệ thống
+Yêu cầu nghiệp vụ
+
+Lưu đồ và diễn giải
+
+Lưu đồ
+Diễn giải
+
+Giao diện
+Màn hình	
+Mô tả chi tiết các trường
+US27 - Là người quản trị, tôi muốn thiết lập quy tắc điều kiện tính phí
+Yêu cầu nghiệp vụ
+
+Navigation: Khi muốn xem/ thêm mới/ chỉnh sửa thông tin điều kiện tính phí, người quản trị truy cập: Quản trị hệ thống >> Danh mục điều kiện tính phí  
+Màn hình Danh mục điều kiện tính phí gồm: Button Lọc nâng cao, Button Thêm mới, Button Tải xuống, Lưới danh sách điều kiện tính phí.
+	•	Lưới danh sách điều kiện tính phí: Hiển thị tất cả các điều kiện tính phí đang có trên hệ thống, gồm các trường: 
+	•	Mã điều kiện: Hiển thị mã điều kiện với chữ viết hoa. Người quản trị nhấn vào mã điều kiện, hệ thống hiển thị thông tin chi tiết của mã điều kiện đó
+	•	Mapping note msg: Hiển thị tên field API mapping
+	•	Mô tả: Hiển thị mô tả của điều kiện tính phí
+	•	Trạng thái: hiển trị trạng thái gồm: Hoạt động/Không hoạt động
+	•	Kiểu dữ liệu: hiển thị kiểu dữ liệu: Number/String/Date/Time
+	•	Nguồn dữ liệu: Hiển thị nguồn dữ liệu từ API/ETL
+	•	Ghi chú: Hiển thị ghi chú
+	•	Ngày tạo: Hiển thị ngày tạo điều kiện tính phí, hh:mm:ss – dd/mm/yyyy
+	•	Người tạo: Hiển thị username của người tạo
+	•	Ngày sửa: Hiển thị ngày sửa điều kiện tính phí, hh:mm:ss – dd/mm/yyyy. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Người sửa: Hiển thị username của người sửa. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Lọc nâng cao: Người quản trị nhấn vào Lọc nâng cao, hệ thống hiển thị màn hình Lọc điều kiện tính phí gồm có:
+	•	Mã điều kiện: Người quản trị nhập mã điều kiện, hệ thống xử lý viết hoa các kí tự khi tìm kiếm
+	•	Nguồn dữ liệu: Người quản trị chọn nguồn dữ liệu từ ETL/ API
+	•	Trạng thái: Người quản trị chọn trạng thái: Hoạt động/Không hoạt động
+	•	Mapping note msg: Người quản trị nhập tên field mapping note msg (Tên field trong API). Trường này hiển thị khi người quản trị chọn Nguồn dữ liệu = API
+	•	Sau khi lọc theo các điều kiện, hệ thống trả kết quả, hiển thị các điều kiện tính phí phù hợp với điều kiện lọc theo Quy tắc chung của hệ thống.
+	•	Tải xuống: Người quản trị có thể tải xuống file danh sách các điều kiện tính phí theo dữ liệu kết quả tìm kiếm đang hiển thị trên màn hình và theo quy tắc tải xuống tại mục Quy tắc chung của hệ thống.
+	•	Xem chi tiết 1 điều kiện tính phí: Người quản trị có thể xem chi tiết 1 điều kiện tính phí, các trường thông tin hiển thị như ở màn tạo/chỉnh sửa theo Quy tắc chung của hệ thống.
+	•	Khi người quản trị muốn Thêm mới điền kiện tính phí: Người quản trị nhấn vào button “Thêm mới”, hệ thống hiển thị màn hình thêm mới gồm các trường thông tin: 
+	•	Mã điều kiện: Người quản trị nhập mã điều kiện, hệ thống tự động hiển thị các kí tự viết hoa. Mã điều kiện là duy nhất và bắt buộc nhập. 
+	•	Tên điều kiện: Người quản trị nhập tên điều kiện và bắt buộc nhập. 
+	•	Nguồn dữ liệu: Người quản trị chọn nguồn dữ liệu từ API/ ETL, là field bắt buộc nhập.
+	•	Chọn Nguồn dữ liệu = API => Hệ thống hiển thị field Mapping note Msg. Người quản trị nhập tên field mapping dữ liệu trong API, field này sẽ được đem vào làm nguồn dữ liệu tính phí.
+	•	Chọn Nguồn dữ liệu = ETL => Hệ thống hiển thị field Bảng dữ liệu, field “Trường dữ liệu”. Người quản trị chọn Bảng: Khách hàng/Tài khoản/Thẻ, sau đó người quản trị chọn field Trường dữ liệu. Giá trị của Field này theo khách hàng cụ thể sẽ được đem vào làm nguồn dữ liệu tính phí.
+	•	Kiểu dữ liệu: Người quản trị chọn kiểu dữ liệu từ danh sách: Number/String/Date/Time. Đây là field bắt buộc để làm giảm sai sót trong quá trình khai báo điều kiện tính phí/điều kiện áp dụng ưu đãi.
+	•	Ghi chú: Người quản trị nhập nội dung ghi chú 
+	•	Trạng thái: default = Hoạt động, người quản trị có thể chọn trạng thái: Hoạt động/Không hoạt động. 
+	•	Button “Xác nhận”: Người quản trị nhấn vào xác nhận, hệ thống check các điều kiện 
+	•	Mã điều kiện trùng, hiển thị thông báo: Mã điều kiện không được trùng
+	•	Button “Đóng”: Người quản trị nhấn vào “Đóng”, hệ thống đóng màn hình thêm mới
+	•	Khi người quản trị muốn chỉnh sửa 1 điều kiện tính phí, nhấn vào button “Chỉnh sửa” tại hành động trên lưới danh sách điều kiện tính phí => Hệ thống hiển thị màn chỉnh sửa điều kiện tính phí. 
+	•	Khi chỉnh sửa trạng thái Điều kiện tính phí: 
+	•	Nếu điều kiện tính phí đang gán với 1 CTƯĐ (trạng thái = Chưa có hiệu lực/Đang hiệu lực)/Code phí (trạng thái = Hoạt động/Ngưng hoạt động/Chờ gán) thì không cho phép sửa trạng thái. Người dùng nhấn “Xác nhận”, hệ thống báo “Không thể sửa trạng thái điều kiện tính phí. Điều kiện tính phí đang sử dụng trong hệ thống”
+	•	Nếu điều kiện tính phí chưa gán vs CTƯĐ/Code phí nào, hoặc gán CTƯĐ có trạng thái = Hết hiệu lực/Code phí có trạng thái = Huỷ thì người dùng có thể sửa trạng thái điều kiện tính phí
+	•	Sửa các thông tin khác: hệ thống kiểm tra tương tự như khi thêm mới điều kiện tính phí.
+	•	Danh sách điều kiện tính phí được phép khai báo tại các màn thêm mới/chỉnh sửa code phí/ CTƯĐ là các điều kiện tính phí có trạng thái = Hoạt động.
+Lưu đồ và diễn giải
+Lưu đồ
+
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Danh mục điều kiện tính phí
+Chọn Danh mục điều kiện tính phí
+Người quản trị
+2
+
+Gửi yêu cầu xử lý
+Frontend
+3
+
+Nhận yêu cầu và xử lý logic
+Backend
+4
+
+Hiển thị màn hình Danh mục điều kiện tính phí
+Frontend
+5
+
+Lựa chọn: 
++ Lọc nâng cao => Bước 5.1
++ Thêm mới => Bước 5.2
++ Chỉnh sửa => Bước 5.3
++ Tải xuống => Bước 5.4
+Người quản trị
+5.1
+
+Lọc nâng cao
+Người quản trị
+6
+
+Hiển thị màn hình Lọc điều kiện tính phí
+Frontend
+7
+
+Nhập/chọn các điều kiện lọc
+Người quản trị
+8
+
+Lựa chọn: 
++ Xoá lọc => Bước 8.1
++ Áp dụng => Bước 8.2
+Người quản trị
+8.1
+
+Xoá lọc
+Người quản trị
+9
+
+Đóng màn hình Lọc điều kiện tính phí => Kết thúc
+Frontend
+8.2
+
+Áp dụng
+Người quản trị
+10
+
+Hiển thị danh sách điều kiện tính phí theo điều kiện lọc => Kết thúc
+Frontend
+5.2
+
+Thêm mới
+Người quản trị
+11
+
+Hiển thị màn hình thêm mới
+Frontend
+12
+
+Nhập/chọn các trường và nhấn xác nhận
+Người quản trị
+13
+
+Check các trường bắt buộc và business rule
++ Valid => Tiếp bước 14
++ Invalid => Quay lại bước 12
+Frontend
+14
+
+Nhận yêu cầu và xử lý
+Backend
+15
+
+Hiển thị bản ghi mới trên lưới danh sách
+Frontend
+5.3
+
+Chỉnh sửa
+Người quản trị
+16
+
+Hiển thị màn hình chỉnh sửa 
+=> Quay lại bước 12
+Frontend
+5.4
+
+Tải xuống
+Người quản trị
+17
+
+Tham chiếu quy tắc tải xuống tại mục Quy tắc chung
+Frontend
+
+Giao diện
+Giao diện
+Màn hình danh mục điều kiện tính phí
+
+Màn hình lọc điều kiện tính phí
+
+Màn hình thêm mới điều kiện tính phí
+
+
+Màn hình chỉnh sửa điều kiện tính phí
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+Màn hình danh sách điều kiện tính phí
+NÚT CHỨC NĂNG
+1
+Lọc nâng cao
+
+Button
+
+Người quản trị nhấn vào button Lọc nâng cao, hệ thống hiển thị Màn hình Lọc điều kiện tính phí
+Các điều kiện lọc: 
++ Mã điều kiện: Người quản trị nhập mã điều kiện
++ Nguồn dữ liệu: API/ETL. Nếu người quản trị chọn nguồn dữ liệu = API => hiển thị field Mapping note msg. Nếu người dùng chọn nguồn dữ liệu = ETL => Hiển thị field Bảng dữ liệu, Trường dữ liệu
++ Mapping note msg: Người quản trị nhập field mapping
++ Bảng dữ liệu: Người quản trị chọn ETL Khách hàng/ETL Thẻ/ ETL Tài khoản
++ Trường dữ liệu: Người quản trị chọn trường dữ liệu 
++ Trạng thái: Người quản trị chọn trạng thái: Hoạt động/Không hoạt động
+2
+Thêm mới
+
+Button
+
+Người quản trị nhấn vào Button Thêm mới, hệ thống hiển thị màn hình thêm mới (refer màn hình Thêm mới)
+3
+Tải xuống
+
+Button
+
+Tải xuống file danh sách điều kiện tính phí 
+CÁC TRƯỜNG THÔNG TIN
+1
+Mã điều kiện
+
+Text
+
+Hiển thị mã điều kiện, luôn là chữ viết hoa
+2
+Mapping note msg
+
+Text
+
+Hiển thị field mapping note msg của api
+3
+Bảng dữ liệu
+
+Text
+
+Hiển thị bảng dữ liệu: Khách hàng/ Tài khoản/Thẻ
+4
+Mô tả
+
+Text
+
+Hiển thị mô tả 
+5
+Trạng thái
+
+Text
+
+Hiển thị trạng thái của điều kiện tính phí
+6
+Kiểu dữ liệu
+
+Text
+
+Hiển thị kiểu dữ liệu
+7
+Nguồn dữ liệu
+
+Text
+
+Hiển thị nguồn dữ liệu API/ETL
+8
+Ghi chú
+
+Text
+
+Hiển thị ghi chú 
+9
+Ngày tạo
+
+Datetime
+
++ Hiển thị ngày tạo hh:mm:ss – dd/mm/yyyy
+10
+Người tạo
+
+Text
+
+Hiển thị username của người tạo
+11
+Ngày sửa
+
+Datetime
+
++ Hiển thị ngày sửa hh:mm:ss – dd/mm/yyyy
+12
+Người sửa
+
+Text
+
+Hiển thị username của người sửa
+Màn hình Thêm mới/ Chỉnh sửa điều kiện tính phí
+NÚT CHỨC NĂNG
+1
+Xác nhận
+
+Button
+
+Người quản trị nhấn vào xác nhận để thêm mới/ chỉnh sửa 1 điều kiện tính phí
+2
+Icon “x”
+
+Button
+
+Người quản trị nhấn vào icon “x” để tắt màn thêm mới
+CÁC TRƯỜNG THÔNG TIN
+1
+Mã điều kiện
+★
+Text box
+
+Người quản trị nhập mã điều kiện, khi nhập thì hệ thống xử lý để luôn là chữ viết hoa
+2
+Tên điều kiện
+★
+Text box
+
+Người quản trị nhập tên điều kiện
+3
+Nguồn dữ liệu
+★
+Dropdownlist
+
+Người quản trị chọn nguồn dữ liệu API/ETL
++ Nếu nguồn dữ liệu = API => hệ thống hiển thị field Mapping note msg
++ Nếu nguồn dữ liệu = ETL => Hệ thống hiển thị field Bảng dữ liệu và Trường dữ liệu
+4
+Mapping note msg
+◎
+Text box
+Bắt buộc nhập khi chọn nguồn dữ liệu = API
+Người quản trị nhập field Mapping note msf
+5
+Bảng dữ liệu
+◎
+Dropdownlist
+Bắt buộc nhập khi chọn nguồn dữ liệu = ETL
+Người quản trị chọn bảng dữ liệu: Khách hàng/ Tài khoản/Thẻ
+
+Trường dữ liệu
+◎
+Combobox
+Bắt buộc nhập khi chọn nguồn dữ liệu = ETL
+Người quản trị chọn trường dữ liệu 
+6
+Mô tả
+◎
+Textbox
+
+Người quản trị nhập mô tả
+7
+Trạng thái
+★
+Dropdownlist
+
+- Người quản trị chọn trạng thái: Hoạt động/Không hoạt động
+- Khi chỉnh sửa điều kiện tính phí: 
++ Nếu điều kiện tính phí đang gán với 1 CTƯĐ (trạng thái = Chưa có hiệu lực/Đang hiệu lực)/Code phí (trạng thái = Hoạt động/Ngưng hoạt động/Chờ gán) thì không cho phép sửa trạng thái
++ Nếu điều kiện tính phí chưa gán vs CTƯĐ/Code phí nào, hoặc gán CTƯĐ có trạng thái = Hết hiệu lực/Code phí có trạng thái = Huỷ thì người quản trị có thể sửa trạng thái điều kiện tính phí
+8
+Kiểu dữ liệu
+★
+Dropdownlist
+
+Người quản trị chọn kiểu dữ liệu: Number/String/Date/Time
+
+
+
+Phụ lục 
+Quy tắc chung
+Các loại định dạng trường trong hệ thống
+Định dạng combobox
+
+
+Người dùng có thể chọn giá trị trực tiếp trong danh sách hoặc có thể gõ text vào trường. Khi gõ text, hệ thống sẽ tìm kiếm dữ liệu tồn tại theo giá trị người nhập.
+Định dạng dropdown list
+
+Với định dạng này người dùng nhấn vào thanh bar, hệ thống hiển thị ra danh sách các lựa chọn, và người dùng chỉ được chọn 1 giá trị.
+Định dạng number
+
+
+Với định dạng này, người dùng chỉ được nhập số. Sau khi nhập xong sẽ hiển thị số người dùng đã nhập như sau: phân cách hàng nghìn bởi dấu phẩy, hàng thập phân bởi dấu chấm, hàng thập phân lấy 2 chữ số. Note: riêng với VND, JPY không có hàng thập phân
+Định dạng multiple select dropdown 
+
+
+Người dùng có thể chọn 1 hoặc nhiều giá trị trực tiếp trong danh sách hoặc có thể gõ text vào trường. Khi gõ text, hệ thống sẽ tìm kiếm dữ liệu tồn tại theo giá trị người nhập.
+Định dạng Date
+
+Hệ thống mặc định định dạng Date là dd/mm/yyyy, người dùng có thể trực tiếp giá trị trên trường hoặc chọn ngày ở bảng lịch. Trường hợp tìm kiếm theo khoảng thời gian (Từ ngày – Đến ngày) thì Từ ngày điền vào được hiểu là dd/mm/yyyy 00:00:00.000 và Đến ngày điền vào được hiểu là dd/mm/yyyy 23:59:59.999)
+
+Định dạng Text
+
+Với định dạng này, người dùng nhập giá trị text vào trường, độ dài tối đa của loại trường này sẽ được mô tả ở cột “Ràng buộc” tại bảng mô tả chi tiết các trường của từng chức năng. Nếu trường text nào không được mô tả độ dài tối đa thì được hiểu mặc định độ dài tối đa như sau: 
+Loại trường
+Độ dài tối đa
+Mã 
+50 kí tự
+Tên
+50 kí tự
+Diễn giải/Ghi chú/Nội dung
+300 kí tự
+
+Tìm kiếm
+Mô tả chức năng
+Người dùng có thể tìm kiếm bằng cách nhập mã hoặc tên (gần đúng) vào thanh search bar để tìm kiếm nhanh.
+Màn hình tham khảo
+Màn hình khi chưa nhập text tìm kiếm: 
+
+Màn hình sau khi nhập text và tìm kiếm: 
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+1
+Tìm kiếm 
+
+Search bar
+
++ Người dùng nhấn vào tìm kiếm, hệ thống ghi nhận và tìm kiếm 
++ Tìm kiếm theo các trường cụ thể, theo điều kiện and hay or sẽ được mô tả tại mục tìm kiếm của từng chức năng tương ứng
+Màn hình khi chưa nhập text tìm kiếm
+2
++ Các trường trong danh sách: Hiển thị danh sách và định dạng tương ứng được mô tả chi tiết tại mục tìm kiếm từng chức năng đó
+Màn hình sau khi áp dụng các điều kiện tìm kiếm
+3
++ Sau khi tìm kiếm, hệ thống hiển thị các record có text người dùng đã nhập
+Mô tả cách thức xử lý  
+Sau khi người dùng nhập text tại search bar, hệ thống tìm kiếm các bản ghi có mã/tên gần đúng với thông tin người dùng dùng đã nhập và hiển thị kết quả trên lưới chức năng.
+
+Lọc nâng cao
+Mô tả chức năng
+Người dùng có thể tìm kiếm bằng cách chọn Lọc nâng cao để nhập các điều kiện tìm kiếm trên màn hình, nhấn “Áp dụng” để tìm kiếm theo các điều kiện lọc.
+Màn hình tham khảo
+
+Người dùng nhấn vào button Lọc nâng cao, hệ thống hiển thị màn hình:
+      
+
+
+Màn hình sau khi áp dụng các điều kiện tìm kiếm: 
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+1
+Lọc nâng cao
+
+Button
+
++ Người dùng click vào button Lọc nâng cao, hệ thống hiển thị màn hình “Lọc nâng cao” + Người dùng áp dụng Lọc nâng cao rồi, hệ thống disbale search bar tìm kiếm nhanh
+Màn hình “Lọc nâng cao”
+2
++ Các trường điều kiện tìm kiếm: Hiển thị danh sách điều kiện tìm kiếm với định dạng tương ứng được mô tả chi tiết tại mục tìm kiếm từng chức năng 
++ Nếu nhập/ chọn các điều kiện tìm kiếm, hệ thống thực hiện tìm kiếm theo các dữ liệu thoả mãn đồng thời các điều kiện đã nhập
++ Nếu không nhập điều kiện tìm kiếm, người dùng nhấn vào áp dụng, hệ thống hiển thị toàn bộ thông tin tồn tại trong hệ thống theo mô tả các trường trên lưới dữ liệu của chức năng đó
+3
+Xoá lọc
+
+Button
+
+Người dùng nhấn vào button Xoá lọc để bỏ các điều kiện tìm kiếm đã nhập
+4
+Áp dụng
+
+Button
+
+Người dùng nhấn vào button Áp dụng để tìm kiếm theo các điều kiện người dùng đã nhập theo từng chức năng
+Màn hình sau khi áp dụng các điều kiện tìm kiếm
+5
+x
+
+Button icon
+
++ Người dùng nhấn vào “x” ở các điều kiện lọc ở màn hình kết quả tìm kiếm để loại bỏ điều kiện tìm kiếm đó
++ Sau khi loại bỏ 1 điều kiện tìm kiếm ở màn hình kết quả, người dùng nhấn vào button Lọc nâng cao, màn hình Lọc nâng cao hiển thị cũng loại bỏ điều kiện đó
++ Người dùng loại bỏ toàn bộ điều kiện lọc thì hệ thống hiển thị toàn bộ thông tin tồn tại trong hệ thống theo mô tả các trường trên lưới dữ liệu của chức năng đó, các button và search bar về tìm kiếm có thể thao tác được
+6
+Các field trên lưới: hiển thị danh sách và định dạng các field được mô tả tại chức năng đó
+
+Mô tả cách thức xử lý  
+Người dùng chỉ được lọc (1) Tìm kiếm nhanh tại search bar hoặc (2) Tìm kiếm theo button “Lọc nâng cao”.  Khi người dùng nhập text và ô tìm kiếm nhanh, hệ thống disable nút “Lọc nâng cao” và ngược lại.
+	•	“Lọc nâng cao”: Người dùng nhấn vào button “Lọc nâng cao”, hiển thị màn hình Lọc nâng cao, người dùng nhập các điều kiện tìm kiếm với các giá trị tương ứng, người dùng click vào nút “Áp dụng”.
+	•	Nếu chưa nhập đủ các điều kiện tìm kiếm bắt buộc (nếu có), hệ thống hiển thị thông báo các trường chưa nhập “Trường này bắt buộc” ngày dưới ô nhập bị thiếu.
+	•	Nếu dữ liệu nhập hợp lệ: Hệ thống trả về kết quả thoả mãn các điều kiện tìm kiếm đã nhập.
+	•	Quy tắc tìm kiếm chung: 
+Nội dung
+Quy tắc
+Kết hợp điều kiện
+AND giữa các điều kiện (Áp dụng cho lọc nâng cao)
+Hoa/thường
+Không phân biệt
+Dấu tiếng Việt
+Bỏ dấu khi tìm gần đúng tại các ô nhập text
+Trim khoảng trắng
+Tự động trim trước khi gửi backend
+Điều kiện rỗng
+Không đưa vào query
+
+Tra cứu 
+Mô tả chức năng
+Người dùng có thể tìm kiếm bằng cách nhập các điều kiện tìm kiếm trên màn hình, nhấn “Tra cứu” để tìm kiếm theo các điều kiện.
+Màn hình tham khảo
+Màn hình khi chưa nhập các điều kiện: 
+
+Màn hình sau khi áp dụng các điều kiện tìm kiếm: 
+
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+1
+Tra cứu
+
+Button
+
+Người dùng nhấn vào tra cứu, hệ thống ghi nhận và tìm kiếm theo các điều kiện đã nhập
+2
+Xoá tra cứu
+
+Button
+
+Người dùng nhấn vào button Xoá tra cứu, hệ thống bỏ các điều kiện tìm kiếm, danh sách tìm kiếm hiển thị theo mặc định
+3
+Vùng nhập điều kiện tra cứu:
++ Hiển thị danh sách điều kiện tìm kiếm với định dạng tương ứng được mô tả chi tiết tại mục tìm kiếm của từng chức năng
++ Nếu nhập điều kiện tìm kiếm, hệ thống thực hiện tìm kiếm các dữ liệu thoả mãn đồng thời các điều kiện đã nhập
++ Nếu không nhập điều kiện tìm kiếm, hệ thống mặc định không hiển thị danh sách
+Màn hình sau khi áp dụng các điều kiện tìm kiếm
+4
+Danh sách lưới: Hiển thị kết quả tìm dạng danh sách với các trường và định dạng được mô tả tại mục tìm kiếm của chức năng đó
+
+Mô tả cách thức xử lý
+Người dùng nhập các điều kiện tìm kiếm với các giá trị tương ứng sau đó click vào nút “Tìm kiếm”:
+	•	Nếu chưa nhập đủ các điều kiện tìm kiếm bắt buộc (nếu có), hệ thống hiển thị thông báo các trường chưa nhập “Trường này bắt buộc” ngày dưới ô nhập bị thiếu
+	•	Nếu dữ liệu nhập hợp lệ: Hệ thống trả về kết quả thoả mãn các điều kiện tìm kiếm đã nhập
+	•	Quy tắc tìm kiếm chung: 
+Nội dung
+Quy tắc
+Kết hợp điều kiện
+AND giữa các điều kiện
+Hoa/thường
+Không phân biệt
+Dấu tiếng Việt
+Bỏ dấu khi tìm gần đúng tại các ô nhập text
+Trim khoảng trắng
+Tự động trim trước khi gửi backend
+Điều kiện rỗng
+Không đưa vào query
+
+Tải xuống
+Mô tả chức năng
+Người dùng có thể tải xuống dữ liệu trên lưới ra dạng excel, đối với các định dạng file khác sẽ được mô tả tại chức năng tương ứng
+Màn hình tham khảo
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+1
+Tải xuống
+
+Button
+
+Người dùng nhấn vào button tải xuống, cho phép thực hiện tải xuống dữ liệu
+
+Mô tả cách thức xử lý
+	•	Button “Tải xuống” hiển thị khi trên màn hình có danh sách lưới dữ liệu
+	•	Người dùng nhấn vào button “Tải xuống” trên lưới của chức năng đang mở, hệ thống tải xuống file danh sách dữ liệu theo các điều kiện tìm kiếm đã nhập
+	•	Định dạng file tải xuống: mặc định tệp dữ liệu tải xuống là excel, đối với dạng file khác sẽ được mô tả tại mục tải xuống của chức năng đó 
+	•	Tên file theo format: Tên chức năng - yyyymmddhhmmss
+	•	Template: được đính kèm tại mục tải xuống của chức năng đó
+Phân trang
+Mô tả chức năng
+Người dùng có thể xem danh sách dữ liệu trên các trang bằng cách nhấn vào các số trang, trang tiếp theo/trang trước đó.
+Màn hình tham khảo
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+1
+Số trang
+
+Button
+
+Người dùng nhấn vào button số trang để xem danh sách dữ liệu 
+2
+Trang tiếp theo 
+
+
+Button
+
++ Người dùng nhấn vào button “Trang tiếp theo” để xem danh sách dữ liệu trang tiếp theo
++ Nếu là trang cuối cùng thì người dùng không thể thao được button này, button “Trang tiếp theo” sẽ diable
+3
+Trang trước đó
+
+Button
+
++ Người dùng nhấn vào button “Trang trước đó” để xem danh sách dữ liệu trang tiếp theo
++ Nếu là trang đầu thì người dùng không thể thao được button này, button “Trang trước đó” sẽ disable
+4
+Số bản ghi trên trang
+
+	•	
+
+Hiển thị số bản ghi đang hiển thị trên một trang so với tổng sổ bản ghi
+Ví dụ: 1-50 của 295 bản ghi
+
+Mô tả cách thức xử lý
+	•	Hệ thống hiển thị mặc định là 50 bản ghi trên 1 trang đối với trường hợp có số bản ghi khác thì sẽ được mô tả cụ thể tại mục phân trang của chức năng đó
+	•	Người dùng ở trang nào, hệ thống hiển thị tương ứng số bản ghi lần lượt ở trang đó
+
+Upload file
+Mô tả chức năng
+Người dùng có thể upload file excel lên thay vì thêm từng dòng bản ghi trên hệ thống
+Màn hình tham khảo
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+1
+Upload file
+
+Button
+
+Người dùng nhấn vào button tải xuống, cho phép thực hiện tải xuống dữ liệu
+2
+Danh sách bản ghi: Sau khi upload file, hệ thống xử lý các điều kiện, dữ liệu phù hợp sẽ được thông báo upload file thành công, màn hình hiển thị danh sách các bản ghi đã được upload
+
+Mô tả cách thức xử lý  
+	•	Định dạng file được upload: Excel
+	•	Dung lượng file: theo tham số hệ thống
+	•	Người dùng nhấn vào button Upload file để lựa file định dạng excel để upload. Sau khi upload, hệ thống validate định dạng, dung lượng file và dữ liệu trong file, cụ thể về các rule validate dữ liệu sẽ được mô tả tại mục upload của chức năng đó: 
+	•	Nếu định dạng,dung lượng file không hợp lệ thì hệ thống thông báo “ Định dạng hoặc dung lượng không hợp lệ”. Người dùng chọn lại file để upload
+	•	Nếu dữ liệu hợp lệ: Hệ thống hiển thị danh sách các bản ghi
+	•	Nếu dữ liệu không hợp lệ: Hệ thống thông báo “Dữ liệu của bạn khôn hợp lệ” hiển thị bản ghi, đối với bản ghi không hợp lệ, hệ thống highlight bản ghi đó
+Lịch sử tác động
+Mô tả chức năng
+Người dùng có thể xem lịch sử tác động tới các dữ liệu Code phí, Biểu phí và Chương trình ưu đãi tại các màn hình xem tại các chức năng quản lý tương ứng. Tại màn hình xem Code phí/Biểu phí/Chương trình ưu đãi, khi người dùng nhấn vào “Lịch sử tác động”, hệ thống hiển thị Màn hình liệt kê lịch sử tác động theo thứ tự thời gian duyệt từ gần nhất tới xa nhất và người dùng có thể click vào bản ghi tương ứng để xem thông tin chi tiết sau khi tác động.
+Màn hình tham khảo
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+1
+Ngày cập nhật
+
+Date time
+
++ Hiển thị thời điểm hành động (Thêm mới/Chỉnh sửa) được phê duyệt thành công
++ Format: dd/mm/yyyy
++ Người dùng nhấn vào hyperlink  “Ngày cập nhật”, hệ thống hiển thị thông tin chi tiết của bản ghi ở phiên bản trước khi chỉnh sửa (bản lịch sử)
+2
+Tác động
+
+Text
+
+Hiển thị các hành động của người dùng đến chức năng: Thêm mới, Chỉnh sửa
+3
+Người cập nhật
+
+Text
+
+Hiển thị người tác động đến chức năng như: Thêm mới/Chỉnh sửa
+4
+Người phê duyệt
+
+Text
+
+Hiển thị người phê duyệt cuối của chức năng
+5
+Icon “x”
+
+-
+
+Người dùng nhấn vào icon “x” để tắt Popup
+
+
+Mã lỗi
+Mã chức năng
+Mã lỗi
+Nội dung mã lỗi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -7,32 +7,26 @@ description: Prompt chuyên dụng cho việc Review Test Case bằng kỹ năng
 Hãy đóng vai **Senior QA Lead**, sử dụng kỹ năng `qa_test_case_reviewer` để thực hiện review bộ Test Case tại: [Đường dẫn file Test Case] dựa trên tài liệu đặc tả tại: [Đường dẫn file URD/FSD].
 
 **Yêu cầu chi tiết:**
-1. **Traceability Matrix:** Đối soát từng Business Rule (BR) trong tài liệu nguồn. Tìm các điểm nghiệp vụ bị bỏ sót (Gap Analysis).
-   > **🔄 KIỂM TRA CHUYỂN ĐỔI TRẠNG THÁI (STATE TRANSITION CHECK):** Đặc biệt rà soát lỗi thiếu hụt kịch bản State Transition. Khi tài liệu có nhắc đến các luồng thay đổi trạng thái (Ví dụ: Chờ duyệt -> Duyệt, Hoạt động -> Không hoạt động), BẮT BUỘC phải soi xem bộ Test Case đã có đầy đủ các kịch bản kiểm tra luồng đi và luồng đảo ngược (Reverse logic) như từ Không hoạt động về lại Hoạt động chưa. Nếu thiếu các nhánh chuyển đổi của vòng đời dữ liệu, phải đánh dấu là Gap Analysis và yêu cầu bổ sung ngay.
+1. **Traceability Matrix:** Đối soát từng Business Rule (BR) trong tài liệu nguồn. Đảm bảo các điểm nghiệp vụ đều được kiểm tra (Gap Analysis).
+   > **🔄 KIỂM TRA CHUYỂN ĐỔI TRẠNG THÁI (STATE TRANSITION CHECK):** Xem xét cẩn thận các kịch bản State Transition. Kiểm tra xem bộ Test Case đã phản ánh tốt và tách riêng các luồng điều kiện và trạng thái đi và ngược lại chưa nhằm bao phủ thiết kế hệ thống.
    > **🔎 ĐỐI SOÁT HÌNH ẢNH TRONG TÀI LIỆU DOCX:**
-   > - **Trích xuất ảnh:** Nếu tài liệu URD/FSD là file `.docx`, BẮT BUỘC sử dụng script/lệnh giải nén để lấy ảnh từ thư mục `word/media/` ra.
-   > - **Phân tích (Vision/OCR):** Chỉ xem lọc 2-3 hình ảnh quan trọng nhất (như Mockup Màn hình, Sơ đồ luồng) nhằm đối chiếu khắt khe thiết kế giao diện thực tế và sơ đồ so với bộ Test Case, bắt chặt các lỗi về UI (nút bấm, input ẩn hiện) hoặc Flow bị sót. Tránh load tất cả ảnh làm chậm hệ thống.
-2. **Logic Validation & Anti-Pattern Check:** Kiểm tra các bước thực hiện và Expected Result có khớp 100% với Rule trong URD không. Đặc biệt lưu ý các công thức tính toán và trạng thái dữ liệu.
-   > **❌ BẮT LỖI CHẤT LƯỢNG KÉM, TRÙNG LẶP & COPY-PASTE (CRITICAL CHECK):**
-   > - **Lỗi Cắt Gọn / Tự Ý Sáng Tạo Tên Trường (Field/Item):** Bắt lỗi khắt khe các Test Case sử dụng sai, cắt gọn, hoặc tự ý sáng tạo ra tên các field, nút bấm (button) hay item nghiệp vụ. Yêu cầu Test Case phải được viết hoàn toàn với 100% tên trường xuất hiện đúng y hệt như tài liệu nguồn được gửi lên (không tự lược bớt, không bịa tên).
-   > - **Lỗi Title Chung Chung / Vô Nghĩa:** Bắt lỗi NGAY LẬP TỨC các Test Case có Title (Tiêu đề) sáo rỗng, không thể hiện được mục tiêu kiểm thử (VD: "Test chức năng Thêm mới", "Kiểm tra Happy case", "Kiểm tra BR đầy đủ"). Bắt buộc Reviewer phải note cờ đỏ, yêu cầu người viết sửa lại Title sao cho đọc vào là hiểu ngay đang test hành vi gì, điều kiện/dữ liệu đầu vào ra sao và mong đợi kết quả rẽ nhánh nào (VD: "Kiểm tra hệ thống báo lỗi đỏ dưới field khi bỏ trống trường bắt buộc [Mã Khách Hàng]").
-   > - **Lỗi Trùng TC_ID:** Quét toàn bộ file để phát hiện các Test Case có cùng `TC_ID` => Yêu cầu đánh lại ID duy nhất.
-   > - **Lỗi Trùng 100% Content:** Bắt các nhóm TC có **cả Steps và Expected Result GIỐNG HỆT NHAU** nhưng nằm ở các tính năng/BR khác nhau (dấu hiệu copy-paste quên sửa).
-   > - **Lỗi Expected Result Dập Khuôn (Luồng chung chung):** Bắt lỗi nếu nhiều TC dùng chung 1 template Expected hời hợt (VD: *"Thông tin được xử lý thành công"* hoặc *"Đóng form, không lưu dữ liệu"* lặp lại cho hàng chục TC khác nhau). Mỗi chức năng phải có một Expected tường minh cho mục tiêu đó.
-   > - **Lỗi Logic Copy-Paste:** Soi kỹ các TC kiểm tra UI (Luồng Xem/Đóng/Hủy). Nếu Expected Result chứa *"Lưu thành công, sinh bản ghi"* hoặc Steps chứa *"Nhấn xác nhận"* => BẮT LỖI NGAY.
-   > - **Lỗi Chia Nhỏ Luồng (Flow Fragmentation):** Bắt lỗi các Test Case Luồng Nghiệp Vụ (Flow / E2E) bị băm nhỏ thành từng step giống như test Business Rule (BR). Vi phạm này tạo ra các TC Flow giả, thực chất chỉ đi test một câu chữ báo lỗi hay một validation nhỏ (VD: Flow mà chỉ test "nhấn nút Đóng" hoặc "báo lỗi trùng tên"). Một TC Flow chuẩn phải là **Continuous End-to-End**: đi liền mạch qua nhiều màn hình/chức năng (VD: Maker soạn -> Submit -> Pending -> Checker Reject -> Maker sửa -> Checker Approve -> Active). Yêu cầu đánh cờ đỏ các TC Flow vụn vặt và yêu cầu gộp hoặc xóa bỏ do đã lặp lại kịch bản của phần BR.
-   > - **Lỗi Test Nhầm Trường Tự Sinh:** Bắt lỗi các TC test Negative validations cho các trường do hệ thống tự sinh (như 'Ngày tạo', 'Mã tự sinh').
-   > - **Lỗi Gộp Trạng Thái (Status/State Grouping):** Bắt lỗi các Test Case kiểm tra điều kiện đầu vào gộp quá nhiều logic liên quan đến Cờ trạng thái (State) vào chung một bước chạy (VD: "Kiểm tra với Nhóm KH ở trạng thái Hoạt động/Ngừng hoạt động/Chờ gán"). Yêu cầu người viết phải bóc tách riêng rẽ thành từng Test Case độc lập cho mỗi trạng thái, không để gộp chung tránh rủi ro sót bug nghiêm trọng.
-3. **Double-Check & Anti-Corruption:**
-    - Kiểm tra cấu trúc **Expected Result**: BẮT BUỘC KIỂM TRA TEST CASE ĐÃ BÓC TÁCH ĐỦ 4 LỚP EXPECTED RESULT (CÓ XUỐNG DÒNG RÕ RÀNG) CHƯA:
-      + (i) Nghiệp vụ/Logic: Kết quả xử lý hệ thống (VD: Chặn hay Lưu thành công).
-      + (ii) UI: Giao diện trực tiếp (VD: Toast, Popup, Grid reload, Focus bôi đỏ ô lỗi).
-      + (iii) Trạng thái/Audit: Trạng thái dữ liệu (VD: Hoạt động/Chờ duyệt) và ghi log Audit.
-      + (iv) Output: Output trích xuất (VD: File Excel export, Kafka, Email).
-      => Nếu bất kỳ Test Case nào viết Expected Result chung chung, thiếu dòng, thiếu đánh số (i, ii, iii, iv) => Lập tức báo lỗi định dạng (Format) mức phân loại Medium.
-    - Kiểm tra tính nhất quán về vai trò (Maker/Checker) và Pre-conditions. ĐẶC BIỆT chú ý kiểm tra định dạng: Nếu Pre-conditions có nhiều ý tách biệt, BẮT BUỘC phải bắt lỗi Format (Medium) nếu các ý không được đánh số thứ tự và xuống dòng rõ ràng.
-    - Kiểm tra cột **Note**: Với các TC có Steps gộp (3a/3b/3c), bắt buộc phải có ghi chú rõ ràng về việc gộp tại cột Note.
-4. **Báo cáo:** Trình bày kết quả theo dạng bảng chuyên nghiệp gồm: BR_ID / TC_ID, Loại phát hiện (Duplicate, Gap, Logic, Format, Note), Mô tả sự cố, Mức độ nghiêm trọng và Đề xuất sửa đổi cụ thể.
+   > - **Trích xuất ảnh:** Nếu tài liệu là `.docx`, vui lòng trích xuất ảnh hỗ trợ khi cần thiết.
+   > - **Phân tích (Vision/OCR):** Tham khảo ưu tiên ảnh để hiểu Mockup/Sơ đồ luồng, phối hợp nhẹ nhàng với thiết kế để nhận định các khác biệt.
+2. **Logic Validation:** Kiểm tra các bước thực hiện và Expected Result có khớp với Rule trong URD không. 
+   > **🎯 LƯU Ý VỀ CHẤT LƯỢNG TEST CASE:**
+   > - **Sự chính xác và đồng bộ từ vựng:** Các trường dữ liệu, chức năng cần bám sát chính xác ngôn ngữ của tài liệu gốc.
+   > - **Tiêu đề (Title) rõ ràng:** Đề xuất điều chỉnh nếu Title mang ngôn ngữ chung chung.
+   > - **Tách riêng Test Case (Không gộp case):** Cần đảm bảo các TC được tách riêng (từng Test Case kiểm thử 1 kịch bản/trạng thái độc lập). Việc gộp nhiều luồng vào một Test Case dễ sinh rủi ro bỏ sót nhánh kiểm thử.
+   > - **Lưu ý các trường hợp sao chép (Copy-Paste) nhầm:** Xem xét các Test Case có chung cả Steps và Expected Result để đối soát lại nội dung xem đã phù hợp nghiệp vụ chưa.
+   > - **Bám sát đúng luồng của Test Case:** Các thao tác dạng Xem (View) thì không nên có Expected Result liên quan đến việc thay đổi trạng thái của cơ sở dữ liệu. Tránh gộp các bước rẽ nhánh liên tục vào cùng một chức năng. 
+3. **Double-Check Test Case:**
+    - Kiểm tra cấu trúc **Expected Result**: Cần đảm bảo tách đủ 4 lớp dữ liệu một cách trực quan, ví dụ:
+      + (i) Nghiệp vụ/Logic: Kết quả xử lý hệ thống.
+      + (ii) UI: Giao diện trực tiếp.
+      + (iii) Trạng thái bản ghi: Trạng thái cập nhật của bản ghi (TUYỆT ĐỐI KHÔNG đề cập đến Audit Log hay Ghi log người dùng).
+      + (iv) Output: File hoặc thông tin đi kèm.
+    - Cần nhắc nhở người viết đảm bảo Pre-conditions được trình bày rõ ràng, đánh số thứ tự để thuận lợi cho việc kiểm thử (nếu có nhiều ý thì đánh số từ 1, 2, 3...; nếu chỉ có 1 ý duy nhất thì vẫn phải đánh số "1."); đồng thời nếu có đường dẫn Menu hoặc cần đứng tại màn hình cụ thể nào để bắt đầu bước tiếp theo thì phải mô tả thông tin này đầy đủ. Đặc biệt lưu ý: Các tên chức năng phân quyền phải được ghi lấy theo đúng tên **tính năng to/chính** (Feature/Module gốc) xuất hiện trong tài liệu, chứ không phải tên tính năng con nằm trong màn hình (VD: đổi "Được phân quyền Quản lý tham số." thành "Được phân quyền vào chức năng [Tên tính năng to theo tài liệu]"). Cần chú ý đối soát và áp dụng chuẩn này ở tất cả các Test Case.
+4. **Ghi nhận kết quả (Báo cáo linh hoạt):** Vui lòng tổng hợp, phân tích và trình bày các phát hiện (Duplicate, Gap, Logic, Format) để hiển thị chi tiết, rõ ràng trực tiếp trên Chat cho người dùng đối chiếu. ĐỐI VỚI FILE EXCEL: Chỉ sinh comment và tự động lưu vào cột `Note` khi thật sự cần thiết (phát hiện lỗi logic nghiêm trọng, thiếu case trọng yếu, sai nghiệp vụ cốt lõi); tuyệt đối không ghi nhận tràn lan hay giữ lại tất cả thông tin thừa thãi trên file. Không tự ý tạo thêm các sheet báo cáo phụ.
 
 ---
 

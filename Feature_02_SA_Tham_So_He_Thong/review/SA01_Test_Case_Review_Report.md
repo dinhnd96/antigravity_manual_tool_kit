@@ -1,72 +1,80 @@
-# 📋 BÁO CÁO REVIEW TEST CASE – SA01: Đăng nhập
-> **Tài liệu nguồn (URD):** `SA.01 – Đăng nhập .docx`
-> **Bộ Test Case:** `SA01_Đăng nhập.xlsx`
-> **Tổng TC:** 15 | **Người review:** Senior QA Lead (AI)
-> **Ngày review:** 2026-04-06
-> **Kết luận nhanh:** Bộ TC có chất lượng **KHÁ TỐT**, cấu trúc rõ ràng và đã bóc tách 4 lớp Expected Result. Tuy nhiên còn **7 phát hiện** cần xử lý trước khi release.
+# 📋 BÁO CÁO REVIEW TEST CASE — SA.01 Đăng nhập
+
+> **Reviewer:** Senior QA Lead (AI-Assisted)
+> **Tài liệu nguồn:** SA.01 – Đăng nhập.docx
+> **Bộ Test Case:** SA01_Đăng nhập.xlsx (14 TC)
+> **Ngày review:** 2026-04-07
 
 ---
 
-## I. TRACEABILITY MATRIX – Đối Soát BR vs TC
+## 1. TÓM TẮT TỔNG QUAN
 
-| BR_ID | Mô tả trong URD | TC Coverage | Trạng thái |
-|:---|:---|:---|:---|
-| **BR_01** | Một tài khoản tại 1 thời điểm chỉ đăng nhập ở 1 phiên | SA01-NEG-006, SA01-FLOW-011 | OK Đã cover |
-| **BR_02** | Không đăng nhập được khi tài khoản Inactive | SA01-NEG-005 | OK Đã cover |
-| **BR_03** | Tính năng "Ghi nhớ" đăng nhập nhanh lần sau | SA01-HAPPY-007 | WARN Cover nhưng thiếu case Negative |
-| **BR_04** | Tích hợp EntraID, điều kiện theo nguyên tắc EntraID | SA01-HAPPY-009, SA01-NEG-010, SA01-NEG-013, SA01-NEG-015 | OK Cover đa luồng |
-| **Chức năng Xem mật khẩu** | Cho phép hiển thị mật khẩu đã nhập | SA01-UI-008 | OK Đã cover |
-| **Luồng nghiệp vụ chính** | Nhập user/pass > Xác thực > Vào trang chủ | SA01-HAPPY-001 | OK Đã cover |
-| **Post-condition: Vào màn hình phiên trước** | Sau đăng nhập hướng đến màn hình phiên trước hoặc dashboard | SA01-HAPPY-001 | WARN Chưa kiểm tra nhánh "vào màn hình phiên trước" |
-| **BR-SEC (Lockout)** | (Không có trong URD) | SA01-SECURITY-012 | ERROR Ngoài phạm vi URD |
-
----
-
-## II. BẢNG PHÁT HIỆN CHI TIẾT
-
-| # | BR_ID / TC_ID | Loại phát hiện | Mô tả sự cố / Mâu thuẫn | Mức độ | Đề xuất QA |
-|:--|:---|:---|:---|:---|:---|
-| 1 | **SA01-HAPPY-001** | **Format – Title** | Title "Đăng nhập thành công với thông tin hợp lệ (Luồng chính)" khá ổn nhưng thiếu mô tả hành vi điều hướng sau đăng nhập — một điểm quan trọng trong Post-condition của URD. | Low | Đổi title thành: *"Đăng nhập thành công → Hệ thống điều hướng về Dashboard hoặc màn hình phiên trước"* |
-| 2 | **SA01-HAPPY-001** | **GAP – Logic** | Post-condition trong URD ghi rõ: *"Điều hướng người dùng đến màn hình ở phiên đăng nhập trước hoặc dashboard"*. TC hiện chỉ verify "vào Trang chủ" (1 nhánh), chưa có step kiểm tra nhánh "vào màn hình phiên trước" khi user đã có lịch sử đăng nhập. | **Medium** | Tách hoặc bổ sung Sub-step: *"Nếu user đã đăng nhập trước, hệ thống điều hướng đến màn hình phiên trước thay vì Dashboard"*. Cần làm rõ với BA về cơ chế session-restore. |
-| 3 | **SA01-HAPPY-007** | **GAP – Thiếu Negative Case cho BR_03** | BR_03 quy định tính năng "Ghi nhớ". TC hiện cover Happy case (bật Ghi nhớ), nhưng **chưa có TC kiểm tra khi người dùng KHÔNG tích "Ghi nhớ"** – tức là sau khi đóng browser và mở lại, hệ thống phải **không** tự điền thông tin. | **Medium** | Thêm `SA01-NEG-007b`: Kiểm tra khi **không** tích "Ghi nhớ" → mở lại browser → trường Username phải trống, không tự đăng nhập. |
-| 4 | **SA01-HAPPY-007** | **Format – Expected Result thiếu lớp** | Expected Result chỉ có 1 dòng duy nhất `(i) Nghiệp vụ/UI` gộp chung. Bộ chuẩn yêu cầu phân tách 4 lớp riêng biệt: (i) Logic, (ii) UI, (iii) Trạng thái, (iv) Output. | **Medium** | Tách thành: `(i) Nghiệp vụ: Cookie/Session được lưu phía client.` / `(ii) UI: Trường Username tự động điền khi mở lại trang login.` / `(iii) Trạng thái: Phụ thuộc config Cookie – ghi chú vào cột Note.` |
-| 5 | **SA01-UI-008** | **Format – Expected Result thiếu lớp** | TC này chỉ có lớp `(ii) UI`, bỏ sót lớp `(i) Nghiệp vụ` (hành vi toggle show/hide không ảnh hưởng đến giá trị password thực tế). Tuy tính năng UI-only nhưng vẫn cần xác nhận không có side-effect nghiệp vụ. | **Low** | Bổ sung: `(i) Nghiệp vụ: Giá trị mật khẩu thực tế không bị thay đổi khi bật/tắt hiển thị.` |
-| 6 | **SA01-FLOW-011** | **Duplicate + Flow Fragmentation** | TC này được gán Type=Happy và đặt tên là "End-to-End" nhưng **nội dung trùng hoàn toàn với BR_01** đã được cover tại `SA01-NEG-006`. Cả hai TC kiểm tra cùng một kịch bản: đăng nhập 2 browser cùng tài khoản. `SA01-FLOW-011` không phải là một E2E thực sự (không có flow xuyên màn hình hay Maker/Checker). | **High** | **Gộp hoặc xóa** `SA01-FLOW-011`. Nếu giữ lại, cần nâng cấp thành flow thật sự: *"Login → Thao tác nghiệp vụ → Bị kick session → Quay login lại"*. Hiện tại đây là Duplicate với `SA01-NEG-006`. |
-| 7 | **SA01-SECURITY-012** | **Ngoài phạm vi URD – Chưa có BR tương ứng** | TC này kiểm tra cơ chế **Account Lockout sau 5 lần nhập sai**. Tính năng này **KHÔNG TỒN TẠI trong URD SA.01**. TC đã có note `[QA WARNING]` nhưng vẫn đang nằm trong bộ TC chính thức. | **High** | Chuyển TC này ra khỏi bộ TC chính thức (Backlog/Pending) và **yêu cầu BA confirm** trước. Nếu BA confirm có tính năng này → Thêm BR_05 vào URD → mới đưa TC vào. |
-
----
-
-## III. PHÂN TÍCH BỔ SUNG
-
-### 3.1 Điểm mạnh của bộ TC
-
-- **Cấu trúc Expected Result 4 lớp** được áp dụng nhất quán ở phần lớn TC.
-- **Traceability Column (OldID/Trace_ID)** giúp truy vết lịch sử tốt.
-- Cover tốt các luồng lỗi EntraID (3 TC: Cancel, Timeout, Authorization).
-- TC có **Note column** để ghi chú merge và design-decision còn mở.
-- SA01-NEG-014 (XSS/injection validation) là điểm bảo mật chủ động, được đánh giá cao.
-- SA01-NEG-015 (Authorization after Authentication) phân biệt rõ AuthN vs AuthZ — rất tốt.
-
-### 3.2 Rủi ro tiềm ẩn chưa có TC cover
-
-| Rủi ro | Mô tả | Khuyến nghị |
+| Hạng mục | Số lượng | Đánh giá |
 |:---|:---|:---|
-| **Ambiguity BR_04** | URD chỉ ghi "điều kiện theo nguyên tắc EntraID" — rất mơ hồ. Nếu EntraID thay đổi policy (MFA, SSPR, Conditional Access) thì TC có thể lỗi thời. | Làm rõ với BA: Liệt kê cụ thể các điều kiện EntraID cần test. |
-| **Session Timeout tự nhiên** | Không có TC kiểm tra hết session sau khoảng thời gian không hoạt động (Idle Timeout). | Cân nhắc thêm nếu hệ thống có cấu hình Timeout. |
-| **Đăng nhập trên Mobile Browser** | Không rõ hệ thống có hỗ trợ responsive. Nếu có, cần coverage cho mobile. | Xác nhận với BA phạm vi test platform. |
+| Tổng TC đã có | **14** | Phủ rộng từ Happy Path → Security |
+| Lỗi Role/Luồng duyệt | **0** | ✅ Sạch bóng Maker/Checker |
+| Expected Result thiếu Layer | **5/14 TC** | 🔴 Thiếu Layer (iii) và (iv) quan trọng |
+| Gap nghiệp vụ | **2** | 🔴 Thiếu TC Ghi nhớ đăng nhập và xác thực EntraID |
+| Lỗi Mockup Mismatch | **1** | 🟠 UI màn đăng nhập không có checkbox "Ghi nhớ" |
+| Anti-pattern (Giả định BR không có URD) | **2** | 🟡 Thêm Lockout 30 phút và giới hạn 50 ký tự |
+
+> [!IMPORTANT]
+> **Đánh giá sơ bộ:** Đây là bộ TC có bộ khung tư duy chiều sâu tốt, bao gồm Security, EntraID Integration và Concurrent Session. Tuy nhiên **chất lượng Expected Result chưa đồng đều**: Nhiều TC chỉ có Layer (i) và (ii), thiếu hoàn toàn Layer (iii) Trạng thái/Audit và (iv) Output. Đây là điểm trừ lớn cần chấn chỉnh toàn bộ trước khi nghiệm thu.
 
 ---
 
-## IV. TỔNG KẾT & ACTION PLAN
+## 2. PHÂN TÍCH MOCKUP UI
 
-| Ưu tiên | Hành động | TC liên quan | Người thực hiện |
+Màn hình đăng nhập thực tế (image1.png - PVcomBank) có các thành phần:
+- Field: **"Tên đăng nhập"** (placeholder: "Nhập tên đăng nhập")
+- Field: **"Mật khẩu"** (placeholder: "Nhập mật khẩu" + Icon Mắt hiện/ẩn mật khẩu)
+- Button: **"Đăng nhập"** (màu xám khi rỗng field)
+
+> [!WARNING]
+> **Phát hiện Mockup Mismatch quan trọng:** URD có BR_03 quy định tính năng **"Ghi nhớ"** (Remember Me). Tuy nhiên, Mockup màn hình đăng nhập (image1.png) **KHÔNG hiển thị Checkbox "Ghi nhớ"** nào. Cần có `Assumption` hỏi BA/Designer trước khi viết TC. Hiện tại TC `SA01-HAPPY-007` đang giả định checkbox đó tồn tại nhưng không thể check được trên UI.
+
+---
+
+## 3. TRACEABILITY MATRIX
+
+| BR_ID | Mô tả BR | TC tương ứng | Đánh giá |
 |:---|:---|:---|:---|
-| 🔴 High | Quyết định giữ/xóa/chuyển Backlog cho SA01-SECURITY-012 sau khi BA confirm | SA01-SECURITY-012 | QA Lead + BA |
-| 🔴 High | Gộp/xóa SA01-FLOW-011 do trùng với SA01-NEG-006 | SA01-FLOW-011 | QA Writer |
-| 🟡 Medium | Thêm TC Negative cho BR_03 (khi không tích Ghi nhớ) | BR_03 | QA Writer |
-| 🟡 Medium | Bổ sung Sub-case kiểm tra "vào màn hình phiên trước" cho SA01-HAPPY-001 | SA01-HAPPY-001 | QA Writer + BA confirm |
-| 🟡 Medium | Tách Expected Result 4 lớp cho SA01-HAPPY-007 | SA01-HAPPY-007 | QA Writer |
-| 🟢 Low | Bổ sung lớp (i) Nghiệp vụ cho SA01-UI-008 | SA01-UI-008 | QA Writer |
-| 🟢 Low | Cải thiện Title cho SA01-HAPPY-001 để mô tả rõ hành vi điều hướng | SA01-HAPPY-001 | QA Writer |
+| BR_01 | 1 tài khoản – 1 phiên làm việc duy nhất | SA01-NEG-006 | ✅ Có, nhưng Expected thiếu layer (iii)(iv) |
+| BR_02 | Chặn tài khoản Inactive | SA01-NEG-005 | ✅ Đủ |
+| BR_03 | Tính năng Ghi nhớ | SA01-HAPPY-007 | ⚠️ Có TC nhưng Mockup không có Checkbox |
+| BR_04 | Tích hợp EntraID | SA01-HAPPY-009, SA01-NEG-010, SA01-NEG-013 | ✅ Phủ 3 case: Success, Cancel, Token Expired |
+| General | Xem/Ẩn mật khẩu (Eye Icon) | SA01-UI-008 | ✅ Đủ |
+| Security | Lockout sau sai 5 lần | SA01-SECURITY-012 | ⚠️ Giả định "30 phút" – chưa có trong URD |
 
-> **Kết luận tổng thể:** Bộ TC SA01 thể hiện tư duy QA tốt, cấu trúc rõ ràng. Cần ưu tiên xử lý ngay 2 phát hiện High (Duplicate Flow và TC ngoài URD) và bổ sung 1 TC Negative cho BR_03 để đảm bảo coverage đầy đủ trước khi đưa vào regression.
+---
+
+## 4. CHI TIẾT PHÁT HIỆN LỖI (FINDINGS)
+
+| # | TC_ID | Loại phát hiện | Mô tả sự cố | Mức độ | Đề xuất QA |
+|:---|:---|:---|:---|:---|:---|
+| 1 | SA01-NEG-002 | **Expected Result thiếu Layer** | Chỉ có Layer (i) và (ii). Thiếu `(iii) Trạng thái/Audit: Không tạo phiên làm việc (Session). (iv) Output: Không có.` | 🔴 High | Bổ sung đầy đủ 4 layer. |
+| 2 | SA01-NEG-003 | **Expected Result thiếu Layer** | Chỉ có Layer (i) và (ii). Thiếu `(iii)` và `(iv)`. | 🔴 High | Bổ sung đầy đủ 4 layer. |
+| 3 | SA01-NEG-004 | **Expected Result thiếu Layer + Sai cấu trúc** | Chỉ có Layer (ii). Thiếu hoàn toàn (i)(iii)(iv). Ngoài ra, Steps bỏ trống Tên đăng nhập nhưng không test case bỏ trống **cả hai cùng lúc**. | 🔴 High | Bổ sung layer (i)(iii)(iv). Thêm variant bỏ trống đồng thời cả 2 field. |
+| 4 | SA01-NEG-006 | **Expected Result thiếu Layer** | Chỉ có (i) và (ii). Thiếu `(iii) Trạng thái/Audit: Phiên cũ bị ghi nhận bị terminate/kick (nếu thiết kế là Ngắt phiên cũ). (iv) Output: Không có.` | 🔴 High | Bổ sung. Đặc biệt Layer (iii) cực kỳ quan trọng cho Security của tính năng này. |
+| 5 | SA01-HAPPY-007 | **Mockup Mismatch + Expected thiếu Layer** | Mockup màn đăng nhập không có Checkbox "Ghi nhớ". Expected chỉ có 1 layer (i+ii gộp chung cẩu thả). | 🟠 Medium | Ghi Note Assumption hỏi BA. Tách riêng rõ (i)(ii)(iii)(iv). |
+| 6 | SA01-UI-008 | **Expected Result thiếu Layer** | Chỉ ghi Layer (ii). Thiếu `(i) Nghiệp vụ: Không gọi API lưu trạng thái nào. (iii) Trạng thái/Audit: Không đổi. (iv) Output: Không.` | 🟠 Medium | Bổ sung 3 layer còn lại (ngắn gọn cũng được). |
+| 7 | SA01-HAPPY-009 | **Expected Result thiếu Layer** | Chỉ có (i)(ii). Thiếu `(iii) Trạng thái/Audit: Hệ thống nhận và lưu Token EntraID vào Session/Cookie. (iv) Output: Không có.` | 🔴 High | Bổ sung layer (iii)(iv). Layer này quan trọng để trace token khi Automation test. |
+| 8 | SA01-SECURITY-012 | **Anti-Pattern (Giả định BR)** | TC tự chốt cứng `"bị tạm khóa 30 phút"` nhưng URD và các BR Table **không có rule nào quy định thời gian khoá là 30 phút**. Khoá tài khoản sau 5 lần sai thì đúng (BR của SA.03), nhưng `"30 phút"` là số tự nghĩ ra. | 🟡 Medium | Xóa cụm `"trong 30 phút"`. Thay bằng `"Tài khoản bị tạm khóa (Inactive). Cần Admin mở khóa."` theo đúng mô hình Inactive của SA.03. |
+| 9 | SA01-NEG-014 | **Anti-Pattern (Giả định BR)** | TC giả định giới hạn là `"50 ký tự"` nhưng URD hoàn toàn không mention giới hạn độ dài field Tên đăng nhập. | 🟡 Medium | Xóa con số `"50 ký tự"` cụ thể. Thay bằng `"Vượt quá độ dài tối đa cho phép [cần BA xác nhận]"` và ghi Assumption vào cột Note. |
+| 10 | SA01-FLOW-011 | **TC quá mơ hồ (Anti-Pattern: Vague TC)** | Steps rất tóm tắt: `"3. Kiểm tra các chức năng tại Dashboard"` — hoàn toàn không thể dùng làm checklist được. Expected chỉ có `(i)`, và phần (ii) UI không đề xuất verify gì cả trên màn Home (Dashboard). | 🟡 Low | Cụ thể hóa Step 3 thành kiểm tra các widget xuất hiện đúng (Phí định kỳ, Menu Tham số...). Bổ sung `(ii) UI: Dashboard hiển thị đúng các widget theo thiết kế (image2.png).` |
+
+---
+
+## 5. KẾT LUẬN & ACTION PLAN
+
+**Ưu điểm nổi bật:**
+- Bộ TC có tư duy Security rất tốt: Phủ được case Lockout, khóa Inactive, Concurrent Session và toàn bộ luồng EntraID.
+- Hoàn toàn không có dấu vết Maker/Checker — rất chuyên nghiệp.
+
+**Điểm trừ cốt lõi cần khắc phục:**
+1. **5 TC thiếu Layer Expected Result** → Bổ sung đầy đủ (iii)(iv).
+2. **2 TC Anti-Pattern** (giả định BR không có URD) → Xóa số liệu cụ thể, thêm Note Assumption.
+3. **1 TC vague** (FLOW-011) → Cụ thể hóa Steps và UI Verification.
+4. **1 TC Mockup Mismatch** (HAPPY-007 "Ghi nhớ") → Escalate cho BA để chốt thiết kế.
+
+**📝 Tổng số TC cần sửa: 9/14** (64%)

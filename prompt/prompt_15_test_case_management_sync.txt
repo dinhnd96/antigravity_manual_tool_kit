@@ -6,15 +6,16 @@ Các file Test Case (TC) thường bị phân mảnh (nằm trong các file nhá
 
 # INSTRUCTIONS & WORKFLOW TỪ CỐT LÕI
 1. **LỰA CHỌN ENGINE XỬ LÝ:** 
-   - TUYỆT ĐỐI KHÔNG DÙNG `pandas` thuần để `to_excel()` lưu đè lên file đang có chứa Dashboard/Borders. Chỉ được dùng `openpyxl` làm engine chính (`openpyxl.load_workbook`) để can thiệp cell-by-cell. Điều này nhằm BẢO TOÀN toàn bộ các công thức toán học (`=COUNTA`, `=COUNTIF`) và màu sắc.
+   - Vui lòng hạn chế dùng `pandas` thuần để `to_excel()` lưu đè lên file đang có chứa Dashboard/Borders. Ưu tiên dùng `openpyxl` làm engine chính (`openpyxl.load_workbook`) để can thiệp cell-by-cell. Điều này nhằm bảo toàn toàn bộ các công thức toán học và màu sắc sẵn có.
    
 2. **ĐỊNH DẠNG (FORMATTING):**
-   - Khi chỉnh sửa Master File, mọi ô chứa nội dung phải có Viền mỏng (`Thin Border`).
-   - Các cột nhiều chữ (`Title`, `Precondition`, `Steps`, `Expected Result`) phải được Set Width (rộng từ 30-45), bật `Alignment(wrap_text=True, vertical='top')`.
+   - Khi chỉnh sửa Master File, mọi ô chứa nội dung nên có Viền mỏng (`Thin Border`).
+   - Các cột nhiều chữ (`Title`, `Precondition`, `Steps`, `Expected Result`) cần được Set Width (rộng từ 30-45), bật `Alignment(wrap_text=True, vertical='top')`.
 
-3. **CLEAN-UP LOGIC (ANTI-PATTERN):** 
-   - Nếu kịch bản là Kiểm tra chức năng **"Xem Chi Tiết" (View/Read-only)**: Loại bỏ các Step yêu cầu *"Nhấn Xác nhận/Hoàn tất"* hoặc *"Kiểm tra trạng thái bản ghi chờ duyệt"*. Chỉ giữ lại Step thao tác bấm nút Xem. Sửa Expected Result thành *"Form hiển thị dữ liệu read-only. Không làm thay đổi Database."*
-   - Nếu kịch bản là Kiểm tra Nút **"Đóng/Hủy"**: Gọt sạch các Step sai ngữ cảnh, đổi Expected Result thành *"Đóng form, quay về dữ liệu màn trước. Không sinh bản ghi Nháp/Chờ duyệt."*
+3. **CLEAN-UP LOGIC VÀ ĐỒNG BỘ:** 
+   - **Tách riêng Test Case:** Đảm bảo mỗi Test Case chỉ bao gồm 1 kịch bản duy nhất; tránh việc gộp nhiều kịch bản, nhiều trạng thái vào một Test Case để tránh bỏ sót case khi kiểm thử.
+   - Nếu kịch bản là Kiểm tra chức năng **"Xem Chi Tiết" (View/Read-only)**: Lược bớt các Step chưa phù hợp như *"Nhấn Xác nhận/Hoàn tất"*. Hướng Expected Result thành *"Form hiển thị dữ liệu read-only, trạng thái bản ghi không thay đổi."*
+   - Nếu kịch bản là Kiểm tra Nút **"Đóng/Hủy"**: Điều chỉnh các Step phù hợp, trạng thái bản ghi dữ liệu trở về màn trước đó.
    
 4. **PHƯƠNG THỨC ĐỒNG BỘ HAI CHIỀU (TWO-WAY SYNC):**
    - Sync-in (Gộp Master): Đọc danh sách TC_ID từ các file nhánh (Module), ánh xạ đè dữ liệu siêu chuẩn lên sheet tương ứng của Master.

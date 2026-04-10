@@ -1,0 +1,816 @@
+US23 – Là người dùng, tôi muốn đăng xuất hệ thống 
+Yêu cầu nghiệp vụ
+Navigation: Khi muốn đăng xuất hệ thống, tại thông tin user ở góc trái màn hình, người dùng chọn “Đăng xuất”
+Hệ thống có 3 trường hợp đăng xuất khỏi hệ thống gồm: 
+Người dùng chọn Đăng xuất, hệ thống hiển thị Popup Xác nhận,
+Người dùng nhấn vào “Xác nhận”  đăng xuất người dùng đó khỏi, hệ thống đăng xuất người dùng đó khỏi phiên làm việc. Sau khi đăng xuất, hệ thống hiển thị màn hình Đăng nhập
+Người dùng nhấn vào “Huỷ”, hệ thống không đăng xuất, đóng popup “Xác nhận đăng xuất”
+Tự động đăng xuất: 
+Khoảng thời gian hệ thống sẽ tự động đăng xuất nếu người dùng không có thao tác sau n phút: Được quy định tham số SESSION_TIMEOUT tại Quản trị hệ thống >> Quản lý tham số mặc định
+Hết thời gian session, hệ thống tự động đăng xuất người dùng và hiển thị popup thông báo “Phiên đăng nhập của bạn hết hạn. Vui lòng đăng nhập lại”. Người dùng chọn button “Đăng nhập”, hệ thống hiển thị màn hình Đăng nhập. Chi tiết về luồng Đăng nhập, xem tại US22 – Là người dùng, tôi muốn đăng nhập vào hệ thống
+Đăng xuất khi đăng nhập phiên làm việc mới hoặc thiết bị mới: Hệ thống đăng xuất người dùng khỏi hệ thống ở phiên làm việc trước đó. Sau khi đăng xuất, hệ thống hiển thị màn hình Đăng nhập
+Các tác vụ đang thực hiện không được lưu khi người dùng Đăng xuất
+Lưu đồ và diễn giải
+Lưu đồ
+
+Diễn giải
+
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Đăng xuất
+Chọn button “Đăng xuất”
+Người dùng
+2
+
+Hiển thị Popup Xác nhận đăng xuất hệ thống
+Frontend
+3
+
+Người dùng lựa chọn: 
++ Xác nhận => Bước 3.1
++ Huỷ => Bước 3.2
+Người dùng
+3.1.
+
+Xác nhận
+Người dùng
+4
+
+Gửi yêu cầu đăng xuất
+Frontend
+5
+
+Nhận yêu cầu và xử lý đăng xuất
+Backend
+6
+
+Kết thúc phiên làm việc và hiển thị màn hình đăng nhập => Kết thúc
+Frontend
+3.2
+
+Huỷ
+Người dùng
+7
+
+Đóng popup Xác nhận đăng xuất hệ thống => Kết thúc
+Frontend
+
+Giao diện
+Màn hình
+
+
+Popup Xác nhận đăng xuất hệ thống (đợi FE để bổ sung)
+
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+
+
+
+
+
+
+NÚT CHỨC NĂNG
+1
+Đăng xuất
+
+Button
+
+Người dùng nhấn vào button “Đăng xuất”, hệ thống hiển thị Popup Xác nhận đăng xuất hệ thống
+Popup Xác nhận đăng xuất hệ thống
+2
+Xác nhận
+
+Button
+
+Người dùng nhấn vào button “Xác nhận”, hệ thống ghi nhận và xử lý đăng xuất
+3
+Huỷ
+
+Button
+
+Người dùng nhấn vào button “Huỷ”, hệ thống đóng popup Xác nhận đăng xuất hệ thống
+
+US24 – Là người dùng, tôi muốn  hệ thống
+Yêu cầu nghiệp vụ
+
+Lưu đồ và diễn giải
+Lưu đồ
+Diễn giải
+Giao diện
+Màn hình
+Mô tả chi tiết các trường
+
+US25 – Là người dùng, tôi muốn hệ thống
+Yêu cầu nghiệp vụ
+
+Lưu đồ và diễn giải
+Lưu đồ
+Diễn giải
+Giao diện
+Màn hình
+Mô tả chi tiết các trường
+
+US26 – Là người dùng, tôi muốn hệ thống
+Yêu cầu nghiệp vụ
+
+Lưu đồ và diễn giải
+
+Lưu đồ
+Diễn giải
+
+Giao diện
+Màn hình
+Mô tả chi tiết các trường
+US27 - Là người quản trị, tôi muốn thiết lập quy tắc điều kiện tính phí
+Yêu cầu nghiệp vụ
+
+Navigation: Khi muốn xem/ thêm mới/ chỉnh sửa thông tin điều kiện tính phí, người quản trị truy cập: Quản trị hệ thống >> Danh mục điều kiện tính phí  
+Màn hình Danh mục điều kiện tính phí gồm: Button Lọc nâng cao, Button Thêm mới, Button Tải xuống, Lưới danh sách điều kiện tính phí.
+Lưới danh sách điều kiện tính phí: Hiển thị tất cả các điều kiện tính phí đang có trên hệ thống, gồm các trường: 
+Mã điều kiện: Hiển thị mã điều kiện với chữ viết hoa. Người quản trị nhấn vào mã điều kiện, hệ thống hiển thị thông tin chi tiết của mã điều kiện đó
+Mapping note msg: Hiển thị tên field API mapping
+Mô tả: Hiển thị mô tả của điều kiện tính phí
+Trạng thái: hiển trị trạng thái gồm: Hoạt động/Không hoạt động
+Kiểu dữ liệu: hiển thị kiểu dữ liệu: Number/String/Date/Time
+Nguồn dữ liệu: Hiển thị nguồn dữ liệu từ API/ETL
+Ghi chú: Hiển thị ghi chú
+Ngày tạo: Hiển thị ngày tạo điều kiện tính phí, hh:mm:ss – dd/mm/yyyy
+Người tạo: Hiển thị username của người tạo
+Ngày sửa: Hiển thị ngày sửa điều kiện tính phí, hh:mm:ss – dd/mm/yyyy. Nếu không có thông tin, hệ thống hiển thị “-”
+Người sửa: Hiển thị username của người sửa. Nếu không có thông tin, hệ thống hiển thị “-”
+Lọc nâng cao: Người quản trị nhấn vào Lọc nâng cao, hệ thống hiển thị màn hình Lọc điều kiện tính phí gồm có:
+Mã điều kiện: Người quản trị nhập mã điều kiện, hệ thống xử lý viết hoa các kí tự khi tìm kiếm
+Nguồn dữ liệu: Người quản trị chọn nguồn dữ liệu từ ETL/ API
+Trạng thái: Người quản trị chọn trạng thái: Hoạt động/Không hoạt động
+Mapping note msg: Người quản trị nhập tên field mapping note msg (Tên field trong API). Trường này hiển thị khi người quản trị chọn Nguồn dữ liệu = API
+Sau khi lọc theo các điều kiện, hệ thống trả kết quả, hiển thị các điều kiện tính phí phù hợp với điều kiện lọc theo Quy tắc chung của hệ thống.
+Tải xuống: Người quản trị có thể tải xuống file danh sách các điều kiện tính phí theo dữ liệu kết quả tìm kiếm đang hiển thị trên màn hình và theo quy tắc tải xuống tại mục Quy tắc chung của hệ thống.
+Xem chi tiết 1 điều kiện tính phí: Người quản trị có thể xem chi tiết 1 điều kiện tính phí, các trường thông tin hiển thị như ở màn tạo/chỉnh sửa theo Quy tắc chung của hệ thống.
+Khi người quản trị muốn Thêm mới điền kiện tính phí: Người quản trị nhấn vào button “Thêm mới”, hệ thống hiển thị màn hình thêm mới gồm các trường thông tin: 
+Mã điều kiện: Người quản trị nhập mã điều kiện, hệ thống tự động hiển thị các kí tự viết hoa. Mã điều kiện là duy nhất và bắt buộc nhập. 
+Tên điều kiện: Người quản trị nhập tên điều kiện và bắt buộc nhập. 
+Nguồn dữ liệu: Người quản trị chọn nguồn dữ liệu từ API/ ETL, là field bắt buộc nhập.
+Chọn Nguồn dữ liệu = API => Hệ thống hiển thị field Mapping note Msg. Người quản trị nhập tên field mapping dữ liệu trong API, field này sẽ được đem vào làm nguồn dữ liệu tính phí.
+Chọn Nguồn dữ liệu = ETL => Hệ thống hiển thị field Bảng dữ liệu, field “Trường dữ liệu”. Người quản trị chọn Bảng: Khách hàng/Tài khoản/Thẻ, sau đó người quản trị chọn field Trường dữ liệu. Giá trị của Field này theo khách hàng cụ thể sẽ được đem vào làm nguồn dữ liệu tính phí.
+Kiểu dữ liệu: Người quản trị chọn kiểu dữ liệu từ danh sách: Number/String/Date/Time. Đây là field bắt buộc để làm giảm sai sót trong quá trình khai báo điều kiện tính phí/điều kiện áp dụng ưu đãi.
+Ghi chú: Người quản trị nhập nội dung ghi chú 
+Trạng thái: default = Hoạt động, người quản trị có thể chọn trạng thái: Hoạt động/Không hoạt động. 
+Button “Xác nhận”: Người quản trị nhấn vào xác nhận, hệ thống check các điều kiện 
+Mã điều kiện trùng, hiển thị thông báo: Mã điều kiện không được trùng
+Button “Đóng”: Người quản trị nhấn vào “Đóng”, hệ thống đóng màn hình thêm mới
+Khi người quản trị muốn chỉnh sửa 1 điều kiện tính phí, nhấn vào button “Chỉnh sửa” tại hành động trên lưới danh sách điều kiện tính phí => Hệ thống hiển thị màn chỉnh sửa điều kiện tính phí. 
+Khi chỉnh sửa trạng thái Điều kiện tính phí: 
+Nếu điều kiện tính phí đang gán với 1 CTƯĐ (trạng thái = Chưa có hiệu lực/Đang hiệu lực)/Code phí (trạng thái = Hoạt động/Ngưng hoạt động/Chờ gán) thì không cho phép sửa trạng thái. Người dùng nhấn “Xác nhận”, hệ thống báo “Không thể sửa trạng thái điều kiện tính phí. Điều kiện tính phí đang sử dụng trong hệ thống”
+Nếu điều kiện tính phí chưa gán vs CTƯĐ/Code phí nào, hoặc gán CTƯĐ có trạng thái = Hết hiệu lực/Code phí có trạng thái = Huỷ thì người dùng có thể sửa trạng thái điều kiện tính phí
+Sửa các thông tin khác: hệ thống kiểm tra tương tự như khi thêm mới điều kiện tính phí.
+Danh sách điều kiện tính phí được phép khai báo tại các màn thêm mới/chỉnh sửa code phí/ CTƯĐ là các điều kiện tính phí có trạng thái = Hoạt động.
+Lưu đồ và diễn giải
+Lưu đồ
+
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Danh mục điều kiện tính phí
+Chọn Danh mục điều kiện tính phí
+Người quản trị
+2
+
+Gửi yêu cầu xử lý
+Frontend
+3
+
+Nhận yêu cầu và xử lý logic
+Backend
+4
+
+Hiển thị màn hình Danh mục điều kiện tính phí
+Frontend
+5
+
+Lựa chọn: 
++ Lọc nâng cao => Bước 5.1
++ Thêm mới => Bước 5.2
++ Chỉnh sửa => Bước 5.3
++ Tải xuống => Bước 5.4
+Người quản trị
+5.1
+
+Lọc nâng cao
+Người quản trị
+6
+
+Hiển thị màn hình Lọc điều kiện tính phí
+Frontend
+7
+
+Nhập/chọn các điều kiện lọc
+Người quản trị
+8
+
+Lựa chọn: 
++ Xoá lọc => Bước 8.1
++ Áp dụng => Bước 8.2
+Người quản trị
+8.1
+
+Xoá lọc
+Người quản trị
+9
+
+Đóng màn hình Lọc điều kiện tính phí => Kết thúc
+Frontend
+8.2
+
+Áp dụng
+Người quản trị
+10
+
+Hiển thị danh sách điều kiện tính phí theo điều kiện lọc => Kết thúc
+Frontend
+5.2
+
+Thêm mới
+Người quản trị
+11
+
+Hiển thị màn hình thêm mới
+Frontend
+12
+
+Nhập/chọn các trường và nhấn xác nhận
+Người quản trị
+13
+
+Check các trường bắt buộc và business rule
++ Valid => Tiếp bước 14
++ Invalid => Quay lại bước 12
+Frontend
+14
+
+Nhận yêu cầu và xử lý
+Backend
+15
+
+Hiển thị bản ghi mới trên lưới danh sách
+Frontend
+5.3
+
+Chỉnh sửa
+Người quản trị
+16
+
+Hiển thị màn hình chỉnh sửa 
+=> Quay lại bước 12
+Frontend
+5.4
+
+Tải xuống
+Người quản trị
+17
+
+Tham chiếu quy tắc tải xuống tại mục Quy tắc chung
+Frontend
+
+Giao diện
+Giao diện
+Màn hình danh mục điều kiện tính phí
+
+Màn hình lọc điều kiện tính phí
+
+Màn hình thêm mới điều kiện tính phí
+
+
+Màn hình chỉnh sửa điều kiện tính phí
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+Màn hình danh sách điều kiện tính phí
+NÚT CHỨC NĂNG
+1
+Lọc nâng cao
+
+Button
+
+Người quản trị nhấn vào button Lọc nâng cao, hệ thống hiển thị Màn hình Lọc điều kiện tính phí
+Các điều kiện lọc: 
++ Mã điều kiện: Người quản trị nhập mã điều kiện
++ Nguồn dữ liệu: API/ETL. Nếu người quản trị chọn nguồn dữ liệu = API => hiển thị field Mapping note msg. Nếu người dùng chọn nguồn dữ liệu = ETL => Hiển thị field Bảng dữ liệu, Trường dữ liệu
++ Mapping note msg: Người quản trị nhập field mapping
++ Bảng dữ liệu: Người quản trị chọn ETL Khách hàng/ETL Thẻ/ ETL Tài khoản
++ Trường dữ liệu: Người quản trị chọn trường dữ liệu 
++ Trạng thái: Người quản trị chọn trạng thái: Hoạt động/Không hoạt động
+2
+Thêm mới
+
+Button
+
+Người quản trị nhấn vào Button Thêm mới, hệ thống hiển thị màn hình thêm mới (refer màn hình Thêm mới)
+3
+Tải xuống
+
+Button
+
+Tải xuống file danh sách điều kiện tính phí 
+CÁC TRƯỜNG THÔNG TIN
+1
+Mã điều kiện
+
+Text
+
+Hiển thị mã điều kiện, luôn là chữ viết hoa
+2
+Mapping note msg
+
+Text
+
+Hiển thị field mapping note msg của api
+3
+Bảng dữ liệu
+
+Text
+
+Hiển thị bảng dữ liệu: Khách hàng/ Tài khoản/Thẻ
+4
+Mô tả
+
+Text
+
+Hiển thị mô tả 
+5
+Trạng thái
+
+Text
+
+Hiển thị trạng thái của điều kiện tính phí
+6
+Kiểu dữ liệu
+
+Text
+
+Hiển thị kiểu dữ liệu
+7
+Nguồn dữ liệu
+
+Text
+
+Hiển thị nguồn dữ liệu API/ETL
+8
+Ghi chú
+
+Text
+
+Hiển thị ghi chú 
+9
+Ngày tạo
+
+Datetime
+
++ Hiển thị ngày tạo hh:mm:ss – dd/mm/yyyy
+10
+Người tạo
+
+Text
+
+Hiển thị username của người tạo
+11
+Ngày sửa
+
+Datetime
+
++ Hiển thị ngày sửa hh:mm:ss – dd/mm/yyyy
+12
+Người sửa
+
+Text
+
+Hiển thị username của người sửa
+Màn hình Thêm mới/ Chỉnh sửa điều kiện tính phí
+NÚT CHỨC NĂNG
+1
+Xác nhận
+
+Button
+
+Người quản trị nhấn vào xác nhận để thêm mới/ chỉnh sửa 1 điều kiện tính phí
+2
+Icon “x”
+
+Button
+
+Người quản trị nhấn vào icon “x” để tắt màn thêm mới
+CÁC TRƯỜNG THÔNG TIN
+1
+Mã điều kiện
+★
+Text box
+
+Người quản trị nhập mã điều kiện, khi nhập thì hệ thống xử lý để luôn là chữ viết hoa
+2
+Tên điều kiện
+★
+Text box
+
+Người quản trị nhập tên điều kiện
+3
+Nguồn dữ liệu
+★
+Dropdownlist
+
+Người quản trị chọn nguồn dữ liệu API/ETL
++ Nếu nguồn dữ liệu = API => hệ thống hiển thị field Mapping note msg
++ Nếu nguồn dữ liệu = ETL => Hệ thống hiển thị field Bảng dữ liệu và Trường dữ liệu
+4
+Mapping note msg
+◎
+Text box
+Bắt buộc nhập khi chọn nguồn dữ liệu = API
+Người quản trị nhập field Mapping note msf
+5
+Bảng dữ liệu
+◎
+Dropdownlist
+Bắt buộc nhập khi chọn nguồn dữ liệu = ETL
+Người quản trị chọn bảng dữ liệu: Khách hàng/ Tài khoản/Thẻ
+
+Trường dữ liệu
+◎
+Combobox
+Bắt buộc nhập khi chọn nguồn dữ liệu = ETL
+Người quản trị chọn trường dữ liệu 
+6
+Mô tả
+◎
+Textbox
+
+Người quản trị nhập mô tả
+7
+Trạng thái
+★
+Dropdownlist
+
+- Người quản trị chọn trạng thái: Hoạt động/Không hoạt động
+- Khi chỉnh sửa điều kiện tính phí: 
++ Nếu điều kiện tính phí đang gán với 1 CTƯĐ (trạng thái = Chưa có hiệu lực/Đang hiệu lực)/Code phí (trạng thái = Hoạt động/Ngưng hoạt động/Chờ gán) thì không cho phép sửa trạng thái
++ Nếu điều kiện tính phí chưa gán vs CTƯĐ/Code phí nào, hoặc gán CTƯĐ có trạng thái = Hết hiệu lực/Code phí có trạng thái = Huỷ thì người quản trị có thể sửa trạng thái điều kiện tính phí
+8
+Kiểu dữ liệu
+★
+Dropdownlist
+
+Người quản trị chọn kiểu dữ liệu: Number/String/Date/Time
+
+
+
+Phụ lục 
+Quy tắc chung
+Các loại định dạng trường trong hệ thống
+Định dạng combobox
+
+
+Người dùng có thể chọn giá trị trực tiếp trong danh sách hoặc có thể gõ text vào trường. Khi gõ text, hệ thống sẽ tìm kiếm dữ liệu tồn tại theo giá trị người nhập.
+Định dạng dropdown list
+
+Với định dạng này người dùng nhấn vào thanh bar, hệ thống hiển thị ra danh sách các lựa chọn, và người dùng chỉ được chọn 1 giá trị.
+Định dạng number
+
+
+Với định dạng này, người dùng chỉ được nhập số. Sau khi nhập xong sẽ hiển thị số người dùng đã nhập như sau: phân cách hàng nghìn bởi dấu phẩy, hàng thập phân bởi dấu chấm, hàng thập phân lấy 2 chữ số. Note: riêng với VND, JPY không có hàng thập phân
+Định dạng multiple select dropdown 
+
+
+Người dùng có thể chọn 1 hoặc nhiều giá trị trực tiếp trong danh sách hoặc có thể gõ text vào trường. Khi gõ text, hệ thống sẽ tìm kiếm dữ liệu tồn tại theo giá trị người nhập.
+Định dạng Date
+
+Hệ thống mặc định định dạng Date là dd/mm/yyyy, người dùng có thể trực tiếp giá trị trên trường hoặc chọn ngày ở bảng lịch. Trường hợp tìm kiếm theo khoảng thời gian (Từ ngày – Đến ngày) thì Từ ngày điền vào được hiểu là dd/mm/yyyy 00:00:00.000 và Đến ngày điền vào được hiểu là dd/mm/yyyy 23:59:59.999)
+
+Định dạng Text
+
+Với định dạng này, người dùng nhập giá trị text vào trường, độ dài tối đa của loại trường này sẽ được mô tả ở cột “Ràng buộc” tại bảng mô tả chi tiết các trường của từng chức năng. Nếu trường text nào không được mô tả độ dài tối đa thì được hiểu mặc định độ dài tối đa như sau: 
+Loại trường
+Độ dài tối đa
+Mã 
+50 kí tự
+Tên
+50 kí tự
+Diễn giải/Ghi chú/Nội dung
+300 kí tự
+
+Tìm kiếm
+Mô tả chức năng
+Người dùng có thể tìm kiếm bằng cách nhập mã hoặc tên (gần đúng) vào thanh search bar để tìm kiếm nhanh.
+Màn hình tham khảo
+Màn hình khi chưa nhập text tìm kiếm: 
+
+Màn hình sau khi nhập text và tìm kiếm: 
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+1
+Tìm kiếm 
+
+Search bar
+
++ Người dùng nhấn vào tìm kiếm, hệ thống ghi nhận và tìm kiếm 
++ Tìm kiếm theo các trường cụ thể, theo điều kiện and hay or sẽ được mô tả tại mục tìm kiếm của từng chức năng tương ứng
+Màn hình khi chưa nhập text tìm kiếm
+2
++ Các trường trong danh sách: Hiển thị danh sách và định dạng tương ứng được mô tả chi tiết tại mục tìm kiếm từng chức năng đó
+Màn hình sau khi áp dụng các điều kiện tìm kiếm
+3
++ Sau khi tìm kiếm, hệ thống hiển thị các record có text người dùng đã nhập
+Mô tả cách thức xử lý  
+Sau khi người dùng nhập text tại search bar, hệ thống tìm kiếm các bản ghi có mã/tên gần đúng với thông tin người dùng dùng đã nhập và hiển thị kết quả trên lưới chức năng.
+
+Lọc nâng cao
+Mô tả chức năng
+Người dùng có thể tìm kiếm bằng cách chọn Lọc nâng cao để nhập các điều kiện tìm kiếm trên màn hình, nhấn “Áp dụng” để tìm kiếm theo các điều kiện lọc.
+Màn hình tham khảo
+
+Người dùng nhấn vào button Lọc nâng cao, hệ thống hiển thị màn hình:
+      
+
+
+Màn hình sau khi áp dụng các điều kiện tìm kiếm: 
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+1
+Lọc nâng cao
+
+Button
+
++ Người dùng click vào button Lọc nâng cao, hệ thống hiển thị màn hình “Lọc nâng cao”+ Người dùng áp dụng Lọc nâng cao rồi, hệ thống disbale search bar tìm kiếm nhanh
+Màn hình “Lọc nâng cao”
+2
++ Các trường điều kiện tìm kiếm: Hiển thị danh sách điều kiện tìm kiếm với định dạng tương ứng được mô tả chi tiết tại mục tìm kiếm từng chức năng 
++ Nếu nhập/ chọn các điều kiện tìm kiếm, hệ thống thực hiện tìm kiếm theo các dữ liệu thoả mãn đồng thời các điều kiện đã nhập
++ Nếu không nhập điều kiện tìm kiếm, người dùng nhấn vào áp dụng, hệ thống hiển thị toàn bộ thông tin tồn tại trong hệ thống theo mô tả các trường trên lưới dữ liệu của chức năng đó
+3
+Xoá lọc
+
+Button
+
+Người dùng nhấn vào button Xoá lọc để bỏ các điều kiện tìm kiếm đã nhập
+4
+Áp dụng
+
+Button
+
+Người dùng nhấn vào button Áp dụng để tìm kiếm theo các điều kiện người dùng đã nhập theo từng chức năng
+Màn hình sau khi áp dụng các điều kiện tìm kiếm
+5
+x
+
+Button icon
+
++ Người dùng nhấn vào “x” ở các điều kiện lọc ở màn hình kết quả tìm kiếm để loại bỏ điều kiện tìm kiếm đó
++ Sau khi loại bỏ 1 điều kiện tìm kiếm ở màn hình kết quả, người dùng nhấn vào button Lọc nâng cao, màn hình Lọc nâng cao hiển thị cũng loại bỏ điều kiện đó
++ Người dùng loại bỏ toàn bộ điều kiện lọc thì hệ thống hiển thị toàn bộ thông tin tồn tại trong hệ thống theo mô tả các trường trên lưới dữ liệu của chức năng đó, các button và search bar về tìm kiếm có thể thao tác được
+6
+Các field trên lưới: hiển thị danh sách và định dạng các field được mô tả tại chức năng đó
+
+Mô tả cách thức xử lý  
+Người dùng chỉ được lọc (1) Tìm kiếm nhanh tại search bar hoặc (2) Tìm kiếm theo button “Lọc nâng cao”.  Khi người dùng nhập text và ô tìm kiếm nhanh, hệ thống disable nút “Lọc nâng cao” và ngược lại.
+“Lọc nâng cao”: Người dùng nhấn vào button “Lọc nâng cao”, hiển thị màn hình Lọc nâng cao, người dùng nhập các điều kiện tìm kiếm với các giá trị tương ứng, người dùng click vào nút “Áp dụng”.
+Nếu chưa nhập đủ các điều kiện tìm kiếm bắt buộc (nếu có), hệ thống hiển thị thông báo các trường chưa nhập “Trường này bắt buộc” ngày dưới ô nhập bị thiếu.
+Nếu dữ liệu nhập hợp lệ: Hệ thống trả về kết quả thoả mãn các điều kiện tìm kiếm đã nhập.
+Quy tắc tìm kiếm chung: 
+Nội dung
+Quy tắc
+Kết hợp điều kiện
+AND giữa các điều kiện (Áp dụng cho lọc nâng cao)
+Hoa/thường
+Không phân biệt
+Dấu tiếng Việt
+Bỏ dấu khi tìm gần đúng tại các ô nhập text
+Trim khoảng trắng
+Tự động trim trước khi gửi backend
+Điều kiện rỗng
+Không đưa vào query
+
+Tra cứu 
+Mô tả chức năng
+Người dùng có thể tìm kiếm bằng cách nhập các điều kiện tìm kiếm trên màn hình, nhấn “Tra cứu” để tìm kiếm theo các điều kiện.
+Màn hình tham khảo
+Màn hình khi chưa nhập các điều kiện: 
+
+Màn hình sau khi áp dụng các điều kiện tìm kiếm: 
+
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+1
+Tra cứu
+
+Button
+
+Người dùng nhấn vào tra cứu, hệ thống ghi nhận và tìm kiếm theo các điều kiện đã nhập
+2
+Xoá tra cứu
+
+Button
+
+Người dùng nhấn vào button Xoá tra cứu, hệ thống bỏ các điều kiện tìm kiếm, danh sách tìm kiếm hiển thị theo mặc định
+3
+Vùng nhập điều kiện tra cứu:
++ Hiển thị danh sách điều kiện tìm kiếm với định dạng tương ứng được mô tả chi tiết tại mục tìm kiếm của từng chức năng
++ Nếu nhập điều kiện tìm kiếm, hệ thống thực hiện tìm kiếm các dữ liệu thoả mãn đồng thời các điều kiện đã nhập
++ Nếu không nhập điều kiện tìm kiếm, hệ thống mặc định không hiển thị danh sách
+Màn hình sau khi áp dụng các điều kiện tìm kiếm
+4
+Danh sách lưới: Hiển thị kết quả tìm dạng danh sách với các trường và định dạng được mô tả tại mục tìm kiếm của chức năng đó
+
+Mô tả cách thức xử lý
+Người dùng nhập các điều kiện tìm kiếm với các giá trị tương ứng sau đó click vào nút “Tìm kiếm”:
+Nếu chưa nhập đủ các điều kiện tìm kiếm bắt buộc (nếu có), hệ thống hiển thị thông báo các trường chưa nhập “Trường này bắt buộc” ngày dưới ô nhập bị thiếu
+Nếu dữ liệu nhập hợp lệ: Hệ thống trả về kết quả thoả mãn các điều kiện tìm kiếm đã nhập
+Quy tắc tìm kiếm chung: 
+Nội dung
+Quy tắc
+Kết hợp điều kiện
+AND giữa các điều kiện
+Hoa/thường
+Không phân biệt
+Dấu tiếng Việt
+Bỏ dấu khi tìm gần đúng tại các ô nhập text
+Trim khoảng trắng
+Tự động trim trước khi gửi backend
+Điều kiện rỗng
+Không đưa vào query
+
+Tải xuống
+Mô tả chức năng
+Người dùng có thể tải xuống dữ liệu trên lưới ra dạng excel, đối với các định dạng file khác sẽ được mô tả tại chức năng tương ứng
+Màn hình tham khảo
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+1
+Tải xuống
+
+Button
+
+Người dùng nhấn vào button tải xuống, cho phép thực hiện tải xuống dữ liệu
+
+Mô tả cách thức xử lý
+Button “Tải xuống” hiển thị khi trên màn hình có danh sách lưới dữ liệu
+Người dùng nhấn vào button “Tải xuống” trên lưới của chức năng đang mở, hệ thống tải xuống file danh sách dữ liệu theo các điều kiện tìm kiếm đã nhập
+Định dạng file tải xuống: mặc định tệp dữ liệu tải xuống là excel, đối với dạng file khác sẽ được mô tả tại mục tải xuống của chức năng đó 
+Tên file theo format: Tên chức năng - yyyymmddhhmmss
+Template: được đính kèm tại mục tải xuống của chức năng đó
+Phân trang
+Mô tả chức năng
+Người dùng có thể xem danh sách dữ liệu trên các trang bằng cách nhấn vào các số trang, trang tiếp theo/trang trước đó.
+Màn hình tham khảo
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+1
+Số trang
+
+Button
+
+Người dùng nhấn vào button số trang để xem danh sách dữ liệu 
+2
+Trang tiếp theo 
+
+
+Button
+
++ Người dùng nhấn vào button “Trang tiếp theo” để xem danh sách dữ liệu trang tiếp theo
++ Nếu là trang cuối cùng thì người dùng không thể thao được button này, button “Trang tiếp theo” sẽ diable
+3
+Trang trước đó
+
+Button
+
++ Người dùng nhấn vào button “Trang trước đó” để xem danh sách dữ liệu trang tiếp theo
++ Nếu là trang đầu thì người dùng không thể thao được button này, button “Trang trước đó” sẽ disable
+4
+Số bản ghi trên trang
+
+
+
+Hiển thị số bản ghi đang hiển thị trên một trang so với tổng sổ bản ghi
+Ví dụ: 1-50 của 295 bản ghi
+
+Mô tả cách thức xử lý
+Hệ thống hiển thị mặc định là 50 bản ghi trên 1 trang đối với trường hợp có số bản ghi khác thì sẽ được mô tả cụ thể tại mục phân trang của chức năng đó
+Người dùng ở trang nào, hệ thống hiển thị tương ứng số bản ghi lần lượt ở trang đó
+
+Upload file
+Mô tả chức năng
+Người dùng có thể upload file excel lên thay vì thêm từng dòng bản ghi trên hệ thống
+Màn hình tham khảo
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+1
+Upload file
+
+Button
+
+Người dùng nhấn vào button tải xuống, cho phép thực hiện tải xuống dữ liệu
+2
+Danh sách bản ghi: Sau khi upload file, hệ thống xử lý các điều kiện, dữ liệu phù hợp sẽ được thông báo upload file thành công, màn hình hiển thị danh sách các bản ghi đã được upload
+
+Mô tả cách thức xử lý  
+Định dạng file được upload: Excel
+Dung lượng file: theo tham số hệ thống
+Người dùng nhấn vào button Upload file để lựa file định dạng excel để upload. Sau khi upload, hệ thống validate định dạng, dung lượng file và dữ liệu trong file, cụ thể về các rule validate dữ liệu sẽ được mô tả tại mục upload của chức năng đó: 
+Nếu định dạng,dung lượng file không hợp lệ thì hệ thống thông báo “ Định dạng hoặc dung lượng không hợp lệ”. Người dùng chọn lại file để upload
+Nếu dữ liệu hợp lệ: Hệ thống hiển thị danh sách các bản ghi
+Nếu dữ liệu không hợp lệ: Hệ thống thông báo “Dữ liệu của bạn khôn hợp lệ” hiển thị bản ghi, đối với bản ghi không hợp lệ, hệ thống highlight bản ghi đó
+Lịch sử tác động
+Mô tả chức năng
+Người dùng có thể xem lịch sử tác động tới các dữ liệu Code phí, Biểu phí và Chương trình ưu đãi tại các màn hình xem tại các chức năng quản lý tương ứng. Tại màn hình xem Code phí/Biểu phí/Chương trình ưu đãi, khi người dùng nhấn vào “Lịch sử tác động”, hệ thống hiển thị Màn hình liệt kê lịch sử tác động theo thứ tự thời gian duyệt từ gần nhất tới xa nhất và người dùng có thể click vào bản ghi tương ứng để xem thông tin chi tiết sau khi tác động.
+Màn hình tham khảo
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+1
+Ngày cập nhật
+
+Date time
+
++ Hiển thị thời điểm hành động (Thêm mới/Chỉnh sửa) được phê duyệt thành công
++ Format: dd/mm/yyyy
++ Người dùng nhấn vào hyperlink  “Ngày cập nhật”, hệ thống hiển thị thông tin chi tiết của bản ghi ở phiên bản trước khi chỉnh sửa (bản lịch sử)
+2
+Tác động
+
+Text
+
+Hiển thị các hành động của người dùng đến chức năng: Thêm mới, Chỉnh sửa
+3
+Người cập nhật
+
+Text
+
+Hiển thị người tác động đến chức năng như: Thêm mới/Chỉnh sửa
+4
+Người phê duyệt
+
+Text
+
+Hiển thị người phê duyệt cuối của chức năng
+5
+Icon “x”
+
+-
+
+Người dùng nhấn vào icon “x” để tắt Popup
+

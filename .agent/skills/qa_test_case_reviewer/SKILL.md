@@ -26,7 +26,7 @@ Khi được yêu cầu review bộ Test Case, AI cần thực hiện rà soát 
 
 4.  **Dữ Liệu & Tiền Điều Kiện (Data & Role Consistency):**
     *   Kiểm tra Ma trận Phân quyền: Đảm bảo vai trò người dùng (Maker/Checker) trong TC khớp với URD.
-    *   Kiểm tra tính khả thi của Tiền điều kiện (Pre-conditions) và Dữ liệu mồi (Mock Data).
+    *   Kiểm tra tính khả thi của Tiền điều kiện (Pre-conditions) và Dữ liệu mồi (Mock Data). Đặc biệt bắt lỗi khắt khe các Pre-conditions viết tắt, viết cụt (VD sai: "1. 'COND-ACT' trạng thái Hoạt động"). Yêu cầu phải ghi đầy đủ ngữ cảnh (VD đúng: "1. Tồn tại tên điều kiện tính phí 'COND-ACT' trạng thái Hoạt động, 'COND-INACT' trạng thái Không hoạt động.").
 
 ## 2. Quy Trình Thực Thi (Standard Workflow)
 1.  **Recon (Điều tra):** Đọc kỹ tài liệu URD/FSD để liệt kê danh sách các BR_xx và Functional Points cần cover.

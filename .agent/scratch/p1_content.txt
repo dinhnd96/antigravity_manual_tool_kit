@@ -1,0 +1,879 @@
+TỔNG QUAN
+Hiện trạng
+
+Nghiệp vụ
+Hệ thống
+
+Đề xuất
+Đề xuất
+Phương pháp, chỉ tiêu đo lường tính hiệu quả của sản phẩm, dịch vụ
+Đánh giá ảnh hưởng tác động
+Các rủi ro (nếu có làm hoặc rủi ro nếu không làm)
+Đầu mối liên hệ làm việc thuộc đơn vị yêu cầu
+STT
+Nhân sự
+Bộ phận
+Email
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ngân sách
+
+
+
+Quy trình nghiệp vụ
+Danh sách User Story 
+STT
+User Story
+US01
+Là người dùng, tôi muốn khai báo các dịch vụ/sản phẩm tại ngân hàng theo mô hình cây phân cấp để dễ dàng quản lý các dịch vụ/sản phẩm phát sinh phí.
+US02
+Là người dùng, tôi muốn khai báo 1 code phí với các thông tin chi tiết về mức phí cho từng Phân khúc Khách hàng (KHCN, KHTC,...)  và điều kiện áp dụng để đảm bảo tính chính xác trong thanh toán.
+US03
+Là người dùng, tôi muốn khai báo 1 code phí bằng cách nhân bản để khai báo nhanh với các phương thức tính có bộ quy tắc cài đặt tương tự nhau 
+US04
+Là người dùng, tôi muốn hệ thống tự động sinh mã code phí theo nguyên tắc để dễ dàng quản lý theo từng Phân khúc Khách hàng, từng Nhóm SPDV, từng biểu phí
+US05
+Là người dùng, tôi muốn định nghĩa công thức tính phí cho từng code phí để áp dụng đúng mức phí cho từng đối tượng khách hàng và tùy chỉnh theo từng thời kỳ
+US06
+Là người dùng, tôi muốn khai báo 1 biểu phí
+US07
+Là người dùng, tôi muốn khai báo 1 biểu phí bằng cách upload file Excel hoặc CSV) để tiết kiệm thời gian khai báo
+US08
+Là người dùng, tôi muốn sao chép 1 biểu phí để tạo mới với những thay đổi nhỏ dễ dàng
+US09
+Là người dùng, tôi muốn chuyển đổi code phí giữa các biểu phí mà không làm mất thông tin cũ
+US10
+Là người dùng, tôi muốn khai báo các chương trình ưu đãi theo thể lệ thỏa mãn nhiều tiêu chí để thu hút khách hàng theo từng thời kỳ
+US11
+Là người dùng, tôi muốn khai báo 1 chương trình ưu đãi dành cho một danh sách khách hàng xác định
+US12
+Là người dùng, tôi muốn khai báo 1 chương trình ưu đãi theo theo từng code phí/ biểu phí
+US13
+Là người dùng, tôi muốn hệ thống tự động sinh mã CTUD theo nguyên tắc để dễ dàng quản lý theo Khối, thời gian,...
+US14
+Là người dùng, tôi muốn xem toàn bộ danh mục SPDV & toàn bộ lịch sử khai báo
+US15
+Là người dùng, tôi muốn xem danh sách và toàn bộ lịch sử thay đổi Biểu phí 
+US16
+Là người dùng, tôi muốn xem danh sách Chương trình ưu đãi & toàn bộ lịch sử khai báo
+US17
+Là người dùng, tôi muốn xem danh sách code phí áp dụng cho một khách hàng
+US18
+Là người dùng, tôi muốn xem lịch sử thu phí theo khách hàng
+US19
+Là người dùng, tôi muốn tra cứu lịch thu phí dự kiến theo khách hàng
+US20
+Là người dùng, tôi muốn xem danh sách Chương trình ưu đãi theo Khách hàng
+US21
+Là người dùng, tôi muốn đăng nhập vào hệ thống
+US22
+Là người dùng, tôi muốn đăng xuất khỏi hệ thống
+US23
+Là người quản trị, tôi muốn thay đổi nhóm quyền của một user
+US24
+Là người quản trị, tôi muốn khai báo một nhóm quyền trên hệ thống
+US25
+Là người quản trị, tôi muốn cấu hình được ma trận phê duyệt cho các tác vụ khai báo tham số phí
+US26
+Là người quản trị, tôi muốn thiết lập quy tắc của một điều kiện tính phí
+US27
+Là người quản trị, tôi muốn thiết lập quy tắc xác định nhóm khách hàng trong từng thời kỳ
+US28
+Là người dùng, tôi muốn xuất sao kê chi tiết giao dịch thu phí
+US29
+Là người dùng, tôi muốn xuất báo cáo danh sách khách hàng còn nợ phí
+US30
+Là người dùng, tôi muốn xuất báo cáo dự thu phí dịch vụ kỳ tiếp theo
+US31
+Là người dùng, tôi muốn xuất báo cáo tổng doanh thu phí
+US32
+Là người dùng, tôi muốn xem một trang báo cáo tổng quan về hoạt động thu phí
+US33
+Là người dùng, khi khách hàng phát sinh giao dịch với ngân hàng trên kênh online, tôi muốn hệ thống tự động tính toán số tiền phí cần thu
+US34
+Là người dùng, khi phát sinh giao dịch với khách hàng trên kênh quầy/nội bộ, tôi muốn hệ thống tự động tính toán số tiền phí cần thu
+US35
+Là người dùng, tôi muốn hệ thống tự động thu các loại phí định kỳ cần thu theo lịch
+US36
+Là người dùng, tôi muốn hệ thống tự động truy thu và tận thu các loại phí định kỳ mà khách hàng còn nợ
+US37
+Là người dùng, tôi muốn khởi tạo chương trình ưu đãi từ kết quả phê duyệt ngoại lệ trên hệ thống phê duyệt miễn/giảm phí
+
+
+Mô tả nghiệp vụ 
+
+US01 - Là người dùng, tôi muốn khai báo các dịch vụ/sản phẩm tại ngân hàng theo mô hình cây phân cấp để dễ dàng quản lý các dịch vụ/sản phẩm phát sinh phí
+Yêu cầu nghiệp vụ
+Khai báo Nghiệp vụ
+.n: Khi muốn khai báo các dịch vụ/sản phẩm tại ngân hàng, người dùng truy cập chức năng: Tham số >> Danh mục sản phẩm dịch vụ >> Thêm mới Nghiệp vụ
+
+Màn hình Thêm mới nghiệp vụ bao gồm các trường thông tin: Mã nghiệp vụ, Tên Nghiệp vụ, Mô tả, Ngày hiệu lực, Ngày hết hiệu lực.
+Nghiệp vụ được hiểu là Sản phẩm dịch cấp đầu tiên (cấp 1) trong hệ thống.
+Mã nghiệp vụ do hệ thống tự động sinh theo nguyên tắc:
+Là số duy nhất và là số tự tăng có 2 chữ số bắt đầu từ 01 đến 99
+Không trùng với các Mã nghiệp vụ đã tồn tại
+Trạng thái Nghiệp vụ bao gồm:
+Hoạt động: Cấp Nghiệp vụ đang được vận hành và sử dụng
+Không hoạt động: Cấp Nghiệp vụ chưa hoặc không còn được vận hành và sử dụng
+Ngày hiệu lực, Ngày hết hiệu lực đều phải >= Ngày hệ thống và Ngày hết hiệu lực >= Ngày hiệu lực
+Sau khi Maker khai báo thành công, bản ghi Nghiệp vụ sẽ ở trạng thái chờ duyệt với hành động là Thêm mới và chỉ hiển thị trên lưới Danh mục SPDV sau khi cấp duyệt cuối cùng phê duyệt theo nguyên tắc mô tả tại US25 về Ma trận phê duyệt.
+Bản ghi Nghiệp vụ sau khi duyệt thành công sẽ được hiển thị trên lưới chức năng và cho phép chỉnh sửa. Khi người dùng chỉnh sửa Nghiệp vụ, hệ thống chỉ cho phép chỉnh sửa Ngày hiệu lực, Ngày hết hiệu lực.
+Ngày hiệu lực, Ngày hết hiệu lực chỉ được sửa >= Ngày hệ thống và Ngày hết hiệu lực >= Ngày hiệu lực
+Ngày hiệu lực phải <= Ngày hiệu lực của các SPDV chi tiết và Ngày hết hiệu lực phải >= Ngày hết hiệu lực của các SPDV chi tiết
+Sau khi Maker chỉnh sửa thành công, bản ghi Nghiệp vụ sẽ ở trạng thái chờ duyệt với hành động là Sửa và chỉ hiển thị thông tin sau sửa trên lưới Danh mục SPDV sau khi cấp duyệt cuối cùng phê duyệt theo nguyên tắc mô tả tại US25 về Ma trận phê duyệt.
+Hằng ngày, tại thời điểm đầu ngày, hệ thống tự động kiểm tra ngày hiệu lực và ngày hết hiệu lực của tất cả bản ghi Nghiệp vụ và cập nhật theo nguyên tắc:
+Trường hợp ngày T = Ngày hiệu lực và trạng thái hoạt động của Nghiệp vụ = Không hoạt động: Hệ thống cập nhật trạng thái Nghiệp vụ = Hoạt động.
+Trường hợp ngày T > Ngày hết hiệu lực, trạng thái hoạt động của Nghiệp vụ = Hoạt động: Hệ thống cập nhật trạng thái Nghiệp vụ = Không hoạt động.
+Khai báo Sản phẩm, dịch vụ chi tiết
+Navigation: Khi muốn khai báo các dịch vụ/sản phẩm tại ngân hàng, người dùng truy cập chức năng: Tham số >> Danh mục sản phẩm dịch vụ và Code phí >> Thêm mới Sản phẩm dịch vụ
+
+Màn hình Thêm mới SPDV chi tiết bao gồm các trường thông tin: Mã SPDV, Tên SPDV, Mã – Tên SPDV liền trước, Mô tả, Ngày hiệu lực, Ngày hết hiệu lực.
+Người dùng được phép chọn khai báo SPDV cấp chi tiết theo SPDV cấp cha và tại màn hình Thêm mới SPDV, hệ thống tự động hiển thị Mã – Tên SPDV liền trước
+Mã SPDV chi tiết do hệ thống tự động sinh theo nguyên tắc:
+Mã nghiệp vụ/SPDV cấp cha liền trước + 02 ký tự số tự tăng bắt đầu từ 01 đến 99
+Là số duy nhất và không trùng với những bản ghi mã SPDV chi tiết đã tồn tại trên hệ thống
+Các yêu cầu khác tương tự như màn hình Thêm mới Nghiệp vụ
+Bản ghi SPDV chi tiết sau khi duyệt thành công sẽ được hiển thị trên lưới chức năng và cho phép chỉnh sửa. Khi người dùng chỉnh sửa SPDV chi tiết, hệ thống chỉ cho phép chỉnh sửa Ngày hiệu lực, Ngày hết hiệu lực.
+Ngày hiệu lực của Nghiệp vụ/SPDV chi tiết cấp cha <= Ngày hiệu lực <= Ngày hiệu lực của các SPDV chi tiết cấp con
+Ngày hết hiệu lực của Nghiệp vụ/SPDV chi tiết cấp cha >= Ngày hết hiệu lực >= Ngày hết hiệu lực của các SPDV chi tiết
+Các nguyên tắc khác tương tự với yêu cầu Chỉnh sửa về Nghiệp vụ
+Các nguyên tắc khác tương tự với yêu cầu về Nghiệp vụ.
+Lưu đồ và diễn giải
+Khai báo Nghiệp vụ
+Lưu đồ Thêm mới Nghiệp vụ
+
+Lưu đồ Chỉnh sửa Nghiệp vụ
+
+Diễn giải lưu đồ:
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+
+Thêm mới Nghiệp vụ
+
+Chọn nút “+ Thêm mới” trên thanh header của màn hình Danh sách sản phẩm dịch vụ
+Maker
+
+
+Hiển thị màn hình Thêm mới Nghiệp vụ cho phép người dùng khai báo các thông tin Nghiệp vụ, Cấp sản phẩm dịch vụ tự động hiển thị = 1
+Hệ thống
+
+
+Khai báo các thông tin Nghiệp vụ và ấn chọn “Xác nhận”
+Maker
+
+
+Kiểm tra các trường bắt buộc nhập đã được được khai báo đầy đủ và đúng định dạng 
+Hệ thống
+
+
+Lưu thành công bản ghi Nghiệp vụ ở trạng thái “Chờ duyệt”
+
+
+
+Hiển thị bản ghi Thêm mới Nghiệp vụ này tại màn hình “Tác vụ Pending của tôi” của Maker và màn hình Tác vụ chờ duyệt của Checker
+
+
+
+Nhận thông báo Thêm mới thành công Nghiệp vụ
+Maker
+
+Sửa Nghiệp vụ
+Chọn nút “Chỉnh sửa” tại bản ghi Nghiệp vụ cần sửa
+Maker
+
+
+Hiển thị màn hình Chỉnh sửa Nghiệp vụ
+Hệ thống
+
+
+Chỉnh sửa trường Ngày hiệu lực và/hoặc Ngày hết hiệu lực
+Maker
+
+
+Kiểm tra Ngày hết hiệu lực, Ngày hiệu lực có thay đổi so với dữ liệu trước sửa không?
+Hệ thống
+
+
+Tạo mới bản ghi với thông tin vừa sửa ở trạng thái Chờ duyệt
+
+
+
+Hiển thị bản ghi “Sửa Nghiệp vụ” này tại màn hình “Tác vụ Pending của tôi” của Maker và màn hình Tác vụ chờ duyệt của Checker
+
+
+
+Nhận thông báo tạo yêu cầu Sửa thành công Nghiệp vụ
+Maker
+
+Khai báo Sản phẩm, dịch vụ chi tiết
+Lưu đồ Thêm mới SPDV chi tiết:
+
+
+Lưu đồ Chỉnh sửa SPDV chi tiết:
+
+Diễn giải lưu đồ:
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+
+Thêm mới SPDV chi tiết
+
+Chọn nút “+” tại bản ghi SPDV cấp cha liền trước
+Maker
+
+
+Hiển thị màn hình Thêm mới SPDV chi tiết cho phép người dùng khai báo các thông tin SPDV chi tiết
+Hệ thống
+
+
+Khai báo các thông tin SPDV chi tiết và ấn chọn “Xác nhận”
+Maker
+
+
+Kiểm tra các trường bắt buộc nhập đã được được khai báo đầy đủ và đúng định dạng 
+Hệ thống
+
+
+Lưu thành công bản ghi SPDV chi tiết ở trạng thái “Chờ duyệt”
+
+
+
+Hiển thị bản ghi Thêm mới SPDV chi tiết này tại màn hình “Tác vụ Pending của tôi” của Maker và màn hình Tác vụ chờ duyệt của Checker
+
+
+
+Nhận thông báo Thêm mới thành công SPDV chi tiết
+Maker
+
+Sửa SPDV chi tiết
+Chọn nút “Chỉnh sửa” tại bản ghi SPDV chi tiết cần sửa
+Maker
+
+
+Hiển thị màn hình Chỉnh sửa SPDV chi tiết
+Hệ thống
+
+
+Chỉnh sửa trường Ngày hiệu lực và/hoặc Ngày hết hiệu lực
+Maker
+
+
+Kiểm tra Ngày hết hiệu lực, Ngày hiệu lực có thay đổi so với dữ liệu trước sửa không?
+Hệ thống
+
+
+Tạo mới bản ghi với thông tin vừa sửa ở trạng thái Chờ duyệt
+
+
+
+Hiển thị bản ghi “Sửa SPDV chi tiết” này tại màn hình “Tác vụ Pending của tôi” của Maker và màn hình Tác vụ chờ duyệt của Checker
+
+
+
+Nhận thông báo tạo yêu cầu Sửa thành công SPDV chi tiết
+Maker
+
+Giao diện
+Khai báo Nghiệp vụ
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+
+Xác nhận
+★
+Button
+
+Lưu dữ liệu vào hệ thống
+
+Đóng
+★
+Button
+
+Thoát khỏi màn hình
+CÁC TRƯỜNG THÔNG TIN
+
+Cấp sản phẩm dịch vụ
+◎
+Number
+Mặc định: 1
+Không cho phép thay đổi
+Cấp Nghiệp vụ là cấp cao nhất trong cây SPDV
+
+Tên Nghiệp vụ
+★
+Text
+
+Nhập text
+
+Mã Nghiệp vụ
+◎
+Number
+Không cho phép khai báo
+
+Chỉ hiển thị Mã Nghiệp vụ khi khai báo thành công
+
+Số duy nhất và là số tự sinh theo nguyên tắc:
+- Là số tự tăng có 2 chữ số bắt đầu từ 01 đến 99. Trường hợp số tự tăng >99 hệ thống báo lỗi và không cho phép lưu
+- Không trùng với các Mã nghiệp vụ đã tồn tại trên hệ thống
+
+Mô tả
+★
+Text
+
+Nhập text
+Trường mô tả thông tin cụ thể của Nghiệp vụ
+
+Ngày hiệu lực
+★
+Date
+Không chọn ngày quá khứ
+Hiển thị lịch và cho phép chọn 1 giá trị
+- Nếu Ngày hiện tại của hệ thống = Ngày hiệu lực => Trạng thái hoạt động của cấp Nghiệp vụ = Hoạt động
+- Nếu Ngày hiện tại của hệ thống < Ngày hiệu lực => Trạng thái hoạt động của cấp Nghiệp vụ = Không hoạt động
+
+Ngày hết hiệu lực
+★
+Date
+Không chọn ngày quá khứ
+Hiển thị lịch và cho phép chọn 1 giá trị
+Ngày hết hiệu lực >= Ngày hiệu lực
+
+Khai báo Sản phẩm, dịch vụ chi tiết
+
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+
+Xác nhận
+★
+Button
+
+Lưu dữ liệu vào hệ thống
+
+Đóng
+★
+Button
+
+Thoát khỏi màn hình
+CÁC TRƯỜNG THÔNG TIN
+
+Tên
+★
+Text
+
+Nhập text
+Trường lưu tên SPDV chi tiết
+
+Mã
+◎
+Number
+Không cho phép khai báo
+
+Chỉ hiển thị Mã SPDV chi tiết khi khai báo thành công
+
+Số duy nhất và là số tự sinh theo nguyên tắc:
+- Mã nghiệp vụ/SPDV cấp cha liền trước + 02 ký tự số tự tăng bắt đầu từ 01 đến 99. Trường hợp số tự tăng >99 hệ thống báo lỗi và không cho phép lưu
+- Không trùng với những bản ghi mã SPDV chi tiết đã tồn tại trên hệ thống
+Ví dụ: Mã 0601 (SPDV chi tiết: “Tài khoản thanh toán” thuộc Nghiệp vụ “Tài khoản”)
+
+Mô tả
+★
+Text
+
+Nhập text
+Trường mô tả thông tin cụ thể của SPDV chi tiết
+
+Cấp SPDV liền trước
+◎
+Text
+Không cho phép khai báo
+Hiển thị dữ liệu: “Mã SPDV liền trước - Tên SPDV liền trước”
+
+Ngày hiệu lực
+★
+Date
+Không chọn ngày quá khứ
+
+>= Ngày hiệu lực của các cấp cha trong cây SPDV
+Hiển thị lịch và cho phép chọn 1 giá trị
+- Nếu Ngày hiện tại của hệ thống = Ngày hiệu lực => Trạng thái hoạt động SPDV chi tiết = Hoạt động
+- Nếu Ngày hiện tại của hệ thống < Ngày hiệu lực => Trạng thái hoạt động của SPDV chi tiết = Không hoạt động
+
+Ngày hết hiệu lực
+★
+Date
+Không chọn ngày quá khứ
+
+<= Ngày hết hiệu lực của các cấp cha trong cây SPDV
+Hiển thị lịch và cho phép chọn 1 giá trị
+Ngày hết hiệu lực >= Ngày hiệu lực
+
+Đây là cấp cuối cùng trong cây sơ đồ sản phẩm dịch vụ
+◎
+Label
+
+Chỉ hiển thị khi cấp khai báo là cấp cuối
+
+US02 - Là người dùng, tôi muốn khai báo 1 code phí với các thông tin chi tiết về mức phí cho từng Phân khúc Khách hàng (KHCN, KHTC,...)  và điều kiện áp dụng để đảm bảo tính chính xác trong thanh toán.
+Yêu cầu nghiệp vụ
+Navigation: Khi muốn khai báo các code phí, người dùng truy cập chức năng: Tham số >> Danh mục sản phẩm dịch vụ >> SPDV cấp cuối >> Thêm mới Code phí >> Thiết lập Quy tắc tính phí (Quy tắc tính phí)
+
+Code phí là cấp khai báo cuối cùng trong cây Danh mục SPDV, một code phí được gán trực tiếp với một SPDV cấp cuối. Các thông tin được khai báo bao gồm: Thông tin chung của Code phí, Điều kiện tính phí, Quy tắc tính phí
+Các thông tin chung của Code phí cần quản lý: Mã phí, Tên phí, Loại tiền tệ, VAT, Phí đã bao gồm VAT, Đối tượng thu phí, Loại Khách hàng, Loại tính phí, Tần suất, Ngày thu, Loại tiền tối thiểu/tối đa, Mã hạch toán category, Trạng thái
+Mã phí do hệ thống tự sinh và người dùng không được phép chỉnh sửa. Nguyên tắc tự sinh mã phí được mô tả tại US04 về Tự động sinh mã Code phí.
+Loại tiền tệ chính là Loại tiền tệ của Code phí.
+VAT: Giá trị % thuế suất VAT
+Trường hợp Code phí không phải chịu VAT, người dùng bỏ trống không nhập thông tin
+Trường hợp Code phí chịu VAT, bắt buộc nhập giá trị là số > 0 và <100 (Ví dụ thuế suất là 10% nhập số 10)
+Phí đã bao gồm VAT: Số tiền phí hệ thống tính ra đã bao gồm VAT hay chưa?
+Nếu ko tích chọn trường Phí đã bao gồm VAT, trường VAT nhập giá trị, số tiền phí thực thu của khách hàng = Số tiền phí hệ thống tính ra + VAT*Số tiền phí hệ thống tính ra
+Nếu tích chọn trường phí đã bao gồm VAT, trường VAT bắt buộc phải nhập giá trị là số >0 và <=100, số tiền phí thực thu của khách hàng = Số tiền phí hệ thống tính ra
+Đối tượng thu phí: Người dùng lựa chọn Khách hàng hoặc Merchant
+Khách hàng
+Merchant: Các đối tác của PVCB là đơn vị chấp nhận thanh toán
+Loại khách hàng: Bao gồm 4 loại khách hàng:
+KHCN: Khách hàng cá nhân
+KHTC: Khách hàng doanh nghiệp lớn/Khách hàng doanh nghiệp vừa và nhỏ
+DNSN: Khách hàng doanh nghiệp siêu nhỏ và hộ kinh doanh
+CBNV: Khách hàng là cán bộ nhân viên của ngân hàng
+Loại tính phí: Bao gồm 2 loại:
+Theo giao dịch
+Định kỳ
+Loại tiền tối thiểu/tối đa là Loại tiền tệ của Số tiền phí tối thiểu, Số tiền phí tối đa và có thể khác với Loại tiền tệ của Code phí
+Trạng thái của code phí bao gồm
+Chưa gán: Code phí chưa được gán với Biểu phí nào
+Hoạt động: Code phí đang gán với một Biểu phí Đang hiệu lực/Chưa hiệu lực
+Ngừng hoạt động: Các biểu phí mà Code trực thuộc đều đang ở trạng thái Hết hiệu lực 
+Hủy: Code phí khai báo sai thông tin và không thể tái sử dụng
+Trạng thái mặc định của Code phí khi Thêm mới = Chờ gán
+Các loại điều kiện tính phí bao gồm: Điều kiện theo khách hàng, Điều kiện theo Tài khoản, Điều kiện theo Thẻ, Điều kiện theo giao dịch. 
+Trường điều kiện: Người dùng được chọn từ danh sách điều kiện có sẵn trong hệ thống và đã được cấu hình nguồn dữ liệu tương ứng.
+Operator là các toán tử được dùng để so sánh giữa Trường điều kiện và Giá trị
+Giá trị là trường người dùng nhập các giá trị cụ thể tương ứng với Trường điều kiện và làm cơ sở để so sánh khi thực hiện giao dịch
+Về Quy tắc tính phí: Người dùng được thiết lập công thức tính phí cho Code phí theo mô tả tại US06
+Khi khai báo code phí, người dùng bắt buộc phải khái báo trước các thông tin về Loại tiền tệ, Loại khách hàng, Loại tính phí và Loại tiền tối thiểu/tối đa để làm căn cứ xác định các thông tin về Điều kiện tính phí và Quy tắc tính phí
+Loại tiền tệ: Người dùng chọn loại tiền tệ của code phí trước khi chọn loại tiền tệ tối thiểu/tối đa, trường loại tiền tối thiểu/tối đa sẽ tự động cập nhật theo loại tiền tệ của code phí
+Loại khách hàng
+Loại tính phí:
+Nếu Loại tính phí = Theo giao dịch, người dùng được phép khai báo Điều kiện tính phí theo Khách hàng, theo Giao dịch và theo Tài khoản
+Nếu Loại tính phí = Định kỳ, người dùng được phép khai báo Điều kiện tính phí theo Khách hàng và theo Tài khoản/Thẻ
+Loại tiền tối thiểu/tối đa: 
+Trường hợp người dùng chọn loại tiền tối thiểu/tối đa trước, chọn loại tiền tệ của code phí sau, hệ thống sẽ không cập nhật loại tiền tối thiểu/tối đa theo loại tiền của code phí
+Loại tiền tối thiểu/tối đa = VND/JPY, người dùng chỉ được nhập giá trị phí tối thiểu và tối đa dưới dạng số nguyên dương
+Loại tiền tối thiểu/tối đa <> VND/JPY, người dùng được phép nhập giá trị phí tối thiểu và tối đa dưới dạng số thập phân với tối đa 2 số sau dấu thập phân
+Sau khi Maker khai báo thành công, bản ghi Code phí sẽ ở trạng thái chờ duyệt với hành động là Thêm mới và chỉ hiển thị trên lưới Danh mục SPDV sau khi cấp duyệt cuối cùng phê duyệt theo nguyên tắc mô tả tại US25 về Ma trận phê duyệt.
+Bản ghi Code phí sau khi duyệt thành công sẽ được hiển thị trên lưới chức năng và cho phép chỉnh sửa. Khi người dùng chỉnh sửa Code phí, hệ thống chỉ cho phép chỉnh sửa Trạng thái Code phí
+Chỉ cho phép chỉnh sửa thành trạng thái Hủy
+Sau khi Maker chỉnh sửa thành công, bản ghi Code phí sẽ ở trạng thái chờ duyệt với hành động là Sửa và chỉ hiển thị thông tin sau sửa trên lưới Danh mục SPDV sau khi cấp duyệt cuối cùng phê duyệt theo nguyên tắc mô tả tại US25 về Ma trận phê duyệt.
+Hằng ngày, tại thời điểm đầu ngày, hệ thống tự động kiểm tra ngày hiệu lực và ngày hết hiệu lực của Biểu phí mà code phí trực thuộc, trạng thái hoạt động của code phí sẽ được cập nhật theo trạng thái hoạt động của biểu phí. Nguyên tắc cập nhật trạng thái được mô tả tại US06 về Khai báo Biểu phí.
+Lưu đồ và diễn giải
+Lưu đồ
+
+Diễn giải
+
+Giao diện
+Màn hình
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+
+Xác nhận
+★
+Button
+
+Lưu dữ liệu vào hệ thống
+
+Đóng
+★
+Button
+
+Thoát khỏi màn hình
+CÁC TRƯỜNG THÔNG TIN
+Thông tin chung
+
+Mã phí
+◎
+Text
+Hệ thống tự sinh và không cho phép thay đổi
+Nguyên tắc tự sinh Mã phí tham chiếu tới US04
+
+Tên phí
+★
+Text
+
+Nhập text
+
+Loại tiền tệ
+★
+Dropdown list
+
+Hiển thị danh sách và chọn 1 loại tiền tệ của Code phí
+
+VAT
+－
+Number
+Trường không bắt buộc nhập, nếu người dùng nhập bắt buộc phải là số nguyên dương >0 và <=100
+Giá trị thuế VAT
+VD: Nếu Phí tính thuế VAT 10% thì chỉ nhập số 10
+
+Phí đã bao gồm VAT
+－
+Checkbox
+
+Mức phí được khai báo tại phân vùng Công thức tính phí đã bao gồm VAT hay chưa
+Trường hợp tích chọn Phí đã bao gồm VAT, bắt buộc người dùng phải điền tỷ lệ % VAT tại trường VAT
+
+Đối tượng thu phí
+★
+Radio Button
+
+Chỉ cho phép chọn 1 trong 2 giá trị:
+Khách hàng: Code phí được khai báo và áp dụng cho các khách hàng
+Merchant: Code phí được khai báo và áp dụng cho các đối tác là đơn vị chấp nhận thanh toán
+
+Loại Khách hàng
+★
+Dropdown list
+
+Chọn 1 trong danh sách các giá trị:
+KHCN: Khách hàng cá nhân
+KHTC: Khách hàng doanh nghiệp lớn và doanh nghiệp vừa & nhỏ
+DNSN: Khách hàng là doanh nghiệp siêu nhỏ và hộ kinh doanh
+CBNV: Khách hàng là cán bộ nhân viên của ngân hàng (Không hiển thị trong danh sách khi trường Đối tượng thu phí = Merchant)
+
+Khai báo theo phân khúc
+－
+Checkbox
+
+Quy tắc tính phí được thiết lập áp dụng chung hoặc áp dụng riêng cho từng nhóm khách hàng
+
+Loại tính phí
+★
+Dropdown list
+
+Hiển thị danh sách cho phép chọn 1 trong các giá trị:
+Loại tính phí = Theo giao dịch
+Hiển thị Điều kiến tính phí theo Giao dịch, Điều kiện tính phí theo Khách hàng và Điều kiện tính phí theo Tài khoản
+
+Loại tính phí = Định kỳ
+Hiển thị Điều kiện tính phí theo Khách hàng, Điều kiện tính phí theo Tài khoản và Điều kiến tính phí theo Thẻ
+
+Loại tiền tối thiểu/ tối đa
+－
+Dropdown list
+
+Hiển thị danh sách và chọn 1 loại tiền tệ cho giá trị tiền tối thiểu, tối đa
+
+Khi chọn loại tiền tệ của code phí trước, chọn loại tiền tệ tối thiểu/tối đa sau, trường loại tiền tối thiểu/tối đa sẽ tự động cập nhật theo loại tiền tệ của code phí
+
+Khi chọn loại tiền tối thiểu/tối đa trước, chọn loại tiền tệ của code phí sau, hệ thống sẽ không cập nhật loại tiền tối thiểu/tối đa theo loại tiền của code phí
+
+Tần suất
+－
+Dropdown list
+Chỉ hiển thị và bắt buộc nếu Loại tính phí = Định kỳ
+Nếu Phương thức tính phí = Định kỳ, hệ thống Hiển thị danh sách cho phép chọn 1 trong các giá trị:
+Hàng năm
+Hàng tháng
+
+Ngày thu
+－
+Radio Button
+Chỉ hiển thị nếu Loại tính phí = Định kỳ
+Ngày thu là 1 ngày cố định trong tháng hoặc trong năm
+
+Nếu Tần suất thu phí = Hàng năm, hệ thống cho phép người dùng nhập giá trị theo định dạng DD/MM. Đối với tháng 2, hệ thống chỉ cho phép nhập tối đa là ngày 28/02. Các tháng còn lại được phép nhập giá trị theo bộ lịch chuẩn
+
+Nếu Tần suất thu phí = Hàng tháng, hệ thống cho phép người dùng nhập số từ 1-31. Đối với những tháng không có ngày 31 mặc định hiểu là ngày cuối cùng của tháng 
+
+Trường hợp Ngày thu phí xác định động theo dữ liệu thì người dùng không cần nhập thông tin này.
+
+Ngày thu theo dữ liệu
+－
+Radio Button
+Chỉ hiển thị nếu Loại tính phí = Định kỳ
+Chọn 1 trong 2 phương thức Ngày thu hoặc Ngày thu theo dữ liệu
+
+Ngày thu phí Định kỳ có thể thay đổi theo từng khách hàng
+
+Bảng dữ liệu
+－
+Dropdown list
+Chỉ hiển thị nếu Loại tính phí = Định kỳ và Ngày thu theo dữ liệu
+Chọn 1 trong danh sách các bảng:
+ETL Khách hàng
+ETL Tài khoản
+ETL Thẻ
+
+Trường dữ liệu
+－
+Combobox
+Chỉ hiển thị nếu Loại tính phí = Định kỳ và Ngày thu theo dữ liệu
+Trường dữ liệu mapping lấy thông tin thu phí định kỳ
+
+Chọn từ danh sách điều kiện có sẵn trong hệ thống và đã được cấu hình Bảng dữ liệu tương ứng
+
+Mã hạch toán Category
+－
+Number
+
+Nhập text
+Mã hạch toán Category
+
+Ghi chú
+－
+Text
+
+Nhập text
+
+Trạng thái
+◎
+Label
+Không cho phép chỉnh sửa
+Mặc định là “Chờ gắn” khi thêm mới Code phí
+Điều kiện tính phí theo Giao dịch/ Điều kiện tính phí theo Khách hàng/ Điều kiện tính phí theo Tài khoản/ Điều kiện tính phí theo Thẻ
+Khi Loại tính phí = Định kỳ và Ngày thu theo dữ liệu, khi người dùng ấn xác nhận, về thống cần thực hiện kiểm tra trường Bảng dữ liệu tại phân vùng Quy tắc chung và …
+
+Trường điều kiện
+★
+Combobox
+
+Hiển thị danh sách các điều kiện tính phí có trạng thái = Hoạt động, cho phép người dùng chọn các trường điều kiện
+Tại Điều kiện tính phí theo Giao dịch: Hiển thị các trường điều kiện được khai báo với Nguồn dữ liệu = API
+Tại Điều kiện tính phí theo Khách hàng: Hiển thị các trường điều kiện được khai báo với Nguồn dữ liệu = ETL và Bảng dữ liệu = Khách hàng
+Tại Điều kiện tính phí theo Thẻ: Hiển thị các trường điều kiện được khai báo với Nguồn dữ liệu = ETL và Bảng dữ liệu = Thẻ
+Tại Điều kiện tính phí theo Tài khoản: Hiển thị các trường điều kiện được khai báo với Nguồn dữ liệu = ETL và Bảng dữ liệu = Tài khoản
+
+Tại mỗi phân vùng điều kiện tính phí, người dùng có thể thêm nhiều điều kiện, các điều kiện không được trùng lặp
+
+Mô tả
+－
+Text
+
+Nhập text
+
+Operator
+★
+Dropdown list
+
+Hiển thị các toán tử tương ứng với kiểu dữ liệu của trường điều kiện tính phí
+String: =, <>, IN, NOT IN
+Number: =, <>, IN, NOT IN, >, >=, <, <=
+Boolean: YES, NO
+Date: =, >, >=, <, <=
+DateTime: =, >, >=, <, <=
+
+Giá trị
+★
+Text
+
+NSD nhập giá trị cụ thể tương ứng với Trường điều kiện
+Quy tắc tính phí: Tham chiếu tới US06 - Là người dùng, tôi muốn định nghĩa công thức tính phí cho từng code phí để áp dụng đúng mức phí cho từng đối tượng khách hàng và tùy chỉnh theo từng thời kỳ
+
+US06 - Là người dùng, tôi muốn định nghĩa công thức tính phí cho từng code phí để áp dụng đúng mức phí cho từng đối tượng khách hàng và tùy chỉnh theo từng thời kỳ
+Yêu cầu nghiệp vụ
+Navigation: Khi muốn khai báo các code phí, người dùng truy cập chức năng: Tham số >> Danh mục sản phẩm dịch vụ >> SPDV cấp cuối >> Thêm mới Code phí >> Thiết lập Quy tắc tính phí (Quy tắc tính phí)
+
+Khi khai báo code phí, người dùng cần định nghĩa được công thức tính phí cho Màn hình Khai báo Quy tắc tính phí cho từng code phí. 
+Màn hình Quy tắc tính phí bao gồm các trường thông tin: Công thức, Tối thiểu, Tối đa
+Công thức tính phí là công thức toán học, mỗi code phí có thể có 1 hoặc nhiều công thức khác nhau
+Khi người dùng không lựa chọn Khai báo theo nhóm khách hàng khi khai báo Thông tin chung của Code phí, chỉ được khai báo 1 Công thức tính phí và được áp dụng chung
+Khi người dùng lựa chọn Khai báo theo nhóm khách hàng khi khai báo Thông tin chung của Code phí, màn hình Quy tắc tính phí hiển thị thêm trường Nhóm khách hàng.
+Được khai báo nhiều Công thức tính phí, mỗi công thức áp dụng riêng cho mỗi nhóm khách hàng
+Để khai báo các Nhóm khách hàng người dùng ấn chọn Thêm nhóm khách hàng
+Số tiền phí tính ra theo công thức có Loại tiền tệ chính là Loại tiền tệ của Code phí.
+Cùng với công thức, hệ thống cho phép người dùng khai báo Số tiền phí tối thiểu, tối đa và Loại tiền tệ của Số tiền phí tối thiểu, tối đa có thể khác với Loại tiền tệ của Code phí
+Nguyên tắc nhập Công thức tính phí: 
+Các biến được phép sử dụng: 
+Người dùng được định nghĩa các biến được sử dụng trong Công thức tính phí từ một danh sách có sẵn trong hệ thống tương ứng với một trong các trường dữ liệu do các hệ thống yêu cầu tính phí gửi vào tùy theo từng loại giao dịch
+Các hàm được phép sử dụng:
+MONTHS_BETWEEN: Hàm tính số tháng giữa 2 ngày, kết quả trả về có thể là số thập phân
+DATE_DIFF: Hàm tính số ngày giữa 2 ngày, kết quả trả về là số nguyên
+ROUND: Hàm làm tròn số học theo nguyên tắc toán học (>=0.5 làm tròn lên; <0.5 làm tròn xuống)
+ROUNDUP: Hàm làm tròn số học luôn làm tròn lên
+ROUNDDOWN: Hàm làm tròn số học luôn làm tròn xuống
+Max: Hàm lấy giá trị lớn nhất
+Min: Hàm lấy giá trị nhỏ nhất
+Các toán tử được phép sử dụng:
++ Phép cộng
+- Phép trừ
+x Phép nhân
+: Phép chia
+Các ký tự được phép sử dụng:
+( Ký tự mở ngoặc
+) Ký tự đóng ngoặc
+. Ký tự phân cách giữa số nguyên và số thập phân
+, Ký tự phân cách giữa 2 ngày 
+# Ký tự bọc ngoài nhận diện các biến được khai báo
+0; 1; 2; 3; 4; 5; 6; 7; 8; 9; 10: Các ký tự số
+Xác thực Công thức tính phí: Hệ thống thực hiện Xác thực khi Maker ấn “Xác nhận” tại màn hình Thiết lập công thức
+Khi công thức nhập 2 hoặc nhiều cấu phần, trong đó có 2 cấu là các giá trị số học cụ thể, hệ thống báo lỗi và không cho phép lưu
+Các hàm MONTHS_BETWEEN, DATE_DIFF, ROUND, ROUNDUP, ROUNDDOWN, MIN, MAX bắt buộc phải đi kèm ký tự ( và ký tự )
+Hàm MONTHS_BETWEEN, DATE_DIFF bắt buộc phải nhập 2 tham số có định dạng là ngày phân cách bằng ký tự , và nằm trong 2 ký tự (  ). Hệ thống sẽ báo lỗi và không cho phép lưu khi kết hợp 2 hàm MONTHS_BETWEEN và DATE_DIFF trong cùng 1 cấu phần của công thức
+Hàm MIN/MAX và hàm MONTHS_BETWEEN/DATE_DIFF không được phép kết hợp với nhau trong cùng 1 cấu phần của công thức
+Công thức tính phí là 1 cấu phần thuộc Code phí, việc phê duyệt Công thức tính phí được thực hiện đồng thời với việc phê duyệt Code phí. Tham chiếu tới luồng phê duyệt Code phí tại US02 về khai báo 1 code phí.
+Bản ghi Thêm mới code phí đã được phê duyệt thành công và dữ liệu đã được hiển thị trên lưới, chỉ được chỉnh sửa các giá trị là số học; không cho phép sửa các hàm tính toán và các giá trị tính phí. Maker thực hiện sửa bằng cách upload lại danh sách code phí tại biểu phí. Tham chiếu tới US07 về luồng upload danh sách code phí tại biểu phí
+Việc chỉnh sửa Công thức tính phí cũng được thực hiện thông qua việc chỉnh sửa code phí
+Lưu đồ và diễn giải
+Lưu đồ
+
+Diễn giải
+Bước
+Mô tả chi tiết
+Đơn vị thực hiện
+
+Khai báo Thông tin chung của Code phí
+
+Maker
+
+Hiển thị màn hình Thêm mới Nghiệp vụ cho phép người dùng khai báo các thông tin Nghiệp vụ, Cấp sản phẩm dịch vụ tự động hiển thị = 1
+Hệ thống
+
+Khai báo các thông tin Nghiệp vụ và ấn chọn “Xác nhận”
+Maker
+
+Kiểm tra các trường bắt buộc nhập đã được được khai báo đầy đủ và đúng định dạng 
+Hệ thống
+
+Lưu thành công bản ghi Nghiệp vụ ở trạng thái “Chờ duyệt”
+
+
+Hiển thị bản ghi Thêm mới Nghiệp vụ này tại màn hình “Tác vụ Pending của tôi” của Maker và màn hình Tác vụ chờ duyệt của Checker
+
+
+Nhận thông báo Thêm mới thành công Nghiệp vụ
+Maker
+
+Giao diện
+Màn hình
+Màn hình Thêm mới Code phí khi lựa chọn khai báo theo nhóm khách
+
+Màn hình Thêm mới Code phí khi lựa chọn Không khai báo theo nhóm khách hàng (chung quy tắc tính phí).
+
+Màn hình Thiết lập công thức
+
+Mô tả chi tiết các trường
+Quy tắc tính phí
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+
+
+★
+Button
+
+Hiển thị màn hình Thiết lập công thức
+
+
+-
+Button
+Chỉ hiển thị khi tích chọn trường “Khai báo theo nhóm khách hàng” tại phân vùng Thông tin chung
+Hiển thị thêm trường Nhóm khách hàng
+Người dùng có thể khai báo nhiều nhóm khách hàng với các công thức khác nhau
+CÁC TRƯỜNG THÔNG TIN
+Khi công thức là 1 giá trị số học cụ thể, khi người dùng ấn Xác nhận để khai báo Code phí, Loại tiền tệ khác với Loại tiền tối thiểu/tối đa, hệ thống sẽ báo lỗi và không cho phép lưu
+
+Nhóm khách hàng
+-
+Dropdown list
+
+Hiển thị danh sách Nhóm khách hàng tương ứng với từng loại khách hàng đã được khai báo trên hệ thống
+
+Công thức
+★
+Text
+
+Hiển thị công thức do người dùng thiết lập tại màn hình Thiết lập công thức
+
+Tối thiểu
+★
+Number
+
+Mức phí tối thiểu của code phí
+
+Tối đa
+★
+Number
+
+Mức phí tối đa của code phí
+Công thức tính phí
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+
+Xác nhận
+★
+Button
+
+Lưu dữ liệu vào hệ thống
+
+Đóng
+★
+Button
+
+Thoát khỏi màn hình
+CÁC TRƯỜNG THÔNG TIN
+
+Trường giá trị tính phí
+◎
+Combobox
+
+Loại tính phí = Theo giao dịch, hiển thị danh sách các trường điều kiện tính phí với Nguồn dữ liệu = API
+
+Loại tính phí = Định kỳ và Ngày thu theo dữ liệu, hiển thị danh sách các điều kiện có sẵn trong hệ thống với nguồn dữ liệu = Bảng dữ liệu tương ứng tại Thông tin chung
+
+Loại tính phí = Định kỳ và Ngày thu cố định…
+
+Công thức
+◎
+Text
+Nhập tối đa 300 ký tự
+Hệ thống hiển thị và chỉ cho phép nhập:
+Các giá trị là số học
+Các toán tử + - x :  
+Các hàm:  MONTHS_BETWEEN, DATE_DIFF, ROUND, ROUNDUP, ROUNDDOWN, MIN, MAX
+Các ký tự ) ( , . # và ký tự số học
+Người dùng Click vào trường giá trị tính phí nào sẽ hiển thị trường đó tại phân vùng Công thức dưới định dạng #Field# ở vị trí đặt con trỏ
+
+Ngoài ra, người dùng có thể nhập tên trường theo định dạng #Field#. Khi nhập các ký tự sau dấu #, hệ thống sẽ hiển thị các trường gợi ý gần đúng
+
+Hệ thống hiển thị chữ viết hoa các thông tin người dùng nhập vào hệ thống
+

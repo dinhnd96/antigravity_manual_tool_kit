@@ -14,28 +14,21 @@ System type:
 - Phân tích ảnh an toàn: Chọn lọc đọc (Vision/OCR) từ 2 đến 3 hình ảnh cốt lõi nhất (như màn hình chính, sơ đồ luồng) để hiểu sâu về thiết kế UI và Flow mà text không diễn đạt hết. Tránh load cùng lúc quá nhiều ảnh để đảm bảo tốc độ. Điều này giúp viết Test Case UI và E2E chính xác hơn bản text.
 
 # INSTRUCTIONS
-- **BẮT BUỘC GIỮ NGUYÊN TÊN FIELD/ITEM**: Khi viết Test Case, AI phải lấy đúng và đầy đủ tên các field, item, button... từ tài liệu được gửi lên. Tuyệt đối không cắt gọn, không rút gọn tên và không tự ý sáng tạo hay thêm thắt các trường/tên ngoài tài liệu nguồn.
+- **Giữ nguyên tên field/item**: Khi viết Test Case, bạn vui lòng lấy đúng và đầy đủ tên các field, item, button... từ tài liệu được gửi lên. Tránh cắt gọn, rút gọn tên hoặc tự ý thêm thắt các trường/tên ngoài tài liệu nguồn.
 - Sinh đồng thời 3 tập TC, nhưng **không trùng nội dung**:
   (A) **TC theo BR (Business Rules)**: 1–3 TC/BR (≥1 Happy + ≥1 Negative; thêm Boundary/Calculation nếu cần).
   (B) **TC theo Chức năng UI**: mỗi chức năng UI sinh TC riêng (Happy/Negative/Boundary), **chỉ kiểm hành vi UI**, KHÔNG lặp lại validation/logic đã cover ở BR.
   (C) **TC theo Luồng nghiệp vụ (End-to-End Flow)**: Đi 1 luồng từ đầu đến cuối liền mạch xuyên suốt các chức năng. KHÔNG tách ra test lắt nhắt từng step nhỏ vì nếu test lại theo từng step sẽ bị trùng lặp với các TC của phần BR.
 
-
-
-# DANH SÁCH CHỨC NĂNG UI (nếu có trong URD module)
-
-(*Nếu module khác, điều chỉnh dải mục tiêu cho phù hợp.*)
-
-# QUY TẮC “KHÔNG TRÙNG” + GỘP (DEDUP & MERGE ENGINE)
+# QUY TẮC “TÁCH RIÊNG TEST CASE” & “KHÔNG TRÙNG”
 - **Không trùng** giữa TC-BR và TC-UI:
-  • TC-BR tập trung vào **điều kiện/logic** (mandatory, auto-code, hiệu lực, auto-status, audit…), có thể chạm UI nhưng chỉ để kích hoạt BR. 
+  • TC-BR tập trung vào **điều kiện/logic** (mandatory, auto-code, hiệu lực, auto-status…), có thể chạm UI nhưng chỉ để kích hoạt BR. 
   • TC-UI **không** kiểm lại các BR; chỉ kiểm **luồng và hành vi UI bề mặt**: điều hướng, mở/đóng form, button state enabled/disabled, hiển thị trên lưới, tải xuống, pagination, filter syntax, encode file…
-- **Gộp kiểm thử** khi có thể: nếu nhiều trường hợp là **biến thể tương tự** của **cùng một mục tiêu kiểm thử**, hãy:
-  • Tạo **1 TC duy nhất** và mô tả **nhiều biến thể** trong phần Steps (Step 3a/3b/3c…) thay vì tạo nhiều TC rời. **Ghi chú tại cột Note: "Gộp các trường hợp: [Liệt kê các biến thể/trường hợp được gộp]".**
-  • **NGOẠI LỆ NGHIÊM NGẶT (KHÔNG GỘP TRẠNG THÁI):** Khi các trường hợp kiểm tra cấu thành bởi nhiều trạng thái (Status/State) khác nhau (Ví dụ: kiểm tra với trạng thái Hoạt động, Ngừng hoạt động, Chờ duyệt), TUYỆT ĐỐI KHÔNG GỘP chung vào một Test Case để tránh rủi ro sót bug khi test bằng tay hay automation. BẮT BUỘC phải viết test case tách biệt riêng rẽ cho từng điều kiện trạng thái đầu vào cụ thể.
-  • Chỉ tách TC khi: (i) khác BR, hoặc (ii) khác luồng UI rõ rệt (ví dụ “Thêm mới” vs “Sửa”), hoặc (iii) cần data setup/phân quyền rất khác, hoặc (iv) đối với các trạng thái (Status) độc lập như quy định trên.
-- **Note only**: nếu một ý nghĩa **đã được cover** bởi TC khác, KHÔNG tạo TC mới; thay vào đó, thêm **1 dòng Note only**:
-  “ĐÃ COVER ở TC_ID=<<ID>> (Module=<<...>>, URD_Ref=<<...>>, BR_Ref=<<...>>)”.
+- **Tách riêng Test Case**: Để đảm bảo bộ Test Case rõ ràng và tránh bỏ sót, vui lòng **tách riêng từng kịch bản kiểm thử**.
+  • Mỗi Test Case chỉ nên kiểm tra một điều kiện, một trạng thái hoặc một luồng cụ thể. 
+  • Không được gộp chung nhiều trường hợp hay nhiều trạng thái (Status/State) vào cùng một Test Case nhằm tránh rủi ro sót case khi thực thi.
+- **Note only**: Nếu một ý nghĩa **đã được cover** bởi TC khác, KHÔNG tạo TC mới; thay vào đó, thêm **1 dòng Note only**:
+  “Đã cover ở TC_ID=<<ID>> (Module=<<...>>, URD_Ref=<<...>>, BR_Ref=<<...>>)”.
 
 # PHÂN LOẠI & ƯU TIÊN
 - Type: Happy / Boundary / Negative / Integration / Calculation / Security / Job / Report.
@@ -43,26 +36,25 @@ System type:
 - Priority: P1 (Smoke/đường găng), P2, P3.
 
 # HƯỚNG DẪN VIẾT TC (ÁP DỤNG CHO CẢ BR & UI)
-- Title (Tiêu đề): BẮT BUỘC phải viết rõ ràng, cụ thể và mô tả trực diện mục tiêu kiểm thử. Đọc vào Title phải hiểu ngay Test Case đang test hành vi gì, với điều kiện/dữ liệu đầu vào nào, và mong đợi kết quả nào (Ví dụ: "Kiểm tra hệ thống báo lỗi đỏ dưới field khi bỏ trống trường bắt buộc [Mã Khách Hàng]", "Kiểm tra Thêm mới loại phí thành công (sinh dòng Chờ duyệt) khi nhập đúng định dạng các trường"). Tuyệt đối KHÔNG đặt Title chung chung, sáo rỗng kiểu như "Test chức năng Thêm mới", "Kiểm tra BR_01", "Kiểm tra theo Happy case".
-- Precondition nêu rõ: vai trò (Maker/Checker), tham số hệ thống liên quan, data setup (nếu có), ngày T. BẮT BUỘC luôn phải đánh số thứ tự (1., 2., 3...). Ngay cả trong trường hợp chỉ có 1 điều kiện duy nhất, BẮT BUỘC vẫn phải thêm "1. " ở đầu câu. Nếu có nhiều ý thì phải ngắt dòng (\n) rõ ràng cho từng ý.
-- Steps: 4–8 bước/TC, đánh số rõ, nếu có biến thể ghi 3a/3b/3c… (để **gộp**).
-- Expected: BẮT BUỘC liệt kê đủ 4 lớp dữ liệu CÓ XUỐNG DÒNG RÕ RÀNG (theo đúng cú pháp i, ii, iii, iv dưới đây). Tuyệt đối không được viết chung chung: 
-  (i) Nghiệp vụ/Logic: Kết quả xử lý, chặn/lưu thành công.
-  (ii) UI: Toast, Popup, Grid reload, Focus bôi đỏ ô lỗi.
-  (iii) Trạng thái/Audit: Trạng thái bản ghi (Chờ duyệt/Duyệt), ghi log Audit (Maker/Checker).
-  (iv) Output: File (.xlsx), Message Topic (Kafka), Email thông báo.
+- Title (Tiêu đề): Cần viết rõ ràng, cụ thể và mô tả trực diện mục tiêu kiểm thử. Đọc vào Title nên hiểu ngay Test Case đang test hành vi gì. Cố gắng tránh đặt Title chung chung như "Test chức năng Thêm mới" hay "Kiểm tra theo Happy case".
+- Precondition: Nêu rõ vai trò, tham số hệ thống, ngày T, và các trạng thái đầu vào. Vui lòng đánh số thứ tự và ngắt dòng rõ ràng cho từng ý (nếu có nhiều ý thì đánh số từ 1, 2, 3...; nếu chỉ có 1 ý duy nhất thì vẫn phải đánh số "1."). Đặc biệt nếu có đường dẫn Menu hoặc cần đứng tại màn hình nào để bắt đầu bước tiếp theo, phải mô tả thông tin này đầy đủ. Lưu ý: Tên chức năng phân quyền phải được ghi lấy theo đúng tên **tính năng to/chính** (Feature/Module gốc) xuất hiện trong tài liệu, chứ không phải tên tính năng con nằm trong màn hình (VD: thay vì viết chung chung "Được phân quyền Quản lý tham số.", phải viết rõ "Được phân quyền vào chức năng [Tên tính năng to theo tài liệu]"). Đảm bảo đồng bộ chuẩn này ở tất cả các Test Case.
+- Steps: Đánh số rõ từng bước, tối đa 4–8 bước mỗi TC.
+- Expected: Đảm bảo đầy đủ 4 lớp dữ liệu (viết rõ ràng và xuống dòng cho từng ý):
+  (i) Nghiệp vụ/Logic: Kết quả xử lý tương ứng.
+  (ii) UI: Cập nhật trên màn hình (Toast, Popup, thông báo lỗi).
+  (iii) Trạng thái bản ghi: Trạng thái cập nhật của bản ghi dữ liệu (ví dụ: Chờ duyệt/Đã duyệt), TUYỆT ĐỐI KHÔNG đề cập đến Audit Log hay thông tin ghi log người dùng.
+  (iv) Output: Tập tin xuất ra hoặc thông báo đi kèm (nếu có).
   => VÍ DỤ MẪU CHO EXPECTED: 
-  "(i) Nghiệp vụ/Logic: Hệ thống chặn không cho phép lưu bản ghi do vi phạm ràng buộc trống.
-  (ii) UI: Form không tắt, focus và bôi đỏ viền ô lỗi, hiển thị cảnh báo 'Trường bắt buộc nhập'.
-  (iii) Trạng thái/Audit: Không tạo thay đổi, không sinh log.
-  (iv) Output: Không sinh message/file."
-  > **❌ QUY TẮC CHỐNG LỖI LOGIC & CẤM COPY-PASTE (ĐẶC BIỆT CHO UI TC):**
-  > - **Luồng Xem(View)/Đóng(Close/Cancel):** TUYỆT ĐỐI KHÔNG copy-paste cụm từ *"Lưu dữ liệu/Sinh trạng thái Chờ duyệt"* vào Expected Result. Chức năng Xem/Đóng KHÔNG LÀM THAY ĐỔI CSDL. Các bước thao tác cũng không được chèn lệnh *"Nhấn xác nhận/Kiểm tra thông báo"*.
-  > - **Luồng Lưu/Submit:** Phân biệt rành mạch kết quả báo "Lỗi Validation" (Không sinh dòng) và "Lưu thành công" (Báo toast xanh, sinh dòng Chờ duyệt).
-  > - **Trường tự sinh (Auto-generated/Audit logs):** Không bao giờ sinh kịch bản Negative UI Test (bắt lỗi nhập liệu chèn text đỏ) cho các trường mà hệ thống tự gán (như 'Ngày tạo', 'Người tạo').
-  > - **❌ CẤM DẬP KHUÔN STEPS (NO GENERIC STEPS):** Tuyệt đối không dùng chung một bộ 4-5 bước "mẫu" cho tất cả các TC. Các bước thao tác phải mô tả cụ thể hành động, gắn liền với mục tiêu kiểm thử.
-  > - **Test Logic So Sánh / Sắp Xếp (Priority/Sorting):** Đối với các quy tắc liên quan đến thứ tự ưu tiên hoặc sắp xếp, BẮT BUỘC kịch bản (Pre-condition & Steps) phải thiết lập dữ liệu với ít nhất n=02 (02 items/records) có giá trị khác nhau để chứng minh được hệ thống có khả năng sắp xếp hoặc đối chiếu đúng đắn.
-  > - **🔄 BẮT BUỘC SỬ DỤNG KỸ THUẬT STATE TRANSITION (CHUYỂN ĐỔI TRẠNG THÁI):** Đối với dữ liệu có nhiều mốc vòng đời (Status/State), phải chú trọng sinh đủ kịch bản chiều đi và chiều về (Reverse logic). Ví dụ: Không chỉ test luồng xuôi "Hoạt động -> Không hoạt động", mà phải bắt buộc sinh thêm kịch bản test luồng ngược lại "Không hoạt động -> Hoạt động". Khai thác triệt để các hướng chuyển động của trạng thái để đảm bảo không bị bỏ sót Gap.
+  "(i) Nghiệp vụ/Logic: Hệ thống lưu bản ghi mới thành công.
+  (ii) UI: Hiển thị thông báo thành công.
+  (iii) Trạng thái bản ghi: Bản ghi ở trạng thái Chờ duyệt.
+  (iv) Output: Không có."
+  > **📝 LƯU Ý KHI VIẾT TEST CASE:**
+  > - **Đảm bảo tính chính xác cho các luồng:** Với chức năng Xem/Đóng, lưu ý không nhầm lẫn với các thao tác Lưu dữ liệu; các chức năng này không làm thay đổi trạng thái của bản ghi.
+  > - **Trường tự sinh (Auto-generated):** Lưu ý tránh test Negative validations trên các trường do hệ thống tự sinh như Thời gian hệ thống.
+  > - **Đảm bảo bước (Steps) rõ ràng:** Hạn chế dùng chung một bộ mẫu cho tất cả các TC. Từng TC cần các bước liên quan trực tiếp đến kịch bản kiểm thử cụ thể đó.
+  > - **Test So Sánh / Sắp Xếp:** Các Test Case liên quan đến thứ tự, cần có đủ dữ liệu thích hợp để kiểm tra logic.
+  > - **Lưu ý State Transition (Chuyển đổi trạng thái):** Cần đảm bảo có đủ kịch bản kiểm tra cho tất cả các chiều chuyển đổi (chiều xuôi và ngược) của các trạng thái dữ liệu.
 - URD_Ref: chỉ định đúng tiểu mục (ví dụ “I.1.1.1.2”).
 - BR_Ref: 
   • Với **TC-BR**: ghi đúng mã BR (BR_01..BR_xx). 
@@ -70,9 +62,8 @@ System type:
 - Trace_ID: chuỗi ngắn phục vụ traceability (vd: “BR03-AUTOCODE”, “UI-FILTER-BASIC”).
 - Không tạo, không gắn **version record mới** nếu TC chỉ là sửa hiệu lực: luôn qua **OT.01** (đúng Versioning/OT=C).
 
-# SCHEMA XUẤT RA VÀ HÌNH THỨC TRẢ KẾT QUẢ — BẮT BUỘC
-Tuyệt đối KHÔNG in dữ liệu Test Case dạng bảng Markdown hay CSV dạng Text ra màn hình Chat. 
-BẮT BUỘC bạn phải tự viết và chạy một Script Python (sử dụng thư viện pandas và openpyxl) để tạo trực tiếp file `.xlsx` gồm 3 sheet: "Coverage", "Dedup_Log", và "Test Cases" lưu ngay vào máy của người dùng.
+# HIỂN THỊ KẾT QUẢ
+Vui lòng không in dữ liệu Test Case dưới dạng bảng trên Chat. Thay vào đó, hãy hỗ trợ viết và chạy Script Python (sử dụng `pandas` và `openpyxl`) để tạo file `.xlsx` gồm 1 sheet: "Test Cases" lưu vào máy của tác giả. Mọi ghi chú bổ sung cần thiết xin vui lòng điền vào cột Note.
 
 Cột dữ liệu của sheet "Test Cases" phải đảm bảo thứ tự nguyên vẹn và bao gồm đủ 21 cột (để dán khớp vào Master File):
 - A=TC_ID | B=BR_Ref | C=URD_Ref | D=Module | E=Feature | F=Title
@@ -90,19 +81,16 @@ Cột dữ liệu của sheet "Test Cases" phải đảm bảo thứ tự nguyê
 *(Ví dụ chuẩn tham chiếu: SA09-BR-HAP-001, SA09-BR-NEG-001, SA09-UI-001).*
 *Lưu ý: Luôn thay <<MODULE_CODE>> bằng mã module thực tế (VD: SA09, PR02).*
 
-# OUTPUT FORMAT (⚠️ GHI NHỚ: CỘT EXPECTED BẮT BUỘC NGHIÊM NGẶT THEO ĐÚNG FORMAT 4 LỚP i, ii, iii, iv CHO TỪNG RECORD)
-- Sheet “Coverage”:
-  • (A) Đếm TC theo BR (BR_01..BR_xx): Covered / GAP, mỗi GAP gợi ý 1 skeleton TC. 
-  • (B) Đếm TC theo **UI-FUNC.01..0n**: Covered / GAP (nếu một chức năng UI thiếu Happy/Negative, nêu rõ).
-- Sheet “Dedup_Log”:
-  • Liệt kê các cặp TC có khả năng trùng nội dung; nêu quyết định: GỘP vào TC_ID nào, và “Note only” ở đâu.
+# ĐỊNH DẠNG ĐẦU RA (LƯU Ý CỘT EXPECTED CẦN ĐỦ 4 LỚP MỤC)
+- Dữ liệu đầu ra được ánh xạ đầy đủ vào sheet "Test Cases". 
+- Mọi ghi chú liên quan đến vùng phủ (Coverage) hay Trùng lặp kịch bản vui lòng ghi nhận trực tiếp vào cột Note của Test Case liên quan, thay vì sinh ra các sheet báo cáo riêng biệt.
 
 # THỰC THI
 1) Parse URD để liệt kê hết **BR_xx** và **UI-FUNC.01..0n**. 
 2) Sinh **TC-BR** trước (đảm bảo đủ 1–3 TC/BR). 
 3) Sinh **TC-UI** sau, tuyệt đối không lặp validation/logic đã cover ở TC-BR: 
    - Ví dụ: “Thêm mới Nghiệp vụ” (UI-FUNC.01) chỉ kiểm: nút, điều hướng, trạng thái enabled/disabled, clear form, Cancel/Close, giữ dữ liệu khi back/refresh, v.v.; **không** test “thiếu trường bắt buộc” (đã ở BR_01). 
-4) Áp dụng quy tắc **MERGE**: gộp biến thể tương tự trong **1 TC** (ghi chú rõ việc gộp vào cột Note); thêm “Note only” khi đã cover. 
-5) Viết mã Python để nạp dữ liệu vào 3 DataFrames (Coverage, Dedup_Log, Test Cases).
+4) Không gộp các kịch bản với nhau, giữ nguyên quy tắc tách riêng từng TC để không bỏ sót case. 
+5) Viết mã Python để nạp dữ liệu vào DataFrame (cho sheet Test Cases).
 6) Chạy script để tự động xuất ra file `.xlsx` (Ví dụ: `Feature_N_Test_Cases.xlsx`) ngay trong thư mục dự án.
 7) Trả lời người dùng (bằng Tiếng Việt) rằng file Excel đã được sinh thành công và cung cấp đường dẫn để họ kiểm tra.
