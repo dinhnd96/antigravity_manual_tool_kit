@@ -14,11 +14,11 @@ summary.json
 *.doc
 *.pdf
 *.bak
-"tài liệu/"
-"tài liệu đã phân tích/"
-"Test case/"
-"Test case_Management_ProfiX.xlsx"
-"Test Plan ProfiX.xlsx"
+tài liệu/
+tài liệu đã phân tích/
+Test case/
+Test case_Management_ProfiX.xlsx
+Test Plan ProfiX.xlsx
 
 # Temporary files (Office lock files)
 ~$*

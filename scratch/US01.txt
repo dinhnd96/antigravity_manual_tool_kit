@@ -1,0 +1,325 @@
+US01 - Là người dùng, tôi muốn khai báo các dịch vụ/sản phẩm tại ngân hàng theo mô hình cây phân cấp để dễ dàng quản lý các dịch vụ/sản phẩm phát sinh phí
+Yêu cầu nghiệp vụ
+Khai báo Nghiệp vụ
+Navigation: Khi muốn khai báo các dịch vụ/sản phẩm tại ngân hàng, người dùng truy cập chức năng: Tham số >> Danh mục sản phẩm dịch vụ >> Thêm mới Nghiệp vụ
+
+Màn hình Thêm mới nghiệp vụ bao gồm các trường thông tin: Mã nghiệp vụ, Tên Nghiệp vụ, Mô tả, Ngày hiệu lực, Ngày hết hiệu lực.
+	•	Nghiệp vụ được hiểu là Sản phẩm dịch cấp đầu tiên (cấp 1) trong hệ thống.
+	•	Mã nghiệp vụ do hệ thống tự động sinh theo nguyên tắc:
+	•	Là số duy nhất và là số tự tăng có 2 chữ số bắt đầu từ 01 đến 99
+	•	Không trùng với các Mã nghiệp vụ đã tồn tại
+	•	Trạng thái Nghiệp vụ bao gồm:
+	•	Hoạt động: Cấp Nghiệp vụ đang được vận hành và sử dụng
+	•	Không hoạt động: Cấp Nghiệp vụ chưa hoặc không còn được vận hành và sử dụng
+	•	Ngày hiệu lực, Ngày hết hiệu lực đều phải >= Ngày hệ thống và Ngày hết hiệu lực >= Ngày hiệu lực
+	•	Sau khi Maker khai báo thành công, bản ghi Nghiệp vụ sẽ ở trạng thái chờ duyệt với hành động là Thêm mới và chỉ hiển thị trên lưới Danh mục SPDV sau khi cấp duyệt cuối cùng phê duyệt theo nguyên tắc mô tả tại US25 về Ma trận phê duyệt.
+Bản ghi Nghiệp vụ sau khi duyệt thành công sẽ được hiển thị trên lưới chức năng và cho phép chỉnh sửa. Khi người dùng chỉnh sửa Nghiệp vụ, hệ thống chỉ cho phép chỉnh sửa Ngày hiệu lực, Ngày hết hiệu lực.
+	•	Ngày hiệu lực, Ngày hết hiệu lực chỉ được sửa >= Ngày hệ thống và Ngày hết hiệu lực >= Ngày hiệu lực
+	•	Ngày hiệu lực phải <= Ngày hiệu lực của các SPDV chi tiết và Ngày hết hiệu lực phải >= Ngày hết hiệu lực của các SPDV chi tiết
+	•	Sau khi Maker chỉnh sửa thành công, bản ghi Nghiệp vụ sẽ ở trạng thái chờ duyệt với hành động là Sửa và chỉ hiển thị thông tin sau sửa trên lưới Danh mục SPDV sau khi cấp duyệt cuối cùng phê duyệt theo nguyên tắc mô tả tại US25 về Ma trận phê duyệt.
+Hằng ngày, tại thời điểm đầu ngày, hệ thống tự động kiểm tra ngày hiệu lực và ngày hết hiệu lực của tất cả bản ghi Nghiệp vụ và cập nhật theo nguyên tắc:
+	•	Trường hợp ngày T = Ngày hiệu lực và trạng thái hoạt động của Nghiệp vụ = Không hoạt động: Hệ thống cập nhật trạng thái Nghiệp vụ = Hoạt động.
+	•	Trường hợp ngày T > Ngày hết hiệu lực, trạng thái hoạt động của Nghiệp vụ = Hoạt động: Hệ thống cập nhật trạng thái Nghiệp vụ = Không hoạt động.
+Khai báo Sản phẩm, dịch vụ chi tiết
+Navigation: Khi muốn khai báo các dịch vụ/sản phẩm tại ngân hàng, người dùng truy cập chức năng: Tham số >> Danh mục sản phẩm dịch vụ và Code phí >> Thêm mới Sản phẩm dịch vụ
+
+Màn hình Thêm mới SPDV chi tiết bao gồm các trường thông tin: Mã SPDV, Tên SPDV, Mã – Tên SPDV liền trước, Mô tả, Ngày hiệu lực, Ngày hết hiệu lực.
+	•	Người dùng được phép chọn khai báo SPDV cấp chi tiết theo SPDV cấp cha và tại màn hình Thêm mới SPDV, hệ thống tự động hiển thị Mã – Tên SPDV liền trước
+	•	Mã SPDV chi tiết do hệ thống tự động sinh theo nguyên tắc:
+	•	Mã nghiệp vụ/SPDV cấp cha liền trước + 02 ký tự số tự tăng bắt đầu từ 01 đến 99
+	•	Là số duy nhất và không trùng với những bản ghi mã SPDV chi tiết đã tồn tại trên hệ thống
+	•	Các yêu cầu khác tương tự như màn hình Thêm mới Nghiệp vụ
+Bản ghi SPDV chi tiết sau khi duyệt thành công sẽ được hiển thị trên lưới chức năng và cho phép chỉnh sửa. Khi người dùng chỉnh sửa SPDV chi tiết, hệ thống chỉ cho phép chỉnh sửa Ngày hiệu lực, Ngày hết hiệu lực.
+	•	Ngày hiệu lực của Nghiệp vụ/SPDV chi tiết cấp cha <= Ngày hiệu lực <= Ngày hiệu lực của các SPDV chi tiết cấp con
+	•	Ngày hết hiệu lực của Nghiệp vụ/SPDV chi tiết cấp cha >= Ngày hết hiệu lực >= Ngày hết hiệu lực của các SPDV chi tiết
+	•	Các nguyên tắc khác tương tự với yêu cầu Chỉnh sửa về Nghiệp vụ
+Các nguyên tắc khác tương tự với yêu cầu về Nghiệp vụ.
+Lưu đồ và diễn giải
+Khai báo Nghiệp vụ
+Lưu đồ Thêm mới Nghiệp vụ
+
+Lưu đồ Chỉnh sửa Nghiệp vụ
+
+Diễn giải lưu đồ:
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+	•	
+Thêm mới Nghiệp vụ
+
+Chọn nút “+ Thêm mới” trên thanh header của màn hình Danh sách sản phẩm dịch vụ
+Maker
+	•	
+
+Hiển thị màn hình Thêm mới Nghiệp vụ cho phép người dùng khai báo các thông tin Nghiệp vụ, Cấp sản phẩm dịch vụ tự động hiển thị = 1
+Hệ thống
+	•	
+
+Khai báo các thông tin Nghiệp vụ và ấn chọn “Xác nhận”
+Maker
+	•	
+
+Kiểm tra các trường bắt buộc nhập đã được được khai báo đầy đủ và đúng định dạng 
+Hệ thống
+	•	
+
+Lưu thành công bản ghi Nghiệp vụ ở trạng thái “Chờ duyệt”
+
+	•	
+
+Hiển thị bản ghi Thêm mới Nghiệp vụ này tại màn hình “Tác vụ Pending của tôi” của Maker và màn hình Tác vụ chờ duyệt của Checker
+
+	•	
+
+Nhận thông báo Thêm mới thành công Nghiệp vụ
+Maker
+	•	
+Sửa Nghiệp vụ
+Chọn nút “Chỉnh sửa” tại bản ghi Nghiệp vụ cần sửa
+Maker
+	•	
+
+Hiển thị màn hình Chỉnh sửa Nghiệp vụ
+Hệ thống
+	•	
+
+Chỉnh sửa trường Ngày hiệu lực và/hoặc Ngày hết hiệu lực
+Maker
+	•	
+
+Kiểm tra Ngày hết hiệu lực, Ngày hiệu lực có thay đổi so với dữ liệu trước sửa không?
+Hệ thống
+	•	
+
+Tạo mới bản ghi với thông tin vừa sửa ở trạng thái Chờ duyệt
+
+	•	
+
+Hiển thị bản ghi “Sửa Nghiệp vụ” này tại màn hình “Tác vụ Pending của tôi” của Maker và màn hình Tác vụ chờ duyệt của Checker
+
+	•	
+
+Nhận thông báo tạo yêu cầu Sửa thành công Nghiệp vụ
+Maker
+
+Khai báo Sản phẩm, dịch vụ chi tiết
+Lưu đồ Thêm mới SPDV chi tiết:
+
+
+Lưu đồ Chỉnh sửa SPDV chi tiết:
+
+Diễn giải lưu đồ:
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+	•	
+Thêm mới SPDV chi tiết
+
+Chọn nút “+” tại bản ghi SPDV cấp cha liền trước
+Maker
+	•	
+
+Hiển thị màn hình Thêm mới SPDV chi tiết cho phép người dùng khai báo các thông tin SPDV chi tiết
+Hệ thống
+	•	
+
+Khai báo các thông tin SPDV chi tiết và ấn chọn “Xác nhận”
+Maker
+	•	
+
+Kiểm tra các trường bắt buộc nhập đã được được khai báo đầy đủ và đúng định dạng 
+Hệ thống
+	•	
+
+Lưu thành công bản ghi SPDV chi tiết ở trạng thái “Chờ duyệt”
+
+	•	
+
+Hiển thị bản ghi Thêm mới SPDV chi tiết này tại màn hình “Tác vụ Pending của tôi” của Maker và màn hình Tác vụ chờ duyệt của Checker
+
+	•	
+
+Nhận thông báo Thêm mới thành công SPDV chi tiết
+Maker
+	•	
+Sửa SPDV chi tiết
+Chọn nút “Chỉnh sửa” tại bản ghi SPDV chi tiết cần sửa
+Maker
+	•	
+
+Hiển thị màn hình Chỉnh sửa SPDV chi tiết
+Hệ thống
+	•	
+
+Chỉnh sửa trường Ngày hiệu lực và/hoặc Ngày hết hiệu lực
+Maker
+	•	
+
+Kiểm tra Ngày hết hiệu lực, Ngày hiệu lực có thay đổi so với dữ liệu trước sửa không?
+Hệ thống
+	•	
+
+Tạo mới bản ghi với thông tin vừa sửa ở trạng thái Chờ duyệt
+
+	•	
+
+Hiển thị bản ghi “Sửa SPDV chi tiết” này tại màn hình “Tác vụ Pending của tôi” của Maker và màn hình Tác vụ chờ duyệt của Checker
+
+	•	
+
+Nhận thông báo tạo yêu cầu Sửa thành công SPDV chi tiết
+Maker
+
+Giao diện
+Khai báo Nghiệp vụ
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+	•	
+Xác nhận
+★
+Button
+
+Lưu dữ liệu vào hệ thống
+	•	
+Đóng
+★
+Button
+
+Thoát khỏi màn hình
+CÁC TRƯỜNG THÔNG TIN
+	•	
+Cấp sản phẩm dịch vụ
+◎
+Number
+Mặc định: 1
+Không cho phép thay đổi
+Cấp Nghiệp vụ là cấp cao nhất trong cây SPDV
+	•	
+Tên Nghiệp vụ
+★
+Text
+
+Nhập text
+	•	
+Mã Nghiệp vụ
+◎
+Number
+Không cho phép khai báo
+
+Chỉ hiển thị Mã Nghiệp vụ khi khai báo thành công
+
+Số duy nhất và là số tự sinh theo nguyên tắc:
+- Là số tự tăng có 2 chữ số bắt đầu từ 01 đến 99. Trường hợp số tự tăng >99 hệ thống báo lỗi và không cho phép lưu
+- Không trùng với các Mã nghiệp vụ đã tồn tại trên hệ thống
+	•	
+Mô tả
+★
+Text
+
+Nhập text
+Trường mô tả thông tin cụ thể của Nghiệp vụ
+	•	
+Ngày hiệu lực
+★
+Date
+Không chọn ngày quá khứ
+Hiển thị lịch và cho phép chọn 1 giá trị
+- Nếu Ngày hiện tại của hệ thống = Ngày hiệu lực => Trạng thái hoạt động của cấp Nghiệp vụ = Hoạt động
+- Nếu Ngày hiện tại của hệ thống < Ngày hiệu lực => Trạng thái hoạt động của cấp Nghiệp vụ = Không hoạt động
+	•	
+Ngày hết hiệu lực
+★
+Date
+Không chọn ngày quá khứ
+Hiển thị lịch và cho phép chọn 1 giá trị
+Ngày hết hiệu lực >= Ngày hiệu lực
+
+Khai báo Sản phẩm, dịch vụ chi tiết
+
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+	•	
+Xác nhận
+★
+Button
+
+Lưu dữ liệu vào hệ thống
+	•	
+Đóng
+★
+Button
+
+Thoát khỏi màn hình
+CÁC TRƯỜNG THÔNG TIN
+	•	
+Tên
+★
+Text
+
+Nhập text
+Trường lưu tên SPDV chi tiết
+	•	
+Mã
+◎
+Number
+Không cho phép khai báo
+
+Chỉ hiển thị Mã SPDV chi tiết khi khai báo thành công
+
+Số duy nhất và là số tự sinh theo nguyên tắc:
+- Mã nghiệp vụ/SPDV cấp cha liền trước + 02 ký tự số tự tăng bắt đầu từ 01 đến 99. Trường hợp số tự tăng >99 hệ thống báo lỗi và không cho phép lưu
+- Không trùng với những bản ghi mã SPDV chi tiết đã tồn tại trên hệ thống
+Ví dụ: Mã 0601 (SPDV chi tiết: “Tài khoản thanh toán” thuộc Nghiệp vụ “Tài khoản”)
+	•	
+Mô tả
+★
+Text
+
+Nhập text
+Trường mô tả thông tin cụ thể của SPDV chi tiết
+	•	
+Cấp SPDV liền trước
+◎
+Text
+Không cho phép khai báo
+Hiển thị dữ liệu: “Mã SPDV liền trước - Tên SPDV liền trước”
+	•	
+Ngày hiệu lực
+★
+Date
+Không chọn ngày quá khứ
+
+>= Ngày hiệu lực của các cấp cha trong cây SPDV
+Hiển thị lịch và cho phép chọn 1 giá trị
+- Nếu Ngày hiện tại của hệ thống = Ngày hiệu lực => Trạng thái hoạt động SPDV chi tiết = Hoạt động
+- Nếu Ngày hiện tại của hệ thống < Ngày hiệu lực => Trạng thái hoạt động của SPDV chi tiết = Không hoạt động
+	•	
+Ngày hết hiệu lực
+★
+Date
+Không chọn ngày quá khứ
+
+<= Ngày hết hiệu lực của các cấp cha trong cây SPDV
+Hiển thị lịch và cho phép chọn 1 giá trị
+Ngày hết hiệu lực >= Ngày hiệu lực
+	•	
+Đây là cấp cuối cùng trong cây sơ đồ sản phẩm dịch vụ
+◎
+Label
+
+Chỉ hiển thị khi cấp khai báo là cấp cuối
+

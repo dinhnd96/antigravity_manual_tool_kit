@@ -1,0 +1,76 @@
+SA.07- Quản lý nhóm khách hàng
+Mô tả nhóm chức năng
+Mục đích: Chức năng này cho phép người dùng cấu hình các nhóm khách hàng thuộc các phân khúc khách hàng của ngân hàng trong từng thời kỳ
+Các chức năng chi tiết trên màn hình:
+
+STT
+Chức năng
+Mô tả
+
+Thêm mới
+Cho phép thêm mới 1 nhóm khách hàng
+
+Sửa
+Cho phép sửa bản ghi 
+
+Xem
+Cho phép xem bản ghi
+
+Màn hình tham khảo:
+
+
+Thêm mới nhóm khách hàng
+Thông tin chung:
+
+Objective
+Thêm mới nhóm khách hàng
+Actor
+Người dùng
+Trigger
+Người dùng click vào nút “thêm mới” tại chức năng “Quản lý nhóm khách hàng”
+Pre-condition
+Người dùng được phân quyền
+Post-condition
+Thêm mới  thành công một nhóm khách hàng
+
+Luồng nghiệp vụ:
+Step
+Actor
+Description
+
+Người dùng
+Chọn nút “Thêm mới” tại chức năng “Quản lý nhóm khách hàng”
+
+Hệ thống
+Hiển thị màn hình Thêm mới nhóm khách hàng
+
+Người dùng
+Người dùng nhập thông tin tại các trường và nhấn “Xác nhận”
+
+Hệ thống
+Kiểm tra tính hợp lệ của các thông tin vừa nhập
+
+Người dùng
+Nhận thông báo “Thêm mới thành công một nhóm khách hàng”
+
+Business Rules:
+
+BR Code
+Description
+BR_01
++ Trường Operator chỉ hiển thị hai lựa chọn gồm “ =, IN” để người dùng chọn
++ Trường Trạng thái chỉ hiển thị hai lựa chọn gồm “Hoạt động, Không hoạt động” để người dùng chọn
++ Nếu Operator = “IN” thì tại Trường giá trị người dùng được nhập nhiều hơn 1 giá trị và sử dụng dấu phẩy (,) để ngăn cách
+BR_02
+Người dùng chọn “Đóng”, hệ thống sẽ không lưu các thông tin vừa nhập
+Người dùng chọn “Xác nhận” hệ thống kiểm tra các trường bắt buộc điền, nếu không điền, thông báo ngay dưới trường đó “Trường này bắt buộc”
+BR_03
+Đối với trường hợp người dùng sửa trạng thái của một nhóm khách hàng:
++ Nếu trạng thái của bản ghi “Nhóm khách hàng” = Hoạt động và Nhóm khách hàng này đang được gán vào bất kỳ một Code phí nào có trạng thái của Code phí = Hoạt động/Ngừng hoạt động/Chờ gán thì người dùng không được phép trạng thái.
++ Nếu Nhóm khách hàng chưa được gán vào code phí nào hoặc toàn bộ các Code phí đang gán Nhóm khách hàng đó đã có trạng thái = Huỷ thì người dùng có thể sửa trạng thái của Nhóm khách hàng đó.
+
+
+Màn hình tham khảo:
+
+
+

@@ -1,0 +1,238 @@
+US17 - Là người dùng, tôi muốn xem danh sách CTƯĐ và toàn bộ lịch sử khai báo
+Yêu cầu nghiệp vụ
+Navigation: Khi muốn xem thông tin về chương trình ưu đãi, người dùng truy cập: Tham số >> Chương trình ưu đãi >> Quản lý Chương trình ưu đãi
+Màn hình “Quản lý chương trình ưu đãi”: Hiển thị tất cả danh sách chương trình ưu đãi đang có của hệ thống. 
+	•	Màn hình này gồm có: Ưu đãi có đánh giá định kỳ/ Ưu đãi không đánh giá định kỳ, Lọc nâng cao, Lưới danh sách CTƯĐ, Tải xuống
+	•	Ưu đãi có đánh giá định kỳ/ Ưu đãi không đánh giá định kỳ: Người dùng chọn ưu đãi có đánh định kỳ hoặc không. Hệ thống mặc định hiển thị Ưu đãi có đánh giá định kỳ khi vào màn hình “Danh sách chương trình ưu đãi”
+	•	Button Lọc nâng cao: Người dùng nhấn vào button này, hệ thống hiển thị màn hình Lọc Chương trình ưu đãi
+	•	Màn hình Lọc chương trình ưu đãi gồm có: 
+	•	Mã CTƯĐ: Người dùng nhập mã CTƯĐ
+	•	Tên CTƯĐ: Người dùng nhập tên CTƯĐ
+	•	Trạng thái: Người dùng chọn 1 trạng thái, các trạng thái gồm: Hoạt động, Tạm dừng
+	•	Ngày hiệu lực: dd/mm/yyyy
+	•	Ngày hết hiệu lực: dd/mm/yyyy
+	•	Loại ưu đãi: Chọn 1 loại ưu đãi, các loại ưu đãi gồm: Ưu đãi theo biểu phí, Ưu đãi theo code phí
+	•	Button Xoá lọc: Người dùng nhấn vào button này để xoá thông tin trên các trường người dùng đã nhập/chọn
+	•	Button Áp dụng: Người dùng nhấn vào button này để áp dụng lọc với thông tin trên các trường người dùng đã nhập/chọn
+	•	Lưới danh sách chương trình ưu đãi gồm: 
+	•	Mã CTƯĐ: Người dùng nhấn vào mã CTƯĐ để xem chi tiết 1 CTƯĐ
+	•	Tên CTƯĐ
+	•	Trạng thái: Trạng thái CTƯĐ gồm: Hoạt động/Tạm dừng
+	•	Ngày hiệu lực: dd/mm/yyyy
+	•	Ngày hết hiệu lực: dd/mm/yyyy. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Ngày tạo: hh:mm:ss – dd/mm/yyyy
+	•	Người tạo: Hiển thị username của người tạo
+	•	Ngày sửa: hh:mm:ss – dd/mm/yyyy. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Người sửa: Hiển thị username của người sửa. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Ngày duyệt: hh:mm:ss – dd/mm/yyyy
+	•	Người duyệt: Hiển thị username của người duyệt. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Sau khi lọc theo các điều kiện, hệ thống trả kết quả, hiển thị các CTƯĐ phù hợp với điều kiện lọc theo quy tắc tìm kiếm chung của hệ thống
+	•	Tải xuống: Người dùng có thể tải xuống file danh sách CTƯĐ theo dữ liệu kết quả tìm kiếm đang hiển thị trên màn hình và theo quy tắc tải xuống chung của hệ thống.
+	•	Màn hình Xem chi tiết một chương trình ưu đãi: các trường hiển thị như ở màn tạo/chỉnh sửa, Lịch sử tác động. Người dùng nhấn vào Lịch sử tác động, hệ thống hiển thị popup, tham khảo mục Lịch sử tác động  tại Quy tắc chung.
+Lưu đồ và diễn giải
+Lưu đồ
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Xem danh sách CTƯĐ 
+Chọn “Chương trình ưu đãi
+Người dùng
+2
+
+Gửi yêu cầu lấy danh sách ưu đãi
+Frontend
+3
+
+Nhận yêu cầu và xử lý
+Backend
+4
+
+Hiển thị danh sách ưu đãi 
+Frontend
+5
+
+Lựa chọn: 
++ Lọc nâng cao => Bước 5.1
++ Tải xuống => Bước 5.2
++ Xem chi tiết chương trình ưu đãi => Bước 5.3
+Người dùng
+5.1
+
+Lọc nâng cao
+Người dùng
+6
+
+Hiển thị màn hình “Lọc chương trình ưu đãi”
+Frontend
+7
+
+Nhập các điều kiện lọc
+Người dùng
+8
+
+Người dùng lựa chọn: 
++ Xoá lọc => Bước 8.1
++ Áp dụng => Bước 8.2
+Người dùng
+8.1
+
+Xoá lọc
+Người dùng
+9
+
+Đóng màn hình Lọc chương trình ưu đãi => Kết thúc
+Frontend
+8.2
+
+Áp dụng
+Người dùng
+10
+
+Hiển thị danh sách CTƯĐ theo điều kiện => Kết thúc
+Frontend
+5.2
+
+Tải xuống
+Người dùng
+10
+
+Tham chiếu quy tắc Tải xuống tại mục Quy tắc chung => Kết thúc
+Frontend
+5.3
+
+Xem chi tiết CTƯĐ
+Người dùng
+11
+
+Gửi yêu cầu xem chi tiết CTƯĐ
+Frontend
+12
+
+Nhận yêu cầu và xử lý
+Backend
+13
+
+Hiển thị màn chi tiết CTƯĐ
+=> Kết thúc
+Frontend
+
+Giao diện
+Màn hình
+Màn hình xem danh sách chương trình ưu đãi
+Màn hình Lọc Chương trình ưu đãi
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+1
+Lọc nâng cao
+
+Button
+
+Người dùng click vào button “Lọc nâng cao” để nhập các điều kiện lọc
+2
+Thêm mới
+
+Button
+
+Người dùng click vào button Thêm mới để thêm mới 1 CTƯĐ
+3
+Tải xuống
+
+Button
+
+Tải xuống file danh sách CTƯĐ
+4
+Ưu đãi có đánh giá định kỳ/ Ưu đãi không đánh giá định kỳ
+
+Dropdwn list
+
++ Người dùng chọn ưu đãi có đánh định kỳ hoặc không
++ Hệ thống mặc định hiển thị Ưu đãi có đánh giá định kỳ khi vào màn hình “Danh sách chương trình ưu đãi”
+CÁC TRƯỜNG THÔNG TIN
+1
+Mã CTƯĐ
+
+Text
+
++ Hiển thị mã CTƯĐ 
++ Người dùng nhấn vào mã CTƯĐ Hệ thống hiển thị màn hình thông tin chi tiết của CTƯĐ
+2
+Tên CTƯĐ
+
+Text
+
+Hiển thị tên CTƯĐ
+3
+Trạng thái
+
+Text
+
+Hiển thị trạng thái của CTƯĐ: Hoạt động/Tạm dừng
+4
+Ngày hiệu lực
+
+Date 
+
++ Hiển thị ngày hiệu lực của CTƯĐ
++ Format: dd/mm/yyyy
+5
+Ngày hết hiệu lực
+
+Date
+
++ Hiển thị ngày hết hiệu lực của CTƯĐ
++ Format: dd/mm/yyyy
+6
+Ngày tạo
+
+Date time
+
++ Ngày tạo CTƯĐ
++ Format: hh:mm:ss – dd/mm/yyyy
+7
+Người tạo
+
+Text
+
++ username của người tạo CTƯĐ
+8
+Ngày sửa
+
+Date time
+
++ Ngày sửa CTƯĐ
++ Format: hh:mm:ss – dd/mm/yyyy
++ Không có thông tin, hệ thống show “-”
+9
+Người sửa
+
+Text
+
++ Username người sửa CTƯĐ
++ Không có thông tin, hệ thống show “-”
+10
+Người duyệt
+
+Text
+
++ Username của gười duyệt CTƯĐ
++ Không có thông tin, hệ thống show “-”
+11
+Ngày duyệt
+
+Date time
+
++ Ngày duyệt CTƯĐ
++ Format: hh:mm:ss – dd/mm/yyyy
++ Không có thông tin, hệ thống show “-”
+

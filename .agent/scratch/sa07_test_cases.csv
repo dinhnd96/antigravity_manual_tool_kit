@@ -1,0 +1,123 @@
+TC_ID,BR_Ref,URD_Ref,Module,Feature,Comment,Title,Type,Category,Priority,Precondition,Steps,Expected,Trace_ID,Note
+TC_SA07_001,BR_01,I.1.1.1,SA.07,Quản lý nhóm khách hàng,Chức năng này là không có tạo duyệt -> sửa cho tất cả trong feature này,"Kiểm tra danh sách 'Operator' hiển thị [=, IN] và 'Trạng thái' hiển thị [Hoạt động, Không hoạt động]",Happy,Smoke,P2,"1. Đăng nhập tài khoản được phân quyền.
+2. Tại màn hình Thêm mới.","1. Tại form Thêm mới, mở dropdown 'Operator'.
+2. Mở dropdown 'Trạng thái'.","(i) Nghiệp vụ/Logic: Parsing List Option Data.
+(ii) UI: Nhấn dropdown nhảy ra đúng ['=', 'IN'].
+(iii) Trạng thái/Audit: Data view only.
+(iv) Output: Không xuất file.",BR01-OPERATOR-LIST,
+TC_SA07_001_A,BR_01,I.1.1.1,SA.07,Quản lý nhóm khách hàng,"Thêm case Operator = 'IN"" mà người dùng chỉ nhập 1 giá trị, không có dấu phẩy",Kiểm tra nhập liệu 1 giá trị không có dấu phẩy khi chọn Operator = 'IN',Happy,Smoke,P2,"1. Đăng nhập tài khoản được phân quyền.
+2. Tại màn hình Thêm mới.","1. Tại form Thêm mới, chọn Operator = 'IN'.
+2. Nhập 1 giá trị duy nhất (không có dấu phẩy). 
+3. Nhấn Xác nhận.","(i) Nghiệp vụ/Logic: Nhận diện list có 1 phần tử.
+(ii) UI: Form lưu bình thường.
+(iii) Trạng thái/Audit: Ghi xuống CSDL.
+(iv) Output: Không.",BR01-IN-SINGLE,
+TC_SA07_001_B,BR_01,I.1.1.1,SA.07,Quản lý nhóm khách hàng,"Thêm case happy khi toán tử '=' và người dùng nhập 1 giá trị, không có dấu phẩy",Kiểm tra nhập liệu 1 giá trị hợp lệ khi chọn Operator = '=',Happy,Smoke,P2,"1. Đăng nhập tài khoản được phân quyền.
+2. Tại màn hình Thêm mới.","1. Tại form Thêm mới, chọn Operator = '='.
+2. Nhập 1 giá trị duy nhất. 
+3. Nhấn Xác nhận.","(i) Nghiệp vụ/Logic: Xử lý theo equals.
+(ii) UI: Form lưu bình thường, không báo lỗi.
+(iii) Trạng thái/Audit: Ghi CSDL.
+(iv) Output: Không.",BR01-EQUAL-SINGLE,
+TC_SA07_002,BR_01,I.1.1.1,SA.07,Quản lý nhóm khách hàng,Case này sai Trạng thái/Audit: Data view only.,Kiểm tra nhập liệu đa giá trị (ngăn cách dấu phẩy) khi chọn Operator = 'IN',Happy,Regression,P1,"1. Đăng nhập tài khoản được phân quyền.
+2. Tại màn hình Thêm mới.","1. Chọn Operator = 'IN'. 
+2. Tại trường giá trị, nhập: 'Value1,Value2,Value3'. 
+3. Nhấn Xác nhận.","(i) Nghiệp vụ/Logic: Parsing List Option Data.
+(ii) UI: Field nhận đa giá trị cách nhau dấu phẩy, form không báo lỗi format.
+(iii) Trạng thái/Audit: Ghi xuống CSDL.
+(iv) Output: Không xuất file.",BR01-IN-MULTI-VAL,
+TC_SA07_003,BR_01,I.1.1.1,SA.07,Quản lý nhóm khách hàng,,Kiểm tra hệ thống báo lỗi hoặc chỉ nhận diện 1 chuỗi khi nhập dấu phẩy với toán tử '=',Negative,Regression,P2,"1. Đăng nhập tài khoản được phân quyền.
+2. Tại màn hình Thêm mới.","1. Chọn toán tử '='. 
+2. Nhập giá trị: 'A,B'. 
+3. Nhấn Xác nhận.","(i) Nghiệp vụ/Logic: Báo lỗi ký tự validate input.
+(ii) UI: Phản hồi tooltip lỗi format đỏ.
+(iii) Trạng thái/Audit: Không tiến vào tầng DB để ghi gì cả.
+(iv) Output: Bỏ qua.",BR01-EQUAL-COMMA,Assumption - Cần BA xác nhận quy tắc xử lý dấu phẩy với operator =
+TC_SA07_004,BR_01,I.1.1.1,SA.07,Quản lý nhóm khách hàng,,Kiểu dữ liệu: Kiểm tra hệ thống tự TRIM khoảng trắng thừa khi nhập nhiều giá trị với toán tử 'IN',Happy,Regression,P3,"1. Đăng nhập tài khoản được phân quyền.
+2. Tại màn hình Thêm mới.","1. Chọn toán tử 'IN'. 
+2. Nhập giá trị có khoảng trắng: ' Val1 , Val2 , Val3 '. 
+3. Nhấn Xác nhận.","(i) Nghiệp vụ/Logic: String Utils tự động cắt Space dư thừa lúc submit.
+(ii) UI: Không bắn lỗi. 
+(iii) Trạng thái/Audit: Dữ liệu sạch đưa thẳng xuống bảng DB, insert Success log Audit.
+(iv) Output: Report rỗng.",BR01-IN-TRIM,Assumption - Cần BA xác nhận rule TRIM
+TC_SA07_005,BR_02,I.1.1.1,SA.07,Quản lý nhóm khách hàng,"Không có field Phân đoạn, mã nhóm -> check lại",Kiểm tra báo lỗi đỏ dưới field khi để trống các trường bắt buộc,Negative,Smoke,P1,"1. Đăng nhập tài khoản được phân quyền.
+2. Màn hình Thêm mới.","1. Để trống các trường gắn dấu (*). 
+2. Nhấn 'Xác nhận'.","(i) Nghiệp vụ/Logic: Hệ thống detect trường bắt buộc rỗng, chặn gọi API.
+(ii) UI: Màn hình KHÔNG TẮT, chèn text đỏ dưới ô field 'Trường này bắt buộc'.
+(iii) Trạng thái/Audit: Hủy lệnh trên DB.
+(iv) Output: Trống.",BR02-MANDATORY,
+TC_SA07_006,BR_03,I.1.1.1,SA.07,Quản lý nhóm khách hàng,,Kiểm tra không được phép sửa Trạng thái khi Nhóm KH Hoạt động đang gán với Code phí trạng thái Hoạt động,Negative,Regression,P1,"1. Đăng nhập tài khoản được phân quyền.
+2. Bản ghi Nhóm KH 'NHOM_TEST' đang ở trạng thái Hoạt động VÀ đang gán vào 1 Code phí trạng thái Hoạt động.","1. Chọn Sửa Nhóm KH 'NHOM_TEST'. 
+2. Đổi trạng thái từ Hoạt động sang Không hoạt động. 
+3. Nhấn 'Xác nhận'.","(i) Nghiệp vụ/Logic: Check Validation thấy bảng Code phí đang dính trạng thái Hoạt động/Ngừng hoạt động/Chờ gán => Trả về Error.
+(ii) UI: Show popup cảnh báo lỗi không thể đổi.
+(iii) Trạng thái/Audit: Form roll-back lại data. DB không cập nhật trạng thái.
+(iv) Output: Không.",BR03-LINK-CODEPHI,
+TC_SA07_006_B,BR_03,I.1.1.1,SA.07,Quản lý nhóm khách hàng,"Thiếu điều kiện trạng thái nhóm khách hàng = hoạt động => check lại BR03 để viết lại test case, đây là điều kiện and",Kiểm tra không được phép sửa Trạng thái khi Nhóm KH Hoạt động đang gán với Code phí trạng thái Ngừng hoạt động,Negative,Regression,P1,"1. Đăng nhập tài khoản được phân quyền.
+2. Bản ghi Nhóm KH 'NHOM_TEST' đang ở trạng thái Hoạt động VÀ đang gán vào 1 Code phí trạng thái Ngừng hoạt động.","1. Chọn Sửa Nhóm KH 'NHOM_TEST'. 
+2. Đổi trạng thái từ Hoạt động sang Không hoạt động. 
+3. Nhấn 'Xác nhận'.","(i) Nghiệp vụ/Logic: Check Validation thấy bảng Code phí đang dính trạng thái Hoạt động/Ngừng hoạt động/Chờ gán => Trả về Error.
+(ii) UI: Show popup cảnh báo lỗi không thể đổi.
+(iii) Trạng thái/Audit: Form roll-back lại data. DB không cập nhật trạng thái.
+(iv) Output: Không.",BR03-LINK-CODEPHI,
+TC_SA07_006_C,BR_03,I.1.1.1,SA.07,Quản lý nhóm khách hàng,"Thêm case nhóm khách hàng chưa gán vào code phí -> check lại điều kiện BR 03
++ Nhóm KH MASS lấy ở đâu -> không có",Kiểm tra không được phép sửa Trạng thái khi Nhóm KH Hoạt động đang gán với Code phí trạng thái Chờ gán,Negative,Regression,P1,"1. Đăng nhập tài khoản được phân quyền.
+2. Bản ghi Nhóm KH 'NHOM_TEST' đang ở trạng thái Hoạt động VÀ đang gán vào 1 Code phí trạng thái Chờ gán.","1. Chọn Sửa Nhóm KH 'NHOM_TEST'. 
+2. Đổi trạng thái từ Hoạt động sang Không hoạt động. 
+3. Nhấn 'Xác nhận'.","(i) Nghiệp vụ/Logic: Check Validation thấy bảng Code phí đang dính trạng thái Hoạt động/Ngừng hoạt động/Chờ gán => Trả về Error.
+(ii) UI: Show popup cảnh báo lỗi không thể đổi.
+(iii) Trạng thái/Audit: Form roll-back lại data. DB không cập nhật trạng thái.
+(iv) Output: Không.",BR03-LINK-CODEPHI,
+TC_SA07_007,BR_03,I.1.1.1,SA.07,Quản lý nhóm khách hàng,,Kiểm tra cho phép sửa Trạng thái khi Nhóm KH gán với toàn bộ Code phí đã 'Hủy',Happy,Regression,P2,"1. Đăng nhập tài khoản được phân quyền.
+2. Nhóm KH 'NHOM_TEST' chỉ gán với các Code phí trạng thái 'Hủy'.","1. Chọn Sửa Nhóm KH 'NHOM_TEST'. 
+2. Đổi trạng thái sang 'Không hoạt động'. 
+3. Nhấn 'Xác nhận'.","(i) Nghiệp vụ/Logic: Query thấy ALL Code phí gán cùng = 'Hủy' => Cho phép Update.
+(ii) UI: Green notification updated.
+(iii) Trạng thái/Audit: DB gán giá trị mới đè cũ, Audit nhận người Update.
+(iv) Output: Output Log none.",BR03-LINK-CANCELLED,
+TC_SA07_008,UI-FUNC.01,I.1.1.1,SA.07,Quản lý nhóm khách hàng,"Viết lại navigation là từ đâu vào đâu để nhấn button ""Thêm mới""",Kiểm tra điều hướng vào chức năng Thêm mới nhóm KH từ màn hình danh sách,Happy,Smoke,P3,"1. Đăng nhập tài khoản được phân quyền.
+2. Ở menu trang chủ.","1. Từ menu trái, chọn tính năng Quản lý nhóm khách hàng -> Hiển thị danh sách.
+2. Chọn nút Thêm mới.
+3. Quan sát layer popup vừa mở.","(i) Nghiệp vụ/Logic: Route sang trang mới.
+(ii) UI: Bật Layer popup Thêm Mới với các controls rỗng sẵn sàng nhập, có nút lưu/đóng đầy đủ.
+(iii) Trạng thái/Audit: Không.
+(iv) Output: Load view.",UI-ADD-NAV,
+TC_SA07_009,UI-FUNC.03,I.1.1.1,SA.07,Quản lý nhóm khách hàng,,Kiểm tra chức năng 'Xem' không cho phép chỉnh sửa dữ liệu,Happy,Smoke,P3,"1. Đăng nhập tài khoản được phân quyền.
+2. Có bản ghi sẵn trên lưới.","1. Nhấn icon 'Xem' dòng dữ liệu bất kỳ.
+2. Kiểm tra trạng thái các input.","(i) Nghiệp vụ/Logic: Lấy DTO show.
+(ii) UI: Popup bật. Tất cả các field (Mã nhóm, Tên nhóm, Operator, Trạng thái) đều ở chế độ Read-only vô hiệu hóa, không có nút Xác nhận.
+(iii) Trạng thái/Audit: DB Readonly.
+(iv) Output: none.",UI-VIEW-READONLY,
+TC_SA07_010,E2E,I.1.1.1,SA.07,Quản lý nhóm khách hàng,Bổ sung thêm case vs từng trạng thái của code phí = Hoạt động/Ngưng hoạt động/Chờ gán => check BR 03,Luồng E2E: Tạo Nhóm KH mới -> Gán Code phí -> Kiểm tra chặn vô hiệu hóa,Integration,Smoke,P1,"1. Đăng nhập tài khoản được phân quyền.
+2. Hệ thống chưa có bản ghi Nhóm KH 'NEW_GROUP'.","1. Tạo Nhóm KH 'NEW_GROUP'.
+2. Gán NEW_GROUP vào Code phí đang Hoạt động.
+3. Thử đổi 'NEW_GROUP' thành Không hoạt động (Verify chặn).
+4. Quay lại sửa Code phí thành Hủy.
+5. Đổi trạng thái 'NEW_GROUP' sang Không hoạt động (Verify thành công).","(i) Nghiệp vụ/Logic: Ràng buộc cascade liên bảng DB thành công.
+(ii) UI: View map chuẩn từng Step, luồng end-to-end hợp lệ.
+(iii) Trạng thái/Audit: CSDL thay đổi chuỗi trạng thái liên hoàn.
+(iv) Output: E2E check passed.",E2E-CUSTOMER-GROUP,Luồng vòng đời quan hệ dữ liệu.
+TC_SA07_012,BR_02,I.1.1.1,SA.07,Quản lý nhóm khách hàng,,Kiểm tra chức năng Đóng popup Thêm mới không lưu thông tin vào DB,Happy,Regression,P3,"1. Đăng nhập tài khoản được phân quyền.
+2. Đang điền dở dữ liệu màn hình Thêm mới.","1. Nhập một số thông tin (Mã nhóm, Tên nhóm).
+2. Nhấn nút 'Đóng'.","(i) Nghiệp vụ/Logic: Hủy thao tác lưu trữ.
+(ii) UI: Form popup trực tiếp đóng lại. Quay về đúng trang cấu hình danh sách.
+(iii) Trạng thái/Audit: CSDL báo không có biến động, không sinh log Audit.
+(iv) Output: Bỏ qua (không).",BR02-CLOSE-BTN,
+TC_SA07_013,BR_03,I.1.1.1,SA.07,Quản lý nhóm khách hàng,Thêm case đổi trạng thái nhóm Khách hàng từ không hoạt động sang hoạt động,Kiểm tra cho phép sửa Trạng thái đối với Nhóm KH hoàn toàn chưa được gán Code phí nào,Happy,Regression,P2,"1. Đăng nhập tài khoản được phân quyền.
+2. Mở 1 bản ghi Nhóm KH mới (chưa phát sinh gán chéo).","1. Edit Mode -> Đổi trạng thái từ Hoạt động xuống Không hoạt động.
+2. Nhấn 'Xác nhận'.","(i) Nghiệp vụ/Logic: Ràng buộc Code phí = rỗng => System bypass.
+(ii) UI: Báo cập nhật thành công, Lưới hiển thị dòng KH đổi tag trạng thái màu xám.
+(iii) Trạng thái/Audit: Ghi đè trạng thái tại DB, lưu vết log Update Audit Người dùng thao tác.
+(iv) Output: Không đẩy message.",BR03-UNASSIGNED-FREE,
+TC_SA07_013_REV,BR_03,I.1.1.1,SA.07,Quản lý nhóm khách hàng,,Kiểm tra cho phép sửa Trạng thái từ Không hoạt động sang Hoạt động đối với Nhóm KH hoàn toàn chưa được gán Code phí nào,Happy,Regression,P2,"1. Đăng nhập tài khoản được phân quyền.
+2. Mở 1 bản ghi Nhóm KH đang ở trạng thái Không hoạt động (chưa phát sinh gán chéo).","1. Edit Mode -> Đổi trạng thái từ Không hoạt động lên Hoạt động.
+2. Nhấn 'Xác nhận'.","(i) Nghiệp vụ/Logic: Rất thỏa mãn BR03 chiều ngược.
+(ii) UI: Báo cập nhật thành công, Lưới hiển thị dòng KH đổi tag trạng thái.
+(iii) Trạng thái/Audit: Ghi đè trạng thái 'Hoạt động' tại DB, lưu vết log Update Audit Người dùng thao tác.
+(iv) Output: Không đẩy message.",BR03-REVERSE,
+TC_SA07_014,UI-FUNC.02,I.1.1.1,SA.07,Quản lý nhóm khách hàng,,Kiểm tra màn hình Sửa (Edit) load đầy đủ dữ liệu cũ,Happy,Regression,P2,"1. Đăng nhập tài khoản được phân quyền.
+2. Tồn tại bản ghi Nhóm KH hợp lệ.","1. Nhấn icon Sửa trên màn hình danh sách.
+2. Kiểm tra giao diện form.","(i) Nghiệp vụ/Logic: Fetch API chi tiết data.
+(ii) UI: Form load chuẩn xác data cũ của bản ghi vào các control tương ứng, các trường chỉnh sửa được enabled.
+(iii) Trạng thái/Audit: Không.
+(iv) Output: Không.",UI-EDIT-FORM,Bổ sung Gap

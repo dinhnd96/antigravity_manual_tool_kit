@@ -1,0 +1,347 @@
+US26 - Là người quản trị, tôi muốn thiết lập quy tắc điều kiện tính phí
+Yêu cầu nghiệp vụ
+
+Navigation: Khi muốn xem/ thêm mới/ chỉnh sửa thông tin điều kiện tính phí, người quản trị truy cập: Quản trị hệ thống >> Danh mục điều kiện tính phí  
+Màn hình Danh mục điều kiện tính phí gồm: Button Lọc nâng cao, Button Thêm mới, Button Tải xuống, Lưới danh sách điều kiện tính phí.
+	•	Lưới danh sách điều kiện tính phí: Hiển thị tất cả các điều kiện tính phí đang có trên hệ thống, gồm các trường: 
+	•	Mã điều kiện: Hiển thị mã điều kiện với chữ viết hoa. Người quản trị nhấn vào mã điều kiện, hệ thống hiển thị thông tin chi tiết của mã điều kiện đó
+	•	Mapping note msg: Hiển thị tên field API mapping
+	•	Mô tả: Hiển thị mô tả của điều kiện tính phí
+	•	Trạng thái: hiển trị trạng thái gồm: Hoạt động/Không hoạt động
+	•	Kiểu dữ liệu: hiển thị kiểu dữ liệu: Number/String/Date/Time
+	•	Nguồn dữ liệu: Hiển thị nguồn dữ liệu từ API/ETL
+	•	Ghi chú: Hiển thị ghi chú
+	•	Ngày tạo: Hiển thị ngày tạo điều kiện tính phí, hh:mm:ss – dd/mm/yyyy
+	•	Người tạo: Hiển thị username của người tạo
+	•	Ngày sửa: Hiển thị ngày sửa điều kiện tính phí, hh:mm:ss – dd/mm/yyyy. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Người sửa: Hiển thị username của người sửa. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Lọc nâng cao: Người quản trị nhấn vào Lọc nâng cao, hệ thống hiển thị màn hình Lọc điều kiện tính phí gồm có:
+	•	Mã điều kiện: Người quản trị nhập mã điều kiện, hệ thống xử lý viết hoa các kí tự khi tìm kiếm
+	•	Nguồn dữ liệu: Người quản trị chọn nguồn dữ liệu từ ETL/ API
+	•	Trạng thái: Người quản trị chọn trạng thái: Hoạt động/Không hoạt động
+	•	Mapping note msg: Người quản trị nhập tên field mapping note msg (Tên field trong API). Trường này hiển thị khi người quản trị chọn Nguồn dữ liệu = API
+	•	Sau khi lọc theo các điều kiện, hệ thống trả kết quả, hiển thị các điều kiện tính phí phù hợp với điều kiện lọc theo Quy tắc chung của hệ thống.
+	•	Tải xuống: Người quản trị có thể tải xuống file danh sách các điều kiện tính phí theo dữ liệu kết quả tìm kiếm đang hiển thị trên màn hình và theo quy tắc tải xuống tại mục Quy tắc chung của hệ thống.
+	•	Xem chi tiết 1 điều kiện tính phí: Người quản trị có thể xem chi tiết 1 điều kiện tính phí, các trường thông tin hiển thị như ở màn tạo/chỉnh sửa theo Quy tắc chung của hệ thống.
+	•	Khi người quản trị muốn Thêm mới điền kiện tính phí: Người quản trị nhấn vào button “Thêm mới”, hệ thống hiển thị màn hình thêm mới gồm các trường thông tin: 
+	•	Mã điều kiện: Người quản trị nhập mã điều kiện, hệ thống tự động hiển thị các kí tự viết hoa. Mã điều kiện là duy nhất và bắt buộc nhập. 
+	•	Tên điều kiện: Người quản trị nhập tên điều kiện và bắt buộc nhập. 
+	•	Nguồn dữ liệu: Người quản trị chọn nguồn dữ liệu từ API/ ETL, là field bắt buộc nhập.
+	•	Chọn Nguồn dữ liệu = API => Hệ thống hiển thị field Mapping note Msg. Người quản trị nhập tên field mapping dữ liệu trong API, field này sẽ được đem vào làm nguồn dữ liệu tính phí.
+	•	Chọn Nguồn dữ liệu = ETL => Hệ thống hiển thị field Bảng dữ liệu, field “Trường dữ liệu”. Người quản trị chọn Bảng: Khách hàng/Tài khoản/Thẻ, sau đó người quản trị chọn field Trường dữ liệu. Giá trị của Field này theo khách hàng cụ thể sẽ được đem vào làm nguồn dữ liệu tính phí.
+	•	Kiểu dữ liệu: Người quản trị chọn kiểu dữ liệu từ danh sách: Number/String/Date/Time. Đây là field bắt buộc để làm giảm sai sót trong quá trình khai báo điều kiện tính phí/điều kiện áp dụng ưu đãi.
+	•	Ghi chú: Người quản trị nhập nội dung ghi chú 
+	•	Trạng thái: default = Hoạt động, người quản trị có thể chọn trạng thái: Hoạt động/Không hoạt động. 
+	•	Button “Xác nhận”: Người quản trị nhấn vào xác nhận, hệ thống check các điều kiện 
+	•	Mã điều kiện trùng, hiển thị thông báo: Mã điều kiện không được trùng
+	•	Button “Đóng”: Người quản trị nhấn vào “Đóng”, hệ thống đóng màn hình thêm mới
+	•	Khi người quản trị muốn chỉnh sửa 1 điều kiện tính phí, nhấn vào button “Chỉnh sửa” tại hành động trên lưới danh sách điều kiện tính phí => Hệ thống hiển thị màn chỉnh sửa điều kiện tính phí. 
+	•	Khi chỉnh sửa trạng thái Điều kiện tính phí: 
+	•	Nếu điều kiện tính phí đang gán với 1 CTƯĐ (trạng thái = Chưa có hiệu lực/Đang hiệu lực)/Code phí (trạng thái = Hoạt động/Ngưng hoạt động/Chờ gán) thì không cho phép sửa trạng thái. Người dùng nhấn “Xác nhận”, hệ thống báo “Không thể sửa trạng thái điều kiện tính phí. Điều kiện tính phí đang sử dụng trong hệ thống”
+	•	Nếu điều kiện tính phí chưa gán vs CTƯĐ/Code phí nào, hoặc gán CTƯĐ có trạng thái = Hết hiệu lực/Code phí có trạng thái = Huỷ thì người dùng có thể sửa trạng thái điều kiện tính phí
+	•	Sửa các thông tin khác: hệ thống kiểm tra tương tự như khi thêm mới điều kiện tính phí.
+	•	Danh sách điều kiện tính phí được phép khai báo tại các màn thêm mới/chỉnh sửa code phí/ CTƯĐ là các điều kiện tính phí có trạng thái = Hoạt động.
+Lưu đồ và diễn giải
+Lưu đồ
+
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Danh mục điều kiện tính phí
+Chọn Danh mục điều kiện tính phí
+Người quản trị
+2
+
+Gửi yêu cầu xử lý
+Frontend
+3
+
+Nhận yêu cầu và xử lý logic
+Backend
+4
+
+Hiển thị màn hình Danh mục điều kiện tính phí
+Frontend
+5
+
+Lựa chọn: 
++ Lọc nâng cao => Bước 5.1
++ Thêm mới => Bước 5.2
++ Chỉnh sửa => Bước 5.3
++ Tải xuống => Bước 5.4
+Người quản trị
+5.1
+
+Lọc nâng cao
+Người quản trị
+6
+
+Hiển thị màn hình Lọc điều kiện tính phí
+Frontend
+7
+
+Nhập/chọn các điều kiện lọc
+Người quản trị
+8
+
+Lựa chọn: 
++ Xoá lọc => Bước 8.1
++ Áp dụng => Bước 8.2
+Người quản trị
+8.1
+
+Xoá lọc
+Người quản trị
+9
+
+Đóng màn hình Lọc điều kiện tính phí => Kết thúc
+Frontend
+8.2
+
+Áp dụng
+Người quản trị
+10
+
+Hiển thị danh sách điều kiện tính phí theo điều kiện lọc => Kết thúc
+Frontend
+5.2
+
+Thêm mới
+Người quản trị
+11
+
+Hiển thị màn hình thêm mới
+Frontend
+12
+
+Nhập/chọn các trường và nhấn xác nhận
+Người quản trị
+13
+
+Check các trường bắt buộc và business rule
++ Valid => Tiếp bước 14
++ Invalid => Quay lại bước 12
+Frontend
+14
+
+Nhận yêu cầu và xử lý
+Backend
+15
+
+Hiển thị bản ghi mới trên lưới danh sách
+Frontend
+5.3
+
+Chỉnh sửa
+Người quản trị
+16
+
+Hiển thị màn hình chỉnh sửa 
+=> Quay lại bước 12
+Frontend
+5.4
+
+Tải xuống
+Người quản trị
+17
+
+Tham chiếu quy tắc tải xuống tại mục Quy tắc chung
+Frontend
+
+Giao diện
+Giao diện
+Màn hình danh mục điều kiện tính phí
+
+Màn hình lọc điều kiện tính phí
+
+Màn hình thêm mới điều kiện tính phí
+
+
+Màn hình chỉnh sửa điều kiện tính phí
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+Màn hình danh sách điều kiện tính phí
+NÚT CHỨC NĂNG
+1
+Lọc nâng cao
+
+Button
+
+Người quản trị nhấn vào button Lọc nâng cao, hệ thống hiển thị Màn hình Lọc điều kiện tính phí
+Các điều kiện lọc: 
++ Mã điều kiện: Người quản trị nhập mã điều kiện
++ Nguồn dữ liệu: API/ETL. Nếu người quản trị chọn nguồn dữ liệu = API => hiển thị field Mapping note msg. Nếu người dùng chọn nguồn dữ liệu = ETL => Hiển thị field Bảng dữ liệu, Trường dữ liệu
++ Mapping note msg: Người quản trị nhập field mapping
++ Bảng dữ liệu: Người quản trị chọn ETL Khách hàng/ETL Thẻ/ ETL Tài khoản
++ Trường dữ liệu: Người quản trị chọn trường dữ liệu 
++ Trạng thái: Người quản trị chọn trạng thái: Hoạt động/Không hoạt động
+2
+Thêm mới
+
+Button
+
+Người quản trị nhấn vào Button Thêm mới, hệ thống hiển thị màn hình thêm mới (refer màn hình Thêm mới)
+3
+Tải xuống
+
+Button
+
+Tải xuống file danh sách điều kiện tính phí 
+CÁC TRƯỜNG THÔNG TIN
+1
+Mã điều kiện
+
+Text
+
+Hiển thị mã điều kiện, luôn là chữ viết hoa
+2
+Mapping note msg
+
+Text
+
+Hiển thị field mapping note msg của api
+3
+Bảng dữ liệu
+
+Text
+
+Hiển thị bảng dữ liệu: Khách hàng/ Tài khoản/Thẻ
+4
+Mô tả
+
+Text
+
+Hiển thị mô tả 
+5
+Trạng thái
+
+Text
+
+Hiển thị trạng thái của điều kiện tính phí
+6
+Kiểu dữ liệu
+
+Text
+
+Hiển thị kiểu dữ liệu
+7
+Nguồn dữ liệu
+
+Text
+
+Hiển thị nguồn dữ liệu API/ETL
+8
+Ghi chú
+
+Text
+
+Hiển thị ghi chú 
+9
+Ngày tạo
+
+Datetime
+
++ Hiển thị ngày tạo hh:mm:ss – dd/mm/yyyy
+10
+Người tạo
+
+Text
+
+Hiển thị username của người tạo
+11
+Ngày sửa
+
+Datetime
+
++ Hiển thị ngày sửa hh:mm:ss – dd/mm/yyyy
+12
+Người sửa
+
+Text
+
+Hiển thị username của người sửa
+Màn hình Thêm mới/ Chỉnh sửa điều kiện tính phí
+NÚT CHỨC NĂNG
+1
+Xác nhận
+
+Button
+
+Người quản trị nhấn vào xác nhận để thêm mới/ chỉnh sửa 1 điều kiện tính phí
+2
+Icon “x”
+
+Button
+
+Người quản trị nhấn vào icon “x” để tắt màn thêm mới
+CÁC TRƯỜNG THÔNG TIN
+1
+Mã điều kiện
+★
+Text box
+
+Người quản trị nhập mã điều kiện, khi nhập thì hệ thống xử lý để luôn là chữ viết hoa
+2
+Tên điều kiện
+★
+Text box
+
+Người quản trị nhập tên điều kiện
+3
+Nguồn dữ liệu
+★
+Dropdownlist
+
+Người quản trị chọn nguồn dữ liệu API/ETL
++ Nếu nguồn dữ liệu = API => hệ thống hiển thị field Mapping note msg
++ Nếu nguồn dữ liệu = ETL => Hệ thống hiển thị field Bảng dữ liệu và Trường dữ liệu
+4
+Mapping note msg
+◎
+Text box
+Bắt buộc nhập khi chọn nguồn dữ liệu = API
+Người quản trị nhập field Mapping note msf
+5
+Bảng dữ liệu
+◎
+Dropdownlist
+Bắt buộc nhập khi chọn nguồn dữ liệu = ETL
+Người quản trị chọn bảng dữ liệu: Khách hàng/ Tài khoản/Thẻ
+
+Trường dữ liệu
+◎
+Combobox
+Bắt buộc nhập khi chọn nguồn dữ liệu = ETL
+Người quản trị chọn trường dữ liệu 
+6
+Mô tả
+◎
+Textbox
+
+Người quản trị nhập mô tả
+7
+Trạng thái
+★
+Dropdownlist
+
+- Người quản trị chọn trạng thái: Hoạt động/Không hoạt động
+- Khi chỉnh sửa điều kiện tính phí: 
++ Nếu điều kiện tính phí đang gán với 1 CTƯĐ (trạng thái = Chưa có hiệu lực/Đang hiệu lực)/Code phí (trạng thái = Hoạt động/Ngưng hoạt động/Chờ gán) thì không cho phép sửa trạng thái
++ Nếu điều kiện tính phí chưa gán vs CTƯĐ/Code phí nào, hoặc gán CTƯĐ có trạng thái = Hết hiệu lực/Code phí có trạng thái = Huỷ thì người quản trị có thể sửa trạng thái điều kiện tính phí
+8
+Kiểu dữ liệu
+★
+Dropdownlist
+
+Người quản trị chọn kiểu dữ liệu: Number/String/Date/Time
+

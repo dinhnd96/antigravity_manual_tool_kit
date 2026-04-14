@@ -1,0 +1,134 @@
+TC_ID,BR_Ref,URD_Ref,Module,Feature,Comment,Title,Type,Category,Priority,Precondition,Steps,Expected Result,Trace_ID,Note,Status R1,Tester R1,Date R1,Status R2,Tester R2,Date R2,Final Status
+SA06-FLOW-HAP-001,,I.1.1.1,SA.06,Danh mục điều kiện tính phí,Vân: Chưa hiểu Expected Result,Kiểm tra luồng nghiệp vụ E2E: Thêm mới -> Tìm kiếm -> Xem -> Sửa -> Tải xuống,Integration,Smoke,P1,"1. Tải khoản có quyền thao tác tính năng ""Danh mục điều kiện tính phí"".","1. Truy cập chức năng Thêm mới, nhập thông tin hợp lệ -> Lưu.
+2. Truy cập chức năng Tìm kiếm với bản ghi vừa tạo.
+3. Nhấn Xem bản ghi.
+4. Nhấn Sửa bản ghi, thay đổi thông tin -> Lưu.
+5. Đánh dấu bản ghi và nhấn Tải xuống.","(Hành vi Hệ thống / UI / Data / Thông báo trải dọc theo luồng) [Step 1 - Thêm mới]:
+
+Hiển thị thông báo ""Thêm mới điều kiện thành công"".
+Bản ghi được cập nhật vào Database (Bảng Điều kiện tính phí).
+[Step 2 - Tìm kiếm & Xem]:
+
+Lưới (Grid) trả về chính xác bản ghi vừa tạo.
+Khi nhấn nút [Xem], hệ thống hiển thị Form chi tiết chứa chính xác dữ liệu đã nhập, các trường ở trạng thái Read-only (Không làm đổi Database).
+[Step 3 - Sửa]:
+
+Nhấn [Sửa] và Xác nhận, hiển thị thông báo Sửa thành công.
+Lưới danh sách lập tức hiển thị thông tin mới nhất tại bản ghi đó. Core Database được cập nhật đè lên thông tin cũ.
+[Step 4 - Tải xuống]:
+
+Trình duyệt tự tải về máy tính file (.xlsx/.pdf) chứa kết xuất trùng khớp với dữ liệu thật đã được sửa thành công ở Step 3.",SA06-FLOW-E2E,,Fail,Định,2026-04-06,,,,Fail
+SA06-BR-HAP-001,BR_01,I.1.1.1,SA.06,Thêm mới điều kiện tính phí,"bổ sung thêm các trường bắt buộc, trường conditional như nguồn dữ liệu = API/ETL thì hiển thị thêm field nào",Kiểm tra chức năng Thêm mới thành công khi nhập đầy đủ các trường bắt buộc,Happy,Smoke,P1,"1. Đăng nhập với quyền truy cập chức năng Thêm mới điều kiện tính phí.
+2. Chuẩn bị thông tin điều kiện mới.","1. Tại màn 'Danh mục điều kiện tính phí', chọn nút 'Thêm mới'.
+2. Nhập đầy đủ, hợp lệ các box của nhóm trường bắt buộc (Mã, Tên, Kiểu dữ liệu, Trạng thái).
+3. Tại Nguồn dữ liệu, chọn API (và nhập Mapping note Msg) HOẶC chọn ETL (và cấu hình Bảng, Trường dữ liệu).
+4. Nhấn 'Xác nhận'.","(i) Nghiệp vụ/Logic: Hệ thống lưu thành công thông tin điều kiện tính phí vào Database.
+(ii) UI: Đóng form thêm mới, trở về grid, hiển thị thông báo ""Thêm mới điều kiện thành công"".
+(iii) Trạng thái/Audit: Bản ghi có trạng thái mặc định (theo quy trình), ghi log tạo mới.
+(iv) Output: Không có.",BR01-ADD-OK,,Pass,Định,2026-04-06,,,,Pass
+SA06-BR-NEG-001,BR_01,I.1.1.1,SA.06,Thêm mới/Sửa điều kiện tính phí,"Vân: Cột Step còn các trường khác thì sao? ví dụ: Nguồn dữ liệu, Mapping Note Msg, Bảng dữ liệu, Trường dữ liệu",Kiểm tra hệ thống chặn lưu khi không nhập các trường bắt buộc,Negative,Regression,P2,1. Tài khoản có quyền thao tác Thêm mới/Sửa điều kiện tính phí.,"1. Mở màn hình Thêm/Sửa.
+2. Thực hiện: 
+2a. Bỏ trống Mã điều kiện
+2b. Bỏ trống Tên điều kiện
+2c. Bỏ trống nguồn dữ liệu
+2d. Bỏ trống cả Mã và Tên, nguồn dữ liệu
+3. Nhấn ""Xác nhận"".","(i) Nghiệp vụ/Logic: Hệ thống chặn lưu bản ghi do thiếu trường bắt buộc.
+(ii) UI: Form vẫn giữ nguyên, focus bôi đỏ ô chưa nhập kèm cảnh báo ""Trường bắt buộc nhập"".
+(iii) Trạng thái/Audit: Không tạo hoặc đổi trạng thái bản ghi, không sinh log audit.
+(iv) Output: Không có.",BR01-ADD-MISSING,,Pass,Định,2026-04-08,,,,Pass
+SA06-BR-HAP-002,BR_02,I.1.1.1,SA.06,Thêm mới/Sửa điều kiện tính phí,,Kiểm tra thao tác Đóng form không lưu lại thông tin sửa đổi,Happy,Regression,P2,1. Đang ở form Thêm mới hoặc Sửa điều kiện tính phí.,"1. Nhập một số thông tin (Mã, Tên...).
+2. Nhấn nút ""Đóng"" hoặc nút (X).","Đóng form, quay về dữ liệu màn trước. Không sinh bản ghi Nháp/Chờ duyệt.",BR02-CLOSE-BTN,,Pass,Định,2026-04-08,,,,Pass
+SA06-BR-NEG-002,BR_03,I.1.1.1,SA.06,Thêm mới điều kiện tính phí,Tên điều kiện không cần validate trùng,Kiểm tra hệ thống báo lỗi khi nhập trùng Mã điều kiện đã tồn tại,Negative,Regression,P2,"1. Hệ thống đã tồn tại bản ghi có Mã ""COND01"" và Tên ""Fee01"".
+2. Đang ở màn Thêm mới.","1. Nhập Mã điều kiện đã tồn tại trong hệ thống (Tên điều kiện nhập hợp lệ hoặc trùng đều được).
+2. Nhấn Xác nhận.","(i) Nghiệp vụ/Logic: DB kiểm tra constraint (Unique) và chặn tạo mới bản ghi.
+(ii) UI: Hiển thị thông báo lỗi 'Mã điều kiện đã tồn tại'. Form thiết lập không tắt.
+(iii) Trạng thái/Audit: Không tạo thay đổi, không sinh log.
+(iv) Output: Không có.",BR03-UNIQUE,,Pass,Định,2026-04-08,,,,Pass
+SA06-BR-HAP-003,BR_04,I.1.1.1,SA.06,Thêm mới điều kiện tính phí,"Vân:
+1. Bỏ chữ Schema ở kết quả mong đợi
+2. Bổ sung case kiểm tra các trường có định dạng drop down list trong Màn hình có hiển thị đúng danh sách hay không 
+Đã có ở case SA06-BR-HAP-001",Kiểm tra ghi nhận đúng [Kiểu dữ liệu] vào hệ thống theo 4 định dạng,Happy,Regression,P2,1. Đang ở màn hình Thêm mới/Sửa.,"1. Nhập Mã và Tên.
+2. Tại field ""Kiểu dữ liệu"", lần lượt chọn:
+2a. Number
+2b. String
+2c. Date (YYYY-MM-DD)
+2d. Time (HH:MM:SS)
+3. Nhấn Xác nhận.","(i) Nghiệp vụ/Logic: Bản ghi được lưu với đúng DataType tương ứng.
+(ii) UI: Lưu thành công, grid hiển thị đúng định dạng đã chọn.
+(iii) Trạng thái/Audit: Bản ghi lưu vết Audit.
+(iv) Output: Không có.",BR04-DATATYPE,,Pass,Định,2026-04-08,,,,Pass
+SA06-BR-HAP-004,BR_05,I.1.1.1,SA.06,Sửa điều kiện tính phí,"Precondition: 
++ trạng thái có thể là Hoạt động nữa nhé, cho các bản ghi điều kiện tính phí chưa gán hoặc gán như đã đề cập ở precondition 
++ Trạng thái = không hoạt động -> người dùng có thể sửa được luôn, vì các điều kiện tính phí được gán vào code phí/ctud thì trạng thái = hoạt động
+Vân: Steps vẫn sai nha","Kiểm tra cho phép sửa trạng thái khi Điều kiện tính phí không vi phạm điều kiện gán
+",Happy,Regression,P2,"1. Hệ thống có sẵn Điều kiện tính phí thuộc 1 trong 2 tình huống sau:
+- Trạng thái 'Không hoạt động'.
+- Trạng thái 'Hoạt động', NHƯNG chưa từng gán vào đâu, hoặc gán vào CTƯĐ/Code phí đã hết hiệu lực/đã hủy.","1. Mở màn hình Sửa thông tin bản ghi đạt điều kiện.
+2. Thay đổi trạng thái thành ""Hoạt động"".
+3. Nhấn Xác nhận.","(i) Nghiệp vụ/Logic: Cho phép cập nhật chuyển trạng thái.
+(ii) UI: Đóng form, thông báo Sửa thành công, màn hình danh sách cập nhật trạng thái ""Hoạt động"".
+(iii) Trạng thái/Audit: Ghi log sửa trạng thái.
+(iv) Output: Không.",BR05-STATUS-OK,"Đã pas phần còn lại : 
+- Trạng thái 'Không hoạt động'.
+- Trạng thái 'Hoạt động', NHƯNG chưa từng gán vào đâu
+
+Chưa bàn giao code phí nên chưa test được case : 
+- Trạng thái 'Hoạt động'hoặc gán vào CTƯĐ/Code phí đã hết hiệu lực/đã hủy.",Blocked,Định,2026-04-08,,,,Blocked
+SA06-BR-NEG-003,BR_05,I.1.1.1,SA.06,Sửa điều kiện tính phí,"Không cho phép sửa trạng thái do đang gán với [Tên/Mã CTƯĐ/Code phí] 
+=> check lại message lỗi vs chị Vân: Không thể sửa trạng thái điều kiện tính phí. Vui lòng đảm bảo CTƯĐ đã hết hiệu lực và Code phí đã huỷ trước khi thực hiện
+
+Vân: ý này đã comment lại rồi mà nhỉ: Điều kiện tính phí đang được sử dụng trong hệ thống, không được sửa. (Xem lại message lỗi cũ ko cover đủ các trường hợp)",Kiểm tra chặn sửa trạng thái khi Điều kiện tính phí đang gán với CTƯĐ/Code phí đang dùng,Negative,Smoke,P1,1. Tồn tại bản ghi đang gán CTƯĐ (Chưa hiệu lực/Đang hiệu lực) HOẶC gán Code phí (Hoạt động/Ngưng HĐ/Chờ gán).,"1. Mở màn hình Sửa thông tin bản ghi nói trên.
+2. Sửa thông tin trạng thái khác trạng thái ban đầu.
+3. Nhấn Xác nhận.","(i) Nghiệp vụ/Logic: Phát hiện ràng buộc tham chiếu, chặn update.
+(ii) UI: Hệ thống bật popup/toast cảnh báo 'Điều kiện tính phí đang được sử dụng trong hệ thống, không được sửa'.
+(iii) Trạng thái/Audit: Không tạo thay đổi.
+(iv) Output: Không có.",BR05-STATUS-BLOCK,"Chưa bàn giao tính năng PR01, PR05 để tạo dữ liệu",Blocked,Định,2026-04-08,,,,Blocked
+SA06-BR-HAP-005,BR_05,I.1.1.1,SA.06,Tích hợp Code phí,"cả ở màn tạo ở ctud nữa nha anh
+=> check ở chỉnh sửa code phí/ctud có được sửa field điều kiện tính phí không -> list điều kiện tính phí ở đây trạng thái = hoạt động
+Vân: Mô tả tên trạng thái không đúng nhé",Kiểm tra chỉ hiển thị danh sách điều kiện tính phí có trạng thái = 'Hoạt động' tại màn tạo Code phí / CTƯĐ,Integration,Regression,P2,"1. Tồn tại tên điều kiện tính phí 'COND-ACT' trạng thái Hoạt động, 'COND-INACT' trạng thái Không hoạt động.
+2. Mở màn hình tạo/chỉnh sửa Code phí HOẶC mở màn hình tạo/chỉnh sửa CTƯĐ.","1. Xem danh sách dropdown ""Điều kiện tính phí"".","(i) Nghiệp vụ/Logic: Filter query API trả về chỉ list các Item Active.
+(ii) UI: Dropdown có ""COND-ACT"", không có ""COND-INACT"".
+(iii) Trạng thái/Audit: Không thay đổi.
+(iv) Output: Không.",BR05-INTEGRATION,"Chưa bàn giao tính năng PR01, PR05 để tạo dữ liệu",Blocked,Định,2026-04-08,,,,Blocked
+SA06-BR-HAP-006,BR_06,I.1.1.1,SA.06,Thêm mới/Sửa điều kiện tính phí,"thiếu field ""Trường dữ liệu"" khi Nguồn dữ liệu = ETL
++ List trường dữ liệu thì cần lấy full các field đang có trong bảng dữ liệu
+Vân: Mô tả tên trạng thái không đúng nhé","Kiểm tra hiển thị động trường nhập liệu theo giá trị của [Nguồn dữ liệu]
+",Happy,Regression,P2,"1. Tồn tại tên điều kiện tính phí 'COND-ACT' trạng thái Hoạt động, 'COND-INACT' trạng thái Không hoạt động.
+2. Mở màn hình tạo/chỉnh sửa Code phí HOẶC mở màn hình tạo/chỉnh sửa CTƯĐ.","1. Tại dropdown 'Nguồn dữ liệu', lần lượt thử các trường hợp:
+1a. Chọn 'API'.
+1b. Chọn 'ETL'.
+2. Nhập thông tin cấu hình tương ứng:
+- Nếu API: Nhập ô 'Mapping note Msg'.
+- Nếu ETL: Chọn list từ 'Bảng dữ liệu' và sau đó tiếp tục chọn 'Trường dữ liệu' tương ứng với bảng đó.
+3. Nhấn Xác nhận.","(i) Nghiệp vụ/Logic: Lưu chuẩn cấu hình ánh xạ theo Nguồn (API ghi nhận Map Note Msg, ETL ghi nhận Tên bảng).
+(ii) UI: (1a) Hiển thị input ""Mapping note Msg"" – (1b) Ẩn input ""Mapping"", hiển thị Dropdown ""Bảng dữ liệu"". Lưu thành công toast xanh.
+(iii) Trạng thái/Audit: Sinh log audit config source tương ứng.
+(iv) Output: Không có.",BR06-DATASOURCE,,Pass,Định,2026-04-09,,,,Pass
+SA06-UI-001,UI-FUNC.01,I.1.1.1,SA.06,Thêm mới Điều kiện tính phí,"test case này sai navigation -> viết lại -> và đưa nó lên đầu ngay từ lúc thêm mới 1 điều kiện tính phí là phải check các trường có đủ hay không chưa rồi
++ Và Thêm mới điều kiện tính phí, không phải thêm mới Trường điều kiện
+Vân:
+1. Navigation vẫn sai
+2. Feature lúc thì là ""Thêm mới điều kiện tính phí"" lúc thì là ""Thêm mới Điều kiện tính phí"" => Ghi đúng là ""Thêm mới Điều kiện tính phí""",Kiểm tra giao diện màn hình Thêm mới Điều kiện tính phí,Happy,Regression,P3,"1. Đăng nhập thành công, vào menu Quản trị hệ thống > Danh mục điều kiện tính phí .","1. Tại trang Danh mục điều kiện tính phí , click nút 'Thêm mới'.
+2. Quan sát màn hình/popup Thêm mới bật lên.","(i) Nghiệp vụ/Logic: Gọi thành công dữ liệu MasterData (nếu có drop down).
+(ii) UI: Popup bật lên mượt mà, bao gồm đủ các trường (Mã, Tên, Kiểu DL, Cờ Trạng thái mặc định Hoạt động). 
+(iii) Trạng thái/Audit: Không.
+(iv) Output: Không.",UI-ADD-FORM,Chỉ check UI,Pass,Định,2026-04-09,,,,Pass
+SA06-UI-002,UI-FUNC.02,I.1.1.1,SA.06,Sửa điều kiện tính phí,,Kiểm tra màn hình hiển thị đẩy đủ thông tin khi mở form Thiết lập (Sửa),Happy,Regression,P3,1. Có sẵn 1 bản ghi trên lưới (COND_X).,"1. Click icon ""Sửa"" dòng COND_X.","(i) Nghiệp vụ/Logic: Fetch API detail chính xác cấu hình cũ theo ID.
+(ii) UI: Form load xong, điền đẩy đủ các thông số của COND_X vào các input tương ứng (kể cả phần mapping API/ETL ẩn hiện đúng quy tắc).
+(iii) Trạng thái/Audit: Không.
+(iv) Output: Không.",UI-EDIT-LOAD,,Pass,Định,2026-04-09,,,,Pass
+SA06-UI-003,UI-FUNC.03,I.1.1.1,SA.06,Xem,,"Kiểm tra màn hình Xem chi tiết bản ghi (chỉ đọc, không cho sửa)",Happy,Regression,P3,1. Có sẵn 1 bản ghi.,"1. Click icon ""Xem chi tiết"" tại lưới.",Form hiển thị dữ liệu read-only. Không làm thay đổi Database.,UI-VIEW-ONLY,Khẳng định quy tắc không chèn lệnh nhấn Xác Nhận ở Luồng View,Pass,Định,2026-04-09,,,,Pass
+SA06-UI-004,UI-FUNC.04,I.1.1.1,SA.06,Tìm kiếm,"Steps:
++ Bước 1: Cần test trên đầy đủ các trường có trên filter để ra case data/không data
++ Bước 2: Tư động tải => chưa hiểu ạ",Kiểm tra chức năng Tìm kiếm (Filter) với các trường thông tin trên lưới,Happy,Regression,P2,1. Có sẵn nhiều bản ghi với trạng thái/tên khác nhau.,"1. Thực hiện nhập điều kiện tìm kiếm đa dạng:
+1a. Lọc ra kết quả có Tồn tại Data thỏa mãn.
+1b. Lọc ra kết quả Empty (Không có data thỏa mãn).
+2. Nhấn nút Tìm kiếm (hoặc gõ Enter nếu hỗ trợ).
+3. Click nút 'Xóa bộ lọc / Clear' sau khi test xong.","(i) Nghiệp vụ/Logic: Gọi Search API kèm query params thiết lập chuẩn.
+(ii) UI: Lưới reload (có loading indicator) hiển thị kết quả đúng với filter. Khi Clear filter thì trả về trạng thái mặc định như bước load màn. Lưới phân trang đúng quy chiếu.
+(iii) Trạng thái/Audit: Không.
+(iv) Output: Không.",UI-SEARCH-BASIC,"Gộp tìm Tên, Trạng thái, Clear",Fail,Định,2026-04-09,,,,Fail
+SA06-UI-005,UI-FUNC.05,I.1.1.1,SA.06,Tải xuống,expect: Cần check data file có đúng vs trên lưới khi filter và ko filter không,Kiểm tra tải xuống dữ liệu (Export Danh sách),Integration,Regression,P2,1. Có dữ liệu trên lưới. Máy có kết nối mạng ổn định.,"1. Click icon / Nút ""Tải xuống"" trên thanh thao tác.","(i) Nghiệp vụ/Logic: Trigger Export API lấy dữ liệu theo đúng Query lúc user nhấn xuất.
+(ii) UI: Không đổi trang, hiển thị loading.
+(iii) Trạng thái/Audit: Ghi log Export.
+(iv) Output: File excel có đủ header, dữ liệu các hàng/cột bên trong file đảm bảo khớp 100% với danh sách dữ liệu đang hiển thị trên lưới đã filter.",UI-EXPORT,,Fail,Định,2026-04-09,,,,Fail

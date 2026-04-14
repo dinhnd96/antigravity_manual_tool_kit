@@ -1,0 +1,8 @@
+Nhóm Kiểm Thử,URD/BR_Ref,Kết Quả Rà Soát,Ghi Chú
+Business Rule (BR),BR_01,Covered,2 TC Negative: Bỏ trống trường bắt buộc & Nhập dữ liệu sai định dạng
+Security & Auth,Phân quyền,Covered,1 TC Negative kiểm tra thao tác Sửa bằng tài khoản Không có quyền
+Business Rule (BR),BR_02,Covered,1 TC Happy thao tác Đóng form hủy đổi dữ liệu
+Business Rule (BR),BR_03,Covered,2 TC (Integration/Calculation) kiểm tra luồng Time-out và Max failed logins
+UI Function,UI-FUNC.01 (Xem),Covered,1 TC UI Happy kiểm tra giao diện View readonly form
+UI Function,UI-FUNC.02 (Sửa),Covered,1 TC UI Happy kiểm tra giao diện Edit load data
+End-to-End,E2E,Covered,1 TC Flow cho luồng Cập nhật và tự động phản ánh ngay lên View/Grid

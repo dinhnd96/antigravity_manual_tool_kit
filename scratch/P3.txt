@@ -1,0 +1,761 @@
+US22 – Là người dùng, tôi muốn đăng nhập vào hệ thống
+Yêu cầu nghiệp vụ
+Navigation: Khi muốn đăng nhập hệ thống, người dùng truy cập link hệ thống, hệ thống hiển thị màn hình đăng nhập
+	•	Người dùng nhập “Tên đăng nhập”, “ Mật khẩu” và nhấn vào button “Đăng nhập”, hệ thống kiểm tra thông tin người dùng nhập vào có hợp lệ và xác thực thông tin: Hệ thống kiểm tra “Tên đăng nhập” có tồn tại trên hệ thống và trạng thái của người dùng là Hoạt động, Mật khẩu chính xác: 
+	•	Nếu thông tin tên đăng nhập không tồn tại trên hệ thống, hệ thống thông báo “Tên đăng nhập không tồn tại trên hệ thống”
+	•	Nếu trạng thái của người dùng đang đăng nhập không phải “Hoạt động”, hệ thống thông báo “Tài khoản hiện đang không hoạt động. Vui lòng liên hệ quản trị viên”
+	•	Nếu tên đăng nhập hoặc mật khẩu người dùng không đúng, hệ thống thông báo “Tên đăng nhập hoặc Mật khẩu không hợp lệ”
+	•	Người dùng không nhập Tên đăng nhập, Mật khẩu, hệ thống thông báo “Tên đăng nhập/Mật khẩu không được để trống”
+	•	Khoảng thời gian hệ thống sẽ tự động đăng xuất nếu người dùng không có thao tác sau n phút: Được quy định tham số SESSION_TIMEOUT tại Quản trị hệ thống >> Quản lý tham số mặc định, hết thời gian session hệ thống tự động cho người dùng đăng xuất
+	•	Tại mỗi thời điểm mỗi tài khoản chỉ được phép đăng nhập trên 1 phiên làm việc (session) đang hoạt động. Khi người dùng đăng nhập mới (trên cùng hoặc khác thiết bị), phiên làm việc hiện tại sẽ kết thúc, hệ thống đăng xuất người dùng khỏi hệ thống 
+Lưu đồ và diễn giải
+Lưu đồ
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Đăng nhập
+Nhập Tên đăng nhập, Mật khẩu và chọn button “Đăng nhập”
+Người dùng
+2
+
+Kiểm tra thông tin hợp lệ không?
++ Valid => Bước 3
++ Invalid => Bước 2.1
+ProfiX
+2.1
+
+Hiển thị thông báo đăng nhập không thành công
+ProfiX
+3
+
+Xác thực thông tin
++ Valid => Bước 4
++ Invalid => Bước 2.1
+Hệ thống quản lý nhân sự
+4
+
+Đăng nhập thành công và hiển thị màn hình Trang chủ => Kết thúc
+ProfiX
+
+Giao diện
+Màn hình
+Màn hình đăng nhập
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+1
+Đăng nhập
+
+Button
+
+Người dùng nhấn vào button “Đăng nhập, hệ thông ghi nhận và xử lý
+2
+Xem 
+
+Button
+
+Người dùng nhấn vào icon “xem” lần  để xem mật khẩu
+CÁC TRƯỜNG THÔNG TIN
+3
+Tên đăng nhập
+★
+Button
+
+Người dùng nhập username
+4
+Mật khẩu
+★
+Button
+
+Người dùng nhập mật khẩu
+
+US23 – Là người dùng, tôi muốn đăng xuất hệ thống 
+Yêu cầu nghiệp vụ
+	•	Navigation: Khi muốn đăng xuất hệ thống, tại thông tin user ở góc trái màn hình, người dùng chọn “Đăng xuất”
+	•	Hệ thống có 3 trường hợp đăng xuất khỏi hệ thống gồm: 
+	•	Người dùng chọn Đăng xuất, hệ thống hiển thị Popup Xác nhận “Bạn có chắc chắn muốn đăng xuất không?”
+	•	Người dùng nhấn vào “Đồng ý”  đăng xuất người dùng đó khỏi, hệ thống đăng xuất người dùng đó khỏi phiên làm việc. Sau khi đăng xuất, hệ thống hiển thị màn hình Đăng nhập
+	•	Người dùng nhấn vào “Huỷ bỏ”, hệ thống không đăng xuất, đóng popup “Xác nhận đăng xuất”
+	•	Tự động đăng xuất: 
+	•	Khoảng thời gian hệ thống sẽ tự động đăng xuất nếu người dùng không có thao tác sau n phút: Được quy định tham số SESSION_TIMEOUT tại Quản trị hệ thống >> Quản lý tham số mặc định
+	•	Hết thời gian session, hệ thống tự động đăng xuất người dùng và hiển thị popup thông báo “Phiên đăng nhập của bạn hết hạn. Vui lòng đăng nhập lại”. Người dùng chọn button “Đăng nhập”, hệ thống hiển thị màn hình Đăng nhập. Chi tiết về luồng Đăng nhập, xem tại US22 – Là người dùng, tôi muốn đăng nhập vào hệ thống
+	•	Đăng xuất khi đăng nhập phiên làm việc mới hoặc thiết bị mới: Hệ thống đăng xuất người dùng khỏi hệ thống ở phiên làm việc trước đó. Sau khi đăng xuất, hệ thống hiển thị màn hình Đăng nhập
+	•	Các tác vụ đang thực hiện không được lưu khi người dùng Đăng xuất
+Lưu đồ và diễn giải
+Lưu đồ
+
+Diễn giải
+
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Đăng xuất
+Chọn button “Đăng xuất”
+Người dùng
+2
+
+Hiển thị Popup Xác nhận đăng xuất hệ thống
+Frontend
+3
+
+Người dùng lựa chọn: 
++ Đồng ý => Bước 3.1
++ Huỷ bỏ => Bước 3.2
+Người dùng
+3.1.
+
+Xác nhận
+Người dùng
+4
+
+Gửi yêu cầu đăng xuất
+Frontend
+5
+
+Nhận yêu cầu và xử lý đăng xuất
+Backend
+6
+
+Kết thúc phiên làm việc và hiển thị màn hình đăng nhập => Kết thúc
+Frontend
+3.2
+
+Huỷ
+Người dùng
+7
+
+Đóng popup Xác nhận đăng xuất hệ thống => Kết thúc
+Frontend
+
+Giao diện
+Màn hình
+
+
+Popup Xác nhận đăng xuất hệ thống 
+
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+
+
+
+
+
+
+NÚT CHỨC NĂNG
+1
+Đăng xuất
+
+Button
+
+Người dùng nhấn vào button “Đăng xuất”, hệ thống hiển thị Popup Xác nhận đăng xuất hệ thống
+Popup Xác nhận đăng xuất hệ thống
+2
+Đồng ý
+
+Button
+
+Người dùng nhấn vào button “Đồn ý”, hệ thống ghi nhận và xử lý đăng xuất
+3
+Huỷ bỏ
+
+Button
+
+Người dùng nhấn vào button “Huỷ bỏ”, hệ thống đóng popup Xác nhận đăng xuất hệ thống
+
+US24 – Là người quản trị, tôi muốn khai báo/ cập nhật thông tin người dùng trong hệ thống
+Yêu cầu nghiệp vụ
+Navigation: Khi người quản trị muốn khai báo/cập nhật/xem thông tin người dùng trong hệ thống, người quản trị truy cập: Quản trị hệ thống >> Quản lý người dùng 
+Danh sách người dùng
+Màn hình Quản lý người dùng gồm có: Button “Lọc nâng cao”, Button “Thêm mới”, Button "Tải xuống”, lưới Danh sách người dùng
+	•	Lưới danh sách người dùng: Hiển thị tất cả danh sách người dùng hiện đang có trên hệ thống được sắp xếp theo thứ tự ngày sửa hoặc ngày tạo gần nhất ở trên cùng
+	•	Tên đăng nhập: Hiển thị username của người dùng. Người quản trị nhấn vào tên đăng nhập để xem chi tiết người dùng
+	•	Tên hiển thị: Hiển thị tên hiển thị người dùng
+	•	Khối: Hiển thị tên khối của người dùng
+	•	Phòng ban: Hiển thị tên phòng ban của người dùng
+	•	Nhóm quyền: Hiển thị tên nhóm quyền của người dùng đang được gắn
+	•	Trạng thái: Hiển thị trạng thái của người dùng: Hoạt động/Không hoạt động
+	•	Số điện thoại: Hiển thị số điện thoại của người dùng
+	•	Email: Hiển thị email của người dùng
+	•	Ngày tạo: Hiển thị ngày tạo người dùng, form: hh:mm:ss – dd/mm/yyyy
+	•	Người tạo: Hiển thị username của người tạo
+	•	Ngày sửa: Hiển thị ngày sửa người dùng, form: hh:mm:ss – dd/mm/yyyy. Nếu không có thông tin, hệ thống hiển thị “-“
+	•	Người sửa: Hiển thị username của người sửa, Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Button “Lọc nâng cao: Người quản trị nhấn vào Lọc nâng cao, hệ thống hiển thị màn hình Lọc người dùng gồm có:
+	•	Tên đăng nhập: Người quản trị nhập tên đăng nhập
+	•	Tên hiển thị: Người quản trị nhập tên hiển thị
+	•	Khối: Người quản trị chọn một khối 
+	•	Phòng ban: Người quản trị chọn một phòng ban 
+	•	Nhóm quyền: Người quản trị chọn một nhóm quyền
+	•	Trạng thái: Người quản trị chọn trạng thái: Hoạt động/Không hoạt động
+	•	Số điện thoại: Người quản trị nhập số điện thoại muốn tìm kiếm
+	•	Email: Người quản trị nhập email của người dùng muốn tìm kiếm
+	•	Sau khi lọc theo các điều kiện, hệ thống trả kết quả, hiển thị danh sách người dùng với điều kiện lọc theo Quy tắc chung của hệ thống.
+	•	Tải xuống: Người quản trị có thể tải xuống file danh sách người dùng theo dữ liệu kết quả tìm kiếm đang hiển thị trên màn hình và theo quy tắc tải xuống tại mục Quy tắc chung của hệ thống.
+	•	Xem chi tiết 1 người dùng: Người quản trị có thể xem chi tiết 1 người dùng, các trường thông tin hiển thị như ở màn tạo/chỉnh sửa theo Quy tắc chung của hệ thống. Đối với nhóm quyền được gắn với người dùng, hệ thống hiển thị chi tiết nhóm quyền đó.
+	•	Button “Thêm mới”: Người quản trị nhấn vào “Thêm mới”, hệ thống hiển thị Dropdown list gồm: Thêm mới người dùng, Tải lên ds người dùng
+	•	Người quản trị chọn “Thêm mới người dùng”, hệ thống hiển thị màn hình thêm mới gồm: 
+	•	Tên đăng nhập: Cho phép nhập “Tên đăng nhập”. Tên đăng nhập là duy nhất, chưa tồn tại trong hệ thống, viết liền không dấu, không chứa khoảng trắng là trường bắt buộc
+	•	Tên hiển thị: Cho phép nhập tên hiển thị, là trường bắt buộc
+	•	Khối: Cho phép tìm kiếm và chọn một khối, là trường bắt buộc
+	•	Phòng ban: Cho phép tìm kiếm và chọn một phòng ban, là trường bắt buộc
+	•	Nhóm quyền: Cho phép tìm kiếm và chọn 1 nhóm quyền. Khi chọn 1 nhóm quyền, hệ thống hiển thị chi tiết nhóm quyền đó được thực hiện các chức năng nào, là trường bắt buộc
+	•	Trạng thái: Cho phép chọn trạng thái: Hoạt động/Không hoạt động
+	•	Số điện thoại: Cho phép nhập số điện thoại
+	•	Email: cho phép nhập email và theo format email
+	•	Button “Xác nhận”: Người quản trị nhấn vào button “Xác nhận”, hệ thống kiểm tra các điều kiện gồm: 
+	•	Tên đăng nhập không đúng định dạng (viết liền không dấu, không chứa khoảng trắng), hệ thống hiển thị thông báo lỗi “Tên đăng nhập không hợp lệ”
+	•	Tên đăng nhập đã tồn tại trên hệ thống, hệ thống hiển thị thông báo lỗi “Tên đăng nhập đã tồn tại”
+	•	Button “Đóng”: Người quản trị nhấn vào button “Đóng”, hệ thống đóng màn hình thêm mới
+	•	Người quản trị chọn “Tải lên ds người dùng”, hệ thống hiển thị màn hình Tải lên danh sách người dùng (tham chiếu luồng Tải lên danh sách người dùng)
+	•	Khi người quản trị muốn chỉnh sửa 1 người dùng, nhấn vào button “Chỉnh sửa” tại hành động trên lưới danh sách người dùng => Hệ thống hiển thị màn chỉnh sửa người dùng. Khi chỉnh sửa người dùnghệ thống kiểm tra các điều kiện tương tự như khi thêm mới người dùng.
+Tải lên danh sách người dùng
+Màn hình Tải lên danh sách người dùng gồm: Button “Tải lên”, Button “Tải file mẫu”, Button "Đóng”, Button "Xác nhận”
+	•	Button “Tải lên”: Người quản trị chọn button “Tải lên” và chọn file từ máy tính, chỉ cho phép chọn loại file là excel. Sau khi chọn file xong, hệ thống kiểm tra các điều kiện tương tự như tại “Thêm mới người dùng”. Sau khi kiểm tra xong: 
+	•	Nếu có ít nhất 1 người dùng không hợp lệ, hệ thống hiển thị “Danh sách người dùng lỗi”, các trường có lỗi của người dùng đó sẽ được thể hiện bằng text màu đỏ, button “Xác nhận” không thể thao tác được, button “Đóng” có thể thao tác.
+	•	Nếu tất cả các người dùng trong file hợp lệ, hệ thống hiển thị “Danh sách người dùng hợp lệ”, button “Xác nhận”, “Đóng”  có thể thao tác.
+	•	Button “Tải file mẫu”: Người quản trị chọn button “Tải file mẫu”, hệ thống tải xuống file template theo mục quy tắc Tải xuống của Quy tắc chung. File mẫu: Template upload danh sách người dùng
+	•	Button “Đóng”: Người quản trị chọn button “Đóng”, hệ thống đóng màn hình “Tải lên danh sách người dùng”
+	•	Button “Xác nhận”: Người quản trị nhấn vào button Xác nhận, hệ thống thêm các người dùng hợp lệ vào danh sách người dùng trên lưới
+Lưu đồ và diễn giải
+Quản lý người dùng
+Lưu đồ
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Quản lý người dùng
+Chọn Quản lý người dùng
+Người quản trị
+2
+
+Gửi yêu cầu xử lý
+Frontend
+3
+
+Nhận yêu cầu và xử lý logic
+Backend
+4
+
+Hiển thị màn hình Quản lý người dùng
+Frontend
+5
+
+Lựa chọn: 
++ Lọc nâng cao => Bước 5.1
++ Thêm mới => Bước 5.2
++ Chỉnh sửa => Bước 5.3
++ Tải xuống => Bước 5.4
+Người quản trị
+5.1
+
+Lọc nâng cao
+Người quản trị
+6
+
+Hiển thị màn hình lọc Người dùng
+Frontend
+7
+
+Nhập/chọn các điều kiện lọc
+Người quản trị
+8
+
+Lựa chọn: 
++ Xoá lọc => Bước 8.1
++ Áp dụng => Bước 8.2
+Người quản trị
+8.1
+
+Xoá lọc
+Người quản trị
+9
+
+Đóng màn hình Lọc người dùng => Kết thúc 
+Frontend
+8.2
+
+Áp dụng
+Người quản trị
+10
+
+Hiển thị danh sách người dùng theo điều kiện lọc => Kết thúc 
+Frontend
+5.2
+
+Thêm mới
+Người quản trị
+11
+
+Hiển thị dropdownlist: Thêm mới người dùng/ Tải lên ds người dùng
+Frontend
+12
+
+Lựa chọn: 
++ Tải lên ds người dùng => Bước 12.1
++ Thêm mới => Bước 12.2
+Người quản trị
+12.1
+
+Tải lên ds người dùng
+Người quản trị
+13
+
+Tham chiếu luồng tải lên danh sách người dùng => Kết thúc
+Frontend
+12.2
+
+Thêm mới
+Người quản trị
+14
+
+Hiển thị màn hình Thêm mới
+Frontend
+15
+
+Nhập/chọn các trường thông tin và nhấn xác nhận
+Người quản trị
+16
+
+Check các trường bắt buộc và business rules:
++ Valid => Bước 17
++ Invalid => Bước 15
+Frontend
+17
+
+Nhận yêu cầu và xử lý
+Backend
+18
+
+Hiển thị bản ghi mới trên lưới danh sách => Kết thúc
+Frontend
+5.3
+
+Chỉnh sửa
+Người quản trị
+19
+
+Hiển thị màn hình chỉnh sửa => quay lại bước 15
+Frontend
+5.4
+
+Tải xuống
+Người quản trị
+20
+
+Tham chiếu quy tắc tải xuống tại Mục Quy tắc chung => Kết thúc
+Frontend
+
+Tải lên danh sách người dùng
+Lưu đồ
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+
+Tải lên danh sách người dùng
+Tải lên danh sách người dùng
+Người quản trị
+2
+
+Hiển thị màn hình tải lên danh sách người dùng
+Frontend
+3
+
+Lựa chọn: 
++ Tải file mẫu => Bước 3.1
++ Tải lên => Bước 3.2
+Người quản trị
+3.1
+
+Tải file mẫu 
+Người quản trị
+4
+
+Tham chiếu quy tắc Tải xuống tại mục Quy tắc chung
+Frontend
+3.2
+
+Tải lên 
+Người quản trị
+5
+
+Chọn file
+Người quản trị
+6
+
+Gửi danh sách file
+Frontend
+7
+
+Validate và xử lý logic
++ Có user lỗi => Bước 8
++ Không có user lỗi => Bước 9
+Backend
+8
+
+Hiển thị danh sách người dùng lỗi
+Frontend
+9
+
+Hiển thị danh sách người dùng hợp lệ
+Frontend
+10
+
+Lựa chọn: 
++ Đóng => Bước 10.1
++ Xác nhận => Bước 10.2
+Người quản trị
+10.1
+
+Hiển thị màn Quản lý người dùng => Kết thúc
+Frontend
+11
+
+Hiển thị màn hình quản lý người dùng => Kết thúc
+Frontend
+10.2
+
+Xác nhận
+Người quản trị
+12
+
+Gửi yêu cầu tạo danh sách người dùng
+Frontend
+13
+
+Nhận yêu cầu xử lý logic 
+Backend
+14
+
+Hiển thị danh sách người dùng mới trên lưới Quản lý người dùng => Kết thúc
+Frontend
+
+Giao diện
+Màn hình
+Màn hình quản lý người dùng
+
+
+Màn hình Lọc người dùng
+
+Màn hình Thêm mới người dùng
+
+
+Màn hình Chỉnh sửa người dùng
+
+Màn hình Tải lên danh sách người dùng lỗi
+
+
+Màn hình Tải lên danh sách người dùng hợp lệ (đợi update UI)
+
+Mô tả chi tiết các trường
+
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+Màn hình Quản lý người dùng
+NÚT CHỨC NĂNG
+1
+Lọc nâng cao
+
+Button
+
+Người quản trị nhấn vào button Lọc nâng cao, hệ thống hiển thị màn Lọc người dùng
+Các điều kiện lọc: 
++ Tên đăng nhập: cho phép nhập tên đăng đặp
++ Tên hiển thị: Cho phép nhập tên hiển thị
++ Email: cho phép nhập email
++ Khối: cho phép tìm theo tên khối và chọn khối
++ Phòng ban: Cho phép tìm theo tên phòng ban và chọn phòng ban
++ Trạng thái:Hoạt động/Không hoạt động, cho phép chọn 1 trạng thái
++ Nhóm quyền: Cho phép chọn nhóm quyền
+2
+Thêm mới
+
+Button
+
+Người quản trị nhấn vào button Thêm mới, hệ thống hiển thị dropdownlist gồm: Thêm mới người dùng/Tải lên ds người dùng
++ Người quản trị chọn Thêm mới người dùng, hệ thống hiển thị màn hình Thêm mới người dùng
++ Người quản trị chọn Tải lên ds người dùng, hệ thống hiển thị màn hình Tải lên danh sách người dùng 
+3
+Tải xuống
+
+Button
+
+Người quản trị nhấn vào button Tải xuống, hệ thống tải xuống theo mục Quy tắc chung
+4
+Chỉnh sửa
+
+Button
+
+Người quản trị nhấn vào chỉnh sửa, hệ thống hiển thị màn hình chỉnh sửa
+MÔ TẢ CHI TIẾT CÁC TRƯỜNG
+1
+Tên đăng nhập
+
+Text
+
+Hiển thị tên đăng nhập của người dùng
+2
+Tên hiển thị
+
+Text
+
+Tên hiển thị
+3
+Khối
+
+Text
+
+Hiển thị tên khối
+4
+Phòng ban
+
+Text
+
+Hiển thị tên phòng ban
+5
+Nhóm quyền
+
+Text
+
+Hiển thị tên nhóm quyền
+6
+Trạng thái
+
+Text
+
+Hiển thị trạng thái của người dùng
+7
+Số điện thoại
+
+Text
+
+Hiển thị số điện thoại
+8
+Email
+
+Text
+
+Hiển thị email 
+9
+Ngày tạo
+
+Datetime
+
+Hiển thị ngày tạo người dùng thành công
+Format: hh:mm:ss – dd/mm/yyyy
+10
+Người tạo
+
+Text
+
+Hiển thị username của người tạo
+11
+Ngày sửa
+
+Datetime
+
+Hiển thị ngày sửa người dùng thành công
+Format: hh:mm:ss – dd/mm/yyy
+Nếu không có thông tin, hiển thị “-“
+12
+Người sửa
+
+Text
+
+Hiển thị username của người sửa
+Nếu không có thông tin, hiển thị “-“
+Màn hình Thêm mới/Chỉnh sửa 1 người dùng
+NÚT CHỨC NĂNG
+1
+Xác nhận
+
+Button
+
+Người quản trị nhấn vào button Xác nhận, hệ thống ghi nhận yêu cầu và xử lý logic
+2
+Đóng
+
+Button
+
+Người quản trị nhấn vào button Đóng, hệ thống đóng màn thêm mới/chỉnh sửa thông tin người dùng
+MÔ TẢ CHI TIẾT CÁC TRƯỜNG
+1
+Tên đăng nhập
+★
+Textbox
+
+Cho phép nhận tên đăng nhập của người dùng
+2
+Tên hiển thị
+★
+Textbox
+
+Cho phép nhận tên hiển thị của người dùng
+3
+Khối
+★
+Combobox
+
+Cho phép tìm kiếm tên khối và chọn khối
+4
+Phòng ban
+★
+Combobox
+
+Cho phép tìm kiếm tên phòng ban và chọn phòng ban
+5
+Nhóm quyền
+★
+Combobox
+
++ Cho phép tìm kiến tên nhóm quyền và chọn nhóm quyền
++ Người quản trị chọn 1 nhóm quyền, hệ thống hiển thị chi tiết nhóm quyền đó tại màn thêm mới/chỉnh sửa người dùng
+6
+Trạng thái
+★
+Dropdown list
+
+Cho phép chọn trạng thái của người dùng, gồm: Hoạt động/Không hoạt động
+7
+Số điện thoại
+★
+Textbox
+
+Cho phép nhập số điện thoại
+8
+Email
+★
+Textbox
+
+Cho phép nhận email
+Màn hình Tải lên danh sách người dùng
+NÚT CHỨC NĂNG
+1
+Tải lên
+
+Button
+
+Người quản trị nhấn vào button Tải lên, người quản trị chọn file muốn tải lên, sau khi tải lên thành công, hệ thống kiểm tra các user có hợp lệ không
+2
+Tải file mẫu
+
+Button
+
+Người quản trị nhấn vào button Tải file mẫu, hệ thống tải xuống file mẫu theo quy tắc chung
+3
+Xác nhận
+
+Button
+
++ Khi hệ thống có danh sách người dùng lỗi, button Xác nhận không thể thao tác
++ Khi hệ thống hiển thị danh sách người dùng hợp lệ, button Xác nhận có thể thao tác
++ Người quản trị nhấn vào button Xác nhận, hệ thống ghi nhận yêu cầu và xử lý logic
+4
+Đóng
+
+Button
+
+Người quản trị nhấn vào button Đóng, hệ thống đóng màn hình Tải lên danh sách người dùng
+MÔ TẢ CHI TIẾT CÁC TRƯỜNG
+(Danh sách người dùng lỗi/hợp lệ)
+1
+STT
+
+Text
+
+Hiển thị số thự tự
+2
+Tên đăng nhập
+
+Text
+
+Hiển thị tên đăng nhập
+Nếu dữ liệu không hợp lệ, hiển thị text màu đỏ
+3
+Tên hiển thị
+
+Text
+
+Tên hiển thị
+Nếu dữ liệu không hợp lệ, hiển thị text màu đỏ
+4
+Khối
+
+Text
+
+Hiển thị tên khối
+Nếu dữ liệu không hợp lệ, hiển thị text màu đỏ
+5
+Phòng ban
+
+Text
+
+Hiển thị tên phòng ban
+Nếu dữ liệu không hợp lệ, hiển thị text màu đỏ
+6
+Nhóm quyền
+
+Text
+
+Hiển thị tên nhóm quyền
+Nếu dữ liệu không hợp lệ, hiển thị text màu đỏ
+7
+Trạng thái
+
+Text 
+
+Hiển thị trạng thái của người dùng
+Nếu dữ liệu không hợp lệ, hiển thị text màu đỏ
+8
+Số điện thoại
+
+Text
+
+Hiển thị số điện thoại
+Nếu dữ liệu không hợp lệ, hiển thị text màu đỏ
+9
+Email
+
+Text
+
+Hiển thị email 
+Nếu dữ liệu không hợp lệ, hiển thị text màu đỏ
+
+
+US25 – Là người dùng, tôi muốn hệ thống
+Yêu cầu nghiệp vụ
+
+Lưu đồ và diễn giải
+Lưu đồ
+Diễn giải
+Giao diện
+Màn hình
+Mô tả chi tiết các trường
+

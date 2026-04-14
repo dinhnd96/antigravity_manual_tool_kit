@@ -1,0 +1,91 @@
+SA.06- Danh mục điều kiện tính phí
+Mô tả nhóm chức năng
+Mục đích: Chức năng này cho phép người dùng quản lý danh mục các điều kiện tính phí có thể áp dụng được trên hệ thống. Mỗi điều kiện tính phí cần phải được cấu hình định dạng và nguồn dữ liệu tại đây trước khi sử dụng tại màn hình thêm mới Code phí.
+
+Các chức năng chi tiết trên màn hình:
+
+STT
+Chức năng
+Mô tả
+
+Thêm mới
+Cho phép thêm mới bản ghi
+
+Sửa
+Cho phép sửa bản ghi
+
+Xem
+Cho phép xem bản ghi
+
+Tìm kiếm
+Cho phép tìm kiếm dữ liệu trên lưới
+
+Tải xuống
+Cho phép kết xuất dữ liệu ra tệp
+
+Màn hình tham khảo:
+
+Thêm mới Trường điều kiện
+Thông tin chung:
+
+Objective
+Thêm mới bản ghi Trường điều kiện tính phí
+Actor
+Người dùng
+Trigger
+Người dùng click vào nút “Thêm mới” tại chức năng “Danh mục điều kiện tính phí”
+Pre-condition
+Người dùng được phân quyền
+Post-condition
+Thêm mới thành công Trường điều kiện tính phí
+
+Luồng nghiệp vụ:
+Step
+Actor
+Description
+
+Người dùng
+Chọn nút “Thêm mới” tại chức năng “Danh mục điều kiện tính phí”
+
+Hệ thống
+Hiển thị màn hình Thêm mới 
+
+Người dùng
+Nhập các thông tin của Trường điều kiện và chọn Xác nhận
+
+Hệ thống
+Kiểm tra tính hợp lệ của các thông tin vừa nhập
+Lưu thành công điều kiện mới
+
+Người dùng
+Nhận thông báo “Thêm mới điều kiện thành công”
+
+Business Rules:
+
+BR Code
+Description
+BR_01
+Người dùng cần nhập đầy đủ các trường bắt buộc (dấu *) trước khi chọn “Xác nhận”
+BR_02
+Người dùng chọn “Đóng”, hệ thống sẽ không lưu các thông tin vừa nhập
+BR_03
+Tên điều kiện và Mã điều kiện phải là duy nhất, không được trùng với những bản ghi Tên điều kiện và Mã điều kiện đã tồn tại trên hệ thống
+BR_04
+Trường dữ liệu “Kiểu dữ liệu” hiển thị danh sách các định dạng sau:
+Number
+String
+Date (YYYY-MM-DD)
+Time (HH:MM:SS)
+BR_05
+Trạng thái: Hoạt động/Không hoạt động
+List danh sách điều kiện tính phí ở màn tạo/sửa code phí, CTƯĐ chỉ hiển thị các điều kiện tính phí có trạng thái = “Hoạt động”
+Khi chỉnh sửa trạng thái Điều kiện tính phí: 
+Nếu điều kiện tính phí đang gán với 1 CTƯĐ (trạng thái = Chưa có hiệu lực/Đang hiệu lực)/Code phí (trạng thái = Hoạt động/Ngưng hoạt động/Chờ gán) thì không cho phép sửa trạng thái.
+Nếu điều kiện tính phí chưa gán vs CTƯĐ/Code phí nào, hoặc gán CTƯĐ có trạng thái = Hết hiệu lực/Code phí có trạng thái = Huỷ thì người dùng có thể sửa trạng thái điều kiện tính phí.
+BR_06
++ Nguồn dữ liệu = API, hiển thị trường “Mapping note Msg” để người dùng mapping trường dữ liệu trong API sẽ được đem vào làm nguồn dữ liệu tính phí.
++ Nguồn dữ liệu =  ETL, hiển thị trường “Bảng dữ liệu” (Dropdown list: ETL Khách hàng/ETL Tài khoản/ETL Thẻ) để người dùng mapping trường dữ liệu trong bảng tương ứng được đem vào làm nguồn dữ liệu tính phí.
+
+Màn hình tham khảo:
+
+

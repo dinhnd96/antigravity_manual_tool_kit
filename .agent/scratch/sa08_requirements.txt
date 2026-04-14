@@ -1,0 +1,71 @@
+SA.08- Quản lý tham số mặc định
+Mô tả nhóm chức năng
+Mục đích: Chức năng này cho phép người dùng khai báo giá trị áp dụng của các tham số cấu hình mặc định cho hệ thống. Danh sách và ý nghĩa của các tham số được giải thích tại Phụ lục của tài liệu này.
+
+Các chức năng chi tiết trên màn hình:
+
+STT
+Chức năng
+Mô tả
+
+Sửa
+Cho phép sửa bản ghi
+
+Xem
+Cho phép xem bản ghi
+
+Màn hình tham khảo:
+
+
+Sửa Tham số mặc định
+Thông tin chung:
+
+Objective
+Cập nhật tham số mặc định
+Ví dụ: Cập nhật tham số NUMBER_DAY_HIS
+Actor
+Người dùng
+Trigger
+Người dùng click vào nút “Sửa” tại bản ghi tham số cần sửa trên lưới chức năng “Quản lý tham số mặc định”
+Pre-condition
+Người dùng được phân quyền
+Post-condition
+Bản ghi tham số mặc định được cập nhật, hệ thống xử lý theo thông tin cập nhật gần nhất
+
+Luồng nghiệp vụ:
+Step
+Actor
+Description
+
+Người dùng
+Chọn nút “Sửa” tại trên lưới chức năng “Quản lý tham số mặc định”
+
+Hệ thống
+Hiển thị màn hình Sửa 
+
+Người dùng
+Sửa các thông tin của Tham số mặc định
+
+Hệ thống
+Kiểm tra tính hợp lệ của các thông tin vừa nhập
+Lưu thành công 
+
+Người dùng
+Nhận thông báo “Sửa tham số mặc định thành công”
+
+Business Rules:
+
+BR Code
+Description
+BR_01
+Người dùng cần nhập đầy đủ các trường bắt buộc (dấu *) trước khi chọn “Xác nhận”
+BR_02
+Người dùng chọn “Đóng”, hệ thống sẽ không lưu các thông tin vừa nhập
+BR_03
+Các tham số mặc định được cấu hình bao gồm:
+- Thời gian time-out: hết thời gian (số phút) được cấu hình, phiên đăng nhập của người dùng toàn hệ thống sẽ kết thúc, người dùng đăng xuất
+- Số lần tối đa đăng nhập sai: hết số lần đăng nhập sai liên tiếp được cấu hình, người dùng sẽ bị khoá đăng nhập
+
+Màn hình tham khảo:
+
+

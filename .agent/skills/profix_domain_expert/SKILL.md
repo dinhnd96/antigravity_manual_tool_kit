@@ -10,8 +10,8 @@ sources:
 
 # PROFIX DOMAIN EXPERT - BỘ KIẾN THỨC NGHIỆP VỤ
 
-> **Nguồn dữ liệu:** P1 (US01, 02, 06) | P2 (US15-21) | P3 (US23, 27, Quy tắc chung)
-> **Trạng thái:** ✅ P1, P2, P3 đã tích hợp | ⏳ P4 chưa tích hợp
+> **Nguồn dữ liệu:** P1 (US01, US02, US05, US15 tree) | P2 (US15-21) | P3 (US23, 27, Quy tắc chung)
+> **Trạng thái:** ✅ P1, P2, P3 đã tích hợp đầy đủ | ⏳ P4 chưa tích hợp
 
 ---
 
@@ -88,7 +88,7 @@ sources:
 
 ---
 
-## 2. Code Phí - Chi tiết US02 & US06
+## 2. Code Phí - Chi tiết US02 & US05
 *(Navigation: Tham số >> Danh mục SPDV >> SPDV cấp cuối >> Thêm mới Code phí >> Thiết lập Quy tắc tính phí)*
 
 ### 2.1 Thông tin chung Code phí
@@ -139,10 +139,10 @@ sources:
 
 **Lưu ý:** Tại mỗi phân vùng điều kiện tính phí, người dùng có thể thêm nhiều điều kiện. Các điều kiện không được trùng lặp.
 
-### 2.4 Quy tắc tính phí (Công thức tính phí) - US06
+### 2.4 Quy tắc tính phí (Công thức tính phí) - US05
 * Mỗi Code phí có thể có 1 hoặc nhiều công thức khác nhau.
 * **Không khai báo theo nhóm KH:** Chỉ 1 công thức, áp dụng chung.
-* **Khai báo theo nhóm KH:** Nhiều công thức, mỗi công thức áp dụng riêng cho 1 nhóm KH.
+* **Khai báo theo nhóm KH:** Nhiều công thức, mỗi công thức áp dụng riêng cho 1 nhóm KH. Việc khai báo Nhóm khách hàng thực hiện bằng cách thêm mới các mã CIF.
 * Số tiền phí tính theo công thức có Loại tiền tệ = Loại tiền tệ của Code phí.
 * Có thể khai báo Số tiền phí tối thiểu & tối đa với Loại tiền tệ riêng (khác Code phí).
 
@@ -152,10 +152,15 @@ sources:
 * Nếu công thức là 1 giá trị số học cụ thể mà Loại tiền tệ Code phí khác Loại tiền tối thiểu/tối đa → Lỗi, không lưu.
 
 **Nguyên tắc nhập Công thức:**
-* **Hàm được phép:** `MONTHS_BETWEEN`, `DATE_DIFF`, `ROUND`, `ROUNDUP`, `ROUNDDOWN`, `MIN`, `MAX`
+* **Hàm được phép:** 
+  * `MONTHS_BETWEEN`: Tính số tháng giữa 2 ngày (có thể trả về số thập phân).
+  * `DATE_DIFF`: Tính số ngày giữa 2 ngày (trả về số nguyên).
+  * `ROUND`: Làm tròn toán học (>= 0.5 lên, < 0.5 xuống).
+  * `ROUNDUP`, `ROUNDDOWN`: Luôn làm tròn lên / luôn làm tròn xuống.
+  * `MIN`, `MAX`: Giá trị nhỏ nhất / lớn nhất.
 * **Toán tử:** `+` (cộng), `-` (trừ), `x` (nhân), `:` (chia)
 * **Ký tự:** `( ) . , # 0-9`
-* **Biến:** Dùng định dạng `#TenBien#`, hệ thống gợi ý khi nhập sau dấu `#`.
+* **Biến:** Dùng định dạng `#TenBien#`, hệ thống gợi ý khi nhập sau dấu `#`. Trích xuất từ các trường do Core/API gửi về.
 * **Giới hạn:** Tối đa 300 ký tự. Hệ thống tự chuyển sang CHỮ HOA.
 
 **Validation Công thức (khi ấn "Xác nhận"):**
@@ -379,9 +384,10 @@ Màn hình gồm **2 cấu phần độc lập:**
 *(Navigation: Tra cứu >> Xem lịch thu phí dự kiến theo khách hàng)*
 
 * **Điều kiện tra cứu bắt buộc:** Mã CIF.
-* **Điều kiện tùy chọn:** Sản phẩm dịch vụ | Biểu phí | Code phí | Từ ngày – Đến ngày (theo **ngày thu dự kiến**).
+* **Điều kiện tùy chọn:** Sản phẩm dịch vụ | Biểu phí | Code phí | Từ ngày – Đến ngày. 
+  * ⚠️ **Lưu ý (Ràng buộc phạm vi thời gian):** Tìm kiếm theo **ngày thu dự kiến** và bị giới hạn tối đa trong khoảng thời gian **1 năm** (bao gồm ngày hôm nay).
 * **Lưới kết quả:** STT, CIF áp dụng, Tài khoản thu phí, **Số thẻ** (khác US19), Code phí (Mã - Tên), Loại tiền Code phí, Biểu phí, Sản phẩm dịch vụ, VAT, Số tiền phí nguyên tệ, Số tiền phí quy đổi VNĐ, **Ngày thu dự kiến** (dd/mm/yyyy — khác US19).
-* ⚠️ **Điểm khác biệt với US19:** Có thêm cột **Số thẻ** và cột ngày là **Ngày thu dự kiến** (format dd/mm/yyyy) thay vì Ngày thu (hh:mm:ss – dd/mm/yyyy).
+* ⚠️ **Điểm khác biệt với US19:** Có thêm cột **Số thẻ** và cột ngày là **Ngày thu dự kiến** (format dd/mm/yyyy) thay vì Ngày thu (hh:mm:ss – dd/mm/yyyy). Mặc định các số tiền hiển thị là khoản tiền "dự kiến sẽ thu".
 
 ---
 
@@ -393,6 +399,81 @@ Màn hình gồm **2 cấu phần độc lập:**
 * **Lưới kết quả:** STT, CIF áp dụng, Code phí, Tên code phí, Biểu phí, Sản phẩm dịch vụ, Công thức tính phí, **Mã CTƯĐ**, **Tên CTƯĐ**, Ngày hiệu lực CTƯĐ, Ngày hết hiệu lực CTƯĐ, Người tạo, Ngày tạo, Người sửa, Ngày sửa, Người duyệt, Ngày duyệt.
 * Nhấn vào **Mã CTƯĐ** → Xem chi tiết CTƯĐ.
 * Reuse màn hình **Tra cứu CIF** từ US18.
+
+---
+
+## IX. QUẢN TRỊ HỆ THỐNG - ĐĂNG NHẬP, NGƯỜI DÙNG & ĐIỀU KIỆN TÍNH PHÍ (US22 - US26)
+
+### 1. US22 - Đăng nhập (Login)
+* **Quy tắc tính hợp lệ:** Username phải tồn tại + Trạng thái `Hoạt động` + Đúng Mật khẩu.
+* **Thông báo lỗi (Validation messages):**
+  * Tên ĐN không tồn tại → `"Tên đăng nhập không tồn tại trên hệ thống"`
+  * Trạng thái khác Hoạt động → `"Tài khoản hiện đang không hoạt động. Vui lòng liên hệ quản trị viên"`
+  * Sai Pass/User → `"Tên đăng nhập hoặc Mật khẩu không hợp lệ"`
+  * Bỏ trống → `"Tên đăng nhập/Mật khẩu không được để trống"`
+* **Phiên làm việc (Session Rules):**
+  * Tự động đăng xuất sau `n` phút không thao tác (Theo cấu hình tham số `SESSION_TIMEOUT`).
+  * **1 Session per User:** Mỗi tài khoản chỉ được phép có **1 phiên thiết bị đăng nhập đồng thời**. Đăng nhập mới sẽ tự động **kick** (đăng xuất) session cũ ra khỏi trình duyệt.
+
+### 2. US23 - Đăng xuất (Logout)
+* **Logout chủ động:** Nhấn "Đăng xuất" ở góc trái màn hình → Hiển thị Popup Xác nhận → Đồng ý → Quay về màn hình Đăng nhập.
+* **Logout thụ động (Session timeout):** Hết giờ → Tự đăng xuất → Hiện popup *"Phiên đăng nhập của bạn hết hạn. Vui lòng đăng nhập lại"* → Nhấn Đăng nhập để về màn login.
+* **Lưu ý:** Chữ ký số / các tác vụ đang thực hiện dở dang sẽ KHÔNG ĐƯỢC LƯU khi bị đăng xuất.
+
+### 3. US24 - Quản lý người dùng
+*(Navigation: Quản trị hệ thống >> Quản lý người dùng)*
+
+* **Lưới danh sách mặc định:** Sort theo "Ngày sửa" hoặc "Ngày tạo" gần nhất ở trên cùng (DESC).
+* **Thêm mới lẻ (Thêm từng User):**
+  * Tên đăng nhập (Username): Chữ viết liền, không dấu, không có khoảng trắng. (Duplicate → "Tên đăng nhập đã tồn tại"; Sai định dạng → "Tên đăng nhập không hợp lệ").
+  * Trường bắt buộc (★): Tên đăng nhập, Tên hiển thị, Khối, Phòng ban, Nhóm quyền, Trạng thái (Hoạt động/Không HĐ), Số điện thoại, Email.
+* **Tải lên danh sách (Import Excel đa lượng):**
+  * Logic Validate tương tự như khi thêm mới từng user.
+  * **Ràng buộc UI:** Nếu có **ít nhất 1 dòng (user) bị lỗi** → Hệ thống bôi đỏ text những điểm lỗi → **Disable button Xác nhận** (không cho phép import bán phần).
+  * Chỉ khi 100% data đẩy file lên là hợp lệ → Mới cho phép ấn **Xác nhận** đẩy toàn bộ vào lưới.
+
+### 4. US26 - Danh mục Điều kiện tính phí
+*(Navigation: Quản trị hệ thống >> Danh mục điều kiện tính phí)*
+* **Thêm mới Điều kiện tính phí:**
+  * **Nguồn dữ liệu = API**: Bắt buộc nhập `Mapping note msg` (Tên field trong API).
+  * **Nguồn dữ liệu = ETL**: Bắt buộc chọn `Bảng dữ liệu` (Khách hàng/Tài khoản/Thẻ) và `Trường dữ liệu`.
+  * **Kiểu dữ liệu**: Phải chọn từ danh sách Number / String / Date / Time.
+* **Validation sửa/đổi Trạng thái:**
+  * **Chặn sửa:** Nếu Điều kiện đang gắn với CTƯĐ (Chưa HL/Đang HL) hoặc Code phí (Hoạt động/Ngưng hoạt động/Chờ gán) → Báo lỗi: *"Không thể sửa trạng thái. Điều kiện tính phí đang sử dụng trong hệ thống"*.
+  * **Cho phép sửa:** Chưa gắn CTƯĐ/Code phí, hoặc CTƯĐ = Hết HL, Code phí = Hủy.
+* **Quy tắc mapping màn hình khác:** Chỉ các Điều kiện tính phí có **Trạng thái = Hoạt động** mới được hiển thị trong dropdown list khi người dùng Thêm/Sửa Code phí và CTƯĐ.
+
+---
+
+## X. TỰ ĐỘNG TÍNH PHÍ, THU PHÍ & TRUY THU NỢ PHÍ (US33 - US36)
+
+### 1. US33 & US34 - Tính phí tự động Online & Kênh Quầy (Adhoc)
+* **Xác định CTƯĐ áp dụng (nếu có nhiều CTƯĐ hợp lệ):**
+  1. Chọn CTƯĐ có số tiền ưu đãi **LỚN NHẤT**.
+  2. Nếu bằng nhau → Chọn CTƯĐ có **Ngày hết hiệu lực XA NHẤT**.
+* **Quy đổi Tỷ giá tiền tệ đối với Số tiền Min/Max:** 
+  * Nếu Loại tiền khác nhau, hệ thống luôn lấy **Tỷ giá bán giao ngay**. Nếu cả 2 đều khác VND (ví dụ EUR -> USD), dùng Tỷ giá chéo `T1/T2`.
+* **Tính thuế VAT:**
+  * `Phí ĐÃ BAO GỒM VAT? = CÓ` → VAT = Số tiền sau ưu đãi / 110 * 10 
+  * `Phí ĐÃ BAO GỒM VAT? = KHÔNG` → VAT = Số tiền sau ưu đãi / 100 * 10
+  * **Làm tròn:** VND, JPY → Làm tròn số nguyên. Loại tiền tệ khác → Làm tròn 2 số thập phân.
+* **Luồng Adhoc (Kênh quầy):** User chọn SPDV → Hệ thống tải công thức. Nếu là Số cố định → Hiện luôn tiền. Nếu công thức → Cho User chọn dạng nhập liệu "Thủ công" (tự nhập số tiền cuối) hoặc "Tự động" (nhập biến số lượng/đơn giá để hệ thống tự tính). Bất kỳ sửa đổi Manual nào đều bị check qua Ràng buộc Min/Max của code phí.
+
+### 2. US35 - Tự động thu phí định kỳ (Cronjob)
+* **Verify Điều kiện Tài khoản thu phí mặc định:**
+  1. Cùng loại tiền mã phí.
+  2. Sản phẩm tài khoản thuộc biến cấu hình `CA_PRODUCT`.
+  3. Trạng thái tài khoản = `Hoạt động, Tạm ngừng hoạt động, Tạm khóa ghi có`.
+* **Luồng backup (Fallback):** Nếu TK mặc định lỗi/hết tiền, hệ thống tự động quét các TK khác của khách hàng thỏa 3 điều kiện trên. Lúc này ưu tiên TK nào có **Số dư lớn nhất** (Bằng nhau thì lấy Random).
+
+### 3. US36 - Tự động truy thu, tận thu Khách hàng Ghi nợ 
+* **Quét đầu ngày:** Quét tài khoản khách hàng T-1 có số dư > 0.
+* **Tận thu Realtime:** Đọc biến động từ Topic T24 (Tk phát sinh ghi có) → Kích hoạt thu nợ. (Nguyên tắc: Tận thu = thu được bao nhiêu hay bấy nhiêu kể cả không đủ số tiền hóa đơn nợ phí).
+* **Quy tắc ưu tiên trừ nợ (nếu 1 KH thiếu nhiều kỳ nợ):**
+  1. Đóng tiền theo **Độ ưu tiên Nghiệp vụ** (từ thấp -> cao cấu hình trên nhóm Code phí).
+  2. Bằng nhau → Đóng tiền theo **Ngày đến hạn** (từ xa nhất đến gần nhất).
+  3. Bằng nhau tiếp → Random nợ phí.
+* **Xóa Nợ Phí:** Thực hiện ở công cụ (Pricing). Pricing gọi API sang ProfiX cập nhật trạng thái Không truy thu nữa.
 
 ---
 

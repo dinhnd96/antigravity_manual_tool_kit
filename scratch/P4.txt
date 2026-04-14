@@ -1,0 +1,1476 @@
+US26 - Là người quản trị, tôi muốn thiết lập quy tắc điều kiện tính phí
+Yêu cầu nghiệp vụ
+
+Navigation: Khi muốn xem/ thêm mới/ chỉnh sửa thông tin điều kiện tính phí, người quản trị truy cập: Quản trị hệ thống >> Danh mục điều kiện tính phí  
+Màn hình Danh mục điều kiện tính phí gồm: Button Lọc nâng cao, Button Thêm mới, Button Tải xuống, Lưới danh sách điều kiện tính phí.
+	•	Lưới danh sách điều kiện tính phí: Hiển thị tất cả các điều kiện tính phí đang có trên hệ thống, gồm các trường: 
+	•	Mã điều kiện: Hiển thị mã điều kiện với chữ viết hoa. Người quản trị nhấn vào mã điều kiện, hệ thống hiển thị thông tin chi tiết của mã điều kiện đó
+	•	Mapping note msg: Hiển thị tên field API mapping
+	•	Mô tả: Hiển thị mô tả của điều kiện tính phí
+	•	Trạng thái: hiển trị trạng thái gồm: Hoạt động/Không hoạt động
+	•	Kiểu dữ liệu: hiển thị kiểu dữ liệu: Number/String/Date/Time
+	•	Nguồn dữ liệu: Hiển thị nguồn dữ liệu từ API/ETL
+	•	Ghi chú: Hiển thị ghi chú
+	•	Ngày tạo: Hiển thị ngày tạo điều kiện tính phí, hh:mm:ss – dd/mm/yyyy
+	•	Người tạo: Hiển thị username của người tạo
+	•	Ngày sửa: Hiển thị ngày sửa điều kiện tính phí, hh:mm:ss – dd/mm/yyyy. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Người sửa: Hiển thị username của người sửa. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Lọc nâng cao: Người quản trị nhấn vào Lọc nâng cao, hệ thống hiển thị màn hình Lọc điều kiện tính phí gồm có:
+	•	Mã điều kiện: Người quản trị nhập mã điều kiện, hệ thống xử lý viết hoa các kí tự khi tìm kiếm
+	•	Nguồn dữ liệu: Người quản trị chọn nguồn dữ liệu từ ETL/ API
+	•	Trạng thái: Người quản trị chọn trạng thái: Hoạt động/Không hoạt động
+	•	Mapping note msg: Người quản trị nhập tên field mapping note msg (Tên field trong API). Trường này hiển thị khi người quản trị chọn Nguồn dữ liệu = API
+	•	Sau khi lọc theo các điều kiện, hệ thống trả kết quả, hiển thị các điều kiện tính phí phù hợp với điều kiện lọc theo Quy tắc chung của hệ thống.
+	•	Tải xuống: Người quản trị có thể tải xuống file danh sách các điều kiện tính phí theo dữ liệu kết quả tìm kiếm đang hiển thị trên màn hình và theo quy tắc tải xuống tại mục Quy tắc chung của hệ thống.
+	•	Xem chi tiết 1 điều kiện tính phí: Người quản trị có thể xem chi tiết 1 điều kiện tính phí, các trường thông tin hiển thị như ở màn tạo/chỉnh sửa theo Quy tắc chung của hệ thống.
+	•	Khi người quản trị muốn Thêm mới điền kiện tính phí: Người quản trị nhấn vào button “Thêm mới”, hệ thống hiển thị màn hình thêm mới gồm các trường thông tin: 
+	•	Mã điều kiện: Người quản trị nhập mã điều kiện, hệ thống tự động hiển thị các kí tự viết hoa. Mã điều kiện là duy nhất và bắt buộc nhập. 
+	•	Tên điều kiện: Người quản trị nhập tên điều kiện và bắt buộc nhập. 
+	•	Nguồn dữ liệu: Người quản trị chọn nguồn dữ liệu từ API/ ETL, là field bắt buộc nhập.
+	•	Chọn Nguồn dữ liệu = API => Hệ thống hiển thị field Mapping note Msg. Người quản trị nhập tên field mapping dữ liệu trong API, field này sẽ được đem vào làm nguồn dữ liệu tính phí.
+	•	Chọn Nguồn dữ liệu = ETL => Hệ thống hiển thị field Bảng dữ liệu, field “Trường dữ liệu”. Người quản trị chọn Bảng: Khách hàng/Tài khoản/Thẻ, sau đó người quản trị chọn field Trường dữ liệu. Giá trị của Field này theo khách hàng cụ thể sẽ được đem vào làm nguồn dữ liệu tính phí.
+	•	Kiểu dữ liệu: Người quản trị chọn kiểu dữ liệu từ danh sách: Number/String/Date/Time. Đây là field bắt buộc để làm giảm sai sót trong quá trình khai báo điều kiện tính phí/điều kiện áp dụng ưu đãi.
+	•	Ghi chú: Người quản trị nhập nội dung ghi chú 
+	•	Trạng thái: default = Hoạt động, người quản trị có thể chọn trạng thái: Hoạt động/Không hoạt động. 
+	•	Button “Xác nhận”: Người quản trị nhấn vào xác nhận, hệ thống check các điều kiện 
+	•	Mã điều kiện trùng, hiển thị thông báo: Mã điều kiện không được trùng
+	•	Button “Đóng”: Người quản trị nhấn vào “Đóng”, hệ thống đóng màn hình thêm mới
+	•	Khi người quản trị muốn chỉnh sửa 1 điều kiện tính phí, nhấn vào button “Chỉnh sửa” tại hành động trên lưới danh sách điều kiện tính phí => Hệ thống hiển thị màn chỉnh sửa điều kiện tính phí. 
+	•	Khi chỉnh sửa trạng thái Điều kiện tính phí: 
+	•	Nếu điều kiện tính phí đang gán với 1 CTƯĐ (trạng thái = Chưa có hiệu lực/Đang hiệu lực)/Code phí (trạng thái = Hoạt động/Ngưng hoạt động/Chờ gán) thì không cho phép sửa trạng thái. Người dùng nhấn “Xác nhận”, hệ thống báo “Không thể sửa trạng thái điều kiện tính phí. Điều kiện tính phí đang sử dụng trong hệ thống”
+	•	Nếu điều kiện tính phí chưa gán vs CTƯĐ/Code phí nào, hoặc gán CTƯĐ có trạng thái = Hết hiệu lực/Code phí có trạng thái = Huỷ thì người dùng có thể sửa trạng thái điều kiện tính phí
+	•	Sửa các thông tin khác: hệ thống kiểm tra tương tự như khi thêm mới điều kiện tính phí.
+	•	Danh sách điều kiện tính phí được phép khai báo tại các màn thêm mới/chỉnh sửa code phí/ CTƯĐ là các điều kiện tính phí có trạng thái = Hoạt động.
+Lưu đồ và diễn giải
+Lưu đồ
+
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Danh mục điều kiện tính phí
+Chọn Danh mục điều kiện tính phí
+Người quản trị
+2
+
+Gửi yêu cầu xử lý
+Frontend
+3
+
+Nhận yêu cầu và xử lý logic
+Backend
+4
+
+Hiển thị màn hình Danh mục điều kiện tính phí
+Frontend
+5
+
+Lựa chọn: 
++ Lọc nâng cao => Bước 5.1
++ Thêm mới => Bước 5.2
++ Chỉnh sửa => Bước 5.3
++ Tải xuống => Bước 5.4
+Người quản trị
+5.1
+
+Lọc nâng cao
+Người quản trị
+6
+
+Hiển thị màn hình Lọc điều kiện tính phí
+Frontend
+7
+
+Nhập/chọn các điều kiện lọc
+Người quản trị
+8
+
+Lựa chọn: 
++ Xoá lọc => Bước 8.1
++ Áp dụng => Bước 8.2
+Người quản trị
+8.1
+
+Xoá lọc
+Người quản trị
+9
+
+Đóng màn hình Lọc điều kiện tính phí => Kết thúc
+Frontend
+8.2
+
+Áp dụng
+Người quản trị
+10
+
+Hiển thị danh sách điều kiện tính phí theo điều kiện lọc => Kết thúc
+Frontend
+5.2
+
+Thêm mới
+Người quản trị
+11
+
+Hiển thị màn hình thêm mới
+Frontend
+12
+
+Nhập/chọn các trường và nhấn xác nhận
+Người quản trị
+13
+
+Check các trường bắt buộc và business rule
++ Valid => Tiếp bước 14
++ Invalid => Quay lại bước 12
+Frontend
+14
+
+Nhận yêu cầu và xử lý
+Backend
+15
+
+Hiển thị bản ghi mới trên lưới danh sách
+Frontend
+5.3
+
+Chỉnh sửa
+Người quản trị
+16
+
+Hiển thị màn hình chỉnh sửa 
+=> Quay lại bước 12
+Frontend
+5.4
+
+Tải xuống
+Người quản trị
+17
+
+Tham chiếu quy tắc tải xuống tại mục Quy tắc chung
+Frontend
+
+Giao diện
+Giao diện
+Màn hình danh mục điều kiện tính phí
+
+Màn hình lọc điều kiện tính phí
+
+Màn hình thêm mới điều kiện tính phí
+
+
+Màn hình chỉnh sửa điều kiện tính phí
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+Màn hình danh sách điều kiện tính phí
+NÚT CHỨC NĂNG
+1
+Lọc nâng cao
+
+Button
+
+Người quản trị nhấn vào button Lọc nâng cao, hệ thống hiển thị Màn hình Lọc điều kiện tính phí
+Các điều kiện lọc: 
++ Mã điều kiện: Người quản trị nhập mã điều kiện
++ Nguồn dữ liệu: API/ETL. Nếu người quản trị chọn nguồn dữ liệu = API => hiển thị field Mapping note msg. Nếu người dùng chọn nguồn dữ liệu = ETL => Hiển thị field Bảng dữ liệu, Trường dữ liệu
++ Mapping note msg: Người quản trị nhập field mapping
++ Bảng dữ liệu: Người quản trị chọn ETL Khách hàng/ETL Thẻ/ ETL Tài khoản
++ Trường dữ liệu: Người quản trị chọn trường dữ liệu 
++ Trạng thái: Người quản trị chọn trạng thái: Hoạt động/Không hoạt động
+2
+Thêm mới
+
+Button
+
+Người quản trị nhấn vào Button Thêm mới, hệ thống hiển thị màn hình thêm mới (refer màn hình Thêm mới)
+3
+Tải xuống
+
+Button
+
+Tải xuống file danh sách điều kiện tính phí 
+CÁC TRƯỜNG THÔNG TIN
+1
+Mã điều kiện
+
+Text
+
+Hiển thị mã điều kiện, luôn là chữ viết hoa
+2
+Mapping note msg
+
+Text
+
+Hiển thị field mapping note msg của api
+3
+Bảng dữ liệu
+
+Text
+
+Hiển thị bảng dữ liệu: Khách hàng/ Tài khoản/Thẻ
+4
+Mô tả
+
+Text
+
+Hiển thị mô tả 
+5
+Trạng thái
+
+Text
+
+Hiển thị trạng thái của điều kiện tính phí
+6
+Kiểu dữ liệu
+
+Text
+
+Hiển thị kiểu dữ liệu
+7
+Nguồn dữ liệu
+
+Text
+
+Hiển thị nguồn dữ liệu API/ETL
+8
+Ghi chú
+
+Text
+
+Hiển thị ghi chú 
+9
+Ngày tạo
+
+Datetime
+
++ Hiển thị ngày tạo hh:mm:ss – dd/mm/yyyy
+10
+Người tạo
+
+Text
+
+Hiển thị username của người tạo
+11
+Ngày sửa
+
+Datetime
+
++ Hiển thị ngày sửa hh:mm:ss – dd/mm/yyyy
+12
+Người sửa
+
+Text
+
+Hiển thị username của người sửa
+Màn hình Thêm mới/ Chỉnh sửa điều kiện tính phí
+NÚT CHỨC NĂNG
+1
+Xác nhận
+
+Button
+
+Người quản trị nhấn vào xác nhận để thêm mới/ chỉnh sửa 1 điều kiện tính phí
+2
+Icon “x”
+
+Button
+
+Người quản trị nhấn vào icon “x” để tắt màn thêm mới
+CÁC TRƯỜNG THÔNG TIN
+1
+Mã điều kiện
+★
+Text box
+
+Người quản trị nhập mã điều kiện, khi nhập thì hệ thống xử lý để luôn là chữ viết hoa
+2
+Tên điều kiện
+★
+Text box
+
+Người quản trị nhập tên điều kiện
+3
+Nguồn dữ liệu
+★
+Dropdownlist
+
+Người quản trị chọn nguồn dữ liệu API/ETL
++ Nếu nguồn dữ liệu = API => hệ thống hiển thị field Mapping note msg
++ Nếu nguồn dữ liệu = ETL => Hệ thống hiển thị field Bảng dữ liệu và Trường dữ liệu
+4
+Mapping note msg
+◎
+Text box
+Bắt buộc nhập khi chọn nguồn dữ liệu = API
+Người quản trị nhập field Mapping note msf
+5
+Bảng dữ liệu
+◎
+Dropdownlist
+Bắt buộc nhập khi chọn nguồn dữ liệu = ETL
+Người quản trị chọn bảng dữ liệu: Khách hàng/ Tài khoản/Thẻ
+
+Trường dữ liệu
+◎
+Combobox
+Bắt buộc nhập khi chọn nguồn dữ liệu = ETL
+Người quản trị chọn trường dữ liệu 
+6
+Mô tả
+◎
+Textbox
+
+Người quản trị nhập mô tả
+7
+Trạng thái
+★
+Dropdownlist
+
+- Người quản trị chọn trạng thái: Hoạt động/Không hoạt động
+- Khi chỉnh sửa điều kiện tính phí: 
++ Nếu điều kiện tính phí đang gán với 1 CTƯĐ (trạng thái = Chưa có hiệu lực/Đang hiệu lực)/Code phí (trạng thái = Hoạt động/Ngưng hoạt động/Chờ gán) thì không cho phép sửa trạng thái
++ Nếu điều kiện tính phí chưa gán vs CTƯĐ/Code phí nào, hoặc gán CTƯĐ có trạng thái = Hết hiệu lực/Code phí có trạng thái = Huỷ thì người quản trị có thể sửa trạng thái điều kiện tính phí
+8
+Kiểu dữ liệu
+★
+Dropdownlist
+
+Người quản trị chọn kiểu dữ liệu: Number/String/Date/Time
+
+US33 – Là người dùng, khi khách hàng phát sinh giao dịch với ngân hàng trên kênh online, tôi muốn hệ thống tự động tính toán số tiền phí cần thu
+Yêu cầu nghiệp vụ
+Các kênh giao dịch với khách hàng sẽ kết nối tới hệ thống ProfiX để yêu cầu tính phí tự động cho giao dịch, khi khách hàng phát sinh giao dịch có tính phí trên các kênh giao dịch online của ngân hàng, hệ thống tự động tính toán ra được số tiền phí cần thu.
+	•	Hệ thống cần kết hợp được nhiều nguồn dữ liệu khác nhau để tính toán ra được số tiền phí cần thu bao gồm:
+	•	Dữ liệu lưu trữ trên các hệ thống nội bộ của Ngân hàng (Thông tin Khách hàng, Thông tin Tài khoản, Thông tin thẻ)
+	•	Các thông tin cụ thể của giao dịch (Loại giao dịch, Số tiền giao dịch, Loại tiền giao dịch…)
+	•	Các tham số cấu hình code phí và chương trình ưu đãi theo giao dịch đã được thiết lập trên ProfiX
+	•	Cơ chế đồng bộ dữ liệu nguồn làm điều kiện tính phí:
+	•	Hệ thống ProfiX cần nhận đồng bộ dữ liệu nguồn (Khách hàng, Tài khoản, Thẻ) T-1 từ Data Warehouse để làm điều kiện tính phí cho giao dịch, cơ sở để sinh dữ liệu phí định kỳ, truy thu tận thu phí và khởi tạo chương trình ưu đãi
+	•	Thời điểm quy trình đồng bộ được kích hoạt: sau khi Ngân hàng hoàn tất việc khóa sổ cuối ngày và đồng bộ dữ liệu T-1 về Data Warehouse (DWH)
+	•	Trong ngày T, trường hợp phát sinh CIF được mở mới hoặc CIF được update những thông tin ảnh hưởng đến việc tính phí thì cần có cơ chế ghi nhận/update lại thông tin bảng dữ liệu khách hàng T-1 đã ETL trước đó
+	•	Khi Khách hàng tạo giao dịch trên kênh online, hệ thống thực hiện giao dịch gọi API tới ProfiX để tính phí. Sau khi ProfiX gửi lại phản hồi về số tiền phí (đã bao gồm thông tin ưu đãi),  Nếu khách hàng thực hiện sửa lại thông tin giao dịch (ví dụ sửa kênh chuyển tiền, sửa số tiền chuyển…), hệ thống gọi lại API để tính lại phí theo các thông tin giao dịch mới.
+	•	Sau khi kênh online hiển thị thông tin phí cho Khách hàng, nếu KH nhấn commit giao dịch, hệ thống giao dịch sẽ thực hiện kiểm tra giao dịch có yêu cầu phê duyệt hay không và chuyển giao dịch sang bước phê duyệt (nếu cần).
+	•	Nếu giao dịch không cần phê duyệt, hệ thống giao dịch xử lý giao dịch thành công và gọi API đến ProfiX để ghi nhận thông tin thu phí thành công.
+	•	Nếu giao dịch cần phê duyệt, sau khi giao dịch được duyệt thành công, hệ thống giao dịch xử lý giao dịch thành công gọi API đến ProfiX để ghi nhận thông tin thu phí thành công.
+Lưu đồ và diễn giải
+Đồng bộ dữ liệu nguồn làm điều kiện tính phí
+Lưu đồ
+
+
+Diễn giải lưu đồ
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Đồng bộ dữ liệu
+Sau khi Ngân hàng hoàn tất việc khóa sổ cuối ngày và đồng bộ dữ liệu T-1 về Data Warehouse (DWH), DWH thực hiện ETL dữ liệu nguồn vào các bảng bên dưới để làm điều kiện tính phí trên ProfiX: 
+	•	Bảng dữ liệu Khách hàng 
+	•	Bảng dữ liệu Tài khoản 
+	•	Bảng dữ liệu Thẻ 
+Mô tả chi tiết về các bảng dữ liệu ETL sẽ được các bên thống nhất trong quá trình triển khai.
+DWH
+2
+Thêm mới bản ghi KH
+Trong ngày, nếu có sự kiện KH (CIF) được mở mới trên Core T24, T24 sẽ ghi vào Topic tương ứng để ProfiX đọc và xử lý thêm mới bản ghi KH vào Bảng dữ liệu khách hàng T-1 đã nhận trước đó.
+T24
+3
+Update bản ghi KH  
+Trong ngày, nếu có sự kiện KH (CIF) được update thông tin trên Core T24, T24 sẽ ghi vào Topic tương ứng để ProfiX đọc và xử lý update bản ghi KH tại Bảng dữ liệu khách hàng T-1 đã nhận trước đó.
+T24
+4
+Tính phí
+Các dữ liệu ProfiX nhận được thông qua việc ETL/stream data kể trên sẽ được sử dụng làm dữ liệu nguồn khi ProfiX tính toán phí và CTƯĐ cho Khách hàng.
+Hệ thống ProfiX
+
+Thu phí ngay theo giao dịch trên kênh online
+Lưu đồ
+
+
+Diễn giải lưu đồ
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Thêm mới
+Khởi tạo giao dịch có tính phí từ kênh giao dịch online (PVConnect/PVConnectBiz)
+Maker
+2
+
+Back-end của hệ thống PVConnect/PVConnectBiz call API đến ProfiX để tính phí
+Hệ thống giao dịch
+3
+
+ProfiX thực hiện tính toán phí cần thu cho giao dịch theo các bước mô tả tại mục Xử lý tính phí theo giao dịch của hệ thống ProfiX bên dưới.
+Hệ thống ProfiX
+4
+
+PVConnect/PVConnectBiz hiển thị số tiền phí
+Hệ thống giao dịch
+5
+
+- Nếu user thực hiện sửa lại thông tin giao dịch thì quay lại bước 2. 
+- Nếu user thực hiện commit giao dịch thì chuyển sang bước 6.
+Maker
+6
+Phê duyệt
+Hệ thống kiểm tra giao dịch có yêu cầu phê duyệt? 
+- Nếu giao dịch cần phê duyệt, tiếp tục thực hiện bước 6.1 
+- Nếu giao dịch không cần phê duyệt, bỏ qua bước 6.1, tiếp tục thực hiện bước 7
+Hệ thống giao dịch
+6.1
+
+User Checker phê duyệt giao dịch
+Checker
+7
+
+Hệ thống giao dịch call API đến ProfiX để ghi nhận thông tin thu phí thành công
+Hệ thống giao dịch
+8
+
+ProfiX lưu thông tin giao dịch thu phí thành công
+Hệ thống ProfiX
+
+Xử lý tính phí theo giao dịch của hệ thống ProfiX
+Bước
+Nội dung
+Mô tả chi tiết
+1
+Kiểm tra danh sách các code phí áp dụng cho giao dịch (Danh sách A)
+Dựa trên các thông tin hệ thống giao dịch truyền vào, ProfiX kiểm tra dữ liệu để lấy ra danh sách các code phí áp dụng cho giao dịch bao gồm: 
+- Các Code phí có “Loại tính phí” = Theo giao dịch 
+- Các Code phí thuộc cùng một nghiệp vụ với API tính phí 
+- Các thông tin của giao dịch thỏa mãn các điều kiện theo giao dịch của Code phí
+2
+Kiểm tra danh sách các code phí áp dụng cho Khách hàng (Danh sách B)
+Dựa trên số CIF hệ thống giao dịch truyền vào, ProfiX kiểm tra các thông tin của Khách hàng tại bảng Customer để xác định giao dịch áp dụng những Code phí nào trong Danh sách code phí A.
+3
+Xác định Số tiền phí cho mỗi Code phí tại Danh sách B
+3.1. Xác định công thức tính phí áp dụng cho KH (Nếu Code phí có “Khai báo theo Nhóm khách hàng” = Có thì dựa trên Nhóm Khách hàng của CIF để xác định công thức)
+
+
+3.2. Xác định Số tiền phí theo công thức đã được thiết lập, nếu các giá trị tính phí truyền vào là không đủ/không đúng định dạng để xác định số tiền phí thì báo lỗi tương ứng. 
+
+
+3.3. Nếu code phí có khai báo Số tiền tối thiểu, Số tiền tối đa thì thực hiện: 
+- Nếu “Loại tiền phí tối thiểu/tối đa” = “Loại tiền” của Code phí: 
+	•	Số tiền tối thiểu quy đổi = Số tiền tối thiểu 
+	•	Số tiền tối đa quy đổi = Số tiền tối đa 
+- Nếu “Loại tiền phí tối thiểu/tối đa” <> “Loại tiền” của Code phí thì cần Quy đổi Số tiền tối thiểu, Số tiền tối đa như sau: 
+	•	Nếu “Loại tiền” của Code phí = VND thì hệ thống lấy Tỷ giá bán giao ngay Loại tiền phí thiểu/tối đa / với VND (T) trong dữ liệu tỷ giá mà ProfiX nhận được từ Core và tính toán: 
++ Số tiền tối thiểu quy đổi = Số tiền tối thiểu * Tỷ giá T 
++ Số tiền tối đa quy đổi = Số tiền tối đa * Tỷ giá T 
+	•	Nếu “Loại tiền” của Code phí <> VND thì hệ thống lấy Tỷ giá bán giao ngay Loại tiền phí tối thiểu/tối đa / VND (T1) và Tỷ giá mua giao ngay Loại tiền của Code phí/ VND (T2) trong dữ liệu tỷ giá mà ProfiX nhận được từ Core và tính toán: 
++ Tỷ giá chéo T3 = T1/T2
++ Số tiền tối thiểu quy đổi = Số tiền tối thiểu * Tỷ giá T3
++ Số tiền tối đa quy đổi = Số tiền tối đa * Tỷ giá T3
+
+
+3.4. Thực hiện so sánh Số tiền phí đã tính với Số tiền tối thiểu quy đổi, Số tiền tối đa quy đổi để xác định Số tiền phí cần thu như sau: 
+- Nếu Số tiền phí đã tính < Số tiền tối thiểu thì Số tiền phí cần thu = Số tiền tối thiểu 
+- Nếu Số tiền phí đã tính > Số tiền tối đa thì Số tiền phí cần thu = Số tiền tối đa 
+- Nếu Số tiền tối thiểu <= Số tiền phí đã tính <= Số tiền tối đa thì Số tiền phí cần thu = Số tiền phí đã tính
+4
+Xác định các CTƯĐ áp dụng cho giao dịch (Danh sách C)
+Với mỗi Code phí tại danh sách B, hệ thống lấy ra danh sách các CTUD và mức miễn giảm tương ứng cho SPDV cấp cuối (C) theo các điều kiện sau: 
+- Trường hợp 1: CTUD là CTUD không đánh giá định kỳ: 
+	•	Nếu CTUD là CTUD theo chu kỳ thì ngày thực hiện giao dịch thuộc ngày được ưu đãi 
+	•	Các SPDV cấp cuối áp dụng cho CTUD có bao gồm “SPDV cấp cuối” của Code phí 
+	•	KH có các thông tin thỏa điều kiện áp dụng theo khách hàng của CTUD (nếu có) 
+	•	Giao dịch có các thông tin thỏa điều kiện áp dụng theo giao dịch của CTUD (nếu có) 
+	•	KH thuộc Danh sách KH áp dụng của CTUD (nếu có) và KH chưa chạm ngưỡng ưu đãi đã thiết lập.
+- Trường hợp 2: CTUD là CTUD có đánh giá định kỳ: 
+	•	Các SPDV cấp cuối áp dụng cho CTUD có bao gồm “SPDV cấp cuối” của Code phí 
+	•	Kênh giao dịch là kênh của CTUD có đánh giá định kỳ khi khai báo 
+	•	KH thuộc Danh sách KH áp dụng của CTUD (đã xác định theo chu kỳ đánh giá)
+5
+Tính toán mức ưu đãi (nếu có CTUD được áp dụng):
+5.1. Với mỗi CTUD tại danh sách C theo từng Code phí, thực hiện tính toán mức ưu đãi theo bản ghi ưu đãi tương ứng cụ thể như sau: 
+- Nếu Ưu đãi theo tỷ lệ = Yes, Số tiền ưu đãi = Tỷ lệ ưu đãi theo CTUD * Số tiền phí cần thu  
+- Nếu Ưu đãi theo tỷ lệ = No, Số tiền ưu đãi = Số tiền giảm theo CTUD 
+
+
+5.2. Xác định CTUD áp dụng nếu 1 Code phí tìm ra được nhiều CTUD có thể áp dụng (CTUD P): 
+- Lấy CTUD có Số tiền ưu đãi lớn nhất. 
+- Nếu các CTUD có Số tiền ưu đãi tính ra bằng nhau thì lấy CTUD có hiệu lực xa nhất. 
+Số tiền phí sau ưu đãi = Số tiền phí cần thu – Số tiền ưu đãi của CTUD P
+
+
+5.3. Kiểm tra số tiền phí tối thiểu/tối đa theo CTUD nếu có cài đặt tại bản ghi ưu đãi theo SPDV cấp cuối: 
+- Nếu “Loại tiền phí tối thiểu/tối đa” = “Loại tiền” của Code phí: 
+	•	Số tiền tối thiểu quy đổi = Số tiền tối thiểu 
+	•	Số tiền tối đa quy đổi = Số tiền tối đa 
+- Nếu “Loại tiền phí tối thiểu/tối đa” <> “Loại tiền” của Code phí thì cần Quy đổi Số tiền tối thiểu, Số tiền tối đa như sau: 
+- Nếu “Loại tiền” của Code phí = VND thì hệ thống lấy Tỷ giá bán giao ngay Loại tiền phí tối thiểu/tối đa / với VND (T) trong dữ liệu tỷ giá mà ProfiX nhận được từ Core và tính toán: 
+	•	Số tiền tối thiểu quy đổi = Số tiền tối thiểu * Tỷ giá T  
+	•	Số tiền tối đa quy đổi = Số tiền tối đa * Tỷ giá T 
+- Nếu “Loại tiền” của Code phí <> VND thì hệ thống lấy Tỷ giá bán giao ngay Loại tiền phí tối thiểu/tối đa / VND (T1) và Tỷ giá mua giao ngay Loại tiền của Code phí/ VND (T2) trong dữ liệu tỷ giá mà ProfiX nhận được từ Core và tính toán: 
+	•	Tỷ giá chéo T3 = T1/T2 
+	•	Số tiền tối thiểu quy đổi = Số tiền tối thiểu * Tỷ giá T3 
+	•	Số tiền tối đa quy đổi = Số tiền tối đa * Tỷ giá T3
+
+
+5.4. Thực hiện so sánh Số tiền phí sau ưu đãi đã tính với Số tiền tối thiểu quy đổi, Số tiền tối đa quy đổi để xác định Số tiền phí thực thu như sau: 
+- Nếu Số tiền phí sau ưu đãi < Số tiền tối thiểu thì Số tiền phí thực thu = Số tiền tối thiểu 
+- Nếu Số tiền phí sau ưu đãi > Số tiền tối đa thì Số tiền phí thực thu = Số tiền tối đa 
+- Nếu Số tiền tối thiểu <= Số tiền phí sau ưu đãi <= Số tiền tối đa thì Số tiền phí thực thu = Số tiền phí sau ưu đãi 
+6
+Tính VAT
+Hệ thống tính VAT theo cấu hình tại Code phí cụ thể như sau:
+- Code phí có VAT = “” (phí không có VAT): để trống VAT trong response phản hồi cho hệ thống thực hiện giao dịch
+- Code phí có VAT <> “” (phí có VAT):
+	•	Phí đã bao gồm VAT? = ‘Có’”:
++ VAT = Số tiền phí sau ưu đãi/110*10. (Với code phí có Loại tiền = VND/JPY thì làm tròn đến số nguyên, với code phí có Loại tiền # VND,JPY thì làm tròn đến 02 chữ số hàng thập phân).
++ Phí thu được = Số tiền phí sau ưu đãi - VAT
+	•	Phí đã bao gồm VAT? = ‘Không’:
++ VAT = Số tiền phí sau ưu đãi /100*10. (Với code phí có Loại tiền = VND/JPY thì làm tròn đến số nguyên, với code phí có Loại tiền # VND,JPY thì làm tròn đến 02 chữ số hàng thập phân).
++ Phí thu được = Số tiền phí sau ưu đãi
+
+Giao diện
+Màn hình
+N/A
+Mô tả chi tiết các trường
+N/A
+
+US34 – Là người dùng, khi khách hàng phát sinh giao dịch với ngân hàng trên kênh quầy/nội bộ, tôi muốn hệ thống tự động tính toán số tiền phí cần thu
+Yêu cầu nghiệp vụ
+Các kênh quầy/nội bộ sẽ kết nối tới hệ thống phí để yêu cầu tính phí tự động cho giao dịch. Khi khách hàng phát sinh giao dịch với ngân hàng trên kênh quầy/nội bộ, hệ thống sẽ tự động tính toán ra được số tiền phí cần thu.
+Việc thu phí được thực hiện theo 02 trường hợp như sau:
+	•	Trường hợp hạch toán thu phí kèm theo giao dịch gốc
+Khi khách hàng phát sinh giao dịch có kèm thu phí (ví dụ: giao dịch chuyển tiền, giao dịch phát hành L/C, giao dịch phát hành bảo lãnh…) trên kênh quầy/nội bộ, hệ thống tự động tính toán ra được số tiền phí cần thu.
+	•	Hệ thống cần kết hợp được nhiều nguồn dữ liệu khác nhau để tính toán ra được số tiền phí cần thu và cần có cơ chế đồng bộ dữ liệu nguồn làm điều kiện tính phí tương tự như yêu cầu tại US33 về việc tính phí tự động cho giao dịch trên kênh online.
+	•	Khi người dùng tạo giao dịch trên kênh quầy/nội bộ, hệ thống thực hiện giao dịch gọi API tới ProfiX để tính phí. 
+	•	Sau khi ProfiX gửi lại phản hồi về số tiền phí (đã bao gồm thông tin ưu đãi), hệ thống thực hiện giao dịch hiển thị thông tin phí cho người dùng theo từng code phí cần thu với số tiền phí đã áp dụng ưu đãi (nếu có):
+	•	Nếu người dùng thực hiện sửa lại thông tin giao dịch (ví dụ sửa kênh chuyển tiền, sửa số tiền chuyển…), hệ thống gọi lại API để tính lại phí theo các thông tin giao dịch mới.
+	•	Người dùng được phép sửa số tiền phí cần thu, hệ thống kiểm tra số tiền phí người dùng nhập vào có nằm ngoài khoảng Số tiền phí tối thiểu/tối đa (nếu có) theo Code phí hay không, nếu nằm ngoài khoảng thì báo lỗi, nếu trong khoảng thì cho phép commit giao dịch. 
+	•	Sau khi người dùng nhấn commit giao dịch, hệ thống giao dịch sẽ chuyển giao dịch sang bước phê duyệt. Sau khi giao dịch được duyệt thành công, hệ thống giao dịch xử lý giao dịch thành công gọi API đến ProfiX để ghi nhận thông tin thu phí thành công.
+	•	Trường hợp thu phí Adhoc
+Khi khách hàng phát sinh giao dịch mà các hệ thống giao dịch không hỗ trợ hạch toán thu phí kèm theo giao dịch gốc (ví dụ: Phí sao kê tài khoản thanh toán, Phí xác nhận số dư, Phí cấp bản sao hồ sơ tài sản bảo đảm…) trên kênh quầy/nội bộ, hệ thống sẽ hỗ trợ bộ phận tác nghiệp thực hiện thu phí Adhoc (thu phí rời).
+	•	Khi thực hiện thu phí Adhoc, người dùng được phép lựa chọn SPDV cần thu phí từ Danh sách SPDV được đồng bộ với danh sách SPDV của ProfiX.
+	•	Hệ thống thực hiện giao dịch sẽ gọi API sang ProfiX để lấy danh sách các Code phí kèm theo công thức tính tính phí tương ứng theo các điều kiện sau:
+	•	Code phí thuộc SPDV cần thu phí
+	•	Code phí không phải là phí thu định kỳ (được thu tự động)
+	•	Nếu Code phí có tham số “Khai báo theo nhóm khách hàng” = Có thì chỉ lấy Công thức tính phí tương ứng với Nhóm Khách hàng của Khách hàng cần thu phí.
+	•	Khi người dùng chọn Code phí cần thu:
+	•	Nếu Code phí tương ứng với một số cố định (chỉ gồm các giá trị số): hệ thống giao dịch sẽ hiển thị số tiền phí tương ứng, người dùng có thể thực hiện sửa số tiền phí thực thu.
+	•	Nếu Code phí <> Số cố định: hiển thị tính năng cho phép người dùng chọn phương thức nhập là thủ công hay tự động:
+	•	Nếu chọn phương thức “Thủ công”, người dùng nhập trực tiếp số tiền phí thực thu. 
+	•	Nếu chọn phương thức “Tự động”, người dùng nhập giá trị/số lượng cần tính phí, hệ thống giao dịch thực hiện tính phí theo công thức tương ứng với code phí đã chọn. Sau khi hệ thống giao dịch hiển thị thông tin phí, người dùng có thể chọn lại phương thức nhập là thủ công hay tự động và thay đổi giá trị/số lượng tính phí (nếu chọn tự động, hệ thống sẽ tính lại phí theo các thông tin mới).
+	•	Nếu Người dùng sửa số tiền phí do hệ thống tự động tính ra, hệ thống kiểm tra số tiền phí người dùng nhập vào có nằm ngoài khoảng Số tiền phí tối thiểu/tối đa (nếu có) theo Code phí hay không, nếu nằm ngoài khoảng thì báo lỗi, nếu trong khoảng thì cho phép commit giao dịch. 
+	•	Sau khi người dùng nhấn commit giao dịch, hệ thống giao dịch sẽ chuyển giao dịch sang bước phê duyệt. Sau khi giao dịch được duyệt thành công, hệ thống giao dịch xử lý giao dịch thành công gọi API đến ProfiX để ghi nhận thông tin thu phí thành công.
+
+Lưu đồ và diễn giải
+Trường hợp hạch toán thu phí kèm theo giao dịch gốc
+Lưu đồ
+
+
+Diễn giải lưu đồ
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Thêm mới
+User Maker khởi tạo giao dịch trên hệ thống nội bộ của ngân hàng
+Maker
+2
+
+Hệ thống giao dịch call API đến ProfiX để tính phí
+Hệ thống giao dịch
+3
+
+ProfiX thực hiện tính toán phí cần thu cho giao dịch theo các bước mô tả tại mục Xử lý tính phí theo giao dịch của hệ thống ProfiX tại US33 – Là người dùng, khi khách hàng phát sinh giao dịch với ngân hàng trên kênh online, tôi muốn hệ thống tự động tính toán số tiền phí cần thu.
+Hệ thống ProfiX
+4
+
+Hệ thống giao dịch hiển thị số tiền phí, ưu đãi
+Hệ thống giao dịch
+5
+
+- Nếu user thực hiện sửa lại thông tin giao dịch (ví dụ sửa kênh chuyển tiền, sửa số tiền chuyển…) thì quay lại bước 2. 
+- Nếu user thực hiện sửa số tiền phí thực thu thì Hệ thống giao dịch lưu lại thông tin tương ứng trước khi commit giao dịch. 
+Nếu user thực hiện commit giao dịch thì chuyển sang bước 6.
+Maker
+6
+Phê duyệt
+User Checker phê duyệt giao dịch
+Checker
+7
+
+Hệ thống giao dịch call API đến ProfiX để ghi nhận thông tin thu phí thành công
+Hệ thống giao dịch
+8
+
+ProfiX lưu thông tin giao dịch thu phí thành công
+Hệ thống ProfiX
+
+Trường hợp thu phí Adhoc
+Lưu đồ
+
+
+Diễn giải lưu đồ
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Thêm mới
+User Maker khởi tạo giao dịch thu phí adhoc trên hệ thống nội bộ của ngân hàng
+Maker
+2
+
+User Maker chọn Sản phẩm dịch vụ cần thu phí
+Maker
+3
+
+Hệ thống giao dịch call API đến ProfiX để lấy danh sách code phí theo sản phẩm dịch vụ
+Hệ thống giao dịch
+4
+
+ProfiX trả ra danh sách code phí và công thức tính phí tương ứng
+Hệ thống ProfiX
+5
+
+Hệ thống giao dịch hiển thị danh sách code phí cho User Maker chọn
+Hệ thống giao dịch
+6
+
+User Maker chọn code phí cần thu
+Maker
+7
+
+Hệ thống giao dịch kiểm tra loại công thức tính phí: 
+- Nếu loại công thức tính phí là “Số cố định” thì hiển thị số tiền phí tương ứng và chuyển tới bước 8. 
+- Nếu loại công thức tính phí khác “Số cố định” (Tỷ lệ * giá trị, Số lượng * Đơn giá, …) thì hiển thị tính năng cho phép người dùng chọn phương thức nhập là thủ công hay tự động và chuyển tới bước 9.
+Hệ thống giao dịch
+8
+
+- Nếu User Maker thực hiện sửa số tiền phí thực thu thì Hệ thống giao dịch lưu lại thông tin tương ứng trước khi commit giao dịch. 
+- Nếu User Maker thực hiện commit giao dịch thì chuyển tới bước 10.
+Maker
+9
+
+User Maker chọn phương thức nhập liệu: 
+- Nếu chọn “Thủ công” thì chuyển tới bước 9.1. 
+- Nếu chọn “Tự động” thì chuyển tới bước 9.2.
+Maker
+9.1
+
+User Maker điền số tiền phí thực thu và chuyển tới bước 9.3  
+Maker
+9.2
+
+User Maker điền Giá trị tính phí (Công thức Tỷ lệ * Giá trị) hoặc Số lượng tính phí (Công thức Đơn giá * Số lượng) số tiền phí thực thu
+Maker
+9.2.1
+
+Hệ thống giao dịch tính số tiền phí cần thu theo Công thức của Code phí
+Hệ thống giao dịch
+9.2.2
+
+Hệ thống giao dịch hiển thị số tiền phí đã tính toán và chuyển tới bước 9.3
+Hệ thống giao dịch
+9.3
+
+- Nếu User Maker chọn lại Phương thức nhập khác thì quay lại bước 9. 
+- Nếu User Maker thực hiện commit giao dịch thì chuyển tới bước 10.
+Maker
+10
+Phê duyệt
+User Checker phê duyệt giao dịch
+Checker
+11
+
+Hệ thống giao dịch call API đến ProfiX để ghi nhận thông tin thu phí thành công
+Hệ thống giao dịch
+12
+
+ProfiX lưu giao dịch thu phí thành công
+Hệ thống ProfiX
+
+	•	Giao diện
+Màn hình
+N/A
+Mô tả chi tiết các trường
+N/A
+
+	•	US35 – Là người dùng, tôi muốn hệ thống tự động thu các loại phí định kỳ cần thu theo lịch
+Yêu cầu nghiệp vụ
+Đến lịch thu phí định kỳ đã cài đặt trên hệ thống ProfiX, hệ thống ProfiX sẽ sinh dữ liệu các khoản phí định kỳ cần thu và gửi thông tin tới Hệ thống Core T24. Hệ thống Core T24 sẽ hạch toán thu phí và cập nhật kết quả về ProfiX.
+	•	Đối tượng tính phí định kỳ bao gồm:
+	•	Khách hàng (Customer): Các loại phí thu theo KH bao gồm Phí dịch vụ SMS, Phí quản lý Merchant, Phí dịch vụ PVconnect… Các loại phí này được thu theo một tài khoản thanh toán mặc định theo từng Khách hàng mà ProfiX đã được nhận đồng bộ dữ liệu T-1.
+	•	Tài khoản (Account): Phí quản lý tài khoản thanh toán sẽ được thu trên chính tài khoản thanh toán đó
+	•	Thẻ (Card): Phí thường niên thẻ sẽ được thu trên chính số thẻ đó
+	•	Với đối tượng tính phí định kỳ là Khách hàng/Tài khoản, phí sẽ được thu định kỳ hàng tháng vào một ngày cố định trong tháng. Với đối tượng tính phí định kỳ là Thẻ, phí sẽ được thu định kỳ hàng năm và tròn năm tính từ ngày kích hoạt thẻ theo dữ liệu mà ProfiX đã được nhận đồng bộ T-1.
+	•	Số tiền phí cần thu được tính toán dựa trên:
+	•	Dữ liệu lưu trữ trên các hệ thống nội bộ của Ngân hàng (Thông tin Khách hàng, Thông tin Tài khoản, Thông tin thẻ) được đồng bộ T-1 về ProfiX theo mô tả US33 về việc tính phí tự động cho giao dịch trên kênh online.
+	•	Các tham số cấu hình code phí và chương trình ưu đãi dành cho phí định kỳ đã được thiết lập trên ProfiX.
+	•	Với đối tượng tính phí là Khách hàng, hệ thống cần kiểm tra tài khoản thu phí mặc định của khách hàng đó có đủ điều kiện các điều kiện để thu phí bao gồm:
+	•	Tài khoản phải cùng loại tiền với loại tiền của Code phí
+	•	Sản phẩm của tài khoản phải thuộc danh sách các sản phẩm được phép trích thu phí quy định tại tham số hệ thống CA_PRODUCT
+	•	Trạng thái của tài khoản được phép trích thu phí (chỉ được phép trích thu từ các tài khoản có trạng thái: Hoạt động, Tạm ngừng hoạt động, Tạm khóa ghi có…)
+	•	Trường hợp tài khoản thu phí mặc định không đủ điều kiện để thu phí, hệ thống thực hiện tìm tài khoản thay thế trong danh sách các tài khoản của khách hàng có đủ điều kiện tương tự như mục (1), (2), (3) và ưu tiên lấy tài khoản có số dư lớn nhất, nếu có nhiều tài khoản thỏa mãn và có cùng số dư thì lấy ngẫu nhiên.
+	•	Thứ tự ưu tiên các khoản phí định kỳ cần thu: hệ thống cho phép cài đặt thứ tự ưu tiên của nghiệp vụ phí cần thu (ví dụ: ưu tiên thu phí dịch vụ SMS trước thu phí quản lý tài khoản).
+	•	Sau khi ProfiX xác định được danh sách các khoản phí định kỳ cần thu, hệ thống ProfiX sẽ ghi danh sách vào Topic Kafka theo thứ tự ưu tiên. Core T24 sẽ đọc danh sách và thực hiện thu phí. 
+	•	Kết quả thu phí sẽ được ghi vào Topic kết quả thu phí tương ứng để ProfiX đọc và lưu dữ liệu. Các khoản phí định kỳ cần thu sẽ có các trạng thái như sau:
+	•	Thêm mới: Khoản phí định kỳ cần thu mới được sinh dữ liệu (chưa gửi yêu cầu thu phí đi)
+	•	Đang xử lý: Khoản phí định kỳ cần thu đã ghi vào Topic thu phí nhưng chưa nhận được phản hồi về kết quả thu.
+	•	Thanh toán toàn bộ: Đã thu được toàn bộ số tiền phí cần thu
+	•	Thanh toán một phần: Đã thu được một phần số tiền phí cần thu (tận thu được một phần do số dư tài khoản không đủ để thu toàn bộ)
+	•	Chưa thanh toán: Thu không thành công toàn bộ số tiền phí
+	•	Xóa nợ: Đã được cập nhật miễn giảm cho Khách hàng (không tiếp tục theo dõi nợ phí)
+	•	Trong khoảng thời gian ProfiX chưa nhận được kết quả thu phí thì trạng thái của kỳ nợ phí được duy trì là “Đang xử lý”. Sau khi ProfiX đọc được kết quả trên Topic kết quả thu phí thì ProfiX xử lý:
+	•	Ghi nhận lịch sử thu phí theo kết quả thu
+	•	Cập nhật trạng thái của kỳ nợ phí tương ứng
+	•	Các khoản phí ở trạng thái Thanh toán một phần/Chưa thanh toán sẽ được xác định là Nợ phí và hệ thống cần theo dõi để tiếp tục truy thu/tận thu. Yêu cầu về truy thu/tận thu nợ phí sẽ được mô tả cụ thể tại US về truy thu, tận thu nợ phí.
+Lưu đồ và diễn giải
+Lưu đồ
+ 
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Sinh dữ liệu phí
+ProfiX sinh dữ liệu phí định kỳ đến hạn cần thu theo các bước mô tả tại mục Xử lý tính phí theo giao dịch của hệ thống ProfiX bên dưới.
+Hệ thống ProfiX
+2
+Truyền message thông tin phí
+ProfiX truyền message thông tin phí cần thu sang Topic
+Hệ thống ProfiX
+3
+Hạch toán thu phí
+Core T24 xử lý: 
+Hệ thống Core Banking T24
+3.1 
+
+Process hạch toán thu phí theo message
+Hệ thống Core Banking T24
+3.2
+
+Core T24 truyền message kết quả thu phí
+Hệ thống Core Banking T24
+4
+Update kết quả thu phí
+ProfiX process update kết quả thu phí
+Hệ thống ProfiX
+Xử lý tính phí định kỳ của hệ thống ProfiX
+Bước
+Nội dung
+Mô tả chi tiết
+
+Đầu ngày T, hệ thống xác định các job có lịch chạy trong ngày T để thực hiện các bước bên dưới theo từng job (Job A) và Nhóm các code phí đang được gắn với job đó (Danh sách code phí B):
+1
+Xác định đối tượng tính phí và code phí áp dụng (Danh sách C)
+- Nếu Job A có đối tượng tính phí = Customer, hệ thống đối chiếu danh sách khách hàng trong bảng Customer với Danh sách code phí B xem khách hàng thỏa mãn điều kiện của những Code phí nào, sau đó thực hiện tiếp bước 2.
+- Nếu Job A có đối tượng tính phí = Account, hệ thống đối chiếu danh sách tài khoản trong bảng Account với Danh sách code phí B xem (1) tài khoản thỏa mãn điều kiện theo tài khoản và (2) CIF của Account đó thỏa mãn điều kiện theo KH của những Code phí nào, sau đó thực hiện tiếp bước 3.
+- Nếu Job A có đối tượng tính phí = Card, hệ thống đối chiếu danh sách thẻ trong bảng Card với Danh sách code phí B xem (1) Thẻ thỏa mãn điều kiện theo thẻ và (2) CIF của Thẻ đó đó thỏa mãn điều kiện theo KH của những Code phí nào, sau đó thực hiện tiếp bước 3.
+2
+Kiểm tra tính hợp lệ của tài khoản thu phí mặc định (trường hợp đối tượng tính phí = Customer)
+Hệ thống kiểm tra tài khoản thu phí mặc định của Khách hàng có đủ điều kiện để thu phí hay không theo các điều kiện:
+	•	Tài khoản phải cùng loại tiền với loại tiền của Code phí
+	•	Sản phẩm của tài khoản phải thuộc danh sách các sản phẩm được phép trích thu phí quy định tại tham số hệ thống CA_PRODUCT
+	•	Trạng thái của tài khoản được phép trích thu phí (chỉ được phép trích thu từ các tài khoản có trạng thái: Hoạt động, Tạm ngừng hoạt động, Tạm khóa ghi có…)
+Trường hợp tài khoản thu phí mặc định không đủ điều kiện để thu phí, hệ thống thực hiện tìm tài khoản thay thế trong danh sách các tài khoản của khách hàng có đủ điều kiện tương tự như các mục trên và ưu tiên lấy tài khoản có số dư lớn nhất, nếu có nhiều tài khoản thỏa mãn và có cùng số dư thì lấy ngẫu nhiên. Số tài khoản thay thế này chỉ được sử dụng để ghi thông tin phí định kỳ đúng hạn cần thu vào Topic, không áp dụng cho truy thu/tận thu nợ phí. 
+3
+Xác định số tiền phí cần thu cho mỗi khoản thu trong danh sách C
+3.1. Xác định công thức tính phí áp dụng cho KH (Nếu Code phí có “Khai báo theo Nhóm khách hàng” = Có thì dựa trên Nhóm Khách hàng của CIF để xác định công thức)
+
+
+3.2. Xác định Số tiền phí theo công thức đã được thiết lập 
+
+
+3.3. Nếu code phí có khai báo Số tiền tối thiểu, Số tiền tối đa thì thực hiện: 
+- Nếu “Loại tiền phí tối thiểu/tối đa” = “Loại tiền” của Code phí: 
+	•	Số tiền tối thiểu quy đổi = Số tiền tối thiểu 
+	•	Số tiền tối đa quy đổi = Số tiền tối đa 
+- Nếu “Loại tiền phí tối thiểu/tối đa” <> “Loại tiền” của Code phí thì cần Quy đổi Số tiền tối thiểu, Số tiền tối đa như sau: 
+	•	Nếu “Loại tiền” của Code phí = VND thì hệ thống lấy Tỷ giá bán giao ngay Loại tiền phí thiểu/tối đa / với VND (T) trong dữ liệu tỷ giá mà ProfiX nhận được từ Core và tính toán: 
++ Số tiền tối thiểu quy đổi = Số tiền tối thiểu * Tỷ giá T 
++ Số tiền tối đa quy đổi = Số tiền tối đa * Tỷ giá T 
+	•	Nếu “Loại tiền” của Code phí <> VND thì hệ thống lấy Tỷ giá bán giao ngay Loại tiền phí tối thiểu/tối đa / VND (T1) và Tỷ giá mua giao ngay Loại tiền của Code phí/ VND (T2) trong dữ liệu tỷ giá mà ProfiX nhận được từ Core và tính toán: 
++ Tỷ giá chéo T3 = T1/T2
++ Số tiền tối thiểu quy đổi = Số tiền tối thiểu * Tỷ giá T3
++ Số tiền tối đa quy đổi = Số tiền tối đa * Tỷ giá T3
+
+
+3.4. Thực hiện so sánh Số tiền phí đã tính với Số tiền tối thiểu quy đổi, Số tiền tối đa quy đổi để xác định Số tiền phí cần thu như sau: 
+- Nếu Số tiền phí đã tính < Số tiền tối thiểu thì Số tiền phí cần thu = Số tiền tối thiểu 
+- Nếu Số tiền phí đã tính > Số tiền tối đa thì Số tiền phí cần thu = Số tiền tối đa 
+- Nếu Số tiền tối thiểu <= Số tiền phí đã tính <= Số tiền tối đa thì Số tiền phí cần thu = Số tiền phí đã tính
+4
+Xác định các CTƯĐ áp dụng cho khoản phí định kỳ (Danh sách D)
+Với mỗi Code phí tại danh sách C, hệ thống lấy ra danh sách các CTUD và mức miễn giảm tương ứng cho SPDV cấp cuối (D) theo các điều kiện sau: 
+- Trường hợp 1: CTUD là CTUD không đánh giá định kỳ và liên tục (không áp dụng đối với CTUD theo chu kỳ): 
+	•	Các SPDV cấp cuối áp dụng cho CTUD có bao gồm “SPDV cấp cuối” của Code phí 
+	•	KH có các thông tin thỏa điều kiện áp dụng theo khách hàng của CTUD (nếu có) 
+	•	Tài khoản/Thẻ (tùy theo đối tượng tính phí) có các thông tin thỏa điều kiện áp dụng theo tài khoản/thẻ của CTUD (nếu có) 
+	•	KH thuộc Danh sách KH áp dụng của CTUD (nếu có) và KH chưa chạm ngưỡng ưu đãi đã thiết lập.
+- Trường hợp 2: CTUD là CTUD có đánh giá định kỳ: 
+	•	Các SPDV cấp cuối áp dụng cho CTUD có bao gồm “SPDV cấp cuối” của Code phí
+	•	KH thuộc Danh sách KH áp dụng của CTUD (đã xác định theo chu kỳ đánh giá)
+5
+Tính toán mức ưu đãi (nếu có CTUD được áp dụng):
+(Tương tự xử lý tính phí theo giao dịch)
+5.1. Với mỗi CTUD tại danh sách D theo từng Code phí, thực hiện tính toán mức ưu đãi theo bản ghi ưu đãi tương ứng cụ thể như sau: 
+- Nếu Ưu đãi theo tỷ lệ = Yes, Số tiền ưu đãi = Tỷ lệ ưu đãi theo CTUD * Số tiền phí cần thu  
+- Nếu Ưu đãi theo tỷ lệ = No, Số tiền ưu đãi = Số tiền giảm theo CTUD 
+
+
+5.2. Xác định CTUD áp dụng nếu 1 Code phí tìm ra được nhiều CTUD có thể áp dụng (CTUD P): 
+- Lấy CTUD có Số tiền ưu đãi lớn nhất. 
+- Nếu các CTUD có Số tiền ưu đãi tính ra bằng nhau thì lấy CTUD có hiệu lực xa nhất. 
+Số tiền phí sau ưu đãi = Số tiền phí cần thu – Số tiền ưu đãi của CTUD P
+
+
+5.3. Kiểm tra số tiền phí tối thiểu/tối đa theo CTUD nếu có cài đặt tại bản ghi ưu đãi theo SPDV cấp cuối: 
+- Nếu “Loại tiền phí tối thiểu/tối đa” = “Loại tiền” của Code phí: 
+	•	Số tiền tối thiểu quy đổi = Số tiền tối thiểu 
+	•	Số tiền tối đa quy đổi = Số tiền tối đa 
+- Nếu “Loại tiền phí tối thiểu/tối đa” <> “Loại tiền” của Code phí thì cần Quy đổi Số tiền tối thiểu, Số tiền tối đa như sau: 
+- Nếu “Loại tiền” của Code phí = VND thì hệ thống lấy Tỷ giá bán giao ngay Loại tiền phí tối thiểu/tối đa / với VND (T) trong dữ liệu tỷ giá mà ProfiX nhận được từ Core và tính toán: 
+	•	Số tiền tối thiểu quy đổi = Số tiền tối thiểu * Tỷ giá T  
+	•	Số tiền tối đa quy đổi = Số tiền tối đa * Tỷ giá T 
+- Nếu “Loại tiền” của Code phí <> VND thì hệ thống lấy Tỷ giá bán giao ngay Loại tiền phí tối thiểu/tối đa / VND (T1) và Tỷ giá mua giao ngay Loại tiền của Code phí/ VND (T2) trong dữ liệu tỷ giá mà ProfiX nhận được từ Core và tính toán: 
+	•	Tỷ giá chéo T3 = T1/T2 
+	•	Số tiền tối thiểu quy đổi = Số tiền tối thiểu * Tỷ giá T3 
+Số tiền tối đa quy đổi = Số tiền tối đa * Tỷ giá T3
+
+
+5.4. Thực hiện so sánh Số tiền phí sau ưu đãi đã tính với Số tiền tối thiểu quy đổi, Số tiền tối đa quy đổi để xác định Số tiền phí thực thu như sau: 
+- Nếu Số tiền phí sau ưu đãi < Số tiền tối thiểu thì Số tiền phí thực thu = Số tiền tối thiểu 
+- Nếu Số tiền phí sau ưu đãi > Số tiền tối đa thì Số tiền phí thực thu = Số tiền tối đa 
+- Nếu Số tiền tối thiểu <= Số tiền phí sau ưu đãi <= Số tiền tối đa thì Số tiền phí thực thu = Số tiền phí sau ưu đãi 
+6
+Tính VAT
+(Tương tự xử lý tính phí theo giao dịch)
+Hệ thống tính VAT theo cấu hình tại Code phí cụ thể như sau:
+- Code phí có VAT = “” (phí không có VAT): để trống VAT trong response phản hồi cho hệ thống thực hiện giao dịch
+- Code phí có VAT <> “” (phí có VAT):
+	•	Phí đã bao gồm VAT? = ‘Có’”:
++ VAT = Số tiền phí sau ưu đãi/110*10. (Với code phí có Loại tiền = VND/JPY thì làm tròn đến số nguyên, với code phí có Loại tiền # VND,JPY thì làm tròn đến 02 chữ số hàng thập phân).
++ Phí thu được = Số tiền phí sau ưu đãi - VAT
+	•	Phí đã bao gồm VAT? = ‘Không’:
++ VAT = Số tiền phí sau ưu đãi /100*10. (Với code phí có Loại tiền = VND/JPY thì làm tròn đến số nguyên, với code phí có Loại tiền # VND,JPY thì làm tròn đến 02 chữ số hàng thập phân).
++ Phí thu được = Số tiền phí sau ưu đãi
+
+Giao diện
+Màn hình
+N/A
+Mô tả chi tiết các trường
+N/A
+US36 – Là người dùng, tôi muốn hệ thống tự động truy thu và tận thu các loại phí định kỳ mà khách hàng còn nợ
+Yêu cầu nghiệp vụ
+Khi khách hàng chưa thanh toán hết các khoản phí định kỳ cần thu theo lịch, hệ thống sẽ tự động truy thu/ tận thu các khoản nợ phí này tại đầu ngày các làm việc tiếp theo hoặc khi tài khoản khách hàng phát sinh ghi có:
+Truy thu/tận thu nợ phí đầu ngày
+Đầu ngày, khi CIF còn nợ phí và tồn tại tài khoản có số dư khả dụng (T-1) > 0, hệ thống sẽ thực hiện truy thu/tận thu trên tài khoản đó, song song cùng với Quy trình thu phí định kỳ đúng hạn.
+	•	Trường hợp này xảy ra nếu KH đang nợ phí và: 
+	•	Tại ngày T-1, KH có mở mới tài khoản và tài khoản mới đó có số dư để truy thu được nợ phí, hoặc 
+	•	Tại ngày T-1, KH có tài khoản có biến động ghi có nhưng cũng đồng thời đang có nợ nghĩa vụ tín dụng đến hạn/quá hạn chưa thanh toán (nghĩa vụ tín dụng được ưu tiên thanh toán hơn và được quét vào cuối ngày T-1 nên trong ngày T-1 chưa bị quét nợ phí).
+	•	Trường hợp khác: các trường hợp mà luồng truy thu/tận thu nợ phí khi tài khoản KH phát sinh ghi có chưa xử lý được (ví dụ: biến động ghi có nằm ngoài khoảng thời gian Core theo dõi biến động)
+	•	Nếu KH có nhiều kỳ nợ phí (trạng thái = Thanh toán một phần/Chưa thanh toán) thì cần xác định thứ tự ưu tiên theo nguyên tắc:
+	•	Nghiệp vụ từ thấp đến cao, đã được xác định theo nhóm code phí khi sinh dữ liệu thu phí định kỳ đến hạn
+	•	Ngày đến hạn thu phí từ xa đến gần
+	•	Trường hợp cùng một mức ưu tiên có nhiều kỳ nợ phí được tìm thấy, hệ thống lựa chọn kỳ ngẫu nhiên. 
+	•	Đầu ngày, sau khi xác định được danh sách CIF còn nợ phí và tồn tại tài khoản có số dư khả dụng (T-1) > 0 thì ProfiX ghi yêu cầu truy thu/tận thu nợ phí trên tài khoản đó vào Topic thu phí. Nếu KH có nhiều tài khoản có số dư khả dụng (T-1) > 0 thì ưu tiên thu trên tài khoản có số dư lớn nhất.
+	•	Core T24 đọc Topic thu phí để thực hiện hạch toán thu phí, ghi kết quả vào Topic kết quả thu phí để ProfiX đọc và cập nhật dữ liệu. Trong khoảng thời gian ProfiX chưa nhận được kết quả thu phí thì trạng thái của kỳ nợ phí được duy trì là “Đang xử lý”. Sau khi ProfiX đọc được kết quả trên Topic kết quả thu phí thì ProfiX xử lý:
+	•	Ghi nhận lịch sử thu phí theo kết quả thu
+	•	Cập nhật trạng thái của kỳ nợ phí tương ứng
+
+Truy thu/tận thu nợ phí khi tài khoản KH phát sinh ghi có
+Khi các hệ thống đã hoàn tất quy trình thu phí đầu ngày (bao gồm cả thu phí định kỳ đúng hạn và truy thu/tận thu nợ phí đầu ngày), ProfiX sẽ chuyển sang chế độ truy thu/tận thu trong ngày với luồng xử lý như sau:
+	•	ProfiX gửi danh sách các tài khoản của KH có nợ phí để Core T24 theo dõi. 
+	•	Khi phát sinh sự kiện một trong các tài khoản thuộc danh sách nêu trên biến động ghi có, Core T24 sẽ ghi vào Topic biến động số dư.
+	•	ProfiX đọc Topic biến động số dư và ghi yêu cầu truy thu/tận thu nợ phí trên tài khoản đó vào Topic thu phí. 
+	•	Core T24 đọc Topic thu phí để thực hiện hạch toán thu phí, ghi kết quả vào Topic kết quả thu phí để ProfiX đọc và cập nhật dữ liệu. Trong khoảng thời gian ProfiX chưa nhận được kết quả thu phí thì trạng thái của kỳ nợ phí được duy trì là “Đang xử lý”. Sau khi ProfiX đọc được kết quả trên Topic kết quả thu phí thì ProfiX xử lý:
+	•	Ghi nhận lịch sử thu phí theo kết quả thu
+	•	Cập nhật trạng thái của kỳ nợ phí tương ứng
+	•	Luồng xử lý này vận hành liên tục trong một khoảng thời gian trong ngày tùy theo yêu cầu của ngân hàng.
+	•	Nếu KH có nhiều kỳ nợ phí thì trong yêu cầu truy thu/tận thu nợ phí gửi đi cần xác định thứ tự ưu tiên theo nguyên tắc:
+	•	Nghiệp vụ từ thấp đến cao, đã được xác định theo nhóm code phí khi sinh dữ liệu thu phí định kỳ đến hạn
+	•	Ngày đến hạn thu phí từ xa đến gần
+	•	Trường hợp cùng một mức ưu tiên có nhiều kỳ nợ phí được tìm thấy, hệ thống lựa chọn kỳ ngẫu nhiên. 
+
+Xóa nợ phí
+Hệ thống cho phép kết nối thông qua API để lấy danh sách các kỳ nợ phí theo Khách hàng và cập nhật xóa nợ phí sau khi cấp thẩm quyền phê duyệt xóa nợ phí cho KH trên một hệ thống nội bộ của ngân hàng.
+	•	Hệ thống quản lý luồng trình phê duyệt xóa nợ phí sẽ lấy danh sách các kỳ nợ phí của Khách hàng từ ProfiX và hiển thị lên cho người dùng lựa chọn đề xuất miễn giảm một hoặc nhiều kỳ nợ phí.
+	•	Sau khi luồng trình phê duyệt xóa nợ được cấp thẩm quyền phê duyệt, Hệ thống quản lý luồng trình phê duyệt đó sẽ gửi yêu cầu xóa một hoặc một danh sách các kỳ nợ phí sang ProfiX để ProfiX xử lý cập nhật lại trạng thái cũng như không tiếp tục truy thu/tận thu nợ phí với các kỳ nợ phí đó.
+
+Lưu đồ và diễn giải
+Truy thu/tận thu nợ phí đầu ngày
+Lưu đồ:
+
+
+Diễn giải lưu đồ:
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Sinh dữ liệu
+Đầu ngày, ProfiX sinh danh sách truy thu/tận thu đầu ngày với các CIF còn nợ phí và tồn tại tài khoản có số dư khả dụng (T-1) > 0
+Hệ thống ProfiX
+2
+Xác định kỳ nợ phí
+ProfiX xác định các kỳ nợ phí cần thu theo thứ tự ưu tiên:
+- Nghiệp vụ từ thấp đến cao (Được cấu hình theo Nhóm code phí định kỳ), 
+- Ngày đến hạn thu phí từ xa đến gần,
+Trường hợp cùng một mức ưu tiên có nhiều kỳ nợ phí được tìm thấy, hệ thống lựa chọn kỳ ngẫu nhiên.
+Sau đó, ProfiX ghi dữ liệu truy thu/tận thu đầu ngày vào Topic, cập nhật trạng thái các kỳ nợ phí kể trên là “Đang xử lý”.
+Hệ thống ProfiX
+3
+Hạch toán thu phí
+
+Core T24 đọc Topic thu phí định kỳ và xử lý:
+- Hạch toán thu phí, lưu ý tận thu (thu một phần phí nếu tài khoản không đủ số dư)
+- Ghi kết quả thu phí vào Topic kết quả
+Core T24
+4 
+Đọc message kết quả thu
+ProfiX đọc các message trên Topic kết quả
+Hệ thống ProfiX
+5
+Update kết quả thu phí
+Nếu kết quả thu là đã thanh toán toàn bộ/một phần thì ProfiX xử lý:
+- Ghi nhận lịch sử thu phí
+- Update trạng thái nợ phí
+Hệ thống ProfiX
+
+Truy thu/tận thu nợ phí khi tài khoản KH phát sinh ghi có
+Lưu đồ: 
+
+Diễn giải lưu đồ:
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Gửi danh sách tài khoản của KH nợ phí
+
+ProfiX gửi T24 danh sách tài khoản (dữ liệu T-1) của các KH có nợ phí.
+Hệ thống ProfiX
+2
+Theo dõi biến động ghi có
+Khi một trong các tài khoản thuộc danh sách kể trên có biến động ghi có và KH không có nghĩa vụ tín dụng đến hạn/quá hạn chưa thanh toán trong ngày, T24 ghi vào Topic tương ứng.
+Hệ thống Core Banking T24
+3
+Nhận thông tin tài khoản có biến động ghi có
+- Nếu các kỳ nợ phí đều đang ở trạng thái “Đang xử lý” (từ là đang tồn tại yêu cầu truy thu/tận thu đã ghi vào Topic và chưa có kết quả thu), hệ thống không xử lý gì tiếp. 
+- Nếu tồn tại kỳ nợ phí đang ở trạng thái “Thanh toán một phần”/”Chưa thanh toán” thì xử lý các bước tiếp theo:  
+Hệ thống ProfiX
+4 
+Xác định thứ tự ưu tiên
+ProfiX xác định các kỳ nợ phí cần thu theo thứ tự ưu tiên:
+- Nghiệp vụ từ thấp đến cao (Được cấu hình theo Nhóm code phí định kỳ), 
+- Ngày đến hạn thu phí từ xa đến gần,
+Trường hợp cùng một mức ưu tiên có nhiều kỳ nợ phí được tìm thấy, hệ thống lựa chọn kỳ ngẫu nhiên.
+Sau đó, ProfiX ghi dữ liệu truy thu/tận thu đầu ngày vào Topic, cập nhật trạng thái các kỳ nợ phí kể trên là “Đang xử lý”.
+Hệ thống ProfiX
+5
+Hạch toán
+Core T24 đọc Topic thu phí định kỳ và xử lý:
+- Hạch toán thu phí, lưu ý tận thu (thu một phần phí nếu tài khoản không đủ số dư) 
+- Ghi kết quả thu phí vào Topic kết quả
+Hệ thống Core Banking T24
+6
+Đọc message kết quả thu
+ProfiX đọc các message trên Topic kết quả
+Hệ thống ProfiX
+7
+Update kết quả thu phí
+Nếu kết quả thu là đã thanh toán toàn bộ/một phần thì ProfiX xử lý:
+- Ghi nhận lịch sử thu phí
+- Update trạng thái nợ phí
+Hệ thống ProfiX
+
+Xóa nợ phí
+Lưu đồ:
+
+
+Diễn giải lưu đồ:
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Thêm mới yêu cầu xóa nợ phí
+RM khởi tạo yêu cầu xóa nợ phí cho Khách hàng trên hệ thống Pricing
+RM
+2
+
+Pricing call API đến ProfiX để lấy thông tin danh sách Nợ phí theo Khách hàng
+Hệ thống Pricing
+3
+
+ProfiX trả ra Danh sách các kỳ nợ phí của Khách hàng
+Hệ thống ProfiX
+4 
+
+Pricing hiển thị Danh sách các kỳ nợ phí
+Hệ thống Pricing
+5
+
+RM lựa chọn các kỳ đề xuất xóa nợ phí
+RM
+6
+Phê duyệt yêu cầu xóa nợ phí
+Approver phê duyệt tờ trình xóa nợ phí
+Approver
+7
+
+Pricing call API đến ProfiX để cập nhật xóa nợ phí cho Khách hàng
+Hệ thống Pricing
+8
+Cập nhật kết quả
+Cập nhật trạng thái đã xóa nợ cho các kỳ nợ phí tương ứng
+Hệ thống ProfiX
+
+Giao diện
+Màn hình
+N/A
+Mô tả chi tiết các trường
+N/A
+
+
+
+
+
+
+Phụ lục 
+Quy tắc chung
+Các loại định dạng trường trong hệ thống
+Định dạng combobox
+
+
+Người dùng có thể chọn giá trị trực tiếp trong danh sách hoặc có thể gõ text vào trường. Khi gõ text, hệ thống sẽ tìm kiếm dữ liệu tồn tại theo giá trị người nhập.
+Định dạng dropdown list
+
+Với định dạng này người dùng nhấn vào thanh bar, hệ thống hiển thị ra danh sách các lựa chọn, và người dùng chỉ được chọn 1 giá trị.
+Định dạng number
+
+
+Với định dạng này, người dùng chỉ được nhập số. Sau khi nhập xong sẽ hiển thị số người dùng đã nhập như sau: phân cách hàng nghìn bởi dấu phẩy, hàng thập phân bởi dấu chấm, lấy đến 02 chữ số sau dấu chấm (Riêng với VND, JPY không có hàng thập phân).
+Định dạng multiple select dropdown 
+
+
+Người dùng có thể chọn 1 hoặc nhiều giá trị trực tiếp trong danh sách hoặc có thể gõ text vào trường. Khi gõ text, hệ thống sẽ tìm kiếm dữ liệu tồn tại theo giá trị người nhập.
+Định dạng Date
+
+Hệ thống mặc định định dạng Date là dd/mm/yyyy, người dùng có thể trực tiếp giá trị trên trường hoặc chọn ngày ở bảng lịch. Trường hợp tìm kiếm theo khoảng thời gian (Từ ngày – Đến ngày) thì Từ ngày điền vào được hiểu là dd/mm/yyyy 00:00:00.000 và Đến ngày điền vào được hiểu là dd/mm/yyyy 23:59:59.999)
+
+Định dạng Text
+
+Với định dạng này, người dùng nhập giá trị text vào trường, độ dài tối đa của loại trường này sẽ được mô tả ở cột “Ràng buộc” tại bảng mô tả chi tiết các trường của từng chức năng. Nếu trường text nào không được mô tả độ dài tối đa thì được hiểu mặc định độ dài tối đa như sau: 
+Loại trường
+Độ dài tối đa
+Mã 
+50 kí tự
+Tên
+50 kí tự
+Diễn giải/Ghi chú/Nội dung
+300 kí tự
+
+Tìm kiếm
+Mô tả chức năng
+Người dùng có thể tìm kiếm bằng cách nhập mã hoặc tên (gần đúng) vào thanh search bar để tìm kiếm nhanh.
+Màn hình tham khảo
+Màn hình khi chưa nhập text tìm kiếm: 
+
+Màn hình sau khi nhập text và tìm kiếm: 
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+1
+Tìm kiếm 
+
+Search bar
+
++ Người dùng nhấn vào tìm kiếm, hệ thống ghi nhận và tìm kiếm 
++ Tìm kiếm theo các trường cụ thể, theo điều kiện and hay or sẽ được mô tả tại mục tìm kiếm của từng chức năng tương ứng
+Màn hình khi chưa nhập text tìm kiếm
+2
++ Các trường trong danh sách: Hiển thị danh sách và định dạng tương ứng được mô tả chi tiết tại mục tìm kiếm từng chức năng đó
+Màn hình sau khi áp dụng các điều kiện tìm kiếm
+3
++ Sau khi tìm kiếm, hệ thống hiển thị các record có text người dùng đã nhập
+Mô tả cách thức xử lý  
+Sau khi người dùng nhập text tại search bar, hệ thống tìm kiếm các bản ghi có mã/tên gần đúng với thông tin người dùng dùng đã nhập và hiển thị kết quả trên lưới chức năng.
+
+Lọc nâng cao
+Mô tả chức năng
+Người dùng có thể tìm kiếm bằng cách chọn Lọc nâng cao để nhập các điều kiện tìm kiếm trên màn hình, nhấn “Áp dụng” để tìm kiếm theo các điều kiện lọc.
+Màn hình tham khảo
+
+Người dùng nhấn vào button Lọc nâng cao, hệ thống hiển thị màn hình:
+      
+
+
+Màn hình sau khi áp dụng các điều kiện tìm kiếm: 
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+1
+Lọc nâng cao
+
+Button
+
++ Người dùng click vào button Lọc nâng cao, hệ thống hiển thị màn hình “Lọc nâng cao” + Người dùng áp dụng Lọc nâng cao rồi, hệ thống disbale search bar tìm kiếm nhanh
+Màn hình “Lọc nâng cao”
+2
++ Các trường điều kiện tìm kiếm: Hiển thị danh sách điều kiện tìm kiếm với định dạng tương ứng được mô tả chi tiết tại mục tìm kiếm từng chức năng 
++ Nếu nhập/ chọn các điều kiện tìm kiếm, hệ thống thực hiện tìm kiếm theo các dữ liệu thoả mãn đồng thời các điều kiện đã nhập
++ Nếu không nhập điều kiện tìm kiếm, người dùng nhấn vào áp dụng, hệ thống hiển thị toàn bộ thông tin tồn tại trong hệ thống theo mô tả các trường trên lưới dữ liệu của chức năng đó
+3
+Xoá lọc
+
+Button
+
+Người dùng nhấn vào button Xoá lọc để bỏ các điều kiện tìm kiếm đã nhập
+4
+Áp dụng
+
+Button
+
+Người dùng nhấn vào button Áp dụng để tìm kiếm theo các điều kiện người dùng đã nhập theo từng chức năng
+Màn hình sau khi áp dụng các điều kiện tìm kiếm
+5
+x
+
+Button icon
+
++ Người dùng nhấn vào “x” ở các điều kiện lọc ở màn hình kết quả tìm kiếm để loại bỏ điều kiện tìm kiếm đó
++ Sau khi loại bỏ 1 điều kiện tìm kiếm ở màn hình kết quả, người dùng nhấn vào button Lọc nâng cao, màn hình Lọc nâng cao hiển thị cũng loại bỏ điều kiện đó
++ Người dùng loại bỏ toàn bộ điều kiện lọc thì hệ thống hiển thị toàn bộ thông tin tồn tại trong hệ thống theo mô tả các trường trên lưới dữ liệu của chức năng đó, các button và search bar về tìm kiếm có thể thao tác được
+6
+Các field trên lưới: hiển thị danh sách và định dạng các field được mô tả tại chức năng đó
+
+Mô tả cách thức xử lý  
+Người dùng chỉ được lọc (1) Tìm kiếm nhanh tại search bar hoặc (2) Tìm kiếm theo button “Lọc nâng cao”.  Khi người dùng nhập text và ô tìm kiếm nhanh, hệ thống disable nút “Lọc nâng cao” và ngược lại.
+	•	“Lọc nâng cao”: Người dùng nhấn vào button “Lọc nâng cao”, hiển thị màn hình Lọc nâng cao, người dùng nhập các điều kiện tìm kiếm với các giá trị tương ứng, người dùng click vào nút “Áp dụng”.
+	•	Nếu chưa nhập đủ các điều kiện tìm kiếm bắt buộc (nếu có), hệ thống hiển thị thông báo các trường chưa nhập “Trường này bắt buộc” ngày dưới ô nhập bị thiếu.
+	•	Nếu dữ liệu nhập hợp lệ: Hệ thống trả về kết quả thoả mãn các điều kiện tìm kiếm đã nhập.
+	•	Quy tắc tìm kiếm chung: 
+Nội dung
+Quy tắc
+Kết hợp điều kiện
+AND giữa các điều kiện (Áp dụng cho lọc nâng cao)
+Hoa/thường
+Không phân biệt
+Dấu tiếng Việt
+Bỏ dấu khi tìm gần đúng tại các ô nhập text
+Trim khoảng trắng
+Tự động trim trước khi gửi backend
+Điều kiện rỗng
+Không đưa vào query
+
+Tra cứu 
+Mô tả chức năng
+Người dùng có thể tìm kiếm bằng cách nhập các điều kiện tìm kiếm trên màn hình, nhấn “Tra cứu” để tìm kiếm theo các điều kiện.
+Màn hình tham khảo
+Màn hình khi chưa nhập các điều kiện: 
+
+Màn hình sau khi áp dụng các điều kiện tìm kiếm: 
+
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+1
+Tra cứu
+
+Button
+
+Người dùng nhấn vào tra cứu, hệ thống ghi nhận và tìm kiếm theo các điều kiện đã nhập
+2
+Xoá tra cứu
+
+Button
+
+Người dùng nhấn vào button Xoá tra cứu, hệ thống bỏ các điều kiện tìm kiếm, danh sách tìm kiếm hiển thị theo mặc định
+3
+Vùng nhập điều kiện tra cứu:
++ Hiển thị danh sách điều kiện tìm kiếm với định dạng tương ứng được mô tả chi tiết tại mục tìm kiếm của từng chức năng
++ Nếu nhập điều kiện tìm kiếm, hệ thống thực hiện tìm kiếm các dữ liệu thoả mãn đồng thời các điều kiện đã nhập
++ Nếu không nhập điều kiện tìm kiếm, hệ thống mặc định không hiển thị danh sách
+Màn hình sau khi áp dụng các điều kiện tìm kiếm
+4
+Danh sách lưới: Hiển thị kết quả tìm dạng danh sách với các trường và định dạng được mô tả tại mục tìm kiếm của chức năng đó
+
+Mô tả cách thức xử lý
+Người dùng nhập các điều kiện tìm kiếm với các giá trị tương ứng sau đó click vào nút “Tìm kiếm”:
+	•	Nếu chưa nhập đủ các điều kiện tìm kiếm bắt buộc (nếu có), hệ thống hiển thị thông báo các trường chưa nhập “Trường này bắt buộc” ngày dưới ô nhập bị thiếu
+	•	Nếu dữ liệu nhập hợp lệ: Hệ thống trả về kết quả thoả mãn các điều kiện tìm kiếm đã nhập
+	•	Quy tắc tìm kiếm chung: 
+Nội dung
+Quy tắc
+Kết hợp điều kiện
+AND giữa các điều kiện
+Hoa/thường
+Không phân biệt
+Dấu tiếng Việt
+Bỏ dấu khi tìm gần đúng tại các ô nhập text
+Trim khoảng trắng
+Tự động trim trước khi gửi backend
+Điều kiện rỗng
+Không đưa vào query
+
+Tải xuống
+Mô tả chức năng
+Người dùng có thể tải xuống dữ liệu trên lưới ra dạng excel, đối với các định dạng file khác sẽ được mô tả tại chức năng tương ứng
+Màn hình tham khảo
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+1
+Tải xuống
+
+Button
+
+Người dùng nhấn vào button tải xuống, cho phép thực hiện tải xuống dữ liệu
+
+Mô tả cách thức xử lý
+	•	Button “Tải xuống” hiển thị khi trên màn hình có danh sách lưới dữ liệu
+	•	Người dùng nhấn vào button “Tải xuống” trên lưới của chức năng đang mở, hệ thống tải xuống file danh sách dữ liệu theo các điều kiện tìm kiếm đã nhập
+	•	Định dạng file tải xuống: mặc định tệp dữ liệu tải xuống là excel, đối với dạng file khác sẽ được mô tả tại mục tải xuống của chức năng đó 
+	•	Tên file theo format: Tên chức năng - yyyymmddhhmmss
+	•	Template: được đính kèm tại mục tải xuống của chức năng đó
+Phân trang
+Mô tả chức năng
+Người dùng có thể xem danh sách dữ liệu trên các trang bằng cách nhấn vào các số trang, trang tiếp theo/trang trước đó.
+Màn hình tham khảo
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+1
+Số trang
+
+Button
+
+Người dùng nhấn vào button số trang để xem danh sách dữ liệu 
+2
+Trang tiếp theo 
+
+
+Button
+
++ Người dùng nhấn vào button “Trang tiếp theo” để xem danh sách dữ liệu trang tiếp theo
++ Nếu là trang cuối cùng thì người dùng không thể thao được button này, button “Trang tiếp theo” sẽ diable
+3
+Trang trước đó
+
+Button
+
++ Người dùng nhấn vào button “Trang trước đó” để xem danh sách dữ liệu trang tiếp theo
++ Nếu là trang đầu thì người dùng không thể thao được button này, button “Trang trước đó” sẽ disable
+4
+Số bản ghi trên trang
+
+	•	
+
+Hiển thị số bản ghi đang hiển thị trên một trang so với tổng sổ bản ghi
+Ví dụ: 1-50 của 295 bản ghi
+
+Mô tả cách thức xử lý
+	•	Hệ thống hiển thị mặc định là 50 bản ghi trên 1 trang đối với trường hợp có số bản ghi khác thì sẽ được mô tả cụ thể tại mục phân trang của chức năng đó
+	•	Người dùng ở trang nào, hệ thống hiển thị tương ứng số bản ghi lần lượt ở trang đó
+
+Upload file
+Mô tả chức năng
+Người dùng có thể upload file excel lên thay vì thêm từng dòng bản ghi trên hệ thống
+Màn hình tham khảo
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+1
+Upload file
+
+Button
+
+Người dùng nhấn vào button tải xuống, cho phép thực hiện tải xuống dữ liệu
+2
+Danh sách bản ghi: Sau khi upload file, hệ thống xử lý các điều kiện, dữ liệu phù hợp sẽ được thông báo upload file thành công, màn hình hiển thị danh sách các bản ghi đã được upload
+
+Mô tả cách thức xử lý  
+	•	Định dạng file được upload: Excel
+	•	Dung lượng file: theo tham số hệ thống
+	•	Người dùng nhấn vào button Upload file để lựa file định dạng excel để upload. Sau khi upload, hệ thống validate định dạng, dung lượng file và dữ liệu trong file, cụ thể về các rule validate dữ liệu sẽ được mô tả tại mục upload của chức năng đó: 
+	•	Nếu định dạng,dung lượng file không hợp lệ thì hệ thống thông báo “ Định dạng hoặc dung lượng không hợp lệ”. Người dùng chọn lại file để upload
+	•	Nếu dữ liệu hợp lệ: Hệ thống hiển thị danh sách các bản ghi
+	•	Nếu dữ liệu không hợp lệ: Hệ thống thông báo “Dữ liệu của bạn khôn hợp lệ” hiển thị bản ghi, đối với bản ghi không hợp lệ, hệ thống highlight bản ghi đó
+Lịch sử tác động
+Mô tả chức năng
+Người dùng có thể xem lịch sử tác động tới các dữ liệu Code phí, Biểu phí và Chương trình ưu đãi tại các màn hình xem tại các chức năng quản lý tương ứng. Tại màn hình xem Code phí/Biểu phí/Chương trình ưu đãi, khi người dùng nhấn vào “Lịch sử tác động”, hệ thống hiển thị Màn hình liệt kê lịch sử tác động theo thứ tự thời gian duyệt từ gần nhất tới xa nhất và người dùng có thể click vào bản ghi tương ứng để xem thông tin chi tiết sau khi tác động.
+Màn hình tham khảo
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+1
+Ngày cập nhật
+
+Date time
+
++ Hiển thị thời điểm hành động (Thêm mới/Chỉnh sửa) được phê duyệt thành công
++ Format: dd/mm/yyyy
++ Người dùng nhấn vào hyperlink  “Ngày cập nhật”, hệ thống hiển thị thông tin chi tiết của bản ghi ở phiên bản trước khi chỉnh sửa (bản lịch sử)
+2
+Tác động
+
+Text
+
+Hiển thị các hành động của người dùng đến chức năng: Thêm mới, Chỉnh sửa
+3
+Người cập nhật
+
+Text
+
+Hiển thị người tác động đến chức năng như: Thêm mới/Chỉnh sửa
+4
+Người phê duyệt
+
+Text
+
+Hiển thị người phê duyệt cuối của chức năng
+5
+Icon “x”
+
+-
+
+Người dùng nhấn vào icon “x” để tắt Popup
+
+
+Mã lỗi
+Mã chức năng
+Mã lỗi
+Nội dung mã lỗi
+PR.01
+PR.01.01
+Chưa nhập đủ các trường bắt buộc
+PR.01
+PR.01.02
+Thêm mới cấp Nghiệp vụ thành công
+PR.01
+PR.01.03
+Chưa thay đổi Ngày hiệu lực/Ngày hết hiệu lực
+PR.01
+PR.01.04
+Sửa cấp Nghiệp vụ thành công
+PR.02
+PR.02.01
+Chưa nhập đủ các trường bắt buộc
+PR.02
+PR.02.02
+Thêm mới SPDV chi tiết thành công
+PR.02
+PR.02.03
+Chưa thay đổi Ngày hiệu lực/Ngày hết hiệu lực
+PR.02
+PR.02.04
+Sửa SPDV chi tiết thành công
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

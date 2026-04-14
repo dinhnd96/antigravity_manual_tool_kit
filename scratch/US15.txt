@@ -1,0 +1,1029 @@
+US15 - Là người dùng, tôi muốn xem toàn bộ danh mục SPDV
+Yêu cầu nghiệp vụ
+Navigation: 
+	•	Khi muốn xem thông tin sản phẩm dịch vụ để khai báo các cấp SPDV chi tiết hơn hoặc khai báo code phí trực thuộc, người dùng truy cập: Tham số >> Danh mục SPDV và code phí >> Danh sách sản phẩm dịch vụ/ Danh sách code phí chưa sử dụng (1)
+	•	Khi muốn xem thông tin sản phẩm dịch vụ theo sơ đồ hình cây và mối liên quan tới các biểu phí, code phí, người dùng truy cập: Tra cứu >> Xem nghiệp vụ theo cây thư mục (2)
+
+Xem thông tin SPDV tại chức năng quản lý Danh mục sản phẩm dịch vụ và code phí:
+Người dùng lựa chọn Danh mục SPDV, hệ thống hiển thị màn hình gồm 2 tab: Danh mục sản phẩm dịch vụ (Mặc định) và Danh sách code phí chưa sử dụng.
+	•	Tab danh mục sản phẩm dịch vụ: Hiển thị tất cả danh mục sản phẩm dịch vụ đang có của hệ thống
+	•	Tab danh mục sản phẩm dịch vụ gồm: Tìm kiếm nhanh, Lọc nâng cao, Tải xuống, Lưới Danh mục sản phẩm dịch vụ
+	•	Tìm kiếm nhanh: Người dùng nhập mã/tên để tìm kiếm nhanh và gần đúng dữ liệu.
+	•	Lọc nâng cao: Người dùng nhấn Lọc nâng cao, hệ thống hiển thị màn hình để người dùng nhập các điều kiện muốn lọc. Điều kiện lọc bao gồm: Cấp khai báo, Tên, Từ ngày, Đến ngày
+	•	Cấp khai báo: Người dùng chọn 1 cấp khai báo, danh sách cấp khai báo kiểm tra theo tham số hệ thống về cấp khai báo để hiển thị danh sách cấp khai báo
+	•	Tên: Người dùng nhập tên danh mục sản phẩm để tìm kiếm tương tự
+	•	Từ ngày: Người dùng chọn ngày, tìm kiếm theo trường ngày hiệu lực
+	•	Đến ngày: Người dùng chọn ngày, tìm kiếm theo trường ngày hiệu lực
+	•	Lưới Danh mục sản phẩm dịch vụ:
+	•	Các trường hiển thị trong lưới kết quả gồm có: Mã code phí, loại, mã SPDV, tên SPDV, Trạng thái, Ngày tạo, Ngày hiệu lực, Ngày hết hiệu lực, Người tạo, Ngày duyệt, Người duyệt, Ngày sửa, Người sửa. 
+	•	Người dùng nhấn mã danh mục SPDV, hệ thống hiển thị màn hình chi tiết sản phẩm dịch vụ. Các trường gồm có: Tên, Mã SPDV, Mô tả, Cấp SPDV, ngày tạo, người tạo, ngày duyệt, Người duyệt, Ngày sửa, Người sửa, Ngày hiệu lực, Ngày hết hiệu lực, Trạng thái, Code phí
+	•	Tại Sản phẩm dịch vụ cấp cuối, hiển thị các code phí đang hiệu lực được gắn với sản phẩm dịch vụ cấp đó và người dùng có thể thêm code phí mới. Nếu người dùng nhấn vào xem chi tiết 1 code phí, hệ thống hiển thị thông tin chi tiết của code phí đó, các trường hiển thị giống như màn thêm mới.
+	•	Trạng thái của Sản phẩm dịch vụ gồm: 
+Trạng thái
+Mô tả
+Hoạt động
+Sản phẩm dịch vụ đang có hiệu lực 
+Không hoạt động
+Sản phẩm dịch vụ chưa đến ngày hiệu lực hoặc đã hết hiệu lực
+	•	Sau khi tìm kiếm theo các điều kiện, hệ thống trả kết quả trên lưới Danh mục sản phẩm dịch vụ, hiển thị đến các cấp phù hợp với điều kiện lọc theo quy tắc tìm kiếm chung của hệ thống.
+	•	Tải xuống: Cho phép người dùng kết xuất file danh sách SPDV theo dữ liệu kết quả tìm kiếm đang hiển thị lưới và theo quy tắc tải xuống chung của hệ thống.
+	•	Tab danh mục code phí chưa sử dụng: 
+	•	Mục đích: Hiển thị danh sách các code phí chưa được gán vào Biểu phí để đảm bảo các code phí cần vận hành đã được gắn đầy đủ vào các biểu phí hoặc người dùng có thể tra cứu được các code phí theo trạng thái.
+	•	Các trạng thái của code phí bao gồm: 
+Trạng thái
+Mô tả
+Hoạt động
+Code phí đang gán với một Biểu phí có hiệu lực 
+Ngừng hoạt động
+Code phí đang gán với một Biểu phí hết hiệu lực
+Chờ gán
+Code phí chưa được gán với Biểu phí nào 
+Hủy
+Code phí khai báo sai thông tin và không thể tái sử dụng
+	•	Tab danh sách code phí chưa sử dụng gồm có: Tìm kiếm nhanh, Lọc nâng cao, Tải xuống, Lưới Danh sách code phí chưa sử dụng
+	•	Tìm kiếm nhanh: Người dùng nhập mã/tên để tìm kiếm nhanh và gần đúng dữ liệu.
+	•	Lọc nâng cao: Người dùng nhấn chọn lọc nâng cao, hệ thống hiển thị màn hình để người dùng nhập các điều kiện muốn lọc. Điều kiện lọc bao gồm: Tên, Từ ngày, Đến ngày
+	•	Tên: Người dùng nhập tên code phí để tìm kiếm gần đúng
+	•	Từ ngày: Người dùng chọn ngày, tìm kiếm theo trường ngày tạo
+	•	Đến ngày: Người dùng chọn ngày, tìm kiếm theo trường ngày tạo
+	•	Lưới Danh sách code phí chưa sử dụng:
+	•	Các trường hiển thị trong lưới kết quả gồm có: Code phí, Tên phí, Mã SPDV, Tên SPDV, Trạng thái, Ngày tạo, Người tạo, Ngày sửa, Người sửa. 
+	•	Người dùng nhấn vào xem chi tiết 1 code phí, hệ thống hiển thị thông tin chi tiết của code phí đó, các trường hiển thị giống như màn thêm mới/chỉnh sửa. Tại màn xem chi tiết của code phí, người dùng nhấn vào “Lịch sử tác động”, hệ thống hiển thị popup Lịch sử tác động (tham khảo tại mục Lịch sử tác động của Quy tắc chung)
+	•	Sau khi tìm kiếm theo các điều kiện, hệ thống trả kết quả trên lưới Code phí chưa sử dụng, hiển thị các code phí phù hợp với điều kiện lọc theo quy tắc tìm kiếm chung của hệ thống.
+	•	Tải xuống: Cho phép người dùng kết xuất file danh sách Code phí theo dữ liệu kết quả tìm kiếm đang hiển thị lưới và theo quy tắc tải xuống chung của hệ thống.
+Xem thông tin SPDV, code phí, biểu phí tại chức năng Xem nghiệp vụ theo cây thư mục:  
+Người dùng chọn “Xem nghiệp vụ theo cây thư mục”, hệ thống hiển thị màn hình gồm 2 cấu phần tìm kiếm dữ liệu: “Danh mục toàn hàng” và “Danh mục sản phẩm dịch vụ/ Danh mục biểu phí”, người dùng có thể tìm kiếm độc lập giữa các cấu phần.
+	•	Danh mục toàn hàng: Người dùng tìm kiếm các SPDV theo cây thư mục, từ cây thư mục có thể xem chi tiết SPDV, danh sách code phí/ biểu phí đi kèm
+	•	Layout danh mục toàn hàng gồm có: Tìm kiếm nhanh theo tên SPDV, cây thư mục SPDV
+	•	Tìm kiếm nhanh: Người dùng nhập tên SPDV muốn tìm kiếm, hệ thống hiển thị các SPDV phù hợp với đến tất cả cấp, hiển thị đến cấp đó
+	•	Cây thư mục SPDV: 
+	•	Mặc định: Hiển thị toàn bộ SPDV cấp 1
+	•	Người dùng có thể mở rộng/thụ gọn đến cấp cuối của 1 cấp, hiển thị theo dạng cây
+	•	Người dùng nhấn vào 1 SPDV, hệ thống hiển thị chi tiết và hyperlink “Xem biểu phí/ code phí đi kèm”. 
+	•	Nếu là SPDV cấp cuối thì hiển thị hyperlink “Xem code phí đi kèm”.
+	•	Nếu không phải SPDV cấp cuối thì hiển thị hyperlink “Xem biểu phí đi kèm” 
+	•	Người dùng nhấn vào hyperlink để xem danh sách biểu phí, code phí tương ứng.
+	•	Tại màn Danh sách biểu phí, các trường trên lưới gồm: Mã biểu phí (Click vào để xem chi tiết biểu phí), Tên biểu phí, Tên văn bản, Ngày ban hành, Ngày hiệu lực, Ngày hết hiệu lực, Trạng thái, Người tạo, Ngày tạo, Người sửa, Ngày sửa, Người duyệt, Ngày duyệt
+	•	Tại màn danh sách code phí, các trường trên lưới gồm:  button Tải xuống, Mã code phí (Click vào để xem chi tiết code phí), tên code phí, công thức tính phí, người tạo, ngày tạo, người sửa, ngày sửa, người duyệt, ngày duyệt
+	•	Tải xuống: Cho phép người dùng kết xuất file danh sách code phí/ biểu phí theo dữ liệu kết quả tìm kiếm đang hiển thị trên màn hình và theo quy tắc tải xuống chung của hệ thống.
+	•	Phân trang: Hệ thống hiển thị 20 SPDV cấp 1 trên 1 trang, người dùng nhấn vào button tiếp theo/ số trang để xem các SPDV tại trang đó
+	•	Danh mục sản phẩm dịch vụ: Tra cứu các sản phẩm dịch vụ theo các điều kiện khác nhau
+	•	Màn hình danh mục sản phẩm dịch vụ gồm có: Điều kiện tra cứu, Tra cứu, Tải xuống, Lưới Danh mục sản phẩm dịch vụ
+	•	Khi người dùng vào Tab Danh mục sản phẩm dịch vụ, mặc định không hiển thị danh sách sản phẩm dịch vụ. 
+	•	Sau khi nhập điều kiện và nhấn “Tra cứu”, hệ thống trả kết quả trên Lưới Danh mục sản phẩm dịch vụ, hiển thị các SPDV phù hợp với điều kiện lọc theo quy tắc tìm kiếm chung của hệ thống
+	•	Các điều kiện tra cứu gồm: 
+	•	Cấp khai báo: Người dùng lựa chọn 1 trong các cấp khai báo trong dropdown list. Cấp khai báo sẽ được hiển thị đến cấp cuối cùng theo tham số được cấu hình 
+	•	Tên: Người dùng nhập tên sản phẩm, dịch vụ
+	•	Từ ngày - đến ngày: người dùng chọn ngày, hệ thống tìm kiếm theo ngày hiệu lực
+	•	Lưới Danh mục sản phẩm dịch vụ: Mã SPDV, Tên SPDV, Loại (là cấp của SPDV), mã Code phí, Trạng thái, Trạng thái, Ngày tạo, Ngày hiệu lực, Ngày hết hiệu lực, Người tạo, Ngày duyệt, Người duyệt, Ngày sửa, Người sửa.
+	•	Người dùng nhấn vào mã SPDV, mã code phí thì hiển thị màn hình chi tiết SPDV/Code phí tương ứng.
+	•	Tải xuống: Cho phép người dùng kết xuất file danh mục SPDV theo dữ liệu kết quả tìm kiếm đang hiển thị trên màn hình và theo quy tắc tải xuống chung của hệ thống.
+	•	Danh mục biểu phí: Tra cứu biểu phí theo các điều kiện khác nhau
+	•	Màn hình danh mục biểu phí gồm có: Các điều kiện lọc, Tải xuống, Lưới danh mục biểu phí
+	•	Khi người dùng vào Tab Danh mục biểu phí mặc định không hiển thị dữ liệu trên Lưới danh mục biểu phí. 
+	•	Sau khi nhập điều kiện và nhấn “Tra cứu”, hệ thống trả kết quả trên Lưới Danh mục biểu phí, hiển thị các biểu phí phù hợp với điều kiện lọc theo quy tắc tìm kiếm chung của hệ thống
+	•	Các điều kiện tra cứu gồm: 
+	•	Tên biểu phí: Người dùng nhập tên biểu phí để tìm kiếm gần đúng
+	•	Số văn bản: Người dùnh nhập số văn bản
+	•	Tên văn bản: Người dùng nhập tên văn 
+	•	Loại khách hàng: người dùng chọn: KHCN, KHTC, KHDNSN, CBNV
+	•	Từ ngày - đến ngày: người dùng chọn ngày, hệ thống tìm kiếm theo ngày hiệu lực
+	•	Trạng thái: Người dùng lựa chọn 1 trong các trạng thái của biểu phí bao gồm:
+Trạng thái
+Mô tả
+Đang hiệu lực 
+Khi ngày hiệu lực bắt đầu, nằm trong khoảng thời gian ngày hiệu lực và ngày hết hiệu lực
+Chưa hiệu lực 
+Khi ngày hiểu lực chưa bắt đầu
+Hết hiệu lực
+Khi ngày hết hiệu lực bắt đầu
+	•	Danh sách biểu phí: Mã biểu phí, Tên biểu phí, Số văn bản, Tên văn bản, Trạng thái, Ngày hiệu lực, Ngày hết hiệu lực, Ngày tạo, Người tạo, Ngày duyệt, Người duyệt, Ngày sửa, Người sửa
+	•	Người dùng nhấn vào mã biểu phí thì hiển thị màn hình chi tiết biểu phí tương ứng
+	•	Tải xuống: Cho phép người dùng xuất file danh sách biểu phí theo dữ liệu kết quả tìm kiếm đang hiển thị trên màn hình và theo quy tắc tải xuống chung của hệ thống
+Lưu đồ và diễn giải
+Quản lý Danh mục sản phẩm dịch vụ (Tham số)
+Lưu đồ
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Tìm kiếm danh mục sản phẩm dịch vụ theo chức năng
+Chọn "Danh mục sản phẩm dịch vụ và code phí" tại menu  
+Người dùng
+2
+
+Hiển thị 2 tab: Danh mục SPDV (default) và Code phí chưa sử dụng
+Frontend
+3
+
+Gửi yêu cầu lấy danh sách SPDV
+Backend
+4
+
+Lấy danh sách sản phẩm dịch vụ
+Người dùng
+5
+
+Hiển thị màn hình sản phẩm dịch vụ theo chức năng
+Frontend
+6
+
+Lựa chọn: 
++ Nhập mã tìm kiếm
++ Lọc nâng cao
++ Tải xuống
++ Nhấn mã SPDV
++ Nhấn xem chi tiết Code phí ở SPDV cấp cuối
+Người dùng
+6.1
+
+Nhập mã tìm kiếm
+Người dùng
+7
+
+Hiển thị danh sách SPDV => Kết thúc
+Frontend
+6.2
+
+Lọc nâng cao
+Người dùng
+8
+
+Hiển thị màn hình lọc sản phẩm dịch vụ
+Frontend
+9
+
+Nhập các điều kiện lọc
+Người dùng
+10
+
+Lựa chọn: 
++ Xoá lọc
++ Áp dụng
+Người dùng
+10.1
+
+Xoá lọc
+Người dùng
+11
+
+Đóng màn hình Lọc sản phẩm dịch vụ => Kết thúc
+Frontend
+
+11.2
+
+Áp dụng
+Người dùng
+12
+
+Hiển thị Danh mục sản phẩm dịch vụ => Kết thúc
+Frontend
+
+6.3
+
+Tải xuống
+Người dùng
+13
+
+Tham chiếu quy tắc Tải xuống tại mục Quy tắc chung => Kết thúc
+Frontend
+6.4
+
+Nhấn mã Mã danh mục SPDV
+Người dùng
+14
+
+Hiển thị màn hình chi tiết 1 SPDV
+Frontend
+6.5
+
+Nhấn xem chi tiết Code phí ở SPDV cấp cuối
+Người dùng
+15
+
+Gửi yêu cầu xem chi tiết code phí
+Frontend
+16
+
+Nhận yêu cầu và xử lý
+Backend
+17
+
+Hiển thị màn hình xem chi tiết code phí
+=> Kết thúc
+Frontend
+
+Quản lý Danh sách code phí chưa sử dụng (Tham số)
+Lưu đồ
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Danh sách Code phí chưa sử dụng
+Chọn menu "Danh mục sản phẩm dịch vụ và code phí" tại Menu  
+Người dùng
+2
+
+Hiển thị 2 tab: Danh mục SPDV (default) và Code phí chưa sử dụng
+Frontend
+3
+
+Chọn tab Code phí chưa sử dụng
+Người dùng
+4
+
+Gửi yêu cầu lấy danh sách code phí chưa sử dụng
+Frontend
+6
+
+Lấy danh sách code phí chưa sử dụng
+Backend
+7
+
+Hiển thị màn hình code phí chưa sử dụng
+Frontend
+8
+
+Người dùng lựa chọn: 
++ Nhập mã (code phí) tìm kiếm
++ Lọc nâng cao
++ Tải xuống
++ Xem chi tiết code phí
+Người dùng
+8.1
+
+Nhập mã tìm kiếm
+Người dùng
+9
+
+Hiển thị kết quả  danh sách code phí => Kết thúc
+Frontend
+8.2
+
+Lọc nâng cao
+Người dùng
+10
+
+Hiển thị màn hình Lọc code phí chưa sử dụng
+Frontend
+11
+
+Nhập các điều kiện lọc
+Người dùng
+12
+
+Người dùng lựa chọn: 
++ Xoá lọc
++ Áp dụng
+Người dùng
+12.1
+
+Xoá lọc
+Người dùng
+13
+
+Đóng màn hình lọc code phí chưa sử dụng
+=> Kết thúc
+Frontend
+12.2
+
+Áp dụng
+Người dùng
+14
+
+Hiển thị danh sách code phí theo điều kiện đã lọc => Kết thúc
+Frontend
+8.3
+
+Tải xuống
+Người dùng
+15
+
+Tham chiếu mục Tải xuống tại Quy tắc chung => Kết thúc
+Frontend
+8.4
+
+Xem chi tiết code phí
+Người dùng
+16
+
+Gửi yêu cầu xem chi tiết code phí
+Frontend
+17
+
+Lấy chi tiết 1 code phí
+Backend
+18
+
+Hiển thị màn hình thông tin chi tiết code phí
+Frontend
+
+Xem nghiệp vụ theo cây thư mục (Tra cứu)
+Lưu đồ
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Tra cứu cây SPDV, code phí, biểu phí
+Chọn  "Xem nghiệp vụ theo cây thư mục”
+Người dùng
+2
+
+Hiển thị màn hình gồm 2 phần: Cây thư mục và phần thông tin chi tiết
+Frontend
+3
+
+Lựa chọn tab chức năng: 
++ Chọn “ Danh mục toàn hàng” của Cây thư mục => đến bước 3.1
++ Chọn Tab “Danh mục Sản phầm dịch vụ” => đến bước 3.2
++ Chọn  Tab “ Danh mục biểu phí” => đến bước 3.3
+Người dùng
+3.1
+
+Chọn Danh mục toàn hàng của Cây thư mục
+Người dùng
+4
+
+Hiển thị toàn bộ danh mục sản phẩm cấp 1
+Frontend
+5
+
+Lựa chọn: 
++ Nhập tìm kiếm => đến bước 5.1 
++ Nhấn expand/collapse => đến bước 5.2
++ Nhấn vào 1 SPDV => đến bước 5.3
+Người dùng
+5.1
+
+Nhập tìm kiếm
+Người dùng
+6
+
+Hiển thị kết quả tìm kiếm
+Frontend
+5.2
+
+Nhấn expand/collapse
+Người dùng
+7
+
+Hiển thị thêm/thu gọn các thư mục SPDV
+Frontend
+5.3
+
+Nhấn vào 1 SPDV
+Người dùng
+8
+
+Hệ thống kiểm tra có phải SPDV cấp cuối không?
++ Nếu không -> đến bước 8.1
++ Nếu có -> đến bước 8.2
+Frontend
+8.1
+
+Hiển thị thông tin chi tiết + Hyperlink “Xem biểu phí đi kèm”
+Frontend
+8.2
+
+Hiển thị thông tin chi tiết + Hyperlink “Xem code phí đi kèm”
+Frontend
+9
+
+Người dùng lựa chọn: 
++ Nhấn vào hyperlink “Xem biểu phí đi kèm” => đến bước 9.1
++ Nhấn vào hyperlink “Xem code phí đi kèm” => đến bước 9.2
++ Tải xuống (List code phí/biểu phí đi kèm) => đến bước 9.3
+Người dùng
+9.1
+
+Nhấn vào hyperlink “Xem biểu phí đi kèm”
+Người dùng
+10
+
+Gửi yêu cầu lấy danh sách biểu phí đi kèm
+Frontend
+11
+
+Nhận yêu cầu và xử lý dữ liệu 
+Backend
+12
+
+Hiển thị danh sách biểu phí 
+Frontend
+9.2
+
+Nhấn vào hyperlink “Xem code phí đi kèm”
+Người dùng
+13
+
+Gửi yêu cầu xem code phí đi kèm
+Frontend
+14
+
+Nhận yêu cầu và xử lý dữ liệu
+Backend
+15
+
+Hiển thị danh sách code phí đi kèm
+Frontend
+9.3
+
+Nhấn tải xuống 
+(tại màn danh sách code phí hoặc biểu phí để download file)
+Người dùng
+16
+
+Tham chiếu quy tắc tải xuống tại mục Quy tắc chung
+Frontend
+3.2
+
+Chọn Tab Danh mục sản phẩm dịch vụ => Tiếp tục bước 17
+Người dùng
+17
+
+Hiển thị màn hình danh mục SPDV
+Frontend
+18
+
+Nhập các điều kiện lọc và nhấn Tìm kiếm
+Người dùng
+19
+
+Gửi yêu cầu tìm kiếm
+Frontend
+20
+
+Nhận yêu cầu và xử lý dữ liệu 
+Backend
+21
+
+Hiển thị danh sách SPDV => Kết thúc
+Frontend
+3.3
+
+Chọn tab “Danh mục biểu phí” => Tiếp bước 22
+Người dùng
+22
+
+Hiển thị màn hình Danh mục Biểu phí
+Frontend
+23
+
+Nhập các điều kiện lọc và “Tìm kiếm”
+Người dùng
+24
+
+Gửi yêu cầu tìm kiếm
+Frontend
+25
+
+Nhận yêu cầu và xử lý dữ liệu
+Backend
+26
+
+Hiển thị danh sách biểu phí => Kết thúc
+Frontend
+
+Giao diện
+Tìm kiếm danh mục sản phẩm dịch vụ (Tham số)
+Màn hình
+
+
+
+Mô tả các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+1
+Tìm kiếm nhanh
+
+Search bar
+
+Người dùng tìm kiếm nhanh mã/tên SPDV
+2
+Lọc nâng cao
+
+Button
+
+Các điều kiện Lọc, bao gồm: Cấp khai báo, Tên, Từ ngày - đến ngày: 
++ Cấp khai báo: Chọn danh sách cấp khai báo
++ Tên: Người dùng nhập tên SPDV
++ Từ ngày - đến ngày: lựa chọn ngày, và tìm kiếm theo ngày hiệu lực
+3
+Thêm mới
+
+Button
+
+Thêm mới Nghiệp vụ
+4
+Tải xuống
+
+Button
+
+Tải xuống file dạng excel
+CÁC TRƯỜNG THÔNG TIN TRÊN LƯỚI
+1
+Tên
+
+Text
+
+Tên sản phẩm dịch vụ
+2
+Mã
+
+Text
+
++ Mã sản phẩm dịch vụ, người dùng click vào mã để xem chi tiết một mã sản phẩm dịch vụ
++ Các trường thông tin như màn chỉnh sửa và thêm mới một SPDV
+3
+Mô tả
+
+Text
+
+Mô tả
+4
+Cấp
+
+Text
+
+
+Cấp sản phẩm dịch vụ
+5
+Code phí
+
+Text
+
+
++ Hiển thị mã code phí (nếu có) 
++ Nếu là sản phẩm dịch vụ cấp cuối thì hệ thống hiển thị button xem, chỉnh sửa, thêm code phí
++ Button chuyển đổi code phí hiển thị khi có ít nhất 1 code phí và ở cấp cuối của SPDV
+6
+Trạng thái
+
+Text
+
+Hiển thị trạng thái của sản phẩm dịch vụ gồm: 
++ Đang hoạt động
++ Không hoạt động
+7
+Ngày tạo
+
+Date
+
+Ngày tạo sản phẩm dịch vụ
+8
+Người tạo
+
+Text
+
+Người tạo sản phẩm dịch vụ
+9
+Ngày duyệt
+
+Date
+
+Ngày duyệt cấp cuối của sản phẩm dịch vụ
+10
+Người duyệt
+
+Text
+
+Người duyệt cấp cuối của sản phẩm dịch vụ
+11
+Ngày sửa
+
+Date
+
+Ngày sửa sản phẩm dịch vụ
+12
+Người sửa
+
+Date
+
+Người sửa sản phẩm dịch vụ
+13
+Ngày hiệu lực
+
+Date
+
+Ngày hiệu lực của sản phẩm dịch vụ
+14
+Ngày hết hiệu lực
+
+Date
+
+Ngày hết hiệu lực của sản phẩm dịch vụ
+15
+Hành động
+
+-
+
+Người dùng click vào button hành động, hiển thị danh sách button gồm: Thêm mới, chỉnh sửa
+ 
+Xem danh sách code phí chưa sử dụng
+Màn hình
+
+
+Mô tả các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+1
+Tìm kiếm nhanh
+
+Search bar
+
+Người dùng tìm kiếm nhanh bằng mã/tên code phí
+2
+Lọc nâng cao
+
+Button
+
+Các điều kiện Lọc, bao gồm: Tên, Từ ngày - đến ngày
++ Tên: Người dùng nhập tên Code phí
++ Từ ngày - đến ngày: lựa chọn ngày, và tìm kiếm theo ngày tạo
+3
+Tải xuống
+
+Button
+
+Tải xuống file dạng excel
+CÁC TRƯỜNG THÔNG TIN
+1
+Code phí
+
+Text
+
++ Hiển thị mã code phí + Người dùng click vào Mã, hệ thống hiển thị màn hình chi tiết code phí
+2
+Tên 
+
+Text
+
+Tên code phí
+3
+Mã SPDV
+
+Text
+
+Mã sản phẩm dịch vụ
+4
+Tên SPDV
+
+Text
+
+Tên SPDV
+5
+Trạng thái
+
+Text
+
+Hiển thị trạng thái của  code phí  gồm:
++ Huỷ
++ Ngừng hoạt động
++ Chờ gán
+6
+Ngày tạo
+
+Date
+
+Ngày tạo code phí
+7
+Người tạo
+
+Text
+
+Người tạo code phí
+8
+Ngày sửa
+
+Date
+
+Ngày sửa code phí
+9
+Người sửa
+
+Date
+
+Người sửa code phí
+
+Xem nghiệp vụ theo cây thư mục (Tra cứu)
+Màn hình
+Màn hình danh mục toàn hàng
+
+
+Màn hình danh mục Sản phẩm dịch vụ
+Màn hình Danh mục biểu phí
+
+Mô tả các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+DANH MỤC TOÀN HÀNG
+NÚT CHỨC NĂNG
+1
+Tìm kiếm nhanh
+
+Search bar
+
+Người dùng tìm kiếm nhanh bằng mã/tên sản phẩm dịch vụ
+2
+Expand/ Collapse
+
+Button
+
++ Người dùng nhấn vào Expand button icon để mở rộng các cấp SPDV 
++ Người dùng nhấn vào Collapse button icon để thu gọn các cấp SPDV
+CÁC TRƯỜNG THÔNG TIN
+1
+Tên SPDV
+
+Text
+
++ Hiển thị tên SPDV theo thư mục hình cây
++ Người dùng nhấn vào 1 SPDV để xem chi tiết thông tin SPDV
+DANH MỤC SẢN PHẨM DỊCH VỤ
+NÚT CHỨC NĂNG
+1
+Tra cứu
+
+Button
+
+Người dùng nhấn vào Tra cứu button để tìm kiếm theo các điều kiện 
+2
+Xoá tra cứu
+
+Button
+
+Người dùng nhấn vào button xoá tra cứu để bỏ các điều kiện tra cứu
+3
+Tải xuống
+
+Button
+
+Tải xuống file dạng excel, hiển thị khi trên lưới có dữ liệu 
+CÁC TRƯỜNG THÔNG TIN
+Các điều kiện tra cứu
+1
+Tên
+
+Textbox
+
+Người dùng nhập tên SPDV
+2
+Cấp khai báo
+
+Dropdown list
+
+Chọn danh sách cấp khai báo
+3
+Từ ngày - đến ngày
+
+Date
+
+Người dùng lựa chọn ngày, hệ thống tìm kiếm theo ngày tạo
+Lưới Danh mục sản phẩm dịch vụ
+4
+Mã code phí
+
+Text
+
++ Hiển thị mã code phí + Người dùng click vào Mã, hệ thống hiển thị màn hình chi tiết code phí
+5
+Loại SPDV
+
+Text
+
+Hiển thị cấp của SPDV
+6
+Mã SPDV
+
+Text
+
++ Mã sản phẩm dịch vụ + Người dùng nhấn vào Mã SPDV, hệ thống hiển thị chi tiết mã SPDV
+7
+Tên SPDV
+
+Text
+
+Tên SPDV
+8
+Trạng thái
+
+Text
+
+Trạng thái của SPDV: Hoạt động/Không hoạt động
+9
+Ngày hiệu lực
+
+Date
+
+Ngày hiệu lực của SPDV
+10
+Ngày hết hiệu lực
+
+Date
+
+Ngày hết hiệu lực của SPDV
+11
+Ngày tạo
+
+Date
+
+Ngày tạo SPDV
+12
+Người tạo
+
+Text
+
+Người tạo SPDV
+13
+Ngày sửa
+
+Date
+
+Ngày sửa SPDV
+14
+Người sửa
+
+Text
+
+Người sửa SPDV
+15
+Ngày duyệt
+
+Date
+
+Ngày duyệt SPDV
+16
+Người duyệt
+
+Text
+
+Người duyệt SPDV
+DANH MỤC BIỂU PHÍ
+NÚT CHỨC NĂNG
+1
+Tra cứu 
+
+Button
+
+Người dùng nhấn vào Tra cứu để tìm kiếm theo các điều kiện
+2
+Xoá tra cứu 
+
+Button
+
+Người dùng nhấn vào button Xoá tra cứu để bỏ các điều kiện tra cứu
+3
+Tải xuống
+
+Button
+
+Tải xuống file dạng excel
+CÁC TRƯỜNG THÔNG TIN
+Các điều kiện tra cứu 
+1
+Tên biểu phí
+
+Textbox
+
+Người dùng nhập tên biểu phí 
+2
+Trạng thái
+
+Dropdown list
+
+Người dùng chọn trạng thái của biểu phí
+3
+Từ ngày - đến ngày
+
+Date
+
+Người dùng chọn ngày, tìm kiếm theo ngày hiệu lực
+4
+Số văn bản
+
+Textbox
+
+Người dùng nhập số văn bản
+5
+Tên văn bản
+
+Textbox
+
+Người dùng nhập tên văn bản
+6
+Loại khách hàng
+
+Dropdown list
+
+Người dùng chọn loại khách hàng gồm: 
++ KHCN
++ KHTC
++ KHDNSN
++ CBNV
+Lưới Danh sách biểu phí
+7
+Mã biểu phí
+
+Text
+
++ Hiển thị mã biểu phí
++ Người dùng click vào Mã biểu phí, hệ thống hiển thị màn hình chi tiết biểu phí
+8
+Tên biểu phí
+
+Text
+
+Tên biểu phí
+9
+Số văn bản
+
+Text
+
+Số văn bản
+10
+Tên văn bản
+
+Text
+
+Tên văn bản
+11
+Trạng thái
+
+Text
+
+Hiển thị trạng thái của biểu phí  gồm: 
++ Đang hiệu lực
++ Chưa hiệu lực 
++ Hết hiệu lực
+12
+Ngày hiệu lực
+
+Date
+
+Hiển thị ngày hiệu lực của biểu phí
+13
+Ngày hết hiệu lực
+
+Date
+
+Hiển thị ngày hết hiệu lực của biểu phí
+14
+Ngày tạo
+
+Date
+
+Ngày tạo biểu phí
+15
+Người tạo
+
+Text
+
+Người tạo biểu phí
+16
+Ngày sửa
+
+Date
+
+Ngày sửa biểu phí
+17
+Người sửa
+
+Date
+
+Người sửa biểu phí
+18
+Ngày duyệt
+
+Date
+
+Ngày duyệt của biểu phí
+19
+Người duyệt
+
+Text
+
+Hiển thị username người duyệt của biểu phí
+

@@ -1,0 +1,235 @@
+US16 - Là người dùng, tôi muốn xem danh mục biểu phí 
+Yêu cầu nghiệp vụ
+Navigation: Khi muốn xem thông tin về biểu phí, người dùng truy cập chức năng: Tham số >> Quản lý Danh mục biểu phí
+Màn hình “Danh mục biểu phí”: Hiển thị tất cả danh sách biếu phí đang có của hệ thống. Màn hình này gồm có: Lọc nâng cao, lưới danh sách biểu phí, Tải xuống 
+	•	Button Lọc nâng cao: Người dùng nhấn vào button này, hệ thống hiển thị màn hình Lọc Biểu phí. Màn hình Lọc Biểu phí gồm có: 
+	•	Tên biểu phí: Người dùng nhập tên biểu phí để tìm kiếm gần đúng
+	•	Trạng thái: Người dùng chọn 1 trạng thái, các trạng thái gồm: Chưa hiệu lực/Đang hiệu lực/Hết hiệu lực
+	•	Từ ngày - đến ngày : dd/mm/yyyy, người dùng chọn ngày, hệ thống tìm theo ngày hiệu lực
+	•	Button Xoá lọc: Người dùng nhấn vào button này để xoá thông tin trên các trường người dùng đã nhập/chọn
+	•	Button Áp dụng: Người dùng nhấn vào button này để áp dụng lọc với thông tin trên các trường người dùng đã nhập/chọn
+	•	Lưới danh sách biểu phí gồm: 
+	•	Mã biểu phí: Người dùng nhấn vào mã biểu phí để xem chi tiết 1 biểu phí
+	•	Tên biểu phí: Hiển thị tên biểu phí
+	•	Trạng thái: Trạng thái biểu phí, trạng thái gồm: Chưa hiệu lực, Đang hiệu lực, Hết hiệu lực
+	•	Ngày hiệu lực: dd/mm/yyyy
+	•	Ngày hết hiệu lực: dd/mm/yyyy. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Ngày tạo: hh:mm:ss – dd/mm/yyyy
+	•	Người tạo: Hiển thị username của người tạo
+	•	Ngày sửa: hh:mm:ss – dd/mm/yyyy. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Người sửa:Hiển thị username của người sửa. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Ngày duyệt: hh:mm:ss – dd/mm/yyyy
+	•	Người duyệt:Hiển thị username của người duyệt. Nếu không có thông tin, hệ thống hiển thị “-”
+	•	Sau khi lọc theo các điều kiện, hệ thống trả kết quả, hiển thị các biểu phí phù hợp với điều kiện lọc theo quy tắc chung của hệ thống.
+	•	Tải xuống: Người dùng có thể tải xuống file danh sách biểu phí theo dữ liệu kết quả tìm  kiếm đang hiển thị trên màn hình và theo quy tắc tải xuống tại mục Quy tắc chung của hệ thống.
+	•	Màn hình Xem chi tiết 1 biểu phí: cho phép xem các trường thông tin hiển thị như ở màn tạo/chỉnh sửa và Lịch sử tác động theo Quy tắc chung của hệ thống. Tại màn xem chi tiết của biểu phí, người dùng nhấn vào “Lịch sử tác động”, hệ thống hiển thị popup Lịch sử tác động (tham khảo tại mục Lịch sử tác động của Quy tắc chung)
+
+Lưu đồ và diễn giải
+Lưu đồ
+
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Xem danh sách CTƯĐ 
+Chọn menu “Danh mục biểu phí”
+Người dùng
+2
+
+Gửi yêu cầu lấy danh sách biểu phí
+Frontend
+3
+
+Nhận yêu cầu và xử lý
+Hệ thống
+4
+
+Hiển thị danh sách biểu phí
+Frontend
+5
+
+Lựa chọn: 
++ Lọc nâng cao => Bước 5.1
++ Tải xuống => Bước 5.2
++ Xem chi tiết biểu phí => Bước 5.3
+Người dùng
+5.1
+
+Lọc nâng cao
+Người dùng
+6
+
+Hiển thị màn hình “Lọc Biểu phí”
+Frontend
+7
+
+Nhập các điều kiện lọc
+Người dùng
+8
+
+Người dùng lựa chọn: 
++ Xoá lọc => Bước 8.1
++ Áp dụng => Bước 8.2
+Người dùng
+8.1
+
+Xoá lọc
+Người dùng
+9
+
+Đóng màn hình Lọc Biểu phí => Kết thúc
+Frontend
+8.2
+
+Áp dụng
+Người dùng
+10
+
+Hiển thị danh sách Biểu phí theo điều kiện => Kết thúc
+Frontend
+5.2
+
+Tải xuống
+Người dùng
+10
+
+Tham chiếu quy tắc Tải xuống tại mục Quy tắc chung => Kết thúc
+Frontend
+5.3
+
+Xem chi tiết Biểu phí
+Người dùng
+11
+
+Gửi yêu cầu xem chi tiết Biểu phí
+Frontend
+12
+
+Nhận yêu cầu và xử lý
+Backend
+13
+
+Hiển thị màn chi tiết Biểu phí => Kết thúc
+Frontend
+
+Giao diện
+Màn hình
+Màn hình danh mục biểu phí
+Màn hình lọc biểu phí
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+1
+Lọc nâng cao
+
+Button
+
+Người dùng click vào button “Lọc nâng cao” để nhập các điều kiện lọc
+2
+Thêm mới
+
+Button
+
+Người dùng click vào button Thêm mới để thêm mới 1 biểu phí
+3
+Tải xuống
+
+Button
+
+Tải xuống file danh sách biểu phí
+4
+Sao chép
+
+Button
+
+Người dùng nhấn vào button này để sao chép 1 biểu phí
+CÁC TRƯỜNG THÔNG TIN
+1
+Mã biểu phí
+
+Text
+
++ Hiển thị mã biểu phí
++ Người dùng nhấn vào mã biểu phí. Hệ thống hiển thị màn hình thông tin chi tiết của biểu phí
+2
+Tên biểu phí
+
+Text
+
+Hiển thị tên biểu phí
+3
+Trạng thái
+
+Text
+
+Hiển thị trạng thái của biểu phí: 
++ Đang hiệu lực
++ Chưa hiệu lực
++ Hết hiệu lực
+4
+Ngày hiệu lực
+
+Date 
+
++ Hiển thị ngày hiệu lực của biểu phí
++ Format: dd/mm/yyyy
+5
+Ngày hết hiệu lực
+
+Date
+
++ Hiển thị ngày hết hiệu lực của biểu phí
++ Format: dd/mm/yyyy
+6
+Ngày tạo
+
+Date time
+
++ Ngày tạo biểu phí
++ Format: hh:mm:ss – dd/mm/yyyy
+7
+Người tạo
+
+Text
+
++ username của người tạo biểu phí
+8
+Ngày sửa
+
+Date time
+
++ Ngày sửa biểu phí
++ Format: hh:mm:ss – dd/mm/yyyy
++ Không có thông tin, hệ thống show “-”
+9
+Người sửa
+
+Text
+
++ Username người sửa biểu phí
++ Không có thông tin, hệ thống show “-”
+10
+Người duyệt
+
+Text
+
++ Username của gười duyệt biểu phí
++ Không có thông tin, hệ thống show “-”
+11
+Ngày duyệt
+
+Date time
+
++ Ngày duyệt biểu phí
++ Format: hh:mm:ss – dd/mm/yyyy
++ Không có thông tin, hệ thống show “-”
+

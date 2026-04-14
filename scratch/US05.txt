@@ -1,0 +1,223 @@
+US05 - Là người dùng, tôi muốn định nghĩa công thức tính phí cho từng code phí để áp dụng đúng mức phí cho từng đối tượng khách hàng và tùy chỉnh theo từng thời kỳ
+Yêu cầu nghiệp vụ
+Navigation: Khi muốn khai báo các code phí, người dùng truy cập chức năng: Tham số >> Danh mục sản phẩm dịch vụ >> SPDV cấp cuối >> Thêm mới Code phí >> Thiết lập Quy tắc tính phí (Quy tắc tính phí)
+
+Khi khai báo code phí, người dùng cần định nghĩa được công thức tính phí cho Màn hình Khai báo Quy tắc tính phí cho từng code phí. 
+	•	Màn hình Quy tắc tính phí bao gồm các trường thông tin: Công thức, Tối thiểu, Tối đa
+	•	Công thức tính phí là công thức toán học, mỗi code phí có thể có 1 hoặc nhiều công thức khác nhau
+	•	Khi người dùng không lựa chọn Khai báo theo nhóm khách hàng khi khai báo Thông tin chung của Code phí, chỉ được khai báo 1 Công thức tính phí và được áp dụng chung
+	•	Khi người dùng lựa chọn Khai báo theo nhóm khách hàng khi khai báo Thông tin chung của Code phí, màn hình Quy tắc tính phí hiển thị thêm trường Nhóm khách hàng.
+	•	Được khai báo nhiều Công thức tính phí, mỗi công thức áp dụng riêng cho mỗi nhóm khách hàng
+	•	Để khai báo các Nhóm khách hàng người dùng ấn chọn Thêm nhóm khách hàng
+	•	Số tiền phí tính ra theo công thức có Loại tiền tệ chính là Loại tiền tệ của Code phí.
+	•	Cùng với công thức, hệ thống cho phép người dùng khai báo Số tiền phí tối thiểu, tối đa và Loại tiền tệ của Số tiền phí tối thiểu, tối đa có thể khác với Loại tiền tệ của Code phí
+Nguyên tắc nhập Công thức tính phí: 
+	•	Các biến được phép sử dụng: 
+Người dùng được định nghĩa các biến được sử dụng trong Công thức tính phí từ một danh sách có sẵn trong hệ thống tương ứng với một trong các trường dữ liệu do các hệ thống yêu cầu tính phí gửi vào tùy theo từng loại giao dịch
+	•	Các hàm được phép sử dụng:
+	•	MONTHS_BETWEEN: Hàm tính số tháng giữa 2 ngày, kết quả trả về có thể là số thập phân
+	•	DATE_DIFF: Hàm tính số ngày giữa 2 ngày, kết quả trả về là số nguyên
+	•	ROUND: Hàm làm tròn số học theo nguyên tắc toán học (>=0.5 làm tròn lên; <0.5 làm tròn xuống)
+	•	ROUNDUP: Hàm làm tròn số học luôn làm tròn lên
+	•	ROUNDDOWN: Hàm làm tròn số học luôn làm tròn xuống
+	•	Max: Hàm lấy giá trị lớn nhất
+	•	Min: Hàm lấy giá trị nhỏ nhất
+	•	Các toán tử được phép sử dụng:
+	•	+ Phép cộng
+	•	- Phép trừ
+	•	x Phép nhân
+	•	: Phép chia
+	•	Các ký tự được phép sử dụng:
+	•	( Ký tự mở ngoặc
+	•	) Ký tự đóng ngoặc
+	•	. Ký tự phân cách giữa số nguyên và số thập phân
+	•	, Ký tự phân cách giữa 2 ngày 
+	•	# Ký tự bọc ngoài nhận diện các biến được khai báo
+	•	0; 1; 2; 3; 4; 5; 6; 7; 8; 9; 10: Các ký tự số
+	•	Xác thực Công thức tính phí: Hệ thống thực hiện Xác thực khi Maker ấn “Xác nhận” tại màn hình Thiết lập công thức
+	•	Khi công thức nhập 2 hoặc nhiều cấu phần, trong đó có 2 cấu là các giá trị số học cụ thể, hệ thống báo lỗi và không cho phép lưu
+	•	Các hàm MONTHS_BETWEEN, DATE_DIFF, ROUND, ROUNDUP, ROUNDDOWN, MIN, MAX bắt buộc phải đi kèm ký tự ( và ký tự )
+	•	Hàm MONTHS_BETWEEN, DATE_DIFF bắt buộc phải nhập 2 tham số có định dạng là ngày phân cách bằng ký tự , và nằm trong 2 ký tự (  ). Hệ thống sẽ báo lỗi và không cho phép lưu khi kết hợp 2 hàm MONTHS_BETWEEN và DATE_DIFF trong cùng 1 cấu phần của công thức
+	•	Hàm MIN/MAX và hàm MONTHS_BETWEEN/DATE_DIFF không được phép kết hợp với nhau trong cùng 1 cấu phần của công thức
+Công thức tính phí là 1 cấu phần thuộc Code phí, việc phê duyệt Công thức tính phí được thực hiện đồng thời với việc phê duyệt Code phí. Tham chiếu tới luồng phê duyệt Code phí tại US02 về khai báo 1 code phí.
+Bản ghi Thêm mới code phí đã được phê duyệt thành công và dữ liệu đã được hiển thị trên lưới, chỉ được chỉnh sửa các giá trị là số học; không cho phép sửa các hàm tính toán và các giá trị tính phí. Maker thực hiện sửa bằng cách upload lại danh sách code phí tại biểu phí. Tham chiếu tới US07 về luồng upload danh sách code phí tại biểu phí
+Việc chỉnh sửa Công thức tính phí cũng được thực hiện thông qua việc chỉnh sửa code phí
+Lưu đồ và diễn giải
+Lưu đồ
+
+Diễn giải
+Bước
+Mô tả chi tiết
+Đơn vị thực hiện
+0.
+Khai báo Thông tin chung của Code phí
+Khai báo theo nhóm Khách hàng = Yes chuyển xuống Bước 1.a
+Khai báo theo nhóm Khách hàng = No chuyển xuống Bước 1.1
+Người dùng
+1.1.
+Hiển thị Công thức, Tối thiểu, Tối đa và chuyển xuống Bước 5
+Frontend
+1.a.
+Hiển thị Nhóm khách hàng (CIF), Công thức, Tối thiểu, Tối đa
+Frontend
+1.b.
+Chọn + Thêm nhóm khách hàng (+ Thêm mới CIF)
+Người dùng
+1.c.
+Ghi nhận yêu cầu
+Frontend
+2.
+Truy vấn danh sách Nhóm khách hàng (Danh sách CIF)
+Backend
+3.
+Hiển thị danh sách Nhóm khách hàng (Danh sách CIF)
+Frontend
+4.
+Chọn Nhóm khách hàng (CIF)
+Người dùng
+5.
+Khai báo Giá trị phí tối thiểu, tối đa và Chọn sg
+Người dùng
+6.
+Ghi nhận yêu cầu
+Frontend
+7.
+Truy vấn danh sách Trường giá trị tính phí
+Backend
+8.
+Hiển thị màn hình Thiết lập công thức
+Frontend
+9.
+Thiết lập công thức tính phí
+Thực hiện Bước 9.1 hoặc 9.a
+Người dùng
+9.1.
+Đóng
+Người dùng
+9.2.
+Hiển thị màn hình Khai báo code phí
+Frontend
+9.a.
+Xác nhận
+Người dùng
+9.b.
+Ghi nhận thông tin
+Frontend
+10.
+Xác thực các điều kiện
+Nếu có ít nhất 1 điều kiện không thỏa mãn chuyển xuống bước 11.1
+Nếu các điều kiện thỏa mãn chuyển xuống bước 11.a
+Backend
+11.1.
+Hiển thị thông báo lỗi (PR.02.01)
+Frontend
+11.a.
+Hiển thị thông báo thành công (PR.02.02)
+Frontend
+11.b.
+Hiển thị màn hình Khai báo code phí
+Frontend
+
+Giao diện
+Màn hình
+Màn hình Thêm mới Code phí khi lựa chọn khai báo theo nhóm khách
+
+Màn hình Thêm mới Code phí khi lựa chọn Không khai báo theo nhóm khách hàng (chung quy tắc tính phí).
+
+Màn hình Thiết lập công thức
+
+Mô tả chi tiết các trường
+Quy tắc tính phí
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+	•	
+
+★
+Button
+
+Hiển thị màn hình Thiết lập công thức
+	•	
+
+-
+Button
+Chỉ hiển thị khi tích chọn trường “Khai báo theo nhóm khách hàng” tại phân vùng Thông tin chung
+Hiển thị thêm trường Nhóm khách hàng
+Người dùng có thể khai báo nhiều nhóm khách hàng với các công thức khác nhau
+CÁC TRƯỜNG THÔNG TIN
+Khi công thức là 1 giá trị số học cụ thể, khi người dùng ấn Xác nhận để khai báo Code phí, Loại tiền tệ khác với Loại tiền tối thiểu/tối đa, hệ thống sẽ báo lỗi và không cho phép lưu
+	•	
+Nhóm khách hàng
+-
+Dropdown list
+
+Hiển thị danh sách Nhóm khách hàng tương ứng với từng loại khách hàng đã được khai báo trên hệ thống
+	•	
+Công thức
+★
+Text
+
+Hiển thị công thức do người dùng thiết lập tại màn hình Thiết lập công thức
+	•	
+Tối thiểu
+★
+Number
+
+Mức phí tối thiểu của code phí
+	•	
+Tối đa
+★
+Number
+
+Mức phí tối đa của code phí
+Công thức tính phí
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+	•	
+Xác nhận
+★
+Button
+
+Lưu dữ liệu vào hệ thống
+	•	
+Đóng
+★
+Button
+
+Thoát khỏi màn hình
+CÁC TRƯỜNG THÔNG TIN
+	•	
+Trường giá trị tính phí
+◎
+Combobox
+
+Loại tính phí = Theo giao dịch, hiển thị danh sách các trường điều kiện tính phí với Nguồn dữ liệu = API
+
+Loại tính phí = Định kỳ và Ngày thu theo dữ liệu, hiển thị danh sách các điều kiện có sẵn trong hệ thống với nguồn dữ liệu = Bảng dữ liệu tương ứng tại Thông tin chung
+
+Loại tính phí = Định kỳ và Ngày thu cố định…
+	•	
+Công thức
+◎
+Text
+Nhập tối đa 300 ký tự
+Hệ thống hiển thị và chỉ cho phép nhập:
+	•	Các giá trị là số học
+	•	Các toán tử + - x :  
+	•	Các hàm:  MONTHS_BETWEEN, DATE_DIFF, ROUND, ROUNDUP, ROUNDDOWN, MIN, MAX
+	•	Các ký tự ) ( , . # và ký tự số học
+Người dùng Click vào trường giá trị tính phí nào sẽ hiển thị trường đó tại phân vùng Công thức dưới định dạng #Field# ở vị trí đặt con trỏ
+
+Ngoài ra, người dùng có thể nhập tên trường theo định dạng #Field#. Khi nhập các ký tự sau dấu #, hệ thống sẽ hiển thị các trường gợi ý gần đúng
+
+Hệ thống hiển thị chữ viết hoa các thông tin người dùng nhập vào hệ thống
+

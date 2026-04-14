@@ -1,0 +1,356 @@
+US18 - Là người dùng, tôi muốn xem danh sách code phí áp dụng cho một khách hàng
+Yêu cầu nghiệp vụ
+Navigation: Khi muốn xem các code phí đang được áp dụng với một CIF cụ thể, người dùng truy cập: Tra cứu >> Xem code phí theo khách hàng >> Tra cứu
+Màn hình “Xem code phí theo khách hàng” gồm có: Các điều kiện tra cứu, Lưới Danh sách code phí theo khách hàng, Button Tra cứu CIF, Button Tra cứu, Button Tải xuống.
+	•	Các điều kiện tìm kiếm: Mã CIF, Sản phẩm dịch vụ
+	•	Mã CIF: Người dùng nhập 1 mã CIF để tìm kiếm
+	•	Sản phẩm dịch vụ: Người dùng nhập tên SPDV/Code phí để tìm kiếm SPDV/code phí và chọn 1/nhiều sản phẩm dịch vụ/code phí
+	•	Lưới Danh sách code phí theo khách hàng gồm có các trường: STT, CIF áp dụng, Code, Tên, Biểu phí, Sản phẩm dịch vụ, Công thức tính phí, Người tạo, Ngày tạo, Người sửa, Ngày sửa, Người duyệt, Ngày duyệt
+	•	Sau khi tìm kiếm theo các điều kiện, hệ thống trả kết quả, hiển thị đến các cấp phù hợp với điều kiện lọc theo quy tắc tìm kiếm chung của hệ thống
+	•	Tải xuống: Cho phép người dùng xuất file danh sách code phí theo khách hàng theo dữ liệu kết quả tìm kiếm đang hiển thị trên màn hình và theo quy tắc tải xuống chung của hệ thống
+	•	Button “Tra cứu CIF”: Người dùng chọn button Tra cứu CIF để tìm kiếm CIF theo các thông tin thể nhân của Khách hàng. Màn hình “Tra cứu CIF” gồm có:
+	•	Các điều kiện để tra cứu CIF: Số điện thoại, Phân khúc khách hàng, Chi nhánh quản lý, Tỉnh, Phường/xã, Trạng thái
+	•	Lưới Danh sách khách hàng gồm có các trường: STT, CIF áp dụng, Số điện thoại, Tên, Chi nhánh quản lý, Tỉnh, Trạng thái
+Lưu đồ và diễn giải
+Lưu đồ
+
+Diễn giải
+Bước
+Nội dung chính
+Mô tả chi tiết
+Đơn vị thực hiện
+1
+Xem danh sách code phí áp dụng cho một khách hàng
+Chọn Tra cứu/Xem code phí theo khách hàng
+Người dùng
+2
+
+Hiển thị màn hình Tra cứu code phí theo khách hàng
+Frontend
+3
+
+Người dùng lựa chọn:
++ Nhấn vào Tra cứu CIF => Bước 3.1
++ Nhập điều kiện tìm kiếm và nhấn Tìm kiếm => Bước 3.2
+Người dùng
+3.1
+
+Nhấn vào Tra cứu CIF
+Người dùng
+4
+
+Hiển thị màn hình Tra cứu CIF
+Frontend
+5
+
+Nhập các điều kiện lọc và nhấn Tra cứu
+Người dùng
+6
+
+Gửi yêu cầu xử lý
+Frontend
+7
+
+Nhận yêu cầu và xử lý
+Backend
+8
+
+Hiển thị kết quả danh sách CIF
+Frontend
+9
+
+Click vào 1 CIF
+Người dùng
+10
+
+Hệ thống fill số CIF vào box nhập mã CIF tại màn hình Tra cứu Code phí theo Khách hàng => bước 3.2
+Frontend
+3.2
+
+Nhập điều kiện tìm kiếm và nhấn tìm kiếm
+Người dùng
+11
+
+Gửi yêu cầu xử lý 
+Frontend
+12
+
+Nhận yêu cầu và xử lý dữ liệu
+Backend
+13
+
+Hiển thị kết quả code phí áp dụng cho CIF
+Frontend
+14
+
+Lựa chọn: 
++ Nhấn vào Tải xuống => Bước 14.1
++ Nhấn vào mã code phí => Bước 14.2
+Người dùng
+14.1
+
+Nhấn vào Tải xuống
+Người dùng
+15
+
+Tham chiếu quy tắc Tải xuống tại mục Quy tắc chung => Kết thúc
+Frontend
+14.2
+
+Nhấn vào mã code phí
+Người dùng
+16
+
+Gửi yêu cầu đến xử lý
+Frontend
+17
+
+Nhận yêu cầu và xử lý
+Backend
+18
+
+Hiển thị chi tiết code phí => Kết thúc
+Frontend
+
+Giao diện
+Tra cứu code phí theo khách hàng
+Màn hình
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+1
+Tra cứu 
+
+Button
+
+Người dùng nhấn vào Tra cứu, hệ thống ghi nhận và tìm kiếm
+2
+Xoá tra cứu
+
+Button
+
+Người dùng click vào button Xoá tra cứu, hệ thống xoá các điều kiện lọc
+3
+Tải xuống
+
+Button
+
+Tải xuống file danh sách CIF áp dụng với các code phí
+4
+Tra cứu CIF
+
+Button
+
+Người dùng click vào button Tra cứu CIF, hệ thống hiển thị màn hình Tra cứu CIF
+CÁC TRƯỜNG THÔNG TIN
+1
+Mã CIF
+Y
+Text box
+
++ Người dùng nhập mã CIF, chỉ nhập 1 mã CIF
++ Người dùng phải nhập mã CIF để tìm kiếm
+2
+Sản phẩm dịch vụ
+
+Multiple select dropdown
+
+
++ Người dùng được chọn 1/nhiều sản phẩm dịch vụ/code phí 
++ Người dùng có thể tìm kiếm tên SPDV/Code phí tại dropdown box
+3
+STT
+
+Text
+
+Số thứ tự 
+4
+CIF áp dụng
+
+Text
+
+Hiển thị CIF áp dụng
+5
+Code
+
+Text
+
++ Hiển thị mã code phí
++ Người dùng nhấn vào mã code phí và hiển thị màn hình chi tiết code phí
+6
+Tên
+
+Text
+
++ Hiển thị tên code phí
+7
+Biểu phí
+
+Text
+
+Hiển thị tên biểu phí mà code phí được gắn 
+8
+Sản phẩm dịch vụ
+
+Text
+
+Hiển thị tên sản phẩm dịch vụ mà code phí dó được gắn
+9
+Công thức tính phí
+
+Text
+
+Hiển thị công thức tính phí 
+10
+Ngày tạo
+
+Date
+
+Ngày tạo code phí
+11
+Người tạo
+
+Text
+
+Người tạo code phí
+12
+Ngày sửa
+
+Date
+
+Ngày sửa code phí
+13
+Người sửa
+
+Text
+
+Người sửa code phí
+14
+Người duyệt
+
+Date
+
+Người duyệt code phí
+15
+Ngày duyệt
+
+Text
+
+Ngày duyệt code phí
+16
+Phân trang
+
+-
+
+Hiển thị danh sách SPDV trên trang và số trạng hiện tại
+
+Tra cứu CIF
+Màn hình tra cứu CIF
+
+Mô tả chi tiết các trường
+STT
+Tên trường/ Nút
+Bắt buộc
+Định dạng
+Ràng buộc
+Mô tả
+NÚT CHỨC NĂNG
+1
+Tra cứu 
+
+Button
+
+Người dùng nhấn vào button Tra cứu, hệ thống ghi nhận và tìm kiếm
+2
+Xoá tra cứu
+
+Button
+
+Người dùng click vào button Xoá tra cứu, hệ thống xoá các điều kiện lọc
+CÁC TRƯỜNG THÔNG TIN
+1
+Số điện thoại
+Y
+Text box
+
++ Người dùng nhập số điện thoại + Người dùng phải nhập số điện thoại để tìm kiếm
+2
+Loại khách hàng
+
+Dropdown list
+
++ Người dùng chọn 1 trong danh sách
++ Danh sách loại khách hàng gồm: KHCN, KHTC, KHDNSN, CBNV
+3
+Chi nhánh quản lý
+
+Dropdown list
+
+Người dùng chọn 1 chi nhánh quản lý 
+4
+Tỉnh
+
+Dropdown list
+Người dùng phải chọn tỉnh, rồi mới chọn được Phường/xã
+Người dùng chọn 1 tỉnh 
+5
+Phường/Xã
+
+Dropdown list
+
+Người dùng chọn phường/xã trong tỉnh người dùng đã chọn
+6
+Trạng thái
+
+Dropdown list
+
+Người dùng chọn trạng thái: Hoạt động/Tạm dừng
+8
+STT
+
+Text
+
+STT
+9
+CIF
+
+Text
+
+Mã CIF, người dùng nhấn vào mã CIF, hệ thống tự động back và fill vào trường Mã CIF ở màn Tra cứu code phí theo khách hàng
+10
+Số điện thoại
+
+Text
+
+Số điện thoại
+11
+Tên
+
+Text
+
+Tên khách hàng
+12
+Chi nhánh quản lý
+
+Text
+
+Chi nhánh quản lý
+13
+Tỉnh
+
+Text
+
+Hiển thị tên tỉnh
+14
+Trạng thái
+
+Text
+
+Hiển thị trạng thái của CIF
+
