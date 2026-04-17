@@ -39,22 +39,60 @@ Sinh đồng thời 3 tập TC, đảm bảo **không trùng nội dung**:
 - **Trace_ID**: Sử dụng chuỗi ngắn (vd: `BR03-AUTOCODE`, `UI-FILTER-BASIC`).
 
 ## 6. Định Dạng TC_ID (BẮT BUỘC)
-- Không nhúng mã rule (BR01, BR02) vào ID.
-- **TC-BR**: Bỏ số "0x", giữ chữ "BR". Cấu trúc: `<<MOD>>-BR-HAP-001`, `<<MOD>>-BR-NEG-001`.
+- Không nhúng mã rule (BR01, BR02) hay số Step vào ID.
+- **TC-BR**: Cấu trúc: `<<MOD>>-BR-HAP-001`, `<<MOD>>-BR-NEG-001`.
 - **TC-UI**: Cấu trúc: `<<MOD>>-UI-001`, `002`...
-*(Ví dụ: SA09-BR-HAP-001, SA09-UI-001)*
+*(Ví dụ: SA14-BR-HAP-001, SA14-UI-001)*
 
-## 7. Xuất File Excel (BẮT BUỘC)
+## 7. Chiến Lược Traceability Khi Tài Liệu KHÔNG Có Mã BR/UI-FUNC
+
+Nhiều FSD hiện đại viết theo dạng Narrative (văn xuôi + bảng diễn giải bước) mà **không có mã BR_xx hay UI-FUNC.xx**. Trong trường hợp này, áp dụng chiến lược sau:
+
+### 7.1. Cột BR_Ref — Đặt mã Logic tự định nghĩa
+Bóc tách từng "điều kiện logic ẩn" trong văn bản và đặt mã theo pattern:
+`LOG-[KHU_VỰC]-[MÔ_TẢ_NGẮN]`
+
+Ví dụ:
+- `LOG-TAB-SPDV-FILTER-DATE` — Logic lọc theo ngày hiệu lực ở Tab SPDV
+- `LOG-TREE-HYPERLINK-LEAF` — Logic hiển thị hyperlink khác nhau theo cấp cuối/trung gian
+- `LOG-CODEPI-STATUS` — Logic trạng thái Code phí (Chờ gán/Hủy/Ngừng)
+
+### 7.2. Cột URD_Ref — Tham chiếu vị trí trong tài liệu
+Tuyệt đối KHÔNG dùng số dòng. Tham chiếu theo:
+- **Tên Mục**: `Mục "Xem thông tin SPDV - Tab SPDV"`
+- **Tên Bảng + STT**: `Bảng "Mô tả các trường" - STT 5 cột Code phí`
+- **Bước Lưu đồ**: `Lưu đồ SPDV - Bước 6.2 Lọc nâng cao`
+
+Ví dụ điền vào cột URD_Ref:
+`Tab SPDV - Bảng Mô tả trường - STT 2 (Mã SPDV)`
+`Lưu đồ Tra cứu cây - Bước 8.1, 8.2`
+
+### 7.3. Cột Trace_ID — Từ khóa ngắn để lọc nhanh
+Dùng pattern ngắn gọn để filter/search trong Excel:
+`[MODULE]-[TÍNH_NĂNG]-[LOẠI]`
+
+Ví dụ: `SA14-TAB1-FILTER`, `SA14-TREE-NAV`, `SA14-DETAIL-SPDV`
+
+### 7.4. Tổng hợp quy tắc mapping
+| Loại tài liệu | TC_ID | BR_Ref | URD_Ref | Trace_ID |
+|---|---|---|---|---|
+| FSD có mã | `SA09-BR-HAP-001` | `BR_01` | `Mục I.2.1` | `BR01-VALIDATE` |
+| FSD Narrative | `SA14-BR-HAP-001` | `LOG-TAB-FILTER-DATE` | `Tab SPDV - STT 14` | `SA14-TAB1-FILTER` |
+| TC-UI | `SA14-UI-001` | `UI-SPDV-GRID` | `Bảng Mô tả trường - STT 2` | `SA14-UI-GRID-MA` |
+
+## 8. Xuất File Excel (BẮT BUỘC)
 Không in bảng ra Chat. Phải chạy Script Python (`pandas`, `openpyxl`) tạo file `.xlsx` gồm 1 sheet **"Test Cases"** với đúng 21 cột sau:
 - A=TC_ID | B=BR_Ref | C=URD_Ref | D=Module | E=Feature | F=Title
 - G=Type | H=Category | I=Priority | J=Precondition
 - K=Steps | L=Expected | M=Trace_ID | N=Note
 - O-U: Các cột thực thi (để trống).
 
-## 8. Luồng Thực Thi (Workflow)
-1. Parse URD: Liệt kê danh sách **BR_xx** và **UI-FUNC.01..0n**.
-2. Sinh **TC-BR** trước (1-8 TC/BR).
-3. Sinh **TC-UI** sau (Check rà soát Ma trận để mỗi UI-FUNC đều có ít nhất 1 TC).
+## 9. Luồng Thực Thi (Workflow)
+1. Parse tài liệu: Liệt kê **Logic điều kiện ẩn (LOG-xxx)** và **Chức năng UI (UI-xxx)**.
+   - Nếu tài liệu có mã BR/UI-FUNC → dùng trực tiếp.
+   - Nếu tài liệu Narrative → tự bóc tách và đặt mã `LOG-` theo Mục 7.1.
+2. Sinh **TC-BR** trước (1-8 TC/LOG).
+3. Sinh **TC-UI** sau, không lặp lại logic đã cover ở TC-BR.
 4. Kiểm tra quy tắc **Tách riêng** (Không gộp trạng thái).
 5. Viết và chạy Script Python tạo file.
 6. Thông báo đường dẫn file cho User bằng Tiếng Việt.

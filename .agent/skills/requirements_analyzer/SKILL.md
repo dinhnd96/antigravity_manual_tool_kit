@@ -67,20 +67,56 @@ Kiểm tra xem với mỗi hành động nhập liệu, tài liệu đã trả l
 - Khi ấn Xem/Sửa form — tài liệu liệt kê đủ các trường và kiểu dữ liệu (dropdown, text, date, number) chưa?
 - Thông báo lành mạnh (Success toast) nội dung chính xác là gì?
 
+### Bước 3b — Sinh Coverage Checklist (BẮT BUỘC với tài liệu Narrative FSD)
+Tài liệu FSD dạng văn xuôi không có mã BR/UI-FUNC sẵn, vì vậy AI phải **tự bóc tách và tạo danh sách điểm kiểm tra (Checklist)** theo 2 nhóm:
+
+**Nhóm 1 — Logic ẩn (LOG-xxx):** Mỗi điều kiện/quy tắc nghiệp vụ nằm trong văn bản.
+- Pattern mã: `LOG-[KHU_VỰC]-[MÔ_TẢ_NGẮN]`
+- Ví dụ:
+  - `LOG-TAB-SPDV-FILTER-DATE` — Lọc theo khoảng ngày hiệu lực
+  - `LOG-TREE-LEAF-HYPERLINK` — Hiển thị "Xem code phí" nếu là cấp cuối
+  - `LOG-CODEPHI-STATUS-RULE` — Quy tắc chuyển trạng thái code phí
+
+**Nhóm 2 — Chức năng UI (UI-xxx):** Mỗi nút/cột/hành động UI trong bảng mô tả trường.
+- Pattern mã: `UI-[MÀN_HÌNH]-[STT hoặc TÊN_PHẦN_TỬ]`
+- Ví dụ:
+  - `UI-TAB-SPDV-BTN-FILTER` — Nút Lọc nâng cao tab SPDV
+  - `UI-TAB-SPDV-GRID-COL-MA` — Cột Mã SPDV click xem chi tiết
+  - `UI-TREE-BTN-EXPAND` — Nút Expand/Collapse cây thư mục
+
+> **Mục đích:** Checklist này là "xương sống" cho bộ Test Case — mỗi mã LOG/UI sẽ trở thành `BR_Ref` trong cột tương ứng của file Excel TC. Tester dùng checklist này để đảm bảo không bỏ sót bất kỳ điểm nào khi viết TC.
+
 ### Bước 4 — Sinh Báo cáo Q&A (Question Report)
 Tổng hợp kết quả phân tích thành bảng câu hỏi Q&A chuẩn mực gửi BA. Mỗi câu hỏi gán nhãn rõ mức độ ưu tiên.
 
 ---
 
-## 3. Cấu trúc Báo cáo Q&A Đầu ra (Output Format)
+## 3. Cấu trúc Báo cáo Đầu ra (Output Format)
 
-Báo cáo sẽ được trình bày theo 2 phần chính:
+Báo cáo sẽ được trình bày theo **3 phần chính**:
 
 ### Phần 1: Tóm tắt Nghiệp vụ (QA Understanding Summary)
 Liệt kê các User Story tóm tắt theo format 4 thành phần ở Bước 2.
 Mục đích: Để BA kiểm tra QA đã hiểu đúng chưa trước khi đi vào các câu hỏi chi tiết.
 
-### Phần 2: Danh sách Câu hỏi Q&A
+### Phần 2: Coverage Checklist (Danh sách điểm cần test)
+*Chỉ áp dụng khi tài liệu là Narrative FSD không có mã BR/UI-FUNC.*
+
+Trình bày dưới dạng bảng 2 nhóm:
+
+| Mã Logic/UI | Nhóm | Mô tả | URD_Ref (Tên Mục/Bảng/Bước) | Đã có TC? |
+|---|---|---|---|---|
+| `LOG-TAB-SPDV-FILTER-DATE` | Logic | Lọc khoảng ngày hiệu lực | Tab SPDV - STT 14, 15 | ⬜ |
+| `LOG-TREE-LEAF-HYPERLINK` | Logic | Hyperlink khác nhau theo cấp | Lưu đồ - Bước 8.1, 8.2 | ⬜ |
+| `UI-SPDV-GRID-COL-MA` | UI | Cột Mã SPDV click xem chi tiết | Bảng Mô tả trường - STT 2 | ⬜ |
+| `UI-TAB-SPDV-BTN-FILTER` | UI | Nút Lọc nâng cao | Bảng Mô tả trường - STT 2 | ⬜ |
+
+> **Cách dùng:**  
+> - **Khi viết TC:** Điền mã LOG/UI vào cột `BR_Ref` của Test Case. Đánh dấu ✅ khi đã có TC kiểm chứng.  
+> - **Khi review TC:** Scan bảng này để phát hiện ngay các mã còn ⬜ (GAP — chưa có TC).  
+> - **Tham chiếu:** Cột `URD_Ref` cho bạn biết chính xác cần mở trang/bảng nào trong file Word để xác minh.
+
+### Phần 3: Danh sách Câu hỏi Q&A
 
 Trình bày theo bảng:
 

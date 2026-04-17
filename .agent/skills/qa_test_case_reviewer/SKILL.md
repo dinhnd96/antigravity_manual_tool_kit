@@ -29,19 +29,32 @@ Khi được yêu cầu review bộ Test Case, AI cần thực hiện rà soát 
     *   Kiểm tra tính khả thi của Tiền điều kiện (Pre-conditions) và Dữ liệu mồi (Mock Data). Đặc biệt bắt lỗi khắt khe các Pre-conditions viết tắt, viết cụt (VD sai: "1. 'COND-ACT' trạng thái Hoạt động"). Yêu cầu phải ghi đầy đủ ngữ cảnh (VD đúng: "1. Tồn tại tên điều kiện tính phí 'COND-ACT' trạng thái Hoạt động, 'COND-INACT' trạng thái Không hoạt động.").
 
 ## 2. Quy Trình Thực Thi (Standard Workflow)
-1.  **Recon (Điều tra):** Đọc kỹ tài liệu URD/FSD để liệt kê danh sách các BR_xx và Functional Points cần cover.
-2.  **Mapping (Đối soát):** Duyệt qua danh sách Test Case và map từng TC_ID với BR_ID tương ứng.
+1.  **Recon (Điều tra):** Đọc kỹ tài liệu URD/FSD để liệt kê danh sách các điểm cần cover:
+    - Nếu tài liệu có mã **BR_xx / UI-FUNC.xx** → liệt kê trực tiếp.
+    - Nếu tài liệu dạng **Narrative FSD** (văn xuôi + bảng bước) → tự bóc tách ra danh sách mã Logic: `LOG-[KHU_VỰC]-[MÔ_TẢ]` (vd: `LOG-TAB-SPDV-FILTER-DATE`, `LOG-TREE-HYPERLINK-LEAF`) và danh sách UI: `UI-[MÀN_HÌNH]-[STT_BẢNG]`.
+2.  **Mapping (Đối soát):** Duyệt qua danh sách Test Case và map từng TC_ID với mã LOG-xxx / UI-xxx tương ứng.
 3.  **Drill-down (Phân tích sâu):** Đọc nội dung chi tiết (Steps/Expected) của các TC trọng yếu để tìm lỗi logic.
 4.  **Reporting (Báo cáo):** Tổng hợp danh sách các lỗi, lỗ hổng và đề xuất sửa đổi.
 
 ## 3. Cấu Trúc Báo Cáo Trả Về (The Review Report)
-AI cần trình bày kết quả review dưới dạng bảng chuyên nghiệp:
+AI cần trình bày kết quả review dưới dạng bảng chuyên nghiệp.
+
+**Trường hợp tài liệu có mã BR/UI-FUNC:**
 
 | BR_ID / Mục tham chiếu | Loại phát hiện | Mô tả Sự cố / Mâu thuẫn | Mức độ Nghiêm trọng | Đề xuất QA |
 | :--- | :--- | :--- | :--- | :--- |
 | **BR_01** | **GAP** | Tài liệu yêu cầu check KH mới ngày T, TC đang bỏ sót bước này. | **High** | Thêm TC-BR01-HAPPY-001. |
 | **BR_02** | **Logic Mismatch** | FSD nhắc sửa tăng phí, TC đang kỳ vọng sửa được cả giảm phí. | **High** | Sửa Expected Result của TC_02. |
 | **UI-FUNC-01**| **Ambiguity** | Chưa rõ nút "Đóng" sau khi bấm có trigger Auto-save không. | **Medium** | Làm rõ với BA và bổ sung verify step. |
+
+**Trường hợp tài liệu Narrative FSD (không có mã BR/FUNC):**
+Thay `BR_ID` bằng mã tự định nghĩa:
+
+| LOG_ID / URD_Ref | Loại phát hiện | Mô tả Sự cố / Mâu thuẫn | Mức độ Nghiêm trọng | Đề xuất QA |
+| :--- | :--- | :--- | :--- | :--- |
+| **LOG-TAB-SPDV-FILTER-DATE** `Tab SPDV - STT 14` | **GAP** | Chưa có TC kiểm tra trường hợp Từ ngày > Đến ngày. | **High** | Thêm SA14-BR-NEG-001. |
+| **LOG-TREE-HYPERLINK-LEAF** `Lưu đồ - Bước 8.1, 8.2` | **Logic Mismatch** | TC đang test cùng hyperlink cho cả SPDV cấp cuối và trung gian. | **High** | Tách 2 TC riêng biệt. |
+| **UI-SPDV-GRID** `Bảng Mô tả trường - STT 5` | **Ambiguity** | TC chưa verify trạng thái enabled/disabled của cột Code phí. | **Medium** | Bổ sung bước kiểm tra. |
 
 ## 4. Các Quy Tắc Bắt Buộc (Strict Rules)
 - **Tư duy phản biện (Critical Thinking):** Không được mặc định Test Case là đúng. Luôn tìm cách "thử thách" (challenge) bộ TC bằng cách đặt mình vào vị thế của người dùng cuối hoặc hệ thống khi gặp lỗi.
