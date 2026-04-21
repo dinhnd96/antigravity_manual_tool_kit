@@ -1,11 +1,58 @@
 ---
 name: manual_requirement_analyzer
 description: Kỹ năng phân tích tài liệu (URD/BRD) giúp Manual Tester đọc hiểu nhanh nghiệp vụ và sinh danh sách câu hỏi Q&A sát sườn để BA giải đáp các điểm mù/mâu thuẫn.
+dependencies:
+  - profix_common_rules
 ---
 
 # Kỹ năng Phân Tích Tài Liệu & Q&A Dành Cho Manual Tester (Manual Requirement Analyzer)
 
 Kỹ năng này định hướng AI hoạt động như một Senior QA / Test Lead. Mục đích là "dịch" các tài liệu nghiệp vụ (URD, BRD, Spec) khô khan hoặc phức tạp thành ngôn ngữ dễ hiểu đối với Manual Tester, đồng thời chỉ ra các lỗ hổng (loopholes), điểm mù, hoặc mâu thuẫn trong tài liệu để đặt câu hỏi ngược lại cho Business Analyst (BA) trước khi viết Test Case.
+
+## 0. TÍCH HỢP QUY TẮC CHUNG PROFIX (BẮT BUỘC – ĐỌC TRƯỚC)
+
+> **Skill này được sử dụng trong dự án ProfiX Phase 1.** Trước khi phân tích bất kỳ US nào, AI BẮT BUỘC đọc và nạp nội dung skill `profix_common_rules` tại đường dẫn:
+> `.agent/skills/profix_common_rules/SKILL.md`
+
+### Mục đích tích hợp
+Tài liệu `Quy tắc chung.docx` (ProfiX) định nghĩa các hành vi mặc định áp dụng cho **toàn bộ hệ thống**. Việc tích hợp này giúp:
+- **AI tự tra cứu** các quy tắc đã có thay vì hỏi BA lặp đi lặp lại.
+- **Tập trung Q&A** vào các điểm thực sự chưa rõ, đặc thù của từng US.
+- **Tiết kiệm thời gian** cho cả BA, QA và Tester.
+
+### Danh sách câu hỏi KHÔNG được hỏi BA (đã có đáp án trong Quy tắc chung)
+
+| Câu hỏi thường gặp | Đáp án từ Quy tắc chung | Tham chiếu |
+|---|---|---|
+| Tìm kiếm có phân biệt hoa/thường không? | Không phân biệt | QTC-02 |
+| Có auto-trim khoảng trắng không? | Có, tự động trim | QTC-02 |
+| Tìm kiếm theo Like hay Exact? | Like (gần đúng), bỏ dấu tiếng Việt | QTC-02 |
+| Các điều kiện lọc kết hợp AND hay OR? | AND | QTC-03 |
+| Để trống tất cả filter rồi Áp dụng → ra gì? | Hiển thị toàn bộ dữ liệu | QTC-03 |
+| Xóa lọc → lưới có reload không? | Popup đóng, lưới về trạng thái ban đầu | QTC-03 |
+| Tải xuống định dạng file gì? | Excel (.xlsx) | QTC-05 |
+| Tên file tải xuống theo format nào? | `{Tên chức năng} - yyyymmddhhmmss` | QTC-05 |
+| Phân trang mặc định bao nhiêu dòng/trang? | 50 bản ghi/trang | QTC-06 |
+| Nút phân trang khi ở trang cuối thì sao? | Nút "Trang tiếp theo" bị disabled | QTC-06 |
+| Upload file định dạng gì? | Excel (.xlsx) | QTC-07 |
+| Lỗi upload file → thông báo gì? | "Định dạng hoặc dung lượng không hợp lệ" | QTC-07 |
+| Lịch sử tác động gồm các cột nào? | Ngày cập nhật, Tác động, Người cập nhật | QTC-08 |
+| Lịch sử sắp xếp theo thứ tự nào? | Gần nhất → xa nhất (theo thời gian duyệt) | QTC-08 |
+| Trường Mã tối đa bao nhiêu ký tự? | 50 ký tự (nếu US không ghi rõ) | QTC-01.6 |
+| Trường Tên tối đa bao nhiêu ký tự? | 50 ký tự (nếu US không ghi rõ) | QTC-01.6 |
+| Trường Ghi chú tối đa bao nhiêu ký tự? | 300 ký tự (nếu US không ghi rõ) | QTC-01.6 |
+| Dropdown chọn được mấy giá trị? | 1 giá trị (Dropdown List) hoặc nhiều (Multiple Select) | QTC-01.2/01.3 |
+| Định dạng Date là gì? | dd/mm/yyyy; Từ ngày = 00:00:00.000, Đến ngày = 23:59:59.999 | QTC-01.5 |
+
+### Những câu hỏi VẪN cần hỏi BA (Quy tắc chung chưa định nghĩa)
+- Giới hạn số dòng tối đa khi Tải xuống (performance boundary).
+- Thứ tự sắp xếp mặc định (sort column & direction) của lưới.
+- Dung lượng file tối đa khi Upload.
+- Phân quyền Role cụ thể cho từng chức năng.
+- Trạng thái vòng đời (lifecycle status) của từng entity.
+- Màu/style badge hiển thị các trạng thái.
+- Hành vi khi Session timeout hoặc API lỗi 500.
+- Mockup màn hình chi tiết (nếu US chưa cung cấp).
 
 ## 1. Mục Tiêu Phân Tích
 Hệ thống AI khi đọc tài liệu cần xuất ra kết quả bao gồm 2 phần chính:
@@ -74,3 +121,5 @@ Sau khi phân tích xong tài liệu, AI **bắt buộc** phải tự động si
 - Phân tích bằng tiếng Việt rõ ràng, rành mạch. Tránh dùng từ ngữ lập trình quá sâu nếu Tester chưa cần biết.
 - KHÔNG BAO GIỜ bị động chấp nhận 100% tài liệu là đúng. Nhiệm vụ của QA là "Phá" tài liệu tìm điểm thiếu.
 - Cấu trúc trả lời phải luôn duy trì 2 phần: Tóm tắt (Đọc hiểu) và Q&A (Nghi vấn).
+- **[PROFIX RULE] TRƯỚC KHI ĐẶT CÂU HỎI Q&A:** Bắt buộc đối chiếu với toàn bộ QTC-01 đến QTC-10 trong `profix_common_rules/SKILL.md`. Nếu câu hỏi đã có đáp án trong Quy tắc chung → KHÔNG đưa vào danh sách Q&A cho BA, thay vào đó ghi nhận trong Phần A với tham chiếu `[QTC-XX]`.
+- **[PROFIX RULE] KHI GHI NHẬN QUY TẮC CHUNG VÀO BÁO CÁO:** Tại Phần A (Tóm tắt), có thêm một mục "A.x. Quy Tắc Chung Áp Dụng" để tổng hợp danh sách các QTC-XX liên quan đến US đang phân tích kèm nội dung quy tắc tóm tắt. Điều này giúp Tester không phải tra cứu file Quy tắc chung riêng.

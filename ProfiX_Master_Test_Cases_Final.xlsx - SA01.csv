@@ -1,0 +1,63 @@
+TC_ID,BR_Ref,URD_Ref,Module,Feature,Comment,Title,Type,Category,Priority,Precondition,Steps,Expected Result,Trace_ID,Note,Status R1,Tester R1,Date R1,Status R2,Tester R2,Date R2,Final Status,
+SA01-HAPPY-001,BR_01,II.5.4.1,SA.01,Đăng nhập,Vân: Cột Feature để trống nhiều?,Đăng nhập hệ thống thành công với thông tin tài khoản hợp lệ,Happy,Smoke,P1,Tên đăng nhập (Username) tồn tại và trạng thái Active; Mật khẩu chính xác.,"1. Truy cập trang Đăng nhập ProfiX.
+2. Nhập Tên đăng nhập hợp lệ.
+3. Nhập Mật khẩu chính xác.
+4. Nhấn nút 'Đăng nhập'.","(i) Nghiệp vụ: Xác thực thông tin thành công.
+(ii) UI: Chuyển hướng người dùng đến màn hình Trang chủ (Dashboard).
+(iii) Trạng thái/Log: Hệ thống khởi tạo phiên làm việc mới cho người dùng.",SA01-LGN-H01,,Pass,Vân Anh,08/04/2026,,,,Pass,
+SA01-NEG-002,-,II.5.4.1,SA.01,,,Thông báo lỗi khi nhập Tên đăng nhập không tồn tại,Negative,Regression,P2,Tên đăng nhập chưa được tạo trong hệ thống.,"1. Nhập Tên đăng nhập không tồn tại.
+2. Nhập Mật khẩu bất kỳ.
+3. Nhấn 'Đăng nhập'.","(i) Nghiệp vụ/Logic: Hệ thống chặn truy cập, không tạo phiên làm việc.
+(ii) UI: Hiển thị thông báo ""Tên đăng nhập hoặc mật khẩu không chính xác"".
+(iii) Trạng thái/Audit: Không tạo Session. Không ghi Audit log đăng nhập thành công.
+(iv) Output: Không có.",SA01-LGN-N02,,Pass,Vân Anh,08/04/2026,,,,Pass,
+SA01-NEG-003,-,II.5.4.1,SA.01,,,Thông báo lỗi khi nhập sai Mật khẩu,Negative,Smoke,P1,Tên đăng nhập tồn tại.,"1. Nhập Tên đăng nhập đúng.
+2. Nhập Mật khẩu sai.
+3. Nhấn 'Đăng nhập'.","(i) Nghiệp vụ/Logic: Hệ thống xác thực thất bại, không cấp quyền truy cập.
+(ii) UI: Hiển thị thông báo lỗi ""Tên đăng nhập hoặc mật khẩu không chính xác"".
+(iii) Trạng thái/Audit: Không tạo Session. Ghi nhận attempt login sai (dùng cho cơ chế lockout).
+(iv) Output: Không có.",SA01-LGN-N03,,Pass,Vân Anh,08/04/2026,,,,Pass,
+SA01-NEG-004,-,II.5.4.1,SA.01,,,Yêu cầu nhập đầy đủ thông tin khi bỏ trống các trường bắt buộc,Negative,Regression,P3,Truy cập thành công vào màn hình Đăng nhập.,"1. Để trống Tên đăng nhập, nhập Mật khẩu hợp lệ. Nhấn ""Đăng nhập"".
+2. Nhập Tên đăng nhập hợp lệ, để trống Mật khẩu. Nhấn ""Đăng nhập"".
+3. Để trống cả Tên đăng nhập lẫn Mật khẩu. Nhấn ""Đăng nhập"".","(i) Nghiệp vụ/Logic: Hệ thống chặn submit form do thiếu thông tin bắt buộc.
+(ii) UI: Báo lỗi Validation đỏ tại trường bị bỏ trống: ""Vui lòng nhập <Tên trường>"".
+(iii) Trạng thái/Audit: Không gọi API xác thực. Không sinh Session hay log đăng nhập.
+(iv) Output: Không có.",SA01-LGN-N04,,Pass,Vân Anh,08/04/2026,,,,Pass,
+SA01-NEG-005,BR_02,II.5.4.1,SA.01,,,Chặn đăng nhập đối với tài khoản ở trạng thái Inactive (BR_02),Negative,Regression,P1,Tài khoản test ở trạng thái 'Inactive' dù thông tin nhập là đúng.,"1. Nhập Tên đăng nhập Inactive.
+2. Nhập Mật khẩu đúng.
+3. Nhấn 'Đăng nhập'.","(i) Nghiệp vụ: Hệ thống chặn đăng nhập do trạng thái tài khoản không hoạt động.
+(ii) UI: Thông báo lỗi 'Tài khoản của bạn đã bị khóa hoặc ngừng hoạt động'.",SA01-LGN-N05,,Pass,Vân Anh,08/04/2026,,,,Pass,
+SA01-NEG-006,BR_01,II.5.4.1,SA.01,,,Giới hạn mỗi tài khoản chỉ đăng nhập tại một phiên duy nhất (BR_01),Negative,Regression,P2,Tài khoản X đang đăng nhập tại Browser A.,"1. Mở Browser B và đăng nhập bằng tài khoản X.
+2. Kiểm tra kết quả tại Browser B và trạng thái Browser A.","(i) Nghiệp vụ/Logic: Chặn truy cập phiên thứ hai hoặc tự động ngắt phiên cũ (tùy thiết kế).
+(ii) UI: Thông báo trên Browser B: Tài khoản đang được sử dụng ở thiết bị khác. Trên Browser A (nếu bị kick): thông báo Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại.
+(iii) Trạng thái/Audit: Phiên cũ của Browser A bị terminate/invalidate. Log ghi nhận sự kiện đăng nhập trùng lặp.
+(iv) Output: Không có.",SA01-LGN-N06,Assumption: Cần BA xác nhận hành vi: Ngắt phiên cũ (Browser A bị kick) hay Chặn phiên mới (Browser B không vào được).,Pass,Vân Anh,08/04/2026,,,,Pass,
+SA01-UI-008,-,II.5.4.1,SA.01,,,Tính năng Ẩn/Hiện mật khẩu bằng biểu tượng mắt (UI Behavior),Happy,Regression,P3,Truy cập thành công vào màn hình Đăng nhập.,"1. Nhập mật khẩu.
+2. Click icon 'Mắt' để xem.
+3. Click lại để ẩn.","(i) Nghiệp vụ/Logic: Không có API nào được gọi. Đây là behavior thuần UI client-side.
+(ii) UI: Mật khẩu hiển thị dạng text khi click icon Mắt (bật), dạng dấu chấm/sao khi click lại (tắt). Icon thay đổi trạng thái theo.
+(iii) Trạng thái/Audit: Không thay đổi. Không sinh log.
+(iv) Output: Không có.",SA01-LGN-UI08,,Pass,Vân Anh,08/04/2026,,,,Pass,
+SA01-HAPPY-009,BR_04,II.5.4.1,SA.01,,"Vân: không có nút ""Đăng nhật qua EntraID"" => Sửa thành ""Đăng nhập""",Đăng nhập tích hợp qua hệ thống EntraID thành công (BR_04),Happy,Smoke,P1,Tài khoản EntraID hợp lệ.,"1. Nhấn nút 'Đăng nhập'.
+2. Thực hiện xác thực tại màn hình EntraID (MFA nếu có).","(i) Nghiệp vụ/Logic: Hệ thống nhận Token hợp lệ từ EntraID và thiết lập phiên làm việc.
+(ii) UI: Chuyển hướng về trang chủ ProfiX với quyền/tài khoản tương ứng. Menu hiển thị đúng theo nhóm quyền được gán.
+(iii) Trạng thái/Audit: Token EntraID được lưu vào Session/Cookie. Log ghi nhận đăng nhập thành công qua EntraID.
+(iv) Output: Không có.",SA01-LGN-H09,,Blocked,Vân Anh,08/04/2026,,,,Blocked,
+SA01-NEG-010,BR_04,II.5.4.1,SA.01,,"Vân: không có nút ""Đăng nhật qua EntraID"" => Sửa thành ""Đăng nhập""",Xử lý khi xác thực EntraID thất bại (Token Error/Cancel),Negative,Regression,P2,Hệ thống đã kết nối và cấu hình thành công với dịch vụ EntraID.,"1. Nhấn 'Đăng nhập'.
+2. Hủy bỏ xác thực tại trang EntraID.","Đóng form, quay về dữ liệu màn trước. Không sinh bản ghi Nháp/Chờ duyệt.",SA01-LGN-N10,,Blocked,Vân Anh,08/04/2026,,,,Blocked,
+SA01-FLOW-011,-,II.5.4.1,SA.01,,"Vân: Thay đoạn 'Widget ""Phí định kỳ 2025"", ""Tổng phí tháng"", ""Doanh thu từ chương trình ưu đãi"" hiển thị đúng.' thành Các báo cáo hiển thị đúng thông tin.",Luồng End-to-End: Đăng nhập -> Xác thực -> Dashboard,Happy,Smoke,P1,Thông tin đầy đủ.,"1. Truy cập link hệ thống ProfiX.
+2. Nhập Tên đăng nhập và Mật khẩu hợp lệ. Nhấn ""Đăng nhập"".
+3. Kiểm tra màn hình Home Dashboard: Widget Các báo cáo hiển thị đúng thông tin
+4. Kiểm tra Menu trái hiển thị đủ nhóm: Tham số, Tra cứu, Các chức năng khác.
+5. Giữ nguyên trạng thái trong ít nhất 5 phút, không thực hiện thao tác.","(i) Nghiệp vụ/Logic: Phiên làm việc được khởi tạo thành công và giữ ổn định cho đến khi Logout hoặc Timeout.
+(ii) UI: Dashboard hiển thị đúng các widget theo thiết kế (image2). Menu hiển thị đầy đủ nhóm chức năng theo quyền của tài khoản.
+(iii) Trạng thái/Audit: Session hợp lệ, không bị expire trong thời gian thao tác.
+(iv) Output: Không có.",SA01-FLOW-011,,Pass,Vân Anh,08/04/2026,,,,Pass,
+SA01-SECURITY-012,BR-SEC,II.5.4.1,SA.01,,,Chặn đăng nhập (Lockout) sau 5 lần nhập sai mật khẩu liên tiếp (Bảo mật),Negative,Regression,P1,Tài khoản User_A đang ở trạng thái Active.,"1. Thực hiện đăng nhập sai mật khẩu 5 lần liên tiếp cho tài khoản User_A.
+2. Thực hiện đăng nhập lần thứ 6 với mật khẩu đúng.","(i) Nghiệp vụ/Logic: Hệ thống ghi nhận số lần đăng nhập sai. Sau lần thứ 5, tài khoản bị chuyển sang trạng thái Inactive.
+(ii) UI: Từ lần thứ 5 trở đi hiển thị thông báo ""Tài khoản đã bị khóa, vui lòng liên hệ quản trị viên để được hỗ trợ"".
+(iii) Trạng thái/Audit: Tài khoản User_A chuyển sang trạng thái Inactive trong DB. Log Security ghi nhận sự kiện Lockout/Brute-force Detected.
+(iv) Output: Không có.",SA01-SEC-LGN-12,Assumption: URD không quy định thời gian khóa cụ thể (30 phút). Hành vi tài khoản bị Inactive phải được Admin vào SA.03 mở lại (theo quy trình).,Blocked,Vân Anh,08/04/2026,,,,Blocked,"Chưa test được, refer tới SA08 - CACL - 002"
+SA01-NEG-013,BR_04,II.5.4.1,SA.01,,,Xử lý lỗi khi Token từ EntraID hết hạn hoặc không hợp lệ,Negative,Regression,P2,Hệ thống đã kết nối và cấu hình thành công với dịch vụ EntraID.,"1. Nhấn Đăng nhập qua EntraID.
+2. Quá trình xác thực kéo dài quá lâu dẫn đến Timeout hoặc Token trả về bị sai format.","(i) Nghiệp vụ: Từ chối thiết lập phiên.
+(ii) UI: Hiển thị thông báo lỗi 'Xác thực EntraID thất bại, vui lòng thử lại'.",SA01-LGN-N15,,Blocked,Vân Anh,08/04/2026,,,,Blocked,
