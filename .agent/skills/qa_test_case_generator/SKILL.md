@@ -1,11 +1,22 @@
 ---
 name: qa_test_case_generator
 description: Kỹ năng Senior QA Lead phân tích URD/BRD để sinh bộ Test Case chuẩn Enterprise (Level B2) với kỹ thuật tách biệt kịch bản và Expected Result 4 lớp.
+dependencies:
+  - profix_common_rules
 ---
 
 # Kỹ năng Tạo Test Case Chuẩn Enterprise (QA Test Case Generator)
 
 Kỹ năng này định hướng AI hoạt động như một Senior QA Lead, phân tích tài liệu nguồn (URD/BRD/SRD) và sinh ra full bộ Test Case theo tiêu chuẩn Enterprise Level B2 (Chi tiết cao, Không dư, Không lặp).
+
+## 0. TÍCH HỢP QUY TẮC CHUNG PROFIX (BẮT BUỘC – ĐỌC TRƯỚC)
+
+> **Skill này được sử dụng trong dự án ProfiX Phase 1.** Trước khi sinh Test Case, AI BẮT BUỘC đọc và nạp nội dung skill `profix_common_rules` tại đường dẫn:
+> `.agent/skills/profix_common_rules/SKILL.md`
+
+### Mục đích tích hợp
+Tài liệu `Quy tắc chung.docx` (ProfiX) định nghĩa các hành vi mặc định áp dụng cho toàn bộ hệ thống. 
+- **[PROFIX RULE] TRONG QUÁ TRÌNH VIẾT TEST CASE:** Bắt buộc áp dụng các quy tắc xuất/nhập/tìm kiếm/hiển thị từ QTC-01 đến QTC-10 để hoàn thiện kịch bản, ngay cả khi URD gốc bỏ sót. Cần ghi vào cột Note ghi chú `[Theo QTC-XX]` để Test Lead biết Test Case có nguồn gốc từ đâu.
 
 ## 1. Yêu Cầu Chung & Xử Lý Hình Ảnh
 - **Giữ nguyên tên field/item**: Lấy đúng và đầy đủ tên các field, item, button... từ tài liệu. Tuyệt đối không cắt gọn, rút gọn hoặc tự ý thêm thắt.

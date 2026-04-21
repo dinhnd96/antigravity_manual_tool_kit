@@ -1,56 +1,35 @@
 ---
-description: Quy trình Senior QA Lead phân tích yêu cầu (URD/BRD) và sinh bộ Test Case chuẩn Enterprise Level B2.
+description: Quy trình định hướng AI đóng vai trò Manager/Orchestrator để kích hoạt tuần tự các Skill phân tích yêu cầu và sinh Test Case.
 ---
 
-# Quy Trình Sinh Test Case Chuyên Sâu (End-to-End Test Case Generation)
+# Quy Trình Orchestrator: Sinh Test Case Từ Tài Liệu Yêu Cầu
 
-Workflow này hướng dẫn AI phối hợp 2 kỹ năng chuyên gia để đảm bảo chất lượng kiểm thử từ khâu đọc hiểu đến khâu bàn giao.
+Workflow này đóng vai trò là "Người điều phối" (Orchestrator). Trách nhiệm của AI khi chạy Workflow này KHÔNG PHẢI là định nghĩa lại cách làm việc, mà là **GỌI ĐÚNG SKILL (Các Chuyên Gia)** và **TUÂN THỦ CÁC ĐIỂM DỪNG (Checkpoints)** để luân chuyển thông tin.
 
-## Giai Đoạn 1: Phân Tích & Đặc Tả Câu Hỏi (Clarification Phase)
-*Sử dụng skill: `manual_requirement_analyzer`*
+Để đảm bảo kết quả hoàn hảo, tại mỗi giai đoạn, AI BẮT BUỘC phải đọc nội dung hướng dẫn của `SKILL.md` tương ứng và làm ĐÚNG 100% sự chỉ đạo bên trong Skill đó. Không tự ý cắt xén, thêm thắt, hay thay đổi định dạng đầu ra của Skill.
 
-1. **Trích xuất & Soi Ảnh**: 
-   - Nếu URD là file `.docx`, thực hiện `unzip` để lấy ảnh từ `word/media/`.
-   - Đối chiếu Flowchart/UI Mockup với nội dung Text để tìm sự sai lệch.
-2. **Xử lý Q&A hiện có (Nếu có)**:
-   - Nếu tài liệu đã có mục **"PHẦN B: DANH SÁCH CẢNH BÁO & Q&A"** với cột "Câu trả lời của BA" đã được điền: AI **BẮT BUỘC** đọc kỹ các câu trả lời này để cập nhật vào logic nghiệp vụ tổng thể.
-3. **Khai quật lỗ hổng (Loopholes)**: 
-   - Tìm các điểm thiếu luồng lỗi, mâu thuẫn trạng thái hoặc mơ hồ UI.
-   - Kiểm tra xem các câu trả lời của BA ở bước trên có mâu thuẫn với các phần khác của tài liệu hay không.
-4. **Tóm tắt & Q&A bổ sung**: 
-   - Tổng hợp Business Value và Ma trận phân quyền (đã bao gồm các điểm BA đã chốt).
-   - Nếu vẫn còn điểm mù chưa được trả lời, tiếp tục sinh bảng câu hỏi Q&A bổ sung.
-   - **Output**: Xuất file `.docx` báo cáo phân tích và danh sách Q&A.
+## Giai Đoạn 1: Phân Tích Nhận Diện Lỗ Hổng & Cắm Chốt Q&A
+**Chuyên gia (Skill) phụ trách:** `requirements_analyzer`
+
+1. Khi được cung cấp URD/FSD, AI **gọi ngay** kỹ năng `requirements_analyzer` (đọc file `.agent/skills/requirements_analyzer/SKILL.md` nếu cần).
+2. Áp dụng nghiêm ngặt các hướng dẫn phân tích 5 chiều, sinh Checklist ẩn (LOG-xxx) quy định trong Skill.
+3. Thông báo nội dung Báo cáo phân tích và Danh sách Q&A cho User.
 
 > [!STRICT_CHECKPOINT]
-> **DỪNG LẠI (WAIT FOR CONFIRM):** Sau khi cung cấp file báo cáo phân tích, AI phải dừng lại để bạn review. Khi bạn xác nhận "Đồng ý" (nghĩa là logic đã thông suốt), AI mới chuyển sang Giai đoạn 2.
+> **DỪNG LẠI CHỜ DUYỆT (WAIT):** Sau khi cung cấp Báo cáo & Q&A, AI BẮT BUỘC phải báo "Tôi đã xong Giai đoạn 1" và dừng lại hoàn toàn. Chỉ khi User cung cấp câu trả lời (từ BA) hoặc xác nhận "Đồng ý chuyển tiếp", AI mới được phép sang Giai Đoạn 2.
 
-## Giai Đoạn 2: Thiết Kế Test Case Chuẩn B2 (Design Phase)
-*Sử dụng skill: `qa_test_case_generator`*
+## Giai Đoạn 2: Sinh & Bàn Giao File Test Case Master
+**Chuyên gia (Skill) phụ trách:** `qa_test_case_generator`
 
-1. **Lập Ma Trận Phủ**: Liệt kê toàn bộ `BR_xx` và `UI-FUNC.xx`.
-2. **Tích hợp Logic đã Clarified**: Sử dụng cả nội dung URD gốc và các câu trả lời của BA ở Giai đoạn 1 để xây dựng kịch bản.
-3. **Sinh Test Case 3 Mảng (Không Trùng)**:
-   - **(A) TC-BR**: Tập trung logic, 1-8 TC/BR (Happy + Negative + Boundary).
-   - **(B) TC-UI**: Chỉ kiểm hành vi bề mặt UI (Điều hướng, Disabled/Enabled...).
-   - **(C) Luồng E2E**: Luồng nghiệp vụ xuyên suốt.
-4. **Quy Tắc Vàng (Quality Gates)**:
-   - **Cấm Gộp (No-Merge)**: Tách riêng từng kịch bản, từng trạng thái để tránh sót case.
-   - **Expected Result 4 lớp**: (i) Logic nghiệp vụ, (ii) UI/Toast, (iii) Trạng thái bản ghi, (iv) Output.
-   - **Precondition**: Đánh số dòng 1, 2... và nêu rõ Role/Menu.
-5. **Xuất file Markdown Review**: Ngay khi thiết kế xong toàn bộ Test Case, AI **BẮT BUỘC** tạo một file `.md` chứa "Bảng Test Cases Markdown hoàn chỉnh" và lưu vào thư mục dự án.
-6. Cung cấp đường dẫn file `.md` (Bảng Test Cases) cho user.
+1. Lấy Tài liệu URD + Toàn bộ câu trả lời Q&A có được từ Giai đoạn 1 làm **Input đầu vào**.
+2. AI **gọi** kỹ năng `qa_test_case_generator` (đọc file `.agent/skills/qa_test_case_generator/SKILL.md` nếu cần).
+3. Thi hành trọn vẹn workflow nội tại của Skill này, đảm bảo:
+   - Áp dụng triệt để Quy tắc Expected Result 4 lớp, No-Merge, Trace_ID.
+   - Bỏ qua các bước làm vỡ luồng (Ví dụ: Không sinh file Test Case Markdown review unless user yêu cầu).
+   - Đi thẳng tới bước Viết Script Python -> Chạy sinh file Excel `.xlsx` cuối cùng.
 
-> [!STRICT_CHECKPOINT]
-> **DỪNG LẠI (WAIT FOR CONFIRM):** Sau khi cung cấp link file `.md` chứa bản nháp Test Case, AI phải dừng lại để bạn review. Khi bạn xác nhận "Đồng ý", AI mới chuyển sang Giai Đoạn 3 (chạy Script xuất file Excel).
-
-## Giai Đoạn 3: Bàn Giao (Delivery Phase)
-
-1. **Kiểm tra Traceability**: Đảm bảo mỗi BR và UI-FUNC đều có ít nhất một TC kiểm chứng.
-2. **Xuất File Master**:
-   - Sử dụng Script Python để sinh file `.xlsx` gồm sheet **"Test Cases"**. (21 cột dữ liệu).
-3. **Thông báo**: Trả lời bằng Tiếng Việt, cung cấp đường dẫn file Word và file Excel.
-
-> [!IMPORTANT]
-> **Lưu ý về Logic**: Tuyệt đối không copy-paste "Expected Result" chung chung. Phải bám sát logic của từng kịch bản cụ thể.
-
+## Giai Đoạn 3: Dọn Dẹp (Cleanup Phase)
+Sau khi quá trình sinh file Excel thành công:
+1. Cung cấp đường dẫn file Test Case `.xlsx` cho User.
+2. Chủ động tìm và xóa bỏ các script `.py` tạm thời (đã dùng để sinh file Excel) và các file log/debug rác (nếu có) tuân theo <RULE[user_global]>.
+3. Báo cáo dọn dẹp và đóng quy trình.

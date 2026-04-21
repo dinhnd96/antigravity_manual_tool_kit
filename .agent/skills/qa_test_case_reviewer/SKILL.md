@@ -1,69 +1,62 @@
 ---
 name: qa_test_case_reviewer
-description: Kỹ năng chuyên sâu để review, đối soát bộ Test Case so với tài liệu yêu cầu (URD/BRD), tìm lỗi logic, điểm thiếu hụt (Gap) và mâu thuẫn nghiệp vụ.
+description: Kỹ năng chuyên sâu để review, đối soát bộ Test Case so với tài liệu yêu cầu (URD/BRD) và chuẩn đầu ra Enterprise, tìm lỗi logic, điểm thiếu hụt (Gap) và mâu thuẫn nghiệp vụ.
 ---
 
 # Kỹ năng Review Test Case Đối Soát Nghiệp Vụ (QA Test Case Reviewer)
 
-Kỹ năng này định hướng AI hoạt động như một **Senior QA / Test Lead** hoặc **Business Analyst**. Mục tiêu tối thượng là đảm bảo tính chính xác, đầy đủ và nhất quán của bộ Test Case so với các tài liệu đặc tả nguồn (URD, BRD, FSD).
+Kỹ năng này định hướng AI hoạt động như một **Senior QA / Test Lead**. Mục tiêu tối thượng là đảm bảo bộ Test Case không chỉ khớp với tài liệu đặc tả nguồn (URD, BRD, FSD, BA trả lời Q&A) mà còn **PHẢI TUÂN THỦ NGHIÊM NGẶT** tiêu chuẩn sinh Test Case B2 Enterprise.
 
-## 1. Mục Tiêu Thực Hiện Review
-Khi được yêu cầu review bộ Test Case, AI cần thực hiện rà soát qua 4 bộ lọc chính:
+## 1. Tiêu Chí Review Khắt Khe (Mandatory Checkpoints)
 
-1.  **Tính Bao Phủ (Requirement Coverage & Gap Analysis):**
-    *   Sử dụng "Ma trận Truy vết" (Traceability Matrix).
-    *   Tìm mọi Business Rule (BR) hoặc Chức năng (Functional Point) trong tài liệu nguồn nhưng **CHƯA** có kịch bản kiểm thử tương ứng.
-    *   Xác định các Test Case "thừa" (Redundant) không gắn với yêu cầu nào.
+Khi thực hiện review, AI phải quét bộ Test Case qua các bộ lọc sau và **báo lỗi đỏ** nếu vi phạm:
 
-2.  **Tính Chính Xác Logic (Logic & Rule Validation):**
-    *   Đối chiếu trực tiếp từng bước hạch toán, công thức tính toán, trạng thái dữ liệu (Status) giữa FSD và **Expected Result** của TC.
-    *   Phát hiện mâu thuẫn: Ví dụ, FSD yêu cầu trạng thái "A", nhưng TC lại kỳ vọng trạng thái "B".
-    *   **⚠️ Truy lùng lỗi Copy-Paste dập khuôn (Anti-pattern):** Nhận diện ngay và đánh cờ đỏ (Flag) đối với các kịch bản chức năng UI dạng Đóng (Close) hoặc Xem (View) nhưng lại chứa Expected Result làm thay đổi Data State (như: *"Lưu thành công, sinh bản ghi Chờ duyệt"*). Tương tự, bắt lỗi các case test Validation (Negative) ngớ ngẩn nhằm vào các trường dữ liệu do hệ thống tự động sinh (Auto-generated).
+### 1.1 Tính Bao Phủ & Kỹ Thuật (Coverage & Techniques)
+- **Risk & Priority:** TC đã phản ánh đúng Priority dựa theo Risk Level của tính năng (High/Medium/Low) chưa?
+- **Kỹ thuật thiết kế (Bắt lỗi thiếu case):** 
+  - **BVA (Giá trị biên):** Đã test đủ ranh giới cận trên/dưới cho các trường tiền tệ, độ dài chưa? Thiếu case biên -> Báo lỗi GAP.
+  - **Equivalence Partitioning:** Các input cùng nhóm đã được gom gọn chưa hay đang test thừa thãi (Redundant)?
+  - **State Transition:** Đã test đủ các chiều khóa chặn chuyển đổi trạng thái (Status) sai logic chưa?
+  - **Edge Cases:** Có test case nào cover Timeout, Mất mạng, Lỗi hệ thống không?
 
-3.  **Các Luồng Ngoại Lệ & Biên (Edge Cases & Boundaries):**
-    *   Khai quật các luồng lỗi (Negative Flows), xử lý hệ thống khi gặp lỗi (Timeout, Crash, API Error) mà bộ Test Case đang bỏ sót.
-    *   Đặc biệt chú ý các điểm giao thoa (Integration Points) giữa các hệ thống (ví dụ: T24, Pricing, ProfiX).
+### 1.2 Độ Chi Tiết Của Test Data (Zero Placeholder)
+- Khước từ và đánh dấu lỗi NGAY LẬP TỨC các Test Case dùng từ ngữ lấp lửng trong Step/Data như: *"chọn dữ liệu hợp lệ"*, *"nhập số tiền"*, *"điền form đúng format"*.
+- Yêu cầu Test Data phải là giá trị cứng (Hardcoded/Mock) tương ứng: *"Nhập Tên = 'Sản Phẩm A'"*, *"Tiền = 10,000,000"*, *"Ngày = 28/02/2026"*.
 
-4.  **Dữ Liệu & Tiền Điều Kiện (Data & Role Consistency):**
-    *   Kiểm tra Ma trận Phân quyền: Đảm bảo vai trò người dùng (Maker/Checker) trong TC khớp với URD.
-    *   Kiểm tra tính khả thi của Tiền điều kiện (Pre-conditions) và Dữ liệu mồi (Mock Data). Đặc biệt bắt lỗi khắt khe các Pre-conditions viết tắt, viết cụt (VD sai: "1. 'COND-ACT' trạng thái Hoạt động"). Yêu cầu phải ghi đầy đủ ngữ cảnh (VD đúng: "1. Tồn tại tên điều kiện tính phí 'COND-ACT' trạng thái Hoạt động, 'COND-INACT' trạng thái Không hoạt động.").
-    *   **Test Data trong các Step:** Bắt lỗi gắt gao các Test Case sử dụng placeholder hoặc ngôn từ chung chung. Yêu cầu Test Data **phải cụ thể** (VD sai: "Nhập dữ liệu hợp lệ vào form" -> VD đúng: "Nhập Mã = 'NV01', Tên = 'Sản phẩm A'").
+### 1.3 Cấu Trúc Fields & Expected Result 4 Lớp
+- **Pre-conditions:** Phải được đánh số thứ tự (1, 2...) và ghi rõ ràng. Chống viết cụt lủn "Trạng thái hoạt động" mà không rõ của bảng/module nào.
+- **Test Steps:** Bắt lỗi việc gộp thao tác (Ví dụ gộp vừa Thêm vừa Sửa vào cùng 1 TC). Phải đánh số tuần tự.
+- **Expected Results:** Đã tách đủ 4 lớp chưa? (i) Logic ngầm (ii) UI/Toast (iii) Database State (không nhắc Audit) (iv) Output/Download. Nếu thiếu lớp nào báo lỗi lớp đó.
+
+### 1.4 Tính Chính Xác Logic (Logic & Rule Validation)
+- Mâu thuẫn giữa FSD và TC: FSD yêu cầu trạng thái "A", nhưng TC lại kỳ vọng trạng thái "B".
+- Bắt lỗi test Negative (Validation) trên các trường hệ thống Auto-generated.
+- Test chức năng "Xem/Đóng" nhưng Expected lại làm đổi Data State.
 
 ## 2. Quy Trình Thực Thi (Standard Workflow)
-1.  **Recon (Điều tra):** Đọc kỹ tài liệu URD/FSD để liệt kê danh sách các điểm cần cover:
-    - Nếu tài liệu có mã **BR_xx / UI-FUNC.xx** → liệt kê trực tiếp.
-    - Nếu tài liệu dạng **Narrative FSD** (văn xuôi + bảng bước) → tự bóc tách ra danh sách mã Logic: `LOG-[KHU_VỰC]-[MÔ_TẢ]` (vd: `LOG-TAB-SPDV-FILTER-DATE`, `LOG-TREE-HYPERLINK-LEAF`) và danh sách UI: `UI-[MÀN_HÌNH]-[STT_BẢNG]`.
-2.  **Mapping (Đối soát):** Duyệt qua danh sách Test Case và map từng TC_ID với mã LOG-xxx / UI-xxx tương ứng.
-3.  **Drill-down (Phân tích sâu):** Đọc nội dung chi tiết (Steps/Expected) của các TC trọng yếu để tìm lỗi logic.
-4.  **Reporting (Báo cáo):** Tổng hợp danh sách các lỗi, lỗ hổng và đề xuất sửa đổi.
+1. **Recon (Điều tra):** Đọc kỹ tài liệu URD/FSD để liệt kê danh sách Logic (`LOG-xxx`) và màn hình UI (`UI-xxx`).
+2. **Q&A Check:** Đọc kỹ phần câu trả lời Q&A để nắm rõ các logic nghiệp vụ đã được thống nhất.
+3. **Mapping (Đối soát):** Duyệt qua danh sách Test Case và map TC_ID với mã Logic/UI. Trích lập ma trận Traceability.
+4. **Drill-down Standard (Check tiêu chuẩn):** Quét từng fields (Data, Steps, Expected 4 lớp) của TC.
+5. **Reporting (Báo cáo):** Tổng hợp danh sách lỗi vi phạm logic và vi phạm format.
 
 ## 3. Cấu Trúc Báo Cáo Trả Về (The Review Report)
-AI cần trình bày kết quả review dưới dạng bảng chuyên nghiệp.
+Trình bày kết quả review dưới dạng bảng, tách biệt lỗi Format (Data/Expected) và lỗi Nghiệp vụ (Logic/GAP).
 
-**Trường hợp tài liệu có mã BR/UI-FUNC:**
-
-| BR_ID / Mục tham chiếu | Loại phát hiện | Mô tả Sự cố / Mâu thuẫn | Mức độ Nghiêm trọng | Đề xuất QA |
+### Bảng 1: Lỗi Nghiệp Vụ & Gap Analysis
+| LOG_ID / URD_Ref | Loại phát hiện | Mô tả Sự cố / Mâu thuẫn | Mức độ Nghiêm trọng | Đề xuất sửa chữa |
 | :--- | :--- | :--- | :--- | :--- |
-| **BR_01** | **GAP** | Tài liệu yêu cầu check KH mới ngày T, TC đang bỏ sót bước này. | **High** | Thêm TC-BR01-HAPPY-001. |
-| **BR_02** | **Logic Mismatch** | FSD nhắc sửa tăng phí, TC đang kỳ vọng sửa được cả giảm phí. | **High** | Sửa Expected Result của TC_02. |
-| **UI-FUNC-01**| **Ambiguity** | Chưa rõ nút "Đóng" sau khi bấm có trigger Auto-save không. | **Medium** | Làm rõ với BA và bổ sung verify step. |
+| **LOG-TAB-SPDV-FILTER-DATE** | **GAP (BVA)** | Chưa test giá trị biên Từ ngày > Đến ngày 1 ngày. | **High** | Thêm luồng biên giới TC-BR-NEG. |
+| **LOG-CODEPI-STATUS** | **Logic Mismatch** | FSD yêu cầu trạng thái Hủy không được sửa, TC lại có bước Edit. | **High** | Xóa TC hoặc sửa expected thành "Báo lỗi". |
 
-**Trường hợp tài liệu Narrative FSD (không có mã BR/FUNC):**
-Thay `BR_ID` bằng mã tự định nghĩa:
+### Bảng 2: Lỗi Tiêu Chuẩn Enterprise Format (Bắt buộc Khắc nghiệt)
+| TC_ID | Hạng mục Vi Phạm | Mô tả Vi Phạm | Hướng khắc phục |
+| :--- | :--- | :--- | :--- |
+| **SA14-BR-HAP-002** | **Test Data (Placeholder)** | Dùng từ "Nhập đầy đủ thông tin". Quá mơ hồ. | Đề xuất giá trị cứng: Mã = NV01, Tiền = 5M. |
+| **SA14-UI-004** | **Expected Result Layer** | Thiếu Layer (ii): Trạng thái Update UI Toast. | Bổ sung ý hiển thị thông báo "Thành công". |
+| **SA14-BR-NEG-001** | **Anti-Pattern (Gộp Step)** | TC đang gộp test Bỏ trống Tên và Bỏ trống Mã vào cùng 1 case | Yêu cầu rã thành 2 TC độc lập (Quy tắc số 3). |
 
-| LOG_ID / URD_Ref | Loại phát hiện | Mô tả Sự cố / Mâu thuẫn | Mức độ Nghiêm trọng | Đề xuất QA |
-| :--- | :--- | :--- | :--- | :--- |
-| **LOG-TAB-SPDV-FILTER-DATE** `Tab SPDV - STT 14` | **GAP** | Chưa có TC kiểm tra trường hợp Từ ngày > Đến ngày. | **High** | Thêm SA14-BR-NEG-001. |
-| **LOG-TREE-HYPERLINK-LEAF** `Lưu đồ - Bước 8.1, 8.2` | **Logic Mismatch** | TC đang test cùng hyperlink cho cả SPDV cấp cuối và trung gian. | **High** | Tách 2 TC riêng biệt. |
-| **UI-SPDV-GRID** `Bảng Mô tả trường - STT 5` | **Ambiguity** | TC chưa verify trạng thái enabled/disabled của cột Code phí. | **Medium** | Bổ sung bước kiểm tra. |
-
-## 4. Các Quy Tắc Bắt Buộc (Strict Rules)
-- **Tư duy phản biện (Critical Thinking):** Không được mặc định Test Case là đúng. Luôn tìm cách "thử thách" (challenge) bộ TC bằng cách đặt mình vào vị thế của người dùng cuối hoặc hệ thống khi gặp lỗi.
-- **Tiếng Việt chuyên nghiệp:** Sử dụng thuật ngữ QA chuẩn mực nhưng dễ hiểu.
-- **Dẫn chứng cụ thể:** Khi báo lỗi, phải trích dẫn rõ Mục/Trang/Dòng trong tài liệu URD/FSD để BA/Tester dễ đối soát.
-- **Đề xuất hướng xử lý:** Không chỉ nêu lỗi, phải đưa ra giải pháp cụ thể (Thêm bước, sửa logic, xóa case...).
-
-## 5. Mẫu Câu Lệnh Gọi Skill (Invocation Prompt)
+## 4. Mẫu Câu Lệnh Gọi Skill (Invocation Prompt)
 User có thể gọi kỹ năng này bằng các câu tương tự:
-- *"Hãy dùng skill `qa_test_case_reviewer` để review bộ Test Case trong file excel X so với tài liệu URD Y."*
-- *"So sánh các bước Expected Result của bộ TC mới này với tài liệu FSD giúp tôi."*
+- *"Hãy dùng skill `qa_test_case_reviewer` để review bộ Test Case này xem đã chuẩn Enterprise và đúng với URD chưa."*
+- *"So sánh các bước Expected Result và Test data của TC so với tiêu chuẩn giúp tôi."*

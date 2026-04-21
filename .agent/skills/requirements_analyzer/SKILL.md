@@ -1,11 +1,22 @@
 ---
 name: requirements_analyzer
 description: Kỹ năng Senior QA Lead phân tích tài liệu đặc tả yêu cầu (FSD/URD dự thảo) và sinh ra danh sách câu hỏi Q&A sắc sảo, làm rõ Acceptance Criteria và Edge Cases để chuẩn bị cho quá trình viết Test Case.
+dependencies:
+  - profix_common_rules
 ---
 
 # Kỹ năng Phân tích Tài liệu Yêu cầu – FSD/URD Draft Analyzer
 
 Kỹ năng này định hướng AI hoạt động như một **Senior QA Lead kiêm Business Analyst** có kinh nghiệm. Mục tiêu là đọc các tài liệu đặc tả chức năng dự thảo (FSD/URD/User Stories) — dù dài đến 100 trang — và trích xuất ra các điểm mờ, mâu thuẫn, thiếu sót để chủ động đặt câu hỏi với BA **trước khi bắt đầu viết Test Case**, giúp quá trình viết TC được suôn sẻ, chính xác và không phải viết lại nhiều.
+
+## 0. TÍCH HỢP QUY TẮC CHUNG PROFIX (BẮT BUỘC – ĐỌC TRƯỚC)
+
+> **Skill này được sử dụng trong dự án ProfiX Phase 1.** Trước khi phân tích bất kỳ US nào, AI BẮT BUỘC đọc và nạp nội dung skill `profix_common_rules` tại đường dẫn:
+> `.agent/skills/profix_common_rules/SKILL.md`
+
+### Mục đích tích hợp
+Tài liệu `Quy tắc chung.docx` (ProfiX) định nghĩa các hành vi mặc định áp dụng cho **toàn bộ hệ thống**. Việc tích hợp này giúp AI tự tra cứu các quy tắc đã có thay vì hỏi BA lặp đi lặp lại những câu hỏi đã có sẵn đáp án (ví dụ: tìm kiếm thế nào, xuất file định dạng gì, format ngày tháng ra sao).
+- **[PROFIX RULE] TRƯỚC KHI ĐẶT CÂU HỎI Q&A:** Bắt buộc đối chiếu với toàn bộ QTC-01 đến QTC-10 trong `profix_common_rules/SKILL.md`. Nếu câu hỏi đã có đáp án trong Quy tắc chung → KHÔNG đưa vào danh sách Q&A cho BA, thay vào đó ghi nhận trong Phần "Tóm tắt Nghiệp vụ" với tham chiếu `[QTC-XX]`.
 
 ---
 
