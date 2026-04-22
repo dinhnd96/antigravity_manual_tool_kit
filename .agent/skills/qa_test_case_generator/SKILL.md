@@ -102,7 +102,7 @@ Ví dụ:
 
 ### 7.3. Cột Trace_ID — Từ khóa ngắn để lọc nhanh
 Dùng pattern ngắn gọn để filter/search trong Excel:
-`[MODULE]-[TÍNH_NĂNG]-[LOẠI]`
+`US01 - Là người dùng, tôi muốn khai báo các dịch vụ/sản phẩm tại ngân hàng theo mô hình cây phân cấp để dễ dàng quản lý các dịch vụ/sản phẩm phát sinh phí`
 
 Ví dụ: `SA14-TAB1-FILTER`, `SA14-TREE-NAV`, `SA14-DETAIL-SPDV`
 
