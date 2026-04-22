@@ -71,15 +71,34 @@ Ví dụ:
 - `LOG-TREE-HYPERLINK-LEAF` — Logic hiển thị hyperlink khác nhau theo cấp cuối/trung gian
 - `LOG-CODEPI-STATUS` — Logic trạng thái Code phí (Chờ gán/Hủy/Ngừng)
 
-### 7.2. Cột URD_Ref — Tham chiếu vị trí trong tài liệu
-Tuyệt đối KHÔNG dùng số dòng. Tham chiếu theo:
-- **Tên Mục**: `Mục "Xem thông tin SPDV - Tab SPDV"`
-- **Tên Bảng + STT**: `Bảng "Mô tả các trường" - STT 5 cột Code phí`
-- **Bước Lưu đồ**: `Lưu đồ SPDV - Bước 6.2 Lọc nâng cao`
+### 7.2. Cột URD_Ref — Tham chiếu vị trí + trích dẫn quy tắc trong tài liệu
 
-Ví dụ điền vào cột URD_Ref:
-`Tab SPDV - Bảng Mô tả trường - STT 2 (Mã SPDV)`
-`Lưu đồ Tra cứu cây - Bước 8.1, 8.2`
+**Mục tiêu:** Reviewer đọc cột này phải hiểu ngay TC đang kiểm tra quy tắc gì, từ đâu — mà KHÔNG cần mở tài liệu gốc.
+
+**Cấu trúc bắt buộc (2 phần ngăn cách bởi dấu ` – `):**
+```
+[VỊ TRÍ THAM CHIẾU] – [TRÍCH DẪN QUY TẮC NGẮN GỌN (tối đa 1-2 câu)]
+```
+
+**Quy tắc định vị (KHÔNG dùng số dòng):**
+- **Tên Mục**: `Mục "Khai báo Nghiệp vụ"`
+- **Tên Bảng + STT**: `Bảng "Mô tả các trường" - STT 3 cột Ngày hiệu lực`
+- **Bước Lưu đồ**: `Lưu đồ Thêm mới NV - Bước 4 Kiểm tra ràng buộc`
+
+**Quy tắc trích dẫn:**
+- Trích nguyên văn hoặc diễn đạt lại **phần điều kiện/quy tắc cốt lõi** mà TC đang kiểm tra.
+- Giới hạn **tối đa 30 từ**. Cắt bỏ phần diễn giải dài dòng, giữ lại mệnh đề điều kiện.
+- Nếu quy tắc đã rõ từ tên mục, có thể bỏ trích dẫn.
+
+**Ví dụ điền vào cột URD_Ref:**
+
+| Trường hợp | URD_Ref mẫu |
+|:---|:---|
+| Validation ngày | `Mục "Khai báo Nghiệp vụ" - P13: "Ngày HLực, Ngày HHLực đều phải >= Ngày hệ thống và HHLực >= HLực"` |
+| Mã tự sinh | `Bảng Table 2 - STT Mã NV: "số duy nhất, tự tăng 2 chữ số từ 01 đến 99"` |
+| Lưu đồ | `Lưu đồ Thêm mới NV - Bước 5: "Lưu thành công ở trạng thái Chờ duyệt"` |
+| Ràng buộc cascade | `Mục "Khai báo SPDV chi tiết" - P32: "Ngày HLực cha <= Ngày HLực con <= Ngày HLực SPDV cấp con"` |
+| Q&A BA confirm | `Q08 BA Confirm: "Tên NV được phép trùng vì đã có Mã NV unique"` |
 
 ### 7.3. Cột Trace_ID — Từ khóa ngắn để lọc nhanh
 Dùng pattern ngắn gọn để filter/search trong Excel:
