@@ -62,10 +62,13 @@ Hệ thống AI khi đọc tài liệu cần xuất ra kết quả bao gồm 2 p
 ## 2. Phần A: Tóm Tắt Nghiệp Vụ (Requirements Breakdown)
 AI cần bóc tách tài liệu gốc và trình bày dưới dạng:
 1. **Thông điệp cốt lõi (Core Business Value):** Tính năng này sinh ra để làm gì? Ai là người dùng cuối?
-2. **Luồng chính (Happy Path Workflow):** Mô tả flow chuẩn dưới dạng danh sách gạch đầu dòng ngắn gọn (Step 1 -> Step 2 -> Step 3).
-3. **Các luồng rẽ nhánh / Ngoại lệ (Alternative & Exception Flows):** Điểm kê các luồng phụ hoặc lỗi phổ biến được nhắc tới.
-4. **Bảng Điều Kiện Tiên Quyết & Cấu Hình (Pre-conditions & Settings):** Liệt kê các cờ (flags), phân quyền (roles), hoặc dữ liệu mồi (master data) cần chuẩn bị trước khi Test.
-5. **Ma trận Phân Quyền/Dữ Liệu (Nếu có):** Ai có quyền làm gì? Trạng thái nào đi với hành động nào? Mọi thứ cần được làm phẳng hóa (flattened) để Tester không bị rối.
+2. **Cấu trúc Luồng Nghiệp Vụ (Flow Structure):** Gom nhóm các luồng rẽ nhánh và ngoại lệ thành **tập con (subset)** của luồng chính tương ứng để Tester dễ dàng đối soát theo từng cụm chức năng.
+   - **[Tên Chức năng 1] - Luồng chính (Happy Path):** Mô tả flow chuẩn dạng gạch đầu dòng ngắn gọn.
+     - *Các Luồng Rẽ Nhánh / Ngoại lệ:* Liệt kê lỗi cơ bản, hành vi Hủy (Cancel), xung đột trạng thái, ràng buộc dữ liệu... trực tiếp thuộc chức năng 1.
+   - **[Tên Chức năng 2] - Luồng chính (Happy Path):** Tương tự...
+     - *Các Luồng Rẽ Nhánh / Ngoại lệ:* Tương tự...
+3. **Bảng Điều Kiện Tiên Quyết & Cấu Hình (Pre-conditions & Settings):** Liệt kê các cờ (flags), phân quyền (roles), hoặc dữ liệu mồi (master data) cần chuẩn bị trước khi Test.
+4. **Ma trận Phân Quyền/Dữ Liệu (Nếu có):** Ai có quyền làm gì? Trạng thái nào đi với hành động nào? Mọi thứ cần được làm phẳng hóa (flattened) để Tester không bị rối.
 
 ## 3. Phần B: Khai Quật Lỗ Hổng & Sinh Câu Hỏi Q&A (Loopholes Discovery & BA Queries)
 Đây là kỹ năng quan trọng nhất. AI phải đọc tài liệu với "Tư duy Phản biện" (Critical Thinking) để tìm ra:
