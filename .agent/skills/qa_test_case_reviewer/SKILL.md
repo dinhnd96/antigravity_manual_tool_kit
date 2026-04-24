@@ -23,8 +23,10 @@ Khi thực hiện review, AI phải quét bộ Test Case qua các bộ lọc sau
 - Khước từ và đánh dấu lỗi NGAY LẬP TỨC các Test Case dùng từ ngữ lấp lửng trong Step/Data như: *"chọn dữ liệu hợp lệ"*, *"nhập số tiền"*, *"điền form đúng format"*.
 - Yêu cầu Test Data phải là giá trị cứng (Hardcoded/Mock) tương ứng: *"Nhập Tên = 'Sản Phẩm A'"*, *"Tiền = 10,000,000"*, *"Ngày = 28/02/2026"*.
 
-### 1.3 Cấu Trúc Fields, URD_Ref & Expected Result 4 Lớp
-- **URD_Ref (Cột tham chiếu):** Phải tuân thủ cấu trúc: `[VỊ TRÍ THAM CHIẾU] – [TRÍCH DẪN QUY TẮC NGẮN GỌN (tối đa 30 từ)]`. Bắt lỗi ngay nếu chỉ ghi vị trí mà thiếu trích dẫn nội dung quy tắc, hoặc nếu dùng số dòng (Ví dụ sai: "Dòng 15", "Mục 2").
+### 1.3 Cấu Trúc Fields, BR_Ref, Reference, Feature/Module & Expected Result 4 Lớp
+- **Feature & Module:** Phải kiểm tra sự phân định rõ ràng giữa cột `Feature` (Tính năng cha) và `Module` (Tính năng con). Bắt lỗi nếu gộp chung thành 1 cột hoặc phân cấp lộn xộn.
+- **BR_Ref:** Phải kiểm tra cột BR_Ref xem có lấy trực tiếp từ bảng phân tích tài liệu (Phần C - Trích dẫn tài liệu) để đảm bảo không sót case hay không. Báo lỗi nếu thiếu hoặc tự bịa ra mã không có trong file phân tích.
+- **Reference (Cột tham chiếu):** Phải tuân thủ cấu trúc: `[VỊ TRÍ THAM CHIẾU] – [TRÍCH DẪN QUY TẮC NGẮN GỌN (tối đa 30 từ)]`. Bắt lỗi ngay nếu chỉ ghi vị trí mà thiếu trích dẫn nội dung quy tắc, hoặc nếu dùng số dòng (Ví dụ sai: "Dòng 15", "Mục 2").
 - **Pre-conditions:** Phải được đánh số thứ tự (1, 2...) và ghi rõ ràng. Chống viết cụt lủn "Trạng thái hoạt động" mà không rõ của bảng/module nào.
 - **Test Steps:** Bắt lỗi việc gộp thao tác (Ví dụ gộp vừa Thêm vừa Sửa vào cùng 1 TC). Phải đánh số tuần tự.
 - **Expected Results:** Đã tách đủ 4 lớp chưa? (i) Logic ngầm (ii) UI/Toast (iii) Database State (không nhắc Audit) (iv) Output/Download. Nếu thiếu lớp nào báo lỗi lớp đó.
@@ -45,7 +47,7 @@ Khi thực hiện review, AI phải quét bộ Test Case qua các bộ lọc sau
 Trình bày kết quả review dưới dạng bảng, tách biệt lỗi Format (Data/Expected) và lỗi Nghiệp vụ (Logic/GAP).
 
 ### Bảng 1: Lỗi Nghiệp Vụ & Gap Analysis
-| LOG_ID / URD_Ref | Loại phát hiện | Mô tả Sự cố / Mâu thuẫn | Mức độ Nghiêm trọng | Đề xuất sửa chữa |
+| LOG_ID / Reference | Loại phát hiện | Mô tả Sự cố / Mâu thuẫn | Mức độ Nghiêm trọng | Đề xuất sửa chữa |
 | :--- | :--- | :--- | :--- | :--- |
 | **LOG-TAB-SPDV-FILTER-DATE** | **GAP (BVA)** | Chưa test giá trị biên Từ ngày > Đến ngày 1 ngày. | **High** | Thêm luồng biên giới TC-BR-NEG. |
 | **LOG-CODEPI-STATUS** | **Logic Mismatch** | FSD yêu cầu trạng thái Hủy không được sửa, TC lại có bước Edit. | **High** | Xóa TC hoặc sửa expected thành "Báo lỗi". |
@@ -56,7 +58,7 @@ Trình bày kết quả review dưới dạng bảng, tách biệt lỗi Format 
 | **SA14-BR-HAP-002** | **Test Data (Placeholder)** | Dùng từ "Nhập đầy đủ thông tin". Quá mơ hồ. | Đề xuất giá trị cứng: Mã = NV01, Tiền = 5M. |
 | **SA14-UI-004** | **Expected Result Layer** | Thiếu Layer (ii): Trạng thái Update UI Toast. | Bổ sung ý hiển thị thông báo "Thành công". |
 | **SA14-BR-NEG-001** | **Anti-Pattern (Gộp Step)** | TC đang gộp test Bỏ trống Tên và Bỏ trống Mã vào cùng 1 case | Yêu cầu rã thành 2 TC độc lập (Quy tắc số 3). |
-| **SA14-BR-HAP-003** | **Cấu trúc URD_Ref** | Cột URD_Ref chỉ ghi vị trí tham chiếu mà thiếu trích dẫn nội dung quy tắc. | Đề xuất bổ sung theo chuẩn: `[Vị trí] – [Trích dẫn ngắn gọn ≤ 30 từ]`. |
+| **SA14-BR-HAP-003** | **Cấu trúc Reference** | Cột Reference chỉ ghi vị trí tham chiếu mà thiếu trích dẫn nội dung quy tắc. | Đề xuất bổ sung theo chuẩn: `[Vị trí] – [Trích dẫn ngắn gọn ≤ 30 từ]`. |
 
 ## 4. Mẫu Câu Lệnh Gọi Skill (Invocation Prompt)
 User có thể gọi kỹ năng này bằng các câu tương tự:

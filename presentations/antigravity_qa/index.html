@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Future of Quality: Antigravity Agentic QA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #030712;
+            --card-bg: rgba(17, 24, 39, 0.7);
+            --accent-primary: #60a5fa;
+            --accent-secondary: #c084fc;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --neon-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        h1, h2, h3 { font-family: 'Outfit', sans-serif; letter-spacing: -0.01em; }
+
+        .presentation-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 4rem; opacity: 0; transform: scale(0.95) translateY(20px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none; z-index: 1;
+        }
+
+        .slide.active { opacity: 1; transform: scale(1) translateY(0); pointer-events: all; z-index: 2; }
+        .slide.prev { opacity: 0; transform: scale(1.05) translateY(-20px); }
+
+        /* Hero Slide */
+        .slide-hero {
+            background: radial-gradient(circle at center, rgba(30, 58, 138, 0.4) 0%, var(--bg-color) 70%), url('hero.png');
+            background-size: cover; background-position: center; text-align: center;
+        }
+
+        .hero-badge {
+            background: rgba(96, 165, 250, 0.1);
+            border: 1px solid var(--accent-primary);
+            color: var(--accent-primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 99px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+            display: inline-block;
+            box-shadow: var(--neon-shadow);
+        }
+
+        .hero-title {
+            font-size: 6rem; font-weight: 800; margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 30%, var(--accent-primary) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.75rem; color: var(--text-muted); max-width: 900px;
+            font-weight: 300; line-height: 1.4;
+        }
+
+        /* Content Card Styling */
+        .content-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 4rem;
+            width: 100%; max-width: 1100px;
+            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8);
+        }
+
+        .slide-title {
+            font-size: 3.5rem; font-weight: 800; margin-bottom: 2.5rem;
+            display: flex; align-items: center; gap: 1rem;
+        }
+
+        .slide-title span { color: var(--accent-primary); }
+
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
+
+        .feature-box {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px; padding: 2rem;
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s ease;
+        }
+
+        .feature-box:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent-primary);
+            transform: translateY(-8px);
+        }
+
+        .feature-icon { font-size: 2rem; margin-bottom: 1rem; }
+        .feature-title { font-weight: 700; color: #fff; margin-bottom: 0.75rem; font-size: 1.5rem; }
+        .feature-desc { color: var(--text-muted); line-height: 1.6; font-size: 1.1rem; }
+
+        /* Stats Section */
+        .stat-grid { display: flex; justify-content: space-around; margin-top: 3rem; }
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 5rem; font-weight: 800; color: var(--accent-primary); display: block; line-height: 1; }
+        .stat-label { color: var(--text-muted); font-size: 1rem; text-transform: uppercase; letter-spacing: 0.2em; margin-top: 1rem; display: block; }
+
+        /* Navigation */
+        .nav-controls { position: fixed; bottom: 3rem; right: 4rem; display: flex; gap: 1.5rem; z-index: 100; }
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(8px);
+            border: 1px solid var(--glass-border); color: white;
+            width: 64px; height: 64px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-btn:hover { background: var(--accent-primary); border-color: var(--accent-primary); transform: scale(1.1); box-shadow: var(--neon-shadow); }
+
+        .progress-bar { position: fixed; top: 0; left: 0; height: 6px; background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary)); z-index: 200; transition: width 0.4s ease; }
+
+        .slide-number { position: fixed; bottom: 3.5rem; left: 4rem; font-family: 'Outfit', sans-serif; color: var(--text-muted); font-size: 1.1rem; opacity: 0.5; }
+
+        /* Highlights */
+        .highlight-text { color: var(--accent-secondary); font-weight: 700; }
+        .quote-box {
+            border-left: 4px solid var(--accent-secondary);
+            padding-left: 2rem; margin: 2rem 0;
+            font-size: 1.5rem; font-style: italic; color: #e5e7eb;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress"></div>
+    <div class="slide-number" id="slideNum">1 / 7</div>
+
+    <div class="presentation-container">
+        <!-- Slide 1: Hero -->
+        <div class="slide slide-hero active">
+            <div class="hero-badge">Next Generation Quality Engineering</div>
+            <h1 class="hero-title">ANTIGRAVITY</h1>
+            <h2 class="hero-subtitle">Biến QA thành <strong>"Trung tâm năng suất"</strong> thay vì "Điểm nghẽn" bằng sức mạnh Agentic AI</h2>
+            <div style="margin-top: 4rem; display: flex; gap: 2rem; justify-content: center;">
+                <div style="text-align: left; border-left: 1px solid var(--accent-primary); padding-left: 1.5rem;">
+                    <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted);">Dự án trọng điểm</div>
+                    <div style="font-weight: 600;">Profix Transformation</div>
+                </div>
+                <div style="text-align: left; border-left: 1px solid var(--accent-secondary); padding-left: 1.5rem;">
+                    <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted);">Công nghệ lõi</div>
+                    <div style="font-weight: 600;">Google Agentic Framework</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: The Pain -->
+        <div class="slide">
+            <div class="content-card">
+                <h2 class="slide-title"><span>01.</span> Cái giá của sự chậm trễ</h2>
+                <div class="grid">
+                    <div class="feature-box">
+                        <div class="feature-icon">⏳</div>
+                        <div class="feature-title">Thời gian chết (Dead Time)</div>
+                        <div class="feature-desc">Tester mất 40% thời gian chỉ để đọc hiểu tài liệu và copy-paste dữ liệu thủ công.</div>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-icon">⚠️</div>
+                        <div class="feature-title">Rủi ro tiềm ẩn (Hidden Gaps)</div>
+                        <div class="feature-desc">Logic nghiệp vụ ngày càng phức tạp vượt quá khả năng bao phủ của tư duy con người.</div>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-icon">📉</div>
+                        <div class="feature-title">Nghẽn cổ chai (Bottleneck)</div>
+                        <div class="feature-desc">Dev xong nhưng QA chưa kịp viết script. Release bị delay chỉ vì quy trình test chưa sẵn sàng.</div>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-icon">💸</div>
+                        <div class="feature-title">Chi phí cơ hội</div>
+                        <div class="feature-desc">Mỗi ngày delay là một ngày mất doanh thu và giảm lợi thế cạnh tranh trên thị trường.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: The Vision -->
+        <div class="slide">
+            <div class="content-card">
+                <h2 class="slide-title"><span>02.</span> Tầm nhìn Agentic QA</h2>
+                <div class="quote-box">
+                    "Chúng ta không cần thêm Tester, chúng ta cần <strong>nhân bản tri thức</strong> của Senior QA vào một hệ thống tự vận hành."
+                </div>
+                <p style="font-size: 1.2rem; color: var(--text-muted); line-height: 1.8;">
+                    Antigravity không thay thế con người. Nó giải phóng Tester khỏi những việc lặp đi lặp lại để họ tập trung vào <span class="highlight-text">Chiến lược</span> và <span class="highlight-text">Trải nghiệm người dùng</span>.
+                </p>
+                <div style="margin-top: 3rem; display: flex; gap: 1.5rem;">
+                    <div class="feature-box" style="flex: 1;">
+                        <div style="font-weight: 800; color: var(--accent-primary); margin-bottom: 0.5rem;">SIÊU NHẬN THỨC</div>
+                        <div style="font-size: 0.9rem;">Hiểu sâu nghiệp vụ như một BA thực thụ.</div>
+                    </div>
+                    <div class="feature-box" style="flex: 1;">
+                        <div style="font-weight: 800; color: var(--accent-secondary); margin-bottom: 0.5rem;">TỰ ĐỘNG HÓA TỨC THÌ</div>
+                        <div style="font-size: 0.9rem;">Biến Requirement thành Automation script trong giây lát.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Breakthrough Workflow -->
+        <div class="slide">
+            <div class="content-card">
+                <h2 class="slide-title"><span>03.</span> Quy trình đột phá</h2>
+                <div style="position: relative; padding: 2rem 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div style="width: 200px; text-align: center;">
+                            <div style="width: 80px; height: 80px; background: rgba(96, 165, 250, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; border: 2px solid var(--accent-primary);">🧠</div>
+                            <div style="font-weight: 700;">AI Analysis</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Tự "soi" lỗi logic trong URD/FSD</div>
+                        </div>
+                        <div style="margin-top: 40px; color: var(--accent-primary);">➔</div>
+                        <div style="width: 200px; text-align: center;">
+                            <div style="width: 80px; height: 80px; background: rgba(192, 132, 252, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; border: 2px solid var(--accent-secondary);">📝</div>
+                            <div style="font-weight: 700;">Auto-Design</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Sinh bộ Test Case Enterprise B2</div>
+                        </div>
+                        <div style="margin-top: 40px; color: var(--accent-secondary);">➔</div>
+                        <div style="width: 200px; text-align: center;">
+                            <div style="width: 80px; height: 80px; background: rgba(96, 165, 250, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; border: 2px solid var(--accent-primary);">⚡</div>
+                            <div style="font-weight: 700;">Instant Auto</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Tự viết & chạy script Automation</div>
+                        </div>
+                        <div style="margin-top: 40px; color: var(--accent-primary);">➔</div>
+                        <div style="width: 200px; text-align: center;">
+                            <div style="width: 80px; height: 80px; background: rgba(192, 132, 252, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; border: 2px solid var(--accent-secondary);">📈</div>
+                            <div style="font-weight: 700;">Smart Report</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Dự báo rủi ro & Root Cause</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: The ROI -->
+        <div class="slide">
+            <div class="content-card">
+                <h2 class="slide-title"><span>04.</span> Chỉ số hiệu quả (ROI)</h2>
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <span class="stat-value">5x</span>
+                        <span class="stat-label">Năng suất làm việc</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">-80%</span>
+                        <span class="stat-label">Thời gian chuẩn bị</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">0</span>
+                        <span class="stat-label">Lỗi logic bị bỏ sót</span>
+                    </div>
+                </div>
+                <div style="margin-top: 4rem; padding: 2rem; background: rgba(255,255,255,0.03); border-radius: 20px; border: 1px solid var(--glass-border);">
+                    <p style="font-size: 1.2rem; line-height: 1.6;">
+                        "Trong module <span class="highlight-text">US01</span>, Antigravity đã hoàn thành khối lượng công việc <span class="highlight-text">16 giờ</span> của một Senior QA chỉ trong <span class="highlight-text">15 phút</span> với độ chính xác tuyệt đối."
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Competitive Edge -->
+        <div class="slide">
+            <div class="content-card">
+                <h2 class="slide-title"><span>05.</span> Lợi thế cạnh tranh</h2>
+                <div class="grid">
+                    <div class="feature-box">
+                        <div class="feature-title">Tốc độ Release</div>
+                        <div class="feature-desc">Đưa sản phẩm ra thị trường nhanh hơn đối thủ ít nhất 30% nhờ khâu QA cực nhanh.</div>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-title">Chất lượng Enterprise</div>
+                        <div class="feature-desc">Đảm bảo hệ thống tài chính (Profix) vận hành không sai sót nhờ bộ Test Case bao phủ mọi ngóc ngách.</div>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-title">Tối ưu chi phí</div>
+                        <div class="feature-desc">Giảm thiểu chi phí sửa lỗi (Bug fix cost) ở các giai đoạn muộn nhờ phát hiện sớm ngay từ Requirement.</div>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-title">Lưu trữ tri thức</div>
+                        <div class="feature-desc">Nghiệp vụ dự án được "số hóa" vào hệ thống AI, không bị mất đi khi nhân sự thay đổi.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: The Ask -->
+        <div class="slide">
+            <div class="content-card" style="text-align: center;">
+                <h2 class="slide-title" style="justify-content: center; margin-bottom: 3rem;">Hành động tiếp theo?</h2>
+                <div style="max-width: 700px; margin: 0 auto; text-align: left;">
+                    <div class="feature-box" style="margin-bottom: 1.5rem; border-color: var(--accent-primary);">
+                        <div style="font-weight: 800; color: var(--accent-primary);">GIAI ĐOẠN 1: MỞ RỘNG</div>
+                        <p style="margin-top: 0.5rem;">Phê duyệt áp dụng Antigravity cho toàn bộ Phase 1 của dự án Profix.</p>
+                    </div>
+                    <div class="feature-box" style="margin-bottom: 1.5rem;">
+                        <div style="font-weight: 800; color: var(--accent-secondary);">GIAI ĐOẠN 2: CHUẨN HÓA</div>
+                        <p style="margin-top: 0.5rem;">Xây dựng "Thư viện tri thức chất lượng" (Quality Knowledge Base) cho riêng công ty.</p>
+                    </div>
+                </div>
+                <h3 style="margin-top: 4rem; font-size: 2rem; color: #fff;">Chúng ta sẵn sàng dẫn đầu chưa?</h3>
+                <button onclick="currentSlide = 0; updateSlides();" style="margin-top: 2rem; background: var(--accent-primary); color: white; border: none; padding: 1.25rem 3rem; border-radius: 99px; font-weight: 700; cursor: pointer; transition: 0.3s; box-shadow: var(--neon-shadow); text-transform: uppercase; letter-spacing: 0.1em;">Xem lại từ đầu</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-controls">
+        <div class="nav-btn" onclick="prevSlide()">←</div>
+        <div class="nav-btn" onclick="nextSlide()">→</div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const progressBar = document.getElementById('progress');
+        const slideNumDisplay = document.getElementById('slideNum');
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else if (index < currentSlide) {
+                    slide.classList.add('prev');
+                }
+            });
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            progressBar.style.width = `${progress}%`;
+            slideNumDisplay.innerText = `${currentSlide + 1} / ${totalSlides}`;
+        }
+
+        function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateSlides(); } }
+        function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlides(); } }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        updateSlides();
+    </script>
+</body>
+</html>

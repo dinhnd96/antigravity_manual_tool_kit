@@ -62,16 +62,11 @@ Sinh đồng thời 3 tập TC, đảm bảo **không trùng nội dung**:
 
 Nhiều FSD hiện đại viết theo dạng Narrative (văn xuôi + bảng diễn giải bước) mà **không có mã BR_xx hay UI-FUNC.xx**. Trong trường hợp này, áp dụng chiến lược sau:
 
-### 7.1. Cột BR_Ref — Đặt mã Logic tự định nghĩa
-Bóc tách từng "điều kiện logic ẩn" trong văn bản và đặt mã theo pattern:
-`LOG-[KHU_VỰC]-[MÔ_TẢ_NGẮN]`
+### 7.1. Cột BR_Ref — Traceability 100% từ Bảng Phân Tích
+Giá trị cột BR_Ref **BẮT BUỘC** phải lấy trực tiếp từ cột "Trích dẫn tài liệu (Traceability Ctrl+F)" trong Bảng Tổng Hợp Test Case (Phần C) của file báo cáo phân tích yêu cầu (do AI `manual_requirement_analyzer` sinh ra). Việc này đảm bảo tính kế thừa, bao phủ 100% tài liệu và không bị sót kịch bản.
+Nếu trong quá trình sinh Test Case mà phát sinh thêm case mới chưa có trong bảng phân tích, AI phải tự động đối chiếu và lấy trích dẫn theo đúng cấu trúc từ tài liệu gốc.
 
-Ví dụ:
-- `LOG-TAB-SPDV-FILTER-DATE` — Logic lọc theo ngày hiệu lực ở Tab SPDV
-- `LOG-TREE-HYPERLINK-LEAF` — Logic hiển thị hyperlink khác nhau theo cấp cuối/trung gian
-- `LOG-CODEPI-STATUS` — Logic trạng thái Code phí (Chờ gán/Hủy/Ngừng)
-
-### 7.2. Cột URD_Ref — Tham chiếu vị trí + trích dẫn quy tắc trong tài liệu
+### 7.2. Cột Reference — Tham chiếu vị trí + trích dẫn quy tắc trong tài liệu
 
 **Mục tiêu:** Reviewer đọc cột này phải hiểu ngay TC đang kiểm tra quy tắc gì, từ đâu — mà KHÔNG cần mở tài liệu gốc.
 
@@ -90,9 +85,9 @@ Ví dụ:
 - Giới hạn **tối đa 30 từ**. Cắt bỏ phần diễn giải dài dòng, giữ lại mệnh đề điều kiện.
 - Nếu quy tắc đã rõ từ tên mục, có thể bỏ trích dẫn.
 
-**Ví dụ điền vào cột URD_Ref:**
+**Ví dụ điền vào cột Reference:**
 
-| Trường hợp | URD_Ref mẫu |
+| Trường hợp | Reference mẫu |
 |:---|:---|
 | Validation ngày | `Mục "Khai báo Nghiệp vụ" - P13: "Ngày HLực, Ngày HHLực đều phải >= Ngày hệ thống và HHLực >= HLực"` |
 | Mã tự sinh | `Bảng Table 2 - STT Mã NV: "số duy nhất, tự tăng 2 chữ số từ 01 đến 99"` |
@@ -107,18 +102,22 @@ Dùng pattern ngắn gọn để filter/search trong Excel:
 Ví dụ: `SA14-TAB1-FILTER`, `SA14-TREE-NAV`, `SA14-DETAIL-SPDV`
 
 ### 7.4. Tổng hợp quy tắc mapping
-| Loại tài liệu | TC_ID | BR_Ref | URD_Ref | Trace_ID |
+| Loại tài liệu | TC_ID | BR_Ref | Reference | Trace_ID |
 |---|---|---|---|---|
-| FSD có mã | `SA09-BR-HAP-001` | `BR_01` | `Mục I.2.1` | `BR01-VALIDATE` |
-| FSD Narrative | `SA14-BR-HAP-001` | `LOG-TAB-FILTER-DATE` | `Tab SPDV - STT 14` | `SA14-TAB1-FILTER` |
-| TC-UI | `SA14-UI-001` | `UI-SPDV-GRID` | `Bảng Mô tả trường - STT 2` | `SA14-UI-GRID-MA` |
+| FSD có mã | `SA09-BR-HAP-001` | `(Trích dẫn từ Phần C)` | `Mục I.2.1` | `BR01-VALIDATE` |
+| FSD Narrative | `SA14-BR-HAP-001` | `(Trích dẫn từ Phần C)` | `Tab SPDV - STT 14` | `SA14-TAB1-FILTER` |
+| TC-UI | `SA14-UI-001` | `(Trích dẫn từ Phần C)` | `Bảng Mô tả trường - STT 2` | `SA14-UI-GRID-MA` |
 
 ## 8. Xuất File Excel (BẮT BUỘC)
 Không in bảng ra Chat. Phải chạy Script Python (`pandas`, `openpyxl`) tạo file `.xlsx` gồm 1 sheet **"Test Cases"** với đúng 21 cột sau:
-- A=TC_ID | B=BR_Ref | C=URD_Ref | D=Module | E=Feature | F=Title
+- A=TC_ID | B=BR_Ref | C=Reference | D=Feature | E=Module | F=Title
 - G=Type | H=Category | I=Priority | J=Precondition
 - K=Steps | L=Expected | M=Trace_ID | N=Note
 - O-U: Các cột thực thi (để trống).
+
+*Lưu ý:* 
+- **Feature (Tính năng cha):** Là tên tính năng lớn (Ví dụ: Khai báo Nghiệp vụ).
+- **Module (Tính năng con):** Là tên tính năng phụ, màn hình con hoặc luồng rẽ nhánh cụ thể (Ví dụ: Thêm mới Nghiệp vụ).
 
 ## 9. Luồng Thực Thi (Workflow)
 1. Parse tài liệu: Liệt kê **Logic điều kiện ẩn (LOG-xxx)** và **Chức năng UI (UI-xxx)**.

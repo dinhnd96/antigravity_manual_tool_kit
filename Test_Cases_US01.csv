@@ -1,0 +1,292 @@
+TC_ID,BR_Ref,URD_Ref,Module,Feature,Title,Type,Category,Priority,Precondition,Steps,Expected Result,Trace_ID,Note,Status,Tester,Execute Date,Actual Result,Pass/Fail,Bug_ID,Sprint/Cycle
+US01-BR-HAP-001,LOG-NV-AUTOCODE,"Mục ""Khai báo Nghiệp vụ"" - Bảng Table 2 - Mã Nghiệp vụ",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Thêm mới Nghiệp vụ thành công – Hệ thống tự sinh Mã nghiệp vụ dạng số 2 chữ số tự tăng,Functional,TC-BR,Critical,"1. Đã đăng nhập hệ thống với tài khoản Maker có quyền ""Danh mục Sản phẩm Dịch vụ và Code Phí"".
+2. Hệ thống chưa có bất kỳ Nghiệp vụ nào (hoặc Mã cuối cùng là '05').
+3. Ngày hệ thống hiện tại (T): 21/04/2026.","1. Truy cập menu: Tham số >> Danh mục sản phẩm dịch vụ và Code phí.
+2. Nhấn nút ""Thêm mới Nghiệp vụ"".
+3. Quan sát trường ""Mã Nghiệp vụ"" trên màn hình.
+4. Nhập Tên Nghiệp vụ = 'Tài khoản', Mô tả = 'Nghiệp vụ quản lý tài khoản ngân hàng'.
+5. Nhập Ngày hiệu lực = 21/04/2026, Ngày hết hiệu lực = 31/12/2026.
+6. Nhấn nút ""Xác nhận"".","(i) Nghiệp vụ/Logic: Hệ thống tự động sinh Mã Nghiệp vụ = '06' (số tự tăng tiếp theo, 2 chữ số). Bản ghi lưu thành công ở trạng thái 'Chờ duyệt'.
+(ii) UI: Toast/thông báo thành công hiển thị: 'Thêm mới Nghiệp vụ thành công'. Trường Mã Nghiệp vụ hiển thị read-only (không cho chỉnh sửa) với giá trị '06'.
+(iii) Trạng thái bản ghi: Bản ghi Nghiệp vụ 'Tài khoản' xuất hiện tại màn hình ""Tác vụ Pending của tôi"" của Maker với Action = 'Thêm mới', Status = 'Chờ duyệt'.
+(iv) Output: Bản ghi xuất hiện trong danh sách ""Tác vụ chờ duyệt"" của Checker để phê duyệt.",US01-NV-AUTOCODE-HAP,,,,,,,,
+US01-BR-NEG-001,LOG-NV-AUTOCODE,"Mục ""Khai báo Nghiệp vụ"" - Bảng Table 2 - Mã Nghiệp vụ - Ràng buộc >99",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Thêm mới Nghiệp vụ thất bại – Mã tự sinh vượt ngưỡng 99 (Boundary overflow),Functional,TC-BR,High,"1. Đã đăng nhập với tài khoản Maker có quyền ""Danh mục Sản phẩm Dịch vụ và Code Phí"".
+2. Hệ thống đã có đúng 99 Nghiệp vụ (Mã 01→99 đã tồn tại, tất cả ở trạng thái bất kỳ).
+3. Ngày hệ thống (T): 21/04/2026.","1. Truy cập menu: Tham số >> Danh mục sản phẩm dịch vụ và Code phí.
+2. Nhấn nút ""Thêm mới Nghiệp vụ"".
+3. Nhập Tên Nghiệp vụ = 'NghiepVu_Overflow', Mô tả = 'Test boundary overflow mã tự sinh'.
+4. Nhập Ngày hiệu lực = 21/04/2026, Ngày hết hiệu lực = 31/12/2026.
+5. Nhấn nút ""Xác nhận"".","(i) Nghiệp vụ/Logic: Hệ thống phát hiện không còn mã khả dụng (số tiếp theo = 100 > 99). Không lưu bản ghi.
+(ii) UI: Hiển thị thông báo lỗi: 'Không thể tạo thêm Nghiệp vụ. Mã Nghiệp vụ đã đạt giới hạn tối đa (99).' Form không bị đóng, user có thể xem lại thông tin đã nhập.
+(iii) Trạng thái bản ghi: Không có bản ghi mới nào được tạo ra trong hệ thống.
+(iv) Output: Không có bản ghi nào xuất hiện trong màn hình Tác vụ Pending.",US01-NV-AUTOCODE-OVERFLOW,,,,,,,,
+US01-BR-HAP-002,LOG-NV-DATE-VALIDATE,"Mục ""Khai báo Nghiệp vụ"" - Bảng Table 2 - Ngày hiệu lực, Ngày hết hiệu lực",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Thêm mới Nghiệp vụ – Ngày hiệu lực = Ngày hệ thống (boundary equal),Functional,TC-BR,High,"1. Đã đăng nhập với tài khoản Maker có quyền mục ""Danh mục Sản phẩm Dịch vụ và Code Phí"".
+2. Ngày hệ thống (T): 21/04/2026.","1. Truy cập menu: Tham số >> Danh mục sản phẩm dịch vụ và Code phí >> Thêm mới Nghiệp vụ.
+2. Nhập Tên Nghiệp vụ = 'Cho Vay', Mô tả = 'Nghiệp vụ Cho Vay'.
+3. Nhập Ngày hiệu lực = 21/04/2026 (= Ngày T).
+4. Nhập Ngày hết hiệu lực = 21/04/2026 (= Ngày T, bằng Ngày hiệu lực).
+5. Nhấn nút ""Xác nhận"".","(i) Nghiệp vụ/Logic: Hệ thống chấp nhận (Ngày hiệu lực >= T và Ngày hết hiệu lực >= Ngày hiệu lực). Bản ghi lưu thành công.
+(ii) UI: Toast thành công: 'Thêm mới Nghiệp vụ thành công'.
+(iii) Trạng thái bản ghi: Bản ghi 'Cho Vay' tạo thành công, trạng thái = 'Chờ duyệt', Action = 'Thêm mới'.
+(iv) Output: Bản ghi xuất hiện tại màn hình ""Tác vụ chờ duyệt"" của Checker.",US01-NV-DATE-BOUNDARY-EQUAL,,,,,,,,
+US01-BR-NEG-002,LOG-NV-DATE-VALIDATE,"Mục ""Khai báo Nghiệp vụ"" - Bảng Table 2 - Ngày hiệu lực - Ràng buộc ""Không chọn ngày quá khứ""",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Thêm mới Nghiệp vụ thất bại – Ngày hiệu lực là ngày quá khứ,Functional,TC-BR,High,"1. Đã đăng nhập với tài khoản Maker có quyền mục ""Danh mục Sản phẩm Dịch vụ và Code Phí"".
+2. Ngày hệ thống (T): 21/04/2026.","1. Truy cập menu: Tham số >> Danh mục sản phẩm dịch vụ và Code phí >> Thêm mới Nghiệp vụ.
+2. Nhập Tên Nghiệp vụ = 'Bảo Lãnh', Mô tả = 'Nghiệp vụ bảo lãnh'.
+3. Nhập Ngày hiệu lực = 20/04/2026 (< Ngày T - quá khứ).
+4. Nhập Ngày hết hiệu lực = 31/12/2026.
+5. Nhấn nút ""Xác nhận"".","(i) Nghiệp vụ/Logic: Hệ thống từ chối lưu vì Ngày hiệu lực < Ngày hệ thống.
+(ii) UI: Hiển thị thông báo lỗi tại trường Ngày hiệu lực: 'Ngày hiệu lực không được là ngày quá khứ'. Form không đóng, giữ nguyên dữ liệu đã nhập để user sửa.
+(iii) Trạng thái bản ghi: Không có bản ghi nào được tạo.
+(iv) Output: Không.",US01-NV-DATE-PAST,,,,,,,,
+US01-BR-NEG-003,LOG-NV-DATE-VALIDATE,"Mục ""Khai báo Nghiệp vụ"" - Bảng Table 2 - Ngày hết hiệu lực >= Ngày hiệu lực",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Thêm mới Nghiệp vụ thất bại – Ngày hết hiệu lực nhỏ hơn Ngày hiệu lực,Functional,TC-BR,High,"1. Đã đăng nhập với tài khoản Maker có quyền mục ""Danh mục Sản phẩm Dịch vụ và Code Phí"".
+2. Ngày hệ thống (T): 21/04/2026.","1. Truy cập menu: Tham số >> Danh mục sản phẩm dịch vụ và Code phí >> Thêm mới Nghiệp vụ.
+2. Nhập Tên Nghiệp vụ = 'Thanh Toán', Mô tả = 'Nghiệp vụ thanh toán quốc tế'.
+3. Nhập Ngày hiệu lực = 25/04/2026.
+4. Nhập Ngày hết hiệu lực = 22/04/2026 (< Ngày hiệu lực).
+5. Nhấn nút ""Xác nhận"".","(i) Nghiệp vụ/Logic: Hệ thống từ chối lưu vì Ngày hết hiệu lực < Ngày hiệu lực.
+(ii) UI: Thông báo lỗi tại trường Ngày hết hiệu lực: 'Ngày hết hiệu lực phải lớn hơn hoặc bằng Ngày hiệu lực'. Form giữ nguyên, không đóng.
+(iii) Trạng thái bản ghi: Không có bản ghi nào được tạo.
+(iv) Output: Không.",US01-NV-DATE-ENDBEFORESTART,,,,,,,,
+US01-BR-NEG-004,LOG-NV-MANDATORY,"Mục ""Khai báo Nghiệp vụ"" - Bảng Table 2 - Tên Nghiệp vụ (★ Bắt buộc)",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Thêm mới Nghiệp vụ thất bại – Bỏ trống trường Tên Nghiệp vụ bắt buộc,Functional,TC-BR,High,"1. Đã đăng nhập với tài khoản Maker có quyền mục ""Danh mục Sản phẩm Dịch vụ và Code Phí"".
+2. Ngày hệ thống (T): 21/04/2026.","1. Truy cập menu: Tham số >> Danh mục sản phẩm dịch vụ và Code phí >> Thêm mới Nghiệp vụ.
+2. Để trống trường Tên Nghiệp vụ.
+3. Nhập Mô tả = 'Nghiệp vụ test'.
+4. Nhập Ngày hiệu lực = 21/04/2026, Ngày hết hiệu lực = 31/12/2026.
+5. Nhấn nút ""Xác nhận"".","(i) Nghiệp vụ/Logic: Hệ thống từ chối lưu do thiếu thông tin bắt buộc.
+(ii) UI: Thông báo lỗi phía dưới trường Tên Nghiệp vụ: 'Trường này bắt buộc'. Form vẫn mở, các trường khác giữ nguyên.
+(iii) Trạng thái bản ghi: Không có bản ghi nào được tạo.
+(iv) Output: Không.",US01-NV-MANDATORY-NAME,,,,,,,,
+US01-BR-NEG-005,LOG-NV-MANDATORY,"Mục ""Khai báo Nghiệp vụ"" - Bảng Table 2 - Ngày hiệu lực, Ngày hết hiệu lực (★ Bắt buộc)",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Thêm mới Nghiệp vụ thất bại – Bỏ trống cả Ngày hiệu lực và Ngày hết hiệu lực,Functional,TC-BR,High,"1. Đã đăng nhập với tài khoản Maker có quyền mục ""Danh mục Sản phẩm Dịch vụ và Code Phí"".
+2. Ngày hệ thống (T): 21/04/2026.","1. Truy cập menu: Tham số >> Danh mục sản phẩm dịch vụ và Code phí >> Thêm mới Nghiệp vụ.
+2. Nhập Tên Nghiệp vụ = 'Kiều Hối', Mô tả = 'Nghiệp vụ kiều hối'.
+3. Để trống Ngày hiệu lực và Ngày hết hiệu lực.
+4. Nhấn nút ""Xác nhận"".","(i) Nghiệp vụ/Logic: Hệ thống từ chối lưu do thiếu các trường ngày bắt buộc.
+(ii) UI: Thông báo lỗi phía dưới từng trường trống: 'Trường này bắt buộc' (hiển thị đồng thời cho cả 2 trường). Form vẫn mở.
+(iii) Trạng thái bản ghi: Không có bản ghi nào được tạo.
+(iv) Output: Không.",US01-NV-MANDATORY-DATE,,,,,,,,
+US01-BR-HAP-003,LOG-NV-STATUS-AUTO,"Mục ""Khai báo Nghiệp vụ"" - đoạn ""Hằng ngày, tại thời điểm đầu ngày..."" P19-P21",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Auto-Job đầu ngày – Chuyển trạng thái Nghiệp vụ sang 'Hoạt động' khi T = Ngày hiệu lực,Functional,TC-BR,Critical,"1. Nghiệp vụ 'Chiết Khấu' (Mã: '07') đã được Checker duyệt thành công.
+2. Ngày hiệu lực của 'Chiết Khấu' = 22/04/2026; Ngày hết hiệu lực = 31/12/2026.
+3. Trạng thái hiện tại của 'Chiết Khấu' = 'Không hoạt động' (vì T < Ngày hiệu lực).
+4. Ngày hệ thống đang chạy Auto-Job đầu ngày ngày T = 22/04/2026.","1. Chờ/Trigger hệ thống chạy Auto-Job đầu ngày (thời điểm T = 22/04/2026).
+2. Đăng nhập hệ thống hoặc refresh lưới Danh mục SPDV.
+3. Kiểm tra trạng thái Nghiệp vụ 'Chiết Khấu' (Mã '07') trên lưới.","(i) Nghiệp vụ/Logic: Auto-Job phát hiện T = 22/04/2026 = Ngày hiệu lực của 'Chiết Khấu'. Cập nhật trạng thái từ 'Không hoạt động' → 'Hoạt động'.
+(ii) UI: Cột Trạng thái tại dòng 'Chiết Khấu' (Mã '07') hiển thị 'Hoạt động'.
+(iii) Trạng thái bản ghi: Bản ghi Nghiệp vụ 'Chiết Khấu' cập nhật trạng thái = 'Hoạt động' trong database.
+(iv) Output: Không có output file; trạng thái thay đổi theo cơ chế tự động của hệ thống.",US01-NV-AUTOJOB-ACTIVATE,,,,,,,,
+US01-BR-HAP-004,LOG-NV-STATUS-AUTO,"Mục ""Khai báo Nghiệp vụ"" - đoạn ""Trường hợp ngày T > Ngày hết hiệu lực..."" P21",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Auto-Job đầu ngày – Chuyển trạng thái Nghiệp vụ sang 'Không hoạt động' khi T > Ngày hết hiệu lực,Functional,TC-BR,Critical,"1. Nghiệp vụ 'Thẻ' (Mã: '08') đã được Checker duyệt, đang ở trạng thái 'Hoạt động'.
+2. Ngày hết hiệu lực của 'Thẻ' = 30/04/2026.
+3. Ngày hệ thống đang chạy Auto-Job đầu ngày: T = 01/05/2026 (> Ngày hết hiệu lực).","1. Chờ/Trigger Auto-Job đầu ngày tại T = 01/05/2026.
+2. Đăng nhập hệ thống hoặc refresh lưới Danh mục SPDV.
+3. Kiểm tra Nghiệp vụ 'Thẻ' (Mã '08') trên lưới.","(i) Nghiệp vụ/Logic: Auto-Job phát hiện T = 01/05/2026 > 30/04/2026 (Ngày hết hiệu lực). Cập nhật trạng thái từ 'Hoạt động' → 'Không hoạt động'.
+(ii) UI: Cột Trạng thái của 'Thẻ' (Mã '08') chuyển sang 'Không hoạt động'.
+(iii) Trạng thái bản ghi: Bản ghi 'Thẻ' được cập nhật trạng thái = 'Không hoạt động' trong database.
+(iv) Output: Không có output file.",US01-NV-AUTOJOB-DEACTIVATE,,,,,,,,
+US01-BR-HAP-005,LOG-NV-APPROVE,"Mục ""Khai báo Nghiệp vụ"" - P14 ""Sau khi Maker khai báo thành công...""",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Checker duyệt thành công Nghiệp vụ mới – Bản ghi hiển thị trên lưới Danh mục SPDV,Functional,TC-BR,Critical,"1. Nghiệp vụ 'Bảo Hiểm' đã được Maker tạo thành công, đang ở trạng thái 'Chờ duyệt', Action = 'Thêm mới'.
+2. Đăng nhập với tài khoản Checker có quyền phê duyệt ""Danh mục Sản phẩm Dịch vụ và Code Phí"".
+3. Ma trận phê duyệt đã được cấu hình: 1 cấp duyệt mức cần Checker phê duyệt.","1. Đăng nhập với tài khoản Checker.
+2. Vào màn hình ""Tác vụ chờ duyệt"".
+3. Tìm bản ghi 'Bảo Hiểm' - Action = 'Thêm mới', Status = 'Chờ duyệt'.
+4. Nhấn nút ""Phê duyệt"" (hoặc ""Duyệt"").
+5. Xác nhận phê duyệt.
+6. Truy cập lưới Danh mục SPDV và kiểm tra.","(i) Nghiệp vụ/Logic: Sau khi Checker phê duyệt, bản ghi Nghiệp vụ 'Bảo Hiểm' hoàn tất luồng duyệt và hiển thị chính thức trên lưới Danh mục SPDV.
+(ii) UI: Toast thành công: 'Phê duyệt thành công'. Bản ghi xuất hiện trên lưới Danh mục SPDV với đầy đủ thông tin (Mã, Tên, Ngày hiệu lực, Ngày hết hiệu lực, Trạng thái hoạt động).
+(iii) Trạng thái bản ghi: Bản ghi chuyển sang trạng thái chính thức. Trạng thái hoạt động dựa vào Ngày hiệu lực so với Ngày T.
+(iv) Output: Bản ghi biến mất khỏi ""Tác vụ chờ duyệt"" của Checker.",US01-NV-APPROVE-CHECKER,,,,,,,,
+US01-BR-HAP-006,LOG-NV-APPROVE,"Mục ""Khai báo Nghiệp vụ"" - P14 - Q08 (BA Confirm: nhiều Maker tạo đồng thời được phép)",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Nhiều Maker tạo Nghiệp vụ đồng thời – Các bản ghi Chờ duyệt độc lập nhau,Functional,TC-BR,Medium,"1. Đã đăng nhập với 2 tài khoản Maker khác nhau: MakerA và MakerB.
+2. Cả 2 đều có quyền ""Danh mục Sản phẩm Dịch vụ và Code Phí"".
+3. Ngày hệ thống (T): 21/04/2026.","1. MakerA tạo Nghiệp vụ 'Tín Dụng', Ngày hiệu lực = 21/04/2026, Ngày hết hiệu lực = 31/12/2026 → nhấn 'Xác nhận'.
+2. MakerB (đồng thời hoặc ngay sau) tạo Nghiệp vụ 'Ngoại Hối', Ngày hiệu lực = 21/04/2026, Ngày hết hiệu lực = 31/12/2026 → nhấn 'Xác nhận'.
+3. Kiểm tra màn hình ""Tác vụ Pending của tôi"" của từng Maker.
+4. Kiểm tra màn hình ""Tác vụ chờ duyệt"" của Checker.","(i) Nghiệp vụ/Logic: Hệ thống cho phép cả 2 Maker tạo đồng thời (BA confirm: không giới hạn bản ghi Chờ duyệt). Mỗi Maker tạo thành công bản ghi Nghiệp vụ riêng với Mã tự sinh không trùng nhau.
+(ii) UI: MakerA thấy bản ghi 'Tín Dụng' trong Pending của mình. MakerB thấy bản ghi 'Ngoại Hối' trong Pending của mình.
+(iii) Trạng thái bản ghi: 2 bản ghi riêng biệt với trạng thái 'Chờ duyệt', Mã khác nhau.
+(iv) Output: Checker thấy cả 2 bản ghi trong Tác vụ chờ duyệt.",US01-NV-CONCURRENT-MAKER,BA Confirm Q08: Tên nghiệp vụ được phép trùng (do Mã là unique). Nhiều Maker tạo đồng thời là được phép.,,,,,,,
+US01-BR-HAP-007,LOG-NV-EDIT-RESTRICT,"Mục ""Khai báo Nghiệp vụ"" - P15 ""Bản ghi Nghiệp vụ sau khi duyệt thành công sẽ được hiển thị...""",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Chỉnh sửa Nghiệp vụ – Chỉ cho phép sửa Ngày hiệu lực và Ngày hết hiệu lực,Functional,TC-BR,High,"1. Nghiệp vụ 'Tín Dụng' (Mã '09') đã được Checker duyệt, đang hiển thị trên lưới Danh mục SPDV.
+2. Đã đăng nhập với tài khoản Maker.
+3. Ngày hệ thống (T): 21/04/2026.","1. Trên lưới Danh mục SPDV, tìm và chọn Nghiệp vụ 'Tín Dụng' (Mã '09').
+2. Nhấn nút ""Chỉnh sửa"".
+3. Quan sát màn hình Chỉnh sửa: kiểm tra trạng thái các trường (Tên Nghiệp vụ, Mã Nghiệp vụ, Mô tả, Ngày hiệu lực, Ngày hết hiệu lực).
+4. Cố gắng thay đổi trường Tên Nghiệp vụ (nếu trường cho phép tương tác).
+5. Thay đổi Ngày hết hiệu lực từ 31/12/2026 → 30/06/2027.
+6. Nhấn nút ""Xác nhận"".","(i) Nghiệp vụ/Logic: Trường Tên Nghiệp vụ, Mã Nghiệp vụ, Mô tả chỉ ở chế độ hiển thị (read-only hoặc disabled), không thể thay đổi. Chỉ Ngày hiệu lực và Ngày hết hiệu lực mới được chỉnh sửa. Sau khi nhấn Xác nhận, hệ thống tạo bản ghi chờ duyệt.
+(ii) UI: Toast thành công: 'Yêu cầu Sửa Nghiệp vụ đã được gửi chờ phê duyệt'. Màn hình chỉnh sửa: Tên, Mã, Mô tả hiển thị dạng view-only (theo quy tắc chung hệ thống - BA confirm Q14).
+(iii) Trạng thái bản ghi: Bản ghi 'Tín Dụng' xuất hiện tại Tác vụ Pending của Maker với Action = 'Sửa', Status = 'Chờ duyệt'.
+(iv) Output: Bản ghi 'Sửa Nghiệp vụ' xuất hiện trong Tác vụ chờ duyệt của Checker.",US01-NV-EDIT-RESTRICT,"BA Confirm Q14: Màn hình chỉnh sửa tương tự màn hình xem chi tiết, các trường không được phép sửa hiển thị read-only.",,,,,,,
+US01-BR-NEG-006,LOG-NV-EDIT-DATE-VALIDATE,"Mục ""Khai báo Nghiệp vụ"" - P16 ""Ngày hiệu lực, Ngày hết hiệu lực chỉ được sửa >= Ngày hệ thống""",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Chỉnh sửa Nghiệp vụ thất bại – Ngày hết hiệu lực mới nhỏ hơn Ngày hệ thống,Functional,TC-BR,High,"1. Nghiệp vụ 'Ngoại Hối' (Mã '10') đã được duyệt, đang 'Hoạt động'.
+2. Ngày hiệu lực hiện tại = 01/03/2026; Ngày hết hiệu lực = 31/12/2026.
+3. Đã đăng nhập Maker. Ngày hệ thống (T) = 21/04/2026.","1. Trên lưới SPDV, chọn Nghiệp vụ 'Ngoại Hối' → nhấn ""Chỉnh sửa"".
+2. Trong màn hình chỉnh sửa, sửa Ngày hết hiệu lực = 20/04/2026 (< T).
+3. Nhấn nút ""Xác nhận"".","(i) Nghiệp vụ/Logic: Hệ thống từ chối vì Ngày hết hiệu lực mới < Ngày hệ thống.
+(ii) UI: Thông báo lỗi: 'Ngày hết hiệu lực không được là ngày quá khứ'. Form giữ nguyên.
+(iii) Trạng thái bản ghi: Bản ghi 'Ngoại Hối' không tạo bản ghi Chờ duyệt mới, không thay đổi.
+(iv) Output: Không.",US01-NV-EDIT-DATE-PAST,,,,,,,,
+US01-BR-NEG-007,LOG-NV-EDIT-DATE-CHILD,"Mục ""Khai báo Nghiệp vụ"" - P17 ""Ngày hiệu lực phải <= Ngày hiệu lực của các SPDV chi tiết""",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Chỉnh sửa Nghiệp vụ thất bại – Ngày hiệu lực mới vi phạm ràng buộc ngày với SPDV con,Functional,TC-BR,Critical,"1. Nghiệp vụ 'Tài Khoản' (Mã '01') đã duyệt. Ngày hiệu lực = 01/04/2026; Ngày hết hiệu lực = 31/12/2026.
+2. SPDV chi tiết con 'Tài khoản Thanh Toán' (Mã '0101') có Ngày hiệu lực = 05/04/2026.
+3. Đã đăng nhập Maker. Ngày hệ thống (T) = 21/04/2026.","1. Trên lưới SPDV, chọn Nghiệp vụ 'Tài Khoản' (Mã '01') → nhấn ""Chỉnh sửa"".
+2. Sửa Ngày hiệu lực = 10/04/2026 (> Ngày hiệu lực của SPDV con = 05/04/2026).
+3. Nhấn nút ""Xác nhận"".","(i) Nghiệp vụ/Logic: Hệ thống kiểm tra cascade: Ngày hiệu lực mới (10/04) > Ngày hiệu lực của SPDV con '0101' (05/04) → vi phạm ràng buộc. Không lưu.
+(ii) UI: Thông báo lỗi: 'Ngày hiệu lực của Nghiệp vụ phải nhỏ hơn hoặc bằng Ngày hiệu lực của các SPDV con'. Form vẫn mở (BA update Q12: BA sẽ update US chi tiết error message).
+(iii) Trạng thái bản ghi: Không có bản ghi Chờ duyệt nào được tạo.
+(iv) Output: Không.",US01-NV-EDIT-DATE-CHILD-VIOLATION,BA chưa cung cấp error message chi tiết cho Q12 (đang cập nhật US). QA cần verify lại khi BA update.,,,,,,,
+US01-BR-NEG-008,LOG-NV-NO-CHANGE,"Lưu đồ Chỉnh sửa Nghiệp vụ - Bước ""Kiểm tra Ngày HLực/HHLực có thay đổi không? → No""",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Chỉnh sửa Nghiệp vụ – Không thay đổi giá trị nào thì hệ thống thông báo 'Không có thay đổi',Functional,TC-BR,Medium,"1. Nghiệp vụ 'Bảo Lãnh' (Mã '02') đã duyệt. Ngày hiệu lực = 21/04/2026; Ngày hết hiệu lực = 31/12/2026.
+2. Đã đăng nhập Maker. Ngày hệ thống (T) = 21/04/2026.","1. Trên lưới SPDV, chọn Nghiệp vụ 'Bảo Lãnh' (Mã '02') → nhấn ""Chỉnh sửa"".
+2. Không thay đổi bất kỳ trường nào (giữ nguyên Ngày hiệu lực và Ngày hết hiệu lực).
+3. Nhấn nút ""Xác nhận"".","(i) Nghiệp vụ/Logic: Hệ thống phát hiện không có thay đổi. Không tạo bản ghi Chờ duyệt mới (tránh luồng phê duyệt không cần thiết - BA confirm Q04).
+(ii) UI: Thông báo thông tin (không phải lỗi màu đỏ): 'Không có thay đổi nào được ghi nhận'.
+(iii) Trạng thái bản ghi: Bản ghi gốc không thay đổi. Không có Pending nào được tạo.
+(iv) Output: Không.",US01-NV-EDIT-NOCHANGE,BA confirm Q04: Không tạo bản ghi chờ duyệt khi không có thay đổi là hợp lý.,,,,,,,
+US01-BR-HAP-008,LOG-SPDV-AUTOCODE,"Mục ""Khai báo SPDV chi tiết"" - P28 - Bảng Table 3 - Mã SPDV chi tiết",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Thêm mới SPDV chi tiết – Mã SPDV = Mã cha + 2 ký tự số tự tăng,Functional,TC-BR,Critical,"1. Nghiệp vụ 'Tài Khoản' (Mã '06') đã duyệt, đang 'Hoạt động'.
+2. Chưa có SPDV con nào của 'Tài Khoản' được tạo.
+3. Đã đăng nhập Maker. Ngày hệ thống (T) = 21/04/2026.","1. Trên lưới Danh mục SPDV, tìm dòng 'Tài Khoản' (Mã '06').
+2. Nhấn nút ""+"" tại dòng 'Tài Khoản' để tạo SPDV chi tiết con.
+3. Quan sát màn hình: trường Mã, Cấp SPDV liền trước.
+4. Nhập Tên = 'Tài khoản thanh toán', Mô tả = 'SPDV tài khoản thanh toán cá nhân'.
+5. Nhập Ngày hiệu lực = 21/04/2026, Ngày hết hiệu lực = 31/12/2026.
+6. Nhấn nút ""Xác nhận"".","(i) Nghiệp vụ/Logic: Hệ thống tự sinh Mã SPDV chi tiết = '0601' (Mã cha '06' + '01'). Trường Cấp SPDV liền trước hiển thị: '06 - Tài Khoản'.
+(ii) UI: Toast thành công: 'Thêm mới SPDV chi tiết thành công'. Trường Mã SPDV hiển thị '0601' (read-only).
+(iii) Trạng thái bản ghi: SPDV con 'Tài khoản thanh toán' (Mã '0601') tạo thành công, trạng thái = 'Chờ duyệt', Action = 'Thêm mới'.
+(iv) Output: Bản ghi xuất hiện trong Tác vụ chờ duyệt của Checker.",US01-SPDV-AUTOCODE-CHILD,Ví dụ trong Table 3: Mã 0601 - 'Tài khoản thanh toán' thuộc Nghiệp vụ 'Tài khoản'.,,,,,,,
+US01-BR-NEG-009,LOG-SPDV-AUTOCODE,"Mục ""Khai báo SPDV chi tiết"" - Bảng Table 3 - Mã SPDV - Ràng buộc >99",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Thêm mới SPDV chi tiết thất bại – Mã tự sinh vượt ngưỡng 99 con cùng cha,Functional,TC-BR,High,"1. Nghiệp vụ 'Cho Vay' (Mã '03') đã có đúng 99 SPDV con (Mã '0301' đến '0399').
+2. Đã đăng nhập Maker. Ngày hệ thống (T) = 21/04/2026.","1. Trên lưới Danh mục SPDV, nhấn nút ""+"" tại dòng 'Cho Vay' (Mã '03').
+2. Nhập Tên = 'SPDV_Overflow', Mô tả = 'Test boundary', Ngày hiệu lực = 21/04/2026, Ngày hết hiệu lực = 31/12/2026.
+3. Nhấn nút ""Xác nhận"".","(i) Nghiệp vụ/Logic: Hệ thống không thể sinh Mã tiếp theo (sẽ là '0300' không hợp lệ hoặc '03100' vượt format). Từ chối tạo.
+(ii) UI: Thông báo lỗi: 'Không thể tạo thêm SPDV chi tiết. Số lượng SPDV con của cấp này đã đạt tối đa (99)'.
+(iii) Trạng thái bản ghi: Không có bản ghi nào được tạo.
+(iv) Output: Không.",US01-SPDV-AUTOCODE-OVERFLOW,,,,,,,,
+US01-BR-HAP-009,LOG-SPDV-DATE-HIERARCHY,"Mục ""Khai báo SPDV chi tiết"" - P32-P33 - Bảng Table 3 - Ngày hiệu lực, Ngày hết hiệu lực",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Thêm mới SPDV chi tiết – Ngày hiệu lực/hết hiệu lực hợp lệ nằm trong khoảng ngày của Nghiệp vụ cha,Functional,TC-BR,Critical,"1. Nghiệp vụ 'Tài Khoản' (Mã '01') đã duyệt: Ngày hiệu lực = 01/04/2026; Ngày hết hiệu lực = 31/12/2027.
+2. Đã đăng nhập Maker. Ngày hệ thống (T) = 21/04/2026.","1. Nhấn nút ""+"" tại dòng 'Tài Khoản' (Mã '01').
+2. Nhập Tên = 'Tài khoản Tiết kiệm', Mô tả = 'SPDV tài khoản tiết kiệm'.
+3. Nhập Ngày hiệu lực = 21/04/2026 (>= Ngày HLực cha 01/04/2026 ✓).
+4. Nhập Ngày hết hiệu lực = 31/12/2026 (<= Ngày HHLực cha 31/12/2027 ✓).
+5. Nhấn nút ""Xác nhận"".","(i) Nghiệp vụ/Logic: Tất cả ràng buộc ngày hợp lệ. Bản ghi lưu thành công.
+(ii) UI: Toast thành công: 'Thêm mới SPDV chi tiết thành công'.
+(iii) Trạng thái bản ghi: SPDV con tạo thành công ở trạng thái 'Chờ duyệt'.
+(iv) Output: Bản ghi trong Tác vụ chờ duyệt của Checker.",US01-SPDV-DATE-HIERARCHY-HAP,,,,,,,,
+US01-BR-NEG-010,LOG-SPDV-DATE-HIERARCHY,"Mục ""Khai báo SPDV chi tiết"" - P32 - Ràng buộc: Ngày HLực con >= Ngày HLực cha",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Thêm mới SPDV chi tiết thất bại – Ngày hiệu lực con nhỏ hơn Ngày hiệu lực của Nghiệp vụ cha,Functional,TC-BR,Critical,"1. Nghiệp vụ 'Tài Khoản' (Mã '01') đã duyệt: Ngày hiệu lực = 01/05/2026; Ngày hết hiệu lực = 31/12/2027.
+2. Đã đăng nhập Maker. Ngày hệ thống (T) = 01/05/2026.","1. Nhấn nút ""+"" tại dòng 'Tài Khoản' (Mã '01').
+2. Nhập Tên = 'Tài khoản VIP', Mô tả = 'SPDV tài khoản VIP'.
+3. Nhập Ngày hiệu lực = 01/05/2026 (= T) nhưng < Ngày hiệu lực cha '01/05/2026' → thực ra bằng, thử với 30/04/2026 (< Ngày HLực cha).
+4. Nhập Ngày hiệu lực = 30/04/2026 (< Ngày HLực cha = 01/05/2026).
+5. Nhập Ngày hết hiệu lực = 31/12/2026.
+6. Nhấn nút ""Xác nhận"".","(i) Nghiệp vụ/Logic: Hệ thống từ chối vì Ngày hiệu lực của SPDV con < Ngày hiệu lực của Nghiệp vụ cha.
+(ii) UI: Thông báo lỗi tại trường Ngày hiệu lực: 'Ngày hiệu lực phải lớn hơn hoặc bằng Ngày hiệu lực của cấp cha (01/05/2026)'. Form vẫn mở.
+(iii) Trạng thái bản ghi: Không tạo bản ghi mới.
+(iv) Output: Không.",US01-SPDV-DATE-BEFORE-PARENT,,,,,,,,
+US01-BR-NEG-011,LOG-SPDV-DATE-HIERARCHY,"Mục ""Khai báo SPDV chi tiết"" - P33 - Ràng buộc: Ngày HHLực con <= Ngày HHLực cha",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Thêm mới SPDV chi tiết thất bại – Ngày hết hiệu lực con lớn hơn Ngày hết hiệu lực của Nghiệp vụ cha,Functional,TC-BR,Critical,"1. Nghiệp vụ 'Tài Khoản' (Mã '01') đã duyệt: Ngày hiệu lực = 01/04/2026; Ngày hết hiệu lực = 31/12/2026.
+2. Đã đăng nhập Maker. Ngày hệ thống (T) = 21/04/2026.","1. Nhấn nút ""+"" tại dòng 'Tài Khoản' (Mã '01').
+2. Nhập Tên = 'Tài khoản Doanh nghiệp', Mô tả = 'SPDV tài khoản doanh nghiệp'.
+3. Nhập Ngày hiệu lực = 21/04/2026 (hợp lệ so với cha).
+4. Nhập Ngày hết hiệu lực = 01/01/2027 (> Ngày HHLực cha = 31/12/2026).
+5. Nhấn nút ""Xác nhận"".","(i) Nghiệp vụ/Logic: Hệ thống từ chối vì Ngày hết hiệu lực của SPDV con > Ngày hết hiệu lực cha.
+(ii) UI: Thông báo lỗi tại trường Ngày hết hiệu lực: 'Ngày hết hiệu lực phải nhỏ hơn hoặc bằng Ngày hết hiệu lực của cấp cha (31/12/2026)'. Form vẫn mở.
+(iii) Trạng thái bản ghi: Không tạo bản ghi mới.
+(iv) Output: Không.",US01-SPDV-DATE-AFTER-PARENT,,,,,,,,
+US01-BR-HAP-010,LOG-SPDV-LEVEL-MAX,"Mục ""Khai báo SPDV chi tiết"" - P35-P36 ""Số n tăng: Trạng thái SPDV không thay đổi""",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Tham số PRODUCT_LEVEL tăng – Người dùng có thể khai báo thêm SPDV cấp sâu hơn,Functional,TC-BR,High,"1. PRODUCT_LEVEL hiện tại = 3 (tối đa 3 cấp: Nghiệp vụ + 2 cấp con).
+2. Cây SPDV: '01' (Cấp 1) → '0101' (Cấp 2) → '010101' (Cấp 3, là cấp cuối).
+3. Admin tăng PRODUCT_LEVEL = 4.
+4. Đã đăng nhập Maker.","1. Trên lưới SPDV, kiểm tra Nghiệp vụ '01' và các SPDV con → trạng thái không thay đổi.
+2. Nhấn nút ""+"" tại SPDV '010101' (Cấp 3, trước đây là cấp cuối).
+3. Nhập Tên = 'SPDV Cấp 4 Mới', Ngày hiệu lực = 21/04/2026, Ngày hết hiệu lực = 31/12/2026.
+4. Nhấn ""Xác nhận"".","(i) Nghiệp vụ/Logic: Các SPDV hiện tại không thay đổi trạng thái. Hệ thống cho phép tạo SPDV cấp 4 con của '010101'. Mã tự sinh = '01010101'.
+(ii) UI: Nút '+' xuất hiện tại dòng '010101'. Toast thành công sau khi tạo.
+(iii) Trạng thái bản ghi: SPDV mới 'SPDV Cấp 4 Mới' (Mã '01010101') tạo thành công, trạng thái 'Chờ duyệt'.
+(iv) Output: Bản ghi trong Tác vụ chờ duyệt của Checker.",US01-SPDV-LEVEL-INCREASE,,,,,,,,
+US01-BR-HAP-011,LOG-SPDV-LEVEL-MAX,"Mục ""Khai báo SPDV chi tiết"" - P37 ""Số n giảm: Hệ thống tự động cập nhật trạng thái SPDV cấp > n → Không hoạt động""",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Tham số PRODUCT_LEVEL giảm – SPDV có cấp > n tự động chuyển sang 'Không hoạt động',Functional,TC-BR,Critical,"1. PRODUCT_LEVEL hiện tại = 4.
+2. Cây SPDV: '01'(Cấp 1) → '0101'(Cấp 2) → '010101'(Cấp 3, Hoạt động) → '01010101'(Cấp 4, Hoạt động).
+3. Admin giảm PRODUCT_LEVEL = 3.","1. Admin cập nhật tham số PRODUCT_LEVEL từ 4 → 3.
+2. Đăng nhập Maker hoặc Checker, truy cập lưới Danh mục SPDV.
+3. Kiểm tra trạng thái SPDV '010101' (Cấp 3).
+4. Kiểm tra trạng thái SPDV '01010101' (Cấp 4).
+5. Kiểm tra trạng thái '01' (Cấp 1) và '0101' (Cấp 2).","(i) Nghiệp vụ/Logic: Hệ thống tự động cập nhật: SPDV '01010101' (Cấp 4 > n=3) chuyển sang 'Không hoạt động'. SPDV '01', '0101', '010101' (Cấp ≤ 3) KHÔNG bị ảnh hưởng, giữ nguyên trạng thái.
+(ii) UI: Cột Trạng thái của '01010101' hiển thị 'Không hoạt động'. Các cấp khác không thay đổi.
+(iii) Trạng thái bản ghi: '01010101' được cập nhật trạng thái = 'Không hoạt động' trong DB.
+(iv) Output: Không có output file.",US01-SPDV-LEVEL-DECREASE,,,,,,,,
+US01-BR-HAP-012,LOG-SPDV-LAST-LEVEL-LABEL,"Bảng Table 3 - Dòng 'Đây là cấp cuối cùng trong cây sơ đồ sản phẩm dịch vụ' (Label, ◎)",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Thêm mới SPDV chi tiết – Label 'Đây là cấp cuối cùng' hiển thị khi cấp khai báo = PRODUCT_LEVEL,Functional,TC-BR,Medium,"1. PRODUCT_LEVEL = 3.
+2. Đã có SPDV '0101' (Cấp 2). User đang tạo SPDV con cấp 3 của '0101'.
+3. Đã đăng nhập Maker. Ngày hệ thống (T) = 21/04/2026.","1. Nhấn nút ""+"" tại SPDV '0101' (Cấp 2) để tạo SPDV cấp 3.
+2. Quan sát màn hình Thêm mới SPDV chi tiết.","(i) Nghiệp vụ/Logic: Vì cấp khai báo = 3 = PRODUCT_LEVEL (cấp tối đa), hệ thống xác định đây là cấp cuối.
+(ii) UI: Label 'Đây là cấp cuối cùng trong cây sơ đồ sản phẩm dịch vụ' tự động hiển thị trên màn hình (BA trao đổi với FE để update UI - Q11).
+(iii) Trạng thái bản ghi: Label chỉ hiển thị, không ảnh hưởng dữ liệu.
+(iv) Output: Không.",US01-SPDV-LASTLEVEL-LABEL,BA Q11: BA trao đổi với FE để update UI về cách hiển thị label cấp cuối. Pending confirmation về UI design.,,,,,,,
+US01-UI-001,UI-NAV-MENU,"Mục ""Khai báo Nghiệp vụ"" - Navigation path",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,Navigation – Truy cập đúng màn hình Danh mục SPDV qua menu Tham số,UI,TC-UI,High,"1. Đã đăng nhập hệ thống với tài khoản Maker có quyền ""Danh mục Sản phẩm Dịch vụ và Code Phí"".","1. Từ màn hình chính, nhấn vào menu 'Tham số'.
+2. Quan sát danh sách menu con.
+3. Nhấn vào mục 'Danh mục sản phẩm dịch vụ và Code phí'.","(i) Nghiệp vụ/Logic: Điều hướng thành công đến màn hình Danh mục SPDV.
+(ii) UI: Màn hình Danh mục SPDV hiển thị với lưới cây phân cấp SPDV, thanh Search bar, nút 'Thêm mới Nghiệp vụ', nút 'Lọc nâng cao'.
+(iii) Trạng thái bản ghi: Không thay đổi.
+(iv) Output: Không.",US01-UI-NAV,BA confirm Q06: Navigation dùng tên 'Danh mục sản phẩm dịch vụ và Code phí' (đã BA update US).,,,,,,,
+US01-UI-002,UI-FORM-OPEN-NV,Lưu đồ Thêm mới Nghiệp vụ - Bước 1 'Hiển thị màn hình Thêm mới Nghiệp vụ',SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,UI – Form Thêm mới Nghiệp vụ hiển thị đủ các trường và Cấp SP hiển thị mặc định = 1,UI,TC-UI,High,1. Đã đăng nhập Maker. Đang ở màn hình Danh mục SPDV.,"1. Nhấn nút ""Thêm mới Nghiệp vụ"".
+2. Quan sát form Thêm mới Nghiệp vụ: kiểm tra danh sách trường, trạng thái hiển thị, giá trị mặc định.","(i) Nghiệp vụ/Logic: Form mở thành công.
+(ii) UI: Form hiển thị đầy đủ: Cấp SP dịch vụ (read-only, mặc định = 1), Tên Nghiệp vụ (★, text rỗng), Mã Nghiệp vụ (◎, read-only, chưa có giá trị), Mô tả (★, text rỗng), Ngày hiệu lực (★, date rỗng), Ngày hết hiệu lực (★, date rỗng). Nút Xác nhận và Đóng hiển thị.
+(iii) Trạng thái bản ghi: Không.
+(iv) Output: Không.",US01-UI-FORM-NV-OPEN,"BA confirm Q01: Mã Nghiệp vụ không ẩn trên màn hình (dùng chung ở các mode khác nhau), hiển thị read-only.",,,,,,,
+US01-UI-003,UI-FORM-CLOSE-NV,Lưu đồ Thêm mới Nghiệp vụ - Bước 2.1 'Đóng' → 2.2 'Quay về màn hình cây SPDV',SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,UI – Nhấn nút Đóng trên form Thêm mới Nghiệp vụ → quay về màn hình danh sách SPDV,UI,TC-UI,Medium,"1. Đã đăng nhập Maker.
+2. Form Thêm mới Nghiệp vụ đang mở, đã nhập Tên = 'Test Draft'.","1. Trên form Thêm mới Nghiệp vụ, nhấn nút ""Đóng"".
+2. Quan sát hành vi hệ thống.","(i) Nghiệp vụ/Logic: Hệ thống đóng form và quay về màn hình Danh mục SPDV. Không tạo bản ghi nào.
+(ii) UI: Màn hình Danh mục SPDV hiển thị (không có popup xác nhận thoát - BA confirm Q03: logic chung).
+(iii) Trạng thái bản ghi: Không có bản ghi 'Test Draft' nào được tạo.
+(iv) Output: Không.",US01-UI-FORM-CLOSE,"BA confirm Q03: 'Đóng' là logic chung - quay về màn hình cũ, không có dialog xác nhận.",,,,,,,
+US01-UI-004,UI-FORM-OPEN-SPDV,"Lưu đồ Thêm mới SPDV chi tiết - Bước 1 'Chọn nút ""+"" tại bản ghi SPDV cấp cha'",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,UI – Nút '+' chỉ hiển thị tại các bản ghi SPDV đã được duyệt (không hiển thị ở bản ghi Chờ duyệt),UI,TC-UI,High,"1. Lưới Danh mục SPDV hiển thị:
+   - Nghiệp vụ 'Tài Khoản' (Mã '01') - đã duyệt, Hoạt động.
+   - Nghiệp vụ 'Cho Vay' (đang ở trạng thái Chờ duyệt).
+2. Đã đăng nhập Maker.","1. Quan sát lưới Danh mục SPDV.
+2. Kiểm tra dòng 'Tài Khoản' (đã duyệt): tìm nút '+'.
+3. Kiểm tra dòng 'Cho Vay' (Chờ duyệt): tìm nút '+'.","(i) Nghiệp vụ/Logic: Nút '+' chỉ hiển thị tại các SPDV đã được duyệt thành công.
+(ii) UI: Dòng 'Tài Khoản' hiển thị nút '+'. Dòng 'Cho Vay' (Chờ duyệt) KHÔNG hiển thị nút '+' hoặc nút '+' bị disabled (BA confirm Q05: chặn tạo con trên cha đang Pending).
+(iii) Trạng thái bản ghi: Không thay đổi.
+(iv) Output: Không.",US01-UI-BTN-PLUS-PENDING,BA confirm Q05 (Analysis Report): Nút [+] chỉ khả dụng khi SPDV cha đã duyệt (Hoạt động/Không hoạt động).,,,,,,,
+US01-UI-005,UI-FORM-SPDV-AUTOFIELD,"Mục ""Khai báo SPDV chi tiết"" - P26 - Bảng Table 3 - Cấp SPDV liền trước (◎ Auto)",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,UI – Form Thêm mới SPDV chi tiết tự động hiển thị 'Mã – Tên SPDV liền trước',UI,TC-UI,High,"1. Nghiệp vụ 'Ngoại Hối' (Mã '04') đã duyệt, Hoạt động.
+2. Đã đăng nhập Maker. Đang ở màn hình Danh mục SPDV.","1. Nhấn nút ""+"" tại dòng 'Ngoại Hối' (Mã '04').
+2. Quan sát form Thêm mới SPDV chi tiết: trường 'Cấp SPDV liền trước'.","(i) Nghiệp vụ/Logic: Hệ thống auto-fill trường Cấp SPDV liền trước.
+(ii) UI: Trường 'Cấp SPDV liền trước' tự động hiển thị = '04 - Ngoại Hối' (read-only, không cho sửa). Trường Mã để trống (chưa sinh). Trường Tên, Mô tả, Ngày hiệu lực, Ngày hết hiệu lực trống để người dùng nhập.
+(iii) Trạng thái bản ghi: Không.
+(iv) Output: Không.",US01-UI-SPDV-PARENT-AUTO,,,,,,,,
+US01-UI-006,UI-GRID-TREE,"Mục ""Giao diện"" - Lưới cây Danh mục SPDV",SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,UI – Lưới cây SPDV hiển thị đúng phân cấp sau khi Checker duyệt,UI,TC-UI,High,"1. Cây SPDV đã có: '01' (Tài Khoản, Cấp 1) → '0101' (TK Thanh Toán, Cấp 2) → '010101' (TK eSaving, Cấp 3).
+2. Tất cả đã được Checker duyệt thành công.
+3. Đã đăng nhập với bất kỳ tài khoản có quyền xem.","1. Truy cập màn hình Danh mục SPDV.
+2. Quan sát lưới cây SPDV.
+3. Expand/collapse các node cây.","(i) Nghiệp vụ/Logic: Lưới hiển thị đúng phân cấp.
+(ii) UI: Cây hiển thị: '01 - Tài Khoản' (Cấp 1, có mũi tên expand) → '0101 - TK Thanh Toán' (Cấp 2) → '010101 - TK eSaving' (Cấp 3). Expand/Collapse hoạt động đúng. Các cột: Mã, Tên, Ngày HLực, Ngày HHLực, Trạng thái hiển thị đầy đủ.
+(iii) Trạng thái bản ghi: Không thay đổi.
+(iv) Output: Không.",US01-UI-GRID-TREE,,,,,,,,
+US01-E2E-001,LOG-E2E-CREATE-APPROVE-NV,Lưu đồ Thêm mới Nghiệp vụ (toàn bộ) - Luồng Happy Path đầy đủ,SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,[E2E] Maker tạo Nghiệp vụ → Checker duyệt → Nghiệp vụ hiển thị trên lưới SPDV,E2E,TC-E2E,Critical,"1. Đã cấu hình Ma trận phê duyệt cho chức năng ""Danh mục SPDV"" (1 cấp Checker).
+2. Tài khoản Maker = 'maker01'; Tài khoản Checker = 'checker01'.
+3. Ngày hệ thống (T) = 21/04/2026. Mã Nghiệp vụ hiện tại cuối = '03'.","1. [Maker] Đăng nhập với tài khoản 'maker01'.
+2. [Maker] Truy cập Tham số >> Danh mục sản phẩm dịch vụ và Code phí.
+3. [Maker] Nhấn 'Thêm mới Nghiệp vụ' → nhập: Tên = 'Bảo Hiểm Nhân Thọ', Mô tả = 'Nghiệp vụ bảo hiểm nhân thọ liên kết phí', Ngày HLực = 21/04/2026, Ngày HHLực = 31/12/2027 → nhấn 'Xác nhận'.
+4. [Maker] Kiểm tra màn hình 'Tác vụ Pending của tôi': xác nhận bản ghi xuất hiện.
+5. [Checker] Đăng nhập với tài khoản 'checker01'.
+6. [Checker] Vào 'Tác vụ chờ duyệt' → tìm bản ghi 'Bảo Hiểm Nhân Thọ' → nhấn 'Phê duyệt' → xác nhận.
+7. [Maker/Checker] Truy cập lưới Danh mục SPDV → tìm 'Bảo Hiểm Nhân Thọ'.","(i) Nghiệp vụ/Logic: Luồng Maker-Checker hoàn tất. Nghiệp vụ 'Bảo Hiểm Nhân Thọ' tạo thành công với Mã '04' (auto-generate). Sau duyệt, bản ghi hiển thị chính thức trên lưới SPDV.
+(ii) UI: Step 3: Toast 'Thêm mới Nghiệp vụ thành công'. Step 6: Toast 'Phê duyệt thành công'. Step 7: Bản ghi 'Bảo Hiểm Nhân Thọ' (Mã '04') xuất hiện trên lưới với đầy đủ cột thông tin, Trạng thái = 'Hoạt động' (vì T = Ngày HLực).
+(iii) Trạng thái bản ghi: Bản ghi biến mất khỏi Tác vụ chờ duyệt. Hiển thị trên lưới chính thức.
+(iv) Output: Bản ghi sẵn sàng cho việc tạo SPDV con và gán Code Phí.",US01-E2E-NV-FULL-FLOW,,,,,,,,
+US01-E2E-002,LOG-E2E-CREATE-SPDV-MULTILEVEL,Lưu đồ Thêm mới SPDV chi tiết - Luồng khai báo cây 3 cấp,SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,[E2E] Khai báo cây SPDV 3 cấp – Nghiệp vụ → SPDV Cấp 2 → SPDV Cấp 3 đầy đủ,E2E,TC-E2E,Critical,"1. PRODUCT_LEVEL = 3.
+2. Nghiệp vụ 'Tài Khoản' (Mã '01') đã duyệt, Hoạt động: Ngày HLực = 01/04/2026; Ngày HHLực = 31/12/2027.
+3. Tài khoản Maker và Checker đã sẵn sàng. Ngày T = 21/04/2026.","1. [Maker] Nhấn '+' tại '01 - Tài Khoản' → nhập: Tên = 'Tài khoản Thanh Toán', Mô tả = 'SPDV TK thanh toán cá nhân', Ngày HLực = 21/04/2026, Ngày HHLực = 31/12/2026 → 'Xác nhận'.
+2. [Checker] Duyệt bản ghi 'Tài khoản Thanh Toán'.
+3. [Maker] Nhấn '+' tại '0101 - Tài khoản Thanh Toán' → nhập: Tên = 'TK eSaving VND', Mô tả = 'Tài khoản tiết kiệm VND', Ngày HLực = 21/04/2026, Ngày HHLực = 30/06/2026 → 'Xác nhận'.
+4. [Checker] Duyệt bản ghi 'TK eSaving VND'.
+5. Kiểm tra lưới Danh mục SPDV: cây phân cấp 3 cấp.","(i) Nghiệp vụ/Logic: Cây SPDV 3 cấp tạo thành công. Mã tự sinh: '0101' và '010101'. Ràng buộc ngày cấp con nằm trong cấp cha được duy trì.
+(ii) UI: Lưới hiển thị cây: '01 - Tài Khoản' → '0101 - Tài khoản Thanh Toán' → '010101 - TK eSaving VND'. Dòng '010101' hiển thị label 'Đây là cấp cuối cùng' (PRODUCT_LEVEL = 3). Nút '+' không xuất hiện tại '010101'.
+(iii) Trạng thái bản ghi: 3 bản ghi đều ở trạng thái chính thức trên lưới.
+(iv) Output: Cây SPDV sẵn sàng để gán Code Phí.",US01-E2E-SPDV-3LEVEL,,,,,,,,
+US01-E2E-003,LOG-E2E-EDIT-APPROVE-NV,Lưu đồ Chỉnh sửa Nghiệp vụ - Luồng đầy đủ,SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,[E2E] Maker sửa Ngày hết hiệu lực Nghiệp vụ → Checker duyệt → Lưới cập nhật đúng,E2E,TC-E2E,High,"1. Nghiệp vụ 'Kiều Hối' (Mã '05') đã duyệt, Hoạt động: Ngày HLực = 01/04/2026; Ngày HHLực = 30/09/2026.
+2. Không có SPDV con nào của 'Kiều Hối'.
+3. Tài khoản Maker và Checker sẵn sàng. Ngày T = 21/04/2026.","1. [Maker] Trên lưới SPDV, chọn Nghiệp vụ 'Kiều Hối' (Mã '05') → nhấn 'Chỉnh sửa'.
+2. [Maker] Trên màn hình Chỉnh sửa: sửa Ngày HHLực từ 30/09/2026 → 31/12/2027 → nhấn 'Xác nhận'.
+3. [Maker] Kiểm tra 'Tác vụ Pending của tôi': xác nhận bản ghi 'Sửa Nghiệp vụ' xuất hiện.
+4. [Checker] Duyệt bản ghi trong Tác vụ chờ duyệt.
+5. [Maker/Checker] Refresh lưới Danh mục SPDV → kiểm tra 'Kiều Hối' (Mã '05').","(i) Nghiệp vụ/Logic: Maker sửa thành công, bản ghi Chờ duyệt được tạo. Sau khi Checker duyệt, thông tin sau sửa ở lưới cập nhật đúng.
+(ii) UI: Step 2: Toast 'Yêu cầu Sửa Nghiệp vụ đã được gửi chờ phê duyệt'. Step 4: Toast 'Phê duyệt thành công'. Step 5: Dòng 'Kiều Hối' (Mã '05') hiển thị Ngày HHLực = 31/12/2027.
+(iii) Trạng thái bản ghi: Bản ghi cập nhật thành công trong DB, bản ghi Pending đã biến mất khỏi queue.
+(iv) Output: Không.",US01-E2E-EDIT-FULL-FLOW,,,,,,,,
+US01-E2E-004,LOG-E2E-DELETE-PENDING,Q13 BA Confirm: 'Chỉ được xóa khi bản ghi có trạng thái Từ chối duyệt/Chờ duyệt',SA - Tham Số Hệ Thống,Khai báo Danh mục Sản phẩm Dịch vụ và Code Phí,[E2E] Maker tạo Nghiệp vụ → Checker từ chối → Maker xóa bản ghi từ màn hình 'Tác vụ Pending',E2E,TC-E2E,High,"1. Nghiệp vụ 'Test_Delete' đã được Maker tạo, đang ở trạng thái 'Chờ duyệt'.
+2. Tài khoản Checker đã Từ chối bản ghi → bản ghi ở trạng thái 'Từ chối duyệt' trong Tác vụ Pending của Maker.
+3. Đã đăng nhập lại với tài khoản Maker.","1. [Maker] Vào màn hình 'Tác vụ Pending của tôi'.
+2. [Maker] Tìm bản ghi 'Test_Delete' với trạng thái 'Từ chối duyệt'.
+3. [Maker] Nhấn nút 'Xóa' tại bản ghi này.
+4. [Maker] Xác nhận xóa.
+5. Kiểm tra lưới Danh mục SPDV.","(i) Nghiệp vụ/Logic: Maker được phép xóa bản ghi ở trạng thái 'Từ chối duyệt'/'Chờ duyệt' từ màn hình Tác vụ Pending.
+(ii) UI: Toast thành công: 'Xóa bản ghi thành công'. Bản ghi biến mất khỏi màn hình Tác vụ Pending của Maker.
+(iii) Trạng thái bản ghi: Bản ghi 'Test_Delete' bị xóa, không xuất hiện trên lưới Danh mục SPDV chính.
+(iv) Output: Không.",US01-E2E-DELETE-REJECTED,"BA confirm Q13: Nút xóa nằm ở màn hình 'Tác vụ pending của tôi', được phép xóa khi Từ chối/Chờ duyệt.",,,,,,,
