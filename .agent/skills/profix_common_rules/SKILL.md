@@ -136,10 +136,33 @@ description: >
 | Ngày cập nhật | `dd/mm/yyyy` (hyperlink) | Thời điểm hành động được phê duyệt. Nhấn hyperlink → xem bản lịch sử trước khi sửa. |
 | Tác động | Text | Hành động: `Thêm mới`, `Chỉnh sửa` |
 | Người cập nhật | Text | Username của người thực hiện hành động |
+| Người phê duyệt | Text | Hiển thị người phê duyệt cuối của chức năng |
 
 ---
 
-## QTC-09 · Nguyên Tắc Phân Quyền Dữ Liệu (Data Authorization by Block)
+## QTC-09 · Tra Cứu CIF
+
+Mục đích: Cung cấp màn hình Popup tra cứu nhanh CIF theo các thông tin thể nhân của Khách hàng tại module Tra cứu, Báo cáo.
+- **Nút Tra cứu CIF:** Mở popup tìm kiếm.
+- **Nút Tra cứu / Xóa tra cứu:** 
+  - Tra cứu: Hệ thống ghi nhận và tìm kiếm.
+  - Xóa tra cứu: Reset/Xóa các điều kiện lọc.
+
+**Các trường điều kiện tìm kiếm:**
+1. **Số điện thoại** (Text): Bắt buộc bắt đầu bằng số `0`. Nếu sai format báo lỗi *"Định dạng chưa đúng"*.
+2. **Loại khách hàng** (Dropdown): Chọn 1 trong danh sách: `KHCN`, `KHTC`, `DNSN`, `CBNV`.
+3. **Chi nhánh quản lý** (Combobox).
+4. **Tỉnh** (Combobox): Phải chọn Tỉnh rồi mới chọn được Phường/xã.
+5. **Phường/Xã** (Combobox): Lọc theo Tỉnh. Disable nếu chưa chọn Tỉnh. Nếu đổi Tỉnh → Reset Phường/xã về rỗng.
+6. **Trạng thái** (Dropdown): `Hoạt động`, `Tạm dừng`.
+
+**Lưới kết quả:**
+- STT, Mã CIF, Số điện thoại, Tên, Chi nhánh quản lý, Tỉnh, Trạng thái.
+- **Hành vi click "Mã CIF":** Màn hình tra cứu đóng lại → Hệ thống tự động back và fill Mã CIF được chọn vào trường "Mã CIF" ở màn hình gọi nó ra (Tra cứu/Báo cáo tương ứng).
+
+---
+
+## QTC-10 · Nguyên Tắc Phân Quyền Dữ Liệu (Data Authorization by Block)
 
 Áp dụng cho các chức năng: Danh mục SPDV & Code phí, Biểu phí, Chương trình ưu đãi, Xem nghiệp vụ theo cây thư mục, Xem code phí theo KH, Lịch sử thu phí, Lịch thu phí dự kiến, Xem CTƯĐ theo KH, Tác vụ chờ duyệt, Báo cáo.
 
@@ -159,36 +182,48 @@ description: >
 | SPDV & Code phí | SPDV: Tất cả. Code phí: Loại KH = KHCN/DNSN/CBNV | SPDV: Tất cả. Code phí: Loại KH = KHTC | Tất cả |
 | Biểu phí | Biểu phí có Code phí Loại KH = KHCN/DNSN/CBNV | Biểu phí có Code phí Loại KH = KHTC | Tất cả |
 | Chương trình ưu đãi | CTƯĐ có Loại KH = KHCN/DNSN/CBNV | CTƯĐ có Loại KH = KHTC | Tất cả |
+| Lịch sử/Lịch thu phí dự kiến | Khách hàng là KHCN/DNSN | Khách hàng là KHTC | Tất cả |
 
 ---
 
-## QTC-10 · Bảng Mã Lỗi Hệ Thống (System Error Codes)
+## QTC-11 · Nguyên Tắc Xử Lý Lỗi (FE-First Error Handling)
 
-| Mã chức năng | Mã lỗi | Nội dung |
-|---|---|---|
-| PR.01 | PR.01.01 | Chưa nhập đủ các trường bắt buộc |
-| PR.01 | PR.01.02 | Khai báo cấp Nghiệp vụ thành công |
-| PR.01 | PR.01.03 | Chưa thay đổi Ngày hiệu lực/Ngày hết hiệu lực |
-| PR.01 | PR.01.04 | Sửa cấp Nghiệp vụ thành công |
-| PR.01 | PR.01.05 | Khai báo SPDV chi tiết thành công |
-| PR.01 | PR.01.06 | Sửa cấp SPDV chi tiết thành công |
-| PR.02 | PR.02.01 | Dữ liệu Code phí chưa hợp lệ |
-| PR.02 | PR.02.02 | Khai báo Code phí thành công |
-| PR.11 | PR.11.01 | Dữ liệu Khai báo Chương trình ưu đãi chưa hợp lệ |
-| PR.11 | PR.11.02 | Khai báo Chương trình ưu đãi thành công |
+> **Chiến lược xử lý lỗi hiện tại của dự án ProfiX:**
+> FE là tầng **chặn lỗi đầu tiên** để hạn chế tối đa việc hiển thị mã lỗi kỹ thuật từ BE lên màn hình người dùng. Tuy nhiên, nếu FE **chưa chặn được** một trường hợp nào đó, mã lỗi từ BE vẫn có thể xuất hiện trên UI.
+
+### Nguyên tắc thiết kế Test Case theo QTC-11:
+
+**Luồng Happy Path / Validation thông thường:**
+- **Expected Result ưu tiên mô tả hành vi FE:** Thông báo lỗi thân thiện do FE hiển thị (toast, inline message, highlight field…).
+- Không còn tham chiếu bảng mã lỗi PR.XX cứng trong Expected Result.
+
+**Luồng Negative / Edge Case FE chưa chặn:**
+- Vẫn thiết kế Test Case bao phủ các trường hợp FE **có thể bỏ sót** (bypass validation, gọi API trực tiếp, edge case dữ liệu hiếm gặp…).
+- **Expected Result cho trường hợp này:** Hệ thống vẫn xử lý an toàn — hoặc hiển thị thông báo lỗi BE (dạng mã lỗi kỹ thuật) — **không crash, không mất dữ liệu**.
+
+### Hướng dẫn viết Expected Result:
+
+| Tình huống | Expected Result mẫu |
+|---|---|
+| FE validate thành công (chặn được) | `Hệ thống hiển thị thông báo "[Nội dung lỗi thân thiện]" tại [vị trí field/toast]` |
+| FE chưa chặn → BE trả lỗi | `Hệ thống hiển thị thông báo lỗi từ BE (có thể dạng mã lỗi kỹ thuật). Dữ liệu không bị thay đổi.` |
+| Cả FE & BE đều xử lý đúng | `Hệ thống ngăn lưu thành công. Không có side-effect.` |
 
 ---
 
-## QTC-11 · Nguyên Tắc Sử Dụng Skill Này
+## QTC-12 · Nguyên Tắc Sử Dụng Skill Này
 
 > **AI BẮT BUỘC áp dụng khi phân tích bất kỳ US nào trong ProfiX:**
 
-1. **Tra cứu trước khi hỏi:** Trước khi đặt câu hỏi Q&A cho BA về bất kỳ hành vi nào, kiểm tra xem QTC-01 đến QTC-10 đã trả lời chưa.
+1. **Tra cứu trước khi hỏi:** Trước khi đặt câu hỏi Q&A cho BA về bất kỳ hành vi nào, kiểm tra xem QTC-01 đến QTC-11 đã trả lời chưa.
 2. **Không hỏi lại câu hỏi đã có đáp án trong Quy tắc chung**, ví dụ:
    - ❌ "Tìm kiếm có phân biệt hoa thường không?" → ✅ Đã có: QTC-02, Không phân biệt.
    - ❌ "Tải xuống ra định dạng gì?" → ✅ Đã có: QTC-05, Excel `.xlsx`.
    - ❌ "Phân trang mặc định bao nhiêu dòng?" → ✅ Đã có: QTC-06, 50 bản ghi/trang.
    - ❌ "Upload file định dạng gì?" → ✅ Đã có: QTC-07, Excel.
-   - ❌ "Lịch sử tác động gồm những cột nào?" → ✅ Đã có: QTC-08.
+   - ❌ "Lịch sử tác động gồm những cột nào?" → ✅ Đã có: QTC-08 (Thêm cả Người phê duyệt).
+   - ❌ "Tra cứu CIF hoạt động thế nào?" → ✅ Đã có: QTC-09.
+   - ❌ "Expected Result lỗi validation viết như thế nào?" → ✅ Đã có: QTC-11, ưu tiên mô tả hành vi FE, bổ sung case FE chưa chặn.
 3. **Chỉ hỏi BA các điểm thực sự thiếu** hoặc US hiện tại có quy tắc riêng mâu thuẫn/ghi đè Quy tắc chung.
 4. **Trong báo cáo phân tích**, khi nhắc đến Quy tắc chung, ghi rõ tham chiếu **[QTC-XX]** để tăng traceability.
+5. **Khi sinh Expected Result cho Test Case lỗi**, áp dụng đúng QTC-11: KHÔNG hard-code mã lỗi PR.XX trừ trường hợp test case dành riêng cho edge case FE chưa chặn.
