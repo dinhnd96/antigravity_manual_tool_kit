@@ -118,7 +118,7 @@ AI phải sinh ra một bảng tổng hợp danh sách các Test Case nhằm bao
 
 **Định Dạng Bảng Tổng Hợp Test Case:**
 `[Mã Kịch Bản (ID)] | [Feature] | [Module] | [Loại Test Case (1 trong 7 nhóm)] | [Tên Test Case / Kịch bản] | [Số lượng TC dự kiến] | [Trích dẫn tài liệu (Traceability)]`
-*Lưu ý:* Cột 'Mã Kịch Bản (ID)' dùng để đặt định danh duy nhất (VD: SC-01, SC-02) phục vụ việc mapping khi sinh Test Case thực tế. Cột 'Feature' là Tính năng lớn, 'Module' là tính năng con. Cột 'Số lượng TC dự kiến' dùng để ước tính nhanh số lượng test case vật lý có thể sinh ra từ kịch bản này (ví dụ: test case positive = 1, test case boundary = 3). Cột 'Trích dẫn tài liệu' phải ghi rõ nội dung đủ để Tester có thể dùng Ctrl+F tìm lại đúng đoạn đó trong tài liệu gốc.
+*Lưu ý:* Cột 'Mã Kịch Bản (ID)' dùng để đặt định danh duy nhất (VD: SC-01, SC-02) phục vụ việc mapping khi sinh Test Case thực tế. Cột 'Feature' là Tính năng lớn, 'Module' là tính năng con. Cột 'Tên Test Case / Kịch bản' phải mô tả đầy đủ kịch bản chính muốn test. Cột 'Số lượng TC dự kiến' dùng để ước tính nhanh số lượng test case vật lý có thể sinh ra từ kịch bản này (ví dụ: test case positive = 1, test case boundary = 3). Cột 'Trích dẫn tài liệu' phải ghi rõ nội dung đủ để Tester có thể dùng Ctrl+F tìm lại đúng đoạn đó trong tài liệu gốc.
 
 ## 5. Định Dạng File Đầu Ra & Traceability Rule
 ### 5.1 Định Dạng Bảng Q&A (Phần B)
@@ -145,5 +145,5 @@ Sau khi phân tích xong tài liệu, AI **bắt buộc** phải tự động si
 - Phân tích bằng tiếng Việt rõ ràng, rành mạch. Tránh dùng từ ngữ lập trình quá sâu nếu Tester chưa cần biết.
 - KHÔNG BAO GIỜ bị động chấp nhận 100% tài liệu là đúng. Nhiệm vụ của QA là "Phá" tài liệu tìm điểm thiếu.
 - Cấu trúc trả lời phải luôn duy trì 2 phần: Tóm tắt (Đọc hiểu) và Q&A (Nghi vấn).
-- **[PROFIX RULE] TRƯỚC KHI ĐẶT CÂU HỎI Q&A:** Bắt buộc đối chiếu với toàn bộ QTC-01 đến QTC-10 trong `profix_common_rules/SKILL.md`. Nếu câu hỏi đã có đáp án trong Quy tắc chung → KHÔNG đưa vào danh sách Q&A cho BA, thay vào đó ghi nhận trong Phần A với tham chiếu `[QTC-XX]`.
+- **[PROFIX RULE] TRƯỚC KHI ĐẶT CÂU HỎI Q&A:** Bắt buộc đối chiếu với toàn bộ QTC-01 đến QTC-12 trong `profix_common_rules/SKILL.md`. Nếu câu hỏi đã có đáp án trong Quy tắc chung → KHÔNG đưa vào danh sách Q&A cho BA, thay vào đó ghi nhận trong Phần A với tham chiếu `[QTC-XX]`.
 - **[PROFIX RULE] KHI GHI NHẬN QUY TẮC CHUNG VÀO BÁO CÁO:** Tại Phần A (Tóm tắt), có thêm một mục "A.x. Quy Tắc Chung Áp Dụng" để tổng hợp danh sách các QTC-XX liên quan đến US đang phân tích kèm nội dung quy tắc tóm tắt. Điều này giúp Tester không phải tra cứu file Quy tắc chung riêng.

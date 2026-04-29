@@ -71,20 +71,20 @@ description: >
 
 ## QTC-03 · Lọc Nâng Cao (Advanced Filter)
 
-- Người dùng nhấn "Lọc nâng cao" → hệ thống hiển thị màn hình Lọc nâng cao (thường là Popup/Drawer).
+- Người dùng nhấn "Lọc nâng cao" → hệ thống hiển thị màn hình Lọc nâng cao (thường là Drawer).
 - Nếu chưa nhập trường bắt buộc → thông báo `"Trường này bắt buộc"` hiển thị ngay dưới trường thiếu.
 - Nếu dữ liệu hợp lệ → nhấn "Áp dụng" → hệ thống trả kết quả thoả mãn **đồng thời** các điều kiện (AND).
 - Nếu để trống tất cả điều kiện → nhấn "Áp dụng" → hệ thống hiển thị **toàn bộ dữ liệu**.
-- Nhấn "Xóa lọc" → reset tất cả trường về trống → **đóng popup** → lưới trở về trạng thái mặc định.
+- Nhấn "Xóa lọc" → reset tất cả trường về trống → **đóng Drawer** → lưới trở về trạng thái mặc định.
 - Quy tắc tìm kiếm: **giống QTC-02** (AND, case-insensitive, bỏ dấu, auto-trim, rỗng bỏ qua).
 
 ---
 
 ## QTC-04 · Tra Cứu (Search with Explicit Button)
-
+- Khi truy cập chức năng  → hệ thống **mặc định không hiển thị danh sách** (kết quả rỗng, chờ user nhập điều kiện).
+- Nếu người dùng không nhập điều kiện và tất cả các điều kiện tìm kiếm là không bắt buộc mà bấm tra cứu thì hệ thống hiển thị tất cả dữ liệu thuộc chức năng
 - Người dùng nhập điều kiện → nhấn nút "Tra cứu" → hệ thống tìm kiếm.
 - Nhấn "Xóa tra cứu" → hệ thống clear điều kiện → **danh sách trở về mặc định** (không hiển thị kết quả nếu không nhập điều kiện theo từng chức năng cụ thể).
-- Nếu không nhập điều kiện → hệ thống **mặc định không hiển thị danh sách** (kết quả rỗng, chờ user nhập điều kiện).
 
 ---
 
@@ -95,8 +95,8 @@ description: >
 - **Định dạng mặc định:** Excel (`.xlsx`). Nếu US cụ thể dùng định dạng khác → sẽ ghi rõ trong tài liệu US đó.
 - **Tên file:** `{Tên chức năng} - {yyyymmddhhmmss}`
   - Ví dụ: `Quản lý Chương trình ưu đãi - 20260421101500.xlsx`
-- **Template:** được đính kèm tại mục Tải xuống của từng chức năng cụ thể.
-- ⚠️ Không có giới hạn số dòng được ghi rõ trong Quy tắc chung → **cần hỏi BA** nếu chức năng có dữ liệu lớn.
+- **Template:** Theo các trường dữ liệu được mô tả trên lưới danh sách của từng chức năng cụ thể.
+- Không có giới hạn số dòng
 
 ---
 
@@ -108,8 +108,7 @@ description: >
   - **Số trang:** nhấn để nhảy đến trang đó.
   - **Trang tiếp theo:** disabled nếu đang ở trang cuối.
   - **Trang trước đó:** disabled nếu đang ở trang đầu.
-- ⚠️ Thứ tự sắp xếp mặc định (sort mặc định của lưới) **không được định nghĩa** trong Quy tắc chung → **cần hỏi BA** hoặc tham chiếu mục Lưới của US cụ thể.
-
+- ⚠️ Thứ tự sắp xếp mặc định (sort mặc định của lưới)theo ngày update, ngày tạo giảm dần
 ---
 
 ## QTC-07 · Upload File
@@ -119,7 +118,7 @@ description: >
 - Validate sau khi upload:
   - Định dạng/dung lượng không hợp lệ → toast `"Định dạng hoặc dung lượng không hợp lệ"` → user chọn lại.
   - Dữ liệu hợp lệ → hiển thị danh sách bản ghi thành công.
-  - Dữ liệu không hợp lệ → toast `"Dữ liệu của bạn không hợp lệ"` → **highlight** dòng lỗi.
+  - Dữ liệu không hợp lệ → **highlight** dòng lỗi.
 - Chi tiết rule validate từng trường → xem tại mục Upload của US tương ứng.
 
 ---
@@ -194,7 +193,7 @@ Mục đích: Cung cấp màn hình Popup tra cứu nhanh CIF theo các thông t
 ### Nguyên tắc thiết kế Test Case theo QTC-11:
 
 **Luồng Happy Path / Validation thông thường:**
-- **Expected Result ưu tiên mô tả hành vi FE:** Thông báo lỗi thân thiện do FE hiển thị (toast, inline message, highlight field…).
+- **Expected Result ưu tiên mô tả hành vi FE:** FE không cho phép thực hiện hoặc hiển thị thông báo lỗi thân thiện (toast, inline message, highlight field…).
 - Không còn tham chiếu bảng mã lỗi PR.XX cứng trong Expected Result.
 
 **Luồng Negative / Edge Case FE chưa chặn:**
@@ -205,17 +204,64 @@ Mục đích: Cung cấp màn hình Popup tra cứu nhanh CIF theo các thông t
 
 | Tình huống | Expected Result mẫu |
 |---|---|
-| FE validate thành công (chặn được) | `Hệ thống hiển thị thông báo "[Nội dung lỗi thân thiện]" tại [vị trí field/toast]` |
+| FE chặn được hoặc validate thành công (chặn được) | `FE không cho phép thực hiện hoặc hiển thị thông báo "[Nội dung lỗi thân thiện]" tại [vị trí field/toast]` |
 | FE chưa chặn → BE trả lỗi | `Hệ thống hiển thị thông báo lỗi từ BE (có thể dạng mã lỗi kỹ thuật). Dữ liệu không bị thay đổi.` |
 | Cả FE & BE đều xử lý đúng | `Hệ thống ngăn lưu thành công. Không có side-effect.` |
 
 ---
 
-## QTC-12 · Nguyên Tắc Sử Dụng Skill Này
+## QTC-12 · Luồng Maker-Checker (Quản lý Phê duyệt - US25)
+
+> **Dựa trên US25 (Quản lý Phê duyệt), áp dụng cho toàn bộ các chức năng có luồng phê duyệt (Maker-Checker):**
+
+### 1. Tác vụ chờ duyệt (Dành cho Checker)
+- **Hành động hiển thị phụ thuộc phân quyền:**
+  - Nếu Checker **được phân quyền** tại cấp duyệt hiện tại và trạng thái tác vụ = **Chờ duyệt** → Hiển thị 3 nút: **Xem, Phê duyệt, Từ chối**.
+  - Nếu Checker **không được phân quyền** tại cấp duyệt hiện tại, hoặc bản ghi ở trạng thái **Đã duyệt / Từ chối duyệt** → Chỉ hiển thị nút **Xem** (Không có Phê duyệt/Từ chối).
+- **Lịch sử phê duyệt:** Khi nhấn "Xem lịch sử phê duyệt", hệ thống hiển thị Popup gồm: Cấp duyệt, Người thực hiện (phê duyệt/từ chối), Khối, Phòng ban, Trạng thái duyệt, Lý do, Ngày thực hiện.
+
+### 2. Tác vụ pending của tôi (Dành cho Maker)
+- **Quy tắc hiển thị hành động theo trạng thái:**
+  - **Xem:** Hiển thị ở **tất cả** các trạng thái của bản ghi.
+  - **Chỉnh sửa:** Chỉ hiển thị khi Trạng thái = **Từ chối duyệt** VÀ Tác vụ là (Thêm mới / Chỉnh sửa / Chuyển đổi code phí).
+  - **Xóa:** Hiển thị khi Trạng thái = **Chờ duyệt** hoặc **Từ chối duyệt**.
+- **Ghi chú (Lý do từ chối):** Lưới sẽ hiển thị lý do từ chối gần nhất của bản ghi khi trạng thái = Từ chối duyệt.
+- Lịch sử phê duyệt hiển thị tương tự như màn hình của Checker.
+
+### 3. Nguyên tắc sinh Mã (Nếu có)
+- Mã **chỉ được sinh chính thức** sau khi cấp duyệt cuối cùng (Checker) phê duyệt thành công.
+- Ở bước Maker (trạng thái Chờ duyệt), Mã = trống/N/A.
+
+### Mẫu Expected Result cho luồng Phê duyệt:
+
+ - **Dành cho luồng Thêm mới :**
+    ```
+    --- TRƯỚC KHI DUYỆT (MAKER) ---
+    (i) Nghiệp vụ/Logic: [Hệ thống ghi nhận lưu thành công. Bản ghi ở trạng thái 'Chờ duyệt', Mã chưa được sinh (đối với yêu cầu có sinh mã tự động).]
+    (ii) UI: Toast 'Thêm mới thành công'. Bản ghi hiển thị tại màn hình Tác vụ Pending của tôi.
+
+    --- SAU KHI LAST CHECKER DUYỆT ---
+    (i) Nghiệp vụ/Logic: [Hệ thống lưu dữ liệu chính thức. Mã được sinh tự động theo quy tắc (đối với yêu cầu có sinh mã tự động). Bản ghi được cập nhật trạng thái là Đã duyệt.]
+    (ii) UI: Toast 'Phê duyệt thành công'. Bản ghi hiển thị trên lưới chính thức với Mã đã sinh (đối với yêu cầu có sinh mã tự động).
+    ```
+  - **Dành cho luồng Chỉnh sửa (Mã không đổi):**
+    ```
+    --- TRƯỚC KHI DUYỆT (MAKER) ---
+    (i) Nghiệp vụ/Logic: [Hệ thống ghi nhận lưu thành công. Bản ghi nháp ở trạng thái 'Chờ duyệt', Mã giữ nguyên không đổi.]
+    (ii) UI: Toast 'Chỉnh sửa thành công'. Bản ghi hiển thị tại màn hình Tác vụ Pending của tôi.
+
+    --- SAU KHI LAST CHECKER DUYỆT ---
+    (i) Nghiệp vụ/Logic: [Hệ thống cập nhật dữ liệu chính thức. Mã giữ nguyên không đổi. Bản ghi đổi trạng thái thành Đã duyệt.]
+    (ii) UI: Toast 'Phê duyệt thành công'. Bản ghi hiển thị thông tin mới cập nhật trên lưới chính thức.
+    ```
+
+---
+
+## QTC-13 · Nguyên Tắc Sử Dụng Skill Này
 
 > **AI BẮT BUỘC áp dụng khi phân tích bất kỳ US nào trong ProfiX:**
 
-1. **Tra cứu trước khi hỏi:** Trước khi đặt câu hỏi Q&A cho BA về bất kỳ hành vi nào, kiểm tra xem QTC-01 đến QTC-11 đã trả lời chưa.
+1. **Tra cứu trước khi hỏi:** Trước khi đặt câu hỏi Q&A cho BA về bất kỳ hành vi nào, kiểm tra xem QTC-01 đến QTC-12 đã trả lời chưa.
 2. **Không hỏi lại câu hỏi đã có đáp án trong Quy tắc chung**, ví dụ:
    - ❌ "Tìm kiếm có phân biệt hoa thường không?" → ✅ Đã có: QTC-02, Không phân biệt.
    - ❌ "Tải xuống ra định dạng gì?" → ✅ Đã có: QTC-05, Excel `.xlsx`.
@@ -223,7 +269,7 @@ Mục đích: Cung cấp màn hình Popup tra cứu nhanh CIF theo các thông t
    - ❌ "Upload file định dạng gì?" → ✅ Đã có: QTC-07, Excel.
    - ❌ "Lịch sử tác động gồm những cột nào?" → ✅ Đã có: QTC-08 (Thêm cả Người phê duyệt).
    - ❌ "Tra cứu CIF hoạt động thế nào?" → ✅ Đã có: QTC-09.
-   - ❌ "Expected Result lỗi validation viết như thế nào?" → ✅ Đã có: QTC-11, ưu tiên mô tả hành vi FE, bổ sung case FE chưa chặn.
+   - ❌ "Expected Result lỗi validation viết như thế nào?" → ✅ Đã có: QTC-11, ưu tiên mô tả hành vi FE.
+   - ❌ "Checker thấy những hành động gì khi chưa được phân quyền?" → ✅ Đã có: QTC-12, Chỉ thấy nút Xem.
 3. **Chỉ hỏi BA các điểm thực sự thiếu** hoặc US hiện tại có quy tắc riêng mâu thuẫn/ghi đè Quy tắc chung.
 4. **Trong báo cáo phân tích**, khi nhắc đến Quy tắc chung, ghi rõ tham chiếu **[QTC-XX]** để tăng traceability.
-5. **Khi sinh Expected Result cho Test Case lỗi**, áp dụng đúng QTC-11: KHÔNG hard-code mã lỗi PR.XX trừ trường hợp test case dành riêng cho edge case FE chưa chặn.
