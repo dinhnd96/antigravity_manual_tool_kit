@@ -43,7 +43,9 @@ Sinh đồng thời các nhóm TC sau, đảm bảo **không trùng nội dung**
 - **Precondition**: Nêu rõ vai trò, tham số, ngày T, trạng thái đầu vào. **BẮT BUỘC** đánh số thứ tự (1, 2...) và ngắt dòng kể cả khi chỉ có 1 ý. Tên tính năng phân quyền phải lấy theo tên tính năng to/chính trong tài liệu.
 - **Steps**: Đánh số rõ ràng, tối đa 4–8 bước. Gắn liền với kịch bản cụ thể, không dùng mẫu chung chung. Sử dụng chính xác tên các button từ tài liệu (vd: click nút 'Xác nhận' thay vì 'Lưu'). Phải đầy đủ các bước của Maker và Checker đối với case End-to-End (E2E). **Test Data trong các step phải cụ thể**, trích xuất hoặc tự thiết kế mô phỏng trực tiếp từ đặc tả yêu cầu. Tuyệt đối không dùng placeholder hay từ ngữ chung chung kiểu `nhập dữ liệu hợp lệ`, mà phải diễn đạt rõ giá trị (vd: `nhập Mã = 'A123'`).
 - **Expected Result**: Đảm bảo đủ 2 lớp dữ liệu (Bắt buộc xuống dòng từng ý), chỉ test theo hướng người dùng cuối (End-User Perspective):
-  - **Dành cho luồng Thêm mới :**
+ (i) Nghiệp vụ/Logic: [Mô tả xử lý logic/nghiệp vụ. VD: Hệ thống lọc đúng dữ liệu theo điều kiện, hoặc không cho phép lưu bản ghi khi có lỗi validation.]
+    (ii) UI: [Mô tả hiển thị giao diện. VD: Hiển thị đúng kết quả trên lưới, hiển thị thông báo lỗi 'abc', hoặc highlight đỏ các trường nhập sai.]
+  - **Dành cho luồng Thêm mới(end to end) :**
     ```
     --- TRƯỚC KHI DUYỆT (MAKER) ---
     (i) Nghiệp vụ/Logic: [Hệ thống ghi nhận lưu thành công. Bản ghi ở trạng thái 'Chờ duyệt', Mã chưa được sinh (đối với yêu cầu có sinh mã tự động).]
@@ -53,7 +55,7 @@ Sinh đồng thời các nhóm TC sau, đảm bảo **không trùng nội dung**
     (i) Nghiệp vụ/Logic: [Hệ thống lưu dữ liệu chính thức. Mã được sinh tự động theo quy tắc (đối với yêu cầu có sinh mã tự động). Bản ghi được cập nhật trạng thái là Đã duyệt.]
     (ii) UI: Toast 'Phê duyệt thành công'. Bản ghi tại màn hình Tác vụ chờ duyệt cập nhật trạng thái Đã duyệt. Bản ghi hiển thị trên lưới chính thức với Mã đã sinh (đối với yêu cầu có sinh mã tự động).
     ```
-  - **Dành cho luồng Chỉnh sửa (Mã không đổi):**
+  - **Dành cho luồng Chỉnh sửa (Mã không đổi)(end to end):**
     ```
     --- TRƯỚC KHI DUYỆT (MAKER) ---
     (i) Nghiệp vụ/Logic: [Hệ thống ghi nhận lưu thành công. Bản ghi nháp ở trạng thái 'Chờ duyệt', Mã giữ nguyên không đổi.]
@@ -63,11 +65,7 @@ Sinh đồng thời các nhóm TC sau, đảm bảo **không trùng nội dung**
     (i) Nghiệp vụ/Logic: [Hệ thống cập nhật dữ liệu chính thức. Mã giữ nguyên không đổi. Bản ghi đổi trạng thái thành Đã duyệt.]
     (ii) UI: Toast 'Phê duyệt thành công'. Bản ghi tại màn hình Tác vụ chờ duyệt cập nhật trạng thái Đã duyệt. Bản ghi hiển thị thông tin mới cập nhật trên lưới chính thức.
     ```
-  - **Dành cho các luồng không phải E2E (Tìm kiếm, Xem, Validation...):**
-    ```
-    (i) Nghiệp vụ/Logic: [Mô tả xử lý logic/nghiệp vụ. VD: Hệ thống lọc đúng dữ liệu theo điều kiện, hoặc không cho phép lưu bản ghi khi có lỗi validation.]
-    (ii) UI: [Mô tả hiển thị giao diện. VD: Hiển thị đúng kết quả trên lưới, hiển thị thông báo lỗi 'abc', hoặc highlight đỏ các trường nhập sai.]
-    ```
+
 
 ## 5. Quy Tắc Chống Lỗi Logic
 - **Xem/Đóng**: Không làm thay đổi dữ liệu bản ghi.
