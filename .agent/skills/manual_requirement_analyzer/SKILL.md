@@ -29,7 +29,7 @@ Tài liệu `Quy tắc chung.docx` (ProfiX) định nghĩa các hành vi mặc �
 | Tìm kiếm theo Like hay Exact? | Like (gần đúng), bỏ dấu tiếng Việt | QTC-02 |
 | Các điều kiện lọc kết hợp AND hay OR? | AND | QTC-03 |
 | Để trống tất cả filter rồi Áp dụng → ra gì? | Hiển thị toàn bộ dữ liệu | QTC-03 |
-| Xóa lọc → lưới có reload không? | Popup đóng, lưới về trạng thái ban đầu | QTC-03 |
+| Xóa lọc → lưới có reload không? | Drawer đóng, lưới về trạng thái ban đầu | QTC-03 |
 | Tải xuống định dạng file gì? | Excel (.xlsx) | QTC-05 |
 | Tên file tải xuống theo format nào? | `{Tên chức năng} - yyyymmddhhmmss` | QTC-05 |
 | Phân trang mặc định bao nhiêu dòng/trang? | 50 bản ghi/trang | QTC-06 |
@@ -45,13 +45,8 @@ Tài liệu `Quy tắc chung.docx` (ProfiX) định nghĩa các hành vi mặc �
 | Định dạng Date là gì? | dd/mm/yyyy; Từ ngày = 00:00:00.000, Đến ngày = 23:59:59.999 | QTC-01.5 |
 
 ### Những câu hỏi VẪN cần hỏi BA (Quy tắc chung chưa định nghĩa)
-- Giới hạn số dòng tối đa khi Tải xuống (performance boundary).
-- Thứ tự sắp xếp mặc định (sort column & direction) của lưới.
-- Dung lượng file tối đa khi Upload.
-- Phân quyền Role cụ thể cho từng chức năng.
 - Trạng thái vòng đời (lifecycle status) của từng entity.
 - Màu/style badge hiển thị các trạng thái.
-- Hành vi khi Session timeout hoặc API lỗi 500.
 - Mockup màn hình chi tiết (nếu US chưa cung cấp).
 
 ## 1. Mục Tiêu Phân Tích & Workflow 2 Giai Đoạn

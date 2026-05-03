@@ -31,7 +31,13 @@ Sinh đồng thời các nhóm TC sau, đảm bảo **không trùng nội dung**
 4. **🎨 UI/UX & Field Validation (Giao diện & Xác thực):** Trạng thái component (disabled/enabled khi chưa đủ field), hành vi Dropdown, chống XSS/SQL Injection cơ bản, hành vi phím Enter, hành vi xác nhận chỉnh sửa khi không thay đổi dữ liệu.
 5. **🧠 Business Logic & State Transition (Logic nghiệp vụ phức tạp):** Rẽ nhánh quy tắc kinh doanh (phân loại khách hàng) hoặc chuyển đổi trạng thái (Từ "Khởi tạo" sang "Chờ duyệt" và không thể quay ngược).
 6. **🔗 Data Integrity & Integration (Tính toàn vẹn dữ liệu):** Tính toàn vẹn khi Xóa (Cascade delete hay block), và sự đồng bộ/tích hợp dữ liệu hiển thị giữa các màn hình khác nhau.
-7. **⚡ NFR (Non-Functional Requirements):** Phân quyền (Authorization view/edit) và Concurrency/Spam click (chống tạo rác dữ liệu khi double-click nút Submit).
+7. **⚡ NFR (Non-Functional Requirements):** Phân quyền (Authorization view/edit) và Concurrency/Spam click. **BẮT BUỘC** phải sinh Test Case chống spam click (double-click) cho **từng hành động submit riêng biệt** trong US, bao gồm nhưng không giới hạn:
+     - Nút **Xác nhận** khi Thêm mới (từng loại entity)
+     - Nút **Xác nhận** khi Chỉnh sửa (từng loại entity)
+     - Nút **Xóa** tại Tác vụ Pending (Maker)
+     - Nút **Phê duyệt** tại Tác vụ chờ duyệt (Checker)
+     - Nút **Từ chối** tại Tác vụ chờ duyệt (Checker)
+     Mỗi hành động trên phải là 1 TC riêng biệt (không gộp).
 
 ## 3. Quy Tắc "Tách Riêng Test Case" & "Không Trùng"
 - **TÁCH RIÊNG TUYỆT ĐỐI**: Mỗi Test Case chỉ kiểm tra một điều kiện, một trạng thái hoặc một luồng cụ thể. 
@@ -84,8 +90,9 @@ Sinh đồng thời các nhóm TC sau, đảm bảo **không trùng nội dung**
 
 Nhiều FSD hiện đại viết theo dạng Narrative (văn xuôi + bảng diễn giải bước) mà **không có mã BR_xx hay UI-FUNC.xx**. Trong trường hợp này, áp dụng chiến lược sau:
 
-### 7.1. Cột SC_Ref — Traceability 100% từ Bảng Phân Tích
-Giá trị cột SC_Ref **BẮT BUỘC** phải lấy trực tiếp từ cột "Mã Kịch Bản (ID)" trong Bảng Tổng Hợp Test Case (Phần C) của file báo cáo phân tích yêu cầu (do AI `manual_requirement_analyzer` sinh ra). Việc này đảm bảo tính kế thừa, bao phủ 100% tài liệu và không bị sót kịch bản.
+### 7.1. Cột SC_Ref — Traceability 100% từ Bảng Phân Tích (TUYỆT ĐỐI KHÔNG ĐƯỢC THIẾU SC NÀO)
+Giá trị cột SC_Ref **BẮT BUỘC** phải lấy trực tiếp từ cột "Mã Kịch Bản (ID)" trong Bảng Tổng Hợp Test Case (Phần C) của file báo cáo phân tích yêu cầu (do AI `manual_requirement_analyzer` sinh ra). Việc này đảm bảo tính kế thừa, bao phủ 100% tài liệu.
+**QUY TẮC SỐNG CÒN:** AI phải sinh đầy đủ Test Case chi tiết cho TẤT CẢ các mã SC xuất hiện trong Phần C, dựa theo đúng mô tả "Loại Test Case" và "Tên Test Case / Kịch bản". TUYỆT ĐỐI KHÔNG ĐƯỢC BỎ SÓT BẤT KỲ SC NÀO.
 Nếu phát sinh thêm case mới chưa có trong bảng phân tích, AI phải tự tạo thêm Mã Kịch Bản (VD: SC-99) và ghi chú rõ ràng.
 
 ### 7.2. Cột Reference — Tham chiếu vị trí + trích dẫn quy tắc trong tài liệu
@@ -136,11 +143,14 @@ Không in bảng ra Chat. Phải chạy Script Python (`pandas`, `openpyxl`) t�
 - **Module (Tính năng con):** Là tên tính năng phụ, màn hình con hoặc luồng rẽ nhánh cụ thể (Ví dụ: Thêm mới Nghiệp vụ).
 
 ## 9. Luồng Thực Thi (Workflow)
-1. Parse tài liệu: Liệt kê **Logic điều kiện ẩn (LOG-xxx)** và **Chức năng UI (UI-xxx)**.
+1. **Phân tích đầu vào BẮT BUỘC:** Lấy danh sách toàn bộ các kịch bản kiểm thử (SC_Ref) từ Bảng Tổng Hợp Test Case (Phần C) của file phân tích yêu cầu trước đó.
+2. Parse tài liệu: Liệt kê **Logic điều kiện ẩn (LOG-xxx)** và **Chức năng UI (UI-xxx)**.
    - Nếu tài liệu Narrative → tự bóc tách và đặt mã `LOG-` theo Mục 7.1.
-2. Kiểm tra quy tắc **Tách riêng** (Không gộp trạng thái).
-3. Viết và chạy Script Python tạo file.
-4. Thông báo đường dẫn file cho User bằng Tiếng Việt.
+3. Sinh Test Case chi tiết: Đảm bảo bao phủ **100% danh sách SC_Ref** ở bước 1. **Mỗi SC phải sinh ra ít nhất một (hoặc nhiều) Test Case thực tế** (vd: 1 SC về kiểm tra điều kiện so sánh có thể sinh ra 3 TC cho >, <, =).
+4. Kiểm tra quy tắc **Tách riêng** (Không gộp trạng thái).
+5. Viết và chạy Script Python tạo file.
+6. **Kiểm tra chéo (Cross-check) chống thiếu sót:** So sánh danh sách các SC_Ref duy nhất trong file Excel vừa tạo với danh sách gốc trong Phần C. Nếu sót bất kỳ SC nào, BẮT BUỘC phải sinh bổ sung.
+7. Thông báo đường dẫn file cho User bằng Tiếng Việt.
 
 ## Anti-Patterns 
 
@@ -148,6 +158,7 @@ Không in bảng ra Chat. Phải chạy Script Python (`pandas`, `openpyxl`) t�
 - ❌ Tự đoán business logic khi chưa hỏi user 
 - ❌ Bỏ qua bước phân tích Ambiguity 
 - ❌ Sinh test data chung chung / placeholder
+- ❌ Bỏ sót bất kỳ kịch bản SC nào từ Phần C (Bảng Tổng Hợp Test Case) khi chuyển đổi thành Test Case chi tiết.
 - ❌ Rút gọn hoặc bỏ sót test case khi mapping sang bảng
 - ❌ Sinh tất cả test cases 1 lần cho hệ thống lớn (phải chia module)
 - ❌ Chỉ có Happy Path, thiếu Negative/Boundary cases (QUICK)

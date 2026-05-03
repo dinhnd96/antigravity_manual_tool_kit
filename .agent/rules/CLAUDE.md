@@ -1,3 +1,7 @@
+---
+trigger: always_on
+---
+
 # CLAUDE.md
 
 Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-specific instructions as needed.
@@ -60,6 +64,15 @@ For multi-step tasks, state a brief plan:
 
 Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 
+## 5. Output Token Optimization (Avoid Max Output Limit)
+
+**Be concise. Break down large outputs. Avoid yapping.**
+
+- **Chunking / Pagination:** For large tasks, divide the output into smaller chunks. Ask the user for permission to proceed or wait for "continue" if the output is too long.
+- **Surgical Output:** Do not rewrite the entire file if you only made minor modifications. Use diffs, or output only the changed functions/blocks.
+- **No Yapping:** Skip unnecessary explanations, intros, and outtros unless asked. Focus entirely on the code or the direct answer.
+- **Modularization:** Break down monolithic requirements into multiple files and generate them step-by-step.
+
 ---
 
-**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, clarifying questions come before implementation, and large outputs do not get cut off due to token limits.
