@@ -109,7 +109,7 @@ AI cần bóc tách tài liệu gốc theo chiều dọc (top-down) đúng như 
 
 ### 3.2 Phân Loại Đầu Ra Bắt Buộc — 4 Hạng Mục (Mandatory Output Grouping)
 
-> **QUY TẮC CỨNG:** Bảng Q&A đầu ra **BẮT BUỘC** có **đúng 4 hàng dữ liệu**, mỗi hàng tương ứng với **1 Hạng mục** dưới đây. AI phải gom nhóm (consolidate) tất cả các phát hiện thuộc cùng Hạng mục vào **1 câu hỏi/cảnh báo duy nhất** cho Hạng mục đó. Không được tạo thêm hàng ngoài 4 hàng này. Không được bỏ trống Hạng mục nào.
+> **QUY TẮC CỨNG VỀ PHÂN LOẠI:** Bảng Q&A đầu ra phải bám sát 4 Hạng mục dưới đây. **TÁCH BẠCH TỪNG CÂU HỎI RA CÁC DÒNG RIÊNG BIỆT**, tuyệt đối không gom chung nhiều câu hỏi vào cùng 1 dòng (không dùng danh sách a, b, c trong 1 ô). Mỗi dòng tương ứng với 1 vấn đề cụ thể để BA tiện trả lời. Không được bỏ trống Hạng mục nào nếu có vấn đề.
 
 **Hạng mục 1: 🔶 Vấn đề Nghiệp vụ / Luồng xử lý (Business Logic & Flow Issues)**
    - Thiếu luồng lỗi / ngoại lệ (Missing Negative Flows): Tài liệu mô tả luồng thành công nhưng không nói khi thất bại thì sao?
@@ -164,15 +164,15 @@ AI sử dụng câu trả lời của BA để chốt logic, sau đó sinh ra m�
 
 ## 5. Định Dạng File Đầu Ra & Traceability Rule
 ### 5.1 Định Dạng Bảng Q&A (Phần B)
-Bảng Q&A có **đúng 4 hàng dữ liệu** (+ 1 hàng header), mỗi hàng = 1 Hạng mục. Cấu trúc mỗi hàng:
+Bảng Q&A hiển thị mỗi câu hỏi trên **một dòng riêng biệt** (+ 1 hàng header). Cấu trúc mỗi hàng:
 
 | Cột | Quy tắc | Ví dụ |
 |---|---|---|
-| **ID** | `[Mã tính năng]-QA-[01 đến 04]`. Trong đó Mã tính năng = tên viết tắt của US đang phân tích. Số 01-04 tương ứng Hạng mục 1-4. | `US01-QA-01`, `US01-QA-02`, `US01-QA-03`, `US01-QA-04` |
+| **ID** | `[Mã tính năng]-QA-[01 đến 04].[STT]`. Trong đó 01-04 tương ứng Hạng mục 1-4, STT là số thứ tự câu hỏi trong hạng mục đó. | `US01-QA-01.1`, `US01-QA-01.2`, `US01-QA-02.1` |
 | **Trích xuất** | Ghi rõ vị trí trong tài liệu gốc (Tên mục, Tên bảng, STT, Flowchart). TUYỆT ĐỐI KHÔNG dùng số dòng. | `Mục "Khai báo Nghiệp vụ", Bảng mô tả trường Row 7` |
-| **Câu hỏi / Sự cố** | Mô tả vấn đề logic. Nếu Hạng mục có nhiều vấn đề, gom thành danh sách đánh số (a), (b), (c)... trong cùng 1 ô. | `(a) Flowchart thiếu nhánh khi User không thay đổi dữ liệu. (b) Concurrent edit chưa được mô tả.` |
+| **Câu hỏi / Sự cố** | Mô tả một vấn đề logic duy nhất, ngắn gọn, súc tích. TUYỆT ĐỐI KHÔNG gom nhiều vấn đề vào 1 ô. | `Flowchart thiếu nhánh khi User không thay đổi dữ liệu.` |
 | **Phân loại** | Một trong 4 giá trị cố định: `Nghiệp vụ` / `Giới hạn` / `Toàn vẹn dữ liệu` / `UI-UX`. | `Nghiệp vụ` |
-| **Đề xuất từ QA** | Nêu rõ phương án xử lý theo chuẩn. Mỗi vấn đề (a), (b)... có đề xuất tương ứng. | `(a) Đề xuất: FE hiển thị cảnh báo. (b) Đề xuất: Block concurrent edit.` |
+| **Đề xuất từ QA** | Nêu rõ phương án xử lý theo chuẩn cho vấn đề ở cột Câu hỏi. | `Đề xuất: FE hiển thị cảnh báo, không cho submit.` |
 | **Trả lời của BA** | **Để trống** — BA sẽ điền sau. | _(trống)_ |
 
 **QUY TẮC TRÍCH XUẤT (TRACEABILITY RULE) BẮT BUỘC:**
