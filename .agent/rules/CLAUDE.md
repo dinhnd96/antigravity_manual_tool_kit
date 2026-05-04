@@ -64,15 +64,36 @@ For multi-step tasks, state a brief plan:
 
 Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 
-## 5. Output Token Optimization (Avoid Max Output Limit)
+## 5. Output Token Optimization (CRITICAL — Avoid Max Output Limit)
 
-**Be concise. Break down large outputs. Avoid yapping.**
+**Every response MUST stay well under the token limit. If in doubt, output LESS.**
 
-- **Chunking / Pagination:** For large tasks, divide the output into smaller chunks. Ask the user for permission to proceed or wait for "continue" if the output is too long.
-- **Surgical Output:** Do not rewrite the entire file if you only made minor modifications. Use diffs, or output only the changed functions/blocks.
-- **No Yapping:** Skip unnecessary explanations, intros, and outtros unless asked. Focus entirely on the code or the direct answer.
-- **Modularization:** Break down monolithic requirements into multiple files and generate them step-by-step.
+### 5.1. Hard Budget Rules
+- **Chat response ≤ 200 lines.** If you need more, STOP and ask the user to say "continue". The model has strict limits on output tokens per message.
+- **NEVER print tables, test cases, JSON arrays, or document content in chat.** Write them to a file (script or direct file write), then report only the file path and a 1-2 line summary. This is the #1 cause of token limit errors.
+- **NEVER re-summarize file content you just created.** After writing/running a script that generates a `.docx`, `.xlsx`, or `.md`, say only: "✅ File đã tạo tại: `<path>`" + any open questions. Do NOT paste the content back into chat.
+
+### 5.2. File-First Output (Mandatory for Large Content)
+- **Scripts ARE the output.** When generating reports, test cases, or documents, write the Python/Node script directly using `write_to_file` → run it → report path. Do NOT draft content in chat first, then convert to script.
+- **Data-driven pattern:** For test case generation, define test data as a compact list of dicts/tuples at the top, then loop to generate rows. Never write one code block per test case.
+- **Split large scripts:** If a script exceeds 300 lines, split it into multiple scripts. 
+
+### 5.3. Chunking Strategy for Large Tasks
+- **Module-by-module:** For tasks with >15 test cases or >10 Q&A items, process ONE module at a time. After each module, output the file and ask "Tiếp tục module tiếp theo?".
+- **Phase separation:** Never generate Phase 1 + Phase 2 content in the same response. Complete Phase 1, stop, wait for input.
+- **Never attempt to output the full dataset at once** if it's large. Generate data in smaller batches.
+
+### 5.4. Response Hygiene
+- **No Yapping:** Skip intros, outros, and filler. Jump straight to action or answer.
+- **No Echo:** Do not repeat the user's request back. Do not restate what a skill/rule says unless clarifying ambiguity.
+- **No Decorative Markdown:** Avoid excessive headers, horizontal rules, emoji, or formatting that inflates token count without adding information.
+
+### 5.5. Self-Check Before Submitting
+Before finalizing any response, ask yourself:
+1. "Am I printing content that should be in a file?" → If yes, move to file.
+2. "Am I summarizing what I just wrote to a file?" → If yes, cut it.
+3. "Is my response over 200 lines?" → If yes, cut it down.
 
 ---
 
-**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, clarifying questions come before implementation, and large outputs do not get cut off due to token limits.
+**These guidelines are working if:** responses stay under token limits, large outputs go to files not chat, no truncated responses, and the user never sees "max output token limit" errors.
