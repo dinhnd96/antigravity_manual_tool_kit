@@ -118,7 +118,13 @@ AI sử dụng câu trả lời của BA để chốt logic, sau đó sinh ra m�
 4. **🎨 UI/UX & Field Validation (Giao diện & Xác thực):** Trạng thái component (disabled/enabled khi chưa đủ field), hành vi Dropdown, chống XSS/SQL Injection cơ bản, hành vi phím Enter, hành vì xác nhận khi không chỉnh sửa.
 5. **🧠 Business Logic & State Transition (Logic nghiệp vụ phức tạp):** Rẽ nhánh quy tắc kinh doanh (phân loại khách hàng) hoặc chuyển đổi trạng thái (Từ "Khởi tạo" sang "Chờ duyệt" và không thể quay ngược).
 6. **🔗 Data Integrity & Integration (Tính toàn vẹn dữ liệu):** Tính toàn vẹn khi Xóa (Cascade delete hay block), và sự đồng bộ/tích hợp dữ liệu hiển thị giữa các màn hình khác nhau.
-7. **⚡ NFR (Non-Functional Requirements):** Phân quyền (Authorization view/edit) và Concurrency/Spam click (chống tạo rác dữ liệu khi double-click nút Submit).
+7. **⚡ NFR (Non-Functional Requirements):** Phân quyền (Authorization view/edit) và Concurrency/Spam click. **BẮT BUỘC** phải sinh Test Case chống spam click (double-click) cho **từng hành động submit riêng biệt** trong US, bao gồm nhưng không giới hạn:
+     - Nút **Xác nhận** khi Thêm mới (từng loại entity)
+     - Nút **Xác nhận** khi Chỉnh sửa (từng loại entity)
+     - Nút **Xóa** tại Tác vụ Pending (Maker)
+     - Nút **Phê duyệt** tại Tác vụ chờ duyệt (Checker)
+     - Nút **Từ chối** tại Tác vụ chờ duyệt (Checker)
+     Mỗi hành động trên phải là 1 TC riêng biệt (không gộp).
 
 **Định Dạng Bảng Tổng Hợp Test Case:**
 `[Mã Kịch Bản (ID)] | [Feature] | [Module] | [Loại Test Case (1 trong 7 nhóm)] | [Tên Test Case / Kịch bản] | [Số lượng TC dự kiến] | [Trích dẫn tài liệu (Traceability)]`

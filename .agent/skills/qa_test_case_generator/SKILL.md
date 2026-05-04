@@ -20,7 +20,7 @@ Tài liệu `Quy tắc chung.docx` (ProfiX) định nghĩa các hành vi mặc �
 
 ## 1. Yêu Cầu Chung & Xử Lý Hình Ảnh
 - **Giữ nguyên tên field/item/button (BẮT BUỘC)**: Lấy đúng và đầy đủ tên các field, item, button... từ tài liệu hoặc mockup. Tuyệt đối không cắt gọn, rút gọn (vd: dùng "Lưu" thay vì "Lưu thông tin") hoặc tự ý đặt tên theo thói quen.
-- **Xử lý tài liệu DOCX**: Nếu tài liệu có ảnh (Mockup, Flowchart), ưu tiên sử dụng lệnh giải nél (truy cập `word/media/`) để lấy ảnh. Phân tích 2-3 hình ảnh cốt lõi (Vision/OCR) để hiểu sâu về thiết kế UI và Flow mà text không diễn đạt hết.
+- **Xử lý tài liệu DOCX**: Nếu tài liệu có ảnh (Mockup, Flowchart), ưu tiên sử dụng lệnh giải nén (truy cập `word/media/`) để lấy ảnh. Phân tích 2-3 hình ảnh cốt lõi (Vision/OCR) để hiểu sâu về thiết kế UI và Flow mà text không diễn đạt hết.
 
 
 ## 2. Mục Tiêu Sinh Test Case
