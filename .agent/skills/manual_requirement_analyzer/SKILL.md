@@ -86,33 +86,58 @@ AI cần bóc tách tài liệu gốc theo chiều dọc (top-down) đúng như 
 3. **Bảng Điều Kiện Tiên Quyết & Cấu Hình (Pre-conditions & Settings):** Liệt kê các cờ (flags), phân quyền (roles), hoặc dữ liệu mồi (master data) cần chuẩn bị trước khi Test.
 4. **Ma trận Phân Quyền/Dữ Liệu (Nếu có):** Ai có quyền làm gì? Trạng thái nào đi với hành động nào? Mọi thứ cần được làm phẳng hóa (flattened) để Tester không bị rối.
 
-## 3. Phần B: Khai Quật Lỗ Hổng & Sinh Câu Hỏi Q&A (Loopholes Discovery & BA Queries)
-Đây là kỹ năng quan trọng nhất. AI phải đọc tài liệu với "Tư duy Phản biện" (Critical Thinking) để tìm ra:
-1. **Thiếu Luồng Lỗi / Ngoại Lệ (Missing Negative Flows):**
-   - Tài liệu mô tả luồng nhập tiền thành công, nhưng không nói nếu tài khoản không đủ tiền thì sao? Lỗi hiển thị gì?
-2. **Mâu Thuẫn Nghiệp Vụ (Business Conflicts):**
-   - Trạng thái A chỉ cho phép Hành động X, nhưng ở một đoạn khác lại nói User có thể làm Hành động Y?
-   - Quy tắc sinh ngày hiệu lực mâu thuẫn với quy tắc chung của hệ thống?
-3. **Mơ Hồ Về UI/UX (UI Ambiguities):**
-   - Danh sách Dropdown lấy dữ liệu từ đâu?
-4. **Performance & Security Boundaries:**
-   - Upload file/hình ảnh thì giới hạn dung lượng/format là bao nhiêu?
+## 3. Phần B: Danh Sách Cảnh Báo & Q&A (Loopholes Discovery & BA Queries)
+Đây là kỹ năng quan trọng nhất. AI phải đọc tài liệu với "Tư duy Phản biện" (Critical Thinking), áp dụng phương pháp phân tích đa tầng bên dưới, sau đó **gom nhóm tất cả câu hỏi/cảnh báo vào đúng 4 Hạng mục bắt buộc**.
 
-5. **Phân Tích Hình Ảnh Thực Tế (Flowchart & UI Mockup):**
+### 3.1 Phương Pháp Phân Tích (Analysis Methodology)
+
+**A. Phân Tích Hình Ảnh Thực Tế (Flowchart & UI Mockup):**
    - **BẮT BUỘC:** Tài liệu .docx thường ẩn chứa hình vẽ luồng (BPMN) và Mockup UI cực kỳ quan trọng. AI phải DÙNG bash command để `unzip` file `.docx` ra một file folder tạm, sau đó tìm vào đường dẫn `word/media/` để lấy các file ảnh (`.png`, `.jpeg`).
    - Dùng tool `view_file` để **nhìn trực tiếp các hình ảnh này**.
    - Đối chiếu chéo (Cross-check): Hình vẽ màn hình (UI) có khớp với các trường (Field) được liệt kê trong bảng mô tả Text hay không? Luồng Flowchart vẽ có thiếu nhánh so với text không? Nếu "Râu ông nọ cắm cằm bà kia" -> Đưa ngay vào danh sách Q&A Bắt BA giải trình.
 
-6. **Định Hướng Test Case (Test Case Facilitation):**
+**B. Định Hướng Test Case (Test Case Facilitation):**
    - Đặt câu hỏi sao cho làm rõ được Định nghĩa Hoàn thành (Acceptance Criteria) bao gồm: Input, Action, và Expected Result cụ thể.
    - Tập trung bóc tách các giá trị biên (Boundary values) và điều kiện dữ liệu mồi (Test data). Qua đó, các câu trả lời của BA sẽ trực tiếp trở thành đầu vào thiết kế Test Case sau này, tiết kiệm tối đa nỗ lực phân tích lại.
    - **Lưu ý Mapping 2 chiều:** Bất cứ điểm mù nào phát hiện cũng phải gắn nhãn nó thuộc "Module [n]" nào theo chiều dọc của tài liệu để Tester dễ dàng bổ sung Test Case vào đúng vị trí sau khi nhận được câu trả lời từ BA.
 
-7. **Chiến Thuật Phân Tích Đa Tầng & Tổng Hợp (Layered Review & Master Consolidation):**
+**C. Chiến Thuật Phân Tích Đa Tầng & Tổng Hợp (Layered Review & Master Consolidation):**
    - **Tầng 1 (Cử động):** Đối chiếu Logic Text với Flowchart. Tìm các nhánh cụt, vòng lặp vô tận, hoặc Action bị thiếu nhánh (VD: Nhấn "Lưu" nhưng Flowchart không vẽ nhánh "Validate Lỗi").
    - **Tầng 2 (Giao diện):** Đối chiếu Cấu trúc Text với Hình ảnh UI Mockup. Tìm sự lệch pha về Tên cột, Tên field, Nút bấm (VD: Text bảo có trường A, Mockup biến mất trường A).
-   - **Tầng 3 (Dữ liệu & Biên):** Đóng vai Tester thực hiện Test Case Facilitation như ở mục 6. Suy nghĩ về Boundary, Format, và Job Batch Timing.
+   - **Tầng 3 (Dữ liệu & Biên):** Đóng vai Tester thực hiện Test Case Facilitation như ở mục B. Suy nghĩ về Boundary, Format, và Job Batch Timing.
    - **Master Consolidation:** Khi phân tích, luôn phải tự đánh giá bằng tư duy của nhiều "Personas" (Mô hình tốc độ cao x Mô hình suy luận sâu). Đảm bảo bản báo cáo cuối cùng vơ hết được (1) Lỗi copy-paste tài liệu, (2) Lỗi logic Data, và (3) Lỗi UX, không bỏ sót bất kỳ điểm nào để phải thao tác 2 lần.
+
+### 3.2 Phân Loại Đầu Ra Bắt Buộc — 4 Hạng Mục (Mandatory Output Grouping)
+
+> **QUY TẮC CỨNG:** Bảng Q&A đầu ra **BẮT BUỘC** có **đúng 4 hàng dữ liệu**, mỗi hàng tương ứng với **1 Hạng mục** dưới đây. AI phải gom nhóm (consolidate) tất cả các phát hiện thuộc cùng Hạng mục vào **1 câu hỏi/cảnh báo duy nhất** cho Hạng mục đó. Không được tạo thêm hàng ngoài 4 hàng này. Không được bỏ trống Hạng mục nào.
+
+**Hạng mục 1: 🔶 Vấn đề Nghiệp vụ / Luồng xử lý (Business Logic & Flow Issues)**
+   - Thiếu luồng lỗi / ngoại lệ (Missing Negative Flows): Tài liệu mô tả luồng thành công nhưng không nói khi thất bại thì sao?
+   - Mâu thuẫn nghiệp vụ (Business Conflicts): Trạng thái A chỉ cho phép Hành động X, nhưng đoạn khác lại cho phép Hành động Y?
+   - Luồng rẽ nhánh bị thiếu trong Flowchart so với Text (Nhánh cụt, thiếu validate).
+   - Hành vi khi User thao tác đặc biệt: Chỉnh sửa mà không thay đổi, Concurrent edit, Thêm con khi cha ở trạng thái đặc biệt.
+   - *Ví dụ: Quy định sửa Tên/Mô tả, luồng không hỗ trợ hủy bỏ, Batch Job xung đột với quyết định admin.*
+
+**Hạng mục 2: 🔴 Giới hạn hệ thống & Exception Handling (System Limits & Exceptions)**
+   - Giới hạn số lượng (VD: Mã tự tăng > 99 → lỗi xảy ra ở bước nào?).
+   - Tham số hệ thống thay đổi (VD: tham số n tăng/giảm → ảnh hưởng gì?).
+   - Edge cases khi đạt ngưỡng giới hạn: overflow, timeout, concurrency.
+   - Hành vi hệ thống khi gặp lỗi không mong đợi (unexpected exception handling).
+   - *Ví dụ: Giới hạn số 99, tham số n giảm rồi tăng lại, Batch Job fail giữa chừng.*
+
+**Hạng mục 3: 🟠 Toàn vẹn dữ liệu & Ràng buộc (Data Integrity & Constraints)**
+   - Ràng buộc Cascade cha-con (VD: Cha hết hiệu lực → con có bị ảnh hưởng?).
+   - Ràng buộc Unique (VD: Tên/Mã có cần unique không? Scope unique ở đâu?).
+   - Ràng buộc ngày tháng giữa các cấp (Ngày hiệu lực cha <= con <= cháu).
+   - Soft delete vs Hard delete, xử lý khi xóa bản ghi có reference.
+   - *Ví dụ: SPDV bị vô hiệu hóa khi giảm n, ràng buộc ngày cha-con, cascade trạng thái.*
+
+**Hạng mục 4: 🔵 UI/UX & Giao diện (UI/UX & Interface Issues)**
+   - Không nhất quán giữa Mockup UI và Bảng mô tả trường (tên field, thứ tự, dấu bắt buộc).
+   - Thiếu trường trên Mockup so với yêu cầu nghiệp vụ (hoặc ngược lại).
+   - Thiếu thông tin về giới hạn ký tự, placeholder, tooltip, trạng thái enabled/disabled.
+   - Hành vi UI chưa rõ: Dropdown lấy data từ đâu? Readonly hay editable? Label chính xác?
+   - *Ví dụ: Mockup hiển thị dấu (*) ở trường readonly, thiếu trường hiển thị cấp hiện tại, label không thống nhất.*
 
 ## 4. Phần C: Tổng Hợp Bảng Test Case Đề Xuất (Test Case Coverage) - CHỈ CHẠY Ở PHASE 2
 *Lưu ý: Chỉ thực hiện bước này sau khi User đã cung cấp câu trả lời của BA cho Phần B.*
@@ -139,8 +164,16 @@ AI sử dụng câu trả lời của BA để chốt logic, sau đó sinh ra m�
 
 ## 5. Định Dạng File Đầu Ra & Traceability Rule
 ### 5.1 Định Dạng Bảng Q&A (Phần B)
-Liệt kê các câu hỏi theo cấu trúc chuyên nghiệp, có căn cứ trích dẫn rõ ràng để BA không bắt bẻ:
-`[ID Câu Hỏi] | [Chỉ dẫn Trích Xuất (Mục/Trang/Bảng)] | [Nội dung Câu hỏi/Sự cố] | [Phân loại: Nghiệp vụ / UX / Security / Test Case] | [Đề xuất hướng xử lý từ QA] | [Câu trả lời của BA (Để trống)]`
+Bảng Q&A có **đúng 4 hàng dữ liệu** (+ 1 hàng header), mỗi hàng = 1 Hạng mục. Cấu trúc mỗi hàng:
+
+| Cột | Quy tắc | Ví dụ |
+|---|---|---|
+| **ID** | `[Mã tính năng]-QA-[01 đến 04]`. Trong đó Mã tính năng = tên viết tắt của US đang phân tích. Số 01-04 tương ứng Hạng mục 1-4. | `US01-QA-01`, `US01-QA-02`, `US01-QA-03`, `US01-QA-04` |
+| **Trích xuất** | Ghi rõ vị trí trong tài liệu gốc (Tên mục, Tên bảng, STT, Flowchart). TUYỆT ĐỐI KHÔNG dùng số dòng. | `Mục "Khai báo Nghiệp vụ", Bảng mô tả trường Row 7` |
+| **Câu hỏi / Sự cố** | Mô tả vấn đề logic. Nếu Hạng mục có nhiều vấn đề, gom thành danh sách đánh số (a), (b), (c)... trong cùng 1 ô. | `(a) Flowchart thiếu nhánh khi User không thay đổi dữ liệu. (b) Concurrent edit chưa được mô tả.` |
+| **Phân loại** | Một trong 4 giá trị cố định: `Nghiệp vụ` / `Giới hạn` / `Toàn vẹn dữ liệu` / `UI-UX`. | `Nghiệp vụ` |
+| **Đề xuất từ QA** | Nêu rõ phương án xử lý theo chuẩn. Mỗi vấn đề (a), (b)... có đề xuất tương ứng. | `(a) Đề xuất: FE hiển thị cảnh báo. (b) Đề xuất: Block concurrent edit.` |
+| **Trả lời của BA** | **Để trống** — BA sẽ điền sau. | _(trống)_ |
 
 **QUY TẮC TRÍCH XUẤT (TRACEABILITY RULE) BẮT BUỘC:**
 TUYỆT ĐỐI KHÔNG SỬ DỤNG SỐ DÒNG (Line 15, Line 20...) làm tham chiếu. Bởi vì tài liệu bạn đọc là file text đã trích xuất từ file Word gốc, số dòng sẽ không khớp với file của người dùng (BA).
