@@ -16,7 +16,7 @@ Kỹ năng này định hướng AI hoạt động như một Senior QA Lead, ph
 
 ### Mục đích tích hợp
 Tài liệu `Quy tắc chung.docx` (ProfiX) định nghĩa các hành vi mặc định áp dụng cho toàn bộ hệ thống. 
-- **[PROFIX RULE] TRONG QUÁ TRÌNH VIẾT TEST CASE:** Bắt buộc áp dụng các quy tắc xuất/nhập/tìm kiếm/hiển thị từ QTC-01 đến QTC-10 để hoàn thiện kịch bản, ngay cả khi URD gốc bỏ sót. Cần ghi vào cột Note ghi chú `[Theo QTC-XX]` để Test Lead biết Test Case có nguồn gốc từ đâu.
+- **[PROFIX RULE] TRONG QUÁ TRÌNH VIẾT TEST CASE:** Bắt buộc áp dụng các quy tắc xuất/nhập/tìm kiếm/hiển thị từ QTC-01 đến QTC-12 để hoàn thiện kịch bản, ngay cả khi URD gốc bỏ sót. Cần ghi vào cột Note ghi chú `[Theo QTC-XX]` để Test Lead biết Test Case có nguồn gốc từ đâu.
 
 ## 1. Yêu Cầu Chung & Xử Lý Hình Ảnh
 - **Giữ nguyên tên field/item/button (BẮT BUỘC)**: Lấy đúng và đầy đủ tên các field, item, button... từ tài liệu hoặc mockup. Tuyệt đối không cắt gọn, rút gọn (vd: dùng "Lưu" thay vì "Lưu thông tin") hoặc tự ý đặt tên theo thói quen.
