@@ -9,8 +9,12 @@ dependencies:
 
 Kỹ năng này định hướng AI hoạt động như một Senior QA / Test Lead. Mục đích là "dịch" các tài liệu nghiệp vụ (URD, BRD, Spec) khô khan hoặc phức tạp thành ngôn ngữ dễ hiểu đối với Manual Tester, đồng thời chỉ ra các lỗ hổng (loopholes), điểm mù, hoặc mâu thuẫn trong tài liệu để đặt câu hỏi ngược lại cho Business Analyst (BA) trước khi viết Test Case.
 
-## 0. TÍCH HỢP QUY TẮC CHUNG PROFIX (BẮT BUỘC – ĐỌC TRƯỚC)
+## 0. CẤU HÌNH HỆ THỐNG & TÍCH HỢP (BẮT BUỘC ĐỌC TRƯỚC)
 
+### 0.1 LOẠI BỎ TÍNH NGẪU NHIÊN CỦA AI (BẮT BUỘC VỚI TESTER)
+Để đảm bảo kết quả phân tích luôn nhất quán, logic và không bị sót case giữa các lần chạy khác nhau, User/Tester **BẮT BUỘC** phải thiết lập thông số của AI ở mức **Temperature = 0** (hoặc mức thấp nhất có thể tùy nền tảng) trước khi bắt đầu phiên làm việc. Điều này loại bỏ hoàn toàn sự "sáng tạo ngẫu nhiên" không cần thiết và ép AI hoạt động theo hướng Deterministic (Tất định).
+
+### 0.2 TÍCH HỢP QUY TẮC CHUNG PROFIX
 > **Skill này được sử dụng trong dự án ProfiX Phase 1.** Trước khi phân tích bất kỳ US nào, AI BẮT BUỘC đọc và nạp nội dung skill `profix_common_rules` tại đường dẫn:
 > `.agent/skills/profix_common_rules/SKILL.md`
 
@@ -20,7 +24,10 @@ Tài liệu `Quy tắc chung.docx` (ProfiX) định nghĩa các hành vi mặc �
 - **Tập trung Q&A** vào các điểm thực sự chưa rõ, đặc thù của từng US.
 - **Tiết kiệm thời gian** cho cả BA, QA và Tester.
 
-### Danh sách câu hỏi KHÔNG được hỏi BA (đã có đáp án trong Quy tắc chung)
+### QUY TẮC CHỐNG LẶP (ANTI-REDUNDANCY) - KHÔNG ĐƯỢC HỎI BA NHỮNG ĐIỀU SAU:
+TUYỆT ĐỐI KHÔNG đưa các câu hỏi mang tính chất "xác nhận lại" vào Phần B (Ví dụ: "Mô tả có áp dụng giới hạn 300 ký tự theo QTC-01.6 không?"). Hệ thống MẶC ĐỊNH ÁP DỤNG, không cần BA xác nhận lại!
+
+**CẤM HỎI VỀ THÔNG BÁO LỖI:** TUYỆT ĐỐI KHÔNG đặt bất kỳ câu hỏi nào liên quan đến mã lỗi (error codes), toast thông báo lỗi, hoặc nội dung của các message lỗi (error messages). Mặc định bỏ qua các điểm mù liên quan đến text/mã lỗi này.
 
 | Câu hỏi thường gặp | Đáp án từ Quy tắc chung | Tham chiếu |
 |---|---|---|
@@ -73,11 +80,9 @@ AI cần bóc tách tài liệu gốc theo chiều dọc (top-down) đúng như 
    - **Module 1: [Tên Chức năng/Module 1]**
      - **Luồng chính (Happy Path):** Mô tả flow chuẩn dạng gạch đầu dòng ngắn gọn.
      - *Các Luồng Rẽ Nhánh / Ngoại lệ:* Liệt kê lỗi cơ bản, hành vi Hủy (Cancel), xung đột trạng thái, ràng buộc dữ liệu... trực tiếp thuộc Module 1.
-     - *Định hướng Test Case:* Liệt kê ý tưởng/danh sách Test Case tương ứng trực tiếp cho Module này (đảm bảo tính mapping dọc).
    - **Module 2: [Tên Chức năng/Module 2]**
      - **Luồng chính (Happy Path):** Tương tự...
      - *Các Luồng Rẽ Nhánh / Ngoại lệ:* Tương tự...
-     - *Định hướng Test Case:* Tương tự...
 3. **Bảng Điều Kiện Tiên Quyết & Cấu Hình (Pre-conditions & Settings):** Liệt kê các cờ (flags), phân quyền (roles), hoặc dữ liệu mồi (master data) cần chuẩn bị trước khi Test.
 4. **Ma trận Phân Quyền/Dữ Liệu (Nếu có):** Ai có quyền làm gì? Trạng thái nào đi với hành động nào? Mọi thứ cần được làm phẳng hóa (flattened) để Tester không bị rối.
 
@@ -89,7 +94,7 @@ AI cần bóc tách tài liệu gốc theo chiều dọc (top-down) đúng như 
    - Trạng thái A chỉ cho phép Hành động X, nhưng ở một đoạn khác lại nói User có thể làm Hành động Y?
    - Quy tắc sinh ngày hiệu lực mâu thuẫn với quy tắc chung của hệ thống?
 3. **Mơ Hồ Về UI/UX (UI Ambiguities):**
-   - Danh sách Dropdown lấy dữ liệu từ đâu? Giới hạn hiển thị bao nhiêu dòng? Có Search không?
+   - Danh sách Dropdown lấy dữ liệu từ đâu?
 4. **Performance & Security Boundaries:**
    - Upload file/hình ảnh thì giới hạn dung lượng/format là bao nhiêu?
 
@@ -113,7 +118,9 @@ AI cần bóc tách tài liệu gốc theo chiều dọc (top-down) đúng như 
 *Lưu ý: Chỉ thực hiện bước này sau khi User đã cung cấp câu trả lời của BA cho Phần B.*
 AI sử dụng câu trả lời của BA để chốt logic, sau đó sinh ra một bảng tổng hợp danh sách các Test Case nhằm bao phủ 100% nội dung tài liệu. Các Test Case này không cần viết bước chi tiết (Test Steps) nhưng phải nêu rõ tiêu đề (Test Case Title) đủ ý và bắt buộc chia thành 7 nhóm sau:
 1. **🟢 Happy Path (Positive Cases - Luồng cơ bản):** Kịch bản người dùng thao tác đúng, nhập dữ liệu chuẩn chỉnh và hệ thống xử lý thành công theo đúng luồng nghiệp vụ mong đợi.
-2. **🔴 Negative Path & Exception Handling (Luồng ngoại lệ, báo lỗi):** Hệ thống phản hồi khi người dùng thao tác sai (bỏ trống trường, sai định dạng, dữ liệu trùng lặp). Hệ thống không crash mà phải có thông báo lỗi rõ ràng.
+2. **🔴 Negative Path & Exception Handling (Luồng ngoại lệ, báo lỗi theo QTC-11):** Cần bao phủ 2 cấp độ xử lý lỗi:
+   - **Cấp độ 1 (FE Validation):** Người dùng thao tác sai cơ bản (bỏ trống trường, sai định dạng). FE chặn không cho thao tác tiếp hoặc không cho lưu hoặc hiển thị thông báo lỗi thân thiện.
+   - **Cấp độ 2 (BE Exception - Edge cases FE chưa chặn):** Kịch bản bypass validation hoặc vi phạm ràng buộc dữ liệu sâu. Hệ thống phải xử lý an toàn: **không crash, không sai lệch dữ liệu**, hiển thị thông báo lỗi từ BE (có thể dạng mã lỗi kỹ thuật) và ngăn lưu thành công.
 3. **📐 Boundary Value Analysis (Giá trị biên):** Kiểm tra điểm giới hạn của dữ liệu được phép nhập (Biên dưới, Biên trên, giá trị bằng 0, số âm, số tối đa).
 4. **🎨 UI/UX & Field Validation (Giao diện & Xác thực):** Trạng thái component (disabled/enabled khi chưa đủ field), hành vi Dropdown, chống XSS/SQL Injection cơ bản, hành vi phím Enter, hành vì xác nhận khi không chỉnh sửa.
 5. **🧠 Business Logic & State Transition (Logic nghiệp vụ phức tạp):** Rẽ nhánh quy tắc kinh doanh (phân loại khách hàng) hoặc chuyển đổi trạng thái (Từ "Khởi tạo" sang "Chờ duyệt" và không thể quay ngược).
@@ -158,5 +165,8 @@ Quá trình xuất file diễn ra thành 2 lần tương ứng với 2 Phase:
 - Phân tích bằng tiếng Việt rõ ràng, rành mạch. Tránh dùng từ ngữ lập trình quá sâu nếu Tester chưa cần biết.
 - KHÔNG BAO GIỜ bị động chấp nhận 100% tài liệu là đúng. Nhiệm vụ của QA là "Phá" tài liệu tìm điểm thiếu.
 - Cấu trúc trả lời phải luôn duy trì 2 phần: Tóm tắt (Đọc hiểu) và Q&A (Nghi vấn).
-- **[PROFIX RULE] TRƯỚC KHI ĐẶT CÂU HỎI Q&A:** Bắt buộc đối chiếu với toàn bộ QTC-01 đến QTC-12 trong `profix_common_rules/SKILL.md`. Nếu câu hỏi đã có đáp án trong Quy tắc chung → KHÔNG đưa vào danh sách Q&A cho BA, thay vào đó ghi nhận trong Phần A với tham chiếu `[QTC-XX]`.
-- **[PROFIX RULE] KHI GHI NHẬN QUY TẮC CHUNG VÀO BÁO CÁO:** Tại Phần A (Tóm tắt), có thêm một mục "A.x. Quy Tắc Chung Áp Dụng" để tổng hợp danh sách các QTC-XX liên quan đến US đang phân tích kèm nội dung quy tắc tóm tắt. Điều này giúp Tester không phải tra cứu file Quy tắc chung riêng.
+- **[PROFIX RULE - TUYỆT ĐỐI KHÔNG HỎI LẠI] TRƯỚC KHI ĐẶT CÂU HỎI Q&A:** Bắt buộc đối chiếu với toàn bộ QTC-01 đến QTC-12 trong `profix_common_rules/SKILL.md`. 
+  - Nếu một vấn đề (độ dài, định dạng ngày, maker-checker...) đã có trong Quy tắc chung → **MẶC ĐỊNH ÁP DỤNG, KHÔNG ĐƯỢC ĐƯA VÀO DANH SÁCH Q&A ĐỂ "XÁC NHẬN LẠI".**
+  - Hành vi hỏi xác nhận (Ví dụ: *"Trường tên có áp dụng giới hạn 50 ký tự theo QTC-01.6 không?"*) là **VI PHẠM NGHIÊM TRỌNG**. Chỉ đặt câu hỏi nếu tài liệu US có ghi chú **mâu thuẫn trực tiếp** với QTC.
+- **[PROFIX RULE] KHI GHI NHẬN QUY TẮC CHUNG VÀO BÁO CÁO:** Tại Phần A (Tóm tắt), có thêm một mục "A.4. Quy Tắc Chung Áp Dụng" để tổng hợp danh sách các QTC-XX liên quan đến US đang phân tích. Mọi giả định mặc định phải nằm ở Phần A, không được tràn xuống Phần B.
+- **[CẤM HỎI VỀ MESSAGE LỖI]:** TUYỆT ĐỐI KHÔNG đặt câu hỏi yêu cầu BA làm rõ mã lỗi (error codes), toast hiển thị lỗi, hay nội dung message lỗi (error messages). Các thành phần này không thuộc phạm vi cần Q&A.
