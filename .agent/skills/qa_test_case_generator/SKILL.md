@@ -39,6 +39,14 @@ Sinh đồng thời các nhóm TC sau, đảm bảo **không trùng nội dung**
      - Nút **Từ chối** tại Tác vụ chờ duyệt (Checker)
      Mỗi hành động trên phải là 1 TC riêng biệt (không gộp).
 
+### QUY TẮC PHÂN LOẠI TEST CASE (BẮT BUỘC):
+Khi phân loại Test Case, Agent phải tuân thủ thứ tự ưu tiên sau:
+1. Nếu case liên quan đến giới hạn số lượng (Min/Max), số thứ tự bản ghi, hoặc độ dài chuỗi: BẮT BUỘC phân loại là "Boundary Value". Tuyệt đối không để là Business Logic.
+2. Nếu case liên quan đến luồng phê duyệt (Maker-Checker) hoặc trạng thái dữ liệu (Active/Inactive): Phân loại là "Business Logic".
+3. Nếu case liên quan đến định dạng hoặc thông báo lỗi nhập liệu: Phân loại là "Field Validation".
+
+=> Lưu ý: Case "Bản ghi thứ 100 báo lỗi" phải được định danh là "Boundary Value".
+
 ## 3. Quy Tắc "Tách Riêng Test Case" & "Không Trùng"
 - **TÁCH RIÊNG TUYỆT ĐỐI**: Mỗi Test Case chỉ kiểm tra một điều kiện, một trạng thái hoặc một luồng cụ thể. 
 - **CẤM GỘP**: Không gộp nhiều trường hợp hoặc nhiều trạng thái (Status/State) vào cùng một TC để tránh rủi ro sót case khi thực thi.

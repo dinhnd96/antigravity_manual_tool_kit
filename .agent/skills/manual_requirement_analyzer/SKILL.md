@@ -158,6 +158,14 @@ AI sử dụng câu trả lời của BA để chốt logic, sau đó sinh ra m�
      - Nút **Từ chối** tại Tác vụ chờ duyệt (Checker)
      Mỗi hành động trên phải là 1 TC riêng biệt (không gộp).
 
+### QUY TẮC PHÂN LOẠI TEST CASE (BẮT BUỘC):
+Khi phân loại Test Case, Agent phải tuân thủ thứ tự ưu tiên sau:
+1. Nếu case liên quan đến giới hạn số lượng (Min/Max), số thứ tự bản ghi, hoặc độ dài chuỗi: BẮT BUỘC phân loại là "Boundary Value". Tuyệt đối không để là Business Logic.
+2. Nếu case liên quan đến luồng phê duyệt (Maker-Checker) hoặc trạng thái dữ liệu (Active/Inactive): Phân loại là "Business Logic".
+3. Nếu case liên quan đến định dạng hoặc thông báo lỗi nhập liệu: Phân loại là "Field Validation".
+
+=> Lưu ý: Case "Bản ghi thứ 100 báo lỗi" phải được định danh là "Boundary Value".
+
 **Định Dạng Bảng Tổng Hợp Test Case:**
 `[Mã Kịch Bản (ID)] | [Feature] | [Module] | [Loại Test Case (1 trong 7 nhóm)] | [Tên Test Case / Kịch bản] | [Số lượng TC dự kiến] | [Trích dẫn tài liệu (Traceability)]`
 *Lưu ý:* Cột 'Mã Kịch Bản (ID)' dùng để đặt định danh duy nhất (VD: SC-01, SC-02) phục vụ việc mapping khi sinh Test Case thực tế. Cột 'Feature' là Tính năng lớn, 'Module' là tính năng con. Cột 'Tên Test Case / Kịch bản' phải mô tả đầy đủ kịch bản chính muốn test. Cột 'Số lượng TC dự kiến' dùng để ước tính nhanh số lượng test case vật lý có thể sinh ra từ kịch bản này (ví dụ: test case positive = 1, test case boundary = 3). Cột 'Trích dẫn tài liệu' phải ghi rõ nội dung đủ để Tester có thể dùng Ctrl+F tìm lại đúng đoạn đó trong tài liệu gốc.
