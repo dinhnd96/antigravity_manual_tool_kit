@@ -103,7 +103,7 @@ AI cần bóc tách tài liệu gốc theo chiều dọc (top-down) đúng như 
    - **Tầng 1 (Cử động):** Đối chiếu Logic Text với Flowchart. Tìm các nhánh cụt, vòng lặp vô tận, hoặc Action bị thiếu nhánh (VD: Nhấn "Lưu" nhưng Flowchart không vẽ nhánh "Validate Lỗi").
    - **Tầng 2 (Giao diện):** Đối chiếu Cấu trúc Text với Hình ảnh UI Mockup. Tìm sự lệch pha về Tên cột, Tên field, Nút bấm (VD: Text bảo có trường A, Mockup biến mất trường A).
    - **Tầng 3 (Dữ liệu & Biên):** Đóng vai Tester thực hiện Test Case Facilitation như ở mục B. Suy nghĩ về Boundary, Format, và Job Batch Timing.
-   - **Master Consolidation:** Khi phân tích, luôn phải tự đánh giá bằng tư duy của nhiều "Personas" (Mô hình tốc độ cao x Mô hình suy luận sâu). Đảm bảo bản báo cáo cuối cùng vơ hết được (1) Lỗi copy-paste tài liệu, (2) Lỗi logic Data, và (3) Lỗi UX, không bỏ sót bất kỳ điểm nào để phải thao tác 2 lần.
+   - **Master Consolidation:** Đảm bảo bản báo cáo cuối cùng vơ hết được (1) Lỗi copy-paste tài liệu, (2) Lỗi logic Data, và (3) Lỗi UX, không bỏ sót bất kỳ điểm nào để phải thao tác 2 lần.
 
 ### 3.2 Phân Loại Đầu Ra Bắt Buộc — 4 Hạng Mục (Mandatory Output Grouping)
 
