@@ -14,6 +14,24 @@ description: >
 
 ---
 
+## Giải Thích Thuật Ngữ
+
+| STT | Ký hiệu / Từ viết tắt | Giải thích |
+|-----|------------------------|------------|
+| 1 | ◎ | Trường ở dạng disable, không cho phép nhập/sửa |
+| 2 | ★ | Trường bắt buộc phải nhập |
+| 3 | – | Trường không bắt buộc nhập |
+| 4 | KH | Khách hàng |
+| 5 | KHCN | Khách hàng cá nhân |
+| 6 | KHTC | Khách hàng doanh nghiệp lớn / Khách hàng doanh nghiệp vừa và nhỏ |
+| 7 | DNSN | Khách hàng doanh nghiệp siêu nhỏ |
+| 8 | CBNV | Cán bộ nhân viên |
+| 9 | SPDV | Sản phẩm dịch vụ |
+| 10 | CTƯĐ | Chương trình ưu đãi |
+| 11 | MTD | Month to date |
+
+---
+
 ## QTC-01 · Định Dạng Trường (Field Formats)
 
 ### QTC-01.1 · Combobox
