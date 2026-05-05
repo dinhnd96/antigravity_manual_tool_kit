@@ -3,6 +3,7 @@ name: qa_test_case_generator
 description: Kỹ năng Senior QA Lead phân tích URD/BRD để sinh bộ Test Case chuẩn Enterprise (Level B2) với kỹ thuật tách biệt kịch bản và Expected Result 2 lớp (Logic & UI).
 dependencies:
   - profix_common_rules
+  - ai_deterministic_config
 ---
 
 # Kỹ năng Tạo Test Case Chuẩn Enterprise (QA Test Case Generator)

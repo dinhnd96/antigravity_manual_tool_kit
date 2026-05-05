@@ -3,6 +3,7 @@ name: manual_requirement_analyzer
 description: Kỹ năng phân tích tài liệu (URD/BRD) giúp Manual Tester đọc hiểu nhanh nghiệp vụ và sinh danh sách câu hỏi Q&A sát sườn để BA giải đáp các điểm mù/mâu thuẫn.
 dependencies:
   - profix_common_rules
+  - ai_deterministic_config
 ---
 
 # Kỹ năng Phân Tích Tài Liệu & Q&A Dành Cho Manual Tester (Manual Requirement Analyzer)
@@ -11,10 +12,7 @@ Kỹ năng này định hướng AI hoạt động như một Senior QA / Test L
 
 ## 0. CẤU HÌNH HỆ THỐNG & TÍCH HỢP (BẮT BUỘC ĐỌC TRƯỚC)
 
-### 0.1 LOẠI BỎ TÍNH NGẪU NHIÊN CỦA AI (BẮT BUỘC VỚI TESTER)
-Để đảm bảo kết quả phân tích luôn nhất quán, logic và không bị sót case giữa các lần chạy khác nhau, User/Tester **BẮT BUỘC** phải thiết lập thông số của AI ở mức **Temperature = 0** (hoặc mức thấp nhất có thể tùy nền tảng) trước khi bắt đầu phiên làm việc. Điều này loại bỏ hoàn toàn sự "sáng tạo ngẫu nhiên" không cần thiết và ép AI hoạt động theo hướng Deterministic (Tất định).
-
-### 0.2 TÍCH HỢP QUY TẮC CHUNG PROFIX
+### 0.1 TÍCH HỢP QUY TẮC CHUNG PROFIX
 > **Skill này được sử dụng trong dự án ProfiX Phase 1.** Trước khi phân tích bất kỳ US nào, AI BẮT BUỘC đọc và nạp nội dung skill `profix_common_rules` tại đường dẫn:
 > `.agent/skills/profix_common_rules/SKILL.md`
 
