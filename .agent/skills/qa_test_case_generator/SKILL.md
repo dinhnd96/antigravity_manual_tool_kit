@@ -19,6 +19,14 @@ Kỹ năng này định hướng AI hoạt động như một Senior QA Lead, ph
 Tài liệu `Quy tắc chung.docx` (ProfiX) định nghĩa các hành vi mặc định áp dụng cho toàn bộ hệ thống. 
 - **[PROFIX RULE] TRONG QUÁ TRÌNH VIẾT TEST CASE:** Bắt buộc áp dụng các quy tắc xuất/nhập/tìm kiếm/hiển thị từ QTC-01 đến QTC-12 để hoàn thiện kịch bản, ngay cả khi URD gốc bỏ sót. Cần ghi vào cột Note ghi chú `[Theo QTC-XX]` để Test Lead biết Test Case có nguồn gốc từ đâu.
 
+## 0.2 CHỐNG VƯỢT TOKEN
+> Tuân thủ rule `rules/token_safe_output.md` (auto-load). Khi sinh Test Case:
+- **Bước đầu tiên:** Phân loại độ phức tạp (S/M/L/XL) dựa trên tổng số SC từ Phần C.
+- **Level ≥ L (>10 SC):** BẮT BUỘC lập WBS — chia batch 5-8 TC/phần.
+- **Chế độ thực thi mặc định:** ✋ **MANUAL** — luôn chờ user nói "tiếp" sau mỗi batch. Chỉ chuyển sang 🔄 AUTO khi user nói rõ "auto" / "tự chạy" / "làm hết đi".
+- **Mỗi batch:** Viết script Python → chạy → append vào file Excel → báo path + số TC → chờ user nói "tiếp".
+- **Output:** KHÔNG in nội dung TC trong chat. Chỉ báo path + số TC đã sinh.
+
 ## 1. Yêu Cầu Chung & Xử Lý Hình Ảnh
 - **Giữ nguyên tên field/item/button (BẮT BUỘC)**: Lấy đúng và đầy đủ tên các field, item, button... từ tài liệu hoặc mockup. Tuyệt đối không cắt gọn, rút gọn (vd: dùng "Lưu" thay vì "Lưu thông tin") hoặc tự ý đặt tên theo thói quen.
 - **Xử lý tài liệu DOCX**: Nếu tài liệu có ảnh (Mockup, Flowchart), ưu tiên sử dụng lệnh giải nén (truy cập `word/media/`) để lấy ảnh. Phân tích 2-3 hình ảnh cốt lõi (Vision/OCR) để hiểu sâu về thiết kế UI và Flow mà text không diễn đạt hết.

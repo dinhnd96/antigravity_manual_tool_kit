@@ -1,149 +1,191 @@
-# 🛡️ Token-Safe Output Rule (Anti-Truncation)
+---
+trigger: always_on
+---
 
-> **Mục đích:** Ngăn chặn lỗi "model's generation exceeded the maximum output token limit" bằng cách buộc AI tự động chia nhỏ output và ghi ra file thay vì in trong chat.
+# 🛡️ Token-Safe Execution Rule (Chống Vượt Token)
+
+> **Mục đích:** Ngăn chặn TRIỆT ĐỂ lỗi "model's generation exceeded the maximum output token limit".
+> **Chiến lược chính:** PHÂN RÃ CÔNG VIỆC trước → Thực thi từng phần nhỏ → Ghi file thay vì in chat.
+> **Nguồn duy nhất (Single Source of Truth):** Toàn bộ quy tắc chống vượt token nằm TẠI ĐÂY. Các file khác (CLAUDE.md) chỉ pointer đến file này.
 
 ---
 
-## 1. Phân loại Task theo Output Size
+## 1. Nguyên Tắc Vàng (KHÔNG BAO GIỜ vi phạm)
 
-Trước khi bắt đầu bất kỳ task sinh nội dung nào, AI **BẮT BUỘC** phải ước lượng kích thước output:
-
-| Level | Ước lượng | Ví dụ | Chiến lược |
-|-------|-----------|-------|------------|
-| **S** | < 50 dòng | Trả lời câu hỏi ngắn, fix 1 bug | Chat trực tiếp |
-| **M** | 50–150 dòng | Phân tích 1 module, Q&A 1 feature | Ghi file `.md` |
-| **L** | 150–400 dòng | Sinh test case 1 module, report phân tích | Ghi file `.md` + chia 2 phần |
-| **XL** | > 400 dòng | Full test suite, phân tích toàn bộ US | Ghi file `.md` + chia theo module |
-
-**Quy tắc vàng:** Nếu level ≥ M → **BẮT BUỘC** ghi ra file, KHÔNG in trong chat.
+1. **KHÔNG BAO GIỜ** cố làm hết 1 task lớn trong 1 response.
+2. **KHÔNG BAO GIỜ** in bảng/data > 5 dòng trong chat. Ghi file.
+3. **KHÔNG BAO GIỜ** viết script > 200 dòng trong 1 response. Chia nhỏ.
+4. **KHÔNG BAO GIỜ** tóm tắt lại nội dung file vừa tạo. Chỉ báo path.
+5. **KHÔNG BAO GIỜ** phân tích + sinh nội dung trong cùng 1 response.
+6. **KHÔNG BAO GIỜ** lặp lại yêu cầu user, mở đầu/kết thúc thừa. Đi thẳng vào việc.
 
 ---
 
-## 2. Chiến lược File-First (Bắt buộc cho Level ≥ M)
+## 2. Quy Trình Bắt Buộc — 3 Bước
 
-### 2.1. Quy trình chuẩn
+### Bước 1: Đánh Giá (Luôn làm đầu tiên)
+
+Ước lượng output → phân loại level:
+
+| Level | Output | Hành động |
+|-------|--------|-----------|
+| **S** | < 50 dòng | Làm trực tiếp |
+| **M** | 50–200 dòng | Ghi file, chat tóm tắt |
+| **L** | 200–500 dòng | **Lập kế hoạch → chia 2-3 phần** |
+| **XL** | > 500 dòng | **Lập kế hoạch → chia 4+ phần** |
+
+**Ước lượng nhanh theo loại task:**
+
+| Loại task | Cách đếm |
+|-----------|----------|
+| Sinh Test Case | 1 TC ≈ 15-20 dòng → 10 TC = ~180 dòng (Level L) |
+| Phân tích yêu cầu (Q&A) | 1 câu hỏi ≈ 5-8 dòng → 20 câu = ~140 dòng (Level M-L) |
+| Report phân tích | 1 section ≈ 30-50 dòng → 5 section = ~200 dòng (Level L) |
+| Script Python/Code | 1 function ≈ 20-40 dòng → script 300 dòng = Level L |
+| Bảng Excel (qua script) | Data + script ≈ 50 dòng/10 rows → 50 rows = Level L-XL |
+
+### Bước 2: Lập Kế Hoạch + Chọn Chế Độ (Bắt buộc cho Level ≥ L)
+
+Tạo WBS và xác định chế độ thực thi:
 
 ```
-Bước 1: AI ước lượng size → thông báo level (S/M/L/XL)
-Bước 2: AI ghi kết quả vào file .md (hoặc .xlsx nếu là bảng)
-Bước 3: Chat chỉ hiển thị:
-   - ✅ Đường dẫn file
-   - 📊 Tóm tắt 3-5 dòng (số lượng items, highlights)
-   - ❓ Câu hỏi mở cần user quyết định (nếu có)
+📋 Task Level: [L/XL]
+🔄 Chế độ: [AUTO / MANUAL]
+📦 Chia thành [N] phần:
+| # | Tên phần | Nội dung | Ước lượng |
+|---|----------|----------|-----------|
+| 1 | ... | ... | ~X dòng |
+[AUTO]: AI tự chạy liên tiếp tất cả phần.
+[MANUAL]: Nói "tiếp" sau mỗi phần.
 ```
 
-### 2.2. Cấm in trong chat
+**Bảng quyết định chế độ mặc định:**
 
-Các loại nội dung sau **TUYỆT ĐỐI KHÔNG** được in trong chat:
-- Bảng test case (> 5 rows)
-- Bảng Q&A (> 5 rows)
-- Report phân tích đầy đủ
-- Code block > 80 dòng
-- JSON/data > 30 dòng
+| Loại task | Chế độ | Lý do |
+|-----------|--------|-------|
+| Sinh TC (spec đã confirm) | 🔄 AUTO | Cơ học, không cần review giữa chừng |
+| Sinh TC (spec chưa confirm) | ✋ MANUAL | Cần user review logic trước |
+| Phân tích yêu cầu / Q&A | ✋ MANUAL | Cần user confirm phân tích trước |
+| Export / Convert format | 🔄 AUTO | Cơ học thuần túy |
+| Script Python sinh Excel | 🔄 AUTO | Cơ học, chạy script liên tiếp |
+| Report tổng hợp | ✋ MANUAL | Cần user review structure |
+
+**Chuyển đổi chế độ:** User nói "auto"/"làm hết đi" → AUTO | "manual"/"cho tôi review" → MANUAL
+
+### Bước 3: Thực Thi Từng Phần
+
+- Mỗi response CHỈ làm 1 phần
+- Ghi kết quả vào FILE
+- Chat chỉ báo: path + 2 dòng tóm tắt + "nói tiếp"
 
 ---
 
-## 3. Chiến lược Chunking (Bắt buộc cho Level L, XL)
+## 3. Giới Hạn Cứng (Hard Limits)
 
-### 3.1. Nguyên tắc chia nhỏ
-
-| Loại task | Đơn vị chia | Max items/chunk |
-|-----------|-------------|-----------------|
-| Phân tích yêu cầu | Theo category (Business Logic, Boundary, UI/UX) | 1 category/response |
-| Sinh Test Case | Theo nhóm chức năng (Add, Edit, Delete, Search...) | 8-10 test cases/response |
-| Q&A Report | Theo category | 1 category/response |
-| Code generation | Theo file/component | 1 file/response |
-
-### 3.2. Quy trình Chunking
-
-```
-Response 1:
-  - Thông báo: "Task level XL. Chia thành N phần."
-  - Liệt kê N phần (Table of Contents)
-  - Thực hiện Phần 1 → ghi file
-  - Kết thúc: "✅ Phần 1/N hoàn tất. Nói 'tiếp' để sang Phần 2."
-
-Response 2 (sau khi user nói "tiếp"):
-  - Thực hiện Phần 2 → APPEND vào cùng file hoặc ghi file mới
-  - Kết thúc: "✅ Phần 2/N hoàn tất. Nói 'tiếp' để sang Phần 3."
-
-... lặp lại đến hết.
-
-Response cuối:
-  - Tổng hợp: "✅ Hoàn tất N/N phần. File tổng hợp tại: <path>"
-  - Thống kê tổng: số items, coverage summary
-```
-
-### 3.3. Append vs New File
-
-- **Append vào cùng file** khi: các phần cùng loại (VD: test cases của các module khác nhau)
-- **Ghi file mới** khi: các phần khác loại (VD: Q&A report vs Test Case)
+| Metric | Giới hạn | Vi phạm → Hậu quả |
+|--------|----------|-------------------|
+| Dòng chat response | ≤ 150 dòng | Bị cắt, mất nội dung |
+| Test cases / response | ≤ 8 TC | Vượt token chắc chắn |
+| Q&A items / response | ≤ 10 câu | Vượt token chắc chắn |
+| Script Python | ≤ 200 dòng | Tách data hoặc chia script |
+| Bảng in trong chat | ≤ 5 dòng | Ghi file thay vì in |
 
 ---
 
-## 4. Self-Check Trước Mỗi Response (CRITICAL)
+## 4. Chiến Lược Script-First (Cho Bảng/Excel/Data)
 
-AI **BẮT BUỘC** tự kiểm tra 4 câu hỏi trước khi submit response:
+Khi cần sinh dữ liệu có cấu trúc (TC, report, bảng):
 
 ```
-□ 1. Nội dung tôi sắp output có > 50 dòng không?
-      → Có: Ghi file, KHÔNG in chat.
-      
-□ 2. Tôi có đang cố nhồi > 10 test cases vào 1 response không?
-      → Có: Dừng lại, chia chunk.
-      
-□ 3. Tôi có đang lặp lại nội dung đã ghi vào file không?
-      → Có: Cắt bỏ, chỉ báo đường dẫn file.
-      
-□ 4. Response chat của tôi có > 100 dòng không?
-      → Có: Rút gọn xuống còn < 80 dòng.
+1. KHÔNG soạn nội dung trong chat rồi convert
+2. Viết SCRIPT trực tiếp (Python + openpyxl)
+3. Script dùng pattern data-driven: 
+   - data = [(...), (...), ...]  ← gọn nhất có thể
+   - 1 hàm loop ghi tất cả
+4. Chạy script → báo path file output
+5. Chat KHÔNG in lại nội dung file
 ```
+
+Nếu data quá lớn cho 1 script:
+- Script 1: Tạo file + ghi batch 1
+- Script 2: Mở file đã tạo + append batch 2
+- Mỗi script ≤ 200 dòng
 
 ---
 
-## 5. Template Thông Báo Chuẩn
+## 5. Self-Check (BẮT BUỘC trước mỗi response)
 
-### 5.1. Khi bắt đầu task lớn
 ```
-📋 **Task Level: [L/XL]**
-Chia thành [N] phần:
-1. [Tên phần 1] — ~[X] items
-2. [Tên phần 2] — ~[X] items
-...
-Bắt đầu Phần 1. Nói "tiếp" sau mỗi phần để tiếp tục.
-```
-
-### 5.2. Khi hoàn thành 1 phần
-```
-✅ **Phần [X]/[N] hoàn tất**
-📄 File: `<đường dẫn>`
-📊 Tóm tắt: [2-3 dòng highlights]
-👉 Nói "tiếp" để sang Phần [X+1].
-```
-
-### 5.3. Khi hoàn thành toàn bộ
-```
-✅ **Hoàn tất [N]/[N] phần**
-📄 File tổng hợp: `<đường dẫn>`
-📊 Tổng: [X] items | Coverage: [Y]%
-🔄 Cần chỉnh sửa? Cho tôi biết phần nào cần update.
+□ Task level gì? ≥ L thì đã lập WBS chưa?
+□ Response > 150 dòng? → Cắt, ghi file
+□ Đang nhồi > 8 TC hoặc > 10 Q&A? → Chia batch
+□ Đang tóm tắt lại file vừa tạo? → Xóa, chỉ giữ path
+□ Script > 200 dòng? → Tách hoặc chia script
 ```
 
 ---
 
-## 6. Quy tắc đặc biệt cho Excel Output
+## 6. Khi Bị Cắt (Fallback)
 
-Khi user yêu cầu xuất Excel:
-1. **Luôn ghi `.md` trước** → để user review nội dung
-2. **Sau khi user confirm** → viết script Python (`openpyxl`) để convert `.md` → `.xlsx`
-3. **Script phải gọn** (< 100 dòng), dùng data-driven pattern (list of dicts)
-4. **KHÔNG** in nội dung Excel trong chat
-
----
-
-## 7. Fallback: Khi vẫn bị cắt
-
-Nếu response bị truncate:
-1. AI **KHÔNG** bắt đầu lại từ đầu
-2. AI xác định điểm bị cắt → tiếp tục từ điểm đó
+Nếu response vẫn bị truncate:
+1. **KHÔNG** bắt đầu lại từ đầu
+2. Xác định điểm bị cắt → tiếp tục từ đó
 3. Append phần còn lại vào file đã tạo
+4. **Giảm batch size** cho các phần tiếp theo
+
+---
+
+## 7. Chiến Lược Tách File (Data-Logic Separation) — CRITICAL
+
+> **Bài học thực tế:** Tool call (`write_to_file`, `run_command`) cũng bị tính vào output token limit. Một script Python 300 dòng trong `write_to_file` sẽ vượt limit dù chat response chỉ có 5 dòng.
+
+### 7.1 Khi nào áp dụng
+- Script sinh file `.docx`/`.xlsx` có **data array ≥ 30 rows**
+- Tổng script (data + logic) ước tính **> 150 dòng**
+- Đã bị lỗi "exceeded max tokens" ở lần thử trước
+
+### 7.2 Pattern bắt buộc: 2-File Split
+
+```
+File 1: {task}_data.py     ← CHỈ chứa data (list/dict)
+File 2: {task}_docx.py     ← CHỈ chứa logic (import data từ File 1)
+```
+
+**File 1 — Data only (write_to_file lần 1):**
+```python
+DATA = [
+    ("SC-01", "Feature", "Module", "Type", "Description", 1, "Trace"),
+    ("SC-02", ...),
+    ...
+]
+```
+
+**File 2 — Logic only (write_to_file lần 2):**
+```python
+from {task}_data import DATA
+# ... docx/xlsx generation logic
+```
+
+### 7.3 Quy tắc cứng
+
+| Metric | Giới hạn |
+|--------|----------|
+| Mỗi file `write_to_file` | **≤ 150 dòng** |
+| Data array > 50 rows | **BẮT BUỘC tách file** |
+| Data array > 100 rows | **Chia thành 2+ data files** (batch) |
+
+### 7.4 Nếu vẫn bị lỗi sau khi tách
+
+1. **Giảm tiếp:** Data file chia thành `_data_part1.py`, `_data_part2.py`
+2. **Logic file import cả 2:** `from x_data_part1 import DATA as D1`
+3. **Tuyệt đối KHÔNG** cố nhồi lại vào 1 file
+4. **Chat response phải cực ngắn:** Chỉ gọi tool, không giải thích dài
+
+### 7.5 Self-Check bổ sung (trước mỗi `write_to_file`)
+
+```
+□ File này bao nhiêu dòng? > 150 → TÁCH
+□ Có data array không? > 30 rows → TÁCH ra file riêng
+□ Chat response + tool call content có vượt ~60K tokens? → TÁCH
+□ Đã bị lỗi token ở turn trước? → GIẢM 50% content mỗi file
+```

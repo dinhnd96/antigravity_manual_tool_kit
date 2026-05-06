@@ -22,6 +22,13 @@ Tài liệu `Quy tắc chung.docx` (ProfiX) định nghĩa các hành vi mặc �
 - **Tập trung Q&A** vào các điểm thực sự chưa rõ, đặc thù của từng US.
 - **Tiết kiệm thời gian** cho cả BA, QA và Tester.
 
+### 0.2 CHỐNG VƯỢT TOKEN
+> Tuân thủ rule `rules/token_safe_output.md` (auto-load). Khi phân tích URD/BRD:
+- **Bước đầu tiên:** Phân loại độ phức tạp (S/M/L/XL) dựa trên số lượng module, câu hỏi Q&A, và test case dự kiến.
+- **Level ≥ L:** BẮT BUỘC lập WBS (Work Breakdown Structure) trước khi thực thi.
+- **Chế độ thực thi mặc định:** ✋ **MANUAL** — luôn chờ user nói "tiếp" sau mỗi phần. Chỉ chuyển sang 🔄 AUTO khi user nói rõ "auto" / "tự chạy" / "làm hết đi".
+- **Output:** Ghi file thay vì in chat. Chat chỉ báo path + 2 dòng highlight.
+
 ### QUY TẮC CHỐNG LẶP (ANTI-REDUNDANCY) - KHÔNG ĐƯỢC HỎI BA NHỮNG ĐIỀU SAU:
 TUYỆT ĐỐI KHÔNG đưa các câu hỏi mang tính chất "xác nhận lại" vào Phần B (Ví dụ: "Mô tả có áp dụng giới hạn 300 ký tự theo QTC-01.6 không?"). Hệ thống MẶC ĐỊNH ÁP DỤNG, không cần BA xác nhận lại!
 
@@ -54,8 +61,8 @@ TUYỆT ĐỐI KHÔNG đưa các câu hỏi mang tính chất "xác nhận lại
 - Màu/style badge hiển thị các trạng thái.
 - Mockup màn hình chi tiết (nếu US chưa cung cấp).
 
-## 1. Mục Tiêu Phân Tích & Workflow 2 Giai Đoạn
-Quá trình phân tích tài liệu được chia làm **2 Giai Đoạn (Phase)** bắt buộc để đảm bảo chất lượng.
+## 1. Mục Tiêu Phân Tích & Workflow 3 Giai Đoạn
+Quá trình phân tích tài liệu được chia làm **tối đa 3 Giai Đoạn (Phase)** để đảm bảo chất lượng. Phase 1.5 chỉ kích hoạt khi BA update tài liệu đáng kể.
 Hệ thống AI khi đọc tài liệu cần tuân thủ workflow sau:
 
 **PHASE 1: Khởi tạo & Đặt Câu Hỏi (Sinh Phần A + B)**
@@ -65,11 +72,44 @@ Hệ thống AI khi đọc tài liệu cần tuân thủ workflow sau:
 - Tự động chạy script xuất file báo cáo `.docx` chứa Phần A & Phần B.
 - **DỪNG LẠI (STOP):** Yêu cầu User gửi/import nội dung câu trả lời của BA. **TUYỆT ĐỐI KHÔNG SINH PHẦN C KHI CHƯA CÓ CÂU TRẢ LỜI CỦA BA.**
 
+**PHASE 1.5: Delta Re-analysis (Khi BA Update Tài Liệu Đáng Kể)**
+> *Phase này CHỈ kích hoạt khi User thông báo BA đã update tài liệu URD/BRD kèm theo câu trả lời. Nếu BA chỉ trả lời Q&A mà không sửa tài liệu → bỏ qua Phase 1.5, đi thẳng Phase 2.*
+
+- **Bước 1 — Phân loại mức độ thay đổi:**
+
+| Mức độ | Dấu hiệu | Hành động |
+|---|---|---|
+| **Nhỏ** (<20% thay đổi) | BA sửa lỗi typo, bổ sung vài field, làm rõ mô tả | Bỏ qua Phase 1.5 → đi thẳng Phase 2 |
+| **Trung bình** (20-50% thay đổi) | BA thêm/sửa module, bổ sung logic rẽ nhánh, thay đổi field đáng kể | **Kích hoạt Phase 1.5** |
+| **Lớn** (>50% thay đổi) | BA viết lại gần như toàn bộ tài liệu | **Reset** — chạy lại Phase 1 từ đầu trên tài liệu mới |
+
+- **Bước 2 — Rà soát Q&A cũ (Part B-v1):** Phân loại từng câu hỏi trong Part B-v1 vào 3 trạng thái:
+
+| Trạng thái | Ý nghĩa | Hành động |
+|---|---|---|
+| ✅ `Resolved` | BA trả lời rõ ràng, tài liệu mới phản ánh đúng câu trả lời | Giữ nguyên, đánh dấu `Resolved` |
+| ⚠️ `Conflict` | BA trả lời một đằng, tài liệu update một nẻo | Giữ lại + **escalate** → ghi rõ "Câu trả lời lần 1 nói X, nhưng tài liệu v2 viết Y" vào Part B-v2 |
+| 🗑️ `Obsolete` | Tài liệu mới đã xóa/thay đổi hoàn toàn phần liên quan → câu hỏi không còn ý nghĩa | Đánh dấu `Obsolete`, không đưa vào Part C |
+
+- **Bước 3 — Sinh Part A-v2 & Part B-v2:**
+  - **Part A-v2:** Sinh lại hoàn toàn dựa trên tài liệu mới (vì cấu trúc module có thể thay đổi).
+  - **Part B-v2 (Supplementary Q&A):** Chỉ sinh câu hỏi **MỚI** phát sinh từ nội dung BA vừa thêm/sửa. **TUYỆT ĐỐI KHÔNG lặp lại** câu hỏi đã `Resolved` trong B-v1. Đánh ID tiếp nối B-v1 (VD: B-v1 kết thúc ở `US06-QA-04.5` → B-v2 bắt đầu từ `US06-QA-04.6` hoặc hạng mục mới).
+
+- **Bước 4 — Xuất file tổng hợp:** File `.docx` đầu ra có cấu trúc:
+  ```
+  📄 USxx_Analysis_v2.docx
+  ├── Phần A: Tóm tắt Nghiệp vụ (v2 — dựa trên tài liệu mới)
+  ├── Phần B-v1: Q&A Round 1 (đã có câu trả lời BA, mỗi câu đánh dấu trạng thái Resolved/Conflict/Obsolete)
+  └── Phần B-v2: Q&A Round 2 (câu hỏi bổ sung từ delta, cột "Trả lời của BA" để trống → chờ BA trả lời)
+  ```
+
+- **DỪNG LẠI (STOP):** Chờ BA trả lời Part B-v2. Chỉ chuyển sang Phase 2 khi B-v2 đã được trả lời.
+
 **PHASE 2: Tổng Hợp Kịch Bản (Sinh Phần C)**
-- *Chỉ kích hoạt khi User đã cung cấp nội dung câu trả lời của BA.*
-- AI đọc câu trả lời của BA, đối chiếu với tài liệu gốc để chốt lại các mâu thuẫn.
-- **Phần C: Bảng Tổng Hợp Test Case Đề Xuất (Test Case Coverage):** Sinh bảng danh sách test case bao phủ 100% tài liệu dựa trên cả URD và câu trả lời của BA (áp dụng Traceability như quy định).
-- Cập nhật/sinh lại file `.docx` báo cáo tổng hợp (Gồm Phần A, Phần B đã cập nhật câu trả lời, và Phần C).
+- *Chỉ kích hoạt khi User đã cung cấp nội dung câu trả lời của BA (bao gồm cả B-v1 và B-v2 nếu có).*
+- AI đọc câu trả lời của BA, đối chiếu với tài liệu gốc (hoặc tài liệu v2 nếu đã qua Phase 1.5) để chốt lại các mâu thuẫn.
+- **Phần C: Bảng Tổng Hợp Test Case Đề Xuất (Test Case Coverage):** Sinh bảng danh sách test case bao phủ 100% tài liệu dựa trên cả URD và toàn bộ câu trả lời của BA từ mọi round Q&A (áp dụng Traceability như quy định).
+- Cập nhật/sinh lại file `.docx` báo cáo tổng hợp (Gồm Phần A phiên bản mới nhất, Phần B tổng hợp tất cả round đã cập nhật câu trả lời, và Phần C).
 
 ## 2. Phần A: Tóm Tắt Nghiệp Vụ (Requirements Breakdown)
 AI cần bóc tách tài liệu gốc theo chiều dọc (top-down) đúng như bố cục tài liệu để đảm bảo trace 2 chiều với FSD, và trình bày dưới dạng:
@@ -164,9 +204,14 @@ Khi phân loại Test Case, Agent phải tuân thủ thứ tự ưu tiên sau:
 
 => Lưu ý: Case "Bản ghi thứ 100 báo lỗi" phải được định danh là "Boundary Value".
 
+### QUY TẮC 1 SC = 1 TC (BẮT BUỘC):
+> **Mỗi Mã Kịch Bản (SC-xx) tương ứng CHÍNH XÁC 1 Test Case.** TUYỆT ĐỐI KHÔNG gộp nhiều kịch bản vào 1 SC, và KHÔNG tách 1 SC thành nhiều TC.
+> - Nếu 1 kịch bản có nhiều biến thể (VD: bỏ trống 7 trường bắt buộc), vẫn viết thành **1 SC duy nhất** với tiêu đề mô tả đầy đủ (VD: "Bỏ trống từng trường bắt buộc → FE chặn").
+> - **KHÔNG tách riêng** từng trường/giá trị thành SC riêng biệt. Giữ nguyên 1 SC bao quát cho cùng 1 nhóm hành vi.
+
 **Định Dạng Bảng Tổng Hợp Test Case:**
-`[Mã Kịch Bản (ID)] | [Feature] | [Module] | [Loại Test Case (1 trong 7 nhóm)] | [Tên Test Case / Kịch bản] | [Số lượng TC dự kiến] | [Trích dẫn tài liệu (Traceability)]`
-*Lưu ý:* Cột 'Mã Kịch Bản (ID)' dùng để đặt định danh duy nhất (VD: SC-01, SC-02) phục vụ việc mapping khi sinh Test Case thực tế. Cột 'Feature' là Tính năng lớn, 'Module' là tính năng con. Cột 'Tên Test Case / Kịch bản' phải mô tả đầy đủ kịch bản chính muốn test. Cột 'Số lượng TC dự kiến' dùng để ước tính nhanh số lượng test case vật lý có thể sinh ra từ kịch bản này (ví dụ: test case positive = 1, test case boundary = 3). Cột 'Trích dẫn tài liệu' phải ghi rõ nội dung đủ để Tester có thể dùng Ctrl+F tìm lại đúng đoạn đó trong tài liệu gốc.
+`[Mã Kịch Bản (ID)] | [Feature] | [Module] | [Loại Test Case (1 trong 7 nhóm)] | [Tên Test Case / Kịch bản] | [Trích dẫn tài liệu (Traceability)]`
+*Lưu ý:* Cột 'Mã Kịch Bản (ID)' dùng để đặt định danh duy nhất (VD: SC-01, SC-02), mỗi SC = 1 TC. Cột 'Feature' là Tính năng lớn, 'Module' là tính năng con. Cột 'Tên Test Case / Kịch bản' phải mô tả đầy đủ kịch bản chính muốn test. Cột 'Trích dẫn tài liệu' phải ghi rõ nội dung đủ để Tester có thể dùng Ctrl+F tìm lại đúng đoạn đó trong tài liệu gốc.
 
 ## 5. Định Dạng File Đầu Ra & Traceability Rule
 ### 5.1 Định Dạng Bảng Q&A (Phần B)

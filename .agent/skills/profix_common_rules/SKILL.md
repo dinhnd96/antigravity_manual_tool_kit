@@ -275,11 +275,35 @@ Mục đích: Cung cấp màn hình Popup tra cứu nhanh CIF theo các thông t
 
 ---
 
+## QTC-14 · Quy Tắc Nghiệp Vụ Bổ Sung (BA Đã Xác Nhận)
+
+> **Các quy tắc dưới đây đã được BA xác nhận chính thức. AI KHÔNG được hỏi lại các vấn đề này.**
+
+### QTC-14.1 · Xử Lý Khi Không Có Thay Đổi (No-Change Guard)
+- **FE:** Nếu người dùng nhấn "Xác nhận" / "Lưu" mà **không có bất kỳ thay đổi nào** so với dữ liệu hiện tại → FE **disable nút Xác nhận** hoặc hiển thị cảnh báo `"Không có thay đổi để lưu"`. Không gửi request lên BE.
+- **BE:** Không tạo bản ghi **Chờ duyệt** nếu không có thay đổi thực tế (dirty check).
+- **Áp dụng:** Toàn bộ chức năng có luồng Chỉnh sửa → Chờ duyệt.
+
+### QTC-14.2 · Tên Nghiệp Vụ Không Yêu Cầu Unique
+- Tên Nghiệp vụ **không cần unique** trên toàn hệ thống.
+- Hệ thống phân biệt bản ghi bằng **Mã (Code)** tự động sinh, không bằng Tên.
+
+### QTC-14.3 · Tên SPDV Không Yêu Cầu Unique Trong Cùng Cấp Cha
+- Tên SPDV **không cần unique** trong cùng cấp cha (siblings).
+- Hệ thống phân biệt các SPDV bằng **Mã SPDV** tự động sinh, không bằng Tên.
+
+### QTC-14.4 · Không Hỗ Trợ Chỉnh Sửa Tên Và Mô Tả Sau Khi Duyệt
+- Hệ thống **không cần bổ sung** cho phép chỉnh sửa Tên và Mô tả sau khi đã duyệt.
+- **Không cung cấp** cơ chế đặc biệt (superadmin) để sửa lỗi chính tả đối với Tên/Mô tả đã duyệt.
+- Nếu cần sửa → phải thực hiện qua luồng **Chỉnh sửa → Chờ duyệt** tiêu chuẩn.
+
+---
+
 ## QTC-13 · Nguyên Tắc Sử Dụng Skill Này
 
 > **AI BẮT BUỘC áp dụng khi phân tích bất kỳ US nào trong ProfiX:**
 
-1. **Tra cứu trước khi hỏi:** Trước khi đặt câu hỏi Q&A cho BA về bất kỳ hành vi nào, kiểm tra xem QTC-01 đến QTC-12 đã trả lời chưa.
+1. **Tra cứu trước khi hỏi:** Trước khi đặt câu hỏi Q&A cho BA về bất kỳ hành vi nào, kiểm tra xem QTC-01 đến QTC-14 đã trả lời chưa.
 2. **Không hỏi lại câu hỏi đã có đáp án trong Quy tắc chung**, ví dụ:
    - ❌ "Tìm kiếm có phân biệt hoa thường không?" → ✅ Đã có: QTC-02, Không phân biệt.
    - ❌ "Tải xuống ra định dạng gì?" → ✅ Đã có: QTC-05, Excel `.xlsx`.
@@ -289,5 +313,23 @@ Mục đích: Cung cấp màn hình Popup tra cứu nhanh CIF theo các thông t
    - ❌ "Tra cứu CIF hoạt động thế nào?" → ✅ Đã có: QTC-09.
    - ❌ "Expected Result lỗi validation viết như thế nào?" → ✅ Đã có: QTC-11, ưu tiên mô tả hành vi FE.
    - ❌ "Checker thấy những hành động gì khi chưa được phân quyền?" → ✅ Đã có: QTC-12, Chỉ thấy nút Xem.
+   - ❌ "Nếu không thay đổi gì mà nhấn Lưu thì sao?" → ✅ Đã có: QTC-14.1, FE disable nút hoặc cảnh báo.
+   - ❌ "Tên Nghiệp vụ có cần unique không?" → ✅ Đã có: QTC-14.2, Không cần unique.
+   - ❌ "Tên SPDV có cần unique trong cùng cấp cha không?" → ✅ Đã có: QTC-14.3, Không cần unique.
+   - ❌ "Có cơ chế superadmin để sửa lỗi chính tả Tên không?" → ✅ Đã có: QTC-14.4, Không có.
 3. **Chỉ hỏi BA các điểm thực sự thiếu** hoặc US hiện tại có quy tắc riêng mâu thuẫn/ghi đè Quy tắc chung.
 4. **Trong báo cáo phân tích**, khi nhắc đến Quy tắc chung, ghi rõ tham chiếu **[QTC-XX]** để tăng traceability.
+   - ❌ "Nhấn 'Đóng' có hiện popup xác nhận không?" → ✅ Đã có: QTC-15, Không hiện popup, không lưu, quay về màn hình trước.
+
+---
+
+## QTC-15 · Hành Vi Nút "Đóng" (Close Button Behavior)
+
+> **Áp dụng cho toàn bộ các màn hình có nút "Đóng" (Close / X) trong hệ thống ProfiX.**
+
+- Khi người dùng nhấn nút **"Đóng"**:
+  1. Hệ thống **KHÔNG hiển thị popup xác nhận** (không hỏi "Bạn có chắc muốn đóng?").
+  2. Dữ liệu đang nhập/chỉnh sửa trên form **KHÔNG được lưu** (discard changes).
+  3. Hệ thống **điều hướng người dùng về màn hình trước đó** (previous screen / parent screen).
+
+- **Lưu ý:** Quy tắc này áp dụng mặc định. Nếu US cụ thể yêu cầu hành vi khác (ví dụ: hiện popup cảnh báo mất dữ liệu), tài liệu US đó phải ghi rõ override.
