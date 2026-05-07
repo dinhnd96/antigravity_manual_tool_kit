@@ -91,6 +91,15 @@ Hệ thống AI khi đọc tài liệu cần tuân thủ workflow sau:
 | ⚠️ `Conflict` | BA trả lời một đằng, tài liệu update một nẻo | Giữ lại + **escalate** → ghi rõ "Câu trả lời lần 1 nói X, nhưng tài liệu v2 viết Y" vào Part B-v2 |
 | 🗑️ `Obsolete` | Tài liệu mới đã xóa/thay đổi hoàn toàn phần liên quan → câu hỏi không còn ý nghĩa | Đánh dấu `Obsolete`, không đưa vào Part C |
 
+  > **QUY TẮC BẢO TOÀN NỘI DUNG GỐC (CONTENT PRESERVATION RULE):**
+  > Khi merge/tổng hợp Q&A với phản hồi BA, **TẤT CẢ câu hỏi** (Resolved, Unresolved, Conflict) **BẮT BUỘC phải giữ nguyên 100% nội dung gốc** từ file Part B trước đó, bao gồm:
+  > - **Trích xuất (Reference):** Giữ nguyên vị trí tham chiếu đầy đủ, KHÔNG tóm tắt/rút gọn.
+  > - **Câu hỏi / Sự cố:** Giữ nguyên toàn bộ mô tả vấn đề, KHÔNG viết lại ngắn hơn.
+  > - **Đề xuất từ QA:** Giữ nguyên đề xuất ban đầu.
+  > - **Câu hỏi đã Resolved:** Giữ nguyên nội dung gốc + **BỔ SUNG** câu trả lời BA vào cột "Trả lời của BA". KHÔNG được xóa/thay thế nội dung câu hỏi hoặc đề xuất QA bằng câu trả lời BA.
+  >
+  > **VI PHẠM:** Rút gọn, tóm tắt, hoặc viết lại bất kỳ câu hỏi nào (kể cả đã resolved) khi merge sẽ gây **mất ngữ cảnh** cho Tester khi đọc lại và không trace được về tài liệu gốc.
+
 - **Bước 3 — Sinh Part A-v2 & Part B-v2:**
   - **Part A-v2:** Sinh lại hoàn toàn dựa trên tài liệu mới (vì cấu trúc module có thể thay đổi).
   - **Part B-v2 (Supplementary Q&A):** Chỉ sinh câu hỏi **MỚI** phát sinh từ nội dung BA vừa thêm/sửa. **TUYỆT ĐỐI KHÔNG lặp lại** câu hỏi đã `Resolved` trong B-v1. Đánh ID tiếp nối B-v1 (VD: B-v1 kết thúc ở `US06-QA-04.5` → B-v2 bắt đầu từ `US06-QA-04.6` hoặc hạng mục mới).
@@ -108,6 +117,11 @@ Hệ thống AI khi đọc tài liệu cần tuân thủ workflow sau:
 **PHASE 2: Tổng Hợp Kịch Bản (Sinh Phần C)**
 - *Chỉ kích hoạt khi User đã cung cấp nội dung câu trả lời của BA (bao gồm cả B-v1 và B-v2 nếu có).*
 - AI đọc câu trả lời của BA, đối chiếu với tài liệu gốc (hoặc tài liệu v2 nếu đã qua Phase 1.5) để chốt lại các mâu thuẫn.
+- **Khi tổng hợp Part B từ nhiều nguồn (file AI sinh + file BA phản hồi + file review bên ngoài):**
+  - **Bước 1 — Đọc đầy đủ TẤT CẢ các file nguồn** trước khi bắt đầu tổng hợp. TUYỆT ĐỐI KHÔNG tổng hợp chỉ từ 1 file mà bỏ qua file khác.
+  - **Bước 2 — Mapping câu hỏi:** Đối chiếu từng câu hỏi giữa các file, xác định trùng/thiếu/mới.
+  - **Bước 3 — Áp dụng Content Preservation Rule:** Câu hỏi chưa resolved phải lấy **nguyên văn nội dung đầy đủ** từ file gốc (file có nội dung chi tiết nhất), KHÔNG được tóm tắt hay viết lại ngắn hơn.
+  - **Bước 4 — Bổ sung câu hỏi mới** từ file BA phản hồi mà AI chưa phát hiện ở Phase 1.
 - **Phần C: Bảng Tổng Hợp Test Case Đề Xuất (Test Case Coverage):** Sinh bảng danh sách test case bao phủ 100% tài liệu dựa trên cả URD và toàn bộ câu trả lời của BA từ mọi round Q&A (áp dụng Traceability như quy định).
 - Cập nhật/sinh lại file `.docx` báo cáo tổng hợp (Gồm Phần A phiên bản mới nhất, Phần B tổng hợp tất cả round đã cập nhật câu trả lời, và Phần C).
 

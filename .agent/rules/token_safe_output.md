@@ -189,3 +189,12 @@ from {task}_data import DATA
 □ Chat response + tool call content có vượt ~60K tokens? → TÁCH
 □ Đã bị lỗi token ở turn trước? → GIẢM 50% content mỗi file
 ```
+
+---
+
+## 8. Tích Hợp RTK (Rust Token Killer) — BẮT BUỘC
+
+> **Để giảm thiểu token tiêu thụ và tránh context overflow khi gọi công cụ `run_command`:**
+1. AI **phải luôn luôn** gắn tiền tố `rtk` trước các lệnh bash/terminal sinh ra nhiều log (VD: chạy script Python, pytest, playwright, npm test).
+2. **Ví dụ đúng:** `rtk python scripts/gen_report.py`
+3. **Ví dụ sai:** `python scripts/gen_report.py`

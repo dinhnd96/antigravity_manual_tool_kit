@@ -108,7 +108,7 @@ description: >
 
 ## QTC-05 · Tải Xuống (Export / Download)
 
-- Nút "Tải xuống" hiển thị khi màn hình **có lưới dữ liệu**.
+- Luôn cho phép tải xuống dù có dữ liệu hay không có dữ liệu
 - Tải xuống dữ liệu **theo điều kiện tìm kiếm đang áp dụng** (không phải toàn bộ DB).
 - **Định dạng mặc định:** Excel (`.xlsx`). Nếu US cụ thể dùng định dạng khác → sẽ ghi rõ trong tài liệu US đó.
 - **Tên file:** `{Tên chức năng} - {yyyymmddhhmmss}`
@@ -200,6 +200,17 @@ Mục đích: Cung cấp màn hình Popup tra cứu nhanh CIF theo các thông t
 | Biểu phí | Biểu phí có Code phí Loại KH = KHCN/DNSN/CBNV | Biểu phí có Code phí Loại KH = KHTC | Tất cả |
 | Chương trình ưu đãi | CTƯĐ có Loại KH = KHCN/DNSN/CBNV | CTƯĐ có Loại KH = KHTC | Tất cả |
 | Lịch sử/Lịch thu phí dự kiến | Khách hàng là KHCN/DNSN | Khách hàng là KHTC | Tất cả |
+
+### Lưu ý quan trọng — Dropdown "Loại khách hàng" KHÔNG lọc theo Khối:
+
+> **BA xác nhận:** Trường dropdown "Loại khách hàng" (KHCN / KHTC / DNSN / CBNV) trên các màn hình tra cứu, khai báo **KHÔNG bị lọc/ẩn** dựa theo Khối của user đăng nhập.
+>
+> **Lý do:** 1 merchant thuộc Loại KH = KHTC vẫn có thể được Khối KHCN nhìn thấy và xử lý. Phân quyền Khối chỉ áp dụng ở tầng **dữ liệu hiển thị trên lưới kết quả** (theo Ma trận dữ liệu ở trên), **không áp dụng lên dropdown filter**.
+
+**Quy tắc cho AI khi sinh Test Case:**
+- ❌ KHÔNG sinh TC kiểm tra "User Khối KHCN → dropdown Loại KH chỉ hiển thị KHCN/DNSN/CBNV" — đây là case SAI.
+- ✅ Dropdown "Loại khách hàng" luôn hiển thị ĐẦY ĐỦ tất cả giá trị (KHCN, KHTC, DNSN, CBNV) bất kể Khối của user.
+- ✅ Phân quyền Khối chỉ lọc **dữ liệu trả về trên lưới**, không lọc giá trị dropdown.
 
 ---
 
