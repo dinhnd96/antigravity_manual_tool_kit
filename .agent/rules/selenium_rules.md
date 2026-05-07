@@ -1,3 +1,7 @@
+---
+trigger: manual
+---
+
 # Selenium Web Automation Rules
 
 ## 1. Selenium Locator Priority Rules

@@ -1,3 +1,7 @@
+---
+trigger: manual
+---
+
 # Playwright Specific Rules
 
 > Các Rule dành riêng cho việc thiết lập và chạy Automation với Playwright Tools.

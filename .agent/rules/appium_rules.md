@@ -1,3 +1,7 @@
+---
+trigger: manual
+---
+
 # Appium Mobile Automation Rules
 
 ## 1. Appium Native Locator Rules

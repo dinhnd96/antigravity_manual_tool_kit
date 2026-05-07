@@ -1,3 +1,7 @@
+---
+trigger: manual
+---
+
 # QA Automation General Rules
 
 These rules apply universally to all automation test implementation tasks.

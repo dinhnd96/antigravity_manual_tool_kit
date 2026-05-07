@@ -192,9 +192,62 @@ from {task}_data import DATA
 
 ---
 
-## 8. Tích Hợp RTK (Rust Token Killer) — BẮT BUỘC
+## 8. Tích Hợp RTK (Rust Token Killer) — BẮT BUỘC — KHÔNG NGOẠI LỆ
 
-> **Để giảm thiểu token tiêu thụ và tránh context overflow khi gọi công cụ `run_command`:**
-1. AI **phải luôn luôn** gắn tiền tố `rtk` trước các lệnh bash/terminal sinh ra nhiều log (VD: chạy script Python, pytest, playwright, npm test).
-2. **Ví dụ đúng:** `rtk python scripts/gen_report.py`
-3. **Ví dụ sai:** `python scripts/gen_report.py`
+> **RTK đã cài sẵn** (`/Users/mac/.local/bin/rtk`, v0.37.2+).
+> **Mục đích:** Lọc noise từ stdout/stderr → giảm 60-70% token tiêu thụ khi `run_command`.
+> **Quy tắc tối thượng:** MỌI lệnh chạy qua `run_command` mà sinh output > 5 dòng **PHẢI** có prefix `rtk`.
+
+### 8.1 Bảng Ánh Xạ Lệnh Bắt Buộc
+
+| Lệnh GỐC (❌ CẤM) | Lệnh ĐÚNG (✅ BẮT BUỘC) | Ngữ cảnh |
+|---|---|---|
+| `python3 gen_xxx.py` | `rtk python3 gen_xxx.py` | Sinh file .docx/.xlsx |
+| `python3 export_xxx.py` | `rtk python3 export_xxx.py` | Export báo cáo |
+| `python3 us*_gen*.py` | `rtk python3 us*_gen*.py` | Sinh doc theo US |
+| `python3 *_batch*.py` | `rtk python3 *_batch*.py` | Chạy batch data |
+| `python3 merge_*.py` | `rtk python3 merge_*.py` | Merge file |
+| `python3 update_*.py` | `rtk python3 update_*.py` | Update file có sẵn |
+| `python3 read_*.py` | `rtk python3 read_*.py` | Đọc nội dung file |
+| `python3 scripts/*.py` | `rtk python3 scripts/*.py` | Mọi script trong scripts/ |
+| `pip install xxx` | `rtk pip install xxx` | Cài thư viện |
+| `npm test` / `npx playwright test` | `rtk npm test` / `rtk npx playwright test` | Chạy test |
+| `pytest` | `rtk pytest` | Chạy test Python |
+| `git log` / `git diff` | `rtk git log` / `rtk git diff` | Git operations dài |
+| `python3 -c "..."` | `rtk python3 -c "..."` | Inline Python script (đọc file, parse data) |
+
+### 8.2 Quy Tắc Cứng (KHÔNG NGOẠI LỆ)
+
+1. **MỌI lệnh `python3 *.py`** → PHẢI dùng `rtk python3 *.py`. Không có ngoại lệ.
+2. **MỌI lệnh `python3 -c "..."`** (inline script) → PHẢI dùng `rtk python3 -c "..."`. Không có ngoại lệ, kể cả khi đã pipe qua `head`/`tail`.
+3. **MỌI lệnh cài đặt** (`pip install`, `npm install`) → PHẢI dùng `rtk`.
+4. **MỌI lệnh chạy test** (`pytest`, `playwright`, `npm test`) → PHẢI dùng `rtk`.
+5. **Chuỗi lệnh (chain):** Mỗi lệnh trong chain đều phải có `rtk`:
+   - ❌ `python3 batch1.py && python3 batch2.py`
+   - ✅ `rtk python3 batch1.py && rtk python3 batch2.py`
+6. **Lệnh với venv:** `rtk` đặt SAU `source activate`:
+   - ✅ `source /tmp/venv/bin/activate && rtk python3 gen.py`
+7. **Pipe KHÔNG miễn trừ rtk:** Kể cả khi đã pipe qua `head`/`tail`/`grep`, vẫn PHẢI có `rtk`:
+   - ❌ `python3 -c "..." | head -50`
+   - ✅ `rtk python3 -c "..." | head -50`
+8. **Lệnh KHÔNG cần rtk** (output ngắn, < 5 dòng):
+   - `which rtk`, `rtk --version`, `rtk gain`
+   - `ls`, `cat file.txt | head -5`, `echo "done"`
+   - `mkdir`, `cp`, `mv`, `rm` (thao tác file đơn)
+
+### 8.3 Self-Check RTK (BẮT BUỘC trước MỖI `run_command`)
+
+```
+□ Lệnh có chứa "python" hoặc "python3"?      → THÊM rtk (kể cả python3 -c)
+□ Lệnh có pipe head/tail nhưng gọi python3?  → VẪN THÊM rtk
+□ Lệnh có chứa "pip" hoặc "npm"?              → THÊM rtk
+□ Lệnh có chứa "pytest" hoặc "playwright"?    → THÊM rtk
+□ Lệnh có chứa "git log" hoặc "git diff"?     → THÊM rtk
+□ Output dự kiến > 5 dòng?                    → THÊM rtk
+□ Đã gắn rtk ở ĐẦU lệnh (hoặc sau source activate)? → OK
+```
+
+### 8.4 Kiểm Tra Hiệu Quả
+
+- Chạy `rtk gain` cuối mỗi phiên để báo cáo token đã tiết kiệm.
+- Nếu Efficiency < 50% → xem xét thêm custom filter vào `.rtk/filters.toml`.

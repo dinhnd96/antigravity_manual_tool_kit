@@ -1,3 +1,7 @@
+---
+trigger: manual
+---
+
 # General Locator Strategies (Cross-Platform / Cross-Tool)
 
 Locator stability and readability define an automation framework's health. 
