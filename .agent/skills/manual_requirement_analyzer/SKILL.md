@@ -65,11 +65,11 @@ TUYỆT ĐỐI KHÔNG đưa các câu hỏi mang tính chất "xác nhận lại
 Quá trình phân tích tài liệu được chia làm **tối đa 3 Giai Đoạn (Phase)** để đảm bảo chất lượng. Phase 1.5 chỉ kích hoạt khi BA update tài liệu đáng kể.
 Hệ thống AI khi đọc tài liệu cần tuân thủ workflow sau:
 
-**PHASE 1: Khởi tạo & Đặt Câu Hỏi (Sinh Phần A + B)**
-- AI đọc tài liệu và xuất ra kết quả bao gồm 2 phần:
-  - **Phần A: Tóm Tắt Nghiệp Vụ Chuyên Sâu (Dành cho Tester):** Trình bày lại luồng logic một cách trực quan, ngắn gọn, dễ hiểu.
-  - **Phần B: Danh Sách Cảnh Báo & Q&A (Dành cho BA):** Khai quật mọi điểm thiếu sót, luồng rẽ nhánh chưa rõ, hoặc giao diện không đồng nhất.
-- Tự động chạy script xuất file báo cáo `.docx` chứa Phần A & Phần B.
+**PHASE 1: Khởi tạo & Đặt Câu Hỏi (Sinh Phần A + B thành 2 file riêng biệt)**
+- AI đọc tài liệu và xuất ra kết quả bao gồm 2 phần, **mỗi phần là 1 file `.docx` riêng biệt**:
+  - **📄 File A — Tóm Tắt Nghiệp Vụ Chuyên Sâu (Dành cho Tester):** Trình bày lại luồng logic một cách trực quan, ngắn gọn, dễ hiểu. Tên file: `USxx_PartA_Summary.docx`.
+  - **📄 File B — Danh Sách Cảnh Báo & Q&A (Dành cho BA):** Khai quật mọi điểm thiếu sót, luồng rẽ nhánh chưa rõ, hoặc giao diện không đồng nhất. Tên file: `USxx_PartB_QA.docx`.
+- Tự động chạy script xuất **2 file báo cáo `.docx` riêng biệt** (File A và File B).
 - **DỪNG LẠI (STOP):** Yêu cầu User gửi/import nội dung câu trả lời của BA. **TUYỆT ĐỐI KHÔNG SINH PHẦN C KHI CHƯA CÓ CÂU TRẢ LỜI CỦA BA.**
 
 **PHASE 1.5: Delta Re-analysis (Khi BA Update Tài Liệu Đáng Kể)**
@@ -249,9 +249,11 @@ TUYỆT ĐỐI KHÔNG SỬ DỤNG SỐ DÒNG (Line 15, Line 20...) làm tham chi
 - **Trích dẫn trực tiếp Text:** (Vd: Tại đoạn văn có câu *"về thống cần thực hiện kiểm tra..."*)
 
 **YÊU CẦU BẮT BUỘC VỀ FILE XUẤT RA:**
-Quá trình xuất file diễn ra thành 2 lần tương ứng với 2 Phase:
-- **Phase 1:** Sinh file **Word (.docx)** chỉ chứa Phần A (Tóm tắt) và Phần B (Q&A Table rỗng cột trả lời).
-- **Phase 2:** Sau khi nhận câu trả lời BA, tự động sinh lại file **Word (.docx)** chứa Phần A, Phần B (đã update câu trả lời) và Phần C (Bảng Test Case).
+Quá trình xuất file diễn ra như sau:
+- **Phase 1:** Sinh **2 file Word (.docx) RIÊNG BIỆT**:
+  - **File A** (`USxx_PartA_Summary.docx`): Chỉ chứa Phần A — Tóm tắt Nghiệp vụ (dành cho Tester đọc hiểu).
+  - **File B** (`USxx_PartB_QA.docx`): Chỉ chứa Phần B — Q&A Table với cột "Trả lời của BA" rỗng (dành cho BA trả lời).
+- **Phase 2:** Sau khi nhận câu trả lời BA, tự động sinh lại **1 file Word (.docx) tổng hợp** chứa Phần A, Phần B (đã update câu trả lời) và Phần C (Bảng Test Case).
 
 - Sử dụng công cụ `write_to_file` để viết một script Python dùng thư viện `python-docx` (`pip install python-docx`) rồi chạy terminal bằng `run_command` để tạo file `.docx`.
 - Tuyệt đối không để user phải yêu cầu lại việc xuất file ở cuối mỗi Phase.
