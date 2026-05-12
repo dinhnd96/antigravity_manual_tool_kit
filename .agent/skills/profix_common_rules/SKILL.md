@@ -67,6 +67,10 @@ description: >
 | Tên | 50 ký tự |
 | Diễn giải / Ghi chú / Nội dung | 300 ký tự |
 
+### QTC-01.7 · Hiển Thị Dữ Liệu Rỗng (Empty Data) Trên Lưới
+- Mặc định trên tất cả các lưới danh sách/báo cáo, nếu một trường dữ liệu (ví dụ: Mã CTƯĐ, Tên CTƯĐ...) không có giá trị, hệ thống sẽ hiển thị **trống (blank)**.
+- **Không** hiển thị các ký tự thay thế như dấu gạch ngang (`-`), `N/A`, `Null`... trừ khi có quy định khác trong tài liệu yêu cầu.
+
 ---
 
 ## QTC-02 · Tìm Kiếm Nhanh (Quick Search Bar)
@@ -110,10 +114,10 @@ description: >
 
 - Luôn cho phép tải xuống dù có dữ liệu hay không có dữ liệu
 - Tải xuống dữ liệu **theo điều kiện tìm kiếm đang áp dụng** (không phải toàn bộ DB).
-- **Định dạng mặc định:** Excel (`.xlsx`). Nếu US cụ thể dùng định dạng khác → sẽ ghi rõ trong tài liệu US đó.
+- **Định dạng mặc định:** Excel (`.xlsx`) hoặc PDF (nếu US có yêu cầu xuất PDF).
 - **Tên file:** `{Tên chức năng} - {yyyymmddhhmmss}`
-  - Ví dụ: `Quản lý Chương trình ưu đãi - 20260421101500.xlsx`
-- **Template:** Theo các trường dữ liệu được mô tả trên lưới danh sách của từng chức năng cụ thể.
+  - Ví dụ: `Quản lý Chương trình ưu đãi - 20260421101500.xlsx` hoặc `.pdf`
+- **Template (áp dụng chung cho cả Excel và PDF):** Trên màn hình (lưới danh sách) có các field nào thì file xuất ra sẽ hiển thị các field đó kèm dữ liệu tương ứng. Không cần yêu cầu BA đính kèm file template mẫu nếu chỉ là xuất danh sách cơ bản.
 - Không có giới hạn số dòng
 
 ---
@@ -308,6 +312,19 @@ Mục đích: Cung cấp màn hình Popup tra cứu nhanh CIF theo các thông t
 - **Không cung cấp** cơ chế đặc biệt (superadmin) để sửa lỗi chính tả đối với Tên/Mô tả đã duyệt.
 - Nếu cần sửa → phải thực hiện qua luồng **Chỉnh sửa → Chờ duyệt** tiêu chuẩn.
 
+### QTC-14.5 · Thiếu Nhánh Validate FE Khi Tra Cứu Trong Flowchart
+- Trong các luồng Tra cứu, nếu Flowchart đi thẳng từ bước người dùng nhấn "Tra cứu" sang bước FE gửi yêu cầu cho BE mà **KHÔNG vẽ nhánh/bước validate FE** cho các lỗi cơ bản như:
+  - Thiếu trường bắt buộc (VD: Từ ngày, Đến ngày).
+  - Logic thời gian sai (VD: Từ ngày > Đến ngày).
+  - Dữ liệu nhập không hợp lệ (VD: CIF không hợp lệ).
+- **Quy định:** Mặc định FE sẽ tự validate các điều kiện này và hiển thị lỗi tương ứng trước khi gọi BE. Việc thiếu nhánh trên Flowchart chỉ là do giản lược biểu đồ.
+- **AI KHÔNG ĐƯỢC HỎI LẠI** về trường hợp thiếu nhánh validate FE trong Flowchart cho các trường hợp này.
+
+### QTC-14.6 · Thiếu Nhánh Lặp (Loop) Tra Cứu Trong Flowchart
+- Trong các luồng Tra cứu, nếu Flowchart kết thúc (End) ngay sau khi hiển thị danh sách kết quả mà **KHÔNG vẽ nhánh quay lại (loop)** cho phép người dùng thay đổi điều kiện và tra cứu tiếp.
+- **Quy định:** Mặc định người dùng luôn có thể nhấn "Tra cứu" hoặc "Xóa tra cứu" nhiều lần liên tiếp ngay trên màn hình. Chi tiết này đã được quy định ở QTC-04 và trong mô tả chi tiết các trường. Flowchart kết thúc ở End chỉ là để thể hiện xong một chu trình (1 request).
+- **AI KHÔNG ĐƯỢC HỎI LẠI** BA/QA về việc bổ sung nhánh lặp (loop) từ cuối Flowchart quay lại bước nhập điều kiện/lựa chọn.
+
 ---
 
 ## QTC-13 · Nguyên Tắc Sử Dụng Skill Này
@@ -317,7 +334,8 @@ Mục đích: Cung cấp màn hình Popup tra cứu nhanh CIF theo các thông t
 1. **Tra cứu trước khi hỏi:** Trước khi đặt câu hỏi Q&A cho BA về bất kỳ hành vi nào, kiểm tra xem QTC-01 đến QTC-14 đã trả lời chưa.
 2. **Không hỏi lại câu hỏi đã có đáp án trong Quy tắc chung**, ví dụ:
    - ❌ "Tìm kiếm có phân biệt hoa thường không?" → ✅ Đã có: QTC-02, Không phân biệt.
-   - ❌ "Tải xuống ra định dạng gì?" → ✅ Đã có: QTC-05, Excel `.xlsx`.
+   - ❌ "Tải xuống ra định dạng gì?" → ✅ Đã có: QTC-05, Excel `.xlsx` hoặc PDF.
+   - ❌ "Tài liệu không đính kèm file template xuất Excel/PDF, yêu cầu BA cung cấp?" → ✅ Đã có: QTC-05, template mặc định lấy theo các field trên lưới màn hình.
    - ❌ "Phân trang mặc định bao nhiêu dòng?" → ✅ Đã có: QTC-06, 50 bản ghi/trang.
    - ❌ "Upload file định dạng gì?" → ✅ Đã có: QTC-07, Excel.
    - ❌ "Lịch sử tác động gồm những cột nào?" → ✅ Đã có: QTC-08 (Thêm cả Người phê duyệt).
@@ -328,6 +346,9 @@ Mục đích: Cung cấp màn hình Popup tra cứu nhanh CIF theo các thông t
    - ❌ "Tên Nghiệp vụ có cần unique không?" → ✅ Đã có: QTC-14.2, Không cần unique.
    - ❌ "Tên SPDV có cần unique trong cùng cấp cha không?" → ✅ Đã có: QTC-14.3, Không cần unique.
    - ❌ "Có cơ chế superadmin để sửa lỗi chính tả Tên không?" → ✅ Đã có: QTC-14.4, Không có.
+   - ❌ "Flowchart tra cứu thiếu nhánh validate trường bắt buộc, Từ ngày > Đến ngày, hoặc CIF không hợp lệ?" → ✅ Đã có: QTC-14.5, Ngầm định FE tự validate, không hỏi lại.
+   - ❌ "Flowchart kết thúc sau khi hiển thị danh sách, thiếu nhánh quay lại để tra cứu tiếp?" → ✅ Đã có: QTC-14.6, Không hỏi lại, mặc định user luôn có thể tra cứu nhiều lần.
+   - ❌ "Trường hợp không có dữ liệu, hệ thống hiển thị rỗng (blank) hay dấu '-' trên lưới?" → ✅ Đã có: QTC-01.7, Hiển thị rỗng (blank).
 3. **Chỉ hỏi BA các điểm thực sự thiếu** hoặc US hiện tại có quy tắc riêng mâu thuẫn/ghi đè Quy tắc chung.
 4. **Trong báo cáo phân tích**, khi nhắc đến Quy tắc chung, ghi rõ tham chiếu **[QTC-XX]** để tăng traceability.
    - ❌ "Nhấn 'Đóng' có hiện popup xác nhận không?" → ✅ Đã có: QTC-15, Không hiện popup, không lưu, quay về màn hình trước.
