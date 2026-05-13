@@ -193,7 +193,55 @@ AI cần bóc tách tài liệu gốc theo chiều dọc (top-down) đúng như 
 
 ## 4. Phần C: Tổng Hợp Bảng Test Case Đề Xuất (Test Case Coverage) - CHỈ CHẠY Ở PHASE 2
 *Lưu ý: Chỉ thực hiện bước này sau khi User đã cung cấp câu trả lời của BA cho Phần B.*
-AI sử dụng câu trả lời của BA để chốt logic, sau đó sinh ra một bảng tổng hợp danh sách các Test Case nhằm bao phủ 100% nội dung tài liệu. Các Test Case này không cần viết bước chi tiết (Test Steps) nhưng phải nêu rõ tiêu đề (Test Case Title) đủ ý và bắt buộc chia thành 7 nhóm sau:
+
+### QUY TẮC PHÂN TÍCH CÂU TRẢ LỜI BA (BA RESPONSE INTERPRETATION RULE) — BẮT BUỘC
+
+> **NGUYÊN TẮC TỐI THƯỢNG:** Câu trả lời của BA là **nguồn chân lý cuối cùng (Final Source of Truth)** để chốt logic sinh Test Case. Đề xuất của QA trong Part B chỉ là **gợi ý ban đầu**, KHÔNG PHẢI quyết định cuối cùng. AI **BẮT BUỘC** phải đọc kỹ từng câu trả lời của BA và phân loại chính xác trước khi sinh SC.
+
+**Bước 1 — Đọc kỹ và phân loại từng câu trả lời BA vào 1 trong 5 dạng:**
+
+| Dạng | Dấu hiệu nhận biết | Hành động của AI |
+|---|---|---|
+| **✅ Dạng 1: BA đồng ý theo đề xuất QA** | BA **đề cập trực tiếp** đến đề xuất QA và đồng ý: "Đồng ý **đề xuất**", "Làm theo **đề xuất** QA", "OK **theo hướng QA đề xuất**" | → Lấy **đề xuất của QA** làm logic chốt để sinh SC. **CHÚ Ý:** Chỉ áp dụng Dạng 1 khi BA **nhắc đến đề xuất QA**. Nếu BA chỉ "xác nhận" một thông tin mà không đề cập đề xuất → xem Dạng 5. |
+| **📝 Dạng 2: BA giải thích chi tiết (khác đề xuất QA)** | BA trả lời dài, nêu logic riêng, giải thích cách xử lý khác so với đề xuất QA | → **BỎ QUA đề xuất QA**, lấy **chính xác nội dung giải thích của BA** làm logic chốt để sinh SC. |
+| **📄 Dạng 3: BA yêu cầu đọc US / tài liệu update** | BA trả lời: "Đã update US", "Xem lại tài liệu mới", "Tham khảo US đã cập nhật" | → AI **BẮT BUỘC đọc lại tài liệu US** (phiên bản mới nhất) để hiểu logic đã thay đổi, lấy **nội dung US update** làm logic chốt. KHÔNG được dùng đề xuất QA cũ. |
+| **❌ Dạng 4: BA từ chối / bác bỏ đề xuất QA** | BA trả lời: "Không", "Không áp dụng", "Không cần", "Chưa cần", "Ngoài phạm vi" | → **LOẠI BỎ hoàn toàn đề xuất QA**. KHÔNG sinh SC dựa trên đề xuất bị bác bỏ. Nếu BA có nêu logic thay thế → lấy logic thay thế. Nếu BA chỉ bác bỏ mà không nêu logic thay thế → KHÔNG sinh SC cho vấn đề này. |
+| **📌 Dạng 5: BA xác nhận / cung cấp thông tin cụ thể (KHÔNG đề cập đề xuất QA)** | BA trả lời bằng cách nêu thẳng thông tin hoặc quyết định mà **không nhắc đến đề xuất QA**: "Cột Ngày thu định dạng Text", "Sử dụng mã X", "Giá trị mặc định là Y" | → Lấy **chính xác thông tin BA cung cấp** làm logic chốt. **KHÔNG suy diễn** rằng BA đang đồng ý với đề xuất QA. Nếu thông tin BA cung cấp **khác** đề xuất QA → bỏ qua đề xuất QA, dùng thông tin của BA. |
+
+> **⚠️ CẢNH BÁO CHỐNG NHẦM LẪN DẠNG 1 vs DẠNG 5:**
+> - BA nói *"Xác nhận cột Ngày thu là Text"* → Đây là **Dạng 5** (BA tự nêu thông tin), KHÔNG phải Dạng 1. BA đang confirm **quyết định của họ**, không phải confirm **đề xuất của QA**.
+> - BA nói *"Đồng ý theo đề xuất QA, dùng định dạng Date cho cột Ngày thu"* → Đây mới là **Dạng 1** (BA đề cập và đồng ý đề xuất QA).
+> - **Quy tắc phân biệt:** Nếu trong câu trả lời BA **KHÔNG xuất hiện** cụm từ "đề xuất", "theo QA", "theo hướng QA" → mặc định phân loại là **Dạng 5**, không phải Dạng 1.
+
+> **🔀 XỬ LÝ CÂU TRẢ LỜI PHỨC HỢP (COMPOUND RESPONSE):**
+> Một câu trả lời BA có thể chứa **nhiều dạng kết hợp** (VD: vừa bác bỏ đề xuất QA + vừa nêu logic riêng + vừa update tài liệu). Khi gặp trường hợp này:
+>
+> **Bước 1 — Tách (Decompose):** Phân tách câu trả lời BA thành từng thành phần riêng biệt.
+> **Bước 2 — Ưu tiên:** Áp dụng logic chốt theo thứ tự ưu tiên:
+>   1. Nếu BA có **update tài liệu** → BẮT BUỘC đọc tài liệu mới để lấy logic đầy đủ nhất (Dạng 3)
+>   2. Nếu BA **nêu logic cụ thể** trong câu trả lời → lấy logic đó làm cơ sở (Dạng 2/5)
+>   3. Đề xuất QA bị **loại bỏ** nếu BA đã bác bỏ hoặc nêu hướng xử lý khác (Dạng 4)
+>
+> **Ví dụ thực tế:**
+> - *QA đề xuất:* "Cần có popup xác nhận khi thay đổi 'Loại tính phí'"
+> - *BA trả lời:* "Xác nhận không có popup. Khi tham số 'Loại tính phí' được thay đổi thì các điều kiện tính phí sẽ bị clear → Đã bổ sung vào yêu cầu nghiệp vụ của trường Loại tính phí"
+> - *Phân tích:* Câu trả lời này chứa **3 thành phần**: ❌ Bác bỏ popup (Dạng 4) + 📌 Nêu logic clear dữ liệu (Dạng 5) + 📄 Update tài liệu (Dạng 3)
+> - *Hành động đúng:* (1) Bỏ đề xuất popup của QA, (2) Đọc tài liệu US mới nhất để lấy logic "clear điều kiện tính phí khi thay đổi Loại tính phí", (3) Sinh SC dựa trên logic từ tài liệu update + giải thích của BA. **TUYỆT ĐỐI KHÔNG** sinh SC về popup.
+
+**Bước 2 — Self-Check bắt buộc trước khi sinh mỗi SC:**
+
+```
+□ Câu hỏi QA gốc đề xuất gì?
+□ BA trả lời thuộc Dạng nào (1/2/3/4/5)?
+□ Nếu phân loại Dạng 1: BA có nhắc đến "đề xuất" / "theo QA" không? Nếu KHÔNG → chuyển sang Dạng 5.
+□ Logic chốt cuối cùng lấy từ đâu? (Đề xuất QA / Giải thích BA / US update / Loại bỏ / Thông tin BA cung cấp)
+□ SC đang sinh có phản ánh đúng logic chốt cuối cùng không?
+□ Có đang dùng đề xuất QA trong khi BA đã bác bỏ/giải thích khác/cung cấp thông tin khác không? → NẾU CÓ → SỬA NGAY
+```
+
+> **VI PHẠM NGHIÊM TRỌNG:** Sinh SC dựa trên đề xuất QA trong khi BA đã từ chối, bác bỏ, hoặc giải thích logic khác. Đây là lỗi **sai logic nghiệp vụ** gây ra Test Case không hợp lệ, lãng phí effort của Tester.
+
+AI sử dụng câu trả lời của BA (đã phân loại theo quy tắc trên) để chốt logic, sau đó sinh ra một bảng tổng hợp danh sách các Test Case nhằm bao phủ 100% nội dung tài liệu. Các Test Case này không cần viết bước chi tiết (Test Steps) nhưng phải nêu rõ tiêu đề (Test Case Title) đủ ý và bắt buộc chia thành 7 nhóm sau:
 1. **🟢 Happy Path (Positive Cases - Luồng cơ bản):** Kịch bản người dùng thao tác đúng, nhập dữ liệu chuẩn chỉnh và hệ thống xử lý thành công theo đúng luồng nghiệp vụ mong đợi.
 2. **🔴 Negative Path & Exception Handling (Luồng ngoại lệ, báo lỗi theo QTC-11):** Cần bao phủ 2 cấp độ xử lý lỗi:
    - **Cấp độ 1 (FE Validation):** Người dùng thao tác sai cơ bản (bỏ trống trường, sai định dạng). FE chặn không cho thao tác tiếp hoặc không cho lưu hoặc hiển thị thông báo lỗi thân thiện.
