@@ -23,12 +23,14 @@ description: >
 | 3 | – | Trường không bắt buộc nhập |
 | 4 | KH | Khách hàng |
 | 5 | KHCN | Khách hàng cá nhân |
-| 6 | KHTC | Khách hàng doanh nghiệp lớn / Khách hàng doanh nghiệp vừa và nhỏ |
-| 7 | DNSN | Khách hàng doanh nghiệp siêu nhỏ |
-| 8 | CBNV | Cán bộ nhân viên |
-| 9 | SPDV | Sản phẩm dịch vụ |
-| 10 | CTƯĐ | Chương trình ưu đãi |
-| 11 | MTD | Month to date |
+| 6 | KHTC | Khách hàng doanh nghiệp lớn và Khách hàng doanh nghiệp vừa và nhỏ (= KHDNL + KHDN) |
+| 7 | KHDNL | Khách hàng doanh nghiệp lớn |
+| 8 | KHDN | Khách hàng doanh nghiệp vừa và nhỏ |
+| 9 | DNSN | Khách hàng doanh nghiệp siêu nhỏ |
+| 10 | CBNV | Cán bộ nhân viên |
+| 11 | SPDV | Sản phẩm dịch vụ |
+| 12 | CTƯĐ | Chương trình ưu đãi |
+| 13 | MTD | Month to date |
 
 ---
 
@@ -183,9 +185,11 @@ Mục đích: Cung cấp màn hình Popup tra cứu nhanh CIF theo các thông t
 
 ---
 
-## QTC-10 · Nguyên Tắc Phân Quyền Dữ Liệu (Data Authorization by Block)
+## QTC-10 · Nguyên Tắc Phân Quyền Dữ Liệu Tra Cứu/Tìm Kiếm (Data Authorization by Block)
 
-Áp dụng cho các chức năng: Danh mục SPDV & Code phí, Biểu phí, Chương trình ưu đãi, Xem nghiệp vụ theo cây thư mục, Xem code phí theo KH, Lịch sử thu phí, Lịch thu phí dự kiến, Xem CTƯĐ theo KH, Tác vụ chờ duyệt, Báo cáo.
+> **Nguồn:** Tài liệu "Nguyên tắc phân quyền dữ liệu tra cứu.docx" — áp dụng cho toàn bộ chức năng tra cứu/tìm kiếm/xem.
+
+Áp dụng cho các chức năng (Tìm kiếm nhanh, Lọc nâng cao, Tra cứu, Xem): Danh mục SPDV & Code phí, Danh mục Biểu phí, Chương trình ưu đãi, Xem nghiệp vụ theo cây thư mục, Xem code phí theo KH, Xem lịch sử thu phí theo KH, Xem lịch thu phí dự kiến theo KH, Xem CTƯĐ theo KH, Tác vụ chờ duyệt, Các chức năng truy xuất báo cáo.
 
 ### Logic phân quyền theo Khối (Block):
 
@@ -193,17 +197,22 @@ Mục đích: Cung cấp màn hình Popup tra cứu nhanh CIF theo các thông t
 - Hệ thống tự động xác định Khối từ thông tin người dùng.
 
 **Màn hình có trường lọc "Khối":**
-- User thuộc **Khối KHCN hoặc KHDN** → mặc định hiển thị Khối của user, **không cho sửa**.
-- User **không thuộc** KHCN/KHDN → hiển thị dropdown chọn Khối tự do.
+- User thuộc **Khối KHCN, KHDN hoặc KHDNL** → mặc định hiển thị Khối của user, **không cho sửa**.
+- User **không thuộc** KHCN/KHDN/KHDNL → hiển thị dropdown chọn Khối tự do.
 
 ### Ma trận dữ liệu theo Khối:
 
-| Loại dữ liệu | Khối KHCN | Khối KHDN | Khối khác |
-|---|---|---|---|
-| SPDV & Code phí | SPDV: Tất cả. Code phí: Loại KH = KHCN/DNSN/CBNV | SPDV: Tất cả. Code phí: Loại KH = KHTC | Tất cả |
-| Biểu phí | Biểu phí có Code phí Loại KH = KHCN/DNSN/CBNV | Biểu phí có Code phí Loại KH = KHTC | Tất cả |
-| Chương trình ưu đãi | CTƯĐ có Loại KH = KHCN/DNSN/CBNV | CTƯĐ có Loại KH = KHTC | Tất cả |
-| Lịch sử/Lịch thu phí dự kiến | Khách hàng là KHCN/DNSN | Khách hàng là KHTC | Tất cả |
+| Loại dữ liệu | Khối KHCN | Khối KHDN (DN vừa & nhỏ) | Khối KHDNL (DN lớn) | Các khối khác |
+|---|---|---|---|---|
+| SPDV & Code phí | SPDV: Tất cả. Code phí: Loại KH = KHCN/DNSN/CBNV **hoặc** Đối tượng tính phí = Merchant | SPDV: Tất cả. Code phí: Loại KH = KHTC **và** Đối tượng tính phí = Khách hàng | SPDV: Tất cả. Code phí: Loại KH = KHTC **và** Đối tượng tính phí = Khách hàng | Tất cả |
+| Biểu phí | Biểu phí có Code phí Loại KH = KHCN/DNSN/CBNV **hoặc** Đối tượng tính phí = Merchant | Biểu phí có Code phí Loại KH = KHTC **và** Đối tượng tính phí = Khách hàng | Biểu phí có Code phí Loại KH = KHTC **và** Đối tượng tính phí = Khách hàng | Tất cả |
+| Chương trình ưu đãi | CTƯĐ có Loại KH = KHCN/DNSN/CBNV | CTƯĐ có **Khối = KHDN** | CTƯĐ có **Khối = KHDNL** | Tất cả |
+| Lịch sử/Lịch thu phí dự kiến | Khách hàng là KHCN/DNSN | Khách hàng là KHTC | Khách hàng là KHTC | Tất cả |
+
+> **Lưu ý thay đổi quan trọng so với phiên bản cũ:**
+> 1. **Tách Khối KHDN thành 2**: Khối KHDN (doanh nghiệp vừa & nhỏ) và Khối KHDNL (doanh nghiệp lớn).
+> 2. **Bổ sung điều kiện "Đối tượng tính phí"**: Khối KHCN thấy Code phí có Đối tượng tính phí = Merchant; Khối KHDN/KHDNL chỉ thấy Code phí có Đối tượng tính phí = Khách hàng.
+> 3. **CTƯĐ**: Khối KHDN/KHDNL lọc theo **Khối** (không phải Loại KH), Khối KHCN vẫn lọc theo Loại KH.
 
 ### Lưu ý quan trọng — Dropdown "Loại khách hàng" KHÔNG lọc theo Khối:
 
@@ -215,6 +224,7 @@ Mục đích: Cung cấp màn hình Popup tra cứu nhanh CIF theo các thông t
 - ❌ KHÔNG sinh TC kiểm tra "User Khối KHCN → dropdown Loại KH chỉ hiển thị KHCN/DNSN/CBNV" — đây là case SAI.
 - ✅ Dropdown "Loại khách hàng" luôn hiển thị ĐẦY ĐỦ tất cả giá trị (KHCN, KHTC, DNSN, CBNV) bất kể Khối của user.
 - ✅ Phân quyền Khối chỉ lọc **dữ liệu trả về trên lưới**, không lọc giá trị dropdown.
+- ✅ Khi test SPDV & Code phí hoặc Biểu phí, phải kiểm tra thêm điều kiện **Đối tượng tính phí** (Merchant vs Khách hàng) ngoài Loại KH.
 
 ---
 
@@ -325,6 +335,19 @@ Mục đích: Cung cấp màn hình Popup tra cứu nhanh CIF theo các thông t
 - **Quy định:** Mặc định người dùng luôn có thể nhấn "Tra cứu" hoặc "Xóa tra cứu" nhiều lần liên tiếp ngay trên màn hình. Chi tiết này đã được quy định ở QTC-04 và trong mô tả chi tiết các trường. Flowchart kết thúc ở End chỉ là để thể hiện xong một chu trình (1 request).
 - **AI KHÔNG ĐƯỢC HỎI LẠI** BA/QA về việc bổ sung nhánh lặp (loop) từ cuối Flowchart quay lại bước nhập điều kiện/lựa chọn.
 
+### QTC-14.7 · Phân Biệt Trạng Thái Hoạt Động và Trạng Thái Phê Duyệt
+- Hệ thống ProfiX sử dụng **2 loại trạng thái riêng biệt** cho mỗi bản ghi, **KHÔNG được nhầm lẫn**:
+
+| Loại trạng thái | Ý nghĩa | Giá trị | Hiển thị |
+|---|---|---|---|
+| **Trạng thái phê duyệt** (Approval Status) | Trạng thái trong luồng Maker-Checker | `Chờ duyệt`, `Đã duyệt`, `Từ chối duyệt` | Màn hình Tác vụ chờ duyệt / Tác vụ pending |
+| **Trạng thái hoạt động** (Operational Status) | Trạng thái vòng đời nghiệp vụ của bản ghi 
+
+- **Quy tắc:**
+  - Bản ghi chỉ hiển thị trên **lưới danh mục chính** khi trạng thái phê duyệt = `Đã duyệt`. Bản ghi `Chờ duyệt` hoặc `Từ chối duyệt` **KHÔNG hiển thị** trên lưới chính (chỉ hiển thị ở Tác vụ chờ duyệt / Tác vụ pending).
+
+- **AI KHÔNG ĐƯỢC NHẦM LẪN** "Chờ duyệt" (trạng thái phê duyệt) với trạng thái hoạt động.
+
 ---
 
 ## QTC-13 · Nguyên Tắc Sử Dụng Skill Này
@@ -348,6 +371,8 @@ Mục đích: Cung cấp màn hình Popup tra cứu nhanh CIF theo các thông t
    - ❌ "Có cơ chế superadmin để sửa lỗi chính tả Tên không?" → ✅ Đã có: QTC-14.4, Không có.
    - ❌ "Flowchart tra cứu thiếu nhánh validate trường bắt buộc, Từ ngày > Đến ngày, hoặc CIF không hợp lệ?" → ✅ Đã có: QTC-14.5, Ngầm định FE tự validate, không hỏi lại.
    - ❌ "Flowchart kết thúc sau khi hiển thị danh sách, thiếu nhánh quay lại để tra cứu tiếp?" → ✅ Đã có: QTC-14.6, Không hỏi lại, mặc định user luôn có thể tra cứu nhiều lần.
+   - ❌ "Trạng thái 'Chờ duyệt' và 'Chờ gán' có phải cùng 1 trạng thái không?" → ✅ Đã có: QTC-14.7, Đây là 2 loại trạng thái khác nhau (phê duyệt vs hoạt động).
+   - ❌ "Bản ghi 'Chờ duyệt' có hiển thị trên lưới chính không?" → ✅ Đã có: QTC-14.7, Không — chỉ hiển thị ở Tác vụ chờ duyệt/pending.
    - ❌ "Trường hợp không có dữ liệu, hệ thống hiển thị rỗng (blank) hay dấu '-' trên lưới?" → ✅ Đã có: QTC-01.7, Hiển thị rỗng (blank).
 3. **Chỉ hỏi BA các điểm thực sự thiếu** hoặc US hiện tại có quy tắc riêng mâu thuẫn/ghi đè Quy tắc chung.
 4. **Trong báo cáo phân tích**, khi nhắc đến Quy tắc chung, ghi rõ tham chiếu **[QTC-XX]** để tăng traceability.
