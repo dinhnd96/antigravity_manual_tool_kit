@@ -273,7 +273,7 @@ Khi phân loại Test Case, Agent phải tuân thủ thứ tự ưu tiên sau:
 
 **Định Dạng Bảng Tổng Hợp Test Case:**
 `[Mã Kịch Bản (ID)] | [Feature] | [Module] | [Loại Test Case (1 trong 7 nhóm)] | [Tên Test Case / Kịch bản] | [Trích dẫn tài liệu (Traceability)]`
-*Lưu ý:* Cột 'Mã Kịch Bản (ID)' dùng để đặt định danh duy nhất (VD: SC-01, SC-02), mỗi SC = 1 TC. Cột 'Feature' là Tính năng lớn, 'Module' là tính năng con. Cột 'Tên Test Case / Kịch bản' phải mô tả đầy đủ kịch bản chính muốn test. Cột 'Trích dẫn tài liệu' phải ghi rõ nội dung đủ để Tester có thể dùng Ctrl+F tìm lại đúng đoạn đó trong tài liệu gốc.
+*Lưu ý:* Cột 'Mã Kịch Bản (ID)' dùng để đặt định danh duy nhất (VD: SC-01, SC-02), mỗi SC = 1 TC. Cột 'Feature' là Tính năng lớn, 'Module' là tính năng con. Cột 'Tên Test Case / Kịch bản' phải mô tả đầy đủ kịch bản chính muốn test. Cột 'Trích dẫn tài liệu' phải **trích dẫn nguyên văn** từ tài liệu gốc (Tên mục/Heading, Tên bảng + STT, Flowchart + bước số, hoặc copy nguyên văn đoạn text) — KHÔNG suy diễn, KHÔNG viết lại — để Tester có thể dùng Ctrl+F tìm lại đúng đoạn đó trong tài liệu gốc.
 
 ## 5. Định Dạng File Đầu Ra & Traceability Rule
 ### 5.1 Định Dạng Bảng Q&A (Phần B)
@@ -282,19 +282,50 @@ Bảng Q&A hiển thị mỗi câu hỏi trên **một dòng riêng biệt** (+ 
 | Cột | Quy tắc | Ví dụ |
 |---|---|---|
 | **ID** | `[Mã tính năng]-QA-[01 đến 04].[STT]`. Trong đó 01-04 tương ứng Hạng mục 1-4, STT là số thứ tự câu hỏi trong hạng mục đó. | `US01-QA-01.1`, `US01-QA-01.2`, `US01-QA-02.1` |
-| **Trích xuất** | Ghi rõ vị trí trong tài liệu gốc (Tên mục, Tên bảng, STT, Flowchart). TUYỆT ĐỐI KHÔNG dùng số dòng. | `Mục "Khai báo Nghiệp vụ", Bảng mô tả trường Row 7` |
+| **Trích xuất** | Ghi rõ vị trí trong tài liệu gốc bằng cách **trích dẫn nguyên văn** (Tên mục, Tên bảng + STT, Flowchart + bước số, hoặc copy nguyên văn đoạn text). TUYỆT ĐỐI KHÔNG dùng số dòng, KHÔNG suy diễn. | `Mục "3.2 Thêm mới", Bảng "Mô tả trường", STT 7 — trường "Mã phí"` |
 | **Câu hỏi / Sự cố** | Mô tả một vấn đề logic duy nhất, ngắn gọn, súc tích. TUYỆT ĐỐI KHÔNG gom nhiều vấn đề vào 1 ô. | `Flowchart thiếu nhánh khi User không thay đổi dữ liệu.` |
 | **Phân loại** | Một trong 4 giá trị cố định: `Nghiệp vụ` / `Giới hạn` / `Toàn vẹn dữ liệu` / `UI-UX`. | `Nghiệp vụ` |
 | **Đề xuất từ QC** | Nêu rõ phương án xử lý theo chuẩn cho vấn đề ở cột Câu hỏi. | `Đề xuất: FE hiển thị cảnh báo, không cho submit.` |
 | **Trả lời của BA** | **Để trống** — BA sẽ điền sau. | _(trống)_ |
 
 **QUY TẮC TRÍCH XUẤT (TRACEABILITY RULE) BẮT BUỘC:**
-TUYỆT ĐỐI KHÔNG SỬ DỤNG SỐ DÒNG (Line 15, Line 20...) làm tham chiếu. Bởi vì tài liệu bạn đọc là file text đã trích xuất từ file Word gốc, số dòng sẽ không khớp với file của người dùng (BA).
-Để BA có thể tìm chính xác vị trí trong tài liệu gốc, bạn phải trích dẫn theo:
-- **Tên Mục / Tên Heading:** (Vd: Tại mục "Khai báo Nghiệp vụ", phần "Giao diện...")
-- **Tên Bảng & STT:** (Vd: Tại Bảng "Mô tả chi tiết các trường", dòng STT 5 "Mã phí"...)
-- **BPMN / Flowchart:** (Vd: Tại Flowchart Thêm mới, Bước số 6.b...)
-- **Trích dẫn trực tiếp Text:** (Vd: Tại đoạn văn có câu *"về thống cần thực hiện kiểm tra..."*)
+
+> **NGUYÊN TẮC TỐI THƯỢNG:** Mọi nội dung trong cột **Trích xuất** phải được **sao chép nguyên văn (verbatim)** từ tài liệu gốc. TUYỆT ĐỐI KHÔNG suy diễn, KHÔNG paraphrase, KHÔNG viết lại bằng ngôn ngữ của AI. Nếu tài liệu gốc viết *"Hệ thống kiểm tra tính hợp lệ"* thì cột Trích xuất phải ghi đúng *"Hệ thống kiểm tra tính hợp lệ"*, KHÔNG được viết thành *"Validate dữ liệu đầu vào"*.
+
+**CẤM TUYỆT ĐỐI:**
+1. **CẤM dùng số dòng** (Line 15, Line 20...) làm tham chiếu — vì tài liệu AI đọc là file text trích xuất từ Word gốc, số dòng sẽ KHÔNG khớp với file của BA.
+2. **CẤM suy diễn nội dung** — KHÔNG được tự diễn giải, tóm tắt, hoặc viết lại nội dung tài liệu bằng từ ngữ riêng.
+3. **CẤM ghi tham chiếu chung chung** — KHÔNG được viết kiểu "Theo tài liệu..." hoặc "Dựa trên mô tả..." mà không chỉ rõ vị trí cụ thể.
+
+**4 PHƯƠNG PHÁP TRÍCH DẪN HỢP LỆ (Bắt buộc dùng 1 hoặc kết hợp):**
+
+| # | Phương pháp | Cách ghi | Ví dụ ĐÚNG ✅ |
+|---|---|---|---|
+| 1 | **Tên Mục / Tên Heading** | Ghi chính xác tên heading/mục trong tài liệu | `Tại mục "3.2. Khai báo Nghiệp vụ", phần "Giao diện Thêm mới"` |
+| 2 | **Tên Bảng & STT dòng** | Ghi tên bảng + số thứ tự (STT) hoặc tên trường trong bảng | `Tại Bảng "Mô tả chi tiết các trường", dòng STT 5 — trường "Mã phí"` |
+| 3 | **BPMN / Flowchart** | Ghi tên Flowchart + bước số cụ thể | `Tại Flowchart "Thêm mới Sản phẩm dịch vụ", Bước 6.b` |
+| 4 | **Trích dẫn trực tiếp Text** | Copy nguyên văn một đoạn text đủ ngắn để BA dùng Ctrl+F tìm được | `Tại đoạn văn có câu: *"Hệ thống cần thực hiện kiểm tra tính duy nhất của Mã"*` |
+
+**Bảng Ví Dụ ĐÚNG / SAI:**
+
+| ❌ SAI (CẤM) | ✅ ĐÚNG (BẮT BUỘC) | Lý do |
+|---|---|---|
+| `Line 45 của file text` | `Mục "3.1 Danh sách", Bảng "Các trường hiển thị", STT 3` | Số dòng không khớp file Word gốc |
+| `Theo tài liệu, trường Mã phải unique` | `Mục "3.2 Thêm mới", đoạn: *"Mã sản phẩm không được trùng trong hệ thống"*` | Thiếu vị trí cụ thể, suy diễn từ "unique" |
+| `Phần mô tả trường Tên` | `Bảng "Mô tả chi tiết các trường thông tin", STT 2 — trường "Tên sản phẩm dịch vụ"` | Quá chung chung, không xác định được bảng nào |
+| `Flowchart có nhánh validate` | `Flowchart "Chỉnh sửa SPDV", Bước 5 — Gateway "Dữ liệu hợp lệ?"` | Thiếu tên Flowchart cụ thể và bước số |
+| `Hệ thống validate dữ liệu` (AI tự viết) | `*"Hệ thống kiểm tra tính hợp lệ của dữ liệu nhập vào"*` (nguyên văn từ tài liệu) | AI paraphrase thay vì copy nguyên văn |
+
+**SELF-CHECK BẮT BUỘC — Trước mỗi lần ghi cột Trích xuất:**
+```
+□ Nội dung trích xuất có được copy nguyên văn từ tài liệu gốc không? Hay AI đang tự viết lại?
+□ Có dùng số dòng (Line XX) không? → NẾU CÓ → XÓA, thay bằng tên mục/bảng/flowchart.
+□ BA có thể dùng Ctrl+F để tìm được đoạn text này trong file Word gốc không?
+□ Tên Heading/Bảng/Flowchart có khớp CHÍNH XÁC với tài liệu gốc không? (kể cả dấu ngoặc kép, số thứ tự)
+□ Nếu trích dẫn trực tiếp text: đoạn text có đủ dài (≥ 5 từ) để Ctrl+F cho kết quả duy nhất không?
+```
+
+> **VI PHẠM NGHIÊM TRỌNG:** Ghi cột Trích xuất bằng nội dung AI tự suy diễn/viết lại sẽ khiến BA **không thể trace** về đúng vị trí trong tài liệu gốc, gây mất thời gian đối chiếu và giảm uy tín bộ Q&A.
 
 **YÊU CẦU BẮT BUỘC VỀ FILE XUẤT RA:**
 Quá trình xuất file diễn ra như sau:
