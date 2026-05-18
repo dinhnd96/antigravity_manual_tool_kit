@@ -30,41 +30,45 @@ Khi thực hiện review, AI phải quét bộ Test Case qua các bộ lọc sau
 - **SC_Ref:** Phải kiểm tra cột SC_Ref xem có lấy trực tiếp từ bảng phân tích tài liệu (Mã Kịch Bản) để đảm bảo không sót case hay không. Báo lỗi nếu thiếu hoặc tự bịa ra mã không có trong file phân tích.
 - **Reference (Cột tham chiếu) — QUY TẮC TRÍCH XUẤT (TRACEABILITY RULE) BẮT BUỘC:**
   
-  Phải tuân thủ cấu trúc: `[VỊ TRÍ THAM CHIẾU] – [TRÍCH DẪN QUY TẮC NGẮN GỌN (tối đa 1-2 câu)]`.
+  Phải tuân thủ cấu trúc: `[VỊ TRÍ THAM CHIẾU] – [TRÍCH DẪN NỘI DUNG NGUYÊN VĂN (đủ hiểu, ≤ 200 ký tự tổng)]`.
   
-  > **NGUYÊN TẮC TỐI THƯỢNG:** Mọi nội dung trong cột Reference phải được **sao chép nguyên văn (verbatim)** từ tài liệu gốc. TUYỆT ĐỐI KHÔNG suy diễn, KHÔNG paraphrase, KHÔNG viết lại bằng ngôn ngữ của AI.
+  > **NGUYÊN TẮC TỐI THƯỢNG:** Mọi nội dung trong cột Reference phải được **sao chép nguyên văn (verbatim)** từ tài liệu gốc, **đủ nội dung để người đọc hiểu ngữ cảnh** mà không cần mở tài liệu gốc, nhưng **KHÔNG vượt quá 200 ký tự**. TUYỆT ĐỐI KHÔNG suy diễn, KHÔNG paraphrase, KHÔNG viết lại bằng ngôn ngữ của AI.
   
   **CẤM TUYỆT ĐỐI:**
   1. **CẤM dùng số dòng** (Line 15, Dòng 20...) làm tham chiếu — vì tài liệu AI đọc là file text trích xuất từ Word gốc, số dòng sẽ KHÔNG khớp với file của BA/Tester.
   2. **CẤM suy diễn nội dung** — KHÔNG được tự diễn giải, tóm tắt, hoặc viết lại nội dung tài liệu bằng từ ngữ riêng.
   3. **CẤM ghi tham chiếu chung chung** — KHÔNG được viết kiểu "Theo tài liệu...", "Dựa trên mô tả...", hoặc "Mục 2" mà không chỉ rõ tên heading cụ thể.
+  4. **CẤM trích dẫn cụt lủn** — KHÔNG được chỉ ghi tên mục/bảng mà thiếu nội dung quy tắc. Phải trích dẫn **đủ ngữ cảnh** (≥ 10 từ) để người đọc hiểu vấn đề.
+  5. **CẤM vượt 200 ký tự** — Mỗi ô Reference tối đa **200 ký tự** (kể cả vị trí tham chiếu + trích dẫn). Nếu nội dung gốc dài hơn, cắt ở vị trí có nghĩa và thêm `[...]` cuối.
   
   **4 PHƯƠNG PHÁP TRÍCH DẪN HỢP LỆ (Bắt buộc dùng 1 hoặc kết hợp):**
   
   | # | Phương pháp | Cách ghi | Ví dụ ĐÚNG ✅ |
   |---|---|---|---|
-  | 1 | **Tên Mục / Tên Heading** | Ghi chính xác tên heading/mục trong tài liệu | `Mục "3.2. Khai báo Nghiệp vụ", phần "Giao diện Thêm mới"` |
-  | 2 | **Tên Bảng & STT dòng** | Ghi tên bảng + số thứ tự (STT) hoặc tên trường trong bảng | `Bảng "Mô tả chi tiết các trường", dòng STT 5 — trường "Mã phí"` |
-  | 3 | **BPMN / Flowchart** | Ghi tên Flowchart + bước số cụ thể | `Flowchart "Thêm mới Sản phẩm dịch vụ", Bước 6.b` |
-  | 4 | **Trích dẫn trực tiếp Text** | Copy nguyên văn một đoạn text đủ ngắn để dùng Ctrl+F tìm được | `Đoạn: *"Hệ thống cần thực hiện kiểm tra tính duy nhất của Mã"*` |
+  | 1 | **Tên Mục / Tên Heading** | Ghi chính xác tên heading + trích dẫn nội dung quy tắc | `Mục "3.2. Khai báo Nghiệp vụ" – *"Mã sản phẩm là duy nhất, không được trùng trong toàn hệ thống"*` |
+  | 2 | **Tên Bảng & STT dòng** | Ghi tên bảng + STT + trích dẫn mô tả trường | `Bảng "Mô tả chi tiết các trường", STT 5 "Mã phí" – *"Bắt buộc nhập, tối đa 50 ký tự, không trùng"*` |
+  | 3 | **BPMN / Flowchart** | Ghi tên Flowchart + bước số + mô tả hành động | `Flowchart "Thêm mới SPDV", Bước 6.b – *"Nếu dữ liệu không hợp lệ, hiển thị thông báo lỗi"*` |
+  | 4 | **Trích dẫn trực tiếp Text** | Copy nguyên văn đoạn text đủ ngữ cảnh (≥ 10 từ, ≤ 200 ký tự) để dùng Ctrl+F tìm được | `Đoạn: *"Hệ thống cần thực hiện kiểm tra tính duy nhất của Mã trước khi lưu bản ghi vào CSDL"*` |
   
   **Bảng Ví Dụ ĐÚNG / SAI khi Review cột Reference:**
   
   | ❌ SAI (Bắt lỗi ngay) | ✅ ĐÚNG (Chấp nhận) | Loại lỗi |
   |---|---|---|
-  | `Dòng 15` / `Line 45` | `Mục "3.1 Danh sách", Bảng "Các trường hiển thị", STT 3` | Dùng số dòng |
-  | `Theo tài liệu, trường Mã phải unique` | `Mục "3.2 Thêm mới" – *"Mã sản phẩm không được trùng trong hệ thống"*` | Suy diễn, thiếu vị trí |
-  | `Phần mô tả trường Tên` | `Bảng "Mô tả chi tiết các trường thông tin", STT 2 — trường "Tên SPDV"` | Quá chung chung |
-  | `Flowchart có nhánh validate` | `Flowchart "Chỉnh sửa SPDV", Bước 5 — Gateway "Dữ liệu hợp lệ?"` | Thiếu tên Flowchart & bước số |
-  | `Hệ thống validate dữ liệu` (AI tự viết) | `*"Hệ thống kiểm tra tính hợp lệ của dữ liệu nhập vào"*` (nguyên văn) | AI paraphrase |
-  | `Mục 2` (chỉ ghi số mục) | `Mục "2. Quản lý Sản phẩm dịch vụ"` (ghi tên đầy đủ) | Thiếu tên heading |
+  | `Dòng 15` / `Line 45` | `Mục "3.1 Danh sách", Bảng "Các trường hiển thị" STT 3 – *"Cột Trạng thái hiển thị giá trị Hoạt động/Ngừng hoạt động"*` | Dùng số dòng |
+  | `Theo tài liệu, trường Mã phải unique` | `Mục "3.2 Thêm mới" – *"Mã sản phẩm là duy nhất, không được trùng trong toàn hệ thống"*` | Suy diễn, thiếu nguyên văn |
+  | `Bảng mô tả trường, STT 2` (cụt lủn) | `Bảng "Mô tả chi tiết các trường", STT 2 "Tên SPDV" – *"Bắt buộc nhập, tối đa 100 ký tự Unicode"*` | Chỉ ghi vị trí, thiếu nội dung quy tắc |
+  | `Flowchart có nhánh validate` | `Flowchart "Chỉnh sửa SPDV", Bước 5 Gateway "Dữ liệu hợp lệ?" – *"Nếu không hợp lệ, quay lại bước nhập liệu"*` | Thiếu tên Flowchart & bước số |
+  | `Hệ thống validate dữ liệu` (AI tự viết) | `*"Hệ thống kiểm tra tính hợp lệ của dữ liệu nhập vào trước khi cho phép lưu"*` (nguyên văn) | AI paraphrase |
+  | `Mục 2` (chỉ ghi số mục) | `Mục "2. Quản lý Sản phẩm dịch vụ" – *"Cho phép người dùng thêm mới, chỉnh sửa và vô hiệu hóa SPDV"*` | Thiếu tên heading & nội dung |
   
   **SELF-CHECK khi Review cột Reference:**
   ```
   □ Reference có dùng số dòng (Line XX / Dòng XX) không? → BẮT LỖI
   □ Reference chỉ ghi vị trí mà thiếu trích dẫn nội dung quy tắc? → BẮT LỖI
-  □ Nội dung trích dẫn có khớp nguyên văn với tài liệu gốc không? Hay AI/Tester tự viết lại? → BẮT LỖI nếu paraphrase
-  □ BA/Tester có thể dùng Ctrl+F tìm được đoạn text này trong file Word gốc không? → BẮT LỖI nếu không tìm được
+  □ Trích dẫn có ĐỦ NỘI DUNG để người đọc hiểu ngữ cảnh không? (≥ 10 từ) → BẮT LỖI nếu cụt lủn
+  □ Tổng ký tự ô Reference có VƯỢT 200 ký tự không? → BẮT LỖI nếu vượt
+  □ Nội dung trích dẫn có khớp nguyên văn với tài liệu gốc không? → BẮT LỖI nếu paraphrase
+  □ BA/Tester có thể dùng Ctrl+F tìm được không? → BẮT LỖI nếu không tìm được
   □ Tên Heading/Bảng/Flowchart có khớp CHÍNH XÁC với tài liệu gốc không? → BẮT LỖI nếu sai tên
   ```
 - **Pre-conditions:** Phải được đánh số thứ tự (1, 2...) và ghi rõ ràng. Chống viết cụt lủn "Trạng thái hoạt động" mà không rõ của bảng/module nào.
