@@ -122,7 +122,7 @@ Hệ thống AI khi đọc tài liệu cần tuân thủ workflow sau:
   - **Bước 2 — Mapping câu hỏi:** Đối chiếu từng câu hỏi giữa các file, xác định trùng/thiếu/mới.
   - **Bước 3 — Áp dụng Content Preservation Rule:** Câu hỏi chưa resolved phải lấy **nguyên văn nội dung đầy đủ** từ file gốc (file có nội dung chi tiết nhất), KHÔNG được tóm tắt hay viết lại ngắn hơn.
   - **Bước 4 — Bổ sung câu hỏi mới** từ file BA phản hồi mà AI chưa phát hiện ở Phase 1.
-- **Phần C: Bảng Tổng Hợp Test Case Đề Xuất (Test Case Coverage):** Sinh bảng danh sách test case bao phủ 100% tài liệu dựa trên cả URD và toàn bộ câu trả lời của BA từ mọi round Q&A (áp dụng Traceability như quy định).
+- **Phần C: Bảng Tổng Hợp Test Case Đề Xuất (Test Case Coverage):** Sinh bảng danh sách test case bao phủ 100% tài liệu dựa trên cả URD và toàn bộ câu trả lời của BA từ mọi round Q&A (áp dụng Traceability như quy định). **LƯU Ý:** Trước khi sinh bảng, AI phải rà soát toàn bộ câu trả lời BA để phát hiện các QA có chỉ thị loại trừ (Dạng 6 — "Không xây test case cho QA này" hoặc tương đương). Các SC liên quan đến QA bị loại trừ **KHÔNG được đưa vào bảng chính**, mà phải liệt kê riêng thành **"Danh sách SC loại trừ theo phản hồi BA"** ở cuối Phần C.
 - Cập nhật/sinh lại file `.docx` báo cáo tổng hợp (Gồm Phần A phiên bản mới nhất, Phần B tổng hợp tất cả round đã cập nhật câu trả lời, và Phần C).
 
 ## 2. Phần A: Tóm Tắt Nghiệp Vụ (Requirements Breakdown)
@@ -207,11 +207,19 @@ AI cần bóc tách tài liệu gốc theo chiều dọc (top-down) đúng như 
 | **📄 Dạng 3: BA yêu cầu đọc US / tài liệu update** | BA trả lời: "Đã update US", "Xem lại tài liệu mới", "Tham khảo US đã cập nhật" | → AI **BẮT BUỘC đọc lại tài liệu US** (phiên bản mới nhất) để hiểu logic đã thay đổi, lấy **nội dung US update** làm logic chốt. KHÔNG được dùng đề xuất QC cũ. |
 | **❌ Dạng 4: BA từ chối / bác bỏ đề xuất QC** | BA trả lời: "Không", "Không áp dụng", "Không cần", "Chưa cần", "Ngoài phạm vi" | → **LOẠI BỎ hoàn toàn đề xuất QC**. KHÔNG sinh SC dựa trên đề xuất bị bác bỏ. Nếu BA có nêu logic thay thế → lấy logic thay thế. Nếu BA chỉ bác bỏ mà không nêu logic thay thế → KHÔNG sinh SC cho vấn đề này. |
 | **📌 Dạng 5: BA xác nhận / cung cấp thông tin cụ thể (KHÔNG đề cập đề xuất QC)** | BA trả lời bằng cách nêu thẳng thông tin hoặc quyết định mà **không nhắc đến đề xuất QC**: "Cột Ngày thu định dạng Text", "Sử dụng mã X", "Giá trị mặc định là Y" | → Lấy **chính xác thông tin BA cung cấp** làm logic chốt. **KHÔNG suy diễn** rằng BA đang đồng ý với đề xuất QC. Nếu thông tin BA cung cấp **khác** đề xuất QC → bỏ qua đề xuất QC, dùng thông tin của BA. |
+| **🚫 Dạng 6: BA chỉ thị KHÔNG xây test case** | BA trả lời: "Không xây test case cho QA này", "Không cần test case", "Bỏ qua QA này", "Không cần kiểm thử" hoặc ý tương đương | → **LOẠI TRỪ HOÀN TOÀN.** KHÔNG sinh bất kỳ SC nào liên quan đến QA đó trong Phần C. Ghi nhận rõ ràng trong báo cáo: `"Loại trừ theo phản hồi BA — QA-XX: Không xây test case"`. Các SC bị loại trừ vẫn phải được liệt kê riêng (dạng danh sách loại trừ) ở cuối Phần C để đảm bảo traceability. |
+| **🔗 Dạng 7: BA tham chiếu chéo US khác** | BA trả lời: "Tương tự US35", "Pending tương tự USxx", "Xử lý giống USxx", "Áp dụng logic của USxx" hoặc ý tương đương | → AI **BẮT BUỘC** tìm và đọc bộ phân tích (Part B/C) của US được tham chiếu để lấy logic chốt tương đương. Sinh SC dựa trên logic đã chốt ở US tham chiếu. Ghi Note trong SC: `"Theo phản hồi BA — tương tự USxx (QA-YY)"`. Nếu **không tìm được** bộ phân tích US tham chiếu → đánh dấu QA là `Pending` (xử lý như Dạng 8) và cảnh báo User. |
+| **⏳ Dạng 8: BA chưa chốt / Pending** | BA trả lời: "Sẽ trao đổi với BE và cập nhật lại sau", "Đang xác nhận", "Sẽ cập nhật sau", "Chưa chốt", "Đang chờ confirm" hoặc ý tương đương | → **TẠM HOÃN — KHÔNG sinh SC.** Đánh dấu QA trạng thái `Pending`. Liệt kê riêng vào **"Danh sách QA chờ BA cập nhật"** ở cuối Phần C (tách biệt với danh sách loại trừ). Khi BA cập nhật sau → User cung cấp câu trả lời mới → AI sinh bổ sung SC vào bộ test case đã có. |
 
 > **⚠️ CẢNH BÁO CHỐNG NHẦM LẪN DẠNG 1 vs DẠNG 5:**
 > - BA nói *"Xác nhận cột Ngày thu là Text"* → Đây là **Dạng 5** (BA tự nêu thông tin), KHÔNG phải Dạng 1. BA đang confirm **quyết định của họ**, không phải confirm **đề xuất của QC**.
 > - BA nói *"Đồng ý theo đề xuất QC, dùng định dạng Date cho cột Ngày thu"* → Đây mới là **Dạng 1** (BA đề cập và đồng ý đề xuất QC).
 > - **Quy tắc phân biệt:** Nếu trong câu trả lời BA **KHÔNG xuất hiện** cụm từ "đề xuất", "theo QC", "theo hướng QC" → mặc định phân loại là **Dạng 5**, không phải Dạng 1.
+
+> **⚠️ CẢNH BÁO CHỐNG NHẦM LẪN DẠNG 4 vs DẠNG 8:**
+> - BA nói *"Không áp dụng"* → Đây là **Dạng 4** (bác bỏ dứt khoát). KHÔNG sinh SC.
+> - BA nói *"Sẽ trao đổi với BE và cập nhật lại sau"* → Đây là **Dạng 8** (chưa chốt). TẠM HOÃN, chờ BA cập nhật.
+> - **Quy tắc phân biệt:** Nếu BA dùng từ chỉ **thời gian tương lai** ("sẽ", "sau", "đang", "chờ") → mặc định phân loại là **Dạng 8**. Nếu BA dùng từ **phủ định dứt khoát** ("không", "không cần", "ngoài phạm vi") → **Dạng 4**.
 
 > **🔀 XỬ LÝ CÂU TRẢ LỜI PHỨC HỢP (COMPOUND RESPONSE):**
 > Một câu trả lời BA có thể chứa **nhiều dạng kết hợp** (VD: vừa bác bỏ đề xuất QC + vừa nêu logic riêng + vừa update tài liệu). Khi gặp trường hợp này:
@@ -232,11 +240,16 @@ AI cần bóc tách tài liệu gốc theo chiều dọc (top-down) đúng như 
 
 ```
 □ Câu hỏi QC gốc đề xuất gì?
-□ BA trả lời thuộc Dạng nào (1/2/3/4/5)?
+□ BA trả lời thuộc Dạng nào (1/2/3/4/5/6/7/8)?
 □ Nếu phân loại Dạng 1: BA có nhắc đến "đề xuất" / "theo QC" không? Nếu KHÔNG → chuyển sang Dạng 5.
-□ Logic chốt cuối cùng lấy từ đâu? (Đề xuất QC / Giải thích BA / US update / Loại bỏ / Thông tin BA cung cấp)
+□ Nếu phân loại Dạng 6: BA có chỉ thị "Không xây test case" không? → NẾU CÓ → LOẠI TRỪ SC, KHÔNG sinh test case.
+□ Nếu phân loại Dạng 7: Đã tìm và đọc bộ phân tích US tham chiếu chưa? → NẾU CHƯA → ĐỌC TRƯỚC khi sinh SC.
+□ Nếu phân loại Dạng 8: BA có dùng từ chỉ thời gian tương lai ("sẽ", "sau", "đang chờ") không? → NẾU CÓ → TẠM HOÃN, đưa vào danh sách Pending.
+□ Logic chốt cuối cùng lấy từ đâu? (Đề xuất QC / Giải thích BA / US update / Loại bỏ / Loại trừ TC / Tham chiếu US khác / Tạm hoãn / Thông tin BA cung cấp)
 □ SC đang sinh có phản ánh đúng logic chốt cuối cùng không?
 □ Có đang dùng đề xuất QC trong khi BA đã bác bỏ/giải thích khác/cung cấp thông tin khác không? → NẾU CÓ → SỬA NGAY
+□ Có đang sinh SC cho QA mà BA đã chỉ thị "Không xây test case" không? → NẾU CÓ → XÓA NGAY
+□ Có đang sinh SC cho QA mà BA chưa chốt (Dạng 8) không? → NẾU CÓ → CHUYỂN VÀO DANH SÁCH PENDING
 ```
 
 > **VI PHẠM NGHIÊM TRỌNG:** Sinh SC dựa trên đề xuất QC trong khi BA đã từ chối, bác bỏ, hoặc giải thích logic khác. Đây là lỗi **sai logic nghiệp vụ** gây ra Test Case không hợp lệ, lãng phí effort của Tester.

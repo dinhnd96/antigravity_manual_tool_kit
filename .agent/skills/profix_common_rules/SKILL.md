@@ -335,48 +335,14 @@ Mục đích: Cung cấp màn hình Popup tra cứu nhanh CIF theo các thông t
 - **Quy định:** Mặc định người dùng luôn có thể nhấn "Tra cứu" hoặc "Xóa tra cứu" nhiều lần liên tiếp ngay trên màn hình. Chi tiết này đã được quy định ở QTC-04 và trong mô tả chi tiết các trường. Flowchart kết thúc ở End chỉ là để thể hiện xong một chu trình (1 request).
 - **AI KHÔNG ĐƯỢC HỎI LẠI** BA/QA về việc bổ sung nhánh lặp (loop) từ cuối Flowchart quay lại bước nhập điều kiện/lựa chọn.
 
-### QTC-14.7 · Phân Biệt Trạng Thái Hoạt Động và Trạng Thái Phê Duyệt
-- Hệ thống ProfiX sử dụng **2 loại trạng thái riêng biệt** cho mỗi bản ghi, **KHÔNG được nhầm lẫn**:
-
-| Loại trạng thái | Ý nghĩa | Giá trị | Hiển thị |
-|---|---|---|---|
-| **Trạng thái phê duyệt** (Approval Status) | Trạng thái trong luồng Maker-Checker | `Chờ duyệt`, `Đã duyệt`, `Từ chối duyệt` | Màn hình Tác vụ chờ duyệt / Tác vụ pending |
-| **Trạng thái hoạt động** (Operational Status) | Trạng thái vòng đời nghiệp vụ của bản ghi 
-
-- **Quy tắc:**
-  - Bản ghi chỉ hiển thị trên **lưới danh mục chính** khi trạng thái phê duyệt = `Đã duyệt`. Bản ghi `Chờ duyệt` hoặc `Từ chối duyệt` **KHÔNG hiển thị** trên lưới chính (chỉ hiển thị ở Tác vụ chờ duyệt / Tác vụ pending).
-
-- **AI KHÔNG ĐƯỢC NHẦM LẪN** "Chờ duyệt" (trạng thái phê duyệt) với trạng thái hoạt động.
-
----
-
-## QTC-13 · Nguyên Tắc Sử Dụng Skill Này
-
-> **AI BẮT BUỘC áp dụng khi phân tích bất kỳ US nào trong ProfiX:**
-
-1. **Tra cứu trước khi hỏi:** Trước khi đặt câu hỏi Q&A cho BA về bất kỳ hành vi nào, kiểm tra xem QTC-01 đến QTC-14 đã trả lời chưa.
-2. **Không hỏi lại câu hỏi đã có đáp án trong Quy tắc chung**, ví dụ:
-   - ❌ "Tìm kiếm có phân biệt hoa thường không?" → ✅ Đã có: QTC-02, Không phân biệt.
-   - ❌ "Tải xuống ra định dạng gì?" → ✅ Đã có: QTC-05, Excel `.xlsx` hoặc PDF.
-   - ❌ "Tài liệu không đính kèm file template xuất Excel/PDF, yêu cầu BA cung cấp?" → ✅ Đã có: QTC-05, template mặc định lấy theo các field trên lưới màn hình.
-   - ❌ "Phân trang mặc định bao nhiêu dòng?" → ✅ Đã có: QTC-06, 50 bản ghi/trang.
-   - ❌ "Upload file định dạng gì?" → ✅ Đã có: QTC-07, Excel.
-   - ❌ "Lịch sử tác động gồm những cột nào?" → ✅ Đã có: QTC-08 (Thêm cả Người phê duyệt).
-   - ❌ "Tra cứu CIF hoạt động thế nào?" → ✅ Đã có: QTC-09.
-   - ❌ "Expected Result lỗi validation viết như thế nào?" → ✅ Đã có: QTC-11, ưu tiên mô tả hành vi FE.
-   - ❌ "Checker thấy những hành động gì khi chưa được phân quyền?" → ✅ Đã có: QTC-12, Chỉ thấy nút Xem.
-   - ❌ "Nếu không thay đổi gì mà nhấn Lưu thì sao?" → ✅ Đã có: QTC-14.1, FE disable nút hoặc cảnh báo.
-   - ❌ "Tên Nghiệp vụ có cần unique không?" → ✅ Đã có: QTC-14.2, Không cần unique.
-   - ❌ "Tên SPDV có cần unique trong cùng cấp cha không?" → ✅ Đã có: QTC-14.3, Không cần unique.
-   - ❌ "Có cơ chế superadmin để sửa lỗi chính tả Tên không?" → ✅ Đã có: QTC-14.4, Không có.
-   - ❌ "Flowchart tra cứu thiếu nhánh validate trường bắt buộc, Từ ngày > Đến ngày, hoặc CIF không hợp lệ?" → ✅ Đã có: QTC-14.5, Ngầm định FE tự validate, không hỏi lại.
-   - ❌ "Flowchart kết thúc sau khi hiển thị danh sách, thiếu nhánh quay lại để tra cứu tiếp?" → ✅ Đã có: QTC-14.6, Không hỏi lại, mặc định user luôn có thể tra cứu nhiều lần.
-   - ❌ "Trạng thái 'Chờ duyệt' và 'Chờ gán' có phải cùng 1 trạng thái không?" → ✅ Đã có: QTC-14.7, Đây là 2 loại trạng thái khác nhau (phê duyệt vs hoạt động).
-   - ❌ "Bản ghi 'Chờ duyệt' có hiển thị trên lưới chính không?" → ✅ Đã có: QTC-14.7, Không — chỉ hiển thị ở Tác vụ chờ duyệt/pending.
    - ❌ "Trường hợp không có dữ liệu, hệ thống hiển thị rỗng (blank) hay dấu '-' trên lưới?" → ✅ Đã có: QTC-01.7, Hiển thị rỗng (blank).
+   - ❌ "Nếu Kafka down/unavailable, retry bao nhiêu lần? Rollback trạng thái không?" → ✅ Đã có: QTC-16, Giải pháp BE, không hỏi BA.
+   - ❌ "ProfiX không nhận được kết quả từ Topic sau timeout, có cơ chế monitoring không?" → ✅ Đã có: QTC-16, Giải pháp BE, không hỏi BA.
+   - ❌ "API xác thực bằng cơ chế gì? Rate limit bao nhiêu?" → ✅ Đã có: QTC-16, Giải pháp BE, không hỏi BA.
 3. **Chỉ hỏi BA các điểm thực sự thiếu** hoặc US hiện tại có quy tắc riêng mâu thuẫn/ghi đè Quy tắc chung.
 4. **Trong báo cáo phân tích**, khi nhắc đến Quy tắc chung, ghi rõ tham chiếu **[QTC-XX]** để tăng traceability.
    - ❌ "Nhấn 'Đóng' có hiện popup xác nhận không?" → ✅ Đã có: QTC-15, Không hiện popup, không lưu, quay về màn hình trước.
+
 
 ---
 
@@ -390,3 +356,37 @@ Mục đích: Cung cấp màn hình Popup tra cứu nhanh CIF theo các thông t
   3. Hệ thống **điều hướng người dùng về màn hình trước đó** (previous screen / parent screen).
 
 - **Lưu ý:** Quy tắc này áp dụng mặc định. Nếu US cụ thể yêu cầu hành vi khác (ví dụ: hiện popup cảnh báo mất dữ liệu), tài liệu US đó phải ghi rõ override.
+
+---
+
+## QTC-16 · Giải Pháp Kỹ Thuật BE/Infra (Không Thuộc Phạm Vi URD/FSD)
+
+> **Các câu hỏi về giải pháp kỹ thuật của Backend/Infrastructure KHÔNG thuộc phạm vi tài liệu nghiệp vụ. AI KHÔNG ĐƯỢC hỏi BA các câu dạng này.**
+
+### Nguyên tắc
+
+- **Tài liệu URD/FSD** chỉ mô tả **nghiệp vụ** (business logic, luồng xử lý, trạng thái, quy tắc).
+- **Giải pháp kỹ thuật** (retry, timeout, rate limit, authentication, circuit breaker, message queue config...) là trách nhiệm của **team BE/DevOps** và được mô tả trong tài liệu kỹ thuật riêng (ISD, Technical Spec).
+- BA sẽ **luôn bác bỏ** các câu hỏi dạng này với phản hồi: *"Đây là giải pháp của BE, sẽ trao đổi với BE và cập nhật lại sau"* hoặc *"Không mô tả trong tài liệu này"*.
+
+### Danh sách câu hỏi CẤM hỏi BA (ví dụ thực tế)
+
+| ❌ CẤM hỏi BA | Lý do | Hành động đúng |
+|---|---|---|
+| "Nếu Kafka down, retry bao nhiêu lần?" | Giải pháp BE | Ghi note: *[QTC-16] Giải pháp BE, QC tham chiếu ISD* |
+| "Timeout chờ kết quả từ Topic là bao lâu?" | Giải pháp BE | Ghi note: *[QTC-16]* |
+| "API xác thực bằng OAuth hay JWT?" | Giải pháp BE | Ghi note: *[QTC-16] QC tham chiếu ISD* |
+| "API có rate limit không? Bao nhiêu request/s?" | Giải pháp BE | Ghi note: *[QTC-16]* |
+| "Message queue dùng at-least-once hay exactly-once?" | Giải pháp Infra | Ghi note: *[QTC-16]* |
+| "Circuit breaker khi service downstream unavailable?" | Giải pháp BE | Ghi note: *[QTC-16]* |
+| "Database transaction isolation level?" | Giải pháp BE | Ghi note: *[QTC-16]* |
+| "Cơ chế idempotent chống duplicate request?" | Giải pháp BE | Ghi note nếu BA đã trả lời nghiệp vụ (VD: "báo lỗi trạng thái không hợp lệ") → sinh TC từ câu trả lời nghiệp vụ, KHÔNG hỏi thêm kỹ thuật |
+
+### Quy tắc xử lý
+
+1. **Khi phân tích (Part B):** Nếu phát hiện gap liên quan kỹ thuật → **KHÔNG đưa vào danh sách Q&A cho BA**. Thay vào đó ghi nhận nội bộ: *"[QTC-16] Giải pháp BE — QC chủ động tham chiếu ISD khi có"*.
+2. **Khi sinh TC (Part C/TC):** Nếu SC liên quan kỹ thuật thuần túy → **KHÔNG sinh TC**. Nếu BA đã phản hồi phần nghiệp vụ (VD: "request duplicate → báo lỗi trạng thái") → sinh TC từ phần nghiệp vụ đó.
+3. **Phân biệt ranh giới:**
+   - ✅ **Hỏi BA:** "Khi request xóa nợ trùng, hệ thống phản hồi gì?" → Đây là hành vi nghiệp vụ.
+   - ❌ **KHÔNG hỏi BA:** "API xóa nợ có idempotent key không?" → Đây là giải pháp kỹ thuật.
+

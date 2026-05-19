@@ -161,12 +161,16 @@ Không in bảng ra Chat. Phải chạy Script Python (`pandas`, `openpyxl`) t�
 
 ## 9. Luồng Thực Thi (Workflow)
 1. **Phân tích đầu vào BẮT BUỘC:** Lấy danh sách toàn bộ các kịch bản kiểm thử (SC_Ref) từ Bảng Tổng Hợp Test Case (Phần C) của file phân tích yêu cầu trước đó.
+   - **QUY TẮC XỬ LÝ SC THEO PHẢN HỒI BA (BẮT BUỘC):** Trong quá trình lọc danh sách SC, AI phải kiểm tra cột "Câu trả lời BA" (hoặc phản hồi BA tương đương) trong Phần B (Q&A) và phân loại từng SC vào 1 trong 3 trạng thái:
+     - **🚫 Loại trừ (Dạng 6):** BA chỉ thị _"Không xây test case cho QA này"_, _"Không cần test case"_, _"Bỏ qua QA này"_ → **Loại bỏ SC khỏi danh sách sinh TC.** Ghi log: `"Loại trừ theo phản hồi BA — QA-XX: Không xây test case"`.
+     - **🔗 Tham chiếu chéo (Dạng 7):** BA trả lời _"Tương tự USxx"_, _"Pending tương tự USxx"_, _"Xử lý giống USxx"_ → **AI BẮT BUỘC tìm và đọc bộ phân tích US tham chiếu** để lấy logic chốt tương đương. Sinh TC dựa trên logic US tham chiếu. Ghi Note: `"Theo phản hồi BA — tương tự USxx"`. Nếu không tìm được US tham chiếu → chuyển sang trạng thái Pending.
+     - **⏳ Tạm hoãn (Dạng 8):** BA trả lời _"Sẽ trao đổi với BE và cập nhật lại sau"_, _"Đang xác nhận"_, _"Chưa chốt"_ → **KHÔNG sinh TC.** Đưa SC vào "Danh sách SC chờ BA cập nhật". Khi BA cung cấp câu trả lời mới → sinh bổ sung TC.
 2. Parse tài liệu: Liệt kê **Logic điều kiện ẩn (LOG-xxx)** và **Chức năng UI (UI-xxx)**.
    - Nếu tài liệu Narrative → tự bóc tách và đặt mã `LOG-` theo Mục 7.1.
-3. Sinh Test Case chi tiết: Đảm bảo bao phủ **100% danh sách SC_Ref** ở bước 1. **Mỗi SC phải sinh ra ít nhất một (hoặc nhiều) Test Case thực tế** (vd: 1 SC về kiểm tra điều kiện so sánh có thể sinh ra 3 TC cho >, <, =).
+3. Sinh Test Case chi tiết: Đảm bảo bao phủ **100% danh sách SC_Ref còn lại** (sau khi đã loại trừ theo phản hồi BA) ở bước 1. **Mỗi SC phải sinh ra ít nhất một (hoặc nhiều) Test Case thực tế** (vd: 1 SC về kiểm tra điều kiện so sánh có thể sinh ra 3 TC cho >, <, =).
 4. Kiểm tra quy tắc **Tách riêng** (Không gộp trạng thái).
 5. Viết và chạy Script Python tạo file.
-6. **Kiểm tra chéo (Cross-check) chống thiếu sót:** So sánh danh sách các SC_Ref duy nhất trong file Excel vừa tạo với danh sách gốc trong Phần C. Nếu sót bất kỳ SC nào, BẮT BUỘC phải sinh bổ sung.
+6. **Kiểm tra chéo (Cross-check) chống thiếu sót:** So sánh danh sách các SC_Ref duy nhất trong file Excel vừa tạo với danh sách SC_Ref còn lại (sau loại trừ) trong Phần C. Nếu sót bất kỳ SC nào, BẮT BUỘC phải sinh bổ sung.
 7. Thông báo đường dẫn file cho User bằng Tiếng Việt.
 
 ## Anti-Patterns 
@@ -183,3 +187,6 @@ Không in bảng ra Chat. Phải chạy Script Python (`pandas`, `openpyxl`) t�
 - ❌ Sử dụng tên button chung chung (OK, Confirm, Lưu) thay vì tên chính xác trong tài liệu.
 - ❌ Expect bản ghi "biến mất" khỏi màn hình Chờ duyệt/Pending sau khi thao tác (phải là cập nhật trạng thái).
 - ❌ Thiếu kịch bản kiểm thử cho bộ 3 giá trị (>, <, =) đối với các quy tắc so sánh nghiệp vụ.
+- ❌ Sinh Test Case cho các SC mà BA đã phản hồi "Không xây test case" (Dạng 6) — phải loại trừ trước khi sinh.
+- ❌ Sinh Test Case cho SC mà BA chưa chốt / đang Pending (Dạng 8) — phải tạm hoãn, chờ BA cập nhật.
+- ❌ Bỏ qua tham chiếu chéo US (Dạng 7) mà không đọc bộ phân tích US tham chiếu — phải tra cứu trước khi sinh TC.
