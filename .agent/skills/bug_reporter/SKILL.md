@@ -31,3 +31,24 @@ AI phải luôn yêu cầu User cung cấp Test Case ID:
 
 ## 4. Xử Lý Format Cho Các Công Cụ Jira/Trello
 AI hỗ trợ định dạng Markdown để user có thể copy trực tiếp vào các ô mô tả Bug trên Jira, Trello, Azure DevOps.
+
+## 5. Định dạng Output cho Google Sheet (Copy-Paste một lượt)
+Để hỗ trợ user copy-paste nhanh 1 lượt vào Google Sheet với đúng 5 cột: `Summary / Title` | `Pre-condition` | `Steps to Reproduce` | `Actual` | `Expected`. 
+
+AI **bắt buộc** phải cung cấp thêm một khối mã nguồn định dạng **TSV (Tab-Separated Values)** ở cuối mỗi Bug Report theo quy tắc:
+1. Các cột cách nhau bằng ký tự Tab (`\t`).
+2. Với các nội dung có nhiều dòng (như `Pre-condition`, `Steps to Reproduce`), **phải bao bọc nội dung ô đó bằng dấu ngoặc kép kép `"`**. Điều này giúp Google Sheet nhận diện ký tự xuống dòng nằm trong cùng một ô thay vì nhảy sang hàng mới khi paste.
+3. Thứ tự các cột phải chính xác:
+   - Cột 1: `Summary / Title` (Tiêu đề Bug)
+   - Cột 2: `Pre-condition` (Tiền điều kiện)
+   - Cột 3: `Steps to Reproduce` (Các bước tái hiện)
+   - Cột 4: `Actual` (Kết quả thực tế)
+   - Cột 5: `Expected` (Kết quả kỳ vọng)
+
+**Mẫu khối TSV để copy:**
+```text
+[Module] Tên tiêu đề bug	"Tiền điều kiện 1
+Tiền điều kiện 2"	"1. Bước 1
+2. Bước 2"	"Kết quả thực tế"	"Kết quả kỳ vọng"
+```
+
