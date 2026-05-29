@@ -17,7 +17,7 @@ Một báo cáo lỗi tốt phải bao gồm các thành phần sau:
 - **Expected Result (Kết quả kỳ vọng):** Đúng theo tài liệu URD/Specs.
 - **Actual Result (Kết quả thực tế):** Hệ thống đang chạy sai như thế nào.
 - **Severity (Mức độ nghiêm trọng):** S1 (Blocker), S2 (Critical), S3 (Major), S4 (Minor).
-- **Priority (Mức độ ưu tiên sửa):** P1 (High), P2 (Medium), P3 (Low).
+- **Priority (Mức độ ưu tiên sửa):** Critical, Major/High, Medium, Low.
 
 ## 2. Quy Tắc Ngôn Ngữ & Mô Tả
 - **Trung lập & Khách quan:** Chỉ nêu sự thật kỹ thuật, không dùng cảm xúc cá nhân.
@@ -33,22 +33,25 @@ AI phải luôn yêu cầu User cung cấp Test Case ID:
 AI hỗ trợ định dạng Markdown để user có thể copy trực tiếp vào các ô mô tả Bug trên Jira, Trello, Azure DevOps.
 
 ## 5. Định dạng Output cho Google Sheet (Copy-Paste một lượt)
-Để hỗ trợ user copy-paste nhanh 1 lượt vào Google Sheet với đúng 5 cột: `Summary / Title` | `Pre-condition` | `Steps to Reproduce` | `Actual` | `Expected`. 
+Để hỗ trợ user copy-paste nhanh 1 lượt vào Google Sheet với đúng 8 cột: `Priority` | `Related TC` | `Summary / Title` | `Pre-condition` | `Steps to Reproduce` | `Actual` | `Expected` | `Root Cause Analysis (QA Note)`.
 
 AI **bắt buộc** phải cung cấp thêm một khối mã nguồn định dạng **TSV (Tab-Separated Values)** ở cuối mỗi Bug Report theo quy tắc:
 1. Các cột cách nhau bằng ký tự Tab (`\t`).
 2. Với các nội dung có nhiều dòng (như `Pre-condition`, `Steps to Reproduce`), **phải bao bọc nội dung ô đó bằng dấu ngoặc kép kép `"`**. Điều này giúp Google Sheet nhận diện ký tự xuống dòng nằm trong cùng một ô thay vì nhảy sang hàng mới khi paste.
 3. Thứ tự các cột phải chính xác:
-   - Cột 1: `Summary / Title` (Tiêu đề Bug)
-   - Cột 2: `Pre-condition` (Tiền điều kiện)
-   - Cột 3: `Steps to Reproduce` (Các bước tái hiện)
-   - Cột 4: `Actual` (Kết quả thực tế)
-   - Cột 5: `Expected` (Kết quả kỳ vọng)
+   - Cột 1: `Priority` (Mức độ ưu tiên: Critical / Major/High / Medium / Low)
+   - Cột 2: `Related TC` (Mã Test Case liên quan, VD: TC-001. Nếu phát hiện qua Exploratory → ghi "Exploratory")
+   - Cột 3: `Summary / Title` (Tiêu đề Bug theo format [Module] Action + Error)
+   - Cột 4: `Pre-condition` (Tiền điều kiện)
+   - Cột 5: `Steps to Reproduce` (Các bước tái hiện)
+   - Cột 6: `Actual` (Kết quả thực tế)
+   - Cột 7: `Expected` (Kết quả kỳ vọng)
+   - Cột 8: `Root Cause Analysis (QA Note)` (Phân tích nguyên nhân gốc từ góc nhìn QA — gợi ý hướng debug cho Dev)
 
 **Mẫu khối TSV để copy:**
 ```text
-[Module] Tên tiêu đề bug	"Tiền điều kiện 1
+Major/High	TC-015	[Module] Tên tiêu đề bug	"Tiền điều kiện 1
 Tiền điều kiện 2"	"1. Bước 1
-2. Bước 2"	"Kết quả thực tế"	"Kết quả kỳ vọng"
+2. Bước 2"	"Kết quả thực tế"	"Kết quả kỳ vọng"	"Phân tích nguyên nhân gốc từ QA"
 ```
 
