@@ -82,6 +82,10 @@ Khi thực hiện review, AI phải quét bộ Test Case qua các bộ lọc sau
 - Mâu thuẫn giữa FSD và TC: FSD yêu cầu trạng thái "A", nhưng TC lại kỳ vọng trạng thái "B".
 - Bắt lỗi test Negative (Validation) trên các trường hệ thống Auto-generated.
 - Test chức năng "Xem/Đóng" nhưng Expected lại làm đổi Data State.
+- **Bắt lỗi / Review logic tham chiếu tréo (Cross-referenced Logic trong Part A, Part C & Test Case):**
+  - **Đối với Part A (Tóm tắt nghiệp vụ):** Kiểm tra xem AI/Tester đã đọc hiểu và diễn giải chi tiết luồng tích hợp từ US tham chiếu (như US34) vào Part A hay chưa. Báo lỗi/flag nếu Part A bỏ qua hoặc chỉ viết chung chung mà không giải thích rõ cách thức hoạt động của luồng tham chiếu đó.
+  - **Đối với Part C & Test Case:** Kiểm tra xem bộ Test Case/Part C đã kế thừa và thiết lập đầy đủ các kịch bản test chuẩn, luồng tích hợp, và các kịch bản biên của US tham chiếu (như US34) hay chưa. Bắt lỗi GAP nếu thiếu các kịch bản liên quan đến luồng tích hợp này.
+  - **TUYỆT ĐỐI KHÔNG** chấp nhận các kịch bản test mang tính phỏng đoán hoặc các câu hỏi đề xuất BA giải trình lại luồng tích hợp đã được định nghĩa rõ ở US tham chiếu đó.
 
 ## 2. Quy Trình Thực Thi (Standard Workflow)
 1. **Recon (Điều tra):** Đọc kỹ tài liệu URD/FSD để liệt kê danh sách Logic (`LOG-xxx`) và màn hình UI (`UI-xxx`).
@@ -89,6 +93,7 @@ Khi thực hiện review, AI phải quét bộ Test Case qua các bộ lọc sau
 3. **Mapping (Đối soát):** Duyệt qua danh sách Test Case và map TC_ID với mã Logic/UI. Trích lập ma trận Traceability.
 4. **Drill-down Standard (Check tiêu chuẩn):** Quét từng fields (Data, Steps, Expected 2 lớp) của TC.
 5. **Reporting (Báo cáo):** Tổng hợp danh sách lỗi vi phạm logic và vi phạm format.
+   - **Lưu ý đặc biệt khi Recon & Q&A Check:** Nếu phát hiện yêu cầu nghiệp vụ ghi tham chiếu đến các US khác trong dự án (ví dụ: US34), AI **BẮT BUỘC** phải tự tìm đọc tài liệu của US đó trong workspace (ví dụ: file US34.docx, US34_PartA_Summary.docx) để nắm rõ logic nghiệp vụ/tích hợp, không được đưa các câu hỏi phỏng đoán hoặc yêu cầu làm rõ luồng đã có tài liệu vào báo cáo (ví dụ: *"Làm rõ luồng tích hợp: MMS tự động sinh GD chờ duyệt trên kênh Quầy/Nội bộ (US34), hoặc Maker nhập tay"*).
 
 ## 3. Cấu Trúc Báo Cáo Trả Về (The Review Report)
 Trình bày kết quả review dưới dạng bảng, tách biệt lỗi Format (Data/Expected) và lỗi Nghiệp vụ (Logic/GAP).

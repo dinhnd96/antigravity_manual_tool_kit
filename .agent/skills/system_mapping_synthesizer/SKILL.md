@@ -36,6 +36,8 @@ Skill này sinh ra **5 tài liệu Mapping chuẩn hóa**, mỗi tài liệu ph�
 
 **Nguyên tắc 2: Mapping phải traceable.** Mỗi mục trong tài liệu mapping phải trỏ ngược được về User Story hoặc mục cụ thể trong tài liệu gốc.
 
+**Nguyên tắc 7: Bắt buộc tự tra cứu tài liệu tham chiếu/tương tự.** Khi tài liệu có các mục hoặc phần phụ thuộc nghiệp vụ trỏ sang US khác trong hệ thống (ví dụ: *"Tính phí và thu phí theo US34"*), AI **BẮT BUỘC** phải tự mở tài liệu tương ứng của US đó (ví dụ: US34.docx hoặc US34_PartA_Summary.docx) để đọc hiểu, đối chiếu, diễn giải và cập nhật đầy đủ luồng nghiệp vụ/tích hợp đó vào các phần mapping tương ứng (như System Architecture, Core Workflows). Không được tự phỏng đoán hoặc bỏ qua các luồng này.
+
 **Nguyên tắc 3: Trực quan hóa bằng Mermaid + HTML-first.** Ưu tiên sơ đồ, biểu đồ, flowchart thay vì văn xuôi dài dòng. **Sinh thẳng 1 file HTML duy nhất** với Mermaid.js live render (xem Phase 2.5) thay vì tạo nhiều file `.md` riêng rời rạc. Tiết kiệm 3-4x token.
 
 **Nguyên tắc 4: Viết cho người chưa biết gì.** Giả định người đọc chưa từng đọc tài liệu gốc. Mọi thuật ngữ phải được giải thích ngay lần đầu xuất hiện.
@@ -448,3 +450,5 @@ Trước khi bàn giao bộ tài liệu, AI tự kiểm tra:
 6. **Phân tích bằng Tiếng Việt.** Trừ khi User yêu cầu ngôn ngữ khác. Tên biến, tên file có thể viết bằng Tiếng Anh.
 
 7. **HTML-first: Sinh thẳng 1 file HTML từ đầu.** KHÔNG sinh nhiều file `.md` rồi render ảnh rồi gộp lại. Sinh thẳng 1 file HTML với Mermaid.js live render. Tiết kiệm 3-4x token, người đọc mở 1 file là hiểu hết.
+
+8. **BẮT BUỘC tra cứu và diễn giải luồng tích hợp của US tham chiếu:** Nếu tài liệu nghiệp vụ gốc đề cập hoặc phụ thuộc vào các US khác trong dự án (ví dụ: *"Tính phí và thu phí theo US34"*), AI **BẮT BUỘC** phải tự tìm kiếm và mở tài liệu của US đó lên để đọc hiểu và tự động diễn giải chi tiết luồng tích hợp đó vào System Architecture (Feature Tree, State Lifecycle, Integration Map) và Core Workflows, giúp người dùng nắm bắt ngữ cảnh một cách rõ ràng nhất.

@@ -60,6 +60,11 @@ description: >
   - `Từ ngày` = `dd/mm/yyyy 00:00:00.000`
   - `Đến ngày` = `dd/mm/yyyy 23:59:59.999`
 
+#### QTC-01.5.1 · Datetime
+- Áp dụng cho các trường có kiểu dữ liệu **Datetime** (ví dụ: Ngày tạo, Ngày cập nhật…).
+- Định dạng hiển thị mặc định: `hh:mm:ss – dd/mm/yyyy`.
+- Trường Datetime thường ở dạng **chỉ đọc** (◎ disable), hệ thống tự ghi nhận thời điểm thao tác.
+
 ### QTC-01.6 · Text – Giới Hạn Ký Tự Mặc Định
 Áp dụng khi cột "Ràng buộc" trong bảng field-description **không ghi rõ** độ dài:
 
@@ -191,29 +196,29 @@ Mục đích: Cung cấp màn hình Popup tra cứu nhanh CIF theo các thông t
 
 Áp dụng cho các chức năng (Tìm kiếm nhanh, Lọc nâng cao, Tra cứu, Xem): Danh mục SPDV & Code phí, Danh mục Biểu phí, Chương trình ưu đãi, Xem nghiệp vụ theo cây thư mục, Xem code phí theo KH, Xem lịch sử thu phí theo KH, Xem lịch thu phí dự kiến theo KH, Xem CTƯĐ theo KH, Tác vụ chờ duyệt, Các chức năng truy xuất báo cáo.
 
-### Logic phân quyền theo Khối (Block):
+### Logic phân quyền theo Khối:
 
 **Màn hình không có trường lọc "Khối":**
 - Hệ thống tự động xác định Khối từ thông tin người dùng.
 
 **Màn hình có trường lọc "Khối":**
 - User thuộc **Khối KHCN, KHDN hoặc KHDNL** → mặc định hiển thị Khối của user, **không cho sửa**.
-- User **không thuộc** KHCN/KHDN/KHDNL → hiển thị dropdown chọn Khối tự do.
+- User **không thuộc** KHCN/KHDN/KHDNL → hiển thị dropdown chọn một trong các giá trị KHCN/KHDN/KHDNL.
 
 ### Ma trận dữ liệu theo Khối:
 
 | Loại dữ liệu | Khối KHCN | Khối KHDN (DN vừa & nhỏ) | Khối KHDNL (DN lớn) | Các khối khác |
 |---|---|---|---|---|
-| SPDV & Code phí | SPDV: Tất cả. Code phí: Loại KH = KHCN/DNSN/CBNV **hoặc** Đối tượng tính phí = Merchant | SPDV: Tất cả. Code phí: Loại KH = KHTC **và** Đối tượng tính phí = Khách hàng | SPDV: Tất cả. Code phí: Loại KH = KHTC **và** Đối tượng tính phí = Khách hàng | Tất cả |
-| Biểu phí | Biểu phí có Code phí Loại KH = KHCN/DNSN/CBNV **hoặc** Đối tượng tính phí = Merchant | Biểu phí có Code phí Loại KH = KHTC **và** Đối tượng tính phí = Khách hàng | Biểu phí có Code phí Loại KH = KHTC **và** Đối tượng tính phí = Khách hàng | Tất cả |
+| SPDV & Code phí | SPDV: Tất cả. Code phí: Loại KH = KHCN/DNSN/CBNV **hoặc** Đối tượng thu phí = Merchant | SPDV: Tất cả. Code phí: Loại KH = KHTC **và** Đối tượng thu phí = Khách hàng | SPDV: Tất cả. Code phí: Loại KH = KHTC **và** Đối tượng thu phí = Khách hàng | Tất cả |
+| Biểu phí | Biểu phí có Code phí Loại KH = KHCN/DNSN/CBNV **hoặc** Đối tượng thu phí = Merchant | Biểu phí có Code phí Loại KH = KHTC **và** Đối tượng thu phí = Khách hàng | Biểu phí có Code phí Loại KH = KHTC **và** Đối tượng thu phí = Khách hàng | Tất cả |
 | Chương trình ưu đãi | CTƯĐ có Loại KH = KHCN/DNSN/CBNV | CTƯĐ có **Khối = KHDN** | CTƯĐ có **Khối = KHDNL** | Tất cả |
-| Lịch sử/Lịch thu phí dự kiến | Khách hàng là KHCN/DNSN | Khách hàng là KHTC | Khách hàng là KHTC | Tất cả |
+| Lịch sử/Lịch thu phí dự kiến | Khách hàng là KHCN/DNSN | Khách hàng là KHDN| Khách hàng là KHDNL | Tất cả |
 
 > **Lưu ý thay đổi quan trọng so với phiên bản cũ:**
 > 1. **Tách Khối KHDN thành 2**: Khối KHDN (doanh nghiệp vừa & nhỏ) và Khối KHDNL (doanh nghiệp lớn).
-> 2. **Bổ sung điều kiện "Đối tượng tính phí"**: Khối KHCN thấy Code phí có Đối tượng tính phí = Merchant; Khối KHDN/KHDNL chỉ thấy Code phí có Đối tượng tính phí = Khách hàng.
-> 3. **CTƯĐ**: Khối KHDN/KHDNL lọc theo **Khối** (không phải Loại KH), Khối KHCN vẫn lọc theo Loại KH.
-
+> 2. **Bổ sung điều kiện "Đối tượng thu phí"**: Khối KHCN thấy Code phí có Đối tượng thu phí = Merchant; Khối KHDN/KHDNL chỉ thấy Code phí có Đối tượng thu phí = Khách hàng.
+> 3. **CTƯĐ**: CTƯĐ lục theo tham số Khối của CTƯĐ, không có tham số Loại KH để lọc.
+>4. **Loại Khách hàng**: Mỗi Khách hàng đã được phân loại thuộc một trong các Loại Khách hàng KHCN/DNSN/CBNV/KHDN/KHDNL. Code phí có tham số Loại khách hàng = KHTC được hiểu là áp dụng cho cả khách hàng là KHDN và khách hàng là KHDNL.
 ### Lưu ý quan trọng — Dropdown "Loại khách hàng" KHÔNG lọc theo Khối:
 
 > **BA xác nhận:** Trường dropdown "Loại khách hàng" (KHCN / KHTC / DNSN / CBNV) trên các màn hình tra cứu, khai báo **KHÔNG bị lọc/ẩn** dựa theo Khối của user đăng nhập.
@@ -224,7 +229,8 @@ Mục đích: Cung cấp màn hình Popup tra cứu nhanh CIF theo các thông t
 - ❌ KHÔNG sinh TC kiểm tra "User Khối KHCN → dropdown Loại KH chỉ hiển thị KHCN/DNSN/CBNV" — đây là case SAI.
 - ✅ Dropdown "Loại khách hàng" luôn hiển thị ĐẦY ĐỦ tất cả giá trị (KHCN, KHTC, DNSN, CBNV) bất kể Khối của user.
 - ✅ Phân quyền Khối chỉ lọc **dữ liệu trả về trên lưới**, không lọc giá trị dropdown.
-- ✅ Khi test SPDV & Code phí hoặc Biểu phí, phải kiểm tra thêm điều kiện **Đối tượng tính phí** (Merchant vs Khách hàng) ngoài Loại KH.
+- ✅ Khi test SPDV & Code phí hoặc Biểu phí hoặc Chương trình ưu đãi, phải kiểm tra thêm điều kiện **Đối tượng thu phí** (Merchant vs Khách hàng) ngoài Loại KH.
+
 
 ---
 

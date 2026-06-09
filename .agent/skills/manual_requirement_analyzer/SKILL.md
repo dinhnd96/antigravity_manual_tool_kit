@@ -34,6 +34,8 @@ TUYỆT ĐỐI KHÔNG đưa các câu hỏi mang tính chất "xác nhận lại
 
 **CẤM HỎI VỀ THÔNG BÁO LỖI:** TUYỆT ĐỐI KHÔNG đặt bất kỳ câu hỏi nào liên quan đến mã lỗi (error codes), toast thông báo lỗi, hoặc nội dung của các message lỗi (error messages). Mặc định bỏ qua các điểm mù liên quan đến text/mã lỗi này.
 
+**CẤM HỎI VỀ LUỒNG THAM CHIẾU/TÍCH HỢP ĐÃ CÓ TÀI LIỆU:** TUYỆT ĐỐI KHÔNG đặt câu hỏi yêu cầu BA làm rõ các luồng tích hợp hoặc nghiệp vụ tham chiếu đến US khác đã có tài liệu trong dự án (ví dụ tài liệu ghi *"Tính phí và thu phí theo US34"*). AI **BẮT BUỘC** phải tự mở các tài liệu tương tự/tham chiếu đó trong workspace (như US34.docx hoặc US34_PartA_Summary.docx) để đọc hiểu và xử lý logic, không được hỏi BA kiểu: *"Đề xuất: Làm rõ luồng tích hợp: MMS tự động sinh GD chờ duyệt trên kênh Quầy/Nội bộ (US34), hoặc Maker nhập tay."*
+
 | Câu hỏi thường gặp | Đáp án từ Quy tắc chung | Tham chiếu |
 |---|---|---|
 | Tìm kiếm có phân biệt hoa/thường không? | Không phân biệt | QTC-02 |
@@ -127,6 +129,8 @@ Hệ thống AI khi đọc tài liệu cần tuân thủ workflow sau:
 
 ## 2. Phần A: Tóm Tắt Nghiệp Vụ (Requirements Breakdown)
 AI cần bóc tách tài liệu gốc theo chiều dọc (top-down) đúng như bố cục tài liệu để đảm bảo trace 2 chiều với FSD, và trình bày dưới dạng:
+
+- **Tra Cứu Tài Liệu Tham Chiếu (Cross-referenced Lookup):** Nếu tài liệu nghiệp vụ gốc đề cập hoặc phụ thuộc vào các US/tài liệu khác trong dự án (ví dụ: *"Tính phí và thu phí theo US34"*), AI **BẮT BUỘC** phải tự tìm kiếm và mở tài liệu của US đó lên trong workspace (như US34.docx hoặc US34_PartA_Summary.docx) để đọc hiểu, đối chiếu và tự động diễn giải chi tiết luồng tích hợp/phụ thuộc đó vào Phần A để giải thích rõ ràng cho Tester nắm bắt ngữ cảnh hệ thống.
 1. **Thông điệp cốt lõi (Core Business Value):** Tính năng này sinh ra để làm gì? Ai là người dùng cuối?
 2. **Cấu trúc Luồng Nghiệp Vụ & Phân Bổ Module (Flow Structure & Module Mapping):** Đọc tài liệu từ trên xuống dưới, đánh dấu số thứ tự các module tính năng từ 1, 2, 3 đến n. Tên module luồng (Flow module) phải map chính xác với tên module trong tài liệu để phục vụ việc trace test case. Gom nhóm các luồng rẽ nhánh và ngoại lệ thành tập con.
    - **Module 1: [Tên Chức năng/Module 1]**
@@ -158,6 +162,11 @@ AI cần bóc tách tài liệu gốc theo chiều dọc (top-down) đúng như 
    - **Tầng 2 (Giao diện):** Đối chiếu Cấu trúc Text với Hình ảnh UI Mockup. Tìm sự lệch pha về Tên cột, Tên field, Nút bấm (VD: Text bảo có trường A, Mockup biến mất trường A).
    - **Tầng 3 (Dữ liệu & Biên):** Đóng vai Tester thực hiện Test Case Facilitation như ở mục B. Suy nghĩ về Boundary, Format, và Job Batch Timing.
    - **Master Consolidation:** Đảm bảo bản báo cáo cuối cùng vơ hết được (1) Lỗi copy-paste tài liệu, (2) Lỗi logic Data, và (3) Lỗi UX, không bỏ sót bất kỳ điểm nào để phải thao tác 2 lần.
+
+**D. Tự Tra Cứu Tài Liệu Tham Chiếu Tréo / Tương Tự (Cross-referenced / Similar US Document Lookup):**
+   - **QUY TẮC CỨNG:** Khi tài liệu yêu cầu nghiệp vụ đang phân tích ghi tham chiếu đến các US khác hoặc tài liệu liên quan khác trong dự án (ví dụ: *"Tính phí và thu phí theo US34"*), AI **BẮT BUỘC** phải tự tìm kiếm và mở các tài liệu của US đó lên trong workspace (ví dụ: file US34.docx hoặc các file phân tích Part A/B/C liên quan đến US34) để tự đọc hiểu, đối chiếu và giải quyết luồng nghiệp vụ/tích hợp đó.
+   - **TUYỆT ĐỐI CẤM** đặt câu hỏi cho BA kiểu phỏng đoán hoặc yêu cầu BA làm rõ các luồng tích hợp đã được định nghĩa ở các US tham chiếu đó. Ví dụ: CẤM đặt câu hỏi dạng *"Đề xuất: Làm rõ luồng tích hợp: MMS tự động sinh GD chờ duyệt trên kênh Quầy/Nội bộ (US34), hoặc Maker nhập tay."*
+   - Hãy chủ động mở các tài liệu tương tự, tài liệu tham chiếu có sẵn trong workspace để tự tìm câu trả lời và thiết kế luồng test/logic tích hợp phù hợp.
 
 ### 3.2 Phân Loại Đầu Ra Bắt Buộc — 4 Hạng Mục (Mandatory Output Grouping)
 
@@ -211,9 +220,6 @@ AI cần bóc tách tài liệu gốc theo chiều dọc (top-down) đúng như 
 | **🔗 Dạng 7: BA tham chiếu chéo US khác** | BA trả lời: "Tương tự US35", "Pending tương tự USxx", "Xử lý giống USxx", "Áp dụng logic của USxx" hoặc ý tương đương | → AI **BẮT BUỘC** tìm và đọc bộ phân tích (Part B/C) của US được tham chiếu để lấy logic chốt tương đương. Sinh SC dựa trên logic đã chốt ở US tham chiếu. Ghi Note trong SC: `"Theo phản hồi BA — tương tự USxx (QA-YY)"`. Nếu **không tìm được** bộ phân tích US tham chiếu → đánh dấu QA là `Pending` (xử lý như Dạng 8) và cảnh báo User. |
 | **⏳ Dạng 8: BA chưa chốt / Pending** | BA trả lời: "Sẽ trao đổi với BE và cập nhật lại sau", "Đang xác nhận", "Sẽ cập nhật sau", "Chưa chốt", "Đang chờ confirm" hoặc ý tương đương | → **TẠM HOÃN — KHÔNG sinh SC.** Đánh dấu QA trạng thái `Pending`. Liệt kê riêng vào **"Danh sách QA chờ BA cập nhật"** ở cuối Phần C (tách biệt với danh sách loại trừ). Khi BA cập nhật sau → User cung cấp câu trả lời mới → AI sinh bổ sung SC vào bộ test case đã có. |
 
-> **⚠️ CẢNH BÁO CHỐNG NHẦM LẪN DẠNG 1 vs DẠNG 5:**
-> - BA nói *"Xác nhận cột Ngày thu là Text"* → Đây là **Dạng 5** (BA tự nêu thông tin), KHÔNG phải Dạng 1. BA đang confirm **quyết định của họ**, không phải confirm **đề xuất của QC**.
-> - BA nói *"Đồng ý theo đề xuất QC, dùng định dạng Date cho cột Ngày thu"* → Đây mới là **Dạng 1** (BA đề cập và đồng ý đề xuất QC).
 > - **Quy tắc phân biệt:** Nếu trong câu trả lời BA **KHÔNG xuất hiện** cụm từ "đề xuất", "theo QC", "theo hướng QC" → mặc định phân loại là **Dạng 5**, không phải Dạng 1.
 
 > **⚠️ CẢNH BÁO CHỐNG NHẦM LẪN DẠNG 4 vs DẠNG 8:**
@@ -253,6 +259,8 @@ AI cần bóc tách tài liệu gốc theo chiều dọc (top-down) đúng như 
 ```
 
 > **VI PHẠM NGHIÊM TRỌNG:** Sinh SC dựa trên đề xuất QC trong khi BA đã từ chối, bác bỏ, hoặc giải thích logic khác. Đây là lỗi **sai logic nghiệp vụ** gây ra Test Case không hợp lệ, lãng phí effort của Tester.
+
+- **BẮT BUỘC ĐỐI CHIẾU US THAM CHIẾU KHI SINH TEST CASE (PART C):** Khi sinh danh sách kịch bản test đề xuất (Part C), nếu có các tính năng tương tự hoặc phụ thuộc tích hợp liên quan đến US khác (ví dụ: *"Tính phí và thu phí theo US34"*), AI **BẮT BUỘC** phải tự mở các tài liệu của US đó (ví dụ: US34.docx hoặc US34_PartC_TestCoverage.docx) để kế thừa toàn bộ các kịch bản test chuẩn, luồng tích hợp, và các kịch bản biên liên quan nhằm bao phủ đầy đủ luồng test tích hợp cho US hiện tại. Tuyệt đối không tự suy diễn hoặc bỏ sót các kịch bản tích hợp này.
 
 AI sử dụng câu trả lời của BA (đã phân loại theo quy tắc trên) để chốt logic, sau đó sinh ra một bảng tổng hợp danh sách các Test Case nhằm bao phủ 100% nội dung tài liệu. Các Test Case này không cần viết bước chi tiết (Test Steps) nhưng phải nêu rõ tiêu đề (Test Case Title) đủ ý và bắt buộc chia thành 7 nhóm sau:
 1. **🟢 Happy Path (Positive Cases - Luồng cơ bản):** Kịch bản người dùng thao tác đúng, nhập dữ liệu chuẩn chỉnh và hệ thống xử lý thành công theo đúng luồng nghiệp vụ mong đợi.

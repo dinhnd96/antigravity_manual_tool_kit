@@ -30,6 +30,10 @@ Tài liệu `Quy tắc chung.docx` (ProfiX) định nghĩa các hành vi mặc �
 ## 1. Yêu Cầu Chung & Xử Lý Hình Ảnh
 - **Giữ nguyên tên field/item/button (BẮT BUỘC)**: Lấy đúng và đầy đủ tên các field, item, button... từ tài liệu hoặc mockup. Tuyệt đối không cắt gọn, rút gọn (vd: dùng "Lưu" thay vì "Lưu thông tin") hoặc tự ý đặt tên theo thói quen.
 - **Xử lý tài liệu DOCX**: Nếu tài liệu có ảnh (Mockup, Flowchart), ưu tiên sử dụng lệnh giải nén (truy cập `word/media/`) để lấy ảnh. Phân tích 2-3 hình ảnh cốt lõi (Vision/OCR) để hiểu sâu về thiết kế UI và Flow mà text không diễn đạt hết.
+- **BẮT BUỘC Tra Cứu Tài Liệu Tham Chiếu (Cross-referenced / Similar US Document Lookup):**
+  - Khi phân tích tài liệu nghiệp vụ hoặc danh sách kịch bản (Phần C) để sinh Test Case chi tiết, nếu có các nghiệp vụ tích hợp hoặc tương tự tham chiếu đến các US khác trong dự án (ví dụ: *"Tính phí và thu phí theo US34"*), AI **BẮT BUỘC** phải tự mở các tài liệu liên quan đến US đó trong workspace (ví dụ: US34.docx, US34_PartA_Summary.docx, hoặc US34_PartC_TestCoverage.docx).
+  - Tự đọc hiểu, đối chiếu, diễn giải và áp dụng chính xác toàn bộ logic tích hợp, kịch bản test chuẩn, và kịch bản biên của US tham chiếu đó để tạo ra bộ Test Case đầy đủ và chính xác nhất cho US hiện tại.
+  - **TUYỆT ĐỐI CẤM** viết Test Case dựa trên phỏng đoán hoặc đặt các câu hỏi lấp lửng cho BA về các luồng tích hợp đã được định nghĩa rõ ở các US tham chiếu đó.
 
 
 ## 2. Mục Tiêu Sinh Test Case
@@ -96,6 +100,7 @@ Khi phân loại Test Case, Agent phải tuân thủ thứ tự ưu tiên sau:
 - **State Transition**: Phải có đủ kịch bản cho tất cả chiều chuyển đổi (xuôi/ngược) của trạng thái bản ghi.
 - **Hiển thị sau khi thao tác (Pending/Checker)**: Tuyệt đối không được expect bản ghi "biến mất" khỏi màn hình Tác vụ chờ duyệt/Pending sau khi phê duyệt/từ chối. Thay vào đó, bản ghi phải được cập nhật trạng thái mới (VD: Đã duyệt, Từ chối) và hiển thị đúng tại màn hình/tab tương ứng.
 - **Kiểm thử Business Rule (Ràng buộc dữ liệu)**: Đối với các quy tắc so sánh (VD: Ngày hiệu lực <= Ngày hết hạn), **BẮT BUỘC** phải có đủ 3 kịch bản kiểm thử cho các trường hợp: Lớn hơn (>), Nhỏ hơn (<), và Bằng (=). Tuyệt đối không được bỏ sót bất kỳ trường hợp nào trong bộ 3 này để đảm bảo tính bao phủ.
+- **Kế thừa kịch bản và logic tích hợp từ US tham chiếu**: Khi thiết kế kịch bản test cho các tính năng có liên kết với US khác (ví dụ: US34), phải mở tài liệu US đó (ví dụ: US34_PartC_TestCoverage.docx) để lấy đúng cấu trúc kịch bản và dữ liệu test liên quan để điền vào steps và expected results. Tuyệt đối không tự suy diễn hay để trống.
 
 ## 6. Định Dạng TC_ID (BẮT BUỘC)
 - Định dạng Test Case theo số thứ tự tăng dần liên tục xuyên suốt toàn bộ Module.
