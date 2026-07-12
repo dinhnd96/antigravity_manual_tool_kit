@@ -1,0 +1,290 @@
+SRS_Tài khoản sinh lời_US 07: Luồng đăng ký bán Trái phiếu PVCB _V1.0
+Mục lục
+1. Lịch sử phiên bản
+2. Tổng quan tài liệu 
+2.1. Mục đích
+2.2.Đối tượng sử dụng tài liệu
+2.3. Thuật ngữ và từ viết tắt
+2.4 Tài liệu liên quan/Tham khảo
+2.5 Phân loại yêu cầu trong tài liệu
+3. Tổng quan kiến trúc hệ thống 
+3.1. Mô hình kiến trúc tổng quát
+3.2. Mô hình hệ thống liên quan (C4 model - Level 1)
+4. Yêu cầu chức năng 
+4.1. FR01- Xem thông tin bán trái phiếu
+5. Mô tả màn hình (Nếu có) 
+5.1. MH1 - Màn hình Bán trái phiếu
+6. Danh sách các API 
+6.1. Mô tả các API cần xây mới/Cập nhật 
+API002 - Danh sách HĐ SLCĐ
+7. Đặc tả Mapping API chi tiết 
+7.1. <Mã API>- Tên API
+8. Yêu cầu phi chức năng 
+8.1. Yêu cầu phân quyền chức năng (nếu có)
+8.2. Yêu cầu phân quyền dữ liệu (Nếu có)
+8.3.Hiệu năng (Performance)
+8.4. Bảo mật (Security)
+8.5. Độ tin cậy & Sẵn sàng (Reliability & Availability)
+1. Lịch sử phiên bản
+2. Tổng quan tài liệu
+2.1. Mục đích
+Bổ sung sau
+2.2.Đối tượng sử dụng tài liệu
+Tài liệu này nhằm phục vụ các đối tượng liên quan sau:
+2.3. Thuật ngữ và từ viết tắt
+2.4 Tài liệu liên quan/Tham khảo
+2.5 Phân loại yêu cầu trong tài liệu
+Hướng dẫn áp dụng
+Giữ nguyên tiền tố (FR, NFR…) để dễ truy vết.
+Sử dụng số thứ tự XXX tăng dần (001, 002, …) trong từng nhóm.
+Khi xóa hoặc gộp yêu cầu, không thay đổi mã đã công bố; thay vào đó đánh dấu “Deprecated” hoặc “Merged-to-FR-0XX” nhằm bảo đảm lịch sử thay đổi rõ ràng.
+3. Tổng quan kiến trúc hệ thống
+3.1. Mô hình kiến trúc tổng quát
+[Cần bổ sung]
+Ghi chú:
+Với dự án mới: Phần này SA điền hoặc BA thu thập thông tin từ SA và đưa vào.
+Với CR hoặc không có thông tin kiến trúc: Để N/A
+3.2. Mô hình hệ thống liên quan (C4 model - Level 1)
+[Cần bổ sung]
+Ghi chú:
+Với dự án mới: Phần này SA điền hoặc BA thu thập thông tin từ SA và đưa vào.
+Với CR hoặc không có thông tin kiến trúc: Để N/A
+4. Yêu cầu chức năng
+Bảng phân rã chức năng:
+4.1. FR01- Xem thông tin bán trái phiếu
+Mô tả chung:
+Lưu đồ: 
+Mô tả lưu đồ:
+5. Mô tả màn hình (Nếu có)
+5.1. MH1 - Màn hình Bán trái phiếu
+Giao diện màn hình:
+Mô tả màn hình:
+ Mô tả thông báo lỗi
+N/A
+6. Danh sách các API
+Danh sách các API có liên quan
+6.1. Mô tả các API cần xây mới/Cập nhật
+API002 - Danh sách HĐ SLCĐ
+API này dùng chung, bổ sung thêm trường bondStatus vào request để lọc danh sách HĐ SLCĐ tại màn bán trái phiếu theo trạng thái TP
+7. Đặc tả Mapping API chi tiết
+ 7.1. <Mã API>- Tên API
+8. Yêu cầu phi chức năng
+8.1. Yêu cầu phân quyền chức năng (nếu có)
+8.2. Yêu cầu phân quyền dữ liệu (Nếu có)
+8.3.Hiệu năng (Performance)
+Thời gian đáp ứng (Response Time)
+Thông lượng (Throughput)
+NFR-05 Hệ thống hỗ trợ tối thiểu […] concurrent users trong điều kiện bình thường.
+NFR-06 Hệ thống hỗ trợ tối thiểu […] concurrent users trong giờ cao điểm.
+NFR-07 Thông lượng giao dịch realtime ≥ […] TPS; batch ≥ […] giao dịch/phút.
+Sử dụng tài nguyên (Resource Utilization)
+NFR-08 Sử dụng CPU/Memory không vượt quá 80 % trong điều kiện bình thường.
+NFR-09 Dung lượng lưu trữ năm đầu ≤ […] TB, kèm kế hoạch mở rộng.
+NFR-10 Áp dụng cache/optimise truy vấn DB để giảm I/O.
+Khả năng mở rộng (Scalability)
+NFR-11 Thiết kế scale-out (thêm node) và scale-up (tăng resource) linh hoạt.
+NFR-12 Hỗ trợ tăng trưởng […] % người dùng/giao dịch mỗi năm mà không suy giảm SLA.
+8.4. Bảo mật (Security)
+Xác thực & Phân quyền
+NFR-13 Bắt buộc MFA cho tài khoản đặc quyền; tùy chọn cho người dùng thường.
+NFR-14 Áp dụng RBAC cho tính năng và dữ liệu.
+NFR-15 Khóa tài khoản sau […] lần đăng nhập sai; hỗ trợ reset bảo mật.
+NFR-16 Hỗ trợ OAuth 2.0 / OpenID Connect khi tích hợp bên ngoài.
+Bảo vệ dữ liệu (Data Protection)
+NFR-17 Mã hóa dữ liệu at-rest bằng AES-256 (hoặc tương đương).
+NFR-18 Mã hóa dữ liệu in-transit bằng TLS 1.3 trở lên.
+NFR-19 Tách môi trường Dev / Test / Prod; không dùng dữ liệu thật ở môi trường phi sản xuất.
+NFR-20 Hỗ trợ xóa an toàn (secure deletion), data masking, key management chuẩn.
+Tuân thủ & Quy định
+NFR-21 Tuân thủ Luật An toàn thông tin, Nghị định 13/2023 (bảo vệ dữ liệu cá nhân), PCI-DSS (nếu xử lý thẻ).
+NFR-22 Cung cấp cơ chế người dùng xem/xuất/xóa dữ liệu cá nhân theo quy định.
+NFR-23 Lưu vết (audit trail) mọi truy cập và thay đổi dữ liệu.
+Giám sát & Ứng phó sự cố
+NFR-24 Log đầy đủ sự kiện bảo mật, lưu tối thiểu […] ngày.
+NFR-25 Cảnh báo real-time khi có sự kiện rủi ro; hỗ trợ IDS/IPS, WAF, rate-limiting.
+8.5. Độ tin cậy & Sẵn sàng (Reliability & Availability)
+Sẵn sàng (Availability)
+NFR-27 SLA uptime ≥ 99.9 % (24×7) cho kênh giao dịch.
+NFR-28 Bảo trì chủ động trong khung giờ thấp điểm; thông báo trước […] giờ.
+Chịu lỗi (Fault Tolerance)
+NFR-29 Thiết kế N+1 / cluster để loại bỏ single-point-of-failure.
+NFR-30 Auto-failover DB, load balancing đa node, circuit-breaker với dịch vụ bên ngoài.
+Khôi phục thảm họa (Disaster Recovery)
+NFR-31 Backup full hàng tuần, incremental hàng ngày; lưu ở site DR.
+NFR-32 RTO = […] giờ; RPO = […] phút cho chức năng quan trọng.
+NFR-33 Kiểm thử DR tối thiểu 2 lần/năm.
+Xử lý lỗi (Error Handling)
+NFR-34 Thông điệp lỗi rõ ràng, không lộ thông tin nhạy cảm.
+NFR-35 Retry hợp lý với lỗi tạm thời; ghi log chi tiết phục vụ phân tích.
+Khả dụng & Trải nghiệm người dùng (Usability & Accessibility)
+NFR-36 Giao diện thống nhất, trực quan; responsive cho desktop/mobile.
+Bảo trì (Maintainability & Portability)
+NFR-40 Kiến trúc modular / microservice; coding-standard thống nhất.
+NFR-41 CI/CD, automated test (coverage ≥ 80 %).
+NFR-42 Hỗ trợ chạy on-prem, cloud, hoặc hybrid; ưu tiên container hóa (Docker/K8s).
+NFR-43 Hạn chế phụ thuộc OS/hardware đặc thù; hỗ trợ DB abstraction.
+Tương thích (Compatibility)
+NFR-44 Tương thích 2 phiên bản mới nhất của Chrome, Edge, Safari, Firefox.
+NFR-45 Hỗ trợ trình duyệt mobile iOS & Android.
+NFR-46 Hỗ trợ định dạng dữ liệu tiêu chuẩn: CSV, JSON, XML; giao thức REST/HTTPS.
+Yêu cầu pháp lý & SLA (Legal and Compliance)f
+NFR-47 Tuân thủ hướng dẫn NHNN, Thông tư/KHNV… liên quan thanh toán, tiền tệ, chống rửa tiền.
+NFR-48 Định nghĩa SLA về uptime, thời gian phản hồi sự cố, thời gian hỗ trợ.
+NFR-49 Thiết lập quy trình giám sát và báo cáo tuân thủ định kỳ.
+Yêu cầu vận hành (Operational Requirements)
+NFR-50 Log toàn diện; retention tối thiểu […] ngày hoặc theo quy định.
+NFR-51 Monitoring real-time (Prometheus, ELK, …); cảnh báo qua Email/SMS/Teams.
+NFR-52 Tài liệu vận hành, sơ đồ kiến trúc, cấu hình tham số cập nhật song hành release.
+NFR-53 Hỗ trợ backup tự động, khôi phục point-in-time; lịch backup tuân thủ quy định nội bộ.
+
+--- TABLE ---
+Epic | 
+Ngày cập nhật | 
+Trạng thái | 
+Người thực hiện | 
+Người đánh giá | 
+-------------
+
+--- TABLE ---
+ | Ngày | Phiên bản | Lý do thay đổi | Nội dung thay đổi | Người thực hiện
+1 | 20/05/2026 | v1 | Tạo mới |  | Thuỷ Nguyễn
+2 | 27/05/2026 |  | Updated | Cập nhật sequence, mô tả sequence, danh sách API | Thuỷ Nguyễn
+3 | 29/05/2026 |  | Update theo cuộc họp break task 29/05/2026 | Bổ sung lựa chọn số bản ghi trong 1 trang | Thuỷ Nguyễ
+-------------
+
+--- TABLE ---
+Stakeholder | Role
+Khối nghiệp vụ (Business Unit) | Đầu mối cung cấp yêu cầu nghiệp vụ; rà soát và phê duyệt đặc tả chức năng.
+Khối CNTT (IT Division) | Chịu trách nhiệm kiến trúc tổng thể, tích hợp và giám sát triển khai giải pháp.
+Nhóm phát triển (Development Team) | Thiết kế, xây dựng và triển khai hệ thống theo yêu cầu.
+Nhóm kiểm thử (QA / Testing Team) | Thiết lập kịch bản kiểm thử dựa trên tài liệu SRS; xác nhận tính đúng đắn của hệ thống.
+Nhà cung cấp giải pháp (Vendor / SI) | Đơn vị phát triển/triển khai hệ thống theo hợp đồng, chịu trách nhiệm thực hiện yêu cầu kỹ thuật.
+Quản trị hệ thống (System Admins) | Vận hành, cấu hình, giám sát hệ thống sau triển khai; thuộc đơn vị CNTT nội bộ hoặc nhà thầu vận hành.
+Đối tác tích hợp (Integration Partners) | Các hệ thống bên ngoài có liên quan đến kết nối dữ liệu (ví dụ: eKYC, hệ thống thanh toán NAPAS…).
+-------------
+
+--- TABLE ---
+Thuật ngữ/Từ viết tắt | Giải thích | Ghi chú
+ |  | 
+ |  | 
+ |  | 
+-------------
+
+--- TABLE ---
+STT | Tên tài liệu | Link/Đính kèm | Ghi chú
+1 | URD: Mua trái phiếu - Tính năng sinh lời cố định trên TKTT của KHCN - v53 |  | 
+2 | Tài liệu kiến trúc v2 |  | 
+3 | Design | https://www.figma.com/design/z9i6yjoJRfPA21ivFT8QKJ/Account-Management---Qu%E1%BA%A3n-l%C3%BD-t%C3%A0i-kho%E1%BA%A3n?node-id=31579-79435&t=UxtDVovjafTnPQ9H-0 | 
+4 | SRS_Tài khoản sinh lời_US 06: Luồng đăng ký mua Trái phiếu PVCB - nhập và duyệt |  | 
+-------------
+
+--- TABLE ---
+Mã yêu cầu | Loại yêu cầu (định nghĩa chung)
+FR-XXX | Functional Requirements – Yêu cầu chức năng: mô tả hệ thống phải làm gì.
+NFR-XXX | Non-Functional Requirements – Yêu cầu phi chức năng: mô tả cách hệ thống vận hành (hiệu năng, bảo mật, tính khả dụng, v.v.).
+-------------
+
+--- TABLE ---
+STT | Mã tính năng | Tính năng | Mô tả | Đối tượng sử dụng (User) | Hệ thống tham gia
+1 | FR01 | Xem thông tin bán trái phiếu | Hệ thống cho phép xem: + Danh sách HĐ SLCĐ đến hạn hoặc KH rút trước hạn, + Thông tin về số dư tài khoản A1, A2, Hạn mức thấu chi, thông tin đầu tư bán trái phiếu | Nghiệp vụ vận hành sản phẩm (Khối nguồn vốn) | Investment Service
+-------------
+
+--- TABLE ---
+Tên tính năng | Xem danh mục bán trái phiếu
+Mục đích | + Cho phép người vận hành xem và kiểm tra toàn bộ danh sách các hợp đồng Sinh lời cố định (SLCĐ) đến hạn hoặc có yêu cầu rút trước hạn hợp lệ trong ngày (12h ngày T-1 đến 11h59’59'' ngày T theo ngày làm việc) + Hệ thống tự động tính toán tổng số tiền Gốc và Lãi phải trả thực tế cho khách hàng, từ đó chốt ra "Số tiền trả cho khách hàng (gross)" để xem trên màn Mua trái phiếu (US 06)
+Đối tượng sử dụng | Nghiệp vụ vận hành sản phẩm (Khối nguồn vốn)
+Thông tin đầu vào | Danh sách HĐ SLCĐ thỏa mãn điều kiện: + Là các hợp đồng của khách hàng cá nhân + Trạng thái của HĐ SLCĐ = Hợp đồng đã đến hạn hoặc KH rút trước hạn Note: Hợp đồng đã đến hạn: Khoản đầu tư có ngày đến hạn theo hợp đồng gốc trùng với ngày làm việc hiện tại KH đang chờ rút tiền: Khoản đầu tư được khách hàng gửi yêu cầu rút trước hạn ngày đến hạn hợp đồng gốc (Đã được hệ thống tiếp nhận trước giờ Cut-off)
+Điều kiện thực hiện | Được quyền truy cập chức năng Quản lý danh mục đầu tư của hệ thống CMS TKSL
+Kết quả mong muốn | + Xem được các thông tin về số dư TKA1, A2, hạn mức còn lại của TKTC C1, thông tin đầu tư bán trái phiếu + Xem được danh sách HĐ SLCĐ của khách hàng là các hợp đồng đã đến hạn hoặc KH đang chờ rút tiền trong ngày (12h ngày T-1 đến 11h59’59'' ngày T theo ngày làm việc) + Lọc theo điều kiện trạng thái trái phiếu để người dùng xem được danh sách SLCĐ có trạng thái TP Đang hoạt động/ Không hoạt động
+-------------
+
+--- TABLE ---
+Bước | Tên bước | Đối tượng thực hiện | Mô tả chi tiết (Logic & Quy tắc nghiệp vụ) | Mã/Tên màn hình liên quan
+I | Luồng ngầm hệ thống chốt số liệu hàng ngày | Luồng ngầm hệ thống chốt số liệu hàng ngày | Luồng ngầm hệ thống chốt số liệu hàng ngày | Luồng ngầm hệ thống chốt số liệu hàng ngày
+- | Cutoff dữ liệu tổng hợp | JOB 12H | Đúng 12h00 hàng ngày, hệ thống tự động chạy JOB 12h thực hiện tổng hợp dữ liệu: Số dư TKTT A1, Số dư TKTT A2, Dư nợ/hạn mức còn lại TKTC C1, và Danh sách HĐ SLCĐ mua/bán (Logic này tham chiếu chi tiết sang US06). | 
+II | Hiển thị màn hình Bán trái phiếu | Hiển thị màn hình Bán trái phiếu | Hiển thị màn hình Bán trái phiếu | Hiển thị màn hình Bán trái phiếu
+1 | Truy cập chức năng | User | Click chọn menu "Quản lý danh mục đầu tư / Bán trái phiếu". | Màn hình "Bán trái phiếu"
+2 | Gọi API lấy danh sách hợp đồng bán | Web CMS | Call API Danh sách HĐ SLCĐ để lấy danh sách các hợp đồng SLCĐ đến hạn/rút trước hạn trong khung thời gian quy định, và thông tin đầu tư bán trái phiếu Khung thời gian: From 12h ngày T-1 đến To 11h59'59" ngày T theo ngày làm việc Trạng thái HĐ SLCĐ: CURRENT, PENDING_ EARLY_CLOSE  (đối với Trạng thái = Current-> check theo ngày đến hạn theo hợp đồng gốc, trạng thái = pending_early_close -> check theo ngày rút trước hạn) | 
+3 | Phản hồi dữ liệu danh sách | Investment Service | Trả danh sách các Hợp đồng bán thỏa mãn điều kiện về cho Web CMS. | 
+4 | Gọi API lấy số dư tài khoản và hạn mức | Web CMS | Call API Lấy số dư TKTT A1, A2, thấu chi C1 | 
+5 | Trả kết quả | Investment Service | Trả kết quả thông tin số dư (A1, A2) và thông tin thấu chi tài khoản C1 về cho Web CMS. | 
+6 | Hiển thị giao diện | Web CMS | Tổng hợp kết quả từ các API và hiển thị giao diện màn hình "Bán trái phiếu" cho người dùng. | Màn hình "Bán trái phiếu"
+III | Lọc danh sách theo điều kiện (Filter) | Lọc danh sách theo điều kiện (Filter) | Lọc danh sách theo điều kiện (Filter) | Lọc danh sách theo điều kiện (Filter)
+7 | Tương tác chọn bộ lọc | User | Người dùng chọn điều kiện lọc tại bộ lọc Trạng thái TP trên giao diện, bao gồm các tùy chọn: Tất cả / Đang hoạt động / Không hoạt động. | Màn hình "Bán trái phiếu"
+8 | Truyền điều kiện lọc | Web CMS | Call API Danh sách HĐ SLCĐ và truyền thêm vào request điều kiện lọc (Trạng thái TP) | 
+9 | Truy vấn dữ liệu theo bộ lọc | Investment | Thực hiện truy vấn (Query) vào DB Investment để lọc các bản ghi hợp đồng khớp với điều kiện | 
+10 | Trả kết quả dữ liệu đã lọc | Investment Service | Trả kết quả danh sách Hợp đồng bán đã qua bộ lọc về cho Frontend. | 
+11 | Cập nhật lưới danh sách | Web CMS | Thực hiện hiển thị lưới danh sách hợp đồng theo đúng điều kiện lọc mà người dùng đã chọn (Lưu ý: thông tin đầu tư bán trái phiếu không bị thay đổi theo bộ lọc này) | Màn hình "Bán trái phiếu"
+IV | Xem chi tiết Hợp đồng SLCĐ | Xem chi tiết Hợp đồng SLCĐ | Xem chi tiết Hợp đồng SLCĐ | Xem chi tiết Hợp đồng SLCĐ
+12 | Click xem chi tiết bản ghi | User | Người dùng thực hiện click 1 bản ghi Hợp đồng bất kỳ trên lưới danh sách. | Màn hình "Bán trái phiếu"
+13 | Điều hướng màn hình xem chi tiết HĐ SLCĐ | Web CMS | Hệ thống điều hướng người dùng sang giao diện xem chi tiết của riêng Hợp đồng SLCĐ đó (Luồng logic này được xử lý chi tiết tại US05). | Màn hình "Xem chi tiết HĐ SLCĐ"
+-------------
+
+--- TABLE ---
+STT | Tên mục | Loại điều khiển | Bắt buộc (Y/N) | Max length | Giá trị mặc định | Mô tả & Quy tắc nghiệp vụ
+I | Tab Điều hướng | Tab Điều hướng | Tab Điều hướng | Tab Điều hướng | Tab Điều hướng | Tab Điều hướng
+1 | Bán trái phiếu | Tab |  |  |  | Khi chọn Menu Quản lý danh mục đầu tư, hệ thống mặc định hiển thị tab Bán trái phiếu Chọn tab bán trái phiếu, hệ thống hiển thị màn hình Bán trái phiếu
+2 | Mua trái phiếu | Tab |  |  |  | Click để chuyển sang màn hình Danh mục mua trái phiếu
+II | Số dư trong tài khoản | Số dư trong tài khoản | Số dư trong tài khoản | Số dư trong tài khoản | Số dư trong tài khoản | Số dư trong tài khoản
+3 | Số dư trong tài khoản A1 | Text (Read-only) |  |  |  | Hiển thị số dư chốt lúc 12h00 hàng ngày của TKTT A1 + Trước 12h ngày T lấy số dư 12h ngày T-1 + Sau 12h ngày T lấy số dư 12h ngày T
+4 | Số dư trong tài khoản A2 | Text (Read-only) |  |  |  | Hiển thị số dư chốt lúc 12h00 hàng ngày của TKTT A2 + Trước 12h ngày T lấy số dư 12h ngày T-1 + Sau 12h ngày T lấy số dư 12h ngày T
+III | Hạn mức thấu chi | Hạn mức thấu chi | Hạn mức thấu chi | Hạn mức thấu chi | Hạn mức thấu chi | Hạn mức thấu chi
+5 | Hạn mức còn lại | Text (Read-only) |  |  |  | Hiển thị số dư hạn mức thấu chi còn lại của TKTC C1. Người dùng truy cập vào xem lúc nào thì hệ thống gọi sang T24 để lấy dữ liệu lúc đó.
+IV | Thông tin đầu tư bán trái phiếu | Thông tin đầu tư bán trái phiếu | Thông tin đầu tư bán trái phiếu | Thông tin đầu tư bán trái phiếu | Thông tin đầu tư bán trái phiếu | Thông tin đầu tư bán trái phiếu
+6 | Tổng tiền bán trái phiếu | Text (Read-only) |  |  |  | Bằng tổng giá trị của cột "Giá trị bán trái phiếu" của toàn bộ danh sách HĐ SLCĐ đến hạn/rút trước hạn trong khung thời gian quy định: Khung thời gian: From 12h ngày T-1 đến To 11h59'59" ngày T theo ngày làm việc Trạng thái HĐ SLCĐ: CURRENT, PENDING_ EARLY_CLOSE  (đối với Trạng thái = Current-> check theo ngày đến hạn theo hợp đồng gốc, trạng thái = pending_early_close -> check theo ngày rút trước hạn) Giá trị bán trái phiếu = Giá trị mua trái phiếu Giá trị mua trái phiếu = Số lượng trái phiếu x giá trái phiếu + Phí giao dịch (nếu có) Lưu ý: Giá trị này không thay đổi khi người dùng chọn bộ lọc (filter) trạng thái trái phiếu trên lưới.
+7 | Số tiền trả khách hàng (Gross) | Text (Read-only) |  |  |  | Bằng tổng giá trị của cột "Số tiền trả khách hàng (Gross)" của toàn bộ danh sách HĐ SLCĐ đến hạn/rút trước hạn trong khung thời gian quy định: Khung thời gian: From 12h ngày T-1 đến To 11h59'59" ngày T theo ngày làm việc Trạng thái HĐ SLCĐ: CURRENT, PENDING_ EARLY_CLOSE  (đối với Trạng thái = Current-> check theo ngày đến hạn theo hợp đồng gốc, trạng thái = pending_early_close -> check theo ngày rút trước hạn) Số tiền trả khách hàng (gross) = Số tiền khách hàng đầu tư + Lãi gross phải trả cho khách hàng của các Hợp đồng đến hạn/rút trước hạn Trong đó: Nếu HĐ SLCĐ đến hạn => Lãi gross = (Số tiền KH đầu tư X Lãi suất tại thời điểm KH đăng kí SLCĐ X Số ngày thực gửi)/365 Nếu HĐ SLCĐ rút trước hạn => Lãi gross = (Số tiền KH đầu tư X Lãi suất KKH X Số ngày thực gửi)/365 Lưu ý: Giá trị này không thay đổi khi người dùng chọn bộ lọc (filter) trạng thái trái phiếu trên lưới.
+V | Bộ lọc danh sách | Bộ lọc danh sách | Bộ lọc danh sách | Bộ lọc danh sách | Bộ lọc danh sách | Bộ lọc danh sách
+8 | Trạng thái trái phiếu | Checkbox Options |  |  | Mặc định tích chọn "Tất cả" | Bộ lọc danh sách dưới lưới theo trạng thái của trái phiếu. Gồm 3 tùy chọn: Tất cả Đang hoạt động Không hoạt động
+VI | Danh sách hợp đồng cần bán trái phiếu | Danh sách hợp đồng cần bán trái phiếu | Danh sách hợp đồng cần bán trái phiếu | Danh sách hợp đồng cần bán trái phiếu | Danh sách hợp đồng cần bán trái phiếu | Danh sách hợp đồng cần bán trái phiếu
+9 | Lưới Danh sách (Data Table) | Data Table |  |  |  | Hiển thị danh sách chi tiết các hợp đồng thỏa mãn điều kiện: + Là các hợp đồng của khách hàng cá nhân + Các hợp đồng SLCĐ đã đến hạn hoặc KH rút tiền trước hạn trong khung thời gian quy định
+9.0 | Chọn số trang hiển thị trên màn hình | Dropdown list |  | - |  | Cho phép người dùng chọn số trang hiển thị trên trang, có thể lựa chọn 10/20/50/100 bản ghi/trang Mặc định hiển thị 50 bản ghi/trang, tối đa 100 bản ghi/trang
+9.1 | STT | Text |  |  |  | Số thứ tự dòng tăng dần
+9.2 | Mã hợp đồng | Text |  |  |  | Mã hợp đồng sinh lời cố định (SLCĐ) của khách hàng.
+9.3 | Tên khách hàng | Text |  |  |  | Tên khách hàng cá nhân sở hữu hợp đồng
+9.4 | Số tiền khách hàng đầu tư | Text |  |  |  | Số tiền gốc ban đầu mà khách hàng đã bỏ ra để đầu tư vào hợp đồng SLCĐ này
+9.5 | Trạng thái trái phiếu | Text |  |  |  | Hiển thị trạng thái hiện tại của trái phiếu liên kết với hợp đồng: Đang hoạt động Không hoạt động
+9.6 | Số tiền trả khách hàng (Gross) | Text |  |  |  | Số tiền thực tế hệ thống tính toán chi trả cho khách hàng (Số tiền đầu tư của KH + Lãi gross phải trả cho khách hàng của các Hợp đồng đến hạn/rút trước hạn) Số tiền trả khách hàng (gross) = Số tiền khách hàng đầu tư + Lãi gross phải trả cho khách hàng của các Hợp đồng đến hạn/rút trước hạn Trong đó: Nếu HĐ SLCĐ đến hạn => Lãi gross = (Số tiền KH đầu tư X Lãi suất tại thời điểm KH đăng kí SLCĐ X Số ngày thực gửi)/365 Nếu HĐ SLCĐ rút trước hạn => Lãi gross = (Số tiền KH đầu tư X Lãi suất KKH X Số ngày thực gửi)/365
+9.7 | Mã trái phiếu | Text |  |  |  | Mã định danh của Trái phiếu đang được liên kết với hợp đồng SLCĐ này
+9.8 | Số lượng mua trái phiếu | Text |  |  |  | Số lượng trái phiếu đã mua tương ứng của hợp đồng.
+-------------
+
+--- TABLE ---
+ | Chức năng sử dụng | Mã API (có giá trị tham chiếu trong tài liệu này) | Tên API | Mục đích | Bên cung cấp API | Bên sử dụng API | Trạng thái (New/Update/Existing) | URL | Tài liệu đặc tả
+1 | FR01 | API002 | Danh sách HĐ SLCĐ | Lấy danh sách hợp đồng sinh lời cố định, đối với màn mua trái phiếu truyền vào request các trường phù hợp để lấy được danh sách HĐ SLCĐ của KH đến hạn/rút trước hạn trong khung thời gian quy định | Investment Service | Web CMS | Update |  | Xem input/output tại API002US06
+2 | FR01 | API003 | Lấy số dư TKTT A1,A2,C1 chốt 12h hàng ngày | Lấy số dư TKTT A1,A2,C1 chốt 12h hàng ngày để hiển thị trên màn Mua trái phiếu, Bán trái phiếu | Investment Service | Web CMS | New |  | Xem input/output tại API003US06
+-------------
+
+--- TABLE ---
+ | Tên trường | Kiểu dữ liệu | M/O | Mô tả
+1 | Input: bổ sung thêm bondStatus | Input: bổ sung thêm bondStatus | Input: bổ sung thêm bondStatus | Input: bổ sung thêm bondStatus
+2 | bondStatus | Array String | O | Truyền vào 1 hoặc nhiều trạng thái trái phiếu gồm: Tất cả, Hoạt động, Không hoạt động
+-------------
+
+--- TABLE ---
+<Bên gọi API> Tên API | <Bên gọi API> Tên trường | <Bên gọi API> Mô tả trường | Nguyên tắc mapping | <Bên cung cấp API> Tên API | <Bên cung cấp API> Tên trường | <Bên cung cấp API> Mô tả trường | Ghi chú
+ |  |  |  |  |  |  | 
+ |  |  |  |  |  |  | 
+ |  |  |  |  |  |  | 
+-------------
+
+--- TABLE ---
+Mã yêu cầu | Mã-Tên chức năng | Người sử dụng | Role trên hệ thống (Điền Role hiện tại nếu đã có hoặc yêu cầu role mới) | Yêu cầu quyền trên hệ thống
+ |  |  |  | 
+ |  |  |  | 
+ |  |  |  | 
+-------------
+
+--- TABLE ---
+Mã yêu cầu | Mã-Tên chức năng | Người sử dụng | Quyền dữ liệu
+ |  |  | 
+ |  |  | 
+ |  |  | 
+-------------
+
+--- TABLE ---
+Mã | Yêu cầu mẫu (có thể tùy chỉnh)
+NFR-01 | Thời gian tải trang/API < 3 giây cho giao dịch thông thường dưới tải bình thường.
+NFR-02 | Các truy vấn/tìm kiếm < 2 giây đối với tập dữ liệu kích thước trung bình.
+NFR-03 | Giao dịch xử lý hàng loạt (batch) hoàn thành trong ≤ […] phút cho […] bản ghi.
+NFR-04 | Độ suy giảm thời gian đáp ứng không vượt quá 50 % khi tải cao (peak).
+-------------

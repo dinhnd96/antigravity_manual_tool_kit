@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="vi"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ISTQB CTFL v4.0.1 — System Mapping (Tiếng Việt)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+:root{--bg:#0f0f1a;--card:#16213e;--border:#0f3460;--accent:#e94560;--accent2:#53a8b6;--text:#e0e0e0;--text2:#a0a0b0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;}
+.hero{text-align:center;padding:60px 20px 40px;background:linear-gradient(135deg,#0f0f1a 0%,#16213e 50%,#0f3460 100%);border-bottom:2px solid var(--accent);}
+.hero h1{font-size:2.2em;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px;}
+.hero p{color:var(--text2);font-size:1.1em;max-width:700px;margin:0 auto;}
+.hero .stats{display:flex;justify-content:center;gap:30px;margin-top:20px;}
+.hero .stat{background:rgba(255,255,255,0.05);padding:10px 20px;border-radius:10px;border:1px solid var(--border);}
+.stat strong{color:var(--accent);font-size:1.3em;display:block;}
+nav{position:sticky;top:0;z-index:100;background:rgba(15,15,26,0.85);backdrop-filter:blur(12px);padding:10px 20px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;border-bottom:1px solid var(--border);}
+nav a{color:var(--text2);text-decoration:none;padding:6px 14px;border-radius:6px;font-size:.85em;transition:.3s;border:1px solid transparent;}
+nav a:hover{color:var(--accent);border-color:var(--accent);background:rgba(233,69,96,.1);}
+.container{max-width:1100px;margin:0 auto;padding:20px;}
+.section-group{margin:40px 0;}
+.section-group h2{font-size:1.6em;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--accent);}
+.badge{background:var(--accent);color:#fff;padding:3px 10px;border-radius:5px;font-size:.75em;margin-right:8px;}
+small{color:var(--text2);font-weight:300;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin:15px 0;transition:.3s;}
+.card:hover{border-color:var(--accent);box-shadow:0 0 20px rgba(233,69,96,.15);transform:translateY(-2px);}
+.card h3{color:var(--accent2);margin-bottom:10px;}
+.card ul{padding-left:20px;}
+.card li{margin:5px 0;color:var(--text2);}
+.diagram-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:25px;margin:20px 0;}
+.diagram-card h3{color:var(--accent);margin-bottom:15px;}
+.diagram-card p{color:var(--text2);margin-bottom:15px;font-size:.95em;}
+table{width:100%;border-collapse:collapse;margin:15px 0;font-size:.9em;}
+th{background:var(--border);color:var(--accent);padding:12px;text-align:left;position:sticky;top:48px;}
+td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.05);}
+tr:nth-child(even){background:rgba(255,255,255,.02);}
+tr:hover{background:rgba(233,69,96,.05);}
+.callout{border-left:4px solid;border-radius:8px;padding:15px 20px;margin:12px 0;background:rgba(255,255,255,.03);}
+.callout.info{border-color:var(--accent2);}
+.callout.warning{border-color:#f0a500;}
+.callout h4{margin-bottom:6px;}
+.callout.info h4{color:var(--accent2);}
+.tag{padding:3px 8px;border-radius:4px;font-size:.8em;font-weight:600;}
+.tag-Hộpđen{background:rgba(83,168,182,.2);color:var(--accent2);}
+.tag-Hộptrắng{background:rgba(233,69,96,.2);color:var(--accent);}
+.tag-Kinhnghiệm{background:rgba(240,165,0,.2);color:#f0a500;}
+.tag-Cộngtác{background:rgba(100,200,100,.2);color:#6c6;}
+.mermaid{margin:10px 0;}
+.sub-detail{margin:8px 0 12px 25px;padding:12px 16px;border-left:3px solid var(--accent2);background:rgba(83,168,182,.05);border-radius:0 8px 8px 0;font-size:.92em;}
+.sub-detail p{margin:8px 0;color:var(--text);}
+.sub-detail ul{padding-left:18px;margin:6px 0;}
+.sub-detail li{color:var(--text);margin:4px 0;}
+.sub-detail table{margin:8px 0;}
+
+footer{text-align:center;padding:30px;color:var(--text2);border-top:1px solid var(--border);margin-top:40px;font-size:.85em;}
+@media(max-width:768px){.hero h1{font-size:1.5em;}.hero .stats{flex-direction:column;gap:10px;}nav{gap:4px;}nav a{font-size:.75em;padding:4px 8px;}}
+</style></head><body>
+
+<div class="hero">
+<h1>📋 ISTQB CTFL v4.0.1 — Bản Đồ Kiến Thức</h1>
+<p>Phân tích toàn diện Syllabus ISTQB Certified Tester Foundation Level phiên bản 4.0.1 (2024). Tất cả thuật ngữ được giải thích bằng Tiếng Việt.</p>
+<div class="stats">
+<div class="stat"><strong>6</strong>Chương chính</div>
+<div class="stat"><strong>78</strong>Trang</div>
+<div class="stat"><strong>1135</strong>Phút học</div>
+<div class="stat"><strong>36</strong>Thuật ngữ</div>
+</div></div>
+
+<nav><a href="#sec-Ch1">Ch1</a><a href="#sec-Ch2">Ch2</a><a href="#sec-Ch3">Ch3</a><a href="#sec-Ch4">Ch4</a><a href="#sec-Ch5">Ch5</a><a href="#sec-Ch6">Ch6</a><a href="#glossary">Thuật ngữ</a><a href="#principles">7 Nguyên tắc</a><a href="#workflows">Luồng cốt lõi</a><a href="#matrix">Ma trận</a></nav>
+
+<div class="container">
+
+<!-- FEATURE TREE -->
+<div class="section-group" id="architecture">
+<h2>🏗️ Kiến trúc Kiến thức — Feature Tree</h2>
+<div class="diagram-card">
+<h3>Cây phân rã toàn bộ nội dung ISTQB CTFL v4.0.1</h3>
+<p>Mindmap thể hiện cấu trúc 6 chương, các section và sub-section. Mỗi node tương ứng 1 mục trong Syllabus gốc.</p>
+<pre class="mermaid">mindmap
+  root((ISTQB CTFL v4.0.1))
+    Ch1: Nền tảng Kiểm thử
+      1.1 Kiểm thử là gì?
+        1.1.1 Mục tiêu kiểm thử
+        1.1.2 Kiểm thử vs Gỡ lỗi
+      1.2 Tại sao cần Kiểm thử?
+        1.2.1 Đóng góp vào thành công
+        1.2.2 Kiểm thử vs Đảm bảo Chất lượng
+        1.2.3 Lỗi con người → Khiếm khuyết → Sự cố
+      1.3 7 Nguyên tắc Kiểm thử
+      1.4 Hoạt động, Testware & Vai trò
+        1.4.1 Hoạt động & Nhiệm vụ
+        1.4.2 Quy trình theo Ngữ cảnh
+        1.4.3 Testware
+        1.4.4 Truy vết Test Basis ↔ Testware
+        1.4.5 Vai trò trong Kiểm thử
+      1.5 Kỹ năng & Thực hành tốt
+        1.5.1 Kỹ năng chung
+        1.5.2 Whole Team Approach
+        1.5.3 Tính độc lập trong Kiểm thử
+    Ch2: Kiểm thử trong SDLC
+      2.1 Kiểm thử trong ngữ cảnh SDLC
+        2.1.1 Tác động của SDLC lên Kiểm thử
+        2.1.2 Thực hành tốt trong mọi SDLC
+        2.1.3 Kiểm thử dẫn dắt phát triển (TDD/ATDD/BDD)
+        2.1.4 DevOps và Kiểm thử
+        2.1.5 Shift Left
+        2.1.6 Retrospective & Cải tiến
+      2.2 Cấp độ & Loại Kiểm thử
+        2.2.1 5 Cấp độ Kiểm thử
+        2.2.2 4 Loại Kiểm thử
+        2.2.3 Confirmation vs Regression Testing
+      2.3 Kiểm thử Bảo trì
+    Ch3: Kiểm thử Tĩnh
+      3.1 Cơ bản về Kiểm thử Tĩnh
+        3.1.1 Sản phẩm có thể kiểm thử tĩnh
+        3.1.2 Giá trị của Kiểm thử Tĩnh
+        3.1.3 So sánh Tĩnh vs Động
+      3.2 Phản hồi & Quy trình Review
+        3.2.1 Lợi ích phản hồi sớm
+        3.2.2 Hoạt động Review
+        3.2.3 Vai trò trong Review
+        3.2.4 4 Loại Review
+        3.2.5 Yếu tố thành công
+    Ch4: Phân tích & Thiết kế Test
+      4.1 Tổng quan Kỹ thuật Test
+      4.2 Kỹ thuật Hộp đen
+        4.2.1 Phân vùng Tương đương (EP)
+        4.2.2 Phân tích Giá trị Biên (BVA)
+        4.2.3 Bảng Quyết định
+        4.2.4 Chuyển đổi Trạng thái
+      4.3 Kỹ thuật Hộp trắng
+        4.3.1 Statement Testing & Coverage
+        4.3.2 Branch Testing & Coverage
+        4.3.3 Giá trị của Hộp trắng
+      4.4 Kỹ thuật dựa Kinh nghiệm
+        4.4.1 Error Guessing
+        4.4.2 Exploratory Testing
+        4.4.3 Checklist-Based Testing
+      4.5 Tiếp cận dựa Cộng tác
+        4.5.1 Viết User Story cộng tác
+        4.5.2 Acceptance Criteria
+        4.5.3 ATDD
+    Ch5: Quản lý Hoạt động Test
+      5.1 Lập kế hoạch Test
+        5.1.1 Mục đích & Nội dung Test Plan
+        5.1.2 Đóng góp vào Iteration/Release Planning
+        5.1.3 Entry Criteria & Exit Criteria
+        5.1.4 Kỹ thuật Ước lượng
+        5.1.5 Ưu tiên hóa Test Case
+        5.1.6 Test Pyramid
+        5.1.7 Testing Quadrants
+      5.2 Quản lý Rủi ro
+        5.2.1 Định nghĩa & Thuộc tính Rủi ro
+        5.2.2 Project Risk vs Product Risk
+        5.2.3 Phân tích Rủi ro Sản phẩm
+        5.2.4 Kiểm soát Rủi ro Sản phẩm
+      5.3 Giám sát, Kiểm soát & Hoàn tất
+        5.3.1 Chỉ số trong Kiểm thử
+        5.3.2 Báo cáo Kiểm thử
+        5.3.3 Truyền thông Trạng thái
+      5.4 Quản lý Cấu hình
+      5.5 Quản lý Khiếm khuyết
+    Ch6: Công cụ Kiểm thử
+      6.1 Hỗ trợ Công cụ cho Kiểm thử
+      6.2 Lợi ích & Rủi ro của Tự động hóa</pre>
+</div></div>
+
+<!-- 7 PRINCIPLES -->
+<div class="section-group" id="principles">
+<h2>⚡ 7 Nguyên Tắc Kiểm Thử</h2>
+<p style="color:var(--text2);margin-bottom:15px;">Đây là 7 nguyên tắc nền tảng áp dụng cho MỌI loại kiểm thử, bất kể ngữ cảnh hay phương pháp.</p>
+<div class="callout info"><h4>1. Kiểm thử chỉ cho thấy SỰ HIỆN DIỆN của lỗi</h4><p>Testing chứng minh được có lỗi, nhưng KHÔNG THỂ chứng minh phần mềm không có lỗi.</p></div><div class="callout info"><h4>2. Kiểm thử toàn diện là BẤT KHẢ THI</h4><p>Không thể test mọi tổ hợp đầu vào. Cần dùng kỹ thuật test, ưu tiên hóa và kiểm thử dựa rủi ro.</p></div><div class="callout info"><h4>3. Kiểm thử SỚM tiết kiệm thời gian & chi phí</h4><p>Lỗi phát hiện càng sớm → chi phí sửa càng thấp. Áp dụng Shift Left.</p></div><div class="callout info"><h4>4. Lỗi có xu hướng TẬP TRUNG (Pareto)</h4><p>Một số ít module chứa phần lớn lỗi. Tập trung test vào vùng rủi ro cao.</p></div><div class="callout info"><h4>5. Test bị 'MÒN' theo thời gian</h4><p>Chạy lại cùng test case nhiều lần sẽ giảm hiệu quả. Cần cập nhật, bổ sung test mới.</p></div><div class="callout info"><h4>6. Kiểm thử PHỤ THUỘC ngữ cảnh</h4><p>Không có phương pháp test nào phù hợp cho mọi dự án. Cần điều chỉnh theo ngữ cảnh.</p></div><div class="callout info"><h4>7. Ngụy biện KHÔNG CÓ LỖI</h4><p>Dù test hết requirements và sửa hết lỗi, phần mềm vẫn có thể không đáp ứng nhu cầu người dùng.</p></div>
+</div>
+
+<!-- CHAPTER DETAILS -->
+<div class="section-group" id="sec-Ch1"><h2><span class="badge">Ch1</span> Nền tảng Kiểm thử <small>(Fundamentals of Testing — 180 phút)</small></h2><div class="card"><h3>1.1 — Kiểm thử là gì?</h3>
+<p><strong>Kiểm thử phần mềm</strong> là tập hợp các hoạt động nhằm phát hiện khiếm khuyết (defect) và đánh giá chất lượng sản phẩm phần mềm. Nhiều người lầm tưởng kiểm thử chỉ là "chạy phần mềm rồi xem kết quả" — thực tế, kiểm thử bao gồm cả <strong>lập kế hoạch, phân tích, thiết kế, thực thi và báo cáo</strong>.</p>
+<div class='callout info'><h4>💡 Verification vs Validation</h4><p><strong>Verification (Xác minh)</strong>: "Chúng ta có đang xây đúng sản phẩm không?" — kiểm tra sản phẩm có đúng với đặc tả/yêu cầu.<br/><strong>Validation (Xác nhận)</strong>: "Chúng ta có đang xây sản phẩm đúng không?" — kiểm tra sản phẩm có thực sự đáp ứng nhu cầu người dùng.</p></div>
+<p><strong>Kiểm thử Tĩnh (Static)</strong>: Đọc và phân tích code/tài liệu mà KHÔNG cần chạy phần mềm (review, static analysis).<br/><strong>Kiểm thử Động (Dynamic)</strong>: Chạy phần mềm và quan sát kết quả thực tế.</p>
+<ul><li><strong>1.1.1</strong> — Mục tiêu kiểm thử</li>
+<div class="sub-detail"><p>Mục tiêu kiểm thử thay đổi tùy ngữ cảnh, nhưng thường bao gồm:</p>
+<ul>
+<li>🔍 <strong>Đánh giá sản phẩm công việc</strong>: requirements, user stories, designs, code</li>
+<li>🐛 <strong>Gây ra sự cố để tìm khiếm khuyết</strong>: tìm bug trước khi người dùng gặp phải</li>
+<li>📏 <strong>Đảm bảo độ phủ yêu cầu</strong>: mọi requirement đều được test</li>
+<li>⚖️ <strong>Giảm rủi ro chất lượng kém</strong>: tập trung test vùng rủi ro cao</li>
+<li>✅ <strong>Xác minh tuân thủ</strong>: hợp đồng, luật pháp, quy định ngành</li>
+<li>📊 <strong>Cung cấp thông tin cho stakeholders</strong> để ra quyết định (release hay không?)</li>
+</ul></div>
+<li><strong>1.1.2</strong> — Kiểm thử vs Gỡ lỗi</li>
+<div class="sub-detail"><p><strong>Kiểm thử ≠ Gỡ lỗi</strong>. Đây là 2 hoạt động riêng biệt:</p>
+<table><tr><th>Kiểm thử (Testing)</th><th>Gỡ lỗi (Debugging)</th></tr>
+<tr><td>Phát hiện sự cố (failure) hoặc khiếm khuyết (defect)</td><td>Tìm nguyên nhân gây ra sự cố, phân tích và sửa lỗi</td></tr>
+<tr><td>Thường do Tester thực hiện</td><td>Thường do Developer thực hiện</td></tr>
+<tr><td>Kết quả: Defect Report</td><td>Kết quả: Code fix</td></tr></table>
+<p>Sau khi Dev sửa lỗi → Tester làm <strong>Confirmation Testing</strong> (xác nhận lỗi đã sửa) + <strong>Regression Testing</strong> (đảm bảo fix không gây lỗi mới).</p></div>
+</ul></div><div class="card"><h3>1.2 — Tại sao cần Kiểm thử?</h3>
+<p>Kiểm thử giúp phát hiện khiếm khuyết sớm, giảm chi phí sửa lỗi, và đảm bảo sản phẩm đáp ứng nhu cầu người dùng.</p>
+<ul><li><strong>1.2.1</strong> — Đóng góp vào thành công</li>
+<div class="sub-detail"><p>Kiểm thử đóng góp vào thành công dự án bằng cách:</p>
+<ul>
+<li>💰 <strong>Phát hiện lỗi sớm</strong> = tiết kiệm chi phí sửa (lỗi ở giai đoạn requirements rẻ hơn 100x so với production)</li>
+<li>📋 <strong>Đánh giá chất lượng</strong> ở từng giai đoạn SDLC, hỗ trợ quyết định go/no-go</li>
+<li>👤 <strong>Đại diện cho người dùng</strong>: Tester đảm bảo nhu cầu người dùng được xem xét xuyên suốt</li>
+<li>⚖️ <strong>Đáp ứng yêu cầu pháp lý</strong>: hợp đồng, quy định ngành</li>
+</ul></div>
+<li><strong>1.2.2</strong> — Kiểm thử vs Đảm bảo Chất lượng</li>
+<div class="sub-detail"><p><strong>Testing ≠ QA</strong> — đây là 2 khái niệm thường bị nhầm lẫn:</p>
+<table><tr><th>Testing (Kiểm thử)</th><th>QA (Đảm bảo Chất lượng)</th></tr>
+<tr><td>Hướng sản phẩm (product-oriented)</td><td>Hướng quy trình (process-oriented)</td></tr>
+<tr><td>Sửa chữa (corrective) — tìm và sửa lỗi</td><td>Phòng ngừa (preventive) — cải tiến quy trình</td></tr>
+<tr><td>Là một dạng Quality Control (QC)</td><td>Tập trung vào cải tiến quy trình</td></tr></table>
+<p>Testing là một phần của QC (Quality Control), còn QA bao trùm cả QC. Cả hai đều sử dụng kết quả test.</p></div>
+<li><strong>1.2.3</strong> — Lỗi con người → Khiếm khuyết → Sự cố</li>
+<div class="sub-detail"><p>Chuỗi nhân quả trong phần mềm:</p>
+<div class='callout warning'><h4>⛓️ Error → Defect → Failure</h4><p>
+<strong>1. Error (Lỗi con người)</strong>: Con người mắc sai sót khi viết code/tài liệu (do áp lực thời gian, thiếu kinh nghiệm, hiểu sai yêu cầu...).<br/>
+<strong>2. Defect (Khiếm khuyết/Bug)</strong>: Lỗi con người tạo ra khiếm khuyết trong code hoặc tài liệu. Khiếm khuyết có thể tồn tại mà chưa bao giờ gây sự cố.<br/>
+<strong>3. Failure (Sự cố)</strong>: Khi khiếm khuyết trong code được thực thi, hệ thống có thể hoạt động sai → sự cố.<br/>
+<strong>4. Root Cause (Nguyên nhân gốc)</strong>: Lý do cơ bản nhất dẫn đến error. Ví dụ: thiếu đào tạo, quy trình review kém.
+</p></div>
+<p>⚠️ Không phải mọi defect đều gây failure. Một số defect chỉ xảy ra trong điều kiện cụ thể.</p></div>
+</ul></div><div class="card"><h3>1.3 — 7 Nguyên tắc Kiểm thử</h3>
+<p>7 nguyên tắc kiểm thử đã được trình bày ở section riêng phía trên. Đây là kim chỉ nam cho MỌI hoạt động kiểm thử.</p>
+</div><div class="card"><h3>1.4 — Hoạt động, Testware & Vai trò</h3>
+<p>Quy trình kiểm thử gồm nhiều hoạt động, không chỉ là "chạy test". Mỗi hoạt động tạo ra các sản phẩm (testware) cụ thể.</p>
+<ul><li><strong>1.4.1</strong> — Hoạt động & Nhiệm vụ</li>
+<div class="sub-detail"><p>7 nhóm hoạt động chính trong quy trình kiểm thử:</p>
+<table><tr><th>#</th><th>Hoạt động</th><th>Câu hỏi trả lời</th><th>Output</th></tr>
+<tr><td>1</td><td>Test Planning</td><td>Chiến lược test thế nào?</td><td>Test Plan</td></tr>
+<tr><td>2</td><td>Test Monitoring & Control</td><td>Tiến độ ra sao? Cần điều chỉnh gì?</td><td>Test Progress Report</td></tr>
+<tr><td>3</td><td>Test Analysis</td><td>Test CÁI GÌ? (What to test)</td><td>Test Conditions</td></tr>
+<tr><td>4</td><td>Test Design</td><td>Test NHƯ THẾ NÀO? (How to test)</td><td>Test Cases, Test Data</td></tr>
+<tr><td>5</td><td>Test Implementation</td><td>Đã chuẩn bị đủ để chạy chưa?</td><td>Test Scripts, Test Suites</td></tr>
+<tr><td>6</td><td>Test Execution</td><td>Kết quả thực tế vs mong đợi?</td><td>Test Logs, Defect Reports</td></tr>
+<tr><td>7</td><td>Test Completion</td><td>Bài học rút ra? Tổng kết?</td><td>Completion Report</td></tr></table></div>
+<li><strong>1.4.2</strong> — Quy trình theo Ngữ cảnh</li>
+<div class="sub-detail"><p>Kiểm thử KHÔNG tồn tại độc lập — nó phụ thuộc vào ngữ cảnh dự án: stakeholders, kỹ năng team, lĩnh vực nghiệp vụ, ràng buộc dự án, công nghệ, SDLC model, và công cụ. Cùng một sản phẩm nhưng ngữ cảnh khác nhau → chiến lược test khác nhau.</p></div>
+<li><strong>1.4.3</strong> — Testware</li>
+<div class="sub-detail"><p><strong>Testware</strong> là TẤT CẢ sản phẩm đầu ra từ hoạt động kiểm thử: Test Plan, Test Schedule, Risk Register, Test Conditions, Test Cases, Test Scripts, Test Data, Test Logs, Defect Reports, Test Completion Report... Cần quản lý cấu hình (Configuration Management) cho testware giống như quản lý source code.</p></div>
+<li><strong>1.4.4</strong> — Truy vết Test Basis ↔ Testware</li>
+<div class="sub-detail"><p><strong>Traceability (Truy vết)</strong> là khả năng liên kết giữa test basis (requirements) ↔ test conditions ↔ test cases ↔ test results ↔ defects. Truy vết tốt giúp: đánh giá độ phủ, xác định ảnh hưởng khi thay đổi, hỗ trợ audit, và làm báo cáo rõ ràng hơn.</p></div>
+<li><strong>1.4.5</strong> — Vai trò trong Kiểm thử</li>
+<div class="sub-detail"><p>2 vai trò chính trong kiểm thử:</p>
+<table><tr><th>Test Management</th><th>Testing (Technical)</th></tr>
+<tr><td>Lập kế hoạch, giám sát, kiểm soát, tổng kết</td><td>Phân tích, thiết kế, triển khai, thực thi test</td></tr>
+<tr><td>Test Manager, Test Lead, Scrum Master...</td><td>Tester, Test Analyst, Test Engineer...</td></tr></table>
+<p>Một người có thể đảm nhiệm cả 2 vai trò, tùy theo quy mô dự án.</p></div>
+</ul></div><div class="card"><h3>1.5 — Kỹ năng & Thực hành tốt</h3>
+<p>Tester cần kết hợp kỹ năng chuyên môn và kỹ năng mềm để làm việc hiệu quả.</p>
+<ul><li><strong>1.5.1</strong> — Kỹ năng chung</li>
+<div class="sub-detail"><p>6 nhóm kỹ năng quan trọng cho Tester:</p>
+<ul>
+<li>📚 <strong>Kiến thức kiểm thử</strong>: kỹ thuật test, quy trình, công cụ</li>
+<li>🔎 <strong>Tỉ mỉ, cẩn thận, tò mò</strong>: phát hiện lỗi khó tìm</li>
+<li>🗣️ <strong>Giao tiếp tốt</strong>: báo cáo lỗi rõ ràng, làm việc nhóm hiệu quả</li>
+<li>🧠 <strong>Tư duy phân tích & phản biện</strong>: đặt câu hỏi đúng, tìm edge cases</li>
+<li>💻 <strong>Kiến thức kỹ thuật</strong>: sử dụng công cụ test hiệu quả</li>
+<li>🏢 <strong>Kiến thức nghiệp vụ</strong>: hiểu domain để giao tiếp với người dùng</li>
+</ul>
+<p>⚠️ Tester thường là người mang tin xấu. Kỹ năng giao tiếp giúp truyền đạt thông tin về lỗi một cách xây dựng, tránh gây xung đột.</p></div>
+<li><strong>1.5.2</strong> — Whole Team Approach</li>
+<div class="sub-detail"><p><strong>Whole Team Approach</strong> (từ Extreme Programming): mọi thành viên trong team đều chịu trách nhiệm về chất lượng, không chỉ riêng Tester. Tester cộng tác chặt với Dev và BA để viết acceptance test, thống nhất chiến lược test, và chia sẻ kiến thức.</p>
+<p>⚠️ Không phải lúc nào cũng phù hợp — ví dụ trong hệ thống safety-critical, cần mức độ độc lập test cao.</p></div>
+<li><strong>1.5.3</strong> — Tính độc lập trong Kiểm thử</li>
+<div class="sub-detail"><p>4 mức độ độc lập trong kiểm thử (từ thấp → cao):</p>
+<ul>
+<li>1️⃣ <strong>Không độc lập</strong>: Tác giả tự test code của mình</li>
+<li>2️⃣ <strong>Ít độc lập</strong>: Đồng nghiệp cùng team test</li>
+<li>3️⃣ <strong>Độc lập cao</strong>: Team test riêng trong cùng tổ chức</li>
+<li>4️⃣ <strong>Rất độc lập</strong>: Tester từ tổ chức bên ngoài</li>
+</ul>
+<p>✅ <strong>Lợi ích</strong>: Tester độc lập phát hiện lỗi khác biệt nhờ góc nhìn khách quan.<br/>
+❌ <strong>Hạn chế</strong>: Có thể bị cô lập, thiếu cộng tác, Dev mất trách nhiệm về chất lượng.</p></div>
+</ul></div></div><div class="section-group" id="sec-Ch2"><h2><span class="badge">Ch2</span> Kiểm thử trong SDLC <small>(Testing Throughout the SDLC — 130 phút)</small></h2><div class="card"><h3>2.1 — Kiểm thử trong ngữ cảnh SDLC</h3>
+<p>SDLC (Software Development Lifecycle) là mô hình trừu tượng mô tả cách phần mềm được phát triển. Ví dụ: Waterfall, V-model (tuần tự), Spiral (lặp), Scrum/Kanban (Agile). Cách tổ chức kiểm thử PHẢI thích ứng theo SDLC đang dùng.</p>
+<ul><li><strong>2.1.1</strong> — Tác động của SDLC lên Kiểm thử</li>
+<div class="sub-detail"><p>SDLC ảnh hưởng đến kiểm thử ở 5 khía cạnh:</p>
+<ul>
+<li>📋 <strong>Phạm vi & thời điểm</strong> test activities</li>
+<li>📄 <strong>Mức chi tiết</strong> tài liệu test</li>
+<li>🔧 <strong>Kỹ thuật test</strong> và test approach</li>
+<li>🤖 <strong>Mức độ tự động hóa</strong></li>
+<li>👤 <strong>Vai trò và trách nhiệm</strong> của tester</li>
+</ul>
+<p>Ví dụ: Trong Waterfall, tester review requirements ở giai đoạn đầu. Trong Agile, tester tham gia từng sprint, test liên tục.</p></div>
+<li><strong>2.1.2</strong> — Thực hành tốt trong mọi SDLC</li>
+<div class="sub-detail"><p>Dù dùng SDLC nào, các thực hành tốt luôn áp dụng:</p>
+<ul>
+<li>✅ Mỗi hoạt động phát triển đều có hoạt động test tương ứng</li>
+<li>✅ Các cấp độ test khác nhau có mục tiêu khác nhau, tránh trùng lặp</li>
+<li>✅ Test analysis & design bắt đầu đồng thời với giai đoạn phát triển tương ứng</li>
+<li>✅ Tester tham gia review tài liệu ngay khi có bản nháp (Shift Left)</li>
+</ul></div>
+<li><strong>2.1.3</strong> — Kiểm thử dẫn dắt phát triển (TDD/ATDD/BDD)</li>
+<div class="sub-detail"><p>3 phương pháp "Test-First" — viết test TRƯỚC khi viết code:</p>
+<table><tr><th>Phương pháp</th><th>Đặc điểm</th><th>Ví dụ</th></tr>
+<tr><td><strong>TDD</strong> (Test-Driven Dev)</td><td>Viết unit test → viết code → refactor. Lặp lại.</td><td>Dev viết test cho hàm calculateTotal() trước khi code hàm đó</td></tr>
+<tr><td><strong>ATDD</strong> (Acceptance Test-Driven Dev)</td><td>Viết acceptance test từ acceptance criteria → rồi mới code feature</td><td>Team viết test "User có thể login bằng email" trước khi code form login</td></tr>
+<tr><td><strong>BDD</strong> (Behavior-Driven Dev)</td><td>Mô tả hành vi bằng ngôn ngữ tự nhiên: Given/When/Then</td><td>Given user ở trang login, When nhập sai password, Then hiện thông báo lỗi</td></tr></table></div>
+<li><strong>2.1.4</strong> — DevOps và Kiểm thử</li>
+<div class="sub-detail"><p><strong>DevOps</strong> = Development + Operations, tạo cầu nối giữa phát triển và vận hành.</p>
+<p>✅ <strong>Lợi ích cho Testing</strong>: Feedback nhanh về chất lượng code, CI thúc đẩy Shift Left, tự động hóa qua pipeline, giảm regression risk, tăng visibility chất lượng phi chức năng.</p>
+<p>⚠️ <strong>Thách thức</strong>: Cần xây dựng delivery pipeline, duy trì CI/CD tools, đầu tư vào test automation. Manual testing (đặc biệt từ góc nhìn user) vẫn cần thiết.</p></div>
+<li><strong>2.1.5</strong> — Shift Left</li>
+<div class="sub-detail"><p><strong>Shift Left = Đẩy kiểm thử sớm hơn trong SDLC</strong>. Tìm lỗi sớm = chi phí sửa thấp hơn.</p>
+<div class='callout info'><h4>💡 Cách thực hiện Shift Left</h4><p>
+1. Review requirements/specifications từ góc nhìn tester<br/>
+2. Viết test case TRƯỚC khi viết code (TDD/ATDD/BDD)<br/>
+3. Sử dụng CI/CD với automated component tests<br/>
+4. Static analysis trước dynamic testing<br/>
+5. Non-functional testing từ cấp component (không đợi đến system test)
+</p></div>
+<p>⚠️ Shift Left KHÔNG có nghĩa là bỏ qua test ở giai đoạn sau. Các giai đoạn test sau vẫn rất quan trọng.</p></div>
+<li><strong>2.1.6</strong> — Retrospective & Cải tiến</li>
+<div class="sub-detail"><p><strong>Retrospective</strong> = cuộc họp rút kinh nghiệm sau mỗi sprint/release. Cả team (không chỉ tester) thảo luận: Cái gì tốt? Cái gì cần cải thiện? Hành động tiếp theo? Kết quả ghi vào Test Completion Report.</p></div>
+</ul></div><div class="card"><h3>2.2 — Cấp độ & Loại Kiểm thử</h3>
+<p>Test được tổ chức theo <strong>cấp độ (levels)</strong> và <strong>loại (types)</strong>. Mỗi cấp/loại có mục tiêu và đối tượng riêng.</p>
+<ul><li><strong>2.2.1</strong> — 5 Cấp độ Kiểm thử</li>
+<div class="sub-detail"><p>5 cấp độ kiểm thử, từ nhỏ → lớn:</p>
+<table><tr><th>Cấp độ</th><th>Đối tượng test</th><th>Ai thực hiện</th><th>Mục tiêu chính</th></tr>
+<tr><td>🔹 Component Test (Unit)</td><td>Hàm, class, module riêng lẻ</td><td>Developer</td><td>Test từng đơn vị nhỏ nhất, cô lập</td></tr>
+<tr><td>🔹 Component Integration</td><td>Giao tiếp giữa các component</td><td>Developer</td><td>Test interface, tương tác giữa modules</td></tr>
+<tr><td>🔷 System Test</td><td>Toàn bộ hệ thống</td><td>Test Team (độc lập)</td><td>Test end-to-end, cả functional & non-functional</td></tr>
+<tr><td>🔷 System Integration</td><td>Kết nối với hệ thống ngoài</td><td>Test Team</td><td>Test giao tiếp với external systems/APIs</td></tr>
+<tr><td>🟢 Acceptance Test</td><td>Toàn hệ thống từ góc user</td><td>User/Business</td><td>Validation — hệ thống đáp ứng nhu cầu thực tế</td></tr></table>
+<p>Acceptance Testing gồm: UAT (User), OAT (Operations), Contractual, Regulatory, Alpha/Beta testing.</p></div>
+<li><strong>2.2.2</strong> — 4 Loại Kiểm thử</li>
+<div class="sub-detail"><p>4 loại kiểm thử, có thể áp dụng ở MỌI cấp độ:</p>
+<table><tr><th>Loại</th><th>Câu hỏi</th><th>Ví dụ</th></tr>
+<tr><td>✅ <strong>Functional</strong></td><td>Hệ thống làm CÁI GÌ?</td><td>Login thành công, tính toán đúng, xuất báo cáo đúng</td></tr>
+<tr><td>⚡ <strong>Non-functional</strong></td><td>Hệ thống hoạt động TỐT NHƯ THẾ NÀO?</td><td>Tốc độ, bảo mật, khả năng sử dụng, độ tin cậy</td></tr>
+<tr><td>⬛ <strong>Black-box</strong></td><td>Test theo đặc tả, không cần biết code</td><td>EP, BVA, Decision Table, State Transition</td></tr>
+<tr><td>⬜ <strong>White-box</strong></td><td>Test theo cấu trúc code bên trong</td><td>Statement coverage, Branch coverage</td></tr></table>
+<p>ISO/IEC 25010 định nghĩa 8 đặc tính chất lượng phi chức năng: Performance, Compatibility, Usability, Reliability, Security, Maintainability, Portability, Safety.</p></div>
+<li><strong>2.2.3</strong> — Confirmation vs Regression Testing</li>
+<div class="sub-detail"><p>2 loại test quan trọng khi có thay đổi:</p>
+<div class='callout info'><h4>🔄 Confirmation vs Regression</h4><p>
+<strong>Confirmation Testing</strong>: Xác nhận lỗi ĐÃ ĐƯỢC SỬA ĐÚNG. Chạy lại test case đã fail trước đó.<br/>
+<strong>Regression Testing</strong>: Đảm bảo thay đổi KHÔNG GÂY LỖI MỚI ở nơi khác. Nên tự động hóa vì chạy lại nhiều lần.<br/>
+Cả hai đều cần thiết ở MỌI cấp độ test khi có thay đổi.
+</p></div></div>
+</ul></div><div class="card"><h3>2.3 — Kiểm thử Bảo trì</h3>
+<p><strong>Maintenance Testing</strong> = kiểm thử khi hệ thống đang vận hành có thay đổi. Trigger gồm: cập nhật tính năng (planned enhancements), sửa lỗi khẩn (hot fix), nâng cấp platform (migration), hoặc loại bỏ hệ thống (retirement). Cần làm <strong>Impact Analysis</strong> trước khi thay đổi để xác định phạm vi regression test.</p>
+</div></div><div class="section-group" id="sec-Ch3"><h2><span class="badge">Ch3</span> Kiểm thử Tĩnh <small>(Static Testing — 80 phút)</small></h2><div class="card"><h3>3.1 — Cơ bản về Kiểm thử Tĩnh</h3>
+<p>Kiểm thử tĩnh KHÔNG cần chạy phần mềm. Bao gồm <strong>Review</strong> (con người đọc) và <strong>Static Analysis</strong> (công cụ phân tích). Có thể áp dụng cho cả Verification và Validation.</p>
+<ul><li><strong>3.1.1</strong> — Sản phẩm có thể kiểm thử tĩnh</li>
+<div class="sub-detail"><p>Hầu như BẤT KỲ sản phẩm nào đọc được đều có thể kiểm thử tĩnh: requirements, source code, test plans, test cases, contracts, models, product backlog items. Tuy nhiên, code bên thứ 3 dạng executable không phù hợp (lý do pháp lý).</p></div>
+<li><strong>3.1.2</strong> — Giá trị của Kiểm thử Tĩnh</li>
+<div class="sub-detail"><p>Giá trị của kiểm thử tĩnh:</p>
+<ul>
+<li>🕐 Phát hiện lỗi ở giai đoạn SỚM NHẤT của SDLC</li>
+<li>🔍 Tìm được lỗi mà dynamic testing KHÔNG tìm được (unreachable code, design patterns sai)</li>
+<li>🤝 Tạo sự hiểu biết chung giữa các stakeholders</li>
+<li>💰 Dù tốn chi phí triển khai review, tổng chi phí dự án THẤP HƠN vì ít phải sửa lỗi muộn</li>
+</ul></div>
+<li><strong>3.1.3</strong> — So sánh Tĩnh vs Động</li>
+<div class="sub-detail"><p>So sánh Kiểm thử Tĩnh vs Động:</p>
+<table><tr><th>Tiêu chí</th><th>Static Testing</th><th>Dynamic Testing</th></tr>
+<tr><td>Chạy phần mềm?</td><td>❌ Không</td><td>✅ Có</td></tr>
+<tr><td>Tìm lỗi</td><td>Trực tiếp tìm defect</td><td>Gây failure → suy ngược ra defect</td></tr>
+<tr><td>Áp dụng cho</td><td>Mọi work product (code, tài liệu, model)</td><td>Chỉ executable work products</td></tr>
+<tr><td>Phát hiện tốt</td><td>Requirements mâu thuẫn, code không thể đạt tới, coding standards</td><td>Lỗi runtime, performance, usability</td></tr></table>
+<p>Hai phương pháp BỔ SUNG cho nhau, không thay thế. Nên dùng cả hai.</p></div>
+</ul></div><div class="card"><h3>3.2 — Phản hồi & Quy trình Review</h3>
+<p>Review là hình thức kiểm thử tĩnh do con người thực hiện. Có quy trình rõ ràng với các bước và vai trò cụ thể.</p>
+<ul><li><strong>3.2.1</strong> — Lợi ích phản hồi sớm</li>
+<div class="sub-detail"><p>Phản hồi sớm và thường xuyên từ stakeholders giúp: tránh hiểu sai requirements, phát hiện vấn đề chất lượng sớm, giảm rework tốn kém. Nếu thiếu sự tham gia của stakeholders → sản phẩm có thể không đáp ứng nhu cầu thực tế → có thể dẫn đến thất bại dự án.</p></div>
+<li><strong>3.2.2</strong> — Hoạt động Review</li>
+<div class="sub-detail"><p>5 bước trong quy trình Review (theo ISO/IEC 20246):</p>
+<ul>
+<li>1️⃣ <strong>Planning</strong>: Xác định phạm vi, mục tiêu, tiêu chí kết thúc, timeline</li>
+<li>2️⃣ <strong>Review Initiation</strong>: Đảm bảo mọi người sẵn sàng, phân phối tài liệu</li>
+<li>3️⃣ <strong>Individual Review</strong>: Mỗi reviewer tự đọc và ghi nhận anomaly</li>
+<li>4️⃣ <strong>Communication & Analysis</strong>: Thảo luận anomaly, quyết định status</li>
+<li>5️⃣ <strong>Fixing & Reporting</strong>: Sửa defect, báo cáo kết quả</li>
+</ul></div>
+<li><strong>3.2.3</strong> — Vai trò trong Review</li>
+<div class="sub-detail"><p>6 vai trò trong Review:</p>
+<ul>
+<li>👔 <strong>Manager</strong>: Quyết định review cái gì, cung cấp nguồn lực</li>
+<li>✍️ <strong>Author</strong>: Tạo và sửa work product</li>
+<li>🎤 <strong>Moderator/Facilitator</strong>: Điều phối cuộc họp review</li>
+<li>📝 <strong>Scribe/Recorder</strong>: Ghi chép anomaly và quyết định</li>
+<li>🔍 <strong>Reviewer</strong>: Thực hiện review, tìm anomaly</li>
+<li>👑 <strong>Review Leader</strong>: Chịu trách nhiệm tổng thể về review</li>
+</ul></div>
+<li><strong>3.2.4</strong> — 4 Loại Review</li>
+<div class="sub-detail"><p>4 loại Review (từ ít formal → rất formal):</p>
+<table><tr><th>Loại</th><th>Mức Formal</th><th>Đặc điểm</th></tr>
+<tr><td>Informal Review</td><td>⭐</td><td>Không quy trình chính thức. Mục tiêu: tìm anomaly nhanh</td></tr>
+<tr><td>Walkthrough</td><td>⭐⭐</td><td>Tác giả dẫn dắt. Đa mục tiêu: đào tạo, đánh giá, tìm lỗi, tạo ý tưởng</td></tr>
+<tr><td>Technical Review</td><td>⭐⭐⭐</td><td>Chuyên gia kỹ thuật, có moderator. Mục tiêu: đồng thuận kỹ thuật</td></tr>
+<tr><td>Inspection</td><td>⭐⭐⭐⭐</td><td>Formal nhất, quy trình đầy đủ. Mục tiêu: tìm TỐI ĐA anomaly. Tác giả KHÔNG được làm review leader hoặc scribe</td></tr></table></div>
+<li><strong>3.2.5</strong> — Yếu tố thành công</li>
+<div class="sub-detail"><p>Yếu tố thành công cho Review: mục tiêu rõ ràng, chọn đúng loại review, review từng phần nhỏ, cung cấp feedback, cho đủ thời gian chuẩn bị, có sự ủng hộ của management, đào tạo participants, điều phối meeting hiệu quả.</p></div>
+</ul></div></div><div class="section-group" id="sec-Ch4"><h2><span class="badge">Ch4</span> Phân tích & Thiết kế Test <small>(Test Analysis and Design — 390 phút)</small></h2><div class="card"><h3>4.1 — Tổng quan Kỹ thuật Test</h3>
+<p>Kỹ thuật test hỗ trợ 2 câu hỏi: <strong>"Test CÁI GÌ?"</strong> (test analysis) và <strong>"Test NHƯ THẾ NÀO?"</strong> (test design). Phân thành 3 nhóm: Hộp đen, Hộp trắng, và Dựa kinh nghiệm — ba nhóm này BỔ SUNG cho nhau.</p>
+</div><div class="card"><h3>4.2 — Kỹ thuật Hộp đen</h3>
+<p>Kỹ thuật Hộp đen (Black-box) dựa trên đặc tả, KHÔNG quan tâm code bên trong. Test case độc lập với implementation → vẫn dùng được khi code thay đổi mà behavior giữ nguyên.</p>
+<ul><li><strong>4.2.1</strong> — Phân vùng Tương đương (EP)</li>
+<div class="sub-detail"><p><strong>EP (Equivalence Partitioning)</strong> — Phân vùng Tương đương:</p>
+<div class='callout info'><h4>💡 Nguyên lý</h4><p>Chia dữ liệu đầu vào thành các "phân vùng" — mỗi phân vùng chứa các giá trị được xử lý GIỐNG NHAU. Chỉ cần test 1 giá trị đại diện cho mỗi phân vùng.<br/><br/>
+<strong>Ví dụ</strong>: Trường tuổi chấp nhận 18-65<br/>
+• Phân vùng hợp lệ: [18, 65] → test giá trị 30<br/>
+• Phân vùng không hợp lệ 1: [-∞, 17] → test giá trị 10<br/>
+• Phân vùng không hợp lệ 2: [66, +∞] → test giá trị 70<br/>
+→ Chỉ cần 3 test cases thay vì test mọi giá trị!</p></div>
+<p>Độ phủ = Số phân vùng đã test / Tổng số phân vùng × 100%</p></div>
+<li><strong>4.2.2</strong> — Phân tích Giá trị Biên (BVA)</li>
+<div class="sub-detail"><p><strong>BVA (Boundary Value Analysis)</strong> — Phân tích Giá trị Biên:</p>
+<div class='callout info'><h4>💡 Nguyên lý</h4><p>Lỗi thường xuất hiện ở BIÊN của phân vùng. BVA test các giá trị tại và xung quanh biên.<br/><br/>
+<strong>Ví dụ</strong>: Trường tuổi 18-65<br/>
+• <strong>2-value BVA</strong>: Test 17, 18, 65, 66 (biên + hàng xóm bên kia)<br/>
+• <strong>3-value BVA</strong>: Test 17, 18, 19, 64, 65, 66 (biên + cả 2 hàng xóm) — kỹ hơn, phát hiện nhiều lỗi hơn</p></div>
+<p>BVA chỉ áp dụng cho phân vùng CÓ THỨ TỰ (ordered partitions). 3-value BVA mạnh hơn 2-value BVA.</p></div>
+<li><strong>4.2.3</strong> — Bảng Quyết định</li>
+<div class="sub-detail"><p><strong>Decision Table</strong> — Bảng Quyết định:</p>
+<p>Dùng khi logic phụ thuộc NHIỀU ĐIỀU KIỆN kết hợp. Mỗi cột = 1 tổ hợp điều kiện + hành động tương ứng.</p>
+<div class='callout info'><h4>💡 Ví dụ</h4><p>Giảm giá khi: Khách VIP (C1) AND Đơn hàng > 500K (C2)?<br/>
+| C1 | C2 | Giảm giá |<br/>
+| T | T | 20% |<br/>
+| T | F | 10% |<br/>
+| F | T | 5% |<br/>
+| F | F | 0% |<br/>
+→ 4 test cases bao phủ mọi tổ hợp!</p></div>
+<p>Sức mạnh: Phát hiện logic thiếu hoặc mâu thuẫn trong requirements. Hạn chế: Số rules tăng theo hàm mũ khi nhiều điều kiện.</p></div>
+<li><strong>4.2.4</strong> — Chuyển đổi Trạng thái</li>
+<div class="sub-detail"><p><strong>State Transition Testing</strong> — Kiểm thử Chuyển đổi Trạng thái:</p>
+<p>Dùng khi hệ thống có các TRẠNG THÁI và CHUYỂN ĐỔI giữa chúng. 3 mức coverage:</p>
+<ul>
+<li><strong>All States</strong>: Test tất cả trạng thái (yếu nhất)</li>
+<li><strong>Valid Transitions (0-switch)</strong>: Test tất cả chuyển đổi hợp lệ (phổ biến nhất)</li>
+<li><strong>All Transitions</strong>: Test cả chuyển đổi hợp lệ VÀ không hợp lệ (mạnh nhất — bắt buộc cho safety-critical)</li>
+</ul></div>
+</ul></div><div class="card"><h3>4.3 — Kỹ thuật Hộp trắng</h3>
+<p>Kỹ thuật Hộp trắng (White-box) dựa trên CẤU TRÚC CODE bên trong. Test case phụ thuộc vào implementation → phải tạo sau khi có code.</p>
+<ul><li><strong>4.3.1</strong> — Statement Testing & Coverage</li>
+<div class="sub-detail"><p><strong>Statement Coverage</strong>: Đo tỷ lệ câu lệnh đã được thực thi ít nhất 1 lần. 100% statement coverage = mọi dòng code đều đã chạy. Tuy nhiên, KHÔNG đảm bảo mọi nhánh logic đều được test.</p></div>
+<li><strong>4.3.2</strong> — Branch Testing & Coverage</li>
+<div class="sub-detail"><p><strong>Branch Coverage</strong>: Đo tỷ lệ nhánh (true/false) đã được thực thi. 100% branch coverage → 100% statement coverage (nhưng KHÔNG ngược lại). Branch coverage MẠNH HƠN statement coverage vì bao phủ cả các nhánh quyết định.</p></div>
+<li><strong>4.3.3</strong> — Giá trị của Hộp trắng</li>
+<div class="sub-detail"><p>✅ <strong>Điểm mạnh</strong>: White-box test toàn bộ implementation, phát hiện lỗi ngay cả khi spec thiếu hoặc lỗi thời.<br/>❌ <strong>Điểm yếu</strong>: Nếu requirement CHƯA ĐƯỢC implement → white-box sẽ KHÔNG phát hiện lỗi thiếu (defects of omission).</p></div>
+</ul></div><div class="card"><h3>4.4 — Kỹ thuật dựa Kinh nghiệm</h3>
+<p>Dựa trên kiến thức và kinh nghiệm của tester. Bổ sung cho black-box và white-box — phát hiện lỗi mà các kỹ thuật formal có thể bỏ sót.</p>
+<ul><li><strong>4.4.1</strong> — Error Guessing</li>
+<div class="sub-detail"><p><strong>Error Guessing</strong>: Tester DỰ ĐOÁN lỗi dựa trên kinh nghiệm: lỗi thường gặp ở input, output, logic, tính toán, interface, dữ liệu. <strong>Fault Attacks</strong> = triển khai có hệ thống error guessing bằng danh sách lỗi tiềm năng.</p></div>
+<li><strong>4.4.2</strong> — Exploratory Testing</li>
+<div class="sub-detail"><p><strong>Exploratory Testing</strong>: Thiết kế, thực thi và đánh giá test ĐỒNG THỜI trong khi khám phá hệ thống. Thường dùng <strong>Session-Based Testing</strong>: test trong time-box có mục tiêu rõ ràng (test charter). Hiệu quả khi spec thiếu hoặc áp lực thời gian.</p></div>
+<li><strong>4.4.3</strong> — Checklist-Based Testing</li>
+<div class="sub-detail"><p><strong>Checklist-Based Testing</strong>: Test theo danh sách kiểm tra. Checklist cần được cập nhật thường xuyên dựa trên defect analysis. Không nên quá dài. Ưu điểm: có hướng dẫn và nhất quán. Hạn chế: kém repeatability hơn test cases chi tiết.</p></div>
+</ul></div><div class="card"><h3>4.5 — Tiếp cận dựa Cộng tác</h3>
+<p>Các phương pháp dựa cộng tác tập trung vào TRÁNH lỗi (defect avoidance) thay vì chỉ tìm lỗi, thông qua giao tiếp giữa business, dev và tester.</p>
+<ul><li><strong>4.5.1</strong> — Viết User Story cộng tác</li>
+<div class="sub-detail"><p><strong>User Story</strong> gồm 3C: <strong>Card</strong> (mô tả), <strong>Conversation</strong> (thảo luận), <strong>Confirmation</strong> (acceptance criteria). Format: "As a [role], I want [goal], so that [value]". User Story tốt cần INVEST: Independent, Negotiable, Valuable, Estimable, Small, Testable.</p></div>
+<li><strong>4.5.2</strong> — Acceptance Criteria</li>
+<div class="sub-detail"><p><strong>Acceptance Criteria</strong> = điều kiện để user story được chấp nhận. 2 format phổ biến:<br/>• <strong>Scenario-oriented</strong>: Given/When/Then (BDD)<br/>• <strong>Rule-oriented</strong>: Danh sách điều kiện dạng bullet hoặc bảng</p></div>
+<li><strong>4.5.3</strong> — ATDD</li>
+<div class="sub-detail"><p><strong>ATDD</strong>: Cả team (customer, dev, tester) viết test case từ acceptance criteria TRƯỚC KHI code. Thứ tự: Specification Workshop → Tạo test cases → Implement → Automate. Test đầu tiên là positive, sau đó negative, rồi non-functional.</p></div>
+</ul></div></div><div class="section-group" id="sec-Ch5"><h2><span class="badge">Ch5</span> Quản lý Hoạt động Test <small>(Managing Test Activities — 335 phút)</small></h2><div class="card"><h3>5.1 — Lập kế hoạch Test</h3>
+<p>Test Planning là hoạt động xác định mục tiêu test, chọn approach phù hợp, và lập kế hoạch chi tiết.</p>
+<ul><li><strong>5.1.1</strong> — Mục đích & Nội dung Test Plan</li>
+<div class="sub-detail"><p><strong>Test Plan</strong> bao gồm: ngữ cảnh test (scope, objectives, test basis), giả định & ràng buộc, stakeholders, hình thức giao tiếp, risk register, test approach (levels, types, techniques, entry/exit criteria), ngân sách và lịch trình. Test Plan giúp team suy nghĩ kỹ về chiến lược trước khi bắt tay vào test.</p></div>
+<li><strong>5.1.2</strong> — Đóng góp vào Iteration/Release Planning</li>
+<div class="sub-detail"><p>Trong Agile, Tester đóng góp vào 2 loại planning:</p>
+<table><tr><th>Release Planning</th><th>Iteration Planning</th></tr>
+<tr><td>Nhìn xa: toàn bộ release</td><td>Nhìn gần: 1 sprint/iteration</td></tr>
+<tr><td>Viết testable user stories, ước lượng test effort, lập test approach</td><td>Phân tích rủi ro chi tiết, chia task test, xác định functional & non-functional aspects</td></tr></table></div>
+<li><strong>5.1.3</strong> — Entry Criteria & Exit Criteria</li>
+<div class="sub-detail"><p><strong>Entry Criteria</strong> = điều kiện BẮT ĐẦU test: có đủ resource, testware, test object đủ chất lượng cơ bản (smoke test pass).<br/>
+<strong>Exit Criteria</strong> = điều kiện KẾT THÚC test: đạt coverage mục tiêu, số defect chấp nhận được, kế hoạch đã hoàn thành.</p>
+<p>Trong Agile: Entry = <strong>Definition of Ready</strong>. Exit = <strong>Definition of Done</strong>.<br/>
+⚠️ Hết thời gian/ngân sách cũng có thể là exit criteria hợp lệ — nếu stakeholders chấp nhận rủi ro.</p></div>
+<li><strong>5.1.4</strong> — Kỹ thuật Ước lượng</li>
+<div class="sub-detail"><p>4 kỹ thuật ước lượng công sức test:</p>
+<table><tr><th>Kỹ thuật</th><th>Loại</th><th>Cách làm</th></tr>
+<tr><td><strong>Ratio-based</strong></td><td>Metrics</td><td>Dùng tỷ lệ từ dự án trước. VD: dev:test = 3:2 → 600 dev-days → 400 test-days</td></tr>
+<tr><td><strong>Extrapolation</strong></td><td>Metrics</td><td>Đo sớm trong dự án hiện tại → ngoại suy cho phần còn lại</td></tr>
+<tr><td><strong>Wideband Delphi</strong></td><td>Expert</td><td>Nhiều expert ước lượng độc lập → thảo luận → lặp lại cho đến khi đồng thuận. Planning Poker là biến thể Agile</td></tr>
+<tr><td><strong>Three-point</strong></td><td>Expert</td><td>E = (a + 4m + b) / 6 với a=lạc quan, m=khả năng nhất, b=bi quan. Sai số SD = (b-a)/6</td></tr></table></div>
+<li><strong>5.1.5</strong> — Ưu tiên hóa Test Case</li>
+<div class="sub-detail"><p>3 chiến lược ưu tiên test case:</p>
+<ul>
+<li>🎯 <strong>Risk-based</strong>: Test rủi ro cao nhất trước</li>
+<li>📏 <strong>Coverage-based</strong>: Test đạt coverage cao nhất trước</li>
+<li>📋 <strong>Requirements-based</strong>: Test requirement quan trọng nhất trước</li>
+</ul>
+<p>⚠️ Cần xét dependency giữa test cases: test có priority thấp nhưng là prerequisite phải chạy trước.</p></div>
+<li><strong>5.1.6</strong> — Test Pyramid</li>
+<div class="sub-detail"><p><strong>Test Pyramid</strong> (Mike Cohn):</p>
+<div class='callout info'><h4>🔺 Kim tự tháp</h4><p>
+<strong>Đỉnh (ít, chậm)</strong>: UI/E2E Tests — test end-to-end, phức tạp, chạy chậm<br/>
+<strong>Giữa</strong>: Integration/Service Tests — test tương tác giữa components<br/>
+<strong>Đáy (nhiều, nhanh)</strong>: Unit/Component Tests — test nhỏ, cô lập, chạy nhanh<br/><br/>
+→ Nên có NHIỀU unit tests ở đáy và ÍT E2E tests ở đỉnh để tối ưu tốc độ feedback.
+</p></div></div>
+<li><strong>5.1.7</strong> — Testing Quadrants</li>
+<div class="sub-detail"><p><strong>Testing Quadrants</strong> (Brian Marick) — 4 góc phần tư:</p>
+<table><tr><th></th><th>Support the Team (Hỗ trợ)</th><th>Critique the Product (Phê bình)</th></tr>
+<tr><td><strong>Business-facing</strong></td><td>Q2: Functional tests, examples, API tests, user story tests</td><td>Q3: Exploratory, usability, UAT (thường manual)</td></tr>
+<tr><td><strong>Technology-facing</strong></td><td>Q1: Component tests, component integration tests (automated, CI)</td><td>Q4: Smoke tests, performance, security (thường automated)</td></tr></table></div>
+</ul></div><div class="card"><h3>5.2 — Quản lý Rủi ro</h3>
+<p>Quản lý rủi ro giúp tăng khả năng đạt mục tiêu, cải thiện chất lượng sản phẩm. Gồm 2 hoạt động chính: Risk Analysis và Risk Control.</p>
+<ul><li><strong>5.2.1</strong> — Định nghĩa & Thuộc tính Rủi ro</li>
+<div class="sub-detail"><p><strong>Risk Level = Likelihood × Impact</strong>.<br/>Likelihood = xác suất xảy ra (0 < p < 1). Impact = mức ảnh hưởng nếu xảy ra. Risk level càng cao → cần xử lý càng sớm.</p></div>
+<li><strong>5.2.2</strong> — Project Risk vs Product Risk</li>
+<div class="sub-detail"><p><strong>Project Risk</strong>: Liên quan quản lý dự án — trễ deadline, thiếu nhân sự, thiếu kỹ năng, ngân sách bị cắt, nhà cung cấp thất bại.<br/>
+<strong>Product Risk</strong>: Liên quan chất lượng sản phẩm — lỗi chức năng, tính toán sai, bảo mật kém, hiệu năng chậm, UX tệ. Hậu quả: mất khách hàng, mất doanh thu, phạt pháp lý, thậm chí gây thương tích.</p></div>
+<li><strong>5.2.3</strong> — Phân tích Rủi ro Sản phẩm</li>
+<div class="sub-detail"><p><strong>Product Risk Analysis</strong> = Risk Identification + Risk Assessment. Kết quả ảnh hưởng: test scope, test levels, test types, test techniques, coverage, effort estimation, và ưu tiên test.</p></div>
+<li><strong>5.2.4</strong> — Kiểm soát Rủi ro Sản phẩm</li>
+<div class="sub-detail"><p><strong>Product Risk Control</strong> = Risk Mitigation + Risk Monitoring. Các cách giảm thiểu rủi ro bằng testing: chọn tester phù hợp, áp dụng mức độ independence phù hợp, review & static analysis, áp dụng test techniques & coverage phù hợp, dynamic testing + regression testing.</p></div>
+</ul></div><div class="card"><h3>5.3 — Giám sát, Kiểm soát & Hoàn tất</h3>
+<p>Monitoring: thu thập thông tin tiến độ. Control: điều chỉnh hoạt động test. Completion: tổng kết khi hoàn thành.</p>
+<ul><li><strong>5.3.1</strong> — Chỉ số trong Kiểm thử</li>
+<div class="sub-detail"><p>Các loại metrics trong testing: project progress, test progress (test cases passed/failed/blocked), product quality (availability, response time), defect (số lượng, mật độ, detection %), risk (residual risk level), coverage (requirements/code), cost.</p></div>
+<li><strong>5.3.2</strong> — Báo cáo Kiểm thử</li>
+<div class="sub-detail"><p><strong>Test Progress Report</strong>: Báo cáo thường xuyên (daily/weekly) gồm: testing period, progress vs plan, impediments, metrics, risks, plan tiếp theo.<br/>
+<strong>Test Completion Report</strong>: Báo cáo tổng kết gồm: test summary, đánh giá chất lượng, deviations từ plan, impediments, metrics, unmitigated risks, lessons learned.</p></div>
+<li><strong>5.3.3</strong> — Truyền thông Trạng thái</li>
+<div class="sub-detail"><p>Các kênh truyền thông trạng thái test: giao tiếp trực tiếp, dashboards (CI/CD, burn-down charts), email/chat, tài liệu online, formal test reports. Điều chỉnh kênh truyền thông theo đối tượng nhận.</p></div>
+</ul></div><div class="card"><h3>5.4 — Quản lý Cấu hình</h3>
+<p><strong>Configuration Management (CM)</strong> = quản lý cấu hình testware: test plans, test cases, test scripts, test results... CM đảm bảo truy vết, kiểm soát phiên bản, và khả năng quay lại baseline trước đó để tái tạo kết quả test.</p>
+</div><div class="card"><h3>5.5 — Quản lý Khiếm khuyết</h3>
+<p><strong>Defect Report</strong> bao gồm: Unique ID, Title, Date/Author, Test object & environment, Context (test case, technique), Steps to reproduce, Expected vs Actual results, Severity (mức nghiêm trọng), Priority (mức ưu tiên sửa), Status (open/deferred/duplicate/fixed/closed/rejected), References.</p>
+<div class='callout warning'><h4>⚠️ Severity vs Priority</h4><p>
+<strong>Severity</strong> = mức ẢNH HƯỞNG kỹ thuật (Critical/Major/Minor/Trivial)<br/>
+<strong>Priority</strong> = mức ƯU TIÊN sửa theo business (Urgent/High/Medium/Low)<br/>
+Ví dụ: Logo sai → Severity thấp nhưng Priority có thể cao (ảnh hưởng thương hiệu)
+</p></div>
+</div></div><div class="section-group" id="sec-Ch6"><h2><span class="badge">Ch6</span> Công cụ Kiểm thử <small>(Test Tools — 20 phút)</small></h2><div class="card"><h3>6.1 — Hỗ trợ Công cụ cho Kiểm thử</h3>
+<p>Công cụ hỗ trợ nhiều hoạt động test:</p>
+<ul>
+<li>📋 <strong>Test Management</strong>: Jira, TestRail, Azure DevOps</li>
+<li>🔍 <strong>Static Testing</strong>: SonarQube, ESLint, FindBugs</li>
+<li>✏️ <strong>Test Design</strong>: tools sinh test cases, test data</li>
+<li>🤖 <strong>Test Execution</strong>: Selenium, Playwright, Cypress</li>
+<li>⚡ <strong>Non-functional</strong>: JMeter, k6 (performance), OWASP ZAP (security)</li>
+<li>🔧 <strong>DevOps</strong>: Jenkins, GitHub Actions, GitLab CI</li>
+<li>💬 <strong>Collaboration</strong>: Slack, Teams, Confluence</li>
+</ul>
+</div><div class="card"><h3>6.2 — Lợi ích & Rủi ro của Tự động hóa</h3>
+<p><strong>Lợi ích tự động hóa test</strong>: Tiết kiệm thời gian (regression), nhất quán hơn, đo lường khách quan (coverage), feedback nhanh hơn, giải phóng tester cho test sáng tạo hơn.</p>
+<p><strong>Rủi ro</strong>: Kỳ vọng không thực tế, ước lượng sai chi phí/effort, dùng tool không phù hợp, quá phụ thuộc tool (bỏ qua critical thinking), vendor dependency, tool không tương thích platform, không tuân thủ quy định.</p>
+<div class='callout info'><h4>💡 Lời khuyên</h4><p>Tool chỉ là phương tiện, KHÔNG đảm bảo thành công. Cần đầu tư vào: lựa chọn tool phù hợp, đào tạo team, xây dựng framework bảo trì được, và duy trì kỹ năng manual testing.</p></div>
+</div></div>
+
+<!-- GLOSSARY -->
+<div class="section-group" id="glossary">
+<h2>📖 Bảng Thuật Ngữ (Glossary) — Giải thích Tiếng Việt</h2>
+<p style="color:var(--text2);margin-bottom:15px;">Tất cả thuật ngữ quan trọng trong ISTQB CTFL, giải thích dễ hiểu bằng Tiếng Việt.</p>
+<table><thead><tr><th>Thuật ngữ</th><th>Giải thích bằng Tiếng Việt</th></tr></thead><tbody><tr><td><strong>Testing (Kiểm thử)</strong></td><td>Tập hợp các hoạt động nhằm phát hiện khiếm khuyết và đánh giá chất lượng phần mềm</td></tr><tr><td><strong>Defect (Khiếm khuyết/Bug)</strong></td><td>Lỗi trong mã nguồn hoặc tài liệu, có thể gây ra sự cố khi thực thi</td></tr><tr><td><strong>Error (Lỗi con người)</strong></td><td>Sai sót do con người tạo ra trong quá trình phát triển</td></tr><tr><td><strong>Failure (Sự cố)</strong></td><td>Hệ thống hoạt động sai so với yêu cầu, do khiếm khuyết gây ra</td></tr><tr><td><strong>Root Cause (Nguyên nhân gốc)</strong></td><td>Lý do cơ bản dẫn đến lỗi, được xác định qua phân tích nguyên nhân gốc</td></tr><tr><td><strong>Verification (Xác minh)</strong></td><td>Kiểm tra xem sản phẩm có đáp ứng đúng yêu cầu đặc tả không</td></tr><tr><td><strong>Validation (Xác nhận)</strong></td><td>Kiểm tra xem sản phẩm có đáp ứng nhu cầu thực tế của người dùng không</td></tr><tr><td><strong>Test Basis (Cơ sở kiểm thử)</strong></td><td>Tài liệu gốc dùng để xây dựng test case: yêu cầu, user story, thiết kế...</td></tr><tr><td><strong>Test Object (Đối tượng kiểm thử)</strong></td><td>Thành phần hoặc hệ thống đang được kiểm thử</td></tr><tr><td><strong>Testware (Sản phẩm kiểm thử)</strong></td><td>Tất cả sản phẩm đầu ra từ hoạt động kiểm thử: test plan, test case, script...</td></tr><tr><td><strong>Coverage (Độ phủ)</strong></td><td>Tỷ lệ phần trăm các mục tiêu kiểm thử đã được thực thi</td></tr><tr><td><strong>Traceability (Truy vết)</strong></td><td>Khả năng liên kết ngược từ test case về yêu cầu gốc</td></tr><tr><td><strong>SDLC</strong></td><td>Software Development Lifecycle — Vòng đời phát triển phần mềm</td></tr><tr><td><strong>Shift Left</strong></td><td>Chiến lược đẩy kiểm thử sớm hơn trong SDLC để phát hiện lỗi sớm, giảm chi phí</td></tr><tr><td><strong>TDD</strong></td><td>Test-Driven Development — Viết test trước, rồi viết code để pass test</td></tr><tr><td><strong>ATDD</strong></td><td>Acceptance Test-Driven Development — Viết acceptance test từ acceptance criteria trước khi code</td></tr><tr><td><strong>BDD</strong></td><td>Behavior-Driven Development — Mô tả hành vi mong đợi bằng ngôn ngữ tự nhiên (Given/When/Then)</td></tr><tr><td><strong>DevOps</strong></td><td>Phương pháp kết hợp Development + Operations, thúc đẩy CI/CD và tự động hóa</td></tr><tr><td><strong>CI/CD</strong></td><td>Continuous Integration / Continuous Delivery — Tích hợp và phân phối liên tục</td></tr><tr><td><strong>EP (Equivalence Partitioning)</strong></td><td>Kỹ thuật chia dữ liệu thành các phân vùng tương đương, chỉ cần test 1 giá trị đại diện</td></tr><tr><td><strong>BVA (Boundary Value Analysis)</strong></td><td>Kỹ thuật test các giá trị biên của phân vùng, nơi lỗi thường xuất hiện</td></tr><tr><td><strong>Decision Table</strong></td><td>Bảng quyết định — liệt kê tổ hợp điều kiện và kết quả tương ứng</td></tr><tr><td><strong>State Transition Testing</strong></td><td>Kiểm thử chuyển đổi trạng thái — test các trạng thái hợp lệ và không hợp lệ</td></tr><tr><td><strong>Statement Coverage</strong></td><td>Độ phủ câu lệnh — tỷ lệ câu lệnh đã được thực thi ít nhất 1 lần</td></tr><tr><td><strong>Branch Coverage</strong></td><td>Độ phủ nhánh — tỷ lệ nhánh (true/false) đã được thực thi. Mạnh hơn Statement Coverage</td></tr><tr><td><strong>Risk Level (Mức rủi ro)</strong></td><td>= Khả năng xảy ra (Likelihood) × Mức ảnh hưởng (Impact)</td></tr><tr><td><strong>Test Pyramid</strong></td><td>Mô hình kim tự tháp: nhiều unit test ở đáy, ít E2E test ở đỉnh</td></tr><tr><td><strong>Testing Quadrants</strong></td><td>4 góc phần tư phân loại test theo Business/Technology và Support/Critique</td></tr><tr><td><strong>Regression Testing</strong></td><td>Kiểm thử hồi quy — đảm bảo thay đổi không gây lỗi mới</td></tr><tr><td><strong>Confirmation Testing</strong></td><td>Kiểm thử xác nhận — đảm bảo lỗi đã được sửa đúng</td></tr><tr><td><strong>Review (Rà soát)</strong></td><td>Kiểm tra tĩnh bằng cách đọc và phân tích tài liệu/code mà không cần chạy</td></tr><tr><td><strong>Inspection (Thanh tra)</strong></td><td>Loại review chính thức nhất, có quy trình chặt chẽ, mục tiêu tìm tối đa lỗi</td></tr><tr><td><strong>Walkthrough</strong></td><td>Review do tác giả dẫn dắt, mục tiêu đa dạng: đào tạo, đánh giá, tìm lỗi</td></tr><tr><td><strong>Defect Report</strong></td><td>Báo cáo khiếm khuyết: gồm ID, mô tả, bước tái hiện, mức nghiêm trọng, ưu tiên, trạng thái</td></tr><tr><td><strong>Entry/Exit Criteria</strong></td><td>Tiêu chí bắt đầu/kết thúc một hoạt động kiểm thử</td></tr><tr><td><strong>Configuration Management</strong></td><td>Quản lý cấu hình — kiểm soát phiên bản testware và test object</td></tr></tbody></table>
+</div>
+
+<!-- CORE WORKFLOWS -->
+<div class="section-group" id="workflows">
+<h2>🔄 Luồng Nghiệp Vụ Cốt Lõi</h2>
+
+<div class="diagram-card">
+<h3>Luồng 1: Quy trình Kiểm thử Tổng thể (Test Process)</h3>
+<p>7 nhóm hoạt động chính trong quy trình kiểm thử. Lưu ý: các hoạt động thường chạy song song hoặc lặp lại, không nhất thiết tuần tự.</p>
+<pre class="mermaid">flowchart LR
+    A[Test Planning] --> B[Test Monitoring<br/>& Control]
+    B --> C[Test Analysis<br/>WHAT to test?]
+    C --> D[Test Design<br/>HOW to test?]
+    D --> E[Test Implementation<br/>Chuẩn bị testware]
+    E --> F[Test Execution<br/>Chạy test]
+    F --> G[Test Completion<br/>Tổng kết]
+    B -.->|feedback loop| A
+    F -.->|defects| B
+    style A fill:#1a1a2e,stroke:#e94560,color:#fff
+    style C fill:#16213e,stroke:#53a8b6,color:#fff
+    style D fill:#16213e,stroke:#53a8b6,color:#fff
+    style F fill:#1a1a2e,stroke:#e94560,color:#fff
+    style G fill:#0f3460,stroke:#e94560,color:#fff</pre>
+<div class="callout warning"><h4>⚠️ Lưu ý quan trọng</h4><p>Test Monitoring & Control chạy XUYÊN SUỐT toàn bộ quy trình, không phải chỉ ở một bước. Khi phát hiện sai lệch, có thể quay lại điều chỉnh Test Plan.</p></div>
+</div>
+
+<div class="diagram-card">
+<h3>Luồng 2: 5 Cấp độ Kiểm thử (Test Levels)</h3>
+<p>Từ đơn vị nhỏ nhất (Component) đến hệ thống hoàn chỉnh (Acceptance). Mỗi cấp có mục tiêu, đối tượng và trách nhiệm riêng.</p>
+<pre class="mermaid">sequenceDiagram
+    participant CT as Component Test<br/>(Unit Test)
+    participant CIT as Component<br/>Integration Test
+    participant ST as System Test
+    participant SIT as System<br/>Integration Test
+    participant AT as Acceptance Test
+    CT->>CIT: Interfaces giữa components
+    CIT->>ST: Hệ thống hoàn chỉnh
+    ST->>SIT: Tích hợp hệ thống ngoài
+    SIT->>AT: Validation với người dùng</pre>
+<div class="callout info"><h4>💡 Giải thích</h4><p><strong>Component Test</strong>: Dev tự test từng hàm/class. <strong>Component Integration</strong>: Test giao tiếp giữa các component. <strong>System Test</strong>: Test toàn hệ thống (chức năng + phi chức năng). <strong>System Integration</strong>: Test kết nối với hệ thống bên ngoài. <strong>Acceptance Test</strong>: Người dùng xác nhận hệ thống đáp ứng nhu cầu.</p></div>
+</div>
+
+<div class="diagram-card">
+<h3>Luồng 3: Quy trình Review (Static Testing)</h3>
+<p>Review là hình thức kiểm thử tĩnh quan trọng. 5 bước từ lập kế hoạch đến sửa lỗi và báo cáo.</p>
+<pre class="mermaid">flowchart LR
+    P[Planning<br/>Xác định phạm vi] --> I[Initiation<br/>Chuẩn bị reviewer]
+    I --> IR[Individual Review<br/>Mỗi người tự review]
+    IR --> CA[Communication<br/>& Analysis<br/>Thảo luận anomaly]
+    CA --> FR[Fixing & Reporting<br/>Sửa lỗi, báo cáo]
+    style P fill:#16213e,stroke:#53a8b6,color:#fff
+    style IR fill:#1a1a2e,stroke:#e94560,color:#fff
+    style CA fill:#0f3460,stroke:#53a8b6,color:#fff
+    style FR fill:#16213e,stroke:#e94560,color:#fff</pre>
+<div class="callout info"><h4>💡 4 loại Review</h4><p><strong>Informal Review</strong>: Không quy trình chính thức, mục tiêu chính là tìm anomaly. <strong>Walkthrough</strong>: Tác giả dẫn dắt, đa mục tiêu. <strong>Technical Review</strong>: Chuyên gia kỹ thuật thực hiện, có moderator. <strong>Inspection</strong>: Chính thức nhất, quy trình đầy đủ, mục tiêu tìm tối đa lỗi.</p></div>
+</div>
+
+<div class="diagram-card">
+<h3>Luồng 4: Quản lý Rủi ro trong Kiểm thử</h3>
+<p>Risk-based Testing: Ưu tiên test dựa trên phân tích rủi ro sản phẩm. Risk Level = Likelihood × Impact.</p>
+<pre class="mermaid">flowchart TB
+    RI[Risk Identification<br/>Xác định rủi ro] --> RA[Risk Assessment<br/>Đánh giá: Likelihood × Impact]
+    RA --> RM[Risk Mitigation<br/>Giảm thiểu qua testing]
+    RM --> RMon[Risk Monitoring<br/>Theo dõi hiệu quả]
+    RMon -.->|feedback| RA
+    subgraph Analysis [Phân tích Rủi ro]
+        RI
+        RA
+    end
+    subgraph Control [Kiểm soát Rủi ro]
+        RM
+        RMon
+    end
+    style RI fill:#16213e,stroke:#53a8b6,color:#fff
+    style RA fill:#16213e,stroke:#e94560,color:#fff
+    style RM fill:#0f3460,stroke:#53a8b6,color:#fff
+    style RMon fill:#0f3460,stroke:#e94560,color:#fff</pre>
+<div class="callout warning"><h4>⚠️ Phân biệt 2 loại rủi ro</h4><p><strong>Project Risk</strong>: Liên quan quản lý dự án (thiếu người, trễ deadline, ngân sách...). <strong>Product Risk</strong>: Liên quan chất lượng sản phẩm (lỗi chức năng, bảo mật, hiệu năng...). Testing chủ yếu giảm thiểu Product Risk.</p></div>
+</div>
+</div>
+
+<!-- TECHNIQUES MATRIX -->
+<div class="section-group" id="matrix">
+<h2>📊 Ma Trận Kỹ Thuật Kiểm Thử</h2>
+<p style="color:var(--text2);margin-bottom:15px;">Tổng hợp tất cả kỹ thuật kiểm thử trong CTFL, phân loại theo nhóm và mức độ nhận thức (K-level) trong kỳ thi.</p>
+<table><thead><tr><th>Kỹ thuật</th><th>Nhóm</th><th>Mức K</th><th>Mô tả ngắn</th></tr></thead><tbody><tr><td>Equivalence Partitioning</td><td><span class="tag tag-Hộpđen">Hộp đen</span></td><td>K3</td><td>Chia dữ liệu thành phân vùng, test 1 giá trị đại diện mỗi phân vùng</td></tr><tr><td>Boundary Value Analysis</td><td><span class="tag tag-Hộpđen">Hộp đen</span></td><td>K3</td><td>Test giá trị biên: 2-value BVA hoặc 3-value BVA</td></tr><tr><td>Decision Table</td><td><span class="tag tag-Hộpđen">Hộp đen</span></td><td>K3</td><td>Bảng tổ hợp điều kiện → hành động, phát hiện logic thiếu/mâu thuẫn</td></tr><tr><td>State Transition</td><td><span class="tag tag-Hộpđen">Hộp đen</span></td><td>K3</td><td>Test chuyển đổi trạng thái hợp lệ và không hợp lệ</td></tr><tr><td>Statement Testing</td><td><span class="tag tag-Hộptrắng">Hộp trắng</span></td><td>K2</td><td>Đo tỷ lệ câu lệnh đã thực thi</td></tr><tr><td>Branch Testing</td><td><span class="tag tag-Hộptrắng">Hộp trắng</span></td><td>K2</td><td>Đo tỷ lệ nhánh (true/false) đã thực thi. Mạnh hơn Statement</td></tr><tr><td>Error Guessing</td><td><span class="tag tag-Kinhnghiệm">Kinh nghiệm</span></td><td>K2</td><td>Dự đoán lỗi dựa kinh nghiệm tester</td></tr><tr><td>Exploratory Testing</td><td><span class="tag tag-Kinhnghiệm">Kinh nghiệm</span></td><td>K2</td><td>Thiết kế + thực thi test đồng thời, sáng tạo</td></tr><tr><td>Checklist-Based</td><td><span class="tag tag-Kinhnghiệm">Kinh nghiệm</span></td><td>K2</td><td>Test theo danh sách kiểm tra có sẵn</td></tr><tr><td>ATDD</td><td><span class="tag tag-Cộngtác">Cộng tác</span></td><td>K3</td><td>Viết acceptance test trước, team cùng tham gia</td></tr></tbody></table>
+<div class="callout info"><h4>💡 Giải thích K-Level</h4><p><strong>K1 (Remember)</strong>: Chỉ cần nhớ/nhận biết. <strong>K2 (Understand)</strong>: Hiểu, giải thích, so sánh được. <strong>K3 (Apply)</strong>: Áp dụng được vào bài tập/tình huống cụ thể — đây là mức khó nhất trong kỳ thi CTFL.</p></div>
+</div>
+
+<footer>
+<p>📋 ISTQB CTFL v4.0.1 System Mapping — Phân tích bằng Tiếng Việt</p>
+<p>Sinh tự động bởi System Mapping Synthesizer Skill | Nguồn: ISTQB Foundation Level Syllabus v4.0.1 (2024-09-15)</p>
+</footer>
+</div>
+
+<script>mermaid.initialize({startOnLoad:true,theme:'dark',themeVariables:{primaryColor:'#16213e',primaryTextColor:'#e0e0e0',primaryBorderColor:'#e94560',lineColor:'#53a8b6',secondaryColor:'#0f3460',tertiaryColor:'#1a1a2e'}});</script>
+</body></html>

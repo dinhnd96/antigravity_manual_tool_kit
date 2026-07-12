@@ -1,0 +1,97 @@
+# -*- coding: utf-8 -*-
+
+US06_REFERENCE_MAP = {
+    # 🟢 Happy Path
+    "SC-01": 'Mục "Thêm mới Biểu phí" – *"Mã Biểu phí và Tên Biểu phí là các thông tin bắt buộc do người dùng khai báo và Mã Biểu phí không được trùng với các Mã biểu phí đã khai báo"*',
+    "SC-02": 'Mục "Thêm mới Biểu phí" – *"Khi tích chọn các SPDV, tích chọn tại cấp nào hệ thống sẽ tự động tích chọn thêm các SPDV cấp con và code phí trực thuộc"*',
+    "SC-03": 'Mục "Thêm mới Biểu phí" – *"Khi người dùng upload file excel, hệ thống sẽ tự động tích chọn các Code phí trong trong file tại trường Sản phẩm/Dịch vụ/Code phí"*',
+    "SC-04": 'Table 0, Bước 5.4 – *"HIển thị màn hình sửa Code phí và chỉ cho phéo sửa các thông tin sau: Điều kiện tính phí: Mô tả, Giá trị Quy tắc tính phí: Giá trị số tại công thức"*',
+    "SC-05": 'Mục "Thêm mới Biểu phí" – *"Màn hình Xem giống với màn hình Xem code phí tại chức năng Danh mục sản phẩm dịch vụ và Code phí"*',
+    "SC-05b": 'Mục "Thêm mới Biểu phí" – *"Người dùng được phép bỏ gắn Code phí ra khỏi Biểu phí bằng cách click vào button Xóa tại bản ghi Code phí đang gán với Biểu phí."*',
+    "SC-06": 'Mục "Thêm mới Biểu phí" – *"“Thêm mới” nếu người dùng không đồng thời thực hiện chỉnh sửa thông tin chi tiết các Code phí thuộc Biểu phí"*',
+    "SC-07": 'Mục "Thêm mới Biểu phí" – *"“Thêm mới – Sửa Code phí” nếu người dùng đồng thời thực hiện chỉnh sửa thông tin chi tiết Code phí thuộc Biểu phí"*',
+    "SC-08": 'Mục "Chỉnh sửa Biểu phí" – *"Nếu trạng thái Biểu phí = Chưa hiệu lực, hệ thống cho phép: Chỉnh sửa toàn bộ thông tin của Biểu phí trừ Mã Biểu phí."*',
+    "SC-09": 'Q&A US06-QA-01.6 – *"nếu trạng thái hoạt động của Biểu phí = Đang hiệu lực thì chỉ được sửa ngày hết hiệu lực của Biểu phí, không tác động đến Code phí."*',
+    "SC-10": 'Mục "Chỉnh sửa Biểu phí" – *"Nếu trạng thái Biểu phí = Hết hiệu lực, hệ thống cho phép chuyển đổi các code phí thuộc biểu phí sang 1 biểu phí mới có trạng thái = Đang hiệu lực"*',
+    "SC-11": 'Mục "Chỉnh sửa Biểu phí" – *"“Chỉnh sửa” nếu người dùng không đồng thời thực hiện chỉnh sửa thông tin chi tiết các Code phí thuộc Biểu phí"*',
+    "SC-19": 'Mục "Thêm mới Biểu phí" – *"Trường hợp người dùng tích chọn trước, upload file excel sau, hệ thống sẽ mặc định thay thế tất cả các code phí đã được chọn trước đó"*',
+    "SC-61": 'Mục "Chỉnh sửa Biểu phí" – *"Bản ghi Biểu phí chỉ hiển thị thông tin sau sửa trên Lưới Danh sách biểu phí [...] sau khi cấp duyệt cuối cùng phê duyệt"*',
+
+    # 🔴 Negative Path
+    "SC-12": 'Table 1, cột Bắt buộc – *"[Dấu ★ biểu thị trường bắt buộc bao gồm: Mã, Tên Biểu phí, Ngày ban hành, Ngày hiệu lực, Ngày hết hiệu lực, Số văn bản, Tên văn bản]"*',
+    "SC-13": 'Table 1, dòng "Mã" – *"Mã Biểu phí là duy nhất và không được trùng với các Mã Biểu phí đã khai báo thành công trước đó trong hệ thống"*',
+    "SC-14": 'Mục "Thêm mới Biểu phí" – *"Ngày ban hành: Ngày ban hành Biểu phí và phải <= Ngày hệ thống"*',
+    "SC-15": 'Mục "Thêm mới Biểu phí" – *"Ngày hiệu lực, Ngày hết hiệu lực [...] đều phải >= Ngày hệ thống"*',
+    "SC-16": 'Mục "Thêm mới Biểu phí" – *"Ngày hết hiệu lực >= Ngày hiệu lực"*',
+    "SC-17": 'Q&A US06-QA-01.8 – *"Không cho phép lưu Biểu phí khi không có ít nhất 1 Code phí. FE disable nút Xác nhận. -> Đồng ý với đề xuất"*',
+    "SC-18": 'QTC-07 Quy tắc chung Upload file – *"Chỉ cho phép tải lên các file có định dạng Excel (.xlsx). Hệ thống thực hiện kiểm tra và đưa ra thông báo lỗi nếu tải lên file sai định dạng"*',
+    "SC-20": 'Q&A US06-QA-02.2 – *"Validate URL bắt đầu bằng http:// hoặc https://. Giới hạn tối đa 500 ký tự. -> Đồng ý với đề xuất"*',
+    "SC-21": 'Mục "Chỉnh sửa Biểu phí" – *"Nếu có [bản ghi ở trạng thái Chờ duyệt], hệ thống chặn không cho phép chỉnh sửa"*',
+    "SC-22": 'Mục "Chỉnh sửa Biểu phí" – *"Nếu trạng thái Biểu phí = Đang hiệu lực [...] Ngày hết hiệu lực mới phải > Ngày hệ thống và > Ngày hiệu lực"*',
+    "SC-23": 'Mục "Chỉnh sửa Biểu phí" – *"Nếu trạng thái Biểu phí = Đang hiệu lực [...] Ngày hết hiệu lực mới phải > Ngày hệ thống và > Ngày hiệu lực"*',
+    "SC-24": 'Q&A US06-QA-01.5 – *"Không cho phép Thêm mới (Gắn thêm) từng Code phí lẻ. Nếu muốn thêm Code phí có thể sử dụng ứng năng upload file Excel tại US07"*',
+    "SC-25": 'QTC-15 Quy tắc chung nút Đóng – *"Khi người dùng nhấn Đóng, hệ thống đóng màn hình hiện tại và quay về màn hình Danh mục mà không hiển thị popup cảnh báo xác nhận"*',
+    "SC-26": 'QTC-11 Quy tắc chung FE-First Error Handling – *"Mọi lỗi nghiệp vụ phát sinh từ Backend (nếu vượt qua Frontend) phải được bắt và trả về thông báo lỗi thân thiện"*',
+    "SC-62": 'Mục "Chỉnh sửa Biểu phí" – *"Nếu trạng thái Biểu phí = Chưa hiệu lực, hệ thống cho phép: Chỉnh sửa toàn bộ thông tin của Biểu phí trừ Mã Biểu phí."*',
+    "SC-63": 'QTC-12 Quy tắc chung Maker-Checker – *"Khi Checker từ chối tác vụ, bản ghi sẽ được trả về trạng thái Từ chối duyệt và giữ nguyên dữ liệu gốc hiện hành tại màn hình Danh mục"*',
+    "SC-76": 'Table 1, dòng "Ngày hết hiệu lực" – *"Không chọn ngày quá khứ"*',
+    "SC-77": 'Q&A US06-QA-01.8 – *"Không cho phép lưu Biểu phí khi không có ít nhất 1 Code phí. FE disable nút Xác nhận."*',
+    "SC-80": 'QTC-15 Quy tắc chung nút Đóng – *"Khi người dùng nhấn Đóng, hệ thống đóng màn hình hiện tại và quay về màn hình Danh mục mà không hiển thị popup cảnh báo xác nhận"*',
+
+    # 🔵 Boundary Value
+    "SC-27": 'QTC-01.6 Text – *"Trường hợp không ghi rõ độ dài: Mã mặc định tối đa 50 ký tự"*',
+    "SC-28": 'QTC-01.6 Text – *"Trường hợp không ghi rõ độ dài: Mã mặc định tối đa 50 ký tự"*',
+    "SC-29": 'QTC-01.6 Text – *"Trường hợp không ghi rõ độ dài: Tên mặc định tối đa 50 ký tự"*',
+    "SC-30": 'Q&A US06-QA-02.2 – *"Validate URL bắt đầu bằng http:// hoặc https://. Giới hạn tối đa 500 ký tự. -> Đồng ý với đề xuất"*',
+    "SC-31": 'Q&A US06-QA-02.2 – *"Validate URL bắt đầu bằng http:// hoặc https://. Giới hạn tối đa 500 ký tự. -> Đồng ý với đề xuất"*',
+    "SC-32": 'Mục "Thêm mới Biểu phí" – *"Ngày hiệu lực, Ngày hết hiệu lực là 2 thông tin bắt buộc cần khai báo, đều phải >= Ngày hệ thống"*',
+    "SC-33": 'Mục "Thêm mới Biểu phí" – *"Ngày hết hiệu lực >= Ngày hiệu lực"*',
+    "SC-34": 'Mục "Thêm mới Biểu phí" – *"Ngày ban hành: Ngày ban hành Biểu phí và phải <= Ngày hệ thống"*',
+    "SC-35": 'Q&A US06-QA-01.8 – *"Không cho phép lưu Biểu phí khi không có ít nhất 1 Code phí. FE disable nút Xác nhận."*',
+    "SC-64": 'QTC-01.6 Text – *"Trường hợp không ghi rõ độ dài: Mã mặc định tối đa 50 ký tự"*',
+    "SC-65": 'QTC-01.6 Text – *"Trường hợp không ghi rõ độ dài: Tên mặc định tối đa 50 ký tự"*',
+    "SC-66": 'QTC-01.6 Text – *"Trường hợp không ghi rõ độ dài: Tên mặc định tối đa 50 ký tự"*',
+    "SC-67": 'QTC-01.6 Text – *"Trường hợp không ghi rõ độ dài: Tên mặc định tối đa 50 ký tự"*',
+    "SC-74": 'Mục "Chỉnh sửa Biểu phí" – *"Nếu trạng thái Biểu phí = Đang hiệu lực, hệ thống chỉ cho phép chỉnh sửa Ngày hiệu lực với ràng buộc: Ngày hết hiệu lực mới phải > Ngày hệ thống"*',
+    "SC-75": 'Mục "Chỉnh sửa Biểu phí" – *"Nếu trạng thái Biểu phí = Đang hiệu lực, hệ thống chỉ cho phép chỉnh sửa Ngày hiệu lực với ràng buộc: Ngày hết hiệu lực mới phải > [...] Ngày hiệu lực"*',
+
+    # 🟡 Field Validation / UI
+    "SC-36": 'Mục "Thêm mới Biểu phí" – *"Trạng thái hoạt động của Biểu phí khi hiển thị trên lưới Danh mục Biểu phí được xác định dựa trên Ngày hệ thống và Ngày hiệu lực, Ngày hết hiệu lực"*',
+    "SC-37": 'Table 1, dòng "Sản phẩm/ Dịch vụ/ Code phí" – *"Có Search bar để tìm kiếm nhanh và gần đúng theo Mã SPDV/Tên SPDV/Mã Code phí/Tên Code phí"*',
+    "SC-40": 'Table 1, cột Bắt buộc – *"[Ký hiệu ◎ biểu thị các trường chỉ hiển thị (Readonly) tại Lưới Thông tin chi tiết của Biểu phí bao gồm: Mã phí, Tên phí, SPDV, Loại tiền tệ, Đối tượng, Loại KH]"*',
+    "SC-41": 'QTC-11 Quy tắc chung FE-First Error Handling – *"Mọi dữ liệu đầu vào chứa các ký tự đặc biệt, mã độc hại (SQL Injection, XSS) phải bị chặn hoặc làm sạch trước khi xử lý"*',
+    "SC-42": 'Q&A US06-QA-01.6 – *"nếu trạng thái hoạt động của Biểu phí = Đang hiệu lực thì chỉ được sửa ngày hết hiệu lực của Biểu phí, không tác động đến Code phí."*',
+    "SC-43": 'QTC-14.1 Quy tắc chung No-Change Guard – *"Nếu người dùng không thực hiện thay đổi bất kỳ trường dữ liệu nào trên màn hình Chỉnh sửa, hệ thống sẽ disable nút Xác nhận"*',
+    "SC-68": 'Table 1, cột Bắt buộc – *"[Ký hiệu ★ thể hiện trường bắt buộc nhập trên giao diện. Trường Link iDoc ký hiệu － thể hiện trường không bắt buộc nhập]"*',
+    "SC-69": 'Table 1, dòng "Chọn tệp" và "Tải xuống" – *"Tải lên file danh sách các code phí được khai báo trong biểu phí. Tải xuống file danh sách các code phí thuộc biểu phí"*',
+    "SC-70": 'QTC-01.5 Quy tắc chung định dạng ngày – *"Tất cả các trường định dạng ngày tháng hiển thị trên giao diện người dùng phải tuân thủ định dạng dd/mm/yyyy"*',
+
+    # 🔵 Business Logic
+    "SC-38": 'Mục "Thêm mới Biểu phí" – *"Khi tích chọn các SPDV, tích chọn tại cấp nào hệ thống sẽ tự động tích chọn thêm các SPDV cấp con và code phí trực thuộc"*',
+    "SC-39": 'Mục "Thêm mới Biểu phí" – *"nếu không có SPDV nào đồng cấp được tích chọn cũng sẽ tự động bỏ tích các SPDV cấp cha liền trước"*',
+    "SC-44": 'Mục "Thêm mới Biểu phí" – *"Đang hiệu lực: Ngày hiệu lực <= Ngày hệ thống <= Ngày hết hiệu lực [...] hệ thống tự động xác định real time"*',
+    "SC-45": 'Mục "Thêm mới Biểu phí" – *"Hết hiệu lực: Ngày hệ thống > Ngày hết hiệu lực (Biểu phí đã hết thời gian áp dụng)"*',
+    "SC-46": 'Mục "Thêm mới Biểu phí" – *"Bản ghi Biểu phí chỉ hiển thị trên lưới Danh mục Biểu phí [...] sau khi cấp duyệt cuối cùng phê duyệt tác vụ"*',
+    "SC-47": 'QTC-12 Quy tắc chung Maker-Checker – *"Các tác vụ bị Checker từ chối phê duyệt sẽ hiển thị tại danh sách Tác vụ pending của tôi để Maker thực hiện hiệu chỉnh hoặc xóa bỏ"*',
+    "SC-49": 'Q&A US06-QA-01.1 – *"nếu có Code phí ở trạng thái Ngừng hoạt động nằm dưới SPDV Hoạt động → Code phí đó vẫn được phép chọn để sử dụng cho Biểu phí đang khai báo"*',
+    "SC-71": 'QTC-12 Quy tắc chung Maker-Checker – *"Maker được phép thực hiện Xóa đối với các tác vụ do mình tạo lập đang ở trạng thái Chờ duyệt hoặc bị Checker Từ chối duyệt"*',
+
+    # 🟢 Data Integrity
+    "SC-50": 'Q&A US06-QA-03.1 – *"1 Code phí có thể được gán cho nhiều biểu phí (trạng thái phê duyệt = đã duyệt), yêu cầu khoảng thời gian hiệu lực của các biểu phí không trùng nhau"*',
+    "SC-51": 'Q&A US06-QA-03.1 – *"1 Code phí có thể được gán cho nhiều biểu phí (trạng thái phê duyệt = đã duyệt), yêu cầu khoảng thời gian hiệu lực của các biểu phí không trùng nhau"*',
+    "SC-52": 'Mục "Thêm mới Biểu phí" – *"Người dùng được phép chỉnh sửa Code phí trong luồng thêm mới Biểu phí bằng cách click vào button Chỉnh sửa tại bản ghi Code phí đang gán với Biểu phí"*',
+    "SC-53": 'Mục "Thêm mới Biểu phí" – *"Trường hợp người dùng tích chọn trước, upload file excel sau, hệ thống sẽ mặc định thay thế tất cả các code phí đã được chọn trước đó"*',
+    "SC-54": 'Mục "Chỉnh sửa Biểu phí" – *"Bỏ gắn Code phí: Người dùng được phép bỏ gắn Code phí ra khỏi Biểu phí bằng cách click vào button Xóa tại bản ghi Code phí đang gán với Biểu phí"*',
+    "SC-78": 'Mục "Thêm mới Biểu phí" & "Chỉnh sửa Biểu phí" – *"Thông tin Code phí sau cập nhật chỉ hiển thị trên lưới Danh mục sản phẩm dịch vụ và code phí sau khi cấp duyệt cuối cùng phê duyệt"*',
+    "SC-79": 'QTC-08 Quy tắc chung Lịch sử tác động – *"Hệ thống phải lưu giữ đầy đủ vết thay đổi của các bản ghi bao gồm: Loại tác động, Nội dung thay đổi, Người cập nhật, Ngày cập nhật, Người phê duyệt"*',
+
+    # 🔵 NFR
+    "SC-55": 'QTC-12 Luồng Maker-Checker & Quy tắc NFR – *"Spam click nút Xác nhận khi Thêm mới Biểu phí → hệ thống chỉ xử lý 1 request"*',
+    "SC-56": 'QTC-12 Luồng Maker-Checker & Quy tắc NFR – *"Spam click nút Xác nhận khi Chỉnh sửa Biểu phí → hệ thống chỉ xử lý 1 request"*',
+    "SC-57": 'QTC-12 Luồng Maker-Checker & Quy tắc NFR – *"Spam click nút Xóa (bỏ gắn Code phí) tại Thông tin chi tiết → không xóa trùng/lỗi"*',
+    "SC-58": 'QTC-12 Luồng Maker-Checker & Quy tắc NFR – *"Spam click nút Phê duyệt tại Tác vụ chờ duyệt (Checker) → chỉ xử lý 1 lần"*',
+    "SC-59": 'QTC-12 Luồng Maker-Checker & Quy tắc NFR – *"Spam click nút Từ chối tại Tác vụ chờ duyệt (Checker) → chỉ xử lý 1 lần"*',
+    "SC-60": 'QTC-12 Luồng Maker-Checker & Quy tắc NFR – *"Spam click nút Xóa tại Tác vụ Pending (Maker) → chỉ xóa 1 lần"*',
+    "SC-72": 'QTC-10 Phân quyền dữ liệu – *"Biểu phí có Code phí Loại KH = KHCN/DNSN/CBNV hoặc Đối tượng thu phí = Merchant"*',
+    "SC-73": 'QTC-10 Phân quyền dữ liệu – *"Biểu phí có Code phí Loại KH = KHTC và Đối tượng thu phí = Khách hàng"*'
+}

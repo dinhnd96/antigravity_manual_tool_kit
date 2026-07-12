@@ -1,0 +1,103 @@
+# US35 Part B Merged - DATA Part 2 (HM1 tail + HM2 + HM3 + HM4)
+QA_DATA_2 = [
+    ("US35-QA-01.15",
+     'Bảng "Diễn giải lưu đồ", Bước 2 – *"Core T24 đọc Topic thu phí định kỳ và xử lý: Hạch toán thu phí, lưu ý tận thu (thu một phần phí nếu tài khoản không đủ số dư)"*',
+     'Nếu số dư = 0 → kết quả = "Thanh toán một phần" (0 đồng) hay "Chưa thanh toán"?',
+     'Nghiệp vụ',
+     'Đề xuất: Số dư = 0 → "Chưa thanh toán". 0 < số dư < phí → "Thanh toán một phần". Cần BA xác nhận.',
+     'AI'),
+
+    # === HM2: Giới hạn ===
+    ("US35-QA-02.1",
+     'Mục "Yêu cầu nghiệp vụ" – *"hệ thống ProfiX sẽ ghi danh sách vào Topic Kafka theo thứ tự ưu tiên. Core T24 sẽ đọc danh sách và thực hiện thu phí"*',
+     'Nếu Kafka bị down khi ProfiX ghi dữ liệu → xử lý thế nào? Có retry policy? Volume lớn (hàng triệu KH) có batch size limit?',
+     'Giới hạn',
+     'Đề xuất: Cần định nghĩa retry policy + batch size + trạng thái cuối khi Kafka fail.',
+     'BOTH'),
+
+    ("US35-QA-02.2",
+     'Bảng "Xử lý tính phí định kỳ", Bước 3.3 – *"hệ thống lấy Tỷ giá bán giao ngay Loại tiền phí tối thiểu/tối đa / với VND (T) trong dữ liệu tỷ giá mà ProfiX nhận được từ Core"*',
+     'Tỷ giá quy đổi min/max là của ngày T hay T-1? Tần suất đồng bộ? Nếu job 00:01 nhưng tỷ giá ngày T chưa có? Nếu không có tỷ giá cho loại tiền hiếm?',
+     'Giới hạn',
+     'Đề xuất: Xác định rõ nguồn/thời điểm tỷ giá + fallback khi không có. Cần BA xác nhận.',
+     'BOTH'),
+
+    ("US35-QA-02.3",
+     'Bảng "Xử lý tính phí định kỳ", Bước 6 – *"Code phí có VAT = \\"\\" (phí không có VAT): để trống VAT trong response"*',
+     'Nếu Code phí KHÔNG cấu hình trường VAT (null/undefined, khác chuỗi rỗng "") → xử lý giống "không có VAT" hay báo lỗi?',
+     'Giới hạn',
+     'Đề xuất: VAT = null → mặc định = không có VAT. Cần BA xác nhận.',
+     'AI'),
+
+    ("US35-QA-02.4",
+     'Bảng "Xử lý tính phí định kỳ" – *"Đầu ngày T, hệ thống xác định các job có lịch chạy trong ngày T để thực hiện các bước bên dưới theo từng job (Job A)"*',
+     'Job crash giữa chừng (OOM, network) → các khoản đã ghi Kafka bị duplicate khi retry? Có idempotency key không?',
+     'Giới hạn',
+     'Đề xuất: Cần idempotency key (mã khoản phí + ngày T) để tránh thu trùng khi retry. Cần BA/SA xác nhận.',
+     'BOTH'),
+
+    ("US35-QA-02.5",
+     'Bảng "Xử lý tính phí định kỳ", Bước 3.3 – *"Nếu code phí có khai báo Số tiền tối thiểu, Số tiền tối đa thì thực hiện..."*',
+     'Nếu Code phí chỉ khai báo 1 trong 2 (chỉ Min hoặc chỉ Max) → logic clamping xử lý thế nào?',
+     'Giới hạn',
+     'Đề xuất: Chỉ có Min → chỉ so Min. Chỉ có Max → chỉ so Max. Tương tự bước 5.3-5.4. Cần BA xác nhận.',
+     'AI'),
+
+    ("US35-QA-02.6",
+     'Bảng "Xử lý tính phí định kỳ", Bước 3.4 – *"Nếu Số tiền phí đã tính < Số tiền tối thiểu thì Số tiền phí cần thu = Số tiền tối thiểu"*',
+     'Nếu cấu hình Code phí có Số tiền tối thiểu > Số tiền tối đa (dữ liệu sai) → hệ thống phát hiện/xử lý thế nào tại runtime?',
+     'Giới hạn',
+     'Đề xuất: Validate Min <= Max tại thời điểm cài đặt Code phí (không phải runtime). Cần BA xác nhận.',
+     'VA'),
+
+    # === HM3: Toàn vẹn dữ liệu ===
+    ("US35-QA-03.1",
+     'Mục "Yêu cầu nghiệp vụ" – *"Trạng thái của tài khoản được phép trích thu phí (chỉ được phép trích thu từ các tài khoản có trạng thái: Hoạt động, Tạm ngừng hoạt động, Tạm khóa ghi có…)"*',
+     'Dấu "…" ám chỉ còn trạng thái nào? Danh sách đầy đủ? Tham số hệ thống nào quy định?',
+     'Toàn vẹn dữ liệu',
+     'Đề xuất: Liệt kê đầy đủ trạng thái TK được phép hoặc tham chiếu tham số hệ thống.',
+     'VA'),
+
+    ("US35-QA-03.2",
+     'Mục "Yêu cầu nghiệp vụ" – *"Dữ liệu lưu trữ trên các hệ thống nội bộ... được đồng bộ T-1 về ProfiX theo mô tả US33"*',
+     'Nếu trong khoảng T-1→T, TK bị đóng hoặc KH bị vô hiệu trên Core nhưng ProfiX chưa cập nhật → vẫn sinh phí cho TK/KH không hợp lệ. T24 xử lý thế nào?',
+     'Toàn vẹn dữ liệu',
+     'Đề xuất: T24 trả "Chưa thanh toán" + lý do TK không hợp lệ. ProfiX cập nhật trạng thái. Cần BA xác nhận.',
+     'AI'),
+
+    ("US35-QA-03.3",
+     'Bảng "Xử lý tính phí định kỳ", Bước 2 – *"Số tài khoản thay thế này chỉ được sử dụng để ghi thông tin phí định kỳ đúng hạn cần thu vào Topic, không áp dụng cho truy thu/tận thu nợ phí"*',
+     'Trong lịch sử thu phí, trường "TK thu phí" lưu TK mặc định hay TK thay thế thực tế? Nợ phí theo dõi trên TK nào?',
+     'Toàn vẹn dữ liệu',
+     'Đề xuất: Lưu cả 2 (TK mặc định + TK thực tế) cho kiểm toán. Nợ phí theo dõi trên TK mặc định. Cần BA xác nhận.',
+     'BOTH'),
+
+    ("US35-QA-03.4",
+     'Mục "Yêu cầu nghiệp vụ" – *"Thêm mới: Khoản phí định kỳ cần thu mới được sinh dữ liệu (chưa gửi yêu cầu thu phí đi)"* và *"Đang xử lý: đã ghi vào Topic [...]"*',
+     'Job chạy lại (retry/reschedule) → có risk sinh trùng khoản phí? Khoản ở "Đang xử lý" → Job chạy lại có bỏ qua?',
+     'Toàn vẹn dữ liệu',
+     'Đề xuất: Khi Job retry → check cùng Code phí + KH/TK/Thẻ + kỳ thu → bỏ qua, không sinh trùng. Cần BA xác nhận.',
+     'AI'),
+
+    ("US35-QA-03.5",
+     'Bảng "Xử lý tính phí định kỳ", Bước 4 – *"KH thuộc Danh sách KH áp dụng của CTƯĐ (nếu có) và KH chưa chạm ngưỡng ưu đãi đã thiết lập"*',
+     'Ngưỡng ƯĐ kiểm tra theo tiêu chí nào (số lần, tổng tiền, theo kỳ)? Đã chạm → CTƯĐ không vào danh sách D hay vào nhưng ƯĐ = 0? Race condition trong batch?',
+     'Toàn vẹn dữ liệu',
+     'Đề xuất: Làm rõ logic ngưỡng + kiểm tra snapshot đầu Job (không cập nhật giữa batch). Cần BA xác nhận.',
+     'BOTH'),
+
+    # === HM4: UI/UX ===
+    ("US35-QA-04.1",
+     'Mục "Giao diện" – *"N/A"* và Mục "Mô tả chi tiết các trường" – *"N/A"*',
+     'US35 backend thuần, không UI. Nhưng cần theo dõi kết quả: Lịch sử Job, danh sách khoản phí, kết quả thu. Hiển thị ở US nào?',
+     'UI-UX',
+     'Đề xuất: Tham chiếu rõ US quản lý kết quả (Lịch sử thu phí, Quản lý nợ phí) để QA biết phạm vi E2E.',
+     'BOTH'),
+
+    ("US35-QA-04.2",
+     'Mục "Lưu đồ" – *Flowchart vẽ 4 bước: (1) Sinh dữ liệu phí → (2) Hạch toán thu phí T24 → (3) Đọc message kết quả → (4) Update kết quả. Không có nhánh xử lý lỗi.*',
+     'Flowchart chỉ 4 bước high-level, không có nhánh lỗi (Kafka fail, T24 timeout, không tìm TK).',
+     'UI-UX',
+     'Đề xuất: Ghi nhận. Tester đọc bảng mô tả chi tiết, không dựa flowchart. Nếu có thể, bổ sung nhánh lỗi.',
+     'BOTH'),
+]

@@ -1,0 +1,567 @@
+"TC_ID","SC_Ref","Reference","Feature","Module","Title","Type","Priority","Precondition","Steps","Expected","Note","Status R1","Tester R1","Date R1"
+"US08-TC-001","SC-01","Mục ""Yêu cầu nghiệp vụ"" – ""hệ thống hiển thị màn hình Thêm mới Biểu phí với các thông tin được sao chép toàn bộ""","US08 – Sao chép Biểu phí","Khởi tạo sao chép","Sao chép biểu phí ở trạng thái 'Đang hiệu lực' — Hệ thống pre-fill đầy đủ dữ liệu trên form Thêm mới","Happy Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Tồn tại biểu phí 'BP-GOCSAO01' ở trạng thái 'Đang hiệu lực', có Code phí 'CP001', 'CP002' đã duyệt.","1. Truy cập Tham số >> Danh mục biểu phí >> Lưới danh sách biểu phí.
+2. Tại dòng biểu phí 'BP-GOCSAO01', nhấn nút 'Sao chép' tại cột Hành động.
+3. Quan sát màn hình Thêm mới Biểu phí hiển thị.","(i) Nghiệp vụ/Logic: Hệ thống mở màn hình Thêm mới Biểu phí với toàn bộ Thông tin chung (Mã = 'BP-GOCSAO01', Tên, Ngày hiệu lực, Ngày hết hiệu lực, Ghi chú) và Thông tin chi tiết (Code phí CP001, CP002) được sao chép nguyên giá trị từ biểu phí gốc.
+(ii) UI: Màn hình Thêm mới Biểu phí hiển thị với layout giống US06. Toàn bộ trường ở trạng thái Editable. Lưới Code phí hiển thị đầy đủ 2 dòng CP001, CP002.","","Fail","Thương",""
+"US08-TC-002","SC-02","BA xác nhận QA-01.2: 'được phép sao chép ở tất cả các trạng thái hoạt động bao gồm = Chưa hiệu lực'","US08 – Sao chép Biểu phí","Khởi tạo sao chép","Sao chép biểu phí ở trạng thái 'Chưa hiệu lực' — Dữ liệu pre-fill đầy đủ","Happy Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Tồn tại biểu phí 'BP-CHUAHL01' ở trạng thái 'Chưa hiệu lực' (Ngày hiệu lực trong tương lai).","1. Truy cập Tham số >> Danh mục biểu phí.
+2. Tại dòng biểu phí 'BP-CHUAHL01', nhấn nút 'Sao chép' tại cột Hành động.
+3. Quan sát màn hình Thêm mới Biểu phí.","(i) Nghiệp vụ/Logic: Hệ thống mở màn hình Thêm mới với toàn bộ dữ liệu pre-fill từ biểu phí gốc 'BP-CHUAHL01'.
+(ii) UI: Màn hình Thêm mới hiển thị đúng. Toàn bộ trường Editable. User có thể chỉnh sửa các trường cần thiết.","","Fail","",""
+"US08-TC-003","SC-03","BA xác nhận QA-01.2: 'được phép sao chép ở tất cả các trạng thái hoạt động bao gồm = Hết hiệu lực'","US08 – Sao chép Biểu phí","Khởi tạo sao chép","Sao chép biểu phí ở trạng thái 'Hết hiệu lực' — Dữ liệu pre-fill đầy đủ, user sửa ngày hiệu lực mới","Happy Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Tồn tại biểu phí 'BP-HETHL01' ở trạng thái 'Hết hiệu lực' (Ngày hết hiệu lực < ngày hiện tại).","1. Truy cập Tham số >> Danh mục biểu phí.
+2. Tại dòng biểu phí 'BP-HETHL01', nhấn nút 'Sao chép' tại cột Hành động.
+3. Quan sát màn hình Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.","(i) Nghiệp vụ/Logic: Hệ thống mở màn hình Thêm mới với toàn bộ dữ liệu pre-fill từ biểu phí gốc 'BP-HETHL01', kể cả Ngày hiệu lực/Hết hiệu lực quá khứ.
+(ii) UI: Màn hình Thêm mới hiển thị đúng. Toàn bộ trường Editable. User có thể sửa Ngày hiệu lực mới để biểu phí clone có hiệu lực trong tương lai.","","Fail","",""
+"US08-TC-004","SC-04","BA xác nhận QA-03.2: 'sao chép toàn bộ Code phí thuộc Biểu phí mà không phụ thuộc vào trạng thái của Code phí'","US08 – Sao chép Biểu phí","Khởi tạo sao chép","Sao chép biểu phí có danh sách nhiều Code phí — Toàn bộ Code phí được load lên lưới chi tiết","Happy Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Tồn tại biểu phí 'BP-NHIEUCF' có 5 Code phí: CP101~CP105, bao gồm cả Code phí ở các trạng thái khác nhau.","1. Truy cập Tham số >> Danh mục biểu phí.
+2. Tại dòng biểu phí 'BP-NHIEUCF', nhấn nút 'Sao chép' tại cột Hành động.
+3. Quan sát lưới Thông tin chi tiết (Code phí) trên form Thêm mới.","(i) Nghiệp vụ/Logic: Hệ thống sao chép toàn bộ 5 Code phí (CP101~CP105) bất kể trạng thái. Lưới chi tiết hiển thị đầy đủ 5 dòng.
+(ii) UI: Lưới chi tiết hiển thị 5 Code phí. User có thể Thêm/Sửa/Xóa các dòng Code phí trước khi nhấn 'Xác nhận'.","","Fail","",""
+"US08-TC-005","SC-05","Mục ""Yêu cầu nghiệp vụ"" – ""bản ghi Biểu phí sẽ ở trạng thái chờ duyệt với hành động là Thêm mới""","US08 – Sao chép Biểu phí","Xác nhận / Đóng","Xác nhận bản clone thành công — Bản ghi ở trạng thái 'Chờ duyệt', hành động = 'Thêm mới'","Happy Path","Critical","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc 'BP-GOCSAO01' → Form Thêm mới hiển thị với dữ liệu pre-fill.","1. Trên form Thêm mới (clone), sửa Mã biểu phí = 'BP-CLONE01' (unique).
+2. Giữ nguyên hoặc chỉnh sửa các trường khác theo nhu cầu.
+3. Nhấn nút 'Xác nhận'.
+4. Quan sát kết quả.","--- TRƯỚC KHI DUYỆT (MAKER) ---
+(i) Nghiệp vụ/Logic: Hệ thống validate theo US06 thành công. Bản ghi 'BP-CLONE01' được lưu ở trạng thái 'Chờ duyệt', hành động = 'Thêm mới'.
+(ii) UI: Toast 'Thêm mới thành công'. Bản ghi hiển thị tại màn hình Tác vụ Pending của tôi.","Luồng Maker-Checker QTC-12","Fail","",""
+"US08-TC-006","SC-06","Mục ""Yêu cầu nghiệp vụ"" – ""chỉ hiển thị trên lưới Danh mục Biểu phí sau khi cấp duyệt cuối cùng phê duyệt""","US08 – Sao chép Biểu phí","Xác nhận / Đóng","Last Checker phê duyệt bản clone — Biểu phí chính thức hiển thị trên lưới Danh mục","Happy Path","Critical","1. User Checker đăng nhập với quyền phê duyệt trên chức năng Biểu phí.
+2. Bản ghi 'BP-CLONE01' đang ở trạng thái 'Chờ duyệt', hành động = 'Thêm mới' tại Tác vụ chờ duyệt.","1. Truy cập màn hình Tác vụ chờ duyệt.
+2. Tại dòng bản ghi 'BP-CLONE01', nhấn nút 'Phê duyệt'.
+3. Xác nhận phê duyệt.
+4. Truy cập Tham số >> Danh mục biểu phí >> Kiểm tra lưới.","--- SAU KHI LAST CHECKER DUYỆT ---
+(i) Nghiệp vụ/Logic: Hệ thống lưu dữ liệu chính thức. Bản ghi 'BP-CLONE01' cập nhật trạng thái = 'Đã duyệt'.
+(ii) UI: Toast 'Phê duyệt thành công'. Bản ghi tại màn hình Tác vụ chờ duyệt cập nhật trạng thái Đã duyệt. Biểu phí 'BP-CLONE01' hiển thị trên lưới Danh mục Biểu phí.","E2E: nối tiếp US08-TC-005","Pass","",""
+"US08-TC-007","SC-07","Mục ""Yêu cầu nghiệp vụ"" – ""Nếu người dùng nhấn Đóng, hệ thống thoát khỏi màn hình Thêm mới""; [QTC-15]","US08 – Sao chép Biểu phí","Xác nhận / Đóng","Nhấn 'Đóng' trên form Thêm mới (sao chép) — Không lưu, không popup, điều hướng về lưới","Happy Path","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới hiển thị.
+3. User đã chỉnh sửa một số trường trên form (có unsaved changes).","1. Trên form Thêm mới (clone), nhấn nút 'Đóng'.
+2. Quan sát hành vi hệ thống.","(i) Nghiệp vụ/Logic: Hệ thống KHÔNG lưu dữ liệu đã nhập/chỉnh sửa. Dữ liệu bị discard.
+(ii) UI: Hệ thống KHÔNG hiển thị popup xác nhận (theo QTC-15). Điều hướng về màn hình Danh mục Biểu phí. Không có bản ghi mới nào được tạo.","[QTC-15] Không popup xác nhận khi Đóng","Pass","",""
+"US08-TC-008","SC-08","Mục ""Yêu cầu nghiệp vụ"" – ""tham chiếu tới US07 về upload file excel code phí ở 1 biểu phí""","US08 – Sao chép Biểu phí","Xác nhận / Đóng","Upload file Excel Code phí trên form bản clone — Hệ thống validate file và cập nhật lưới chi tiết","Happy Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới hiển thị.
+3. Chuẩn bị file Excel 'CodePhi_Upload.xlsx' với dữ liệu Code phí hợp lệ (format theo US07).","1. Trên form Thêm mới (clone), nhấn nút 'Upload file Excel' tại lưới Thông tin chi tiết.
+2. Chọn file 'CodePhi_Upload.xlsx'.
+3. Quan sát kết quả upload.","(i) Nghiệp vụ/Logic: Hệ thống validate file theo US07 (format .xlsx, dữ liệu hợp lệ). Danh sách Code phí từ file được thêm/thay thế trên lưới chi tiết.
+(ii) UI: Lưới Thông tin chi tiết hiển thị các Code phí từ file upload. Không có dòng lỗi (dữ liệu hợp lệ). User có thể tiếp tục chỉnh sửa hoặc nhấn 'Xác nhận'.","Tham chiếu US07 validate file [QTC-07]","Cancel","",""
+"US08-TC-009","SC-09","Mục ""Yêu cầu nghiệp vụ"" – ""hệ thống kiểm tra các điều kiện và ràng buộc tương tự như khi thêm mới""; Tham chiếu US06 validate","US08 – Sao chép Biểu phí","Xác nhận / Đóng","Bỏ trống từng trường bắt buộc trên form clone rồi Xác nhận — FE chặn và hiển thị lỗi","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới hiển thị với dữ liệu pre-fill.","1. Trên form Thêm mới (clone), xóa trống trường bắt buộc 'Tên biểu phí' (để trống).
+2. Nhấn nút 'Xác nhận'.
+3. Quan sát thông báo lỗi.","(i) Nghiệp vụ/Logic: Hệ thống KHÔNG cho phép lưu. FE chặn do trường bắt buộc bị bỏ trống.
+(ii) UI: Hiển thị thông báo lỗi inline ""Trường này bắt buộc"" ngay dưới trường 'Tên biểu phí'. Highlight trường lỗi. [QTC-11 FE-First]","Validate theo US06. Tách riêng từng trường bắt buộc.","Pass","",""
+"US08-TC-010","SC-10","BA xác nhận QA-01.6: 'Mã Biểu phí do người dùng nhập'; Validate Mã trùng tham chiếu US06","US08 – Sao chép Biểu phí","Xác nhận / Đóng","Nhập Mã biểu phí trùng với biểu phí đã tồn tại rồi Xác nhận — Hệ thống báo lỗi Mã trùng","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc 'BP-GOCSAO01' → Form Thêm mới hiển thị.
+3. Tồn tại biểu phí khác có Mã = 'BP-DACOTRUNG' đã duyệt trên hệ thống.","1. Trên form Thêm mới (clone), nhập Mã biểu phí = 'BP-DACOTRUNG' (trùng với biểu phí đã tồn tại).
+2. Nhấn nút 'Xác nhận'.
+3. Quan sát thông báo lỗi.","(i) Nghiệp vụ/Logic: Hệ thống KHÔNG cho phép lưu. Validate phát hiện Mã biểu phí trùng.
+(ii) UI: Hiển thị thông báo lỗi tại trường 'Mã biểu phí': Mã đã tồn tại. [QTC-11 FE-First]","Validate Mã unique tham chiếu US06","Pass","",""
+"US08-TC-011","SC-11","QA-03.4 BA xác nhận: 'Nếu 1 Code phí thuộc nhiều Biểu phí thì khoảng thời gian hiệu lực không được overlap'","US08 – Sao chép Biểu phí","Xác nhận / Đóng","Overlap thời gian Code phí giữa biểu phí clone và biểu phí khác — Hệ thống chặn","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc có Code phí 'CP-OVERLAP' với Ngày hiệu lực 01/01/2026 – 31/12/2026.
+3. Tồn tại biểu phí khác cũng chứa Code phí 'CP-OVERLAP' với Ngày hiệu lực 01/06/2026 – 31/12/2026.","1. Trên form Thêm mới (clone), sửa Mã biểu phí = 'BP-NEWOVERLAP' (unique).
+2. Giữ nguyên Ngày hiệu lực gốc (01/01/2026 – 31/12/2026) → overlap với biểu phí khác tại Code phí 'CP-OVERLAP'.
+3. Nhấn nút 'Xác nhận'.
+4. Quan sát thông báo lỗi.","(i) Nghiệp vụ/Logic: Hệ thống phát hiện Code phí 'CP-OVERLAP' có khoảng thời gian overlap giữa biểu phí clone và biểu phí khác. KHÔNG cho phép lưu.
+(ii) UI: Hiển thị thông báo lỗi về vi phạm quy tắc overlap thời gian của Code phí.","Validate overlap theo US06 update","","",""
+"US08-TC-012","SC-12","Tham chiếu US06 validate; QTC-11 FE-First Error Handling","US08 – Sao chép Biểu phí","Xác nhận / Đóng","Nhập sai định dạng vào các trường trên form clone — FE chặn theo US06","Negative Path","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới hiển thị.","1. Trên form Thêm mới (clone), nhập Ngày hiệu lực = 'abc' (sai định dạng ngày dd/mm/yyyy).
+2. Nhấn nút 'Xác nhận'.
+3. Quan sát thông báo lỗi.","(i) Nghiệp vụ/Logic: FE validate phát hiện định dạng ngày không hợp lệ. KHÔNG gửi request lên BE.
+(ii) UI: Hiển thị thông báo lỗi inline tại trường 'Ngày hiệu lực': Định dạng không hợp lệ. [QTC-11 FE-First]","[QTC-01.5] Định dạng ngày: dd/mm/yyyy","Pass","",""
+"US08-TC-013","SC-13","BA xác nhận QA-01.6: 'Mã Biểu phí do người dùng nhập', 'Mã biểu phí cũng được sao chép'","US08 – Sao chép Biểu phí","Xác nhận / Đóng","Giữ nguyên Mã biểu phí gốc (pre-fill) rồi Xác nhận — Hệ thống báo lỗi Mã trùng","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc 'BP-GOCSAO01' → Form Thêm mới hiển thị với Mã = 'BP-GOCSAO01' (pre-fill nguyên giá trị).","1. Trên form Thêm mới (clone), KHÔNG sửa Mã biểu phí (giữ nguyên 'BP-GOCSAO01' được pre-fill).
+2. Nhấn nút 'Xác nhận'.
+3. Quan sát thông báo lỗi.","(i) Nghiệp vụ/Logic: Hệ thống phát hiện Mã 'BP-GOCSAO01' đã tồn tại (trùng với biểu phí gốc). KHÔNG cho phép lưu.
+(ii) UI: Hiển thị thông báo lỗi tại trường 'Mã biểu phí': Mã đã tồn tại.","Mã được pre-fill nguyên giá trị → user PHẢI sửa Mã trước khi Xác nhận","Pass","",""
+"US08-TC-014","SC-14","Trường hợp biên: biểu phí không có Code phí; BA xác nhận QA-01.5","US08 – Sao chép Biểu phí","Khởi tạo sao chép","Sao chép biểu phí có 0 Code phí (danh sách rỗng) — Form Thêm mới hiển thị lưới trống","Boundary Value","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Tồn tại biểu phí 'BP-NOCF' đã duyệt, không có Code phí nào (lưới chi tiết rỗng).","1. Truy cập Tham số >> Danh mục biểu phí.
+2. Tại dòng biểu phí 'BP-NOCF', nhấn nút 'Sao chép'.
+3. Quan sát lưới Thông tin chi tiết trên form Thêm mới.","(i) Nghiệp vụ/Logic: Hệ thống mở form Thêm mới với Thông tin chung pre-fill đầy đủ. Lưới chi tiết Code phí hiển thị trống (0 dòng).
+(ii) UI: Lưới chi tiết trống. User có thể thêm Code phí mới hoặc upload file Excel.","","","",""
+"US08-TC-015","SC-15","QA-02.2: BA xác nhận 'chỉ hiển thị 1 màn hình Thêm mới có đầy đủ dữ liệu'","US08 – Sao chép Biểu phí","Khởi tạo sao chép","Sao chép biểu phí có số lượng Code phí rất lớn (gần max theo US06) — Load thành công","Boundary Value","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Tồn tại biểu phí 'BP-MAXCF' đã duyệt, có ~50 Code phí chi tiết.","1. Truy cập Tham số >> Danh mục biểu phí.
+2. Tại dòng biểu phí 'BP-MAXCF', nhấn nút 'Sao chép'.
+3. Quan sát lưới Thông tin chi tiết.","(i) Nghiệp vụ/Logic: Hệ thống load thành công toàn bộ ~50 Code phí lên lưới chi tiết. Không bị timeout hay lỗi.
+(ii) UI: Lưới chi tiết hiển thị đầy đủ các Code phí với phân trang (nếu có). Form hoạt động bình thường.","","","",""
+"US08-TC-016","SC-16","QTC-01.6: Ghi chú/Mô tả tối đa 300 ký tự","US08 – Sao chép Biểu phí","Khởi tạo sao chép","Sao chép biểu phí gốc có Ghi chú đạt đúng 300 ký tự (biên trên) — Pre-fill đầy đủ, không bị cắt","Boundary Value","Low","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Tồn tại biểu phí 'BP-GHICHU300' đã duyệt, trường Ghi chú có đúng 300 ký tự.","1. Truy cập Tham số >> Danh mục biểu phí.
+2. Tại dòng biểu phí 'BP-GHICHU300', nhấn nút 'Sao chép'.
+3. Kiểm tra trường 'Ghi chú' trên form Thêm mới.","(i) Nghiệp vụ/Logic: Trường Ghi chú hiển thị đầy đủ 300 ký tự, không bị cắt hay truncate.
+(ii) UI: Nội dung Ghi chú hiển thị hoàn chỉnh trên form.","[QTC-01.6]","","",""
+"US08-TC-017","SC-17","QTC-01.6: Mã tối đa 50 ký tự","US08 – Sao chép Biểu phí","Xác nhận / Đóng","Mã biểu phí bản clone đạt giới hạn 50 ký tự (biên trên) — Xác nhận thành công","Boundary Value","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới hiển thị.","1. Trên form Thêm mới, nhập Mã biểu phí = 'ABCDEFGHIJ1234567890ABCDEFGHIJ1234567890ABCDEFGHIJ' (đúng 50 ký tự, unique).
+2. Nhấn nút 'Xác nhận'.","(i) Nghiệp vụ/Logic: Hệ thống chấp nhận Mã 50 ký tự. Validate thành công. Bản ghi được lưu ở trạng thái 'Chờ duyệt'.
+(ii) UI: Toast 'Thêm mới thành công'. Bản ghi hiển thị tại Tác vụ Pending.","[QTC-01.6] Mã tối đa 50 ký tự","","",""
+"US08-TC-018","SC-18","QTC-01.6: Tên tối đa 50 ký tự","US08 – Sao chép Biểu phí","Xác nhận / Đóng","Tên biểu phí bản clone đạt giới hạn 50 ký tự — Xác nhận thành công","Boundary Value","Low","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới hiển thị.","1. Trên form Thêm mới, sửa Mã biểu phí = 'BP-BV-TEN50' (unique).
+2. Nhập Tên biểu phí = 'Biểu phí kiểm tra biên trên năm mươi ký tự chính xác' (đúng 50 ký tự).
+3. Nhấn nút 'Xác nhận'.","(i) Nghiệp vụ/Logic: Hệ thống chấp nhận Tên 50 ký tự. Validate thành công.
+(ii) UI: Toast 'Thêm mới thành công'.","[QTC-01.6] Tên tối đa 50 ký tự","","",""
+"US08-TC-019","SC-19","QTC-01.6: Mã tối đa 50 ký tự","US08 – Sao chép Biểu phí","Xác nhận / Đóng","Mã biểu phí vượt 50 ký tự (biên trên + 1) — FE chặn không cho nhập hoặc cắt chuỗi","Boundary Value","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới hiển thị.","1. Trên form Thêm mới, nhập Mã biểu phí = 'ABCDEFGHIJ1234567890ABCDEFGHIJ1234567890ABCDEFGHIJK' (51 ký tự).
+2. Quan sát hành vi FE.","(i) Nghiệp vụ/Logic: FE không cho phép nhập quá 50 ký tự.
+(ii) UI: Trường Mã biểu phí chỉ hiển thị tối đa 50 ký tự đầu tiên (cắt ký tự thứ 51) hoặc không cho phép gõ thêm.","[QTC-01.6] BV biên trên + 1","","",""
+"US08-TC-020","SC-20","QA-04.3 BA xác nhận: 'nút sao chép nằm trong cột Hành động của Biểu phí trên Lưới Danh mục Biểu phí'","US08 – Sao chép Biểu phí","Khởi tạo sao chép","Nút 'Sao chép' hiển thị đúng vị trí trong cột 'Hành động' trên lưới","UI/UX & Field Validation","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Tồn tại biểu phí ở các trạng thái: Chưa hiệu lực, Đang hiệu lực, Hết hiệu lực.","1. Truy cập Tham số >> Danh mục biểu phí.
+2. Quan sát cột 'Hành động' tại từng dòng biểu phí trên lưới.","(i) Nghiệp vụ/Logic: Nút 'Sao chép' hiển thị cho tất cả biểu phí ở trạng thái hoạt động (Chưa/Đang/Hết hiệu lực).
+(ii) UI: Nút 'Sao chép' nằm trong cột 'Hành động' (dạng icon/button) ở cuối mỗi dòng dữ liệu.","","","",""
+"US08-TC-021","SC-21","QA-04.1 BA xác nhận: 'UI hoàn toàn giống US06 và không bổ sung Mockup'","US08 – Sao chép Biểu phí","Khởi tạo sao chép","Form Thêm mới sau sao chép HOÀN TOÀN giống form Thêm mới US06 — Không có UI clone riêng","UI/UX & Field Validation","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới hiển thị.","1. So sánh layout form Thêm mới (clone) với form Thêm mới US06.
+2. Kiểm tra xem có label/badge 'Clone', 'Sao chép từ...', hoặc UI riêng biệt nào không.","(i) Nghiệp vụ/Logic: Form Thêm mới (clone) có layout, trường, nút hoàn toàn giống US06 Thêm mới.
+(ii) UI: Không có label/badge 'Clone' hay 'Sao chép từ...'. Title = 'Thêm mới Biểu phí' (giống US06).","","","",""
+"US08-TC-022","SC-22","QA-04.2 BA xác nhận: 'được phép sửa toàn bộ các trường dữ liệu'","US08 – Sao chép Biểu phí","Khởi tạo sao chép","Toàn bộ trường trên form clone đều Editable — Không có trường lock/readonly do là bản clone","UI/UX & Field Validation","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới hiển thị với dữ liệu pre-fill.","1. Kiểm tra trạng thái của từng trường trên form: Mã, Tên, Ngày hiệu lực, Ngày hết hiệu lực, Ghi chú, v.v.
+2. Thử click và nhập liệu vào từng trường.","(i) Nghiệp vụ/Logic: Tất cả trường mà US06 cho phép nhập ở form Thêm mới đều ở trạng thái Editable.
+(ii) UI: Không có trường nào bị lock/readonly/disabled do là bản clone. User có thể sửa tất cả.","","","",""
+"US08-TC-023","SC-23","QA-01.5 BA xác nhận: 'toàn quyền chỉnh sửa (Thêm/Sửa/Xóa) trên lưới chi tiết trước khi Xác nhận'","US08 – Sao chép Biểu phí","Khởi tạo sao chép","User Thêm/Sửa/Xóa Code phí trên lưới chi tiết bản clone trước khi Xác nhận","UI/UX & Field Validation","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc có 3 Code phí (CP001, CP002, CP003).","1. Trên lưới chi tiết, xóa dòng Code phí 'CP003'.
+2. Sửa thông tin của dòng Code phí 'CP002'.
+3. Thêm mới 1 dòng Code phí 'CP-NEW01'.
+4. Quan sát lưới chi tiết sau thao tác.","(i) Nghiệp vụ/Logic: Hệ thống cho phép user Thêm/Sửa/Xóa Code phí tự do trên lưới chi tiết.
+(ii) UI: Lưới chi tiết hiển thị 3 Code phí: CP001 (giữ nguyên), CP002 (đã sửa), CP-NEW01 (mới thêm). CP003 đã bị xóa.","","","",""
+"US08-TC-024","SC-24","BA xác nhận QA-01.8: 'Không đồng ý' thêm hậu tố ' - Copy'","US08 – Sao chép Biểu phí","Khởi tạo sao chép","Tên biểu phí sao chép nguyên giá trị — KHÔNG tự động thêm hậu tố ' - Copy'","UI/UX & Field Validation","Low","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Tồn tại biểu phí gốc có Tên = 'Biểu phí VIP Quý 1'.","1. Tại dòng biểu phí 'Biểu phí VIP Quý 1', nhấn nút 'Sao chép'.
+2. Kiểm tra trường 'Tên biểu phí' trên form Thêm mới.","(i) Nghiệp vụ/Logic: Tên biểu phí = 'Biểu phí VIP Quý 1' (nguyên giá trị, KHÔNG có hậu tố ' - Copy' hay bất kỳ suffix nào).
+(ii) UI: Trường 'Tên biểu phí' hiển thị 'Biểu phí VIP Quý 1' (y hệt bản gốc).","","","",""
+"US08-TC-025","SC-25","BA xác nhận QA-01.6: 'Mã Biểu phí do người dùng nhập, Mã biểu phí cũng được sao chép'","US08 – Sao chép Biểu phí","Khởi tạo sao chép","Mã biểu phí được sao chép nguyên giá trị — User phải tự sửa Mã trước khi Xác nhận","UI/UX & Field Validation","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Tồn tại biểu phí gốc có Mã = 'BP-ORIGINAL'.","1. Tại dòng biểu phí 'BP-ORIGINAL', nhấn nút 'Sao chép'.
+2. Kiểm tra trường 'Mã biểu phí' trên form Thêm mới.","(i) Nghiệp vụ/Logic: Mã biểu phí = 'BP-ORIGINAL' (nguyên giá trị, do user nhập chứ không phải hệ thống sinh). User phải sửa Mã mới (unique) trước khi Xác nhận.
+(ii) UI: Trường 'Mã biểu phí' hiển thị 'BP-ORIGINAL', ở trạng thái Editable.","","","",""
+"US08-TC-026","SC-26","QA-01.4 BA xác nhận: 'hệ thống sẽ lấy các dữ liệu đã duyệt của Biểu phí tại thời điểm nhân bản'","US08 – Sao chép Biểu phí","Khởi tạo sao chép","Biểu phí gốc đang Chờ duyệt chỉnh sửa — Hệ thống lấy dữ liệu phiên bản đã duyệt để pre-fill","Business Logic","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Biểu phí 'BP-DANGDUYET' đang hiệu lực, có tác vụ 'Chờ duyệt chỉnh sửa' (Maker khác đã sửa Tên thành 'Tên sửa nháp' nhưng chưa duyệt; bản đã duyệt có Tên = 'Tên gốc đã duyệt').","1. Truy cập Tham số >> Danh mục biểu phí.
+2. Tại dòng biểu phí 'BP-DANGDUYET', nhấn nút 'Sao chép'.
+3. Kiểm tra trường 'Tên biểu phí' trên form Thêm mới.","(i) Nghiệp vụ/Logic: Hệ thống pre-fill dữ liệu từ phiên bản 'đã duyệt'. Tên = 'Tên gốc đã duyệt' (KHÔNG phải 'Tên sửa nháp').
+(ii) UI: Form Thêm mới hiển thị dữ liệu đã duyệt. Bản nháp chờ duyệt KHÔNG được sao chép.","","","",""
+"US08-TC-027","SC-27","QA-01.2 BA xác nhận: 'Biểu phí ở trạng thái phê duyệt = chờ duyệt không hiển thị trên lưới'","US08 – Sao chép Biểu phí","Khởi tạo sao chép","Biểu phí ở trạng thái Chờ duyệt (Thêm mới) — Không hiển thị trên lưới, không thể sao chép","Business Logic","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Biểu phí 'BP-CHODUYETMOI' đang ở trạng thái 'Chờ duyệt' (hành động Thêm mới, chưa được Last Checker duyệt).","1. Truy cập Tham số >> Danh mục biểu phí.
+2. Tìm kiếm biểu phí 'BP-CHODUYETMOI' trên lưới.
+3. Quan sát kết quả.","(i) Nghiệp vụ/Logic: Biểu phí 'BP-CHODUYETMOI' KHÔNG hiển thị trên lưới Danh mục Biểu phí (do chưa được duyệt). Không có nút 'Sao chép' để thao tác.
+(ii) UI: Lưới không hiển thị biểu phí này.","","","",""
+"US08-TC-028","SC-28","QA-01.7 BA xác nhận: 'phân quyền dữ liệu Biểu phí phụ thuộc vào dữ liệu Code phí chứ không phụ thuộc vào user khai báo'","US08 – Sao chép Biểu phí","Khởi tạo sao chép","Phân quyền biểu phí clone phụ thuộc Code phí bên trong — User Khối A sao chép biểu phí có Code phí Khối B","Business Logic","Medium","1. User Maker thuộc Khối KHCN đăng nhập.
+2. Biểu phí 'BP-KHOIB' hiển thị trên lưới (có Code phí thuộc Khối KHCN theo QTC-10).
+3. Biểu phí 'BP-KHOIB' cũng chứa Code phí thuộc Khối KHTC.","1. Tại dòng biểu phí 'BP-KHOIB', nhấn nút 'Sao chép'.
+2. Sửa Mã = 'BP-CLONE-KHOIB' (unique), nhấn 'Xác nhận'.
+3. Sau khi duyệt → Kiểm tra biểu phí clone hiển thị cho user Khối nào.","(i) Nghiệp vụ/Logic: Biểu phí clone 'BP-CLONE-KHOIB' phân quyền dựa trên Code phí bên trong (KHÔNG phụ thuộc user thực hiện khai báo). User Khối KHTC vẫn thấy biểu phí này nếu có Code phí thuộc KHTC.
+(ii) UI: Biểu phí hiển thị cho các Khối có Code phí tương ứng [QTC-10].","[QTC-10] Phân quyền theo Code phí","","",""
+"US08-TC-029","SC-29","QA-03.2 BA xác nhận: 'sao chép toàn bộ Code phí thuộc Biểu phí mà không phụ thuộc vào trạng thái'","US08 – Sao chép Biểu phí","Khởi tạo sao chép","Sao chép biểu phí có Code phí ở nhiều trạng thái — Hệ thống sao chép TOÀN BỘ bất kể trạng thái","Business Logic","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Biểu phí 'BP-MULTIST' có 3 Code phí với các trạng thái khác nhau.","1. Tại dòng biểu phí 'BP-MULTIST', nhấn nút 'Sao chép'.
+2. Quan sát lưới Thông tin chi tiết trên form Thêm mới.
+3. Đếm số lượng Code phí được pre-fill.","(i) Nghiệp vụ/Logic: Hệ thống sao chép toàn bộ 3 Code phí bất kể trạng thái (trạng thái Code phí phụ thuộc vào Biểu phí).
+(ii) UI: Lưới chi tiết hiển thị đầy đủ 3 Code phí.","","","",""
+"US08-TC-030","SC-30","QA-01.4: áp dụng tương tự cho Code phí chi tiết bên trong Biểu phí","US08 – Sao chép Biểu phí","Khởi tạo sao chép","Code phí đang Chờ duyệt chỉnh sửa — Hệ thống sao chép phiên bản đã duyệt của Code phí","Business Logic","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Biểu phí 'BP-CFCHINHSUA' có Code phí 'CP-DANG-DUYET' đang Chờ duyệt chỉnh sửa (bản nháp sửa Mức phí = 100,000; bản đã duyệt Mức phí = 50,000).","1. Tại dòng biểu phí 'BP-CFCHINHSUA', nhấn nút 'Sao chép'.
+2. Kiểm tra dữ liệu Code phí 'CP-DANG-DUYET' trên lưới chi tiết.","(i) Nghiệp vụ/Logic: Hệ thống sao chép phiên bản 'đã duyệt' của Code phí. Mức phí = 50,000 (KHÔNG phải 100,000 bản nháp).
+(ii) UI: Lưới chi tiết hiển thị Code phí với dữ liệu đã duyệt.","Consistent với logic QA-01.4 cho Biểu phí cấp cha","","",""
+"US08-TC-031","SC-31","QA-01.3 BA xác nhận: 'không cần lưu traceability', 'Sao chép bản chất là Thêm mới'","US08 – Sao chép Biểu phí","Xác nhận / Đóng","Lịch sử tác động ghi hành động = 'Thêm mới' (KHÔNG ghi 'Sao chép')","Business Logic","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã sao chép biểu phí gốc → Xác nhận thành công → Last Checker đã phê duyệt bản clone 'BP-CLONE-HIST'.","1. Truy cập Tham số >> Danh mục biểu phí >> Xem chi tiết biểu phí 'BP-CLONE-HIST'.
+2. Nhấn nút/link 'Lịch sử tác động'.
+3. Kiểm tra popup Lịch sử tác động.","""(i) Nghiệp vụ/Logic: Popup Lịch sử tác động hiển thị dòng gần nhất với Tác động = 'Thêm mới' (KHÔNG phải 'Sao chép'). Không có traceability về nguồn gốc biểu phí gốc.
+(ii) UI: Popup hiển thị bảng: Ngày cập nhật, Tác động = 'Thêm mới', Người cập nhật, Người phê duyệt.
+ Các trường Datetime (Ngày cập nhật) hiển thị đúng định dạng hh:mm:ss – dd/mm/yyyy.""","[QTC-08] Lịch sử tác động","","",""
+"US08-TC-032","SC-32","QA-03.1 BA xác nhận: 'Tên Biểu phí Không cần unique'; [QTC-14.2]","US08 – Sao chép Biểu phí","Xác nhận / Đóng","Giữ nguyên Tên trùng với biểu phí gốc rồi Xác nhận — Hệ thống cho phép (Tên KHÔNG cần unique)","Business Logic","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc có Tên = 'Biểu phí VIP Quý 1'.","1. Trên form Thêm mới (clone), sửa Mã = 'BP-TENTRUNG01' (unique).
+2. Giữ nguyên Tên = 'Biểu phí VIP Quý 1' (trùng bản gốc).
+3. Nhấn nút 'Xác nhận'.","(i) Nghiệp vụ/Logic: Hệ thống chấp nhận Tên trùng. Validate thành công (Tên KHÔNG cần unique). Bản ghi lưu ở trạng thái 'Chờ duyệt'.
+(ii) UI: Toast 'Thêm mới thành công'. Không có lỗi về Tên trùng.","[QTC-14.2] Tên không cần unique","","",""
+"US08-TC-033","SC-33","QA-03.4 BA xác nhận: 'sao chép cả Ngày hiệu lực và Ngày hết hiệu lực'; Validate overlap theo US06","US08 – Sao chép Biểu phí","Xác nhận / Đóng","Ngày hiệu lực sao chép nguyên — Sửa Ngày để không overlap → Xác nhận thành công","Business Logic","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc có Code phí 'CP-OVL' + Ngày hiệu lực 01/01/2026 – 30/06/2026.
+3. Tồn tại biểu phí gốc (không clone) cũng chứa 'CP-OVL' với Ngày 01/01/2026 – 30/06/2026.","1. Trên form clone, sửa Mã = 'BP-NOOVERLAP' (unique).
+2. Sửa Ngày hiệu lực = 01/07/2026, Ngày hết hiệu lực = 31/12/2026 (KHÔNG overlap).
+3. Nhấn nút 'Xác nhận'.","(i) Nghiệp vụ/Logic: Validate overlap pass (khoảng thời gian không overlap). Bản ghi lưu ở trạng thái 'Chờ duyệt'.
+(ii) UI: Toast 'Thêm mới thành công'.","","","",""
+"US08-TC-034","SC-34","QTC-12 §1: Checker có nút Phê duyệt/Từ chối; §2: Maker thấy Ghi chú lý do từ chối","US08 – Sao chép Biểu phí","Maker-Checker","Checker TỪ CHỐI bản clone — Bản ghi chuyển trạng thái 'Từ chối duyệt', Maker thấy lý do","Business Logic","High","1. User Checker đăng nhập với quyền phê duyệt.
+2. Bản ghi clone 'BP-CLONE-REJECT' đang ở trạng thái 'Chờ duyệt' tại Tác vụ chờ duyệt.","1. Truy cập Tác vụ chờ duyệt.
+2. Tại dòng 'BP-CLONE-REJECT', nhấn nút 'Từ chối'.
+3. Nhập lý do từ chối = 'Thiếu thông tin Code phí chi tiết'.
+4. Xác nhận từ chối.
+5. Đăng nhập Maker → Truy cập Tác vụ Pending của tôi.","(i) Nghiệp vụ/Logic: Bản ghi chuyển trạng thái = 'Từ chối duyệt'. Lý do từ chối = 'Thiếu thông tin Code phí chi tiết' được lưu.
+(ii) UI: Tại Tác vụ Pending (Maker), bản ghi hiển thị trạng thái 'Từ chối duyệt'. Ghi chú hiển thị lý do từ chối. Hiển thị nút: Xem, Chỉnh sửa, Xóa [QTC-12 §2].","[QTC-12] Maker-Checker","","",""
+"US08-TC-035","SC-35","QTC-12 §2: 'Xóa: Hiển thị khi Trạng thái = Chờ duyệt hoặc Từ chối duyệt'","US08 – Sao chép Biểu phí","Maker-Checker","Maker XÓA bản clone tại Tác vụ Pending (trạng thái Chờ duyệt)","Business Logic","Medium","1. User Maker đăng nhập.
+2. Bản ghi clone 'BP-CLONE-DEL' đang ở trạng thái 'Chờ duyệt' tại Tác vụ Pending của tôi.","1. Truy cập Tác vụ Pending của tôi.
+2. Tại dòng 'BP-CLONE-DEL', nhấn nút 'Xóa'.
+3. Xác nhận xóa.
+4. Quan sát kết quả.","(i) Nghiệp vụ/Logic: Bản ghi bị xóa khỏi hàng chờ duyệt. Không còn hiển thị tại Tác vụ Pending hoặc Tác vụ chờ duyệt.
+(ii) UI: Bản ghi không còn hiển thị trên danh sách. Không tạo biểu phí chính thức.","[QTC-12 §2]","","",""
+"US08-TC-036","SC-36","QTC-12 §2: 'Chỉnh sửa: Chỉ hiển thị khi Trạng thái = Từ chối duyệt VÀ Tác vụ là Thêm mới'","US08 – Sao chép Biểu phí","Maker-Checker","Maker CHỈNH SỬA bản clone bị từ chối → Submit lại → Trạng thái quay về 'Chờ duyệt'","Business Logic","High","1. User Maker đăng nhập.
+2. Bản ghi clone 'BP-CLONE-REJECT' ở trạng thái 'Từ chối duyệt' tại Tác vụ Pending.","1. Truy cập Tác vụ Pending của tôi.
+2. Tại dòng 'BP-CLONE-REJECT', nhấn nút 'Chỉnh sửa'.
+3. Sửa thông tin theo yêu cầu (bổ sung Code phí chi tiết).
+4. Nhấn nút 'Xác nhận'.","(i) Nghiệp vụ/Logic: Bản ghi quay lại trạng thái 'Chờ duyệt'. Hành động vẫn là 'Thêm mới'.
+(ii) UI: Toast 'Chỉnh sửa thành công'. Bản ghi hiển thị tại Tác vụ Pending với trạng thái 'Chờ duyệt'.","[QTC-12 §2]","","",""
+"US08-TC-037","SC-37","QTC-12 §2: State Transition — Từ chối → Chỉnh sửa → Chờ duyệt → Từ chối lần 2","US08 – Sao chép Biểu phí","Maker-Checker","Vòng lặp Maker-Checker: Từ chối → Chỉnh sửa → Từ chối lần 2 — Trạng thái luân chuyển đúng","Business Logic","Medium","1. Bản ghi clone 'BP-CLONE-CYCLE' đã bị Checker từ chối lần 1.
+2. Maker đã chỉnh sửa và submit lại → Trạng thái = 'Chờ duyệt'.","1. Checker đăng nhập → Truy cập Tác vụ chờ duyệt.
+2. Tại dòng 'BP-CLONE-CYCLE', nhấn nút 'Từ chối' lần 2.
+3. Nhập lý do = 'Vẫn chưa đạt yêu cầu'.
+4. Maker đăng nhập → Truy cập Tác vụ Pending.","(i) Nghiệp vụ/Logic: Bản ghi quay về trạng thái 'Từ chối duyệt' lần 2. Maker vẫn có thể Chỉnh sửa hoặc Xóa [QTC-12 §2].
+(ii) UI: Tại Tác vụ Pending (Maker), hiển thị trạng thái 'Từ chối duyệt'. Ghi chú = 'Vẫn chưa đạt yêu cầu'. Hiển thị nút Chỉnh sửa, Xóa.","State transition cycle: Từ chối → Sửa → Chờ duyệt → Từ chối","","",""
+"US08-TC-038","SC-38","QA-01.1: 'toàn bộ trường đều được sao chép nguyên giá trị'; QA-01.4: 'lấy dữ liệu đã duyệt'","US08 – Sao chép Biểu phí","Khởi tạo sao chép","Dữ liệu pre-fill KHỚP 100% với biểu phí gốc phiên bản đã duyệt — Đối chiếu từng trường","Data Integrity","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Biểu phí gốc 'BP-VERIFY' đã duyệt với: Tên = 'Phí dịch vụ Q2', Mã = 'BP-VERIFY', Ngày hiệu lực = 01/04/2026, Ngày hết hiệu lực = 30/06/2026, Ghi chú = 'Áp dụng quý 2 năm 2026', Code phí: CP-V01, CP-V02.","1. Tại dòng biểu phí 'BP-VERIFY', nhấn nút 'Sao chép'.
+2. Đối chiếu từng trường trên form Thêm mới với dữ liệu biểu phí gốc.","(i) Nghiệp vụ/Logic: Tất cả trường KHỚP 100%: Tên = 'Phí dịch vụ Q2', Mã = 'BP-VERIFY', Ngày hiệu lực = 01/04/2026, Ngày hết hiệu lực = 30/06/2026, Ghi chú = 'Áp dụng quý 2 năm 2026'. Lưới chi tiết: CP-V01, CP-V02.
+(ii) UI: Mọi trường hiển thị đúng giá trị gốc. Không bị mất/sai/cắt dữ liệu.","","","",""
+"US08-TC-039","SC-39","Nguyên tắc sao chép: tạo bản ghi mới độc lập, không tác động bản gốc","US08 – Sao chép Biểu phí","Xác nhận / Đóng","Sau clone thành công — Biểu phí gốc KHÔNG bị ảnh hưởng (dữ liệu giữ nguyên)","Data Integrity","High","1. Biểu phí gốc 'BP-GOCSAO01' có dữ liệu ban đầu: Tên = 'Biểu phí gốc', Code phí: CP001, CP002.
+2. Đã sao chép + duyệt bản clone 'BP-CLONE01' thành công.","1. Truy cập Tham số >> Danh mục biểu phí.
+2. Xem chi tiết biểu phí gốc 'BP-GOCSAO01'.
+3. Kiểm tra dữ liệu, trạng thái, Code phí.","(i) Nghiệp vụ/Logic: Biểu phí gốc 'BP-GOCSAO01' KHÔNG bị thay đổi: Tên = 'Biểu phí gốc', Code phí CP001 + CP002 giữ nguyên, trạng thái không đổi.
+(ii) UI: Mọi thông tin hiển thị y nguyên so với trước khi sao chép.","","","",""
+"US08-TC-040","SC-40","QA-02.2 BA xác nhận: 'chặn gửi nhiều request, đảm bảo chỉ hiển thị 1 màn hình Thêm mới'","US08 – Sao chép Biểu phí","Khởi tạo sao chép","Spam-click nút 'Sao chép' trên lưới — FE chặn multi-request, chỉ mở 1 màn hình","NFR","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Tồn tại biểu phí 'BP-SPAM' trên lưới.","1. Truy cập Tham số >> Danh mục biểu phí.
+2. Tại dòng biểu phí 'BP-SPAM', nhấn nút 'Sao chép' liên tục 3-5 lần nhanh (spam-click).
+3. Quan sát hành vi FE.","(i) Nghiệp vụ/Logic: FE chỉ gửi 1 request đến BE. Chỉ mở 1 màn hình Thêm mới duy nhất.
+(ii) UI: Không mở nhiều tab/popup Thêm mới. Nút 'Sao chép' bị disable sau click đầu tiên hoặc hiển thị loading.","Chống spam-click","","",""
+"US08-TC-041","SC-41","US08: Sao chép bản chất = Thêm mới → không lock biểu phí gốc","US08 – Sao chép Biểu phí","Khởi tạo sao chép","2 Makers cùng sao chép 1 biểu phí gốc đồng thời — Cả 2 tạo clone riêng biệt thành công","NFR","Low","1. User Maker A và Maker B cùng đăng nhập trên 2 phiên khác nhau.
+2. Cùng truy cập biểu phí gốc 'BP-CONCURRENT'.","1. Maker A nhấn nút 'Sao chép' biểu phí 'BP-CONCURRENT' → Sửa Mã = 'BP-CLONEA', nhấn 'Xác nhận'.
+2. Đồng thời, Maker B nhấn nút 'Sao chép' biểu phí 'BP-CONCURRENT' → Sửa Mã = 'BP-CLONEB', nhấn 'Xác nhận'.
+3. Kiểm tra kết quả.","(i) Nghiệp vụ/Logic: Cả 2 bản clone 'BP-CLONEA' và 'BP-CLONEB' đều được tạo thành công ở trạng thái 'Chờ duyệt'. Biểu phí gốc không bị lock.
+(ii) UI: Không có lỗi conflict. Cả 2 Maker đều thấy bản ghi tại Tác vụ Pending.","Sao chép = Thêm mới → không lock","","",""
+"US08-TC-042","SC-42","Tham chiếu US06 validate; QTC-12 Maker-Checker","US08 – Sao chép Biểu phí","Xác nhận / Đóng","Spam-click nút 'Xác nhận' trên form clone — FE chỉ gửi 1 request, không tạo trùng","NFR","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã sao chép biểu phí gốc, sửa Mã = 'BP-SPAMXN' (unique), dữ liệu hợp lệ.","1. Trên form Thêm mới (clone), nhấn nút 'Xác nhận' liên tục 3-5 lần nhanh.
+2. Quan sát hành vi FE.","(i) Nghiệp vụ/Logic: FE chỉ gửi 1 request lưu. Chỉ tạo 1 bản ghi 'Chờ duyệt'. Không tạo trùng.
+(ii) UI: Nút 'Xác nhận' bị disable sau click đầu tiên hoặc hiển thị loading. Toast 'Thêm mới thành công' hiển thị 1 lần.","Chống spam-click nút Xác nhận","","",""
+"US08-TC-043","SC-43","Bảng Điều kiện tiên quyết STT 1: 'Người dùng có quyền Maker trên chức năng Biểu phí'","US08 – Sao chép Biểu phí","Xác nhận / Đóng","User KHÔNG có quyền Maker — Nút 'Sao chép' không hiển thị hoặc bị disabled","NFR","High","1. User đăng nhập với tài khoản KHÔNG có quyền Maker trên chức năng Biểu phí (chỉ có quyền Viewer).","1. Truy cập Tham số >> Danh mục biểu phí.
+2. Quan sát cột 'Hành động' tại các dòng biểu phí.
+3. Tìm nút 'Sao chép'.","(i) Nghiệp vụ/Logic: User không có quyền Maker KHÔNG thể thực hiện sao chép biểu phí.
+(ii) UI: Nút 'Sao chép' không hiển thị hoặc bị disabled tại cột 'Hành động'.","Phân quyền chức năng","","",""
+"US08-TC-044","SC-44","QTC-12 §1: Checker nhấn Phê duyệt; Yêu cầu chống spam-click","US08 – Sao chép Biểu phí","Maker-Checker","Spam-click nút 'Phê duyệt' bản clone (Checker) — FE chỉ gửi 1 request","NFR","Medium","1. User Checker đăng nhập.
+2. Bản ghi clone đang ở trạng thái 'Chờ duyệt' tại Tác vụ chờ duyệt.","1. Truy cập Tác vụ chờ duyệt.
+2. Tại dòng bản ghi clone, nhấn nút 'Phê duyệt' liên tục 3-5 lần nhanh.
+3. Quan sát hành vi.","(i) Nghiệp vụ/Logic: FE chỉ gửi 1 request phê duyệt. Bản ghi chỉ được duyệt 1 lần.
+(ii) UI: Nút 'Phê duyệt' bị disable sau click đầu tiên. Không duplicate request.","Chống spam-click nút Phê duyệt","","",""
+"US08-TC-045","SC-45","QTC-12 §1: Checker nhấn Từ chối; Yêu cầu chống spam-click","US08 – Sao chép Biểu phí","Maker-Checker","Spam-click nút 'Từ chối' bản clone (Checker) — FE chỉ gửi 1 request","NFR","Medium","1. User Checker đăng nhập.
+2. Bản ghi clone đang ở trạng thái 'Chờ duyệt' tại Tác vụ chờ duyệt.","1. Truy cập Tác vụ chờ duyệt.
+2. Tại dòng bản ghi clone, nhấn nút 'Từ chối' liên tục 3-5 lần nhanh.
+3. Quan sát hành vi.","(i) Nghiệp vụ/Logic: FE chỉ gửi 1 request từ chối. Bản ghi chỉ bị từ chối 1 lần.
+(ii) UI: Nút 'Từ chối' bị disable sau click đầu tiên. Không duplicate request.","Chống spam-click nút Từ chối","","",""
+"US08-TC-046","SC-46","QTC-12 §2: Maker nhấn Xóa; Yêu cầu chống spam-click","US08 – Sao chép Biểu phí","Maker-Checker","Spam-click nút 'Xóa' bản clone tại Tác vụ Pending (Maker) — FE chỉ gửi 1 request","NFR","Medium","1. User Maker đăng nhập.
+2. Bản ghi clone đang ở trạng thái 'Chờ duyệt' tại Tác vụ Pending của tôi.","1. Truy cập Tác vụ Pending của tôi.
+2. Tại dòng bản ghi clone, nhấn nút 'Xóa' liên tục 3-5 lần nhanh.
+3. Quan sát hành vi.","(i) Nghiệp vụ/Logic: FE chỉ gửi 1 request xóa. Bản ghi chỉ bị xóa 1 lần.
+(ii) UI: Nút 'Xóa' bị disable sau click đầu tiên. Không duplicate request.","Chống spam-click nút Xóa","","",""
+"US08-TC-047","SC-47","[Tham chiếu US07] Mục ""Yêu cầu nghiệp vụ"" – ""Các thông tin Code phí hợp lệ sẽ thay thế toàn bộ danh sách các code phí cũ""","US08 – Sao chép Biểu phí","Upload file Excel","Upload file Excel hợp lệ chứa danh sách Code phí (Có chỉnh sửa = No) → hệ thống thay thế toàn bộ Code phí cũ","Happy Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. File Excel (.xlsx) hợp lệ gồm 3 sheet: Code phí, Điều kiện tính phí, Quy tắc tính phí.
+4. Sheet Code phí chứa Code phí D, E với cột ""Có chỉnh sửa chi tiết Code phí hay không?"" = ""No"".","1. Trên form Thêm mới (clone), click nút ""Tải lên"".
+2. Chọn file Excel đã chuẩn bị → click ""Open"".
+3. Chờ hệ thống xử lý validate.","(i) Nghiệp vụ/Logic: Hệ thống thay thế toàn bộ Code phí cũ (A, B, C) bằng danh sách mới (D, E). Code phí A, B, C không còn trong Biểu phí.
+(ii) UI: Phân vùng Thông tin chi tiết hiển thị danh sách Code phí mới gồm D, E.","[Nguồn: US07-TC-001]","","",""
+"US08-TC-048","SC-48","[Tham chiếu US07] Bảng template upload, Sheet Quy tắc tính phí – ""Tối thiểu > 0, Tối đa > 0, Tối thiểu < Tối đa""","US08 – Sao chép Biểu phí","Upload file Excel","Upload file hợp lệ với Code phí Thỏa thuận, Chỉnh sửa = Yes → thay đổi Tối thiểu/Tối đa thành công","Happy Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-01-0001"" có Quy tắc tính phí = Thỏa thuận, Tối thiểu hiện tại = 100, Tối đa = 500.
+4. File Excel: sheet Code phí có ""228-01-0001"" với ""Có chỉnh sửa"" = ""Yes"".
+5. Sheet Quy tắc tính phí: ParentId = ""228-01-0001"", Quy tắc = ""Thỏa thuận"", Tối thiểu = 200, Tối đa = 1000.","1. Trên form Thêm mới (clone), click nút ""Tải lên"".
+2. Chọn file Excel đã chuẩn bị → click ""Open"".
+3. Chờ hệ thống validate 3 bước.
+4. Kiểm tra phân vùng Thông tin chi tiết.","(i) Nghiệp vụ/Logic: Hệ thống cập nhật Code phí ""228-01-0001"" với Tối thiểu = 200, Tối đa = 1000. Dữ liệu Quy tắc tính phí được thay thế thành công.
+(ii) UI: Phân vùng Thông tin chi tiết hiển thị Code phí ""228-01-0001"" với giá trị Tối thiểu/Tối đa mới.","[Nguồn: US07-TC-002]","","",""
+"US08-TC-049","SC-49","[Tham chiếu US07] Bảng template upload, Sheet Quy tắc tính phí – ""Số cố định >= 0""","US08 – Sao chép Biểu phí","Upload file Excel","Upload file hợp lệ với Code phí Số cố định, Chỉnh sửa = Yes → thay đổi Số cố định thành công","Happy Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-02-0001"" có Quy tắc = Số cố định, Số cố định hiện tại = 50000.
+4. File Excel: ""228-02-0001"" với ""Có chỉnh sửa"" = ""Yes"".
+5. Sheet Quy tắc: ParentId = ""228-02-0001"", Số cố định = 75000, Tối thiểu và Tối đa bỏ trống.","1. Trên form Thêm mới (clone), click nút ""Tải lên"".
+2. Chọn file Excel → click ""Open"".
+3. Chờ hệ thống validate.
+4. Kiểm tra phân vùng Thông tin chi tiết.","(i) Nghiệp vụ/Logic: Hệ thống cập nhật Số cố định của ""228-02-0001"" từ 50000 thành 75000.
+(ii) UI: Phân vùng Thông tin chi tiết hiển thị Code phí ""228-02-0001"" với Số cố định = 75,000.","[Nguồn: US07-TC-003]","","",""
+"US08-TC-050","SC-50","[Tham chiếu US07] Bảng ""Xử lý tự động"", Bước 2 – ""Hệ thống sẽ kiểm tra và thay thế dữ liệu Mô tả cũ và Giá trị cũ""","US08 – Sao chép Biểu phí","Upload file Excel","Upload file hợp lệ với Chỉnh sửa = Yes → thay đổi Mô tả và Giá trị tại sheet Điều kiện tính phí thành công","Happy Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-01-0001"" có Điều kiện: Nguồn DL = ""ETL Khách hàng"", Tên trường = ""TARGET"", Operator = ""="", Mô tả hiện tại = ""Loại KH"", Giá trị hiện tại = ""1000"".
+4. File Excel: ""228-01-0001"" với ""Có chỉnh sửa"" = ""Yes"".
+5. Sheet Điều kiện: ParentId = ""228-01-0001"", Nguồn DL = ""ETL Khách hàng"", Tên trường = ""TARGET"", Operator = ""="", Mô tả = ""Loại hình KH cá nhân/doanh nghiệp"", Giá trị = ""4000"".","1. Click nút ""Tải lên"" trên form Thêm mới (clone).
+2. Chọn file Excel → click ""Open"".
+3. Chờ validate.
+4. Kiểm tra phân vùng Thông tin chi tiết → xem Điều kiện tính phí của ""228-01-0001"".","(i) Nghiệp vụ/Logic: Hệ thống thay thế Mô tả cũ = ""Loại KH"" bằng ""Loại hình KH cá nhân/doanh nghiệp"" và Giá trị cũ = ""1000"" bằng ""4000"".
+(ii) UI: Điều kiện tính phí của Code phí ""228-01-0001"" hiển thị Mô tả và Giá trị mới.","[Nguồn: US07-TC-004]","","",""
+"US08-TC-051","SC-51","[Tham chiếu US07] Bảng ""Xử lý tự động"", Bước 1 – ""Với code phí = No, hệ thống sẽ không kiểm tra sheet con""","US08 – Sao chép Biểu phí","Upload file Excel","Upload file hỗn hợp Code phí Yes/No → hệ thống chỉ validate sheet con cho Yes, bỏ qua cho No","Happy Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. File Excel chứa 3 Code phí:
+4. - ""228-01-0001"": ""Có chỉnh sửa"" = ""Yes"" (có dữ liệu ĐK/QT đầy đủ, hợp lệ)
+5. - ""228-01-0002"": ""Có chỉnh sửa"" = ""No""
+6. - ""228-01-0003"": ""Có chỉnh sửa"" = ""No""
+7. Sheet Điều kiện và Quy tắc chỉ có ParentId = ""228-01-0001"".","1. Click nút ""Tải lên"" trên form Thêm mới (clone).
+2. Chọn file Excel → click ""Open"".
+3. Chờ validate.
+4. Kiểm tra danh sách Code phí trên phân vùng Thông tin chi tiết.","(i) Nghiệp vụ/Logic: Hệ thống validate và update chi tiết cho ""228-01-0001"" (Yes). Không validate sheet con cho ""228-01-0002"" và ""228-01-0003"" (No). Upload thành công.
+(ii) UI: Phân vùng Thông tin chi tiết hiển thị 3 Code phí. Code phí ""228-01-0001"" có dữ liệu ĐK/QT được cập nhật.","[Nguồn: US07-TC-005]","","",""
+"US08-TC-052","SC-52","[Tham chiếu US07] Mockup màn hình lỗi – nút ""Upload lại"": ""Thực hiện lại luồng upload file excel""","US08 – Sao chép Biểu phí","Màn hình lỗi","Upload file lỗi → hiển thị màn hình 3 tab → nhấn ""Upload lại"" → chọn file mới thành công","Happy Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. File Excel lỗi (file_loi.xlsx): chứa Code phí không tồn tại.
+4. File Excel hợp lệ (file_ok.xlsx): chứa Code phí hợp lệ.","1. Click nút ""Tải lên"" → chọn file_loi.xlsx → click ""Open"".
+2. Hệ thống hiển thị màn hình ""Danh sách code phí upload lỗi"" với 3 tab.
+3. Click nút ""Upload lại"".
+4. Chọn file_ok.xlsx → click ""Open"".
+5. Chờ hệ thống validate.","(i) Nghiệp vụ/Logic: Bước 2 — hệ thống hiển thị lỗi tại tab Code phí. Bước 5 — hệ thống upload thành công, thay thế toàn bộ Code phí.
+(ii) UI: Bước 2 — Màn hình lỗi hiển thị 3 tab (Code phí, Điều kiện tính phí, Quy tắc tính phí). Bước 5 — Phân vùng Thông tin chi tiết hiển thị danh sách Code phí từ file_ok.xlsx.","[Nguồn: US07-TC-006]","","",""
+"US08-TC-053","SC-53","[Tham chiếu US07] Bước 1 – ""Code phí không tồn tại trong hệ thống""","US08 – Sao chép Biểu phí","Validate Sheet Code phí","Upload file chứa Mã code phí không tồn tại trong hệ thống → Chi tiết lỗi tại tab Code phí","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. File Excel: sheet Code phí chứa mã ""999-99-9999"" (không tồn tại trong hệ thống).","1. Click ""Tải lên"" → chọn file Excel → click ""Open"".
+2. Chờ hệ thống validate.
+3. Quan sát màn hình lỗi.","(i) Nghiệp vụ/Logic: Hệ thống chặn toàn bộ file (All-or-Nothing). Không import bất kỳ dòng nào.
+(ii) UI: Hiển thị màn hình ""Danh sách code phí upload lỗi"" → tab Code phí hiển thị dòng ""999-99-9999"" với Chi tiết lỗi.","[Nguồn: US07-TC-007]","","",""
+"US08-TC-054","SC-54","[Tham chiếu US07] Bước 1 – ""Code phí có trạng thái hoạt động = Hủy""","US08 – Sao chép Biểu phí","Validate Sheet Code phí","Upload file chứa Code phí trạng thái = Hủy → Chi tiết lỗi tại tab Code phí","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-01-0099"" tồn tại trong hệ thống nhưng trạng thái = Hủy.
+4. File Excel: sheet Code phí chứa ""228-01-0099"".","1. Click ""Tải lên"" → chọn file Excel → click ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn toàn bộ file. Code phí ""228-01-0099"" bị đánh lỗi vì trạng thái = Hủy.
+(ii) UI: Tab Code phí hiển thị ""228-01-0099"" với Chi tiết lỗi tương ứng.","[Nguồn: US07-TC-008]","","",""
+"US08-TC-055","SC-55","[Tham chiếu US07] Bước 1 – ""Code phí đang tồn tại tác vụ Chỉnh sửa ở trạng thái Chờ duyệt""","US08 – Sao chép Biểu phí","Validate Sheet Code phí","Upload file chứa Code phí đang Chờ duyệt → Chi tiết lỗi tại tab Code phí","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-01-0050"" đang tồn tại tác vụ Chỉnh sửa ở trạng thái Chờ duyệt.
+4. File Excel chứa ""228-01-0050"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. ""228-01-0050"" bị lỗi vì đang Chờ duyệt, tránh xung đột Maker-Checker.
+(ii) UI: Tab Code phí hiển thị Chi tiết lỗi cho ""228-01-0050"".","[Nguồn: US07-TC-009]","","",""
+"US08-TC-056","SC-56","[Tham chiếu US07] Bước 1 – ""Code phí bị trùng lặp trong danh sách (hiển thị lỗi ở tất cả bản ghi trùng)""","US08 – Sao chép Biểu phí","Validate Sheet Code phí","Upload file chứa Code phí trùng lặp (2 dòng cùng Mã) → lỗi ở TẤT CẢ dòng trùng tại tab Code phí","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. File Excel: sheet Code phí có 2 dòng cùng mã ""228-01-0001"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. CẢ 2 dòng ""228-01-0001"" bị đánh lỗi trùng lặp.
+(ii) UI: Tab Code phí hiển thị 2 dòng ""228-01-0001"" đều có Chi tiết lỗi ""trùng lặp"". Tổng số lỗi >= 2.","[Nguồn: US07-TC-010]","","",""
+"US08-TC-057","SC-57","[Tham chiếu US07] Bước 1 – ""QT = Công thức và Có thay đổi = Yes""","US08 – Sao chép Biểu phí","Validate Sheet Code phí","Code phí QT Công thức + Có chỉnh sửa = Yes → lỗi tại tab Code phí","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-03-0001"" có Quy tắc tính phí = Công thức.
+4. File Excel: ""228-03-0001"" với ""Có chỉnh sửa chi tiết Code phí hay không?"" = ""Yes"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Code phí loại Công thức không cho phép chỉnh sửa chi tiết.
+(ii) UI: Tab Code phí hiển thị ""228-03-0001"" với Chi tiết lỗi.","[Nguồn: US07-TC-011]","","",""
+"US08-TC-058","SC-58","[Tham chiếu US07] Bước 1 – ""Không điền đầy đủ các trường bắt buộc điền""","US08 – Sao chép Biểu phí","Validate Sheet Code phí","Bỏ trống trường bắt buộc trên sheet Code phí → lỗi tại tab Code phí","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. File Excel: sheet Code phí có 1 dòng bỏ trống cột ""Có chỉnh sửa chi tiết Code phí hay không?"" (trường bắt buộc).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Dòng thiếu trường bắt buộc bị báo lỗi.
+(ii) UI: Tab Code phí hiển thị dòng lỗi với Chi tiết lỗi ""Không điền đầy đủ trường bắt buộc"".","[Nguồn: US07-TC-012]","","",""
+"US08-TC-059","SC-59","[Tham chiếu US07] Bước 2 – ""ParentID không thuộc danh sách Code phí ở sheet Code phí""","US08 – Sao chép Biểu phí","Validate Sheet Điều kiện tính phí","ParentId ở sheet Điều kiện không thuộc danh sách Code phí → lỗi tại tab Điều kiện tính phí","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. File Excel: sheet Code phí chứa ""228-01-0001"" (hợp lệ).
+4. Sheet Điều kiện tính phí có ParentId = ""228-99-0099"" (không có trong sheet Code phí).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Điều kiện tính phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. ParentId ""228-99-0099"" không khớp danh sách Code phí.
+(ii) UI: Tab Điều kiện tính phí hiển thị dòng lỗi với Chi tiết lỗi ""ParentId không khớp"".","[Nguồn: US07-TC-013]","","",""
+"US08-TC-060","SC-60","[Tham chiếu US07] Bước 2 – ""Nguồn dữ liệu không thuộc các nguồn dữ liệu tại Thông tin Code phí""","US08 – Sao chép Biểu phí","Validate Sheet Điều kiện tính phí","Nguồn dữ liệu không thuộc danh sách hợp lệ của Code phí → lỗi tại tab Điều kiện tính phí","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-01-0001"" có Loại tính phí = Theo giao dịch (Nguồn DL hợp lệ: API Giao dịch).
+4. File Excel: sheet Điều kiện, ParentId = ""228-01-0001"", Nguồn dữ liệu = ""ETL Thẻ"" (không hợp lệ với Loại tính phí).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Điều kiện tính phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Nguồn dữ liệu ""ETL Thẻ"" không thuộc danh sách hợp lệ của Code phí ""228-01-0001"".
+(ii) UI: Tab Điều kiện tính phí hiển thị dòng lỗi với Chi tiết lỗi.","[Nguồn: US07-TC-014]","","",""
+"US08-TC-061","SC-61","[Tham chiếu US07] Bước 2 – ""Tên trường + Operator không có dữ liệu trùng khớp với dữ liệu hiện hữu""","US08 – Sao chép Biểu phí","Validate Sheet Điều kiện tính phí","Tên trường + Operator không trùng khớp dữ liệu hiện hữu → lỗi tại tab Điều kiện","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-01-0001"" có ĐK: Tên trường = ""TARGET"", Operator = ""="".
+4. File Excel: Tên trường = ""INVALID_FIELD"", Operator = ""="" cho ParentId ""228-01-0001"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Điều kiện tính phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Tên trường ""INVALID_FIELD"" + Operator ""="" không khớp dữ liệu hiện hữu.
+(ii) UI: Tab Điều kiện hiển thị dòng lỗi.","[Nguồn: US07-TC-015]","","",""
+"US08-TC-062","SC-62","[Tham chiếu US07] Bước 2 – ""Tên trường + Operator bị trùng lặp trong cùng một Code phí""","US08 – Sao chép Biểu phí","Validate Sheet Điều kiện tính phí","Trùng lặp Tên trường + Operator cho cùng ParentId → lỗi TẤT CẢ dòng trùng tại tab Điều kiện","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. File Excel: sheet Điều kiện có 2 dòng: ParentId = ""228-01-0001"", Tên trường = ""TARGET"", Operator = ""="".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Điều kiện.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Cả 2 dòng trùng Tên trường + Operator bị báo lỗi.
+(ii) UI: Tab Điều kiện hiển thị 2 dòng đều có Chi tiết lỗi ""trùng lặp"".","[Nguồn: US07-TC-016]","","",""
+"US08-TC-063","SC-63","[Tham chiếu US07] Bước 2 – ""Số lượng điều kiện tính phí không trùng khớp"" → lỗi tại tab Code phí","US08 – Sao chép Biểu phí","Validate Sheet Điều kiện tính phí","Số lượng điều kiện không khớp → Chi tiết lỗi tại tab Code phí (không phải tab Điều kiện)","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-01-0001"" có 5 điều kiện trên hệ thống.
+4. File Excel: sheet Điều kiện chỉ có 3 dòng cho ParentId ""228-01-0001"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Số lượng điều kiện upload (3) không khớp hiện hữu (5).
+(ii) UI: Tab Code phí (KHÔNG phải tab Điều kiện) hiển thị Chi tiết lỗi ""Số lượng điều kiện tính phí không trùng khớp"" cho ""228-01-0001"".","[Nguồn: US07-TC-017] Lưu ý: Lỗi hiển thị tại tab Code phí theo tài liệu v2.","","",""
+"US08-TC-064","SC-64","[Tham chiếu US07] Bước 2 – ""Kiểm tra Mô tả và Giá trị hợp lệ""","US08 – Sao chép Biểu phí","Validate Sheet Điều kiện tính phí","Giá trị sai kiểu dữ liệu (VD: text thay vì number) → lỗi tại tab Điều kiện","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-01-0001"" có ĐK: Tên trường = ""TARGET"", kiểu dữ liệu = Number.
+4. File Excel: cột Giá trị nhập ""abc"" (text thay vì number).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Điều kiện.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Giá trị ""abc"" không đúng kiểu dữ liệu Number.
+(ii) UI: Tab Điều kiện hiển thị dòng lỗi cho TARGET với Chi tiết lỗi.","[Nguồn: US07-TC-018]","","",""
+"US08-TC-065","SC-65","[Tham chiếu US07] Bước 3 – ""ParentID không thuộc danh sách Code phí → lỗi tab Điều kiện tính phí""","US08 – Sao chép Biểu phí","Validate Sheet Quy tắc tính phí","ParentId ở sheet QT không thuộc Code phí → lỗi tại tab Điều kiện tính phí","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. File Excel: sheet Code phí chứa ""228-01-0001"".
+4. Sheet Quy tắc có ParentId = ""228-99-0099"" (không có trong sheet Code phí).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Điều kiện tính phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. ParentId ""228-99-0099"" từ sheet QT không khớp.
+(ii) UI: Tab Điều kiện tính phí hiển thị dòng lỗi.","[Nguồn: US07-TC-019] Lưu ý: Theo tài liệu v2, lỗi sheet QT hiển thị tại tab Điều kiện tính phí.","","",""
+"US08-TC-066","SC-66","[Tham chiếu US07] Bước 3 – ""upload thiếu Quy tắc tính phí hoặc Thiếu Nhóm khách hàng → tab Code phí""","US08 – Sao chép Biểu phí","Validate Sheet Quy tắc tính phí","Thiếu Quy tắc tính phí → lỗi tại tab Code phí","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-01-0001"" có ""Chỉnh sửa"" = ""Yes"" nhưng sheet Quy tắc không có dòng nào cho ParentId ""228-01-0001"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Thiếu Quy tắc tính phí cho ""228-01-0001"".
+(ii) UI: Tab Code phí hiển thị lỗi cho ""228-01-0001"".","[Nguồn: US07-TC-020]","","",""
+"US08-TC-067","SC-67","[Tham chiếu US07] Bảng diễn giải lưu đồ, Bước 4 – ""Nếu không có dữ liệu → Bước 4.a hiển thị thông báo lỗi""","US08 – Sao chép Biểu phí","Validate File Upload","Upload file rỗng (đúng template nhưng 0 dòng dữ liệu) → hiển thị thông báo lỗi","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. File Excel (.xlsx) đúng template (3 sheet) nhưng tất cả sheet đều rỗng (chỉ có header).","1. Click ""Tải lên"" → chọn file rỗng → ""Open"".
+2. Quan sát phản hồi hệ thống.","(i) Nghiệp vụ/Logic: Hệ thống phát hiện không có dữ liệu → Bước 4.a.
+(ii) UI: Hiển thị thông báo lỗi (toast hoặc popup). Không chuyển sang màn hình lỗi 3 tab.","[Nguồn: US07-TC-021]","","",""
+"US08-TC-068","SC-68","[Tham chiếu US07] Áp dụng QTC-07 – ""Upload file định dạng .xlsx""","US08 – Sao chép Biểu phí","Validate File Upload","Upload file sai định dạng (.doc) → FE chặn, toast lỗi","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. File định dạng .doc (không phải .xlsx).","1. Click ""Tải lên"" → chọn file .doc → ""Open"".
+2. Quan sát phản hồi FE.","(i) Nghiệp vụ/Logic: FE chặn file không gửi BE. File .doc không hợp lệ.
+(ii) UI: Toast thông báo lỗi ""Định dạng file không hợp lệ"" hoặc tương đương.","[Nguồn: US07-TC-022] [Theo QTC-07]","","",""
+"US08-TC-069","SC-69","[Tham chiếu US07] Áp dụng QTC-07 – ""Validate dung lượng file upload""","US08 – Sao chép Biểu phí","Validate File Upload","Upload file vượt dung lượng cho phép → FE chặn, toast lỗi","Negative Path","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. File Excel (.xlsx) có dung lượng vượt quá giới hạn cho phép.","1. Click ""Tải lên"" → chọn file quá lớn → ""Open"".
+2. Quan sát phản hồi FE.","(i) Nghiệp vụ/Logic: FE chặn file, không gửi BE.
+(ii) UI: Toast thông báo lỗi dung lượng.","[Nguồn: US07-TC-023] [Theo QTC-07]","","",""
+"US08-TC-070","SC-70","[Tham chiếu US07] BA xác nhận: ""chặn toàn bộ file nếu có 1 bản ghi lỗi"" (QA-01.2)","US08 – Sao chép Biểu phí","Upload file Excel","File có lỗi ở nhiều sheet → All-or-Nothing, không import dòng nào","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. File Excel: sheet Code phí có 1 dòng trùng lặp + sheet Điều kiện có 1 dòng ParentId orphan + sheet Quy tắc có 1 dòng Tối thiểu > Tối đa.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát màn hình lỗi cả 3 tab.","(i) Nghiệp vụ/Logic: Hệ thống chặn toàn bộ file. Không import bất kỳ Code phí nào. All-or-Nothing.
+(ii) UI: Màn hình lỗi hiển thị 3 tab đều có dòng lỗi tương ứng.","[Nguồn: US07-TC-024]","","",""
+"US08-TC-071","SC-71","[Tham chiếu US07] Mockup tab Code phí – ""Y"" bị highlight lỗi; BA xác nhận chỉ ""Yes""/""No""","US08 – Sao chép Biểu phí","Validate Sheet Code phí","Nhập ""Y"" thay vì ""Yes"" vào cột Có chỉnh sửa → lỗi tại tab Code phí","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. File Excel: sheet Code phí có Code phí ""228-01-0001"" với cột ""Có chỉnh sửa"" = ""Y"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Giá trị ""Y"" không hợp lệ. Chỉ chấp nhận ""Yes"" hoặc ""No"".
+(ii) UI: Tab Code phí hiển thị ""228-01-0001"" với ""Y"" và Chi tiết lỗi.","[Nguồn: US07-TC-025]","","",""
+"US08-TC-072","SC-72","[Tham chiếu US07] Template – ""bỏ trống khi QT là Số cố định""","US08 – Sao chép Biểu phí","Validate Sheet Quy tắc tính phí","QT Số cố định nhưng nhập Tối thiểu/Tối đa → lỗi tại tab Quy tắc","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-02-0001"" có QT = Số cố định.
+4. File Excel: sheet Quy tắc, ParentId = ""228-02-0001"", Số cố định = 50000, Tối thiểu = 100 (phải bỏ trống).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc tính phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. QT = Số cố định thì Tối thiểu/Tối đa phải bỏ trống.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","[Nguồn: US07-TC-026]","","",""
+"US08-TC-073","SC-73","[Tham chiếu US07] Template – ""bỏ trống khi QT là Thỏa thuận""","US08 – Sao chép Biểu phí","Validate Sheet Quy tắc tính phí","QT Thỏa thuận nhưng nhập Số cố định → lỗi tại tab Quy tắc","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-01-0001"" có QT = Thỏa thuận.
+4. File Excel: sheet Quy tắc, ParentId = ""228-01-0001"", Số cố định = 50000 (phải bỏ trống), Tối thiểu = 100, Tối đa = 500.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. QT = Thỏa thuận thì Số cố định phải bỏ trống.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","[Nguồn: US07-TC-027]","","",""
+"US08-TC-074","SC-74","[Tham chiếu US07] VA SC-25 – ""Dữ liệu readonly phải trùng khớp (Số cố định / Thỏa thuận)""","US08 – Sao chép Biểu phí","Validate Sheet Quy tắc tính phí","Cột Quy tắc tính phí readonly nhập sai giá trị → lỗi tại tab Quy tắc","Negative Path","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-02-0001"" có QT = ""Số cố định"" trên hệ thống.
+4. File Excel: sheet Quy tắc, ParentId = ""228-02-0001"", cột Quy tắc tính phí = ""Thỏa thuận"" (sai so với hệ thống).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Cột Quy tắc tính phí là readonly, phải trùng khớp hệ thống.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","[Nguồn: US07-TC-028] [Nguồn: VA Review]","","",""
+"US08-TC-075","SC-75","[Tham chiếu US07] Template – ""Số cố định phải >= 0""","US08 – Sao chép Biểu phí","Validate Sheet Quy tắc tính phí","Số cố định = 0 (biên dưới) → hợp lệ, upload thành công","Boundary Value","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-02-0001"" có QT = Số cố định, ""Có chỉnh sửa"" = ""Yes"".
+4. File Excel: Số cố định = 0, Tối thiểu/Tối đa bỏ trống.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Kiểm tra kết quả.","(i) Nghiệp vụ/Logic: Hệ thống chấp nhận Số cố định = 0 (>= 0 hợp lệ). Upload thành công.
+(ii) UI: Phân vùng Thông tin chi tiết hiển thị Code phí với Số cố định = 0.","[Nguồn: US07-TC-029]","","",""
+"US08-TC-076","SC-76","[Tham chiếu US07] Template – ""Tối thiểu > 0, Tối đa > 0, Tối thiểu < Tối đa""","US08 – Sao chép Biểu phí","Validate Sheet Quy tắc tính phí","Tối thiểu = 1, Tối đa = 2 (biên dưới hợp lệ) → upload thành công","Boundary Value","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-01-0001"" QT = Thỏa thuận, ""Có chỉnh sửa"" = ""Yes"".
+4. File Excel: Tối thiểu = 1, Tối đa = 2.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.","(i) Nghiệp vụ/Logic: 1 < 2, cả 2 > 0. Upload thành công.
+(ii) UI: Code phí hiển thị Tối thiểu = 1, Tối đa = 2.","[Nguồn: US07-TC-030]","","",""
+"US08-TC-077","SC-77","[Tham chiếu US07] BA xác nhận: ""Tối đa phải > Tối thiểu""","US08 – Sao chép Biểu phí","Validate Sheet Quy tắc tính phí","Tối thiểu = Tối đa (VD: cả 2 = 100) → lỗi vì phải Tối thiểu < Tối đa (strict)","Boundary Value","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-01-0001"" QT = Thỏa thuận.
+4. File Excel: Tối thiểu = 100, Tối đa = 100.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. 100 = 100, vi phạm Tối thiểu < Tối đa.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","[Nguồn: US07-TC-031]","","",""
+"US08-TC-078","SC-78","[Tham chiếu US07] BA xác nhận: ""Tối đa phải > Tối thiểu""","US08 – Sao chép Biểu phí","Validate Sheet Quy tắc tính phí","Tối thiểu > Tối đa (VD: 500 > 100) → lỗi","Boundary Value","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-01-0001"" QT = Thỏa thuận.
+4. File Excel: Tối thiểu = 500, Tối đa = 100.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. 500 > 100, vi phạm.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","[Nguồn: US07-TC-032]","","",""
+"US08-TC-079","SC-79","[Tham chiếu US07] Template – ""giá trị nhập vào phải là số và > 0""","US08 – Sao chép Biểu phí","Validate Sheet Quy tắc tính phí","Tối thiểu = 0 (biên dưới, phải > 0) → lỗi","Boundary Value","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-01-0001"" QT = Thỏa thuận.
+4. File Excel: Tối thiểu = 0.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Tối thiểu = 0, vi phạm > 0.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","[Nguồn: US07-TC-033]","","",""
+"US08-TC-080","SC-80","[Tham chiếu US07] Template – ""Trường hợp không có số Tối đa, bỏ trống""","US08 – Sao chép Biểu phí","Validate Sheet Quy tắc tính phí","Chỉ nhập Tối thiểu, bỏ trống Tối đa → hợp lệ","Boundary Value","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-01-0001"" QT = Thỏa thuận.
+4. File Excel: Tối thiểu = 100, Tối đa bỏ trống.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.","(i) Nghiệp vụ/Logic: Upload thành công. Tối đa được phép bỏ trống.
+(ii) UI: Code phí hiển thị Tối thiểu = 100, Tối đa trống.","[Nguồn: US07-TC-034]","","",""
+"US08-TC-081","SC-81","[Tham chiếu US07] Template – ""Số cố định phải >= 0""","US08 – Sao chép Biểu phí","Validate Sheet Quy tắc tính phí","Số cố định = -100 (số âm) → lỗi","Boundary Value","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-02-0001"" QT = Số cố định.
+4. File Excel: Số cố định = -100.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. -100 < 0, vi phạm >= 0.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","[Nguồn: US07-TC-035]","","",""
+"US08-TC-082","SC-82","[Tham chiếu US07] VA SC-32 – ""Không giới hạn số lượng bản ghi""","US08 – Sao chép Biểu phí","Upload file Excel","Upload file 2000 dòng → đảm bảo performance không timeout","Boundary Value","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. File Excel: sheet Code phí chứa 2000 Code phí hợp lệ (tất cả ""Có chỉnh sửa"" = ""No"").","1. Click ""Tải lên"" → chọn file 2000 dòng → ""Open"".
+2. Chờ hệ thống validate.
+3. Ghi nhận thời gian xử lý.","(i) Nghiệp vụ/Logic: Upload thành công. Không timeout. Hệ thống thay thế toàn bộ Code phí cũ.
+(ii) UI: Phân vùng Thông tin chi tiết hiển thị 2000 Code phí.","[Nguồn: US07-TC-036] [Nguồn: VA Review] Performance test","","",""
+"US08-TC-083","SC-83","[Tham chiếu US07] Table 3 – tất cả trường CÁC TRƯỜNG THÔNG TIN đều ◎ (readonly)","US08 – Sao chép Biểu phí","Màn hình lỗi","Tất cả trường trên màn hình lỗi ở trạng thái readonly (◎) — không cho chỉnh sửa trên UI","Field Validation","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. File Excel có lỗi (VD: Code phí không tồn tại) → đã hiển thị màn hình lỗi.","1. Tại màn hình ""Danh sách code phí upload lỗi"", tab Code phí.
+2. Kiểm tra các cột: Mã phí, Có chỉnh sửa, Chi tiết lỗi.
+3. Thử click vào bất kỳ ô dữ liệu nào.
+4. Lặp lại cho tab Điều kiện tính phí và tab Quy tắc tính phí.","(i) Nghiệp vụ/Logic: Tất cả dữ liệu trên 3 tab đều readonly, không cho phép chỉnh sửa.
+(ii) UI: Không có ô nào cho phép nhập liệu. Các trường hiển thị dạng text thuần.","[Nguồn: US07-TC-037]","","",""
+"US08-TC-084","SC-84","[Tham chiếu US07] Table 3 – trường ""Tổng số lỗi"" và ""Chi tiết lỗi"" trên mỗi tab","US08 – Sao chép Biểu phí","Màn hình lỗi","Mỗi tab hiển thị đúng Tổng số lỗi và cột Chi tiết lỗi cho từng dòng","Field Validation","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. File Excel có 3 dòng lỗi ở sheet Code phí (VD: 1 không tồn tại, 1 trùng lặp, 1 bỏ trống).","1. Upload file → màn hình lỗi.
+2. Tại tab Code phí, kiểm tra ""Tổng số lỗi"".
+3. Kiểm tra cột ""Chi tiết lỗi"" từng dòng.
+4. Lặp lại cho tab Điều kiện và Quy tắc (nếu có lỗi).","(i) Nghiệp vụ/Logic: Tổng số lỗi = 3 tại tab Code phí. Mỗi dòng có Chi tiết lỗi mô tả cụ thể.
+(ii) UI: ""Tổng số lỗi"" hiển thị số 3. Cột Chi tiết lỗi có nội dung lỗi riêng cho từng dòng.","[Nguồn: US07-TC-038]","","",""
+"US08-TC-085","SC-85","[Tham chiếu US07] Table 3, nút ""Đóng"" – Áp dụng QTC-15","US08 – Sao chép Biểu phí","Màn hình lỗi","Nhấn nút ""Đóng"" trên màn hình lỗi → thoát không popup, quay về màn hình Biểu phí","Field Validation","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Đang ở màn hình ""Danh sách code phí upload lỗi"".","1. Tại màn hình lỗi, click nút ""Đóng"".
+2. Quan sát hành vi hệ thống.","(i) Nghiệp vụ/Logic: Hệ thống đóng màn hình lỗi. Không lưu, không thay đổi dữ liệu Biểu phí.
+(ii) UI: Không hiển thị popup xác nhận. Quay về màn hình Biểu phí.","[Nguồn: US07-TC-039] [Theo QTC-15]","","",""
+"US08-TC-086","SC-86","[Tham chiếu US07] Table 3, nút ""Upload lại"" – ""Thực hiện lại luồng upload file excel""","US08 – Sao chép Biểu phí","Màn hình lỗi","Nhấn nút ""Upload lại"" → mở lại luồng upload file Excel","Field Validation","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Đang ở màn hình ""Danh sách code phí upload lỗi"".","1. Tại màn hình lỗi, click nút ""Upload lại"".
+2. Quan sát hành vi hệ thống.","(i) Nghiệp vụ/Logic: Hệ thống mở lại dialog chọn file để upload file mới.
+(ii) UI: Dialog chọn file xuất hiện.","[Nguồn: US07-TC-040]","","",""
+"US08-TC-087","SC-87","[Tham chiếu US07] VA SC-33 – ""Hệ thống mặc định bỏ qua""","US08 – Sao chép Biểu phí","Upload file Excel","Code phí = No nhưng user vẫn nhập data ở sheet Điều kiện/Quy tắc → hệ thống bỏ qua, không lỗi","Field Validation","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. File Excel: Code phí ""228-01-0002"" với ""Có chỉnh sửa"" = ""No"".
+4. Sheet Điều kiện có dòng ParentId = ""228-01-0002"" với dữ liệu bất kỳ.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Kiểm tra kết quả.","(i) Nghiệp vụ/Logic: Hệ thống bỏ qua dữ liệu ở sheet con cho ""228-01-0002"" (vì = No). Upload thành công nếu các Code phí khác hợp lệ.
+(ii) UI: Không hiển thị lỗi cho ""228-01-0002"".","[Nguồn: US07-TC-041] [Nguồn: VA Review]","","",""
+"US08-TC-088","SC-88","[Tham chiếu US07] VA SC-23 – ""Với KH=No, người dùng để trống Segment""","US08 – Sao chép Biểu phí","Validate Sheet Quy tắc tính phí","Nhập Segment khi Code phí có ""Khai báo theo nhóm KH"" = No → lỗi tại tab Quy tắc","Field Validation","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-02-0001"" có ""Khai báo theo nhóm KH"" = No.
+4. File Excel: sheet Quy tắc, ParentId = ""228-02-0001"", Segment = ""KH thông thường"" (phải bỏ trống).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Code phí KH=No phải bỏ trống Segment.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","[Nguồn: US07-TC-042] [Nguồn: VA Review]","","",""
+"US08-TC-089","SC-89","[Tham chiếu US07] BA xác nhận – ""highlight tại sheet code phí"" (QA-03.3)","US08 – Sao chép Biểu phí","Validate Sheet Code phí","Chỉnh sửa = Yes nhưng thiếu dữ liệu ở sheet Điều kiện/Quy tắc → lỗi tại tab Code phí","Business Logic","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-01-0001"" hợp lệ, ""Có chỉnh sửa"" = ""Yes"".
+4. File Excel: sheet Điều kiện và sheet Quy tắc KHÔNG có dòng nào với ParentId = ""228-01-0001"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Code phí ""228-01-0001"" khai báo chỉnh sửa nhưng thiếu dữ liệu sheet con.
+(ii) UI: Tab Code phí hiển thị lỗi ""thiếu dữ liệu tại sheet con"" cho ""228-01-0001"".","[Nguồn: US07-TC-044]","","",""
+"US08-TC-090","SC-90","[Tham chiếu US07] BA xác nhận – ""nhóm KH chỉ có Hoạt động/Không hoạt động""","US08 – Sao chép Biểu phí","Validate Sheet Quy tắc tính phí","Segment nhập Nhóm KH đang Không hoạt động (Inactive) → lỗi","Business Logic","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-01-0001"" có ""Khai báo theo nhóm KH"" = Yes.
+4. Nhóm KH ""NSNN-Gold"" đang ở trạng thái ""Không hoạt động"".
+5. File Excel: sheet Quy tắc, Segment = ""NSNN-Gold"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Nhóm KH ""NSNN-Gold"" đang Không hoạt động.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi cho Segment ""NSNN-Gold"".","[Nguồn: US07-TC-045]","","",""
+"US08-TC-091","SC-91","[Tham chiếu US07] BA xác nhận – ""exact match"" (QA-03.1)","US08 – Sao chép Biểu phí","Validate Sheet Điều kiện tính phí","Trường readonly nhập sai case (VD: ""etl khách hàng"" thay vì ""ETL Khách hàng"") → exact match → lỗi","Business Logic","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Code phí ""228-01-0001"" có Nguồn DL = ""ETL Khách hàng"" (exact).
+4. File Excel: Nguồn dữ liệu = ""etl khách hàng"" (sai case).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Điều kiện.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. ""etl khách hàng"" không exact match ""ETL Khách hàng"".
+(ii) UI: Tab Điều kiện hiển thị dòng lỗi.","[Nguồn: US07-TC-046]","","",""
+"US08-TC-092","SC-92","[Tham chiếu US07] Bước 4.1 và Bước 5 – ""Tham chiếu tới luồng Thêm mới/Sửa Biểu phí tại US06""","US08 – Sao chép Biểu phí","Upload file Excel","Upload thành công → dữ liệu hiển thị trên phân vùng Thông tin chi tiết → tham chiếu US06","Business Logic","High","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. File Excel hợp lệ chứa 5 Code phí.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate thành công.
+3. Kiểm tra phân vùng Thông tin chi tiết.
+4. Thực hiện lưu Biểu phí (tham chiếu US06).
++ 4. Kiểm tra danh sách Code phí mới hiển thị đầy đủ trên phân vùng Thông tin chi tiết.","(i) Bước 3 — 5 Code phí mới hiển thị... Bước 4 — Tiếp tục luồng US06...
+(i) Nghiệp vụ/Logic: 5 Code phí mới thay thế Code phí cũ trên Phân vùng Thông tin chi tiết.
+Dữ liệu chưa được lưu vào DB (chỉ hiển thị tạm trên FE).
+Maker phải click ""Xác nhận"" (US06) để tạo tác vụ Chờ duyệt.
+(ii) UI: Phân vùng Thông tin chi tiết hiển thị 5 Code phí mới.
+Nút ""Xác nhận"" của màn hình Chỉnh sửa Biểu phí vẫn enabled.","[Nguồn: US07-TC-047] [Theo QTC-12]","","",""
+"US08-TC-093","SC-93","[Tham chiếu US07] QTC-11 + NFR – chống spam click cho hành động upload","US08 – Sao chép Biểu phí","Upload file Excel","Spam click nút ""Tải lên"" (double-click) → hệ thống chỉ xử lý 1 lần","NFR","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. File Excel hợp lệ.","1. Trên form Thêm mới (clone), double-click nhanh nút ""Tải lên"".
+2. Quan sát số lượng dialog chọn file xuất hiện.","(i) Nghiệp vụ/Logic: Hệ thống chỉ xử lý 1 request upload, không tạo trùng lặp.
+(ii) UI: Chỉ mở 1 dialog chọn file.","[Nguồn: US07-TC-048] [Theo QTC-11]","","",""
+"US08-TC-094","SC-94","[Tham chiếu US07] NFR – chống spam click cho nút Upload lại","US08 – Sao chép Biểu phí","Màn hình lỗi","Spam click nút ""Upload lại"" → chỉ mở 1 dialog chọn file","NFR","Medium","1. User đăng nhập với quyền Maker trên chức năng Biểu phí.
+2. Đã nhấn 'Sao chép' biểu phí gốc → Form Thêm mới Biểu phí hiển thị với dữ liệu pre-fill.
+3. Đang ở màn hình ""Danh sách code phí upload lỗi"".","1. Double-click nhanh nút ""Upload lại"".
+2. Quan sát số lượng dialog chọn file.","(i) Nghiệp vụ/Logic: Hệ thống chỉ mở 1 dialog, không mở trùng.
+(ii) UI: 1 dialog chọn file duy nhất.","[Nguồn: US07-TC-049]","","",""

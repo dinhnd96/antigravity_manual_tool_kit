@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cha Giàu Cha Nghèo — Toàn bộ Sơ đồ Trực quan</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #0f0f1a; --card: #16213e; --border: #0f3460; --accent: #e94560; --accent2: #53a8b6; --text: #e0e0e0; --muted: #8a8a9a; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
+        .hero { text-align: center; padding: 60px 40px 30px; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+        .hero h1 { font-size: 36px; color: #fff; margin-bottom: 12px; }
+        .hero p { color: var(--muted); font-size: 16px; max-width: 700px; margin: 0 auto; }
+        nav { position: sticky; top: 0; z-index: 100; background: rgba(15,15,26,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); padding: 12px 40px; display: flex; gap: 8px; flex-wrap: wrap; }
+        nav a { color: var(--accent2); text-decoration: none; padding: 6px 14px; border-radius: 20px; font-size: 13px; border: 1px solid var(--border); transition: all 0.2s; }
+        nav a:hover, nav a.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .section-group { padding: 20px 40px; }
+        .section-group h2 { color: var(--accent); font-size: 22px; margin: 30px 0 10px; padding-top: 20px; border-top: 2px solid var(--border); }
+        .section-group h2:first-child { border-top: none; }
+        .diagram-card { background: var(--card); border-radius: 14px; padding: 30px; margin: 20px 0; border: 1px solid var(--border); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        .diagram-card h3 { color: var(--accent2); font-size: 18px; margin-bottom: 6px; }
+        .diagram-card .desc { color: var(--muted); font-size: 14px; margin-bottom: 20px; font-style: italic; }
+        .mermaid { display: flex; justify-content: center; padding: 10px 0; overflow-x: auto; }
+        footer { text-align: center; padding: 30px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); margin-top: 40px; }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>📚 Cha Giàu Cha Nghèo — Sơ đồ Trực quan</h1>
+    <p>Toàn bộ diagrams từ bộ 3 tài liệu Mapping: Knowledge Architecture, Concept Matrix, Core Workflows — gộp trong 1 trang duy nhất.</p>
+</div>
+
+<nav>
+    <a href="#s1">🌳 Knowledge Tree</a>
+    <a href="#s2">🔄 Kim tứ đồ Lifecycle</a>
+    <a href="#s3">💰 Dòng tiền</a>
+    <a href="#s4">🔗 Integration Map</a>
+    <a href="#s5">📊 Cashflow Quadrant</a>
+    <a href="#s6">🐀 Rat Race</a>
+    <a href="#s7">➡️ E→S→B→I</a>
+    <a href="#s8">🧠 Financial IQ</a>
+    <a href="#s9">🗺️ Lộ trình</a>
+</nav>
+
+<div class="section-group">
+    <h2>📘 Tài liệu 1: Knowledge Architecture</h2>
+
+    <div class="diagram-card" id="s1">
+        <h3>1. Bản đồ Phân rã Tri thức (Knowledge Tree)</h3>
+        <p class="desc">5 Tập — 37 Chương, phân cấp theo trụ cột tư duy</p>
+        <div class="mermaid">
+mindmap
+  root((Cha Giàu Cha Nghèo — 5 Tập))
+    Tập I — Nền tảng Tư duy
+      Nhận thức Tiền bạc
+        Bài 1 Người giàu không làm việc vì tiền
+        Bài 2 Tại sao cần học về tài chính
+      Chiến lược Hành động
+        Bài 3 Nghĩ đến kinh doanh của mình
+        Bài 5 Người giàu tạo ra tiền
+        Bài 6 Làm việc để học đừng vì tiền
+      Khung Thực hành
+        5 Rào cản tài chính
+        10 Bước khởi đầu
+    Tập II — Kim tứ đồ
+      Phân loại Người
+        E Employee
+        S Self-Employed
+        B Business Owner
+        I Investor
+      Hệ thống Kinh doanh
+        3 Kiểu hệ thống DN
+      Nấc thang Đầu tư
+        7 Cấp bậc đầu tư
+    Tập III — Đầu tư Nâng cao
+      Quy tắc 90-10
+      Nền móng Tài sản
+      3 Lựa chọn đầu tư
+    Tập IV — Giáo dục Tài chính
+      Giáo dục sớm
+      Học từ Sai lầm
+      Trí thông minh Tài chính
+    Tập V — Nghỉ hưu Giàu có
+      Thu nhập Thụ động
+      Đòn bẩy Tài chính
+      Kế hoạch dài hạn
+        </div>
+    </div>
+
+    <div class="diagram-card" id="s2">
+        <h3>2. Vòng đời Kim tứ đồ (E → S → B → I)</h3>
+        <p class="desc">Hành trình chuyển hóa tư duy từ Nhân viên đến Tự do Tài chính</p>
+        <div class="mermaid">
+stateDiagram-v2
+    [*] --> VoMinh : Sinh ra — Trường học không dạy về tiền
+    VoMinh --> Employee : Đi học → Đi làm thuê
+    Employee --> Employee : Vòng lặp Rat Race
+    Employee --> SelfEmployed : Tự kinh doanh nhỏ
+    SelfEmployed --> Employee : Thất bại → Quay lại
+    SelfEmployed --> BusinessOwner : Xây dựng hệ thống
+    BusinessOwner --> Investor : Tiền làm việc cho mình
+    Investor --> TuDoTaiChinh : Thu nhập thụ động lớn hơn Chi phí
+    TuDoTaiChinh --> [*] : Nghỉ hưu sớm và Giàu có
+        </div>
+    </div>
+
+    <div class="diagram-card" id="s3">
+        <h3>3. Vòng đời Dòng tiền (Tài sản vs Nợ)</h3>
+        <p class="desc">Cơ chế phân biệt Tài sản thực sự và Nợ ngụy trang</p>
+        <div class="mermaid">
+stateDiagram-v2
+    [*] --> ThuNhap : Lương hoặc Doanh thu
+    ThuNhap --> ChiTieu : Chi tiêu sinh hoạt
+    ThuNhap --> MuaTaiSan : Mua Tài sản
+    ThuNhap --> MuaNo : Mua Nợ
+    MuaTaiSan --> ThuNhapThuDong : Sinh dòng tiền vào
+    ThuNhapThuDong --> ThuNhap : Tái đầu tư
+    MuaNo --> ChiPhiDinhKy : Phát sinh chi phí định kỳ
+    ChiPhiDinhKy --> ThuNhap : Cần kiếm thêm để trả
+    ThuNhapThuDong --> TuDoTaiChinh : Thu nhập thụ động lớn hơn Chi phí
+    TuDoTaiChinh --> [*]
+        </div>
+    </div>
+
+    <div class="diagram-card" id="s4">
+        <h3>4. Bản đồ Liên kết giữa các Tập (Integration Map)</h3>
+        <p class="desc">5 tập sách tạo thành hệ thống kiến thức bổ trợ lẫn nhau</p>
+        <div class="mermaid">
+flowchart LR
+    subgraph T1["Tập I: Nền tảng"]
+        A1["6 Bài học cốt lõi"]
+        A2["5 Rào cản"]
+        A3["10 Bước khởi đầu"]
+    end
+    subgraph T2["Tập II: Kim tứ đồ"]
+        B1["4 Nhóm E-S-B-I"]
+        B2["7 Cấp bậc đầu tư"]
+        B3["3 Kiểu hệ thống"]
+    end
+    subgraph T3["Tập III: Đầu tư"]
+        C1["Quy tắc 90/10"]
+        C2["Nền móng tài sản"]
+    end
+    subgraph T4["Tập IV: Giáo dục"]
+        D1["Giáo dục tài chính sớm"]
+        D2["Học từ sai lầm"]
+    end
+    subgraph T5["Tập V: Nghỉ hưu"]
+        E1["Thu nhập thụ động"]
+        E2["Đòn bẩy tài chính"]
+    end
+    A1 -->|"Tư duy nền tảng"| B1
+    A3 -->|"Thực hành"| B3
+    B1 -->|"Chọn B hoặc I"| C1
+    B2 -->|"Nâng cấp"| C2
+    C2 -->|"Đòn bẩy"| E2
+    A2 -->|"Vượt rào cản"| D2
+        </div>
+    </div>
+
+    <h2>📗 Tài liệu 2: Concept Matrix</h2>
+
+    <div class="diagram-card" id="s5">
+        <h3>5. Kim Tứ Đồ — Cashflow Quadrant</h3>
+        <p class="desc">Khái niệm trung tâm Tập II — 4 nhóm người theo cách kiếm thu nhập</p>
+        <div class="mermaid">
+quadrantChart
+    title Kim Tứ Đồ — 4 Cách Kiếm Thu Nhập
+    x-axis "Làm cho người khác" --> "Làm cho mình"
+    y-axis "Đổi thời gian lấy tiền" --> "Hệ thống sinh tiền"
+    quadrant-1 "B — Chủ doanh nghiệp"
+    quadrant-2 "I — Nhà đầu tư"
+    quadrant-3 "E — Nhân viên"
+    quadrant-4 "S — Tự doanh"
+        </div>
+    </div>
+
+    <h2>📙 Tài liệu 3: Core Workflows</h2>
+
+    <div class="diagram-card" id="s6">
+        <h3>6. Luồng 1: Thoát khỏi "Rat Race"</h3>
+        <p class="desc">Con đường từ nhân viên bị mắc kẹt sang tự do tài chính</p>
+        <div class="mermaid">
+flowchart TD
+    A["🏫 Trường học\nKhông dạy về tài chính"] --> B["💼 Đi làm\nKiếm lương hàng tháng"]
+    B --> C{"Dùng lương\nlàm gì?"}
+    C -->|"Đa số người"| D["🐀 RAT RACE\nLương → Chi phí → Nợ\n→ Cần thêm lương"]
+    D --> D
+    C -->|"Theo Bố Giàu"| E["📚 Học tài chính\nTài sản vs Nợ"]
+    E --> F["💰 Trả cho mình trước\nMua Tài sản"]
+    F --> G["🏠 Xây cột Tài sản\nBĐS, Cổ phiếu, DN"]
+    G --> H{"Thu nhập thụ động\n> Chi phí?"}
+    H -->|"Chưa"| F
+    H -->|"Rồi"| I["🎯 TỰ DO TÀI CHÍNH"]
+    style D fill:#ff6b6b,color:#fff
+    style I fill:#51cf66,color:#fff
+    style A fill:#74c0fc,color:#fff
+        </div>
+    </div>
+
+    <div class="diagram-card" id="s7">
+        <h3>7. Luồng 2: Di chuyển E → S → B → I</h3>
+        <p class="desc">Từ phía trái (đổi thời gian) sang phía phải (hệ thống sinh tiền)</p>
+        <div class="mermaid">
+flowchart LR
+    subgraph LEFT["Phía Trái — Đổi thời gian lấy tiền"]
+        E["E — Nhân viên\n• Lương cố định\n• An toàn cao\n• Thuế cao nhất"]
+        S["S — Tự doanh\n• Dừng làm = Dừng tiền\n• Thuế cao"]
+    end
+    subgraph RIGHT["Phía Phải — Hệ thống sinh tiền"]
+        B["B — Chủ DN\n• Sở hữu hệ thống\n• Thuế thấp hơn"]
+        I["I — Nhà đầu tư\n• Tiền sinh tiền\n• Thuế thấp nhất"]
+    end
+    E -->|"Bước 1"| S
+    S -->|"Bước 2"| B
+    B -->|"Bước 3"| I
+    E -.->|"Đường tắt"| B
+    style LEFT fill:#ffe3e3,color:#000
+    style RIGHT fill:#d3f9d8,color:#000
+        </div>
+    </div>
+
+    <div class="diagram-card" id="s8">
+        <h3>8. Luồng 3: Trí thông minh Tài chính</h3>
+        <p class="desc">4 trụ cột kiến thức quyết định thành bại tài chính</p>
+        <div class="mermaid">
+flowchart TD
+    CENTER["🧠 TRÍ THÔNG MINH TÀI CHÍNH"]
+    CENTER --> P1["📊 KẾ TOÁN\n• Báo cáo tài chính\n• Tài sản vs Nợ"]
+    CENTER --> P2["📈 ĐẦU TƯ\n• 7 cấp bậc\n• Quản lý rủi ro"]
+    CENTER --> P3["🏛️ THỊ TRƯỜNG\n• Cung Cầu\n• Phát hiện cơ hội"]
+    CENTER --> P4["⚖️ LUẬT PHÁP\n• Cấu trúc công ty\n• Đòn bẩy thuế"]
+    P1 --> R["🎯 Nhìn thấy cơ hội\nmà người khác không thấy"]
+    P2 --> R
+    P3 --> R
+    P4 --> R
+    style CENTER fill:#845ef7,color:#fff
+    style R fill:#51cf66,color:#fff
+        </div>
+    </div>
+
+    <div class="diagram-card" id="s9">
+        <h3>9. Tổng kết: Lộ trình Hành động</h3>
+        <p class="desc">5 bước từ thay đổi tư duy đến tự do tài chính</p>
+        <div class="mermaid">
+flowchart LR
+    S1["1️⃣ Thay đổi TƯ DUY\n(Tập I)"] --> S2["2️⃣ Xác định VỊ TRÍ\nKim tứ đồ\n(Tập II)"]
+    S2 --> S3["3️⃣ Xây KIẾN THỨC\n(Tập III-IV)"]
+    S3 --> S4["4️⃣ HÀNH ĐỘNG\n10 bước\n(Tập I Ch.9)"]
+    S4 --> S5["5️⃣ Xây TÀI SẢN\n(Tập V)"]
+    S5 --> S6["🏆 TỰ DO\nTÀI CHÍNH"]
+    style S1 fill:#74c0fc
+    style S6 fill:#51cf66,color:#fff
+        </div>
+    </div>
+</div>
+
+<footer>Cha Giàu Cha Nghèo — System Mapping Synthesizer | 9 Diagrams từ 3 Tài liệu Mapping</footer>
+
+<script>
+    mermaid.initialize({
+        startOnLoad: true, theme: 'dark',
+        themeVariables: { primaryColor: '#e94560', primaryTextColor: '#fff', primaryBorderColor: '#0f3460', lineColor: '#53a8b6', secondaryColor: '#0f3460', tertiaryColor: '#16213e', noteBkgColor: '#0f3460', noteTextColor: '#e0e0e0', edgeLabelBackground: '#16213e', clusterBkg: '#0f346080', clusterBorder: '#53a8b6' },
+        flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' }
+    });
+</script>
+</body>
+</html>

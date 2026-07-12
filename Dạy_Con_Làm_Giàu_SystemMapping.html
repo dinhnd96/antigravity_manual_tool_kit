@@ -1,0 +1,1798 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dạy Con Làm Giàu - Bản Đồ Hệ Thống Hóa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            theme: 'dark',
+            startOnLoad: true,
+            themeVariables: {
+                background: '#151f32',
+                primaryColor: '#1f2d44',
+                primaryTextColor: '#f8fafc',
+                lineColor: '#00adb5',
+                nodeBorder: '#1f2d44',
+                mainBkg: '#151f32'
+            }
+        });
+    </script>
+    <style>
+        :root {
+            --bg-main: #0b0f19;
+            --bg-card: #151f32;
+            --bg-nav: rgba(21, 31, 50, 0.75);
+            --border-color: #1f2d44;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #ff2e63;
+            --accent-glow: rgba(255, 46, 99, 0.3);
+            --cyan: #00adb5;
+            --cyan-glow: rgba(0, 173, 181, 0.3);
+            --font-title: 'Outfit', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-bottom: 60px;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding: 80px 24px;
+            text-align: center;
+            background: radial-gradient(circle at top, rgba(0, 173, 181, 0.15), transparent 60%);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero h1 {
+            font-family: var(--font-title);
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 30%, var(--cyan) 70%, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 6px 14px;
+            background-color: rgba(31, 45, 68, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--cyan);
+        }
+
+        /* Navigation Bar */
+        .nav-container {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: var(--bg-nav);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 24px;
+        }
+
+        .nav-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: none; /* Firefox */
+        }
+        
+        .tabs::-webkit-scrollbar {
+            display: none; /* Safari/Chrome */
+        }
+
+        .tab-btn {
+            padding: 8px 16px;
+            background: none;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            color: var(--text-muted);
+            font-family: var(--font-title);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-main);
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .tab-btn.active {
+            color: var(--cyan);
+            background-color: rgba(0, 173, 181, 0.08);
+            border-color: rgba(0, 173, 181, 0.2);
+            box-shadow: 0 0 12px rgba(0, 173, 181, 0.1);
+        }
+
+        .search-box {
+            position: relative;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 8px 16px 8px 36px;
+            background-color: rgba(11, 15, 25, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .search-box input:focus {
+            border-color: var(--cyan);
+        }
+
+        .search-box svg {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            fill: var(--text-muted);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding: 0 24px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Volume Header */
+        .volume-header {
+            margin-bottom: 32px;
+            border-left: 4px solid var(--cyan);
+            padding-left: 16px;
+        }
+
+        .volume-header h2 {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .volume-desc {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 900px;
+        }
+
+        /* Diagrams Section */
+        .diagrams-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 600px) {
+            .diagrams-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .diagram-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .diagram-card h3 {
+            font-family: var(--font-title);
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+            color: var(--cyan);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        .mermaid {
+            background-color: #151f32 !important;
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Chapters Grid */
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 24px;
+        }
+
+        .chapter-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(0, 173, 181, 0.3);
+        }
+
+        .card-header {
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chapter-badge {
+            padding: 2px 8px;
+            background-color: rgba(255, 46, 99, 0.1);
+            border: 1px solid rgba(255, 46, 99, 0.2);
+            color: var(--accent);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .card-header h3 {
+            font-family: var(--font-title);
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .section-detail {
+            font-size: 0.92rem;
+        }
+
+        .section-detail strong {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--text-main);
+        }
+
+        .section-detail p {
+            color: var(--text-muted);
+            text-align: justify;
+        }
+
+        .border-accent {
+            border-left: 2.5px solid var(--accent);
+            padding-left: 8px;
+        }
+
+        .border-cyan {
+            border-left: 2.5px solid var(--cyan);
+            padding-left: 8px;
+        }
+
+        .quote-box {
+            background-color: rgba(11, 15, 25, 0.4);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: auto;
+            position: relative;
+        }
+
+        .quote-icon {
+            position: absolute;
+            top: 4px;
+            left: 8px;
+            font-size: 1.8rem;
+            color: rgba(0, 173, 181, 0.15);
+            line-height: 1;
+            font-family: Georgia, serif;
+        }
+
+        .quote-text {
+            font-style: italic;
+            font-size: 0.88rem;
+            color: var(--cyan);
+            padding-left: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Table Styling */
+        .table-container {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            overflow-x: auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            font-family: var(--font-title);
+            font-weight: 600;
+            color: var(--cyan);
+            background-color: rgba(11, 15, 25, 0.3);
+        }
+
+        tr:hover td {
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+
+        .term-cell {
+            font-weight: 600;
+            color: var(--text-main);
+            white-space: nowrap;
+            width: 20%;
+        }
+
+        /* Callout Box */
+        .callout-box {
+            background-color: rgba(0, 173, 181, 0.05);
+            border-left: 4px solid var(--cyan);
+            border-radius: 0 8px 8px 0;
+            padding: 16px 20px;
+            margin-bottom: 32px;
+        }
+
+        .callout-box h4 {
+            font-family: var(--font-title);
+            font-size: 1.1rem;
+            color: var(--cyan);
+            margin-bottom: 6px;
+        }
+
+        .callout-box p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 24px 0;
+            margin-top: 60px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--cyan);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1>DẠY CON LÀM GIÀU</h1>
+        <p>Bản đồ hệ thống hóa toàn bộ kiến thức, tư duy và bài học cốt lõi từ 5 tập đầu tiên trong bộ sách tài chính kinh điển của Robert Kiyosaki & Sharon Lechter.</p>
+        <div class="hero-badges">
+            <span class="badge">Tập I: Cha Giàu Cha Nghèo</span>
+            <span class="badge">Tập II: Kim Tự Đồ</span>
+            <span class="badge">Tập III: Hướng Dẫn Đầu Tư</span>
+            <span class="badge">Tập IV: Con Giàu Con Thông Minh</span>
+            <span class="badge">Tập V: Nghỉ Hưu Sớm Nghỉ Hưu Giàu</span>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <div class="nav-container">
+        <div class="nav-wrapper">
+            <nav class="tabs">
+                <button class="tab-btn active" onclick="switchTab('overview')">📊 Sơ đồ tư duy</button>
+                <button class="tab-btn" onclick="switchTab('vol-1')">Tập I</button>
+                <button class="tab-btn" onclick="switchTab('vol-2')">Tập II</button>
+                <button class="tab-btn" onclick="switchTab('vol-3')">Tập III</button>
+                <button class="tab-btn" onclick="switchTab('vol-4')">Tập IV</button>
+                <button class="tab-btn" onclick="switchTab('vol-5')">Tập V</button>
+                <button class="tab-btn" onclick="switchTab('glossary')">📖 Thuật ngữ</button>
+            </nav>
+            <div class="search-box">
+                <svg viewBox="0 0 24 24">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+                <input type="text" id="search-input" placeholder="Tìm kiếm chương hoặc bài học..." oninput="handleSearch()">
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Tab 0: Overview & Diagrams -->
+        <div id="overview" class="tab-content active">
+            <div class="volume-header">
+                <h2>📊 Hệ Thống Sơ Đồ Tư Duy Tài Chính</h2>
+                <p class="volume-desc">Tổng hợp trực quan hóa các mô hình tài chính cốt lõi được giảng dạy xuyên suốt 5 tập sách.</p>
+            </div>
+
+            <div class="callout-box">
+                <h4>📌 Kim chỉ nam về Tư duy Tài chính:</h4>
+                <p>Người nghèo làm việc vì tiền và để nỗi sợ chi phối. Người trung lưu mua tiêu sản nhưng nghĩ đó là tài sản. Người giàu tập trung xây dựng cột tài sản để bắt tiền làm việc cho mình thông qua đòn bẩy hệ thống và đầu tư chuyên nghiệp.</p>
+            </div>
+
+            <div class="diagrams-container">
+                <!-- Diagram 1 -->
+                <div class="diagram-card">
+                    <h3>1. So Sánh Dòng Tiền (Cashflow)</h3>
+                    <div class="mermaid">
+                        graph TD
+                            subgraph G["DÒNG TIỀN NGƯỜI GIÀU"]
+                                ts[Cột Tài Sản<br>BĐS, Cổ Phiếu, DN] -->|Sinh ra| tn[Thu Nhập Thụ Động<br>Cổ tức, Lợi nhuận, Tiền thuê]
+                                tn -->|Bỏ vào| tui[Túi Tiền]
+                                tui -->|Tái đầu tư| ts
+                            end
+                            subgraph TL["DÒNG TIỀN TRUNG LƯU"]
+                                job[Lương làm công] -->|Trả góp| px[Cột Tiêu Sản<br>Nhà ở, Xe cộ, Vay tiêu dùng]
+                                px -->|Gây ra| cp[Chi Phí<br>Thuế, Lãi vay, Bảo trì]
+                            end
+                    </div>
+                </div>
+
+                <!-- Diagram 2 -->
+                <div class="diagram-card">
+                    <h3>2. Kim Tự Đồ (Cashflow Quadrant)</h3>
+                    <div class="mermaid">
+                        flowchart TD
+                            subgraph Trai["BÊN TRÁI: Tìm sự AN TOÀN (Bán sức lao động)"]
+                                L["Nhóm L (Làm công)<br>- Làm việc cho hệ thống<br>- Thuế suất cao nhất (30-40%)<br>- Không làm là hết tiền"]
+                                T["Nhóm T (Tự doanh)<br>- Bạn là hệ thống<br>- Cực kỳ bận rộn<br>- Thu nhập phụ thuộc bản thân"]
+                            end
+                            subgraph Phai["BÊN PHẢI: Tìm sự TỰ DO (Sở hữu nguồn lực)"]
+                                C["Nhóm C (Chủ DN)<br>- Sở hữu HỆ THỐNG & CON NGƯỜI<br>- Doanh nghiệp tự vận hành<br>- Tận dụng OPT và đòn bẩy"]
+                                D["Nhóm Đ (Nhà đầu tư)<br>- Bắt TIỀN làm việc cho mình<br>- Thuế suất ưu đãi nhất (0-15%)<br>- Tạo thu nhập thụ động thực sự"]
+                            end
+                            L <--> T
+                            C <--> D
+                            Trai -->|Dịch chuyển tư duy| Phai
+                    </div>
+                </div>
+
+                <!-- Diagram 3 -->
+                <div class="diagram-card">
+                    <h3>3. Trí Thông Minh Tài Chính (Financial IQ)</h3>
+                    <div class="mermaid">
+                        mindmap
+                            root((Financial IQ))
+                                KeToan["KẾ TOÁN<br>(Đọc hiểu con số & BCTC)"]
+                                DauTu["ĐẦU TƯ<br>(Chiến lược tiền đẻ ra tiền)"]
+                                ThiTruong["THỊ TRƯỜNG<br>(Quy luật cung cầu & Tâm lý)"]
+                                PhapLuat["PHÁP LUẬT<br>(Tối ưu thuế & Bảo vệ tài sản)"]
+                    </div>
+                </div>
+
+                <!-- Diagram 4 -->
+                <div class="diagram-card">
+                    <h3>4. Hệ Thống Đòn Bẩy (Leverage System)</h3>
+                    <div class="mermaid">
+                        flowchart LR
+                            db((ĐÒN BẨY)) --> tu_duy[Trí Tuệ & Ngôn Từ<br>'Làm sao mua nổi?']
+                            db --> tai_chinh[Tài Chính - OPM<br>Nợ tốt từ ngân hàng]
+                            db --> con_nguoi[Con Người - OPT<br>Hệ thống & Nhân lực giỏi]
+                            db --> phap_ly[Pháp Lý - Công ty<br>Tối ưu thuế & Lá chắn]
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Các Tập Sách (1 -> 5) -->
+        
+    <div id="vol-1" class="tab-content active">
+        <div class="volume-header">
+            <h2>Tập I: Cha Giàu Cha Nghèo (Rich Dad Poor Dad)</h2>
+            <p class="volume-desc">Cuốn sách nền tảng thay đổi tư duy tài chính toàn cầu, giới thiệu sự khác biệt căn bản giữa tư duy của người cha nghèo (học thức cao nhưng nghèo tài chính) và người cha giàu (học vấn thấp nhưng giàu tư duy tiền bạc).</p>
+        </div>
+        <div class="chapters-grid">
+            
+        <div class="chapter-card" data-title="tập i - lời nói đầu" data-summary="tác giả robert kiyosaki giới thiệu về hai người cha của mình: một người cha ruột (cha nghèo) là tiến sĩ, làm giám đốc sở giáo dục nhưng luôn gặp khó khăn tài chính; và một người cha của bạn thân (cha giàu) mới học hết lớp 8 nhưng là một trong những người giàu nhất bang hawaii. sự mâu thuẫn trong lời khuyên của hai người cha đã thôi thúc robert suy ngẫm và lựa chọn con đường học hỏi từ người cha giàu.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 1</span>
+                <h3>Tập I - Lời nói đầu</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Tác giả Robert Kiyosaki giới thiệu về hai người cha của mình: một người cha ruột (cha nghèo) là tiến sĩ, làm giám đốc sở giáo dục nhưng luôn gặp khó khăn tài chính; và một người cha của bạn thân (cha giàu) mới học hết lớp 8 nhưng là một trong những người giàu nhất bang Hawaii. Sự mâu thuẫn trong lời khuyên của hai người cha đã thôi thúc Robert suy ngẫm và lựa chọn con đường học hỏi từ người cha giàu.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Giáo dục truyền thống dạy chúng ta cách làm việc vì tiền, nhưng không dạy cách quản lý tiền bạc và bắt tiền bạc làm việc cho mình.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Nhận thức rằng những lời khuyên tài chính truyền thống (học giỏi, kiếm việc làm an toàn, tiết kiệm tiền) có thể dẫn đến cái bẫy nghèo khó. Hãy bắt đầu học về tiền bạc một cách chủ động.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Tôi có hai người cha, một người giàu và một người nghèo. Cả hai đều thành công, có ảnh hưởng đến người khác, nhưng lời khuyên của họ về tiền bạc lại hoàn toàn khác nhau.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 1: cha giàu, cha nghèo" data-summary="robert và bạn mình là mike lúc 9 tuổi muốn học cách làm giàu để không bị bạn bè coi thường. người cha giàu đồng ý dạy họ bằng cách cho họ làm việc tại cửa hàng tạp hóa với mức lương cực thấp (10 xu/giờ) và sau đó là không lương để họ trải nghiệm sự thất vọng. qua đó, cha giàu dạy họ bài học đầu tiên về việc không để cảm xúc (nỗi sợ và lòng ham muốn) chi phối quyết định tài chính của mình.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 1</span>
+                <h3>Chương 1: Cha giàu, cha nghèo</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Robert và bạn mình là Mike lúc 9 tuổi muốn học cách làm giàu để không bị bạn bè coi thường. Người cha giàu đồng ý dạy họ bằng cách cho họ làm việc tại cửa hàng tạp hóa với mức lương cực thấp (10 xu/giờ) và sau đó là không lương để họ trải nghiệm sự thất vọng. Qua đó, cha giàu dạy họ bài học đầu tiên về việc không để cảm xúc (nỗi sợ và lòng ham muốn) chi phối quyết định tài chính của mình.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Học cách kiểm soát cảm xúc là bước đầu tiên để làm chủ tiền bạc. Người nghèo làm việc vì tiền; người giàu bắt tiền làm việc cho mình.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Khi gặp khó khăn về tài chính, thay vì phản ứng tức thời bằng cách tìm một công việc làm thêm hoặc đòi tăng lương (làm việc vì tiền), hãy dừng lại suy nghĩ cách tạo ra nguồn thu nhập mới từ cơ hội xung quanh.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Người nghèo và tầng lớp trung lưu làm việc vì tiền bạc. Người giàu bắt tiền bạc làm việc cho mình.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 2: bài học 1: người giàu không làm việc vì tiền" data-summary="chương này đi sâu vào bài học đầu tiên. cha giàu giải thích về 'vòng rác' (rat race) - cái bẫy khi người ta kiếm được nhiều tiền hơn thì lại chi tiêu nhiều hơn, dẫn đến việc phải làm việc chăm chỉ hơn để trả nợ. cách duy nhất để thoát khỏi vòng này là vượt qua nỗi sợ thiếu tiền và lòng ham muốn tiêu xài vô độ, từ đó mở rộng tư duy để nhìn thấy những cơ hội kinh doanh mà người khác bỏ lỡ.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 1</span>
+                <h3>Chương 2: Bài học 1: Người giàu không làm việc vì tiền</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Chương này đi sâu vào bài học đầu tiên. Cha giàu giải thích về 'Vòng rác' (Rat Race) - cái bẫy khi người ta kiếm được nhiều tiền hơn thì lại chi tiêu nhiều hơn, dẫn đến việc phải làm việc chăm chỉ hơn để trả nợ. Cách duy nhất để thoát khỏi vòng này là vượt qua nỗi sợ thiếu tiền và lòng ham muốn tiêu xài vô độ, từ đó mở rộng tư duy để nhìn thấy những cơ hội kinh doanh mà người khác bỏ lỡ.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Nỗi sợ hãi và lòng tham là nguyên nhân giữ chân mọi người trong chiếc vòng luẩn quẩn của việc đi làm, kiếm tiền và trả nợ.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Liệt kê các khoản chi tiêu hàng tháng và xác định xem khoản nào xuất phát từ lòng tham (muốn thể hiện bản thân) hay nỗi sợ (muốn an toàn giả tạo). Cắt giảm chi tiêu không cần thiết để tích lũy vốn đầu tư.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Hầu hết mọi người đi làm vì nỗi sợ không có tiền và lòng tham muốn tiêu xài. Họ bị bẫy trong cái vòng luẩn quẩn: Đi làm -> Nhận lương -> Trả hóa đơn -> Đi làm.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 3: bài học 2: tại sao phải dạy con về tài chính?" data-summary="cha giàu dạy robert định nghĩa quan trọng nhất trong thế giới tài chính: sự khác biệt giữa tài sản (asset) và tiêu sản (liability). tài sản là thứ bỏ tiền vào túi bạn; tiêu sản là thứ lấy tiền ra khỏi túi bạn. người nghèo chỉ có chi phí; người trung lưu mua tiêu sản nhưng lầm tưởng là tài sản (ví dụ: ngôi nhà trả góp); người giàu tập trung mua tài sản để tạo ra dòng tiền.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 1</span>
+                <h3>Chương 3: Bài học 2: Tại sao phải dạy con về tài chính?</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Cha giàu dạy Robert định nghĩa quan trọng nhất trong thế giới tài chính: Sự khác biệt giữa Tài sản (Asset) và Tiêu sản (Liability). Tài sản là thứ bỏ tiền vào túi bạn; tiêu sản là thứ lấy tiền ra khỏi túi bạn. Người nghèo chỉ có chi phí; người trung lưu mua tiêu sản nhưng lầm tưởng là tài sản (ví dụ: ngôi nhà trả góp); người giàu tập trung mua tài sản để tạo ra dòng tiền.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Quy tắc tối thượng: Bạn phải biết sự khác biệt giữa tài sản và tiêu sản, và luôn luôn mua tài sản.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Khi chuẩn bị mua một món đồ lớn (như xe máy, điện thoại, hay nhà đất), hãy tự hỏi: 'Món đồ này sẽ mang lại tiền cho mình hay sẽ liên tục rút tiền từ túi mình để bảo trì và trả nợ?'</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Tài sản bỏ tiền vào túi tôi. Tiêu sản lấy tiền ra khỏi túi tôi. Người giàu mua tài sản. Người nghèo chỉ có chi phí. Người trung lưu mua tiêu sản mà họ nghĩ là tài sản.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 4: bài học 3: hãy nghĩ đến việc kinh doanh của mình" data-summary="tác giả phân biệt rõ ràng giữa 'nghề nghiệp' (job) và 'công việc kinh doanh' (business). nghề nghiệp là thứ bạn làm để kiếm tiền thanh toán hóa đơn hàng tháng. công việc kinh doanh là nơi bạn sở hữu các tài sản tự vận hành (cổ phiếu, trái phiếu, bất động sản tạo dòng tiền, bản quyền trí tuệ). hãy giữ lấy công việc hiện tại nhưng bắt đầu xây dựng và sở hữu cột tài sản riêng của mình.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 1</span>
+                <h3>Chương 4: Bài học 3: Hãy nghĩ đến việc kinh doanh của mình</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Tác giả phân biệt rõ ràng giữa 'Nghề nghiệp' (Job) và 'Công việc kinh doanh' (Business). Nghề nghiệp là thứ bạn làm để kiếm tiền thanh toán hóa đơn hàng tháng. Công việc kinh doanh là nơi bạn sở hữu các tài sản tự vận hành (cổ phiếu, trái phiếu, bất động sản tạo dòng tiền, bản quyền trí tuệ). Hãy giữ lấy công việc hiện tại nhưng bắt đầu xây dựng và sở hữu cột tài sản riêng của mình.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Để có sự tự do tài chính, bạn phải tập trung xây dựng cột tài sản của riêng mình thay vì làm giàu cho ông chủ hoặc chính phủ.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Bắt đầu trích một phần lương hàng tháng để đầu tư vào các tài sản nhỏ như cổ phiếu dài hạn, quỹ mở hoặc chuẩn bị cho một mô hình kinh doanh bán thời gian không cần bạn có mặt trực tiếp.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Người giàu tập trung vào cột tài sản trong khi những người khác chỉ tập trung vào báo cáo thu nhập.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 5: bài học 4: liên đoàn – bí mật lớn nhất của người giàu" data-summary="cha giàu dạy về lịch sử thuế thu nhập và sức mạnh pháp lý của việc thành lập công ty (corporation/liên đoàn). ban đầu thuế chỉ đánh vào người giàu, nhưng sau đó lan rộng sang tầng lớp trung lưu và nghèo. người giàu bảo vệ tài sản của họ bằng cách sử dụng cấu trúc công ty: công ty kiếm tiền, chi tiêu mọi chi phí hợp lệ trước, và chỉ đóng thuế trên phần lợi nhuận còn lại. trong khi cá nhân đi làm đóng thuế trước rồi mới được chi tiêu.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 1</span>
+                <h3>Chương 5: Bài học 4: Liên đoàn – bí mật lớn nhất của người giàu</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Cha giàu dạy về lịch sử thuế thu nhập và sức mạnh pháp lý của việc thành lập công ty (Corporation/Liên đoàn). Ban đầu thuế chỉ đánh vào người giàu, nhưng sau đó lan rộng sang tầng lớp trung lưu và nghèo. Người giàu bảo vệ tài sản của họ bằng cách sử dụng cấu trúc công ty: Công ty kiếm tiền, chi tiêu mọi chi phí hợp lệ trước, và chỉ đóng thuế trên phần lợi nhuận còn lại. Trong khi cá nhân đi làm đóng thuế trước rồi mới được chi tiêu.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Kiến thức về luật pháp và thuế giúp người giàu bảo vệ tiền của họ một cách hợp pháp. Hiểu biết tài chính chính là sức mạnh.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Nghiên cứu các quy định pháp luật về thuế tại địa phương. Nếu hoạt động kinh doanh tự do hoặc đầu tư đạt quy mô nhất định, hãy thành lập doanh nghiệp để tối ưu hóa chi phí và thuế suất hợp pháp.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Người giàu có công ty: 1. Kiếm tiền -> 2. Chi tiêu -> 3. Nộp thuế. Người làm công: 1. Kiếm tiền -> 2. Nộp thuế -> 3. Chi tiêu.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 6: bài học 5: người giàu tạo ra tiền" data-summary="robert chia sẻ rằng trong thế giới thực, không phải người thông minh nhất mà là người dũng cảm nhất sẽ vượt lên. trí thông minh tài chính giúp con người nhìn ra nhiều giải pháp và cơ hội tài chính độc đáo trong khủng hoảng (ví dụ: mua lại bất động sản thế chấp từ ngân hàng với giá rẻ và bán lại kiếm lời nhanh chóng). tiền bạc thực chất chỉ là một ý tưởng được sự đồng thuận xã hội, người giàu biết cách 'tạo ra tiền' từ tư duy sáng tạo.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 1</span>
+                <h3>Chương 6: Bài học 5: Người giàu tạo ra tiền</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Robert chia sẻ rằng trong thế giới thực, không phải người thông minh nhất mà là người dũng cảm nhất sẽ vượt lên. Trí thông minh tài chính giúp con người nhìn ra nhiều giải pháp và cơ hội tài chính độc đáo trong khủng hoảng (ví dụ: mua lại bất động sản thế chấp từ ngân hàng với giá rẻ và bán lại kiếm lời nhanh chóng). Tiền bạc thực chất chỉ là một ý tưởng được sự đồng thuận xã hội, người giàu biết cách 'tạo ra tiền' từ tư duy sáng tạo.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Tài sản lớn nhất của bạn chính là bộ óc. Nếu được huấn luyện tốt, nó có thể tạo ra lượng của cải khổng lồ trong tích tắc.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Liên tục tham gia các khóa học, đọc sách, nghiên cứu thị trường để rèn luyện khả năng phát hiện các cơ hội đầu tư bị định giá thấp hoặc các mô hình kinh doanh giải quyết được nỗi đau của xã hội.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Trong thế giới thực, người dũng cảm mới là người đi đầu, chứ không phải người thông minh. Trí thông minh tài chính đơn giản là có nhiều sự lựa chọn hơn.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 7: bài học 6: hãy làm việc để học đừng làm việc vì tiền" data-summary="tác giả khuyên những người trẻ tuổi nên tìm kiếm công việc giúp họ học hỏi được nhiều kỹ năng hơn là những công việc trả lương cao. các kỹ năng quan trọng nhất bao gồm: quản lý dòng tiền, quản lý hệ thống, quản lý nhân sự, và đặc biệt là kỹ năng bán hàng & tiếp thị (sales & marketing). sự kết hợp đa dạng các kỹ năng (chuyên môn hóa một chút ở nhiều lĩnh vực) sẽ tạo ra lợi thế lớn hơn chuyên môn hóa quá sâu vào một việc.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 1</span>
+                <h3>Chương 7: Bài học 6: Hãy làm việc để học đừng làm việc vì tiền</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Tác giả khuyên những người trẻ tuổi nên tìm kiếm công việc giúp họ học hỏi được nhiều kỹ năng hơn là những công việc trả lương cao. Các kỹ năng quan trọng nhất bao gồm: Quản lý dòng tiền, Quản lý hệ thống, Quản lý nhân sự, và đặc biệt là kỹ năng Bán hàng & Tiếp thị (Sales & Marketing). Sự kết hợp đa dạng các kỹ năng (chuyên môn hóa một chút ở nhiều lĩnh vực) sẽ tạo ra lợi thế lớn hơn chuyên môn hóa quá sâu vào một việc.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Biết một ít về nhiều thứ tốt hơn là biết quá nhiều về một thứ duy nhất đối với việc làm chủ tài chính.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>If bạn đang làm kỹ thuật, hãy chủ động đăng ký học thêm hoặc xin chuyển sang bộ phận kinh doanh, chăm sóc khách hàng để rèn luyện kỹ năng giao tiếp và bán hàng - kỹ năng quan trọng nhất của người giàu.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Tôi khuyên các bạn trẻ hãy tìm việc vì những gì họ học được hơn là những gì họ kiếm được.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 8: vượt chướng ngại vật" data-summary="ngay cả khi có kiến thức tài chính, con người vẫn gặp khó khăn trong việc làm giàu vì 5 lý do chính: 1. sự lo sợ mất tiền; 2. sự hoài nghi (chỉ trích thay vì phân tích); 3. sự lười biếng (bận rộn giả tạo để trốn tránh việc quan trọng); 4. những thói quen xấu (trả tiền cho người khác trước khi trả cho mình); 5. tính kiêu ngạo (che giấu sự thiếu hiểu việc). tác giả phân tích cách vượt qua từng rào cản này.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 1</span>
+                <h3>Chương 8: Vượt chướng ngại vật</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Ngay cả khi có kiến thức tài chính, con người vẫn gặp khó khăn trong việc làm giàu vì 5 lý do chính: 1. Sự lo sợ mất tiền; 2. Sự hoài nghi (chỉ trích thay vì phân tích); 3. Sự lười biếng (bận rộn giả tạo để trốn tránh việc quan trọng); 4. Những thói quen xấu (trả tiền cho người khác trước khi trả cho mình); 5. Tính kiêu ngạo (che giấu sự thiếu hiểu việc). Tác giả phân tích cách vượt qua từng rào cản này.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Sự khác biệt lớn nhất giữa người giàu và người nghèo không phải là kiến thức, mà là cách họ đối phó với thất bại và nỗi sợ hãi.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Thay đổi thói quen tài chính bằng cách 'Trả cho bản thân trước' (trích ngay 10-20% thu nhập vào tài khoản đầu tư trước khi thanh toán hóa đơn). Nỗi sợ hóa đơn sẽ thúc đẩy bạn tìm cách kiếm thêm tiền.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Sự khác biệt giữa người giàu và người nghèo là cách họ đối mặt với nỗi sợ hãi. Người giàu biến thất bại thành động lực, người nghèo để thất bại đánh gục.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 9: sự khởi đầu" data-summary="tác giả đưa ra 10 bước cụ thể để đánh thức thiên tư tài chính của mỗi người: 1. tìm một lý do lớn hơn thực tế (sức mạnh của mục đích); 2. lựa chọn mỗi ngày (sức mạnh của sự tự do học hỏi); 3. chọn bạn cẩn thận (sức mạnh của mối quan hệ); 4. nắm vững một công thức rồi học công thức mới; 5. trả cho bản thân trước; 6. trả lương hậu hĩnh cho người môi giới (sức mạnh của lời khuyên chuyên nghiệp); 7. làm người cho đi trước; 8. dùng tài sản để mua tiêu sản xa xỉ; 9. tìm kiếm những tấm gương anh hùng; 10. cho đi và nhận lại.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 1</span>
+                <h3>Chương 9: Sự khởi đầu</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Tác giả đưa ra 10 bước cụ thể để đánh thức thiên tư tài chính của mỗi người: 1. Tìm một lý do lớn hơn thực tế (sức mạnh của mục đích); 2. Lựa chọn mỗi ngày (sức mạnh của sự tự do học hỏi); 3. Chọn bạn cẩn thận (sức mạnh của mối quan hệ); 4. Nắm vững một công thức rồi học công thức mới; 5. Trả cho bản thân trước; 6. Trả lương hậu hĩnh cho người môi giới (sức mạnh của lời khuyên chuyên nghiệp); 7. Làm người cho đi trước; 8. Dùng tài sản để mua tiêu sản xa xỉ; 9. Tìm kiếm những tấm gương anh hùng; 10. Cho đi và nhận lại.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Làm giàu là một quá trình kỷ luật bản thân và đưa ra những lựa chọn thông minh hàng ngày.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Viết ra mục tiêu tài chính cụ thể (ví dụ: đạt tự do tài chính vào tuổi 45) và tìm kiếm ít nhất một người bạn cùng chí hướng hoặc một người cố vấn có kinh nghiệm để cùng chia sẻ, học hỏi.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Để giải phóng sức mạnh tài chính bên trong, bạn cần một lý do tinh thần mạnh mẽ: tôi không muốn làm thuê cả đời, tôi muốn tự do.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 10: vẫn còn muốn nhiều hơn? đây là một số việc cần làm" data-summary="chương này cung cấp những hành động nhanh chóng mà bất kỳ ai cũng có thể làm ngay: ngừng làm những việc không hiệu quả và tìm kiếm ý tưởng mới; tìm người đã làm được việc bạn muốn làm và xin lời khuyên; tham gia các lớp học, mua băng đĩa bài giảng; đưa ra nhiều lời chào mua bất động sản/cơ hội kinh doanh (luật trung bình); đi bộ hoặc chạy bộ ở một khu vực để quan sát sự thay đổi của thị trường bất động sản.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 1</span>
+                <h3>Chương 10: Vẫn còn muốn nhiều hơn? Đây là một số việc cần làm</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Chương này cung cấp những hành động nhanh chóng mà bất kỳ ai cũng có thể làm ngay: Ngừng làm những việc không hiệu quả và tìm kiếm ý tưởng mới; Tìm người đã làm được việc bạn muốn làm và xin lời khuyên; Tham gia các lớp học, mua băng đĩa bài giảng; Đưa ra nhiều lời chào mua bất động sản/cơ hội kinh doanh (luật trung bình); Đi bộ hoặc chạy bộ ở một khu vực để quan sát sự thay đổi của thị trường bất động sản.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Hành động luôn chiến thắng sự bất động. Nếu bạn không hành động, kiến thức tài chính chỉ là lý thuyết suông.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Dành ra 1 ngày cuối tuần đi khảo sát thực tế giá đất, giá nhà thuê ở khu vực lân cận của bạn để bắt đầu làm quen với nhịp đập của thị trường bất động sản.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Hành động luôn luôn đánh bại sự không hành động. Hãy bắt đầu ngay hôm nay, dù chỉ là những bước đi nhỏ nhất.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="tập i - phần kết" data-summary="tác giả đúc kết lại thông điệp chính: tiền bạc là một công cụ, và trí thông minh tài chính quyết định việc bạn làm chủ nó hay để nó làm chủ bạn. hãy dạy cho con cái những bài học này từ sớm để giúp chúng tự tin bước vào một thế giới ngày càng biến động và cạnh tranh.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 1</span>
+                <h3>Tập I - Phần kết</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Tác giả đúc kết lại thông điệp chính: Tiền bạc là một công cụ, và trí thông minh tài chính quyết định việc bạn làm chủ nó hay để nó làm chủ bạn. Hãy dạy cho con cái những bài học này từ sớm để giúp chúng tự tin bước vào một thế giới ngày càng biến động và cạnh tranh.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Ba kỹ năng tối thượng cần truyền lại cho thế hệ sau: Cách kiếm tiền, cách giữ tiền và cách bắt tiền đẻ ra tiền.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Chia sẻ những kiến thức tài chính cơ bản về tài sản và tiêu sản cho con cái hoặc người thân thông qua các trò chơi thực tế như Cashflow Boardgame.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Hãy ban tặng món quà của sự hiểu biết tài chính cho con cái bạn, đó là tài sản lớn nhất bạn có thể để lại cho chúng.</p>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+    
+    <div id="vol-2" class="tab-content ">
+        <div class="volume-header">
+            <h2>Tập II: Kim Tự Đồ (Rich Dad's Cashflow Quadrant)</h2>
+            <p class="volume-desc">Giải thích về 4 nhóm người tạo ra tiền trong xã hội: L (Làm công), T (Tự doanh), C (Chủ doanh nghiệp) và Đ (Nhà đầu tư). Cuốn sách hướng dẫn cách dịch chuyển từ nửa bên trái Kim Tự Đồ (cần sự an toàn) sang nửa bên phải (cần sự tự do).</p>
+        </div>
+        <div class="chapters-grid">
+            
+        <div class="chapter-card" data-title="tập ii - phụ lục: khái niệm kim tự đồ" data-summary="giới thiệu mô hình kim tự đồ chia làm 4 góc: nhóm l (làm công ăn lương, bán thời gian lấy tiền); nhóm t (làm tư/tự doanh, tự làm chủ công việc của mình); nhóm c (chủ doanh nghiệp, sở hữu hệ thống và con người làm việc cho mình); nhóm đ (nhà đầu tư, bắt tiền làm việc cho mình). mỗi nhóm có một tư duy, ngôn ngữ và nỗi sợ khác nhau.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 2</span>
+                <h3>Tập II - Phụ lục: Khái niệm Kim Tự Đồ</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Giới thiệu mô hình Kim Tự Đồ chia làm 4 góc: Nhóm L (Làm công ăn lương, bán thời gian lấy tiền); Nhóm T (Làm tư/Tự doanh, tự làm chủ công việc của mình); Nhóm C (Chủ doanh nghiệp, sở hữu hệ thống và con người làm việc cho mình); Nhóm Đ (Nhà đầu tư, bắt tiền làm việc cho mình). Mỗi nhóm có một tư duy, ngôn ngữ và nỗi sợ khác nhau.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Không phải bạn làm nghề gì kiếm ra tiền, mà là cách bạn kiếm tiền quyết định bạn thuộc nhóm nào trong Kim Tự Đồ.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Vẽ lại Kim Tự Đồ và tự xác định xem nguồn thu nhập hiện tại của bạn đến từ nhóm nào, và bạn muốn dịch chuyển sang nhóm nào trong tương lai.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Kim Tự Đồ phân chia con người dựa trên nguồn gốc xuất xứ của tiền bạc: L, T, C hay Đ.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 1: tại sao bạn không kiếm một công việc?" data-summary="người cha nghèo luôn khuyên tác giả: 'hãy đi học, đạt điểm cao và tìm một công việc an toàn'. ngược lại, người cha giàu khuyên: 'hãy học cách xây dựng doanh nghiệp và đầu tư'. chương này làm rõ sự khác biệt giữa việc đi tìm sự 'an toàn' (job security) ở nhóm l và đi tìm sự 'tự do' (financial freedom) ở nhóm c và đ.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 2</span>
+                <h3>Chương 1: Tại sao bạn không kiếm một công việc?</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Người cha nghèo luôn khuyên tác giả: 'Hãy đi học, đạt điểm cao và tìm một công việc an toàn'. Ngược lại, người cha giàu khuyên: 'Hãy học cách xây dựng doanh nghiệp và đầu tư'. Chương này làm rõ sự khác biệt giữa việc đi tìm sự 'An toàn' (Job Security) ở nhóm L và đi tìm sự 'Tự do' (Financial Freedom) ở nhóm C và Đ.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Sự an toàn công việc chỉ là một ảo tưởng. Sự tự do tài chính mới là sự bảo đảm thực sự cho cuộc sống.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Chấp nhận rằng việc chuyển từ bên trái sang bên phải Kim Tự Đồ đòi hỏi một sự thay đổi sâu sắc về tư duy chứ không chỉ là đổi công việc.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Đối với những người coi trọng sự an toàn, tự do tài chính là một thứ gì đó quá mạo hiểm. Nhưng đối với tôi, việc phụ thuộc vào một công việc mới là mạo hiểm lớn nhất.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 2: những con người khác nhau thuộc những nhóm khác nhau" data-summary="tác giả phân tích tâm lý học của 4 nhóm. nhóm l sợ rủi ro, cần sự đảm bảo bằng hợp đồng. nhóm t là những người theo chủ nghĩa hoàn hảo, muốn tự tay làm mọi việc vì không tin tưởng người khác. nhóm c thích phân quyền, tìm kiếm những người thông minh hơn mình để vận hành hệ thống. nhóm đ yêu thích rủi ro có kiểm soát, thích nhìn tiền đẻ ra tiền.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 2</span>
+                <h3>Chương 2: Những con người khác nhau thuộc những nhóm khác nhau</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Tác giả phân tích tâm lý học của 4 nhóm. Nhóm L sợ rủi ro, cần sự đảm bảo bằng hợp đồng. Nhóm T là những người theo chủ nghĩa hoàn hảo, muốn tự tay làm mọi việc vì không tin tưởng người khác. Nhóm C thích phân quyền, tìm kiếm những người thông minh hơn mình để vận hành hệ thống. Nhóm Đ yêu thích rủi ro có kiểm soát, thích nhìn tiền đẻ ra tiền.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Để thành công ở nhóm C và Đ, bạn phải học cách tin tưởng và sử dụng tài năng của người khác, thay vì tự mình làm tất cả.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Nếu bạn đang ở nhóm T (ví dụ: mở cửa hàng, làm freelancer), hãy bắt đầu viết quy trình hóa các bước làm việc để người khác có thể thay thế bạn, từng bước chuyển sang nhóm C.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Người nhóm T nói: 'Nếu muốn việc gì được làm tốt, hãy tự làm lấy'. Người nhóm C nói: 'Tại sao lại tự làm khi tôi có thể thuê người giỏi hơn làm việc đó?'</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 3: tại sao người ta chọn sự an toàn hơn là sự tự do?" data-summary="chương này giải thích lý do hệ thống giáo dục và gia đình luôn hướng con người vào nhóm l và t. phần lớn mọi người được lập trình để tìm kiếm sự an toàn từ nhỏ. nỗi sợ thất bại khiến họ không dám bước chân sang bên phải kim tự đồ. tác giả nhấn mạnh rằng để giàu có, ta phải học cách đối mặt và quản lý nỗi sợ thất bại thay vì trốn tránh nó.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 2</span>
+                <h3>Chương 3: Tại sao người ta chọn sự an toàn hơn là sự tự do?</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Chương này giải thích lý do hệ thống giáo dục và gia đình luôn hướng con người vào nhóm L và T. Phần lớn mọi người được lập trình để tìm kiếm sự an toàn từ nhỏ. Nỗi sợ thất bại khiến họ không dám bước chân sang bên phải Kim Tự Đồ. Tác giả nhấn mạnh rằng để giàu có, ta phải học cách đối mặt và quản lý nỗi sợ thất bại thay vì trốn tránh nó.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Học cách chấp nhận rủi ro và quản lý nó là chìa khóa để đạt được sự tự do tài chính.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Bắt đầu tập đầu tư với số vốn nhỏ mà bạn sẵn sàng mất để rèn luyện tâm lý đối mặt với sự biến động của thị trường.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Hầu hết mọi người được dạy dỗ để trở thành người làm công hoặc làm tư. Rất ít người được chuẩn bị để trở thành chủ doanh nghiệp hoặc nhà đầu tư.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 4: ba kiểu hệ thống kinh doanh" data-summary="để thành công ở nhóm c, bạn cần sở hữu một hệ thống kinh doanh. có 3 loại hệ thống phổ biến: 1. doanh nghiệp truyền thống tự xây dựng (tự mình thiết kế hệ thống); 2. nhượng quyền kinh doanh - franchise (mua một hệ thống đã có sẵn như mcdonald's); 3. tiếp thị mạng lưới - network marketing (mua và trở thành một phần của hệ thống có sẵn với chi phí thấp).">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 2</span>
+                <h3>Chương 4: Ba kiểu hệ thống kinh doanh</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Để thành công ở nhóm C, bạn cần sở hữu một hệ thống kinh doanh. Có 3 loại hệ thống phổ biến: 1. Doanh nghiệp truyền thống tự xây dựng (tự mình thiết kế hệ thống); 2. Nhượng quyền kinh doanh - Franchise (mua một hệ thống đã có sẵn như McDonald's); 3. Tiếp thị mạng lưới - Network Marketing (mua và trở thành một phần của hệ thống có sẵn với chi phí thấp).</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Mục tiêu của nhóm C không phải là tạo ra một công việc cho mình, mà là xây dựng hoặc sở hữu một hệ thống tự vận hành sinh lợi nhuận.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Đánh giá khả năng tài chính và kỹ năng của bản thân để chọn 1 trong 3 con đường sở hữu hệ thống. Với người ít vốn, Network Marketing hoặc kinh doanh online quy trình hóa là điểm khởi đầu tốt.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Trong kinh doanh, hệ thống là cầu nối dẫn đến sự tự do tài chính. Nếu không có hệ thống, bạn chỉ đang tự làm thuê cho chính mình.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 5: bảy cấp độ đầu tư" data-summary="tác giả phân loại người đầu tư thành 7 cấp độ: cấp 0: những người không có gì để đầu tư; cấp 1: người đi vay (tiêu xài bằng nợ); cấp 2: người tiết kiệm (gửi tiền ngân hàng và chịu lạm phát); cấp 3: người đầu tư 'khôn ngoan' (chia làm 3 nhóm nhỏ: không muốn bị làm phiền, người hoài nghi, và người cờ bạc); cấp 4: nhà đầu tư dài hạn; cấp 5: nhà đầu tư chuyên nghiệp; cấp 6: nhà đầu tư thực sự (tự tạo ra cuộc chơi).">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 2</span>
+                <h3>Chương 5: Bảy cấp độ đầu tư</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Tác giả phân loại người đầu tư thành 7 cấp độ: Cấp 0: Những người không có gì để đầu tư; Cấp 1: Người đi vay (tiêu xài bằng nợ); Cấp 2: Người tiết kiệm (gửi tiền ngân hàng và chịu lạm phát); Cấp 3: Người đầu tư 'khôn ngoan' (chia làm 3 nhóm nhỏ: không muốn bị làm phiền, người hoài nghi, và người cờ bạc); Cấp 4: Nhà đầu tư dài hạn; Cấp 5: Nhà đầu tư chuyên nghiệp; Cấp 6: Nhà đầu tư thực sự (tự tạo ra cuộc chơi).</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Để đạt tự do tài chính, bạn cần hướng tới việc trở thành nhà đầu tư dài hạn (Cấp 4) và chuyên nghiệp (Cấp 5, 6).</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Xác định cấp độ đầu tư hiện tại của bạn. Nếu đang ở Cấp 2 (chỉ biết tiết kiệm), hãy học hỏi kiến thức đầu tư cơ bản để chuyển dịch lên Cấp 4 bằng cách mua các quỹ chỉ số hoặc bất động sản an toàn.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Đầu tư không phải là mua một sản phẩm tài chính, đầu tư là một quá trình học hỏi, lập kế hoạch và kỷ luật.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 6: tiền bạc không phải là thứ có thể nhìn thấy bằng mắt" data-summary="cha giàu dạy rằng tiền bạc thực chất chỉ là những con số và thỏa ước pháp lý. người nghèo chỉ nhìn thấy tiền bằng mắt thường (tiền mặt, hóa đơn), trong khi người giàu nhìn thấy tiền bằng trí tuệ tài chính (dòng tiền, xu hướng thị trường, đòn bẩy thuế). trí tuệ tài chính giúp bạn thấy được những cơ hội ẩn giấu đằng sau các con số trên báo cáo tài chính.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 2</span>
+                <h3>Chương 6: Tiền bạc không phải là thứ có thể nhìn thấy bằng mắt</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Cha giàu dạy rằng tiền bạc thực chất chỉ là những con số và thỏa ước pháp lý. Người nghèo chỉ nhìn thấy tiền bằng mắt thường (tiền mặt, hóa đơn), trong khi người giàu nhìn thấy tiền bằng trí tuệ tài chính (dòng tiền, xu hướng thị trường, đòn bẩy thuế). Trí tuệ tài chính giúp bạn thấy được những cơ hội ẩn giấu đằng sau các con số trên báo cáo tài chính.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Cuộc chơi tiền bạc diễn ra trong tâm trí bạn. Muốn nhìn thấy cơ hội làm giàu, bạn phải có kiến thức tài chính để đọc vị các con số.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Học cách đọc và phân tích Báo cáo thu nhập (Income Statement) và Bảng cân đối kế toán (Balance Sheet) của cá nhân và của các doanh nghiệp bạn định đầu tư.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Nếu bạn muốn nhìn thấy tiền bạc, trước hết bạn phải có sự hiểu biết về tài chính trong đầu mình.</p>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+    
+    <div id="vol-3" class="tab-content ">
+        <div class="volume-header">
+            <h2>Tập III: Hướng dẫn đầu tư (Rich Dad's Guide to Investing)</h2>
+            <p class="volume-desc">Đi sâu vào thế giới đầu tư của nhóm Đ. Cuốn sách chỉ ra rằng đầu tư không phải là một trò may rủi mà là một kế hoạch tài chính có tính toán kỹ lưỡng để chuyển đổi thu nhập từ sức lao động thành thu nhập thụ động và thu nhập danh mục.</p>
+        </div>
+        <div class="chapters-grid">
+            
+        <div class="chapter-card" data-title="tập iii - lời mở đầu: sự lựa chọn của đầu tư" data-summary="người cha giàu giải thích quy tắc 90/10 của tiền bạc: 10% dân số sở hữu 90% lượng tiền tệ trên thế giới. sự khác biệt nằm ở chỗ người giàu không mua những sản phẩm đầu tư thông thường, họ đầu tư vào bản thân trước và mua các cơ hội đầu tư được thiết kế riêng cho người giàu có hiểu biết pháp luật và tài chính.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 3</span>
+                <h3>Tập III - Lời mở đầu: Sự lựa chọn của đầu tư</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Người cha giàu giải thích quy tắc 90/10 của tiền bạc: 10% dân số sở hữu 90% lượng tiền tệ trên thế giới. Sự khác biệt nằm ở chỗ người giàu không mua những sản phẩm đầu tư thông thường, họ đầu tư vào bản thân trước và mua các cơ hội đầu tư được thiết kế riêng cho người giàu có hiểu biết pháp luật và tài chính.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Quy tắc 90/10 tồn tại vì hầu hết mọi người đầu tư như một phản ứng tức thời thay vì thực hiện một kế hoạch đầu tư dài hạn.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Thay vì tìm kiếm các mẹo làm giàu nhanh chóng (tips), hãy cam kết dành thời gian xây dựng một kế hoạch tài chính cá nhân rõ ràng và tuân thủ nó.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Quy tắc 90/10 của tiền bạc: 10% số người kiếm được 90% số tiền, bởi vì họ hiểu cách vận hành của hệ thống tài chính.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 1: bài học đầu tư 1: bạn nên đầu tư vào đâu?" data-summary="tác giả hỏi cha giàu nên đầu tư vào đâu khi không có tiền. cha giàu trả lời rằng điều quan trọng không phải là mua cái gì, mà là bạn có thái độ và tư duy như thế nào. người nghèo đầu tư để không bị mất tiền (phòng thủ), người giàu đầu tư để chiến thắng và kiểm soát luật chơi. đầu tư thực sự bắt đầu bằng việc đầu tư vào kiến thức tài chính của chính mình.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 3</span>
+                <h3>Chương 1: Bài học đầu tư 1: Bạn nên đầu tư vào đâu?</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Tác giả hỏi cha giàu nên đầu tư vào đâu khi không có tiền. Cha giàu trả lời rằng điều quan trọng không phải là mua cái gì, mà là bạn có thái độ và tư duy như thế nào. Người nghèo đầu tư để không bị mất tiền (phòng thủ), người giàu đầu tư để chiến thắng và kiểm soát luật chơi. Đầu tư thực sự bắt đầu bằng việc đầu tư vào kiến thức tài chính của chính mình.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Trước khi đầu tư tiền bạc, bạn phải đầu tư vào thời gian và trí tuệ để hiểu rõ cuộc chơi đầu tư.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Dành ra ít nhất 5 giờ mỗi tuần để đọc sách tài chính, nghe phân tích kinh tế thay vì chỉ lướt mạng xã hội giải trí.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Đầu tư không phải là mua đất hay mua cổ phiếu. Đầu tư là quá trình biến bản thân bạn thành một nhà đầu tư có năng lực.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 2: bài học đầu tư 2: khai thông trí tuệ" data-summary="người cha giàu yêu cầu robert phải thay đổi thế giới quan về tiền bạc. nhiều người tin rằng 'tiền bạc là nguồn gốc của mọi tội lỗi' hoặc 'đầu tư là mạo hiểm'. cha giàu khẳng định: đầu tư không mạo hiểm, sự thiếu kiến thức mới là mạo hiểm. khai thông trí tuệ nghĩa là giải phóng bản thân khỏi các định kiến tiêu cực về sự giàu có.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 3</span>
+                <h3>Chương 2: Bài học đầu tư 2: Khai thông trí tuệ</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Người cha giàu yêu cầu Robert phải thay đổi thế giới quan về tiền bạc. Nhiều người tin rằng 'Tiền bạc là nguồn gốc của mọi tội lỗi' hoặc 'Đầu tư là mạo hiểm'. Cha giàu khẳng định: Đầu tư không mạo hiểm, sự thiếu kiến thức mới là mạo hiểm. Khai thông trí tuệ nghĩa là giải phóng bản thân khỏi các định kiến tiêu cực về sự giàu có.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Thế giới quan và niềm tin của bạn về tiền bạc sẽ định hình hiện thực tài chính của bạn.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Tự viết ra những niềm tin tiêu cực về tiền bạc mà bạn thừa hưởng từ gia đình (ví dụ: 'Nhà mình nghèo nên phải chịu', 'Người giàu là người tham lam') và chủ động thay thế chúng bằng tư duy tích cực.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Sự mạo hiểm không nằm ở bản thân việc đầu tư, nó nằm ở chính người đầu tư thiếu sự chuẩn bị.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 3: tại sao đầu tư lại gây bối rối?" data-summary="đầu tư gây bối rối vì mọi người sử dụng cùng một từ 'đầu tư' cho các hành động hoàn toàn khác nhau. một người mua nhà để ở gọi là đầu tư, một người mua cổ phiếu lướt sóng gọi là đầu tư, một người mua bảo hiểm cũng gọi là đầu tư. thực tế, họ đang thực hiện các kế hoạch tài chính khác nhau. sự thiếu rõ ràng về mục đích dẫn đến sự bối rối và thua lỗ.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 3</span>
+                <h3>Chương 3: Tại sao đầu tư lại gây bối rối?</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Đầu tư gây bối rối vì mọi người sử dụng cùng một từ 'đầu tư' cho các hành động hoàn toàn khác nhau. Một người mua nhà để ở gọi là đầu tư, một người mua cổ phiếu lướt sóng gọi là đầu tư, một người mua bảo hiểm cũng gọi là đầu tư. Thực tế, họ đang thực hiện các kế hoạch tài chính khác nhau. Sự thiếu rõ ràng về mục đích dẫn đến sự bối rối và thua lỗ.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Mỗi người cần có định nghĩa rõ ràng về mục tiêu tài chính của mình trước khi chọn công cụ đầu tư phù hợp.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Xác định rõ mục tiêu đầu tư của bạn: Tăng trưởng vốn (Capital Gain) hay tạo ra Dòng tiền thụ động (Cash Flow). Người mới bắt đầu nên ưu tiên tạo dòng tiền trước để đảm bảo an toàn.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Đầu tư gây bối rối vì nó là một từ có quá nhiều ý nghĩa đối với những con người khác nhau.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 4: đầu tư là một kế hoạch chứ không phải một kỹ thuật hay một trò chơi" data-summary="cha giàu nhấn mạnh đầu tư giống như việc lên kế hoạch đi từ điểm a đến điểm b một cách an toàn. kế hoạch đầu tư của bạn phải trả lời được câu hỏi: bạn muốn có bao nhiêu tiền khi nghỉ hưu và nguồn thu nhập đó đến từ đâu? các công cụ đầu tư (bất động sản, chứng khoán, doanh nghiệp) chỉ là phương tiện vận chuyển giúp bạn thực hiện kế hoạch đó.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 3</span>
+                <h3>Chương 4: Đầu tư là một kế hoạch chứ không phải một kỹ thuật hay một trò chơi</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Cha giàu nhấn mạnh đầu tư giống như việc lên kế hoạch đi từ điểm A đến điểm B một cách an toàn. Kế hoạch đầu tư của bạn phải trả lời được câu hỏi: Bạn muốn có bao nhiêu tiền khi nghỉ hưu và nguồn thu nhập đó đến từ đâu? Các công cụ đầu tư (bất động sản, chứng khoán, doanh nghiệp) chỉ là phương tiện vận chuyển giúp bạn thực hiện kế hoạch đó.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Một nhà đầu tư khôn ngoan tập trung vào việc hoàn thành kế hoạch tài chính cá nhân hơn là chạy theo các trào lưu đầu tư nóng sốt.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Lập một kế hoạch tài chính đơn giản: Xác định số tiền chi tiêu tối thiểu mỗi tháng và tính toán cột tài sản cần có quy mô bao nhiêu để tạo ra dòng tiền thụ động tương đương số tiền đó.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Đầu tư là một kế hoạch, không phải là một sản phẩm. Một kế hoạch tốt sẽ đưa bạn đến đích một cách an toàn và bền vững.</p>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+    
+    <div id="vol-4" class="tab-content ">
+        <div class="volume-header">
+            <h2>Tập IV: Con Giàu Con Thông Minh (Rich Kid Smart Kid)</h2>
+            <p class="volume-desc">Hướng dẫn các bậc phụ huynh cách truyền đạt kiến thức tài chính cho con cái từ sớm, giúp trẻ nhận biết năng lực học tập riêng biệt và trang bị tư duy tiền bạc vững vàng trước khi bước vào đời.</p>
+        </div>
+        <div class="chapters-grid">
+            
+        <div class="chapter-card" data-title="tập iv - lời giới thiệu" data-summary="tác giả chỉ ra lỗ hổng lớn nhất của hệ thống giáo dục hiện đại: dạy trẻ em học tập chăm chỉ để kiếm việc làm, nhưng hoàn toàn bỏ qua việc dạy cách quản lý và đầu tư tiền bạc. trong thời đại thông tin, kiến thức tài chính là kỹ năng sinh tồn thiết yếu.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 4</span>
+                <h3>Tập IV - Lời giới thiệu</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Tác giả chỉ ra lỗ hổng lớn nhất của hệ thống giáo dục hiện đại: dạy trẻ em học tập chăm chỉ để kiếm việc làm, nhưng hoàn toàn bỏ qua việc dạy cách quản lý và đầu tư tiền bạc. Trong thời đại thông tin, kiến thức tài chính là kỹ năng sinh tồn thiết yếu.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Cha mẹ không thể chỉ trông cậy vào nhà trường để chuẩn bị tương lai tài chính cho con cái mình.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Chủ động nói chuyện về tiền bạc một cách cởi mở và khoa học trong các bữa ăn gia đình thay vì coi đó là chủ đề nhạy cảm.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Trường học dạy con bạn cách làm việc vì tiền, nhưng cha mẹ phải dạy con cách bắt tiền làm việc cho mình.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 1: tiền bạc là một ý tưởng" data-summary="cha giàu dạy rằng tiền bạc không phải là những tờ giấy hay đồng xu kim loại, mà là một ý tưởng. nếu bạn nghĩ tiền bạc là khan hiếm và khó kiếm, cuộc đời bạn sẽ phản ánh điều đó. nếu bạn dạy con tư duy rằng cơ hội tạo ra tiền là vô hạn, chúng sẽ nhìn thấy cơ hội ở khắp mọi nơi.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 4</span>
+                <h3>Chương 1: Tiền bạc là một ý tưởng</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Cha giàu dạy rằng tiền bạc không phải là những tờ giấy hay đồng xu kim loại, mà là một ý tưởng. Nếu bạn nghĩ tiền bạc là khan hiếm và khó kiếm, cuộc đời bạn sẽ phản ánh điều đó. Nếu bạn dạy con tư duy rằng cơ hội tạo ra tiền là vô hạn, chúng sẽ nhìn thấy cơ hội ở khắp mọi nơi.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Cách chúng ta định nghĩa và suy nghĩ về tiền bạc sẽ quyết định lượng tiền chúng ta có thể sở hữu.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Dạy con cách đặt câu hỏi sáng tạo: Thay vì nói 'Bố mẹ không mua nổi món này', hãy hỏi 'Làm thế nào để chúng ta có thể sở hữu nó?'</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Tiền bạc chỉ là một ý tưởng. Nếu con muốn có nhiều tiền hơn, con chỉ cần thay đổi cách suy nghĩ của mình.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 2: con bạn có được giáo dục tài chính tại trường không?" data-summary="tác giả phân tích sự lỗi thời của hệ thống giáo dục kiểu công nghiệp. nhà trường chỉ tập trung vào trí thông minh học thuật (academic iq) và trí thông minh nghề nghiệp (professional iq) để đào tạo ra những người làm công giỏi, nhưng bỏ quên trí thông minh tài chính (financial iq) - thứ quyết định sự giàu có thực sự.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 4</span>
+                <h3>Chương 2: Con bạn có được giáo dục tài chính tại trường không?</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Tác giả phân tích sự lỗi thời của hệ thống giáo dục kiểu công nghiệp. Nhà trường chỉ tập trung vào Trí thông minh học thuật (Academic IQ) và Trí thông minh nghề nghiệp (Professional IQ) để đào tạo ra những người làm công giỏi, nhưng bỏ quên Trí thông minh tài chính (Financial IQ) - thứ quyết định sự giàu có thực sự.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Sự thành công ở trường học không đảm bảo sự thành công về tài chính trong đời thực.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Bổ sung cho con các bài học thực tế ngoài giờ học như quản lý tiền tiêu vặt, lập ngân sách nhỏ, hoặc tham gia các hoạt động thiện nguyện để hiểu giá trị dòng tiền.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Hệ thống giáo dục được thiết kế để đào tạo ra những người làm công xuất sắc, chứ không phải những người làm chủ.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 3: khai quật năng lực tài chính của con bạn" data-summary="mỗi đứa trẻ có một phong cách học tập khác nhau (đọc, nghe, vận động, trải nghiệm trực quan). tác giả khuyên cha mẹ không nên dán nhãn trẻ là 'dốt' chỉ vì chúng có điểm số thấp ở trường, mà hãy giúp con tìm ra thế mạnh và phong cách học tập riêng biệt để phát triển năng lực tài chính.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 4</span>
+                <h3>Chương 3: Khai quật năng lực tài chính của con bạn</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Mỗi đứa trẻ có một phong cách học tập khác nhau (đọc, nghe, vận động, trải nghiệm trực quan). Tác giả khuyên cha mẹ không nên dán nhãn trẻ là 'dốt' chỉ vì chúng có điểm số thấp ở trường, mà hãy giúp con tìm ra thế mạnh và phong cách học tập riêng biệt để phát triển năng lực tài chính.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Mọi đứa trẻ đều có thiên tư riêng. Giáo dục tài chính hiệu quả phải phù hợp với cách học tự nhiên của trẻ.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Quan sát cách con bạn tương tác với thế giới xung quanh (thích vẽ, thích tháo lắp đồ chơi, hay thích mặc cả) để lồng ghép các bài học tài chính phù hợp.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Không có đứa trẻ nào dốt cả, chỉ có hệ thống giáo dục chưa tìm ra cách dạy phù hợp với thiên tài bên trong đứa trẻ đó.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 4: nếu muốn giàu, con phải làm bài tập về nhà" data-summary="tác giả định nghĩa 'bài tập về nhà' tài chính là những hoạt động thực tế gia đình cùng làm: chơi trò chơi cashflow, cùng thảo luận về các báo cáo tài chính gia đình, phân tích các cơ hội mua sắm tài sản nhỏ. những bài học này giúp trẻ hình thành thói quen tư duy tài chính tự nhiên từ bé.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 4</span>
+                <h3>Chương 4: Nếu muốn giàu, con phải làm bài tập về nhà</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Tác giả định nghĩa 'Bài tập về nhà' tài chính là những hoạt động thực tế gia đình cùng làm: chơi trò chơi Cashflow, cùng thảo luận về các báo cáo tài chính gia đình, phân tích các cơ hội mua sắm tài sản nhỏ. Những bài học này giúp trẻ hình thành thói quen tư duy tài chính tự nhiên từ bé.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Những bài học tài chính sâu sắc nhất được học ở nhà thông qua trải nghiệm thực tế và sự đồng hành của cha mẹ.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Dành ra ít nhất 1 buổi tối mỗi tháng để cả nhà cùng chơi boardgame Cashflow hoặc Monopoly và thảo luận về các chiến lược đầu tư trong trò chơi.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Bài tập về nhà quan trọng nhất của con bạn không phải là toán hay văn, mà là những bài học về cuộc sống và tiền bạc tại gia đình.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 5: con bạn cần bao nhiêu tài sản trước tuổi 30?" data-summary="tác giả khuyến khích các bậc cha mẹ đặt mục tiêu tài chính sớm cho con cái. thay vì dạy con tiết kiệm tiền mặt (vốn dễ mất giá do lạm phát), hãy dạy con cách sở hữu ít nhất một tài sản (bất động sản nhỏ, cổ phiếu, hoặc một dự án kinh doanh) trước tuổi 30 để tạo đà bứt phá tài chính.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 4</span>
+                <h3>Chương 5: Con bạn cần bao nhiêu tài sản trước tuổi 30?</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Tác giả khuyến khích các bậc cha mẹ đặt mục tiêu tài chính sớm cho con cái. Thay vì dạy con tiết kiệm tiền mặt (vốn dễ mất giá do lạm phát), hãy dạy con cách sở hữu ít nhất một tài sản (bất động sản nhỏ, cổ phiếu, hoặc một dự án kinh doanh) trước tuổi 30 để tạo đà bứt phá tài chính.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Mục tiêu tài chính sớm giúp người trẻ tuổi tích lũy kinh nghiệm và có thời gian tận dụng sức mạnh của lãi kép.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Hỗ trợ con mở một tài khoản đầu tư nhỏ dưới sự giám sát của cha mẹ và hướng dẫn con tự chọn mua cổ phiếu của các công ty quen thuộc (như Apple, Coca-Cola).</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Đừng dạy con tiết kiệm tiền. Hãy dạy con cách tích lũy và sở hữu tài sản tạo ra dòng tiền.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 6: học hỏi từ những sai lầm" data-summary="nhà trường trừng phạt sai lầm bằng điểm kém, tạo ra nỗi sợ thất bại ở trẻ. nhưng trong đời thực, con người học hỏi và tiến bộ nhiều nhất từ chính những sai lầm của mình. cha mẹ cần tạo ra một môi trường an toàn để con cái được phép thử nghiệm, thất bại và rút ra bài học tài chính mà không bị phán xét.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 4</span>
+                <h3>Chương 6: Học hỏi từ những sai lầm</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Nhà trường trừng phạt sai lầm bằng điểm kém, tạo ra nỗi sợ thất bại ở trẻ. Nhưng trong đời thực, con người học hỏi và tiến bộ nhiều nhất từ chính những sai lầm của mình. Cha mẹ cần tạo ra một môi trường an toàn để con cái được phép thử nghiệm, thất bại và rút ra bài học tài chính mà không bị phán xét.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Sai lầm là những cơ hội học tập vô giá. Người sợ sai lầm sẽ không bao giờ dám hành động để thành công.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Khi con đưa ra một quyết định mua sắm hoặc đầu tư sai lầm dẫn đến mất tiền, thay vì la mắng, hãy ngồi lại cùng con phân tích nguyên nhân và bài học cho lần sau.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Người chiến thắng học hỏi từ những sai lầm của mình. Người thất bại cố gắng tránh né sai lầm bằng cách không làm gì cả.</p>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+    
+    <div id="vol-5" class="tab-content ">
+        <div class="volume-header">
+            <h2>Tập V: Nghỉ Hưu Sớm Nghỉ Hưu Giàu (Retire Young Retire Rich)</h2>
+            <p class="volume-desc">Chia sẻ công thức và tư duy giúp Robert và vợ của ông (Kim Kiyosaki) có thể nghỉ hưu hoàn toàn khi chưa đầy 50 tuổi. Cuốn sách tập trung vào khái niệm 'Đòn bẩy' (Leverage) để đạt được sự giàu có trong thời gian ngắn nhất.</p>
+        </div>
+        <div class="chapters-grid">
+            
+        <div class="chapter-card" data-title="chương 1: làm thế nào để về hưu sớm và giàu" data-summary="robert kể về hành trình ông và vợ bắt đầu từ con số không, thậm chí có lúc vô gia cư vào năm 1985, nhưng đã đạt tự do tài chính và nghỉ hưu vào năm 1994. chìa khóa là họ không đi tìm một công việc làm thuê ổn định, mà tập trung toàn bộ năng lượng vào việc xây dựng doanh nghiệp và mua bất động sản tạo dòng tiền.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 5</span>
+                <h3>Chương 1: Làm thế nào để về hưu sớm và giàu</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Robert kể về hành trình ông và vợ bắt đầu từ con số không, thậm chí có lúc vô gia cư vào năm 1985, nhưng đã đạt tự do tài chính và nghỉ hưu vào năm 1994. Chìa khóa là họ không đi tìm một công việc làm thuê ổn định, mà tập trung toàn bộ năng lượng vào việc xây dựng doanh nghiệp và mua bất động sản tạo dòng tiền.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Nghỉ hưu sớm không phải là ngừng hoạt động, mà là có quyền lựa chọn làm việc hoặc không làm việc nhờ có nguồn thu nhập thụ động vượt trội chi phí.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Thiết lập một mục tiêu 'Nghỉ hưu' cụ thể dựa trên việc xây dựng nguồn thu nhập thụ động, thay vì chờ đợi đến tuổi nghỉ hưu của chính phủ (60-65 tuổi).</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Chúng tôi nghỉ hưu sớm không phải vì có nhiều tiền, mà vì cột tài sản của chúng tôi tạo ra nhiều tiền hơn chi phí sinh hoạt hàng tháng.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 2: tại sao phải nghỉ hưu sớm?" data-summary="nghỉ hưu sớm khi còn trẻ và nhiều sức khỏe giúp bạn có thời gian và sự nhạy bén để tham gia vào các cơ hội đầu tư lớn hơn mà người bận rộn đi làm thuê không thể tiếp cận. nó cũng giải phóng bạn khỏi áp lực cơm áo gạo tiền để tập trung vào những giá trị sống cao đẹp hơn.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 5</span>
+                <h3>Chương 2: Tại sao phải nghỉ hưu sớm?</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Nghỉ hưu sớm khi còn trẻ và nhiều sức khỏe giúp bạn có thời gian và sự nhạy bén để tham gia vào các cơ hội đầu tư lớn hơn mà người bận rộn đi làm thuê không thể tiếp cận. Nó cũng giải phóng bạn khỏi áp lực cơm áo gạo tiền để tập trung vào những giá trị sống cao đẹp hơn.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Thời gian là tài sản quý giá nhất. Nghỉ hưu sớm là cách bạn mua lại thời gian của cuộc đời mình.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Tính toán chỉ số 'Số ngày bạn có thể sống nếu ngừng làm việc hôm nay' để thấy rõ mức độ cấp bách của việc cần tự do tài chính sớm.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Nếu bạn không nghỉ hưu sớm, bạn đang bán đi những năm tháng đẹp nhất của cuộc đời mình cho một công việc.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 3: sức mạnh của đòn bẩy" data-summary="đòn bẩy là khả năng làm được nhiều hơn với ít công sức hơn. người nghèo sử dụng rất ít đòn bẩy (chỉ bán sức lao động cá nhân). người giàu sử dụng đa dạng các loại đòn bẩy: opm (tiền của người khác), opt (thời gian của người khác), hệ thống công nghệ và các mối quan hệ chất lượng.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 5</span>
+                <h3>Chương 3: Sức mạnh của đòn bẩy</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Đòn bẩy là khả năng làm được nhiều hơn với ít công sức hơn. Người nghèo sử dụng rất ít đòn bẩy (chỉ bán sức lao động cá nhân). Người giàu sử dụng đa dạng các loại đòn bẩy: OPM (Tiền của người khác), OPT (Thời gian của người khác), hệ thống công nghệ và các mối quan hệ chất lượng.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Sự khác biệt giữa người giàu và người nghèo là mức độ sử dụng sức mạnh đòn bẩy một cách thông minh.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Tìm kiếm các công cụ giúp bạn tự động hóa công việc hiện tại, hoặc hợp tác với những người có nguồn lực (vốn, mặt bằng, công nghệ) để cộng hưởng sức mạnh.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Hãy cho tôi một điểm tựa, tôi sẽ nhấc bổng cả trái đất. Đòn bẩy là bí mật lớn nhất của sự giàu có nhanh chóng.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 4: đòn bẩy của trí tuệ" data-summary="đòn bẩy mạnh nhất và dễ tiếp cận nhất chính là trí tuệ của bạn. nó bắt đầu bằng việc kiểm soát ngôn từ. thay vì nói những câu từ giới hạn như 'tôi không thể làm được', 'tôi không mua nổi', hãy chuyển dịch sang ngôn từ mở đường: 'làm thế nào để tôi có thể làm được?', 'tôi cần học gì để mua được nó?'">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 5</span>
+                <h3>Chương 4: Đòn bẩy của trí tuệ</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Đòn bẩy mạnh nhất và dễ tiếp cận nhất chính là trí tuệ của bạn. Nó bắt đầu bằng việc kiểm soát ngôn từ. Thay vì nói những câu từ giới hạn như 'Tôi không thể làm được', 'Tôi không mua nổi', hãy chuyển dịch sang ngôn từ mở đường: 'Làm thế nào để tôi có thể làm được?', 'Tôi cần học gì để mua được nó?'</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Tư duy tích cực và câu hỏi định hướng là đòn bẩy đầu tiên khai thông mọi nguồn lực tài chính.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Mỗi khi định từ bỏ một mục tiêu vì thiếu tiền, hãy viết ra 3 giải pháp khả thi để huy động vốn hoặc hợp tác kinh doanh.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Ngôn từ của bạn chính là đòn bẩy. Hãy sử dụng những ngôn từ mở ra cơ hội thay vì đóng sầm cánh cửa tư duy.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 5: đòn bẩy của kế hoạch" data-summary="một kế hoạch tài chính chậm (tiết kiệm tiền, mua bảo hiểm, chờ 40 năm) là rất mạo hiểm vì lạm phát và thuế. bạn cần một kế hoạch tài chính nhanh (xây dựng doanh nghiệp, dùng nợ tốt để đầu tư bất động sản). kế hoạch nhanh đòi hỏi bạn phải liên tục nâng cấp kiến thức tài chính để quản lý rủi ro.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 5</span>
+                <h3>Chương 5: Đòn bẩy của kế hoạch</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Một kế hoạch tài chính chậm (tiết kiệm tiền, mua bảo hiểm, chờ 40 năm) là rất mạo hiểm vì lạm phát và thuế. Bạn cần một kế hoạch tài chính nhanh (xây dựng doanh nghiệp, dùng nợ tốt để đầu tư bất động sản). Kế hoạch nhanh đòi hỏi bạn phải liên tục nâng cấp kiến thức tài chính để quản lý rủi ro.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Kế hoạch tài chính của bạn quyết định tốc độ bạn đi đến sự tự do tài chính.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Thiết lập kế hoạch 3-5 năm tập trung vào việc tạo lập 1 nguồn thu nhập thụ động mới từ kinh doanh hoặc đầu tư, thay vì kế hoạch 30 năm gửi tiết kiệm ngân hàng.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Hầu hết mọi người không giàu lên được vì họ có một kế hoạch tài chính quá chậm chạp và an toàn giả tạo.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 6: đòn bẩy của hành động" data-summary="nhiều người có kế hoạch tốt nhưng không bao giờ giàu vì họ thiếu đòn bẩy hành động. họ bị tê liệt bởi nỗi sợ hãi hoặc sự trì hoãn. bí quyết là chia nhỏ mục tiêu lớn thành các hành động nhỏ hàng ngày, chấp nhận mắc sai lầm và liên tục điều chỉnh hướng đi.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 5</span>
+                <h3>Chương 6: Đòn bẩy của hành động</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Nhiều người có kế hoạch tốt nhưng không bao giờ giàu vì họ thiếu đòn bẩy hành động. Họ bị tê liệt bởi nỗi sợ hãi hoặc sự trì hoãn. Bí quyết là chia nhỏ mục tiêu lớn thành các hành động nhỏ hàng ngày, chấp nhận mắc sai lầm và liên tục điều chỉnh hướng đi.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Hành động nhỏ được lặp đi lặp lại hàng ngày sẽ tạo ra kết quả khổng lồ theo thời gian.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Mỗi ngày thực hiện ít nhất một hành động nhỏ hướng tới mục tiêu tài chính (gọi điện cho một môi giới, đọc 10 trang sách, phân tích 1 mã cổ phiếu).</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Bắt đầu nhỏ, suy nghĩ lớn. Đòn bẩy của hành động là làm ngay những việc nhỏ nhất với sự kiên trì lớn nhất.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 7: đòn bẩy của tài sản" data-summary="tác giả hướng dẫn cách tập trung mua và xây dựng các tài sản có tính chất đòn bẩy cao - tức là những tài sản có thể tự động sinh lợi nhuận và nhân bản mà không cần bạn bỏ thêm nhiều công sức (như nhượng quyền thương hiệu, phần mềm, khóa học trực tuyến, hoặc chuỗi bất động sản cho thuê).">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 5</span>
+                <h3>Chương 7: Đòn bẩy của tài sản</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Tác giả hướng dẫn cách tập trung mua và xây dựng các tài sản có tính chất đòn bẩy cao - tức là những tài sản có thể tự động sinh lợi nhuận và nhân bản mà không cần bạn bỏ thêm nhiều công sức (như nhượng quyền thương hiệu, phần mềm, khóa học trực tuyến, hoặc chuỗi bất động sản cho thuê).</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Hãy tập trung vào những tài sản có khả năng tự vận hành và mở rộng quy mô một cách dễ dàng.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Đánh giá xem công việc kinh doanh hiện tại của bạn có thể nhân bản được không. Nếu không, hãy thiết kế lại quy trình để có thể đóng gói và chuyển giao cho người khác.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Người giàu xây dựng các cột tài sản tự vận hành để tạo ra dòng tiền bền vững, giải phóng sức lao động cá nhân.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 8: đòn bẩy của bất động sản" data-summary="bất động sản là đòn bẩy tuyệt vời vì ngân hàng sẵn sàng cho bạn vay tới 70-80% giá trị tài sản (dùng nợ tốt - opm). ngoài ra, bất động sản mang lại dòng tiền thuê hàng tháng, sự tăng giá trị theo thời gian và các chính sách ưu đãi miễn giảm thuế rất lớn từ chính phủ.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 5</span>
+                <h3>Chương 8: Đòn bẩy của bất động sản</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Bất động sản là đòn bẩy tuyệt vời vì ngân hàng sẵn sàng cho bạn vay tới 70-80% giá trị tài sản (dùng nợ tốt - OPM). Ngoài ra, bất động sản mang lại dòng tiền thuê hàng tháng, sự tăng giá trị theo thời gian và các chính sách ưu đãi miễn giảm thuế rất lớn từ chính phủ.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Sử dụng nợ tốt để mua bất động sản tạo dòng tiền là công thức kinh điển của người giàu.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Học cách tính toán tỷ suất sinh lợi dòng tiền của một bất động sản (Yield = Doanh thu thuê ròng / Tổng giá trị đầu tư) trước khi quyết định mua.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Bất động sản cho phép bạn sử dụng tiền của ngân hàng để làm giàu cho chính mình một cách hợp pháp.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 9: đòn bẩy của chứng khoán" data-summary="chứng khoán (cổ phiếu, trái phiếu, quyền chọn) cung cấp tính thanh khoản cao và khả năng tham gia vào các tập đoàn lớn với số vốn nhỏ. người giàu sử dụng chứng khoán như một công cụ đòn bẩy bảo hiểm tài sản và gia tăng dòng tiền thông qua cổ tức hoặc quyền chọn giao dịch.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 5</span>
+                <h3>Chương 9: Đòn bẩy của chứng khoán</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Chứng khoán (cổ phiếu, trái phiếu, quyền chọn) cung cấp tính thanh khoản cao và khả năng tham gia vào các tập đoàn lớn với số vốn nhỏ. Người giàu sử dụng chứng khoán như một công cụ đòn bẩy bảo hiểm tài sản và gia tăng dòng tiền thông qua cổ tức hoặc quyền chọn giao dịch.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Tài sản giấy (chứng khoán) mang lại sự linh hoạt và khả năng đòn bẩy nhanh chóng nếu bạn hiểu luật chơi.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Tìm hiểu cách sử dụng các chỉ số tài chính cơ bản (P/E, P/B, ROE) để lọc ra các doanh nghiệp tốt đang có giá cổ phiếu dưới giá trị thực trên thị trường chứng khoán.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Thị trường chứng khoán là nơi tiền bạc được chuyển từ người thiếu kiên nhẫn sang người kiên nhẫn.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 10: đòn bẩy của liên đoàn" data-summary="chương này nhấn mạnh lại sức mạnh của việc sử dụng cấu trúc công ty (corporation) làm đòn bẩy pháp lý tối thượng. doanh nghiệp giúp bạn bảo vệ tài sản cá nhân khỏi các vụ kiện tụng, tối ưu hóa các khoản chi phí trước thuế và tận dụng sức lao động của cả một tập thể để tạo ra của cải.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 5</span>
+                <h3>Chương 10: Đòn bẩy của liên đoàn</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Chương này nhấn mạnh lại sức mạnh của việc sử dụng cấu trúc công ty (Corporation) làm đòn bẩy pháp lý tối thượng. Doanh nghiệp giúp bạn bảo vệ tài sản cá nhân khỏi các vụ kiện tụng, tối ưu hóa các khoản chi phí trước thuế và tận dụng sức lao động của cả một tập thể để tạo ra của cải.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Công ty là lá chắn pháp lý và là đòn bẩy thuế mạnh mẽ nhất của người giàu.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Tích lũy kiến thức về luật doanh nghiệp và các chính sách thuế hỗ trợ doanh nghiệp khởi nghiệp tại địa phương của bạn.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Nếu bạn kinh doanh với tư cách cá nhân, bạn đang chịu mức thuế cao nhất và rủi ro pháp lý lớn nhất.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chapter-card" data-title="chương 11: vượt qua sự trì hoãn" data-summary="sự trì hoãn là kẻ thù lớn nhất của thành công. mọi người thường trì hoãn vì nỗi sợ thất bại hoặc sự tự mãn. tác giả khuyên bạn nên xây dựng một kỷ luật cá nhân sắt đá, thiết lập các cột mốc thời gian rõ ràng và tự thưởng/phạt bản thân dựa trên kết quả hành động thực tế.">
+            <div class="card-header">
+                <span class="chapter-badge">Tập 5</span>
+                <h3>Chương 11: Vượt qua sự trì hoãn</h3>
+            </div>
+            <div class="card-body">
+                <div class="section-detail">
+                    <strong>📝 Tóm tắt cốt lõi:</strong>
+                    <p>Sự trì hoãn là kẻ thù lớn nhất của thành công. Mọi người thường trì hoãn vì nỗi sợ thất bại hoặc sự tự mãn. Tác giả khuyên bạn nên xây dựng một kỷ luật cá nhân sắt đá, thiết lập các cột mốc thời gian rõ ràng và tự thưởng/phạt bản thân dựa trên kết quả hành động thực tế.</p>
+                </div>
+                <div class="section-detail border-accent">
+                    <strong>💡 Bài học rút ra:</strong>
+                    <p>Kỷ luật thực thi là cầu nối duy nhất giữa ý tưởng giàu có và hiện thực tự do tài chính.</p>
+                </div>
+                <div class="section-detail border-cyan">
+                    <strong>🚀 Ứng dụng thực tế:</strong>
+                    <p>Viết ra 3 việc quan trọng nhất bạn cần làm trong tuần này để tiến gần hơn đến mục tiêu tài chính và cam kết hoàn thành chúng trước mọi việc khác.</p>
+                </div>
+                <div class="quote-box">
+                    <span class="quote-icon">“</span>
+                    <p class="quote-text">Sự trì hoãn là kẻ trộm thời gian và cơ hội. Đừng chờ đợi thời điểm hoàn hảo, hãy bắt đầu ngay bây giờ và hoàn thiện dần.</p>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+    
+
+        <!-- Tab Glossary -->
+        <div id="glossary" class="tab-content">
+            <div class="volume-header">
+                <h2>📖 Bảng Thuật Ngữ Tài Chính Cốt Lõi</h2>
+                <p class="volume-desc">Giải nghĩa các khái niệm tài chính nền tảng xuất hiện trong toàn bộ bộ sách.</p>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Thuật ngữ</th>
+                            <th>Giải thích chi tiết</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+    <tr>
+        <td class="term-cell">Tài sản (Asset)</td>
+        <td>Những thứ bỏ tiền vào túi bạn (như bất động sản cho thuê, cổ phiếu sinh cổ tức, doanh nghiệp tự vận hành, bản quyền trí tuệ).</td>
+    </tr>
+    
+    <tr>
+        <td class="term-cell">Tiêu sản (Liability)</td>
+        <td>Những thứ lấy tiền ra khỏi túi bạn (như nhà để ở trả góp, xe cá nhân trả góp, các khoản vay tiêu dùng, thẻ tín dụng).</td>
+    </tr>
+    
+    <tr>
+        <td class="term-cell">Vòng rác (Rat Race)</td>
+        <td>Vòng luẩn quẩn tài chính của hầu hết mọi người: Đi làm -> Nhận lương -> Trả hóa đơn -> Hết tiền -> Lại đi làm chăm chỉ hơn -> Nợ nhiều hơn -> Lặp lại.</td>
+    </tr>
+    
+    <tr>
+        <td class="term-cell">Dòng tiền (Cashflow)</td>
+        <td>Lượng tiền mặt chảy vào (thu nhập) và chảy ra (chi phí/tiêu sản) của một cá nhân hoặc tổ chức trong một khoảng thời gian.</td>
+    </tr>
+    
+    <tr>
+        <td class="term-cell">IQ Tài chính (Financial IQ)</td>
+        <td>Sự thông minh về tài chính, bao gồm 4 năng lực: Kế toán (đọc hiểu con số), Đầu tư (tiền đẻ ra tiền), Hiểu biết thị trường (cung và cầu), và Pháp luật (thuế và bảo vệ tài sản).</td>
+    </tr>
+    
+    <tr>
+        <td class="term-cell">Liên đoàn/Công ty (Corporation)</td>
+        <td>Một lá chắn pháp lý giúp người giàu bảo vệ tài sản và tối ưu hóa thuế. Công ty được phép chi tiêu trước khi đóng thuế, ngược lại với cá nhân làm công ăn lương.</td>
+    </tr>
+    
+    <tr>
+        <td class="term-cell">Nợ tốt (Good Debt)</td>
+        <td>Khoản nợ được dùng để mua tài sản tạo ra dòng tiền lớn hơn số tiền phải trả lãi gốc hàng tháng (người khác trả nợ thay bạn).</td>
+    </tr>
+    
+    <tr>
+        <td class="term-cell">Nợ xấu (Bad Debt)</td>
+        <td>Khoản nợ dùng để mua tiêu sản và bạn phải tự bỏ tiền túi ra để trả lãi gốc hàng tháng.</td>
+    </tr>
+    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Hệ thống hóa nội dung bởi <strong>Antigravity AI</strong> dựa trên tài liệu <a href="file:///Users/mac/antigravity-testing-kit/ebook-cha-giau-cha-ngheo.pdf">ebook-cha-giau-cha-ngheo.pdf</a>.</p>
+        <p style="font-size: 0.8rem; margin-top: 8px; color: var(--text-muted);">© 2026. Mọi quyền thuộc về tác giả Robert Kiyosaki.</p>
+    </footer>
+
+    <!-- Script Tương Tác -->
+    <script>
+        // Chuyển Tab
+        function switchTab(tabId) {
+            // Ẩn tất cả tab
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Gỡ active của tất cả nút
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Hiển thị tab được chọn
+            document.getElementById(tabId).classList.add('active');
+
+            // Active nút tương ứng
+            event.currentTarget.classList.add('active');
+
+            // Reset thanh tìm kiếm khi đổi tab
+            document.getElementById('search-input').value = '';
+            handleSearch();
+            
+            // Render lại Mermaid khi tab ẩn được hiển thị
+            if (tabId === 'overview') {
+                mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+            }
+        }
+
+        // Tìm kiếm và lọc thẻ chương học
+        function handleSearch() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            const activeTab = document.querySelector('.tab-content.active');
+            
+            if (!activeTab || activeTab.id === 'overview' || activeTab.id === 'glossary') {
+                return; // Không lọc ở tab sơ đồ và thuật ngữ
+            }
+
+            const cards = activeTab.querySelectorAll('.chapter-card');
+            
+            cards.forEach(card => {
+                const title = card.getAttribute('data-title');
+                const summary = card.getAttribute('data-summary');
+                
+                if (title.includes(query) || summary.includes(query)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

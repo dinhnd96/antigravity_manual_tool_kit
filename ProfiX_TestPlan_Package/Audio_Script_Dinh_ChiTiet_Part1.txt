@@ -1,0 +1,124 @@
+HƯỚNG DẪN CHI TIẾT NGHIỆP VỤ — DÀNH CHO ĐỊNH (TEST LEAD) — PHẦN 1/2
+DỰ ÁN PROFIX PHASE 1 — HỆ THỐNG QUẢN LÝ THAM SỐ PHÍ DỊCH VỤ
+
+Xin chào anh Định. Đây là bản mô tả chi tiết từng tính năng mà anh phụ trách. Anh có thể nghe lại bất cứ lúc nào để nắm vững nghiệp vụ trước khi viết Test Case.
+
+========================================
+NHÓM 1: TRA CỨU THEO KHÁCH HÀNG
+========================================
+
+--- User Story 17: Xem danh sách code phí áp dụng cho một khách hàng ---
+
+Mục đích: Cho phép người dùng tra cứu xem một khách hàng cụ thể đang bị áp dụng những code phí nào.
+
+Cách truy cập: Vào menu Tra cứu, chọn Xem code phí theo khách hàng, rồi nhấn Tra cứu.
+
+Màn hình gồm 3 phần chính:
+Phần 1 là Điều kiện tra cứu, gồm 2 trường. Trường Mã khách hàng là bắt buộc, người dùng nhập 1 mã khách hàng để tìm kiếm. Nếu mã khách hàng không tồn tại, hệ thống sẽ báo lỗi "Mã khách hàng không tồn tại". Trường Sản phẩm dịch vụ cho phép nhập mã hoặc tên Sản phẩm dịch vụ hoặc Code phí để lọc, chỉ hiển thị các Sản phẩm dịch vụ đang hoạt động và code phí có trạng thái Hoạt động, đã duyệt.
+
+Phần 2 là Lưới kết quả, hiển thị danh sách code phí theo khách hàng với các cột: Mã khách hàng, Code, Tên, Biểu phí, Sản phẩm dịch vụ, Người tạo, Ngày tạo, Người sửa, Ngày sửa, Người duyệt, Ngày duyệt.
+
+Phần 3 là các nút chức năng. Nút Tra cứu mã khách hàng cho phép tìm khách hàng theo thông tin thể nhân, tuân theo quy tắc chung. Nút Tải xuống cho phép xuất file danh sách ra Excel hoặc CSV.
+
+Điểm cần lưu ý khi test: Hệ thống chỉ hiển thị code phí có trạng thái Hoạt động và Đã duyệt. Code phí ở trạng thái Nháp, Chờ duyệt hoặc Ngừng hoạt động không được hiển thị.
+
+--- User Story 18: Xem lịch sử thu phí theo khách hàng ---
+
+Mục đích: Cho phép xem toàn bộ lịch sử các lần đã thu phí của một khách hàng.
+
+Cách truy cập: Vào Tra cứu, chọn Xem lịch sử thu phí theo khách hàng.
+
+Điều kiện tra cứu gồm: Mã khách hàng là bắt buộc, Sản phẩm dịch vụ, Biểu phí, Code phí, Từ ngày và Đến ngày.
+
+Lưới kết quả hiển thị rất nhiều cột quan trọng: Mã khách hàng, Tài khoản thu phí, Code phí, Loại tiền code phí, Biểu phí, Sản phẩm dịch vụ, thuế giá trị gia tăng, Số tiền phí nguyên tệ là phí gốc hệ thống tính ra, Chương trình ưu đãi nếu có, Override là cho biết có sửa tiền phí không, Số tiền phí thực thu nguyên tệ là số tiền sau khi đã trừ ưu đãi và sửa tăng giảm nếu có, Số tiền phí thực thu quy đổi Việt Nam đồng, Ngày thu và Ngày đến hạn thu phí định kỳ.
+
+Điểm cần lưu ý khi test: Cần kiểm tra công thức Số tiền phí thực thu bằng Số tiền phí nguyên tệ trừ đi Mức ưu đãi cộng hoặc trừ Override. Đây là trọng tâm kiểm tra Data Accuracy.
+
+--- User Story 19: Tra cứu lịch thu phí dự kiến theo khách hàng ---
+
+Mục đích: Cho phép xem trước các khoản phí mà khách hàng sẽ phải đóng trong tương lai.
+
+Điều kiện tra cứu tương tự User Story 18, nhưng có một điểm đặc biệt: trường Từ ngày và Đến ngày dùng để tìm kiếm trong tương lai, với khoảng thời gian tối đa là 1 năm kể từ ngày hệ thống.
+
+Khi người dùng nhấn Tra cứu, hệ thống sẽ sử dụng dữ liệu tại thời điểm hiện tại để tính toán các khoản phí cần thu trong tương lai, với điều kiện Từ ngày nhỏ hơn hoặc bằng Ngày thu nhỏ hơn hoặc bằng Đến ngày.
+
+Lưu ý rất quan trọng: Việc tính toán này chỉ phục vụ mục đích xuất báo cáo, KHÔNG làm ảnh hưởng tới dữ liệu thu phí định kỳ thực tế của hệ thống. Nghĩa là nó chỉ mô phỏng, không tạo giao dịch thật.
+
+--- User Story 20: Xem danh sách Chương trình ưu đãi theo khách hàng ---
+
+Mục đích: Tra cứu xem một khách hàng cụ thể đang được hưởng những chương trình ưu đãi nào.
+
+Điều kiện tìm kiếm gồm: Mã khách hàng là bắt buộc, Sản phẩm dịch vụ, Từ ngày và Đến ngày dùng để tìm theo ngày hiệu lực của chương trình ưu đãi, nếu nhập Từ ngày thì bắt buộc phải nhập Đến ngày và ngược lại, và Loại khách hàng gồm Khách hàng cá nhân, Khách hàng tổ chức, Doanh nghiệp siêu nhỏ, Cán bộ nhân viên.
+
+Hệ thống tìm kiếm chương trình ưu đãi theo các nguyên tắc sau:
+Một, chương trình ưu đãi phải có trạng thái hoạt động là Đang hiệu lực và trạng thái phê duyệt là Đã duyệt.
+Hai, với chương trình có đánh giá định kỳ hoặc có xác định sẵn danh sách khách hàng, hệ thống kiểm tra mã khách hàng phải thuộc danh sách khách hàng của chương trình.
+Ba, với chương trình không đánh giá định kỳ và không xác định sẵn danh sách, hệ thống kiểm tra mã khách hàng phải thỏa mãn các điều kiện áp dụng, chỉ kiểm tra các điều kiện có Nguồn dữ liệu là dữ liệu đồng bộ Khách hàng.
+
+Khi nhấn vào một chương trình trên lưới, hệ thống hiển thị màn hình xem chi tiết gồm: Thông tin chung như Mã, Tên, Ngày ban hành, Số văn bản, Ngày hiệu lực, Ngày hết hiệu lực. Hình thức là 1 trong 3 loại: Đánh giá định kỳ, Liên tục và không đánh giá định kỳ, hoặc Theo chu kỳ và không đánh giá định kỳ. Và phần Chi tiết ưu đãi gồm Sản phẩm dịch vụ, Loại tiền, Số tiền phí tối thiểu, tối đa, Tỷ lệ ưu đãi, Giá trị ưu đãi, Ngưỡng dừng ưu đãi.
+
+--- User Story 28: Truy xuất sao kê chi tiết giao dịch thu phí ---
+
+Mục đích: Cho phép xem chi tiết từng giao dịch thu phí đã thực hiện, giống như một bảng sao kê ngân hàng.
+
+Cách truy cập: Vào Báo cáo, chọn Sao kê chi tiết giao dịch thu phí.
+
+Điều kiện tìm kiếm gồm: Từ ngày và Đến ngày là bắt buộc, dùng tìm theo thời gian giao dịch. Khối thì nếu người dùng thuộc Khối Khách hàng cá nhân hoặc Khách hàng doanh nghiệp hoặc Khách hàng doanh nghiệp lớn thì hệ thống mặc định hiển thị Khối đó và không cho sửa, nếu không thuộc khối nào thì cho chọn. Mã chi nhánh cho phép chọn 1 chi nhánh. Mã khách hàng cho phép nhập, hệ thống kiểm tra mã khách hàng có tồn tại trong cơ sở dữ liệu ProfiX không.
+
+Lưới kết quả rất chi tiết, gồm nhiều cột: Mã chi nhánh, Tên chi nhánh, Ngày giao dịch hiển thị theo định dạng giờ phút giây ngày tháng năm, Mã khách hàng, Tên khách hàng, Loại khách hàng, Số Chứng minh nhân dân Căn cước công dân, Mã giao dịch liên quan là số ref, Số tài khoản liên quan, Số thẻ liên quan, Code phí, Tên phí, Loại tiền, Số tiền phí nguyên tệ là số tiền hệ thống tính chưa phải thực thu, Mã chương trình ưu đãi, Tên chương trình ưu đãi, Override cho biết có sửa tiền phí không với 3 giá trị Không hoặc Sửa tăng hoặc Sửa giảm, Số tiền phí thực thu nguyên tệ là số tiền đã trừ ưu đãi và sửa tăng giảm, Số tiền phí thực thu quy đổi Việt Nam đồng, Tài khoản thanh toán thu phí, Mã hạch toán, và User hạch toán.
+
+Đặc biệt, trường User hạch toán có 2 trường hợp: với giao dịch thu phí qua API thì user hạch toán là maker, với giao dịch thu phí định kỳ thì user hạch toán là kênh hoặc system.
+
+Nút Tải xuống cho phép chọn định dạng Excel hoặc PDF.
+
+========================================
+NHÓM 2: BÁO CÁO QUẢN TRỊ
+========================================
+
+--- User Story 29: Xuất báo cáo danh sách khách hàng còn nợ phí ---
+
+Mục đích: Liệt kê tất cả khách hàng đang còn nợ phí chưa thanh toán.
+
+Điều kiện tìm kiếm: Nợ phí từ ngày và Nợ phí đến ngày là bắt buộc, tìm theo ngày đến hạn nợ phí. Khối tuân theo quy tắc phân quyền giống User Story 28. Mã chi nhánh, Mã khách hàng, Biểu phí và Code phí.
+
+Lưới kết quả gồm: Mã chi nhánh, Tên chi nhánh, Mã khách hàng, Tên khách hàng, Số tài khoản, Số thẻ, Biểu phí, Code phí, Tên phí, Loại tiền, Số tiền phí chưa bao gồm thuế giá trị gia tăng, Mã và Tên chương trình ưu đãi, Ngày đến hạn, Số tiền đã thu, Số tiền còn nợ bằng Số tiền phí trừ Số tiền đã thu chưa bao gồm thuế giá trị gia tăng, Trạng thái thanh toán chỉ hiển thị các bản ghi có trạng thái Đang xử lý hoặc Thanh toán một phần hoặc Chưa thanh toán, Ngày thanh toán gần nhất và Số tài khoản thu phí gần nhất.
+
+Điểm test quan trọng: Kiểm tra công thức Số tiền còn nợ bằng Số tiền phí trừ Số tiền đã thu. Và kiểm tra lưới chỉ hiển thị đúng 3 trạng thái nợ, không hiển thị bản ghi đã Thanh toán toàn bộ hoặc Xóa nợ.
+
+--- User Story 30: Xuất báo cáo dự thu phí dịch vụ kỳ tiếp theo ---
+
+Mục đích: Dự báo các khoản phí sẽ cần thu trong tương lai.
+
+Điều kiện đặc biệt: Từ ngày phải lớn hơn Ngày hệ thống, tức phải là ngày trong tương lai. Đến ngày trừ Từ ngày không được vượt quá 1 năm, nếu vượt hệ thống báo lỗi.
+
+Khi nhấn Tra cứu, hệ thống tính toán dựa trên Code phí có trạng thái phê duyệt Đã duyệt và trạng thái hoạt động Hoạt động, Chương trình ưu đãi có trạng thái phê duyệt Đã duyệt và trạng thái hoạt động Đang hiệu lực. Giống User Story 19, việc tính toán này chỉ phục vụ xuất báo cáo và không ảnh hưởng tới dữ liệu thu phí thực tế.
+
+--- User Story 31: Xuất báo cáo tổng doanh thu phí ---
+
+Mục đích: Xem tổng doanh thu phí đã thu được theo nhiều tiêu chí lọc.
+
+Điều kiện tìm kiếm: Khối, Mã chi nhánh, Biểu phí, Code phí, Loại tính phí cho phép chọn Theo Giao dịch hoặc Theo định kỳ, Từ ngày và Đến ngày là bắt buộc, tìm theo Ngày giao dịch trong lịch sử thu phí.
+
+Lưới kết quả nhóm dữ liệu theo từng tổ hợp Chi nhánh cộng Loại tiền cộng Loại tính phí cộng Biểu phí cộng Code phí, và hiển thị: Doanh thu phí nguyên tệ chưa bao gồm thuế giá trị gia tăng và Doanh thu phí quy đổi Việt Nam đồng chưa bao gồm thuế giá trị gia tăng.
+
+Cuối bảng có dòng Tổng cộng hiển thị tổng doanh thu phí Việt Nam đồng. Nếu lưới không có dữ liệu thì Tổng cộng hiển thị bằng 0.
+
+--- User Story 32: Xem trang Dashboard tổng quan hoạt động thu phí ---
+
+Mục đích: Cung cấp cái nhìn tổng quan về toàn bộ hoạt động thu phí của ngân hàng dưới dạng biểu đồ trực quan.
+
+Dashboard gồm 3 màn hình: Dashboard theo Chi nhánh là mặc định khi vào, Dashboard theo Sản phẩm và Dashboard theo Khối.
+
+Trên cùng của mọi màn hình Dashboard đều có 3 chỉ số tổng quan:
+Chỉ số 1: Tổng doanh thu, gồm doanh thu tháng hiện tại, doanh thu tháng trước và phần trăm thay đổi. Nếu phần trăm lớn hơn hoặc bằng 100 phần trăm thì hiển thị màu xanh, dưới 100 phần trăm thì hiển thị màu đỏ.
+Chỉ số 2: Số giao dịch thu phí, cũng so sánh tháng hiện tại với tháng trước, chỉ tính giao dịch có số tiền phí thực thu lớn hơn 0 và không tính giao dịch đã bị reverse.
+Chỉ số 3: Tổng số khách hàng phát sinh phí, cũng chỉ tính khách hàng có giao dịch thực thu lớn hơn 0 và không bị reverse.
+
+Dashboard theo Chi nhánh gồm 3 biểu đồ:
+Biểu đồ 1: Số giao dịch thu phí theo chi nhánh, dạng bar chart nằm ngang, sắp xếp chi nhánh có số giao dịch cao nhất lên trên, mặc định hiển thị top 5, người dùng có thể chọn top 5, 10 hoặc 15.
+Biểu đồ 2: Doanh thu phí theo chi nhánh, dạng donut chart, phần trung tâm hiển thị tổng doanh thu toàn ngân hàng, các phần bên ngoài chia theo top chi nhánh và phần Còn lại.
+Biểu đồ 3: Nợ phí và truy thu theo chi nhánh, dạng kết hợp bar chart cho số tiền nợ phí và line chart cho số tiền truy thu thành công, mặc định hiển thị 7 chi nhánh theo thứ tự chữ cái, người dùng có thể chọn tối đa 10 chi nhánh.
+
+Dashboard theo Sản phẩm có biểu đồ số giao dịch dạng line chart và biểu đồ doanh thu dạng stacked horizontal bar chart.
+
+Tất cả số tiền trên Dashboard đều có đơn vị Triệu Việt Nam đồng. Dữ liệu được phân quyền theo Khối của người dùng đăng nhập.

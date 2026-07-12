@@ -1,0 +1,103 @@
+# US35 Part B Merged - DATA with fixed References (verbatim quotes)
+# Format: (ID, Trích xuất, Câu hỏi, Phân loại, Đề xuất, Nguồn)
+
+QA_DATA = [
+    # === HM1: Nghiệp vụ ===
+    ("US35-QA-01.1",
+     'Mục "Yêu cầu nghiệp vụ" – *"hệ thống thực hiện tìm tài khoản thay thế trong danh sách các tài khoản của khách hàng có đủ điều kiện... ưu tiên lấy tài khoản có số dư lớn nhất"*',
+     'Khi đối tượng tính phí = Customer, nếu TK thu phí mặc định không đủ ĐK VÀ không tìm được TK thay thế nào đủ ĐK → khoản phí xử lý thế nào? Tài liệu chỉ mô tả "tìm TK thay thế" nhưng không nêu nhánh thất bại.',
+     'Nghiệp vụ',
+     'Đề xuất: Khoản phí không ghi vào Topic, trạng thái = "Chưa thanh toán" hoặc ghi log riêng. Cần BA xác nhận.',
+     'BOTH'),
+
+    ("US35-QA-01.2",
+     'Mục "Yêu cầu nghiệp vụ" – *"Trong khoảng thời gian ProfiX chưa nhận được kết quả thu phí thì trạng thái của kỳ nợ phí được duy trì là Đang xử lý"*',
+     'Trạng thái "Đang xử lý" duy trì vô thời hạn nếu Kafka message bị mất hoặc T24 không phản hồi. Có cơ chế timeout/retry không?',
+     'Nghiệp vụ',
+     'Đề xuất: Cần timeout (VD: 24h → tự chuyển "Chưa thanh toán" + ghi log) hoặc retry. Cần BA xác nhận.',
+     'BOTH'),
+
+    ("US35-QA-01.3",
+     'Bảng "Xử lý tính phí định kỳ", Bước 1 – *"Nếu Job A có đối tượng tính phí = Account, hệ thống đối chiếu danh sách tài khoản trong bảng Account với Danh sách code phí B [...]"*',
+     'Với đối tượng = Account/Card, bước 2 (kiểm tra TK) bị bỏ qua. TK/Thẻ đó có cần kiểm tra trạng thái + CA_PRODUCT không? Tài liệu chỉ mô tả cho Customer.',
+     'Nghiệp vụ',
+     'Đề xuất: Account → kiểm tra trạng thái + CA_PRODUCT tương tự Customer. Card → kiểm tra trạng thái thẻ. Cần BA xác nhận.',
+     'AI'),
+
+    ("US35-QA-01.4",
+     'Mục "Yêu cầu nghiệp vụ" – *"hệ thống cho phép cài đặt thứ tự ưu tiên của nghiệp vụ phí cần thu (ví dụ: ưu tiên thu phí dịch vụ SMS trước thu phí quản lý tài khoản)"*',
+     'Thứ tự ưu tiên được cài đặt theo đơn vị nào: từng Job, từng Code phí, hay Nhóm nghiệp vụ? Nếu 2 Code phí cùng ưu tiên thì thứ tự ghi Kafka theo tiêu chí nào?',
+     'Nghiệp vụ',
+     'Đề xuất: Cần BA xác nhận đơn vị cài đặt ưu tiên và tiebreak khi cùng mức.',
+     'BOTH'),
+
+    ("US35-QA-01.5",
+     'Bảng "Xử lý tính phí định kỳ", Bước 1 – *"(1) tài khoản thỏa mãn điều kiện theo tài khoản và (2) CIF của Account đó thỏa mãn điều kiện theo KH của những Code phí nào"*',
+     'Nếu TK thỏa ĐK (1) nhưng CIF không thỏa ĐK (2) → bỏ qua hoàn toàn hay chỉ bỏ ĐK KH? Logic AND hay OR?',
+     'Nghiệp vụ',
+     'Đề xuất: Phải thỏa CẢ HAI (AND). Nếu CIF không thỏa → không sinh phí. Cần BA xác nhận.',
+     'BOTH'),
+
+    ("US35-QA-01.6",
+     'Mục "Yêu cầu nghiệp vụ" – *"phí sẽ được thu định kỳ hàng tháng vào một ngày cố định trong tháng"*',
+     'Nếu ngày cố định = 31 nhưng tháng chỉ có 28/29/30 ngày → Job chạy ngày nào?',
+     'Nghiệp vụ',
+     'Đề xuất: Ngày cố định > số ngày tháng → chạy ngày cuối tháng. Cần BA xác nhận.',
+     'AI'),
+
+    ("US35-QA-01.7",
+     'Bảng "Xử lý tính phí định kỳ", Bước 5.2 – *"Lấy CTƯĐ có Số tiền ưu đãi lớn nhất. Nếu các CTƯĐ có Số tiền ưu đãi tính ra bằng nhau thì lấy CTƯĐ có hiệu lực xa nhất"*',
+     'Khi nhiều CTƯĐ cùng Số tiền ƯĐ và cùng hiệu lực → thiếu tiebreak thứ 3. Và "hiệu lực xa nhất" = End Date xa nhất hay Start Date sớm nhất?',
+     'Nghiệp vụ',
+     'Đề xuất: Cần BA xác nhận "hiệu lực xa nhất" nghĩa là gì + tiebreak cuối cùng khi vẫn bằng nhau.',
+     'BOTH'),
+
+    ("US35-QA-01.8",
+     'Mục "Yêu cầu nghiệp vụ" – *"Xóa nợ: Đã được cập nhật miễn giảm cho Khách hàng (không tiếp tục theo dõi nợ phí)"*',
+     'Trạng thái "Xóa nợ" được tạo bởi luồng nào? Thủ công hay tự động? US nào mô tả luồng chuyển trạng thái này?',
+     'Nghiệp vụ',
+     'Đề xuất: Cần BA xác nhận US mô tả luồng xóa nợ để Tester trace.',
+     'BOTH'),
+
+    ("US35-QA-01.9",
+     'Bảng "Diễn giải lưu đồ", Bước 4 – *"Nếu kết quả thu là đã thanh toán toàn bộ/một phần thì ProfiX xử lý: Ghi nhận lịch sử thu phí, Update trạng thái nợ phí"*',
+     'Bước 4 chỉ nêu xử lý cho "thanh toán toàn bộ/một phần". Khi kết quả = "Chưa thanh toán" → ProfiX có ghi lịch sử? Trạng thái kỳ nợ cập nhật thế nào?',
+     'Nghiệp vụ',
+     'Đề xuất: Cần BA xác nhận ProfiX có ghi lịch sử + cập nhật trạng thái khi "Chưa thanh toán".',
+     'VA'),
+
+    ("US35-QA-01.10",
+     'Bảng "Xử lý tính phí định kỳ", Bước 5.1 – *"Số tiền ưu đãi = Tỷ lệ ưu đãi theo CTƯĐ * Số tiền phí cần thu"* và Bước 5.2 – *"Số tiền phí sau ưu đãi = Số tiền phí cần thu – Số tiền ưu đãi"*',
+     'Nếu Số tiền ƯĐ >= Phí cần thu (ưu đãi 100%+), Phí sau ƯĐ = 0 hoặc âm. ProfiX có gửi giao dịch 0 đồng sang T24 không? Hay bỏ qua?',
+     'Nghiệp vụ',
+     'Đề xuất: Nếu phí sau ƯĐ <= 0 → không gửi T24, trạng thái = "Đã miễn phí" hoặc tương đương. Cần BA xác nhận.',
+     'VA'),
+
+    ("US35-QA-01.11",
+     'Bảng "Xử lý tính phí định kỳ", Bước 3.4 – *"Nếu Số tiền phí đã tính < Số tiền tối thiểu thì Số tiền phí cần thu = Số tiền tối thiểu"* vs Bước 5.4 – clamping tương tự theo CTƯĐ',
+     'Xung đột min/max: Sau áp min CTƯĐ (5.4), phí có thể vượt max Code phí (3.4). Bộ min/max nào ưu tiên áp dụng cuối cùng?',
+     'Nghiệp vụ',
+     'Đề xuất: Cần BA xác nhận thứ tự ưu tiên min/max giữa Code phí và CTƯĐ.',
+     'VA'),
+
+    ("US35-QA-01.12",
+     'Mục "Yêu cầu nghiệp vụ" – *"Các khoản phí ở trạng thái Thanh toán một phần/Chưa thanh toán sẽ được xác định là Nợ phí... Yêu cầu về truy thu/tận thu nợ phí sẽ được mô tả cụ thể tại US [...]"*',
+     'Sau thu "Thanh toán một phần", kỳ nợ tiếp theo sinh phí = toàn bộ phí gốc hay chỉ phần thiếu? Tài liệu chưa có tham chiếu US cụ thể.',
+     'Nghiệp vụ',
+     'Đề xuất: Ghi rõ tham chiếu US truy thu/tận thu để QA trace và thiết kế TC liên kết.',
+     'VA'),
+
+    ("US35-QA-01.13",
+     'Bảng "Xử lý tính phí định kỳ", Bước 6 – *"VAT = Số tiền phí sau ưu đãi/110*10"* và Bước 5.4 kết thúc bằng "Số tiền phí thực thu"',
+     '"Số tiền phí sau ưu đãi" dùng tính VAT là giá trị trước hay sau khi áp min/max CTƯĐ (bước 5.4)?',
+     'Nghiệp vụ',
+     'Đề xuất: Đầu vào bước 6 = "Số tiền phí thực thu" (sau toàn bộ xử lý ưu đãi + min/max). Cần BA xác nhận.',
+     'VA'),
+
+    ("US35-QA-01.14",
+     'Bảng "Xử lý tính phí định kỳ" – *"Đầu ngày T, hệ thống xác định các job có lịch chạy trong ngày T để thực hiện các bước bên dưới theo từng job"*',
+     'Job chạy vào thời điểm nào trong ngày T (giờ cụ thể)? Nếu ngày T rơi vào nghỉ lễ/cuối tuần → có chạy không hay dời?',
+     'Nghiệp vụ',
+     'Đề xuất: Cần BA xác nhận thời điểm chạy Job và xử lý ngày nghỉ.',
+     'VA'),
+]

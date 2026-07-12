@@ -1,0 +1,82 @@
+# -*- coding: utf-8 -*-
+FEATURE = "US35 – Thu phí định kỳ tự động"
+
+# (SC_ID, Module, Type, Title, Ref)
+SC_DATA = [
+    # === Happy Path ===
+    ("SC-01","Sinh dữ liệu phí","Happy Path","Job chạy đầu ngày T → xác định danh sách code phí B → sinh danh sách khoản phí C thành công cho ĐT = Customer","Bảng XLTP, Bước 1 – \"hệ thống đối chiếu danh sách KH trong bảng Customer với DS code phí B\""),
+    ("SC-02","Sinh dữ liệu phí","Happy Path","Job chạy → sinh danh sách khoản phí C thành công cho ĐT = Account","Bảng XLTP, Bước 1 – \"đối chiếu danh sách TK trong bảng Account với DS code phí B\""),
+    ("SC-03","Sinh dữ liệu phí","Happy Path","Job chạy → sinh danh sách khoản phí C thành công cho ĐT = Card","Bảng XLTP, Bước 1 – \"đối chiếu danh sách thẻ trong bảng Card với DS code phí B\""),
+    ("SC-04","Kiểm tra TK thu phí","Happy Path","ĐT = Customer, TK mặc định đủ ĐK (cùng loại tiền, SP thuộc CA_PRODUCT, TT hợp lệ) → dùng TK mặc định","Bảng XLTP, Bước 2 – \"TK phải cùng loại tiền...SP thuộc CA_PRODUCT...Trạng thái: HĐ, Tạm ngừng HĐ [...]\" "),
+    ("SC-05","Kiểm tra TK thu phí","Happy Path","ĐT = Customer, TK mặc định không đủ ĐK → tìm TK thay thế có số dư lớn nhất → dùng TK thay thế","Bảng XLTP, Bước 2 – \"tìm TK thay thế...ưu tiên lấy TK có số dư lớn nhất\""),
+    ("SC-06","Tính phí","Happy Path","Quy tắc tính phí = Số cố định → Phí cần thu = giá trị Số cố định","Bảng XLTP, Bước 3.2 – \"Nếu Quy tắc tính phí = Số cố định\""),
+    ("SC-07","Tính phí","Happy Path","Quy tắc tính phí = Công thức → tính theo cấu phần (tham chiếu US05)","Bảng XLTP, Bước 3.2 – \"Nếu Quy tắc tính phí = Công thức\""),
+    ("SC-08","Tính phí","Happy Path","Code phí có Min/Max, cùng loại tiền → so sánh trực tiếp, phí nằm trong khoảng","Bảng XLTP, Bước 3.3-3.4 – \"Nếu Số tiền tối thiểu <= Phí <= Số tiền tối đa\""),
+    ("SC-09","Ưu đãi CTƯĐ","Happy Path","Code phí có 1 CTƯĐ áp dụng, ƯĐ theo tỷ lệ → tính Số tiền ƯĐ = Tỷ lệ * Phí cần thu","Bảng XLTP, Bước 5.1 – \"Nếu Ưu đãi theo tỷ lệ = Yes\""),
+    ("SC-10","Ưu đãi CTƯĐ","Happy Path","Code phí có 1 CTƯĐ áp dụng, ƯĐ theo số tiền giảm cố định","Bảng XLTP, Bước 5.1 – \"Nếu Ưu đãi theo tỷ lệ = No, Số tiền ƯĐ = Số tiền giảm\""),
+    ("SC-11","Tính VAT","Happy Path","Code phí có VAT, Phí đã bao gồm VAT = Có → VAT = Phí thực thu/110*10","Bảng XLTP, Bước 6 – \"Phí đã bao gồm VAT? = Có: VAT = Số tiền phí thực thu/110*10\""),
+    ("SC-12","Tính VAT","Happy Path","Code phí có VAT, Phí đã bao gồm VAT = Không → VAT = Phí thực thu/100*10","Bảng XLTP, Bước 6 – \"Phí đã bao gồm VAT? = Không: VAT = Số tiền phí thực thu/100*10\""),
+    ("SC-13","Tính VAT","Happy Path","Code phí không có VAT (VAT = chuỗi rỗng) → để trống VAT trong response","Bảng XLTP, Bước 6 – \"Code phí có VAT = '' (phí không có VAT): để trống VAT\""),
+    ("SC-14","Ghi Kafka","Happy Path","ProfiX ghi danh sách khoản phí vào Topic Kafka theo thứ tự ưu tiên nhóm code phí → T24 đọc và hạch toán","YCNV – \"ghi danh sách vào Topic Kafka theo thứ tự ưu tiên\""),
+    ("SC-15","Update kết quả","Happy Path","T24 trả kết quả Thanh toán toàn bộ → ProfiX ghi lịch sử + cập nhật trạng thái","Bảng Diễn giải, Bước 4 – \"Ghi nhận lịch sử thu phí, Update trạng thái\""),
+    ("SC-16","Update kết quả","Happy Path","T24 trả kết quả Thanh toán một phần → ProfiX ghi lịch sử + cập nhật trạng thái + xác định Nợ phí","YCNV – \"Thanh toán một phần: Đã thu được một phần số tiền phí cần thu\""),
+    # === Negative Path ===
+    ("SC-17","Kiểm tra TK thu phí","Negative Path","ĐT = Customer, TK mặc định + tất cả TK thay thế đều không đủ ĐK → vẫn gửi TK mặc định → T24 trả Chưa thanh toán","YCNV – \"Nếu không có TK nào thỏa mãn thì...ghi nhận số TK mặc định\" + BA: kết quả = Không thành công"),
+    ("SC-18","Tính phí","Negative Path","Quy tắc Công thức tính ra Phí ≤ 0 → ghi nhận Phí thu được = 0, VAT = 0, không gửi T24","Bảng XLTP, Bước 3.2 – \"Nếu Số tiền phí tính ra ≤ 0 thì ghi nhận Phí = 0, VAT = 0\""),
+    ("SC-19","Tính phí","Negative Path","Không tồn tại Tỷ giá phù hợp (hoặc = 0/Null) khi quy đổi Min/Max Code phí → báo lỗi","Bảng XLTP, Bước 3.3 – \"Nếu không tồn tại Tỷ giá phù hợp...thì báo lỗi\""),
+    ("SC-20","Ưu đãi CTƯĐ","Negative Path","Không tồn tại Tỷ giá khi quy đổi Min/Max CTƯĐ → báo lỗi","Bảng XLTP, Bước 5.3 – \"Nếu không tồn tại Tỷ giá phù hợp...thì báo lỗi\""),
+    ("SC-21","Update kết quả","Negative Path","T24 trả kết quả Chưa thanh toán → ProfiX KHÔNG ghi lịch sử, giữ trạng thái Nợ phí","BA QA-01.9: \"Chưa thanh toán thì ko ghi nhận vào lịch sử\""),
+    ("SC-22","Update kết quả","Negative Path","TK bị đóng trên Core (chưa đồng bộ T-1) → ProfiX vẫn sinh phí → T24 trả Không thành công","BA QA-03.2: \"ProfiX vẫn sinh dữ liệu...kết quả chắc chắn = Không thành công\""),
+    # === Boundary Value ===
+    ("SC-23","Tính phí","Boundary Value","Phí đã tính = Số tiền tối thiểu (biên dưới) → Phí cần thu = Phí đã tính","Bảng XLTP, Bước 3.4 – \"Nếu Số tiền tối thiểu <= Phí <= Số tiền tối đa\""),
+    ("SC-24","Tính phí","Business Logic","Phí đã tính < Số tiền tối thiểu → Phí cần thu = Số tiền tối thiểu","Bảng XLTP, Bước 3.4 – \"Nếu Phí < Số tiền tối thiểu thì Phí = Số tiền tối thiểu\""),
+    ("SC-25","Tính phí","Business Logic","Phí đã tính > Số tiền tối đa → Phí cần thu = Số tiền tối đa","Bảng XLTP, Bước 3.4 – \"Nếu Phí > Số tiền tối đa thì Phí = Số tiền tối đa\""),
+    ("SC-26","Tính phí","Boundary Value","Phí đã tính = Số tiền tối đa (biên trên) → Phí cần thu = Phí đã tính","Bảng XLTP, Bước 3.4 – \"Nếu Số tiền tối thiểu <= Phí <= Số tiền tối đa\""),
+    ("SC-27","Tính phí","Boundary Value","Code phí chỉ có Min (không có Max) → chỉ so sánh Min","BA QA-02.5: \"Chỉ có Min → chỉ so Min\" (theo đề xuất QC)"),
+    ("SC-28","Tính phí","Boundary Value","Code phí chỉ có Max (không có Min) → chỉ so sánh Max","BA QA-02.5: \"Chỉ có Max → chỉ so Max\" (theo đề xuất QC)"),
+    ("SC-29","Ưu đãi CTƯĐ","Business Logic","Phí sau ƯĐ < Min CTƯĐ → Phí thực thu = Min CTƯĐ","Bảng XLTP, Bước 5.4 – \"Nếu Phí sau ƯĐ < Số tiền tối thiểu\""),
+    ("SC-30","Ưu đãi CTƯĐ","Business Logic","Phí sau ƯĐ > Max CTƯĐ → Phí thực thu = Max CTƯĐ","Bảng XLTP, Bước 5.4 – \"Nếu Phí sau ƯĐ > Số tiền tối đa\""),
+    ("SC-31","Ưu đãi CTƯĐ","Boundary Value","Phí sau ƯĐ = 0 (ƯĐ 100%) → Phí thu được = 0, VAT = 0","Bảng XLTP, Bước 3.2 – \"Phí ≤ 0 → Phí = 0, VAT = 0\" (BA QA-01.10)"),
+    ("SC-32","Update kết quả","Boundary Value","Số dư TK = 0 → kết quả = Chưa thanh toán","BA QA-01.15: \"Số dư = 0 → Chưa thanh toán\" (theo đề xuất QC)"),
+    ("SC-33","Update kết quả","Boundary Value","0 < Số dư TK < Phí cần thu → kết quả = Thanh toán một phần","BA QA-01.15: \"0 < số dư < phí → Thanh toán một phần\""),
+    ("SC-34","Sinh dữ liệu phí","Boundary Value","Ngày thu cố định = 31, tháng chỉ có 28/29/30 → Job chạy ngày cuối tháng","BA QA-01.6 + US02: \"ngày 31 → thu vào ngày cuối cùng của các tháng\""),
+    # === Field Validation (UI/UX) ===
+    ("SC-35","Tính VAT","Field Validation","Loại tiền = VND/JPY → làm tròn VAT và Phí thu được đến số nguyên","Bảng XLTP, Bước 6 – \"VND/JPY thì làm tròn đến số nguyên\""),
+    ("SC-36","Tính VAT","Field Validation","Loại tiền ≠ VND/JPY → làm tròn đến 02 chữ số thập phân","Bảng XLTP, Bước 6 – \"Loại tiền # VND,JPY → 02 chữ số thập phân\""),
+    ("SC-37","Tính VAT","Field Validation","Không làm tròn ở phép tính trung gian trong toàn bộ luồng xử lý","Bảng XLTP, Bước 6 – \"Lưu ý không làm tròn ở các phép tính trung gian\""),
+    # === Business Logic ===
+    ("SC-38","Kiểm tra TK thu phí","Business Logic","ĐT = Customer, nhiều TK thay thế cùng số dư lớn nhất → hệ thống lấy ngẫu nhiên","YCNV – \"nếu có nhiều TK thỏa mãn và có cùng số dư thì lấy ngẫu nhiên\""),
+    ("SC-39","Kiểm tra TK thu phí","Negative Path","TK mặc định khác loại tiền Code phí → không đủ ĐK → tìm TK thay thế","Bảng XLTP, Bước 2 – \"TK phải cùng loại tiền với loại tiền của Code phí\""),
+    ("SC-40","Kiểm tra TK thu phí","Negative Path","SP của TK không thuộc CA_PRODUCT → không đủ ĐK → tìm TK thay thế","Bảng XLTP, Bước 2 – \"SP TK phải thuộc DS các SP được phép trích thu phí...CA_PRODUCT\""),
+    ("SC-41","Kiểm tra TK thu phí","Negative Path","TK có trạng thái không hợp lệ → không đủ ĐK → tìm TK thay thế","Bảng XLTP, Bước 2 – \"Trạng thái TK được phép: HĐ, Tạm ngừng HĐ, Tạm khóa ghi có\""),
+    ("SC-42","Tính phí","Business Logic","Code phí có Khai báo theo Nhóm KH = Có → xác định Quy tắc tính phí theo Nhóm KH","Bảng XLTP, Bước 3.1 – \"dựa trên Nhóm KH của CIF để xác định bản ghi QTTP\""),
+    ("SC-43","Tính phí","Business Logic","Quy đổi Min/Max Code phí khi loại tiền khác nhau (Code phí = VND, dùng tỷ giá bán)","Bảng XLTP, Bước 3.3 – \"Loại tiền Code phí = VND → Tỷ giá bán giao ngay\""),
+    ("SC-44","Tính phí","Business Logic","Quy đổi Min/Max Code phí khi cả 2 loại tiền ≠ VND → dùng tỷ giá chéo T3","Bảng XLTP, Bước 3.3 – \"Loại tiền Code phí <> VND → Tỷ giá chéo T3 = T1/T2\""),
+    ("SC-45","Ưu đãi CTƯĐ","Business Logic","CTƯĐ loại không đánh giá định kỳ → kiểm tra SPDV + ĐK KH + ĐK TK/Thẻ + DS KH + ngưỡng ƯĐ","Bảng XLTP, Bước 4 – \"Trường hợp 1: CTƯĐ không đánh giá định kỳ\""),
+    ("SC-46","Ưu đãi CTƯĐ","Business Logic","CTƯĐ loại có đánh giá định kỳ → kiểm tra SPDV + DS KH đã xác định theo chu kỳ","Bảng XLTP, Bước 4 – \"Trường hợp 2: CTƯĐ có đánh giá định kỳ\""),
+    ("SC-47","Ưu đãi CTƯĐ","Business Logic","Nhiều CTƯĐ → chọn CTƯĐ có Số tiền ƯĐ lớn nhất. Bằng nhau → chọn thời gian khởi tạo xa nhất","Bảng XLTP, Bước 5.2 – \"Lấy CTƯĐ có Số tiền ƯĐ lớn nhất...thời gian khởi tạo xa nhất\""),
+    ("SC-48","Ưu đãi CTƯĐ","Business Logic","Code phí không có CTƯĐ áp dụng → bỏ qua bước 5, đi thẳng bước 6","BA QA-01.5: \"Không có CTƯĐ → Phí cần thu đi thẳng, không qua bước 5\""),
+    ("SC-49","Ưu đãi CTƯĐ","Business Logic","Quy đổi Min/Max CTƯĐ khi loại tiền khác (tương tự bước 3.3)","Bảng XLTP, Bước 5.3 – \"Quy đổi Số tiền tối thiểu, Số tiền tối đa\""),
+    ("SC-50","Tính phí","Business Logic","Thứ tự áp Min/Max: Bước 3.4 (Code phí) trước → Bước 5.4 (CTƯĐ) sau, tuần tự","BA QA-01.11: \"Bước 3.4 áp trước, kết quả đó vào bước 5\""),
+    ("SC-51","Sinh dữ liệu phí","Business Logic","Thứ tự ưu tiên ghi Kafka theo nhóm code phí (cài đặt cấp Job)","YCNV – \"cho phép cài đặt thứ tự ưu tiên...theo nhóm code phí\""),
+    ("SC-52","Update kết quả","Business Logic","Trạng thái khoản phí chuyển: Thêm mới → Đang xử lý (sau ghi Kafka)","YCNV – \"Thêm mới: chưa gửi yêu cầu\" → \"Đang xử lý: đã ghi vào Topic\""),
+    ("SC-53","Update kết quả","Business Logic","Nợ phí (TT một phần/Chưa TT) + có cài đặt truy thu/tận thu → tham chiếu US36","YCNV – \"cho phép cài đặt có truy thu/tận thu theo nhóm code phí...US36\""),
+    ("SC-54","Kiểm tra TK thu phí","Business Logic","TK thay thế chỉ dùng cho phí đúng hạn, không dùng cho truy thu/tận thu","Bảng XLTP, Bước 2 – \"TK thay thế chỉ...phí đúng hạn, không áp dụng cho truy thu/tận thu\""),
+    # === Data Integrity ===
+    ("SC-55","Update kết quả","Data Integrity","fee_due_list lưu cả TK mặc định + TK thay thế; fee_collection_history lưu TK ghi nợ thành công","BA QA-03.3: \"fee_due_list lưu cả TK mặc định và TK thay thế\""),
+    ("SC-56","Sinh dữ liệu phí","Data Integrity","Khoản đã ghi Kafka (Đang xử lý) → Job retry → KHÔNG sinh trùng","BA QA-02.4: \"trạng thái = Đang xử lý nên sẽ không bị ghi lại lần 2\""),
+    ("SC-57","Ưu đãi CTƯĐ","Data Integrity","Ngưỡng ƯĐ (số lần/số tiền GD) → KH đã chạm → CTƯĐ không áp dụng (tham chiếu US12)","BA QA-03.5: \"Ngưỡng ƯĐ: theo số lần/số tiền GD → tham chiếu US12\""),
+    ("SC-58","Update kết quả","Data Integrity","Trạng thái Xóa nợ được tạo trong luồng US36, không phải US35","BA QA-01.8: \"Trạng thái Xóa nợ được tạo trong luồng US36\""),
+    # === NFR ===
+    ("SC-59","Sinh dữ liệu phí","NFR","Dữ liệu đồng bộ T-1 từ Core → ProfiX dùng snapshot T-1 để sinh phí","YCNV – \"dữ liệu lưu trữ...được đồng bộ T-1 về ProfiX theo mô tả US33\""),
+    ("SC-60","Tính phí","NFR","Tỷ giá quy đổi lấy theo bản ghi tỷ giá nhận được gần nhất từ Core","BA QA-02.2: \"lấy theo tỷ giá nhận được gần nhất\" (BA đã cập nhật US)"),
+    # === Bổ sung từ VA Review ===
+    ("SC-61","Tính phí","Business Logic","Quy đổi Min/Max bước 3.3: Loại tiền phí tối thiểu/tối đa = Loại tiền Code phí → không cần quy đổi, dùng trực tiếp","Bảng XLTP, Bước 3.3 – \"Nếu Loại tiền phí tối thiểu/tối đa = Loại tiền Code phí\""),
+    ("SC-62","Ưu đãi CTƯĐ","Business Logic","Clamping CTƯĐ bước 5.4: Min ≤ Phí sau ƯĐ ≤ Max → Phí thực thu = Phí sau ƯĐ (nhánh trong khoảng)","Bảng XLTP, Bước 5.4 – \"Nếu Số tiền tối thiểu <= Phí sau ƯĐ <= Số tiền tối đa\""),
+    ("SC-63","Update kết quả","Business Logic","ProfiX chưa nhận được kết quả từ Kafka → trạng thái kỳ nợ phí duy trì 'Đang xử lý'","YCNV – \"chưa nhận được kết quả thu phí thì trạng thái duy trì là Đang xử lý\""),
+    ("SC-64","Sinh dữ liệu phí","Data Integrity","ĐT = Account/Card: logic kết hợp ĐK = AND (TK thỏa ĐK Account AND CIF thỏa ĐK KH)","Bảng XLTP, Bước 1 – \"TK thỏa mãn ĐK theo TK và CIF thỏa mãn ĐK theo KH\""),
+    ("SC-65","Update kết quả","Data Integrity","Kỳ nợ phí tiếp theo sinh phí = toàn bộ phí gốc (không chỉ phần thiếu) → tham chiếu US36","YCNV – \"Yêu cầu về truy thu/tận thu nợ phí sẽ được mô tả cụ thể tại US36\""),
+    # === Bổ sung từ Review ===
+    ("SC-66","Tính phí","Boundary Value","Phí tính ra = 0 (đúng bằng 0, biên BVA) → Phí thu được = 0, VAT = 0, không gửi T24","Bảng XLTP, Bước 3.2 – \"Nếu Số tiền phí tính ra ≤ 0 thì ghi nhận Phí = 0, VAT = 0\""),
+    ("SC-67","Ưu đãi CTƯĐ","Boundary Value","Phí sau ƯĐ < 0 (ƯĐ số tiền giảm > phí cần thu) → Phí thu được = 0, VAT = 0","Bảng XLTP, Bước 3.2 – \"Nếu Số tiền phí tính ra ≤ 0 thì ghi nhận Phí = 0, VAT = 0\" + BA QA-01.10"),
+]

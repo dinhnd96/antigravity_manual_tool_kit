@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProfiX — US40 System Mapping</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+:root {
+  --bg: #0f0f1a; --card: #16213e; --card2: #1a1a2e;
+  --border: #0f3460; --accent: #e94560; --accent2: #53a8b6;
+  --text: #e0e0e0; --text2: #a0a0b0; --text3: #6a6a7a;
+  --success: #4ecca3; --warn: #ffc857; --info: #53a8b6;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+.hero { background: linear-gradient(135deg, #0f3460 0%, #16213e 50%, #1a1a2e 100%);
+  padding: 50px 40px; text-align: center; border-bottom: 2px solid var(--accent); }
+.hero h1 { font-size: 2.0em; font-weight: 700; color: #fff;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero .sub { color: var(--text2); font-size: 1.1em; margin-top: 10px; }
+.hero .stats { display: flex; justify-content: center; gap: 35px; margin-top: 20px; }
+.hero .stat { background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+  border-radius: 12px; padding: 10px 20px; }
+.hero .stat .num { font-size: 1.6em; font-weight: 700; color: var(--accent); }
+.hero .stat .label { font-size: 0.85em; color: var(--text2); }
+nav { position: sticky; top: 0; z-index: 100; background: rgba(15,15,26,0.85);
+  backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+  padding: 12px 20px; display: flex; gap: 8px; justify-content: center; }
+nav a { color: var(--accent2); text-decoration: none; padding: 6px 16px;
+  border-radius: 20px; font-size: 0.9em; font-weight: 500;
+  transition: all 0.3s; border: 1px solid transparent; }
+nav a:hover { background: rgba(83,168,182,0.15); border-color: var(--accent2); }
+.container { max-width: 1100px; margin: 0 auto; padding: 30px 20px; }
+.section { margin-bottom: 50px; }
+.section-title { font-size: 1.5em; font-weight: 700; color: var(--accent);
+  border-left: 4px solid var(--accent); padding-left: 16px; margin-bottom: 24px; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  padding: 24px; margin-bottom: 20px; }
+.card h3 { color: var(--accent2); font-size: 1.15em; margin-bottom: 12px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.88em; margin-top: 12px; }
+th { background: var(--card2); color: var(--accent2); padding: 10px 12px;
+  text-align: left; font-weight: 600; border-bottom: 2px solid var(--accent); }
+td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+tr:hover td { background: rgba(83,168,182,0.08); }
+.callout { padding: 12px 16px; border-radius: 8px; margin: 8px 0; font-size: 0.9em; }
+.callout.warning { background: rgba(255,200,87,0.1); border-left: 4px solid var(--warn); color: var(--warn); }
+.callout.info { background: rgba(83,168,182,0.1); border-left: 4px solid var(--info); color: var(--info); }
+.mermaid { background: var(--card2); border-radius: 10px; padding: 20px; margin: 16px 0;
+  overflow-x: auto; }
+footer { text-align: center; padding: 30px; color: var(--text3); font-size: 0.85em;
+  border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>📊 US40 — Tự động Tính & Thu phí ĐVCNTT</h1>
+  <div class="sub">Hệ thống Quản lý Phí Tập trung ProfiX — PVcomBank</div>
+  <div class="stats">
+    <div class="stat"><div class="num">3</div><div class="label">Kênh GD (POS, ECOM, QR)</div></div>
+    <div class="stat"><div class="num">3</div><div class="label">Luồng Nghiệp Vụ Cốt Lõi</div></div>
+    <div class="stat"><div class="num">6 Bước</div><div class="label">Xử Lý Tính Phí Tự Động</div></div>
+  </div>
+</div>
+
+<nav>
+  <a href="#glossary">Bảng Thuật Ngữ</a>
+  <a href="#roles">Vai Trò & Phân Quyền</a>
+  <a href="#rules">Quy Tắc Chung</a>
+  <a href="#workflows">Luồng Nghiệp Vụ</a>
+</nav>
+
+<div class="container">
+
+  <div class="section" id="glossary">
+    <h2 class="section-title">📖 Bảng Thuật ngữ (Glossary)</h2>
+    <div class="card">
+      <h3>Tra cứu định nghĩa nghiệp vụ & viết tắt</h3>
+      <table>
+        <thead><tr><th>Thuật ngữ</th><th>Giải thích chi tiết</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Merchant (ĐVCNTT)</strong></td><td>Đơn vị chấp nhận thanh toán qua các kênh POS, ECOM và QR của PVcomBank.</td></tr>
+          <tr><td><strong>MMS</strong></td><td>Merchant Management System - Hệ thống quản lý thông tin và dịch vụ của Merchant.</td></tr>
+          <tr><td><strong>NHPL / NHNL</strong></td><td>Ngân hàng Phát lệnh (thu phí Khách hàng trực tiếp) / Ngân hàng Nhận lệnh (thu phí Merchant).</td></tr>
+          <tr><td><strong>ProfiX</strong></td><td>Hệ thống Quản lý Phí Tập trung, chịu trách nhiệm tính phí tự động và ghi nhận lịch sử phí.</td></tr>
+          <tr><td><strong>T24</strong></td><td>Core Banking - Hệ thống ngân hàng lõi thực hiện hạch toán ghi có giao dịch và ghi nợ phí.</td></tr>
+          <tr><td><strong>DWH</strong></td><td>Data Warehouse - Kho dữ liệu đồng bộ thông tin khách hàng T-1 sang ProfiX.</td></tr>
+          <tr><td><strong>Topic Kafka</strong></td><td>Kênh truyền tin bất đồng bộ: Giao dịch nhận thanh toán POS/ECOM, CREDIT_BALANCE, v.v.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section" id="roles">
+    <h2 class="section-title">👥 Vai Trò & Ma Trận Phân Quyền (CRUD)</h2>
+    <div class="card">
+      <h3>Quyền hạn các đối tượng tham gia</h3>
+      <table>
+        <thead><tr><th>Vai trò</th><th>Mô tả phạm vi quyền hạn và trách nhiệm</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Maker (MMS/Counter)</strong></td><td>Khởi tạo thông tin Merchant, đăng ký dịch vụ, hoặc tạo yêu cầu hoàn trả giao dịch.</td></tr>
+          <tr><td><strong>Checker (MMS/Counter)</strong></td><td>Phê duyệt thông tin đăng ký dịch vụ Merchant hoặc yêu cầu hoàn trả giao dịch.</td></tr>
+          <tr><td><strong>ProfiX System</strong></td><td>Tự động consume giao dịch từ Topic Kafka hoặc API để tính phí, sinh phí định kỳ và gửi hạch toán.</td></tr>
+          <tr><td><strong>T24 Core Banking</strong></td><td>Thực hiện hạch toán ghi có giao dịch gốc và ghi nợ phí dịch vụ tự động vào tài khoản Merchant.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="card">
+      <h3>Ma trận quyền CRUD trên thực thể hệ thống</h3>
+      <table>
+        <thead><tr><th>Thực thể dữ liệu / Nghiệp vụ</th><th>MMS / Maker</th><th>MMS / Checker</th><th>ProfiX System</th><th>T24 Core Banking</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Thông tin Merchant</strong></td><td>R (ETL DWH/MMS)</td><td>R (ETL DWH/MMS)</td><td>C/R/U/D (Quản trị)</td><td>R (Tra cứu số dư)</td></tr>
+          <tr><td><strong>Giao dịch POS/ECOM</strong></td><td>C (MMS gửi Kafka)</td><td>R (Xem báo cáo)</td><td>C/R (Consume & Tính phí)</td><td>C/R (Ghi có GD gốc)</td></tr>
+          <tr><td><strong>Bản ghi phí chờ thu</strong></td><td>R (Tra cứu)</td><td>R (Tra cứu)</td><td>C/R/U (Tính phí/Reverse)</td><td>N/A</td></tr>
+          <tr><td><strong>Giao dịch QR</strong></td><td>C (MMS gọi API)</td><td>R (Xem báo cáo)</td><td>C/R (Tính phí realtime)</td><td>C/R (Hạch toán GD & Phí)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section" id="rules">
+    <h2 class="section-title">⚙️ Quy Tắc Nghiệp Vụ Chung</h2>
+    <div class="card">
+      <h3>Các quy định và ràng buộc tính phí</h3>
+      <table>
+        <thead><tr><th style="width: 25%">Quy tắc</th><th>Mô tả chi tiết cách xử lý của hệ thống</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Tính phí POS/ECOM</strong></td><td>Tính theo từng giao dịch báo có từ Kafka. Lưu bản ghi phí chờ thu trạng thái 'Chưa xử lý'. Gom tổng phí chờ thu cuối kỳ để sinh giao dịch thu phí định kỳ (US35/US36).</td></tr>
+          <tr><td><strong>Tính phí QR</strong></td><td>Tính realtime qua API khi giao dịch thành công. Gọi T24 hạch toán ghi có giao dịch gốc và ghi nợ phí (gồm VAT) cùng lúc, sau đó mới phản hồi Napas.</td></tr>
+          <tr><td><strong>Xử lý Hoàn trả</strong></td><td>POS/ECOM: Nếu trạng thái phí chờ thu = 'Chưa xử lý' -> cập nhật sang 'reverse'. Ngược lại báo lỗi. QR: Nếu trạng thái thu phí = 'Đã duyệt' -> cập nhật sang 'reverse'. Ngược lại báo lỗi.</td></tr>
+          <tr><td><strong>Quy tắc làm tròn</strong></td><td>Chỉ làm tròn kết quả số tiền phí thực thu và VAT cuối cùng đến số nguyên (VND). Tuyệt đối không làm tròn ở các bước tính toán trung gian.</td></tr>
+        </tbody>
+      </table>
+      
+      <div class="callout warning">
+        <strong>⚠️ Cảnh báo Loophole & Rủi ro:</strong> Trong luồng POS/ECOM, nợ phí chờ thu tích lũy có thể xảy ra nếu Merchant liên tục không đủ số dư tài khoản. Cần giám sát chặt chẽ trạng thái các giao dịch truy thu và tận thu nợ phí để tránh thất thoát doanh thu.
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="workflows">
+    <h2 class="section-title">🔄 Luồng Nghiệp Vụ Cốt Lõi (Core Workflows)</h2>
+    <div class="card" id="flow1">
+      <h3>Luồng 1: Đồng bộ dữ liệu Merchant làm điều kiện tính phí</h3>
+      <p>Đồng bộ thông tin khách hàng T-1 từ DWH và thông tin dịch vụ Merchant đăng ký từ MMS.</p>
+      <div class="mermaid">
+flowchart TD
+    DWH[Data Warehouse] -->|1. ETL dữ liệu Khách hàng T-1\nMerchant = Yes| PFX[(ProfiX DB)]
+    MMS[Merchant Management System] -->|2. Update dữ liệu dịch vụ đăng ký\nPOS/ECOM/QR| PFX
+    MMS -->|3. Merchant mới trong ngày T| PFX
+      </div>
+    </div>
+    <div class="card" id="flow2">
+      <h3>Luồng 2: Tính & Thu phí giao dịch kênh POS/ECOM (Định kỳ)</h3>
+      <p>Tính phí theo từng giao dịch báo có từ Kafka, lưu trạng thái Chờ xử lý và gom thu định kỳ.</p>
+      <div class="mermaid">
+sequenceDiagram
+    participant Napas
+    participant MMS
+    participant T24 as T24 Core
+    participant PFX as ProfiX
+    Napas->>MMS: 1. Gửi yêu cầu thanh toán thành công
+    MMS->>T24: 2. Hạch toán ghi có tài khoản Merchant
+    T24-->>MMS: 3. Phản hồi hạch toán thành công
+    MMS->>PFX: 4. Gửi giao dịch lên Topic Kafka POS/ECOM
+    PFX->>PFX: 5. Tính phí & Lưu bản ghi 'Chưa xử lý'
+    PFX->>PFX: 6. Sinh phí định kỳ & Thu phí tự động (US35/US36)
+      </div>
+    </div>
+    <div class="card" id="flow3">
+      <h3>Luồng 3: Tính & Thu phí giao dịch QR (Realtime)</h3>
+      <p>Tính và thu phí ngay lập tức trên từng giao dịch QR payment nội địa và QR Global.</p>
+      <div class="mermaid">
+sequenceDiagram
+    participant Napas
+    participant MMS
+    participant PFX as ProfiX
+    participant T24 as T24 Core
+    Napas->>MMS: 1. Gửi yêu cầu thanh toán QR
+    MMS->>PFX: 2. Gọi API yêu cầu tính phí
+    PFX->>PFX: 3. Tính phí & Ghi nhận lịch sử
+    PFX-->>MMS: 4. Trả kết quả tính phí (gồm VAT)
+    MMS->>T24: 5. Hạch toán ghi có GD gốc & ghi nợ phí Merchant
+    T24-->>MMS: 6. Xác nhận hạch toán thành công
+    MMS-->>Napas: 7. Phản hồi kết quả thanh toán QR thành công
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  📊 ProfiX — US40 System Mapping | Tự động sinh dựa trên Đặc tả Yêu cầu Nghiệp vụ US40<br>
+  <em>Tài liệu được cấu trúc dưới dạng sơ đồ tương tác trực quan giúp tăng tốc độ đọc hiểu cho đội ngũ kiểm thử.</em>
+</footer>
+
+<script>
+mermaid.initialize({
+  startOnLoad: true,
+  theme: 'dark',
+  themeVariables: {
+    primaryColor: '#e94560',
+    primaryTextColor: '#fff',
+    primaryBorderColor: '#0f3460',
+    lineColor: '#53a8b6',
+    secondaryColor: '#16213e',
+    tertiaryColor: '#1a1a2e',
+    fontSize: '14px'
+  },
+  flowchart: { curve: 'basis' },
+  sequence: { mirrorActors: false }
+});
+</script>
+</body>
+</html>

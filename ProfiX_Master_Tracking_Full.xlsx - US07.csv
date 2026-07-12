@@ -1,0 +1,679 @@
+"TC_ID","SC_Ref","Reference","Feature","Module","Title","Type","Priority","Precondition","Steps","Expected","Note","Status R1","Tester R1","Date R1"
+"US07-TC-001","SC-01","Mục ""Yêu cầu nghiệp vụ"" – ""Các thông tin Code phí hợp lệ sẽ thay thế toàn bộ danh sách các code phí cũ""","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","Upload file Excel hợp lệ chứa danh sách Code phí (Có chỉnh sửa = No) → hệ thống thay thế toàn bộ Code phí cũ","Happy Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới/Chỉnh sửa Biểu phí.
+2. Biểu phí đang ở trạng thái ""Chưa hiệu lực"" và đã có sẵn Code phí A, B, C.
+3. File Excel (.xlsx) hợp lệ gồm 3 sheet: Code phí, Điều kiện tính phí, Quy tắc tính phí.
+4. Sheet Code phí chứa Code phí D, E với cột ""Có chỉnh sửa chi tiết Code phí hay không?"" = ""No"".","1. Tại màn hình Danh mục Biểu phí, click ""Chỉnh sửa"" bản ghi Biểu phí.
+2. Tại màn hình Chỉnh sửa Biểu phí, click nút ""Tải lên"".
+3. Chọn file Excel đã chuẩn bị → click ""Open"".
+4. Chờ hệ thống xử lý validate.","(i) Nghiệp vụ/Logic: Hệ thống thay thế toàn bộ Code phí cũ (A, B, C) bằng danh sách mới (D, E). Code phí A, B, C không còn trong Biểu phí.
+(ii) UI: Phân vùng Thông tin chi tiết hiển thị danh sách Code phí mới gồm D, E.","","","",""
+"US07-TC-002","SC-02","Bảng template upload, Sheet Quy tắc tính phí – ""Tối thiểu > 0, Tối đa > 0, Tối thiểu < Tối đa""","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","Upload file hợp lệ với Code phí Thỏa thuận, Chỉnh sửa = Yes → thay đổi Tối thiểu/Tối đa thành công","Happy Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-01-0001"" có Quy tắc tính phí = Thỏa thuận, Tối thiểu hiện tại = 100, Tối đa = 500.
+4. File Excel: sheet Code phí có ""228-01-0001"" với ""Có chỉnh sửa"" = ""Yes"".
+5. Sheet Quy tắc tính phí: ParentId = ""228-01-0001"", Quy tắc = ""Thỏa thuận"", Tối thiểu = 200, Tối đa = 1000.","1. Tại màn hình Chỉnh sửa Biểu phí, click nút ""Tải lên"".
+2. Chọn file Excel đã chuẩn bị → click ""Open"".
+3. Chờ hệ thống validate 3 bước.
+4. Kiểm tra phân vùng Thông tin chi tiết.","(i) Nghiệp vụ/Logic: Hệ thống cập nhật Code phí ""228-01-0001"" với Tối thiểu = 200, Tối đa = 1000. Dữ liệu Quy tắc tính phí được thay thế thành công.
+(ii) UI: Phân vùng Thông tin chi tiết hiển thị Code phí ""228-01-0001"" với giá trị Tối thiểu/Tối đa mới.","","","",""
+"US07-TC-003","SC-03","Bảng template upload, Sheet Quy tắc tính phí – ""Số cố định >= 0""","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","Upload file hợp lệ với Code phí Số cố định, Chỉnh sửa = Yes → thay đổi Số cố định thành công","Happy Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-02-0001"" có Quy tắc = Số cố định, Số cố định hiện tại = 50000.
+4. File Excel: ""228-02-0001"" với ""Có chỉnh sửa"" = ""Yes"".
+5. Sheet Quy tắc: ParentId = ""228-02-0001"", Số cố định = 75000, Tối thiểu và Tối đa bỏ trống.","1. Tại màn hình Chỉnh sửa Biểu phí, click nút ""Tải lên"".
+2. Chọn file Excel → click ""Open"".
+3. Chờ hệ thống validate.
+4. Kiểm tra phân vùng Thông tin chi tiết.","(i) Nghiệp vụ/Logic: Hệ thống cập nhật Số cố định của ""228-02-0001"" từ 50000 thành 75000.
+(ii) UI: Phân vùng Thông tin chi tiết hiển thị Code phí ""228-02-0001"" với Số cố định = 75,000.","","","",""
+"US07-TC-004","SC-04","Bảng ""Xử lý tự động"", Bước 2 – ""Hệ thống sẽ kiểm tra và thay thế dữ liệu Mô tả cũ và Giá trị cũ""","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","Upload file hợp lệ với Chỉnh sửa = Yes → thay đổi Mô tả và Giá trị tại sheet Điều kiện tính phí thành công","Happy Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-01-0001"" có Điều kiện: Nguồn DL = ""ETL Khách hàng"", Tên trường = ""TARGET"", Operator = ""="", Mô tả hiện tại = ""Loại KH"", Giá trị hiện tại = ""1000"".
+4. File Excel: ""228-01-0001"" với ""Có chỉnh sửa"" = ""Yes"".
+5. Sheet Điều kiện: ParentId = ""228-01-0001"", Nguồn DL = ""ETL Khách hàng"", Tên trường = ""TARGET"", Operator = ""="", Mô tả = ""Loại hình KH cá nhân/doanh nghiệp"", Giá trị = ""4000"".","1. Click nút ""Tải lên"" tại Chỉnh sửa Biểu phí.
+2. Chọn file Excel → click ""Open"".
+3. Chờ validate.
+4. Kiểm tra phân vùng Thông tin chi tiết → xem Điều kiện tính phí của ""228-01-0001"".","(i) Nghiệp vụ/Logic: Hệ thống thay thế Mô tả cũ = ""Loại KH"" bằng ""Loại hình KH cá nhân/doanh nghiệp"" và Giá trị cũ = ""1000"" bằng ""4000"".
+(ii) UI: Điều kiện tính phí của Code phí ""228-01-0001"" hiển thị Mô tả và Giá trị mới.","","","",""
+"US07-TC-005","SC-05","Bảng ""Xử lý tự động"", Bước 1 – ""Với code phí = No, hệ thống sẽ không kiểm tra sheet con""","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","Upload file hỗn hợp Code phí Yes/No → hệ thống chỉ validate sheet con cho Yes, bỏ qua cho No","Happy Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí ""Chưa hiệu lực"".
+3. File Excel chứa 3 Code phí:
+- ""228-01-0001"": ""Có chỉnh sửa"" = ""Yes"" (có dữ liệu ĐK/QT đầy đủ, hợp lệ)
+- ""228-01-0002"": ""Có chỉnh sửa"" = ""No""
+- ""228-01-0003"": ""Có chỉnh sửa"" = ""No""
+4. Sheet Điều kiện và Quy tắc chỉ có ParentId = ""228-01-0001"".","1. Click nút ""Tải lên"" tại Chỉnh sửa Biểu phí.
+2. Chọn file Excel → click ""Open"".
+3. Chờ validate.
+4. Kiểm tra danh sách Code phí trên phân vùng Thông tin chi tiết.","(i) Nghiệp vụ/Logic: Hệ thống validate và update chi tiết cho ""228-01-0001"" (Yes). Không validate sheet con cho ""228-01-0002"" và ""228-01-0003"" (No). Upload thành công.
+(ii) UI: Phân vùng Thông tin chi tiết hiển thị 3 Code phí. Code phí ""228-01-0001"" có dữ liệu ĐK/QT được cập nhật.","","","",""
+"US07-TC-006","SC-06","Mockup màn hình lỗi – nút ""Upload lại"": ""Thực hiện lại luồng upload file excel""","US07 - Upload danh sách Code phí vào Biểu phí","Màn hình lỗi","Upload file lỗi → hiển thị màn hình 3 tab → nhấn ""Upload lại"" → chọn file mới thành công","Happy Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí ""Chưa hiệu lực"".
+3. File Excel lỗi (file_loi.xlsx): chứa Code phí không tồn tại.
+4. File Excel hợp lệ (file_ok.xlsx): chứa Code phí hợp lệ.","1. Click nút ""Tải lên"" → chọn file_loi.xlsx → click ""Open"".
+2. Hệ thống hiển thị màn hình ""Danh sách code phí upload lỗi"" với 3 tab.
+3. Click nút ""Upload lại"".
+4. Chọn file_ok.xlsx → click ""Open"".
+5. Chờ hệ thống validate.","(i) Nghiệp vụ/Logic: Bước 2 — hệ thống hiển thị lỗi tại tab Code phí. Bước 5 — hệ thống upload thành công, thay thế toàn bộ Code phí.
+(ii) UI: Bước 2 — Màn hình lỗi hiển thị 3 tab (Code phí, Điều kiện tính phí, Quy tắc tính phí). Bước 5 — Phân vùng Thông tin chi tiết hiển thị danh sách Code phí từ file_ok.xlsx.","","","",""
+"US07-TC-007","SC-07","Bước 1 – ""Code phí không tồn tại trong hệ thống""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Code phí","Upload file chứa Mã code phí không tồn tại trong hệ thống → Chi tiết lỗi tại tab Code phí","Negative Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. File Excel: sheet Code phí chứa mã ""999-99-9999"" (không tồn tại trong hệ thống).","1. Click ""Tải lên"" → chọn file Excel → click ""Open"".
+2. Chờ hệ thống validate.
+3. Quan sát màn hình lỗi.","(i) Nghiệp vụ/Logic: Hệ thống chặn toàn bộ file (All-or-Nothing). Không import bất kỳ dòng nào.
+(ii) UI: Hiển thị màn hình ""Danh sách code phí upload lỗi"" → tab Code phí hiển thị dòng ""999-99-9999"" với Chi tiết lỗi.","","","",""
+"US07-TC-008","SC-08","Bước 1 – ""Code phí có trạng thái hoạt động = Hủy""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Code phí","Upload file chứa Code phí trạng thái = Hủy → Chi tiết lỗi tại tab Code phí","Negative Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-01-0099"" tồn tại trong hệ thống nhưng trạng thái = Hủy.
+4. File Excel: sheet Code phí chứa ""228-01-0099"".","1. Click ""Tải lên"" → chọn file Excel → click ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn toàn bộ file. Code phí ""228-01-0099"" bị đánh lỗi vì trạng thái = Hủy.
+(ii) UI: Tab Code phí hiển thị ""228-01-0099"" với Chi tiết lỗi tương ứng.","","","",""
+"US07-TC-009","SC-09","Bước 1 – ""Code phí đang tồn tại tác vụ Chỉnh sửa ở trạng thái Chờ duyệt""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Code phí","Upload file chứa Code phí đang Chờ duyệt → Chi tiết lỗi tại tab Code phí","Negative Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-01-0050"" đang tồn tại tác vụ Chỉnh sửa ở trạng thái Chờ duyệt.
+4. File Excel chứa ""228-01-0050"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. ""228-01-0050"" bị lỗi vì đang Chờ duyệt, tránh xung đột Maker-Checker.
+(ii) UI: Tab Code phí hiển thị Chi tiết lỗi cho ""228-01-0050"".","","","",""
+"US07-TC-010","SC-10","Bước 1 – ""Code phí bị trùng lặp trong danh sách (hiển thị lỗi ở tất cả bản ghi trùng)""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Code phí","Upload file chứa Code phí trùng lặp (2 dòng cùng Mã) → lỗi ở TẤT CẢ dòng trùng tại tab Code phí","Negative Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. File Excel: sheet Code phí có 2 dòng cùng mã ""228-01-0001"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. CẢ 2 dòng ""228-01-0001"" bị đánh lỗi trùng lặp.
+(ii) UI: Tab Code phí hiển thị 2 dòng ""228-01-0001"" đều có Chi tiết lỗi ""trùng lặp"". Tổng số lỗi >= 2.","","","",""
+"US07-TC-011","SC-11","Bước 1 – ""QT = Công thức và Có thay đổi = Yes""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Code phí","Code phí QT Công thức + Có chỉnh sửa = Yes → lỗi tại tab Code phí","Negative Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-03-0001"" có Quy tắc tính phí = Công thức.
+4. File Excel: ""228-03-0001"" với ""Có chỉnh sửa chi tiết Code phí hay không?"" = ""Yes"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Code phí loại Công thức không cho phép chỉnh sửa chi tiết.
+(ii) UI: Tab Code phí hiển thị ""228-03-0001"" với Chi tiết lỗi.","","","",""
+"US07-TC-012","SC-12","Bước 1 – ""Không điền đầy đủ các trường bắt buộc điền""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Code phí","Bỏ trống trường bắt buộc trên sheet Code phí → lỗi tại tab Code phí","Negative Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. File Excel: sheet Code phí có 1 dòng bỏ trống cột ""Có chỉnh sửa chi tiết Code phí hay không?"" (trường bắt buộc).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Dòng thiếu trường bắt buộc bị báo lỗi.
+(ii) UI: Tab Code phí hiển thị dòng lỗi với Chi tiết lỗi ""Không điền đầy đủ trường bắt buộc"".","","","",""
+"US07-TC-013","SC-13","Bước 2 – ""ParentID không thuộc danh sách Code phí ở sheet Code phí""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Điều kiện tính phí","ParentId ở sheet Điều kiện không thuộc danh sách Code phí → lỗi tại tab Điều kiện tính phí","Negative Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. File Excel: sheet Code phí chứa ""228-01-0001"" (hợp lệ).
+4. Sheet Điều kiện tính phí có ParentId = ""228-99-0099"" (không có trong sheet Code phí).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Điều kiện tính phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. ParentId ""228-99-0099"" không khớp danh sách Code phí.
+(ii) UI: Tab Điều kiện tính phí hiển thị dòng lỗi với Chi tiết lỗi ""ParentId không khớp"".","","","",""
+"US07-TC-014","SC-14","Bước 2 – ""Nguồn dữ liệu không thuộc các nguồn dữ liệu tại Thông tin Code phí""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Điều kiện tính phí","Nguồn dữ liệu không thuộc danh sách hợp lệ của Code phí → lỗi tại tab Điều kiện tính phí","Negative Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-01-0001"" có Loại tính phí = Theo giao dịch (Nguồn DL hợp lệ: API Giao dịch).
+4. File Excel: sheet Điều kiện, ParentId = ""228-01-0001"", Nguồn dữ liệu = ""ETL Thẻ"" (không hợp lệ với Loại tính phí).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Điều kiện tính phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Nguồn dữ liệu ""ETL Thẻ"" không thuộc danh sách hợp lệ của Code phí ""228-01-0001"".
+(ii) UI: Tab Điều kiện tính phí hiển thị dòng lỗi với Chi tiết lỗi.","","","",""
+"US07-TC-015","SC-15","Bước 2 – ""Tên trường + Operator không có dữ liệu trùng khớp với dữ liệu hiện hữu""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Điều kiện tính phí","Tên trường + Operator không trùng khớp dữ liệu hiện hữu → lỗi tại tab Điều kiện","Negative Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-01-0001"" có ĐK: Tên trường = ""TARGET"", Operator = ""="".
+4. File Excel: Tên trường = ""INVALID_FIELD"", Operator = ""="" cho ParentId ""228-01-0001"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Điều kiện tính phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Tên trường ""INVALID_FIELD"" + Operator ""="" không khớp dữ liệu hiện hữu.
+(ii) UI: Tab Điều kiện hiển thị dòng lỗi.","","","",""
+"US07-TC-016","SC-16","Bước 2 – ""Tên trường + Operator bị trùng lặp trong cùng một Code phí""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Điều kiện tính phí","Trùng lặp Tên trường + Operator cho cùng ParentId → lỗi TẤT CẢ dòng trùng tại tab Điều kiện","Negative Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. File Excel: sheet Điều kiện có 2 dòng: ParentId = ""228-01-0001"", Tên trường = ""TARGET"", Operator = ""="".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Điều kiện.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Cả 2 dòng trùng Tên trường + Operator bị báo lỗi.
+(ii) UI: Tab Điều kiện hiển thị 2 dòng đều có Chi tiết lỗi ""trùng lặp"".","","","",""
+"US07-TC-017","SC-17","Bước 2 – ""Số lượng điều kiện tính phí không trùng khớp"" → lỗi tại tab Code phí","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Điều kiện tính phí","Số lượng điều kiện không khớp → Chi tiết lỗi tại tab Code phí (không phải tab Điều kiện)","Negative Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-01-0001"" có 5 điều kiện trên hệ thống.
+4. File Excel: sheet Điều kiện chỉ có 3 dòng cho ParentId ""228-01-0001"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Số lượng điều kiện upload (3) không khớp hiện hữu (5).
+(ii) UI: Tab Code phí (KHÔNG phải tab Điều kiện) hiển thị Chi tiết lỗi ""Số lượng điều kiện tính phí không trùng khớp"" cho ""228-01-0001"".","Lưu ý: Lỗi hiển thị tại tab Code phí theo tài liệu v2.","","",""
+"US07-TC-018","SC-18","Bước 2 – ""Kiểm tra Mô tả và Giá trị hợp lệ""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Điều kiện tính phí","Giá trị sai kiểu dữ liệu (VD: text thay vì number) → lỗi tại tab Điều kiện","Negative Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-01-0001"" có ĐK: Tên trường = ""TARGET"", kiểu dữ liệu = Number.
+4. File Excel: cột Giá trị nhập ""abc"" (text thay vì number).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Điều kiện.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Giá trị ""abc"" không đúng kiểu dữ liệu Number.
+(ii) UI: Tab Điều kiện hiển thị dòng lỗi cho TARGET với Chi tiết lỗi.","","","",""
+"US07-TC-019","SC-19","Bước 3 – ""ParentID không thuộc danh sách Code phí → lỗi tab Điều kiện tính phí""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","ParentId ở sheet QT không thuộc Code phí → lỗi tại tab Điều kiện tính phí","Negative Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. File Excel: sheet Code phí chứa ""228-01-0001"".
+4. Sheet Quy tắc có ParentId = ""228-99-0099"" (không có trong sheet Code phí).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Điều kiện tính phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. ParentId ""228-99-0099"" từ sheet QT không khớp.
+(ii) UI: Tab Điều kiện tính phí hiển thị dòng lỗi.","Lưu ý: Theo tài liệu v2, lỗi sheet QT hiển thị tại tab Điều kiện tính phí.","","",""
+"US07-TC-020","SC-20","Bước 3 – ""upload thiếu Quy tắc tính phí hoặc Thiếu Nhóm khách hàng → tab Code phí""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Thiếu Quy tắc tính phí → lỗi tại tab Code phí","Negative Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-01-0001"" có ""Chỉnh sửa"" = ""Yes"" nhưng sheet Quy tắc không có dòng nào cho ParentId ""228-01-0001"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Thiếu Quy tắc tính phí cho ""228-01-0001"".
+(ii) UI: Tab Code phí hiển thị lỗi cho ""228-01-0001"".","","","",""
+"US07-TC-021","SC-21","Bảng diễn giải lưu đồ, Bước 4 – ""Nếu không có dữ liệu → Bước 4.a hiển thị thông báo lỗi""","US07 - Upload danh sách Code phí vào Biểu phí","Validate File Upload","Upload file rỗng (đúng template nhưng 0 dòng dữ liệu) → hiển thị thông báo lỗi","Negative Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. File Excel (.xlsx) đúng template (3 sheet) nhưng tất cả sheet đều rỗng (chỉ có header).","1. Click ""Tải lên"" → chọn file rỗng → ""Open"".
+2. Quan sát phản hồi hệ thống.","(i) Nghiệp vụ/Logic: Hệ thống phát hiện không có dữ liệu → Bước 4.a.
+(ii) UI: Hiển thị thông báo lỗi (toast hoặc popup). Không chuyển sang màn hình lỗi 3 tab.","","","",""
+"US07-TC-022","SC-22","Áp dụng QTC-07 – ""Upload file định dạng .xlsx""","US07 - Upload danh sách Code phí vào Biểu phí","Validate File Upload","Upload file sai định dạng (.doc) → FE chặn, toast lỗi","Negative Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. File định dạng .doc (không phải .xlsx).","1. Click ""Tải lên"" → chọn file .doc → ""Open"".
+2. Quan sát phản hồi FE.","(i) Nghiệp vụ/Logic: FE chặn file không gửi BE. File .doc không hợp lệ.
+(ii) UI: Toast thông báo lỗi ""Định dạng file không hợp lệ"" hoặc tương đương.","[Theo QTC-07]","","",""
+"US07-TC-023","SC-23","Áp dụng QTC-07 – ""Validate dung lượng file upload""","US07 - Upload danh sách Code phí vào Biểu phí","Validate File Upload","Upload file vượt dung lượng cho phép → FE chặn, toast lỗi","Negative Path","Medium","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. File Excel (.xlsx) có dung lượng vượt quá giới hạn cho phép.","1. Click ""Tải lên"" → chọn file quá lớn → ""Open"".
+2. Quan sát phản hồi FE.","(i) Nghiệp vụ/Logic: FE chặn file, không gửi BE.
+(ii) UI: Toast thông báo lỗi dung lượng.","[Theo QTC-07]","","",""
+"US07-TC-024","SC-24","BA xác nhận: ""chặn toàn bộ file nếu có 1 bản ghi lỗi"" (QA-01.2)","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","File có lỗi ở nhiều sheet → All-or-Nothing, không import dòng nào","Negative Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. File Excel: sheet Code phí có 1 dòng trùng lặp + sheet Điều kiện có 1 dòng ParentId orphan + sheet Quy tắc có 1 dòng Tối thiểu > Tối đa.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát màn hình lỗi cả 3 tab.","(i) Nghiệp vụ/Logic: Hệ thống chặn toàn bộ file. Không import bất kỳ Code phí nào. All-or-Nothing.
+(ii) UI: Màn hình lỗi hiển thị 3 tab đều có dòng lỗi tương ứng.","","","",""
+"US07-TC-025","SC-25","Mockup tab Code phí – ""Y"" bị highlight lỗi; BA xác nhận chỉ ""Yes""/""No""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Code phí","Nhập ""Y"" thay vì ""Yes"" vào cột Có chỉnh sửa → lỗi tại tab Code phí","Negative Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. File Excel: sheet Code phí có Code phí ""228-01-0001"" với cột ""Có chỉnh sửa"" = ""Y"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Giá trị ""Y"" không hợp lệ. Chỉ chấp nhận ""Yes"" hoặc ""No"".
+(ii) UI: Tab Code phí hiển thị ""228-01-0001"" với ""Y"" và Chi tiết lỗi.","","","",""
+"US07-TC-026","SC-26","Template – ""bỏ trống khi QT là Số cố định""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","QT Số cố định nhưng nhập Tối thiểu/Tối đa → lỗi tại tab Quy tắc","Negative Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-02-0001"" có QT = Số cố định.
+4. File Excel: sheet Quy tắc, ParentId = ""228-02-0001"", Số cố định = 50000, Tối thiểu = 100 (phải bỏ trống).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc tính phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. QT = Số cố định thì Tối thiểu/Tối đa phải bỏ trống.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","","","",""
+"US07-TC-027","SC-27","Template – ""bỏ trống khi QT là Thỏa thuận""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","QT Thỏa thuận nhưng nhập Số cố định → lỗi tại tab Quy tắc","Negative Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-01-0001"" có QT = Thỏa thuận.
+4. File Excel: sheet Quy tắc, ParentId = ""228-01-0001"", Số cố định = 50000 (phải bỏ trống), Tối thiểu = 100, Tối đa = 500.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. QT = Thỏa thuận thì Số cố định phải bỏ trống.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","","","",""
+"US07-TC-028","SC-28","VA SC-25 – ""Dữ liệu readonly phải trùng khớp (Số cố định / Thỏa thuận)""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Cột Quy tắc tính phí readonly nhập sai giá trị → lỗi tại tab Quy tắc","Negative Path","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-02-0001"" có QT = ""Số cố định"" trên hệ thống.
+4. File Excel: sheet Quy tắc, ParentId = ""228-02-0001"", cột Quy tắc tính phí = ""Thỏa thuận"" (sai so với hệ thống).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Cột Quy tắc tính phí là readonly, phải trùng khớp hệ thống.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","[Nguồn: VA Review]","","",""
+"US07-TC-029","SC-29","Template – ""Số cố định phải >= 0""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Số cố định = 0 (biên dưới) → hợp lệ, upload thành công","Boundary Value","Medium","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-02-0001"" có QT = Số cố định, ""Có chỉnh sửa"" = ""Yes"".
+4. File Excel: Số cố định = 0, Tối thiểu/Tối đa bỏ trống.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Kiểm tra kết quả.","(i) Nghiệp vụ/Logic: Hệ thống chấp nhận Số cố định = 0 (>= 0 hợp lệ). Upload thành công.
+(ii) UI: Phân vùng Thông tin chi tiết hiển thị Code phí với Số cố định = 0.","","","",""
+"US07-TC-030","SC-30","Template – ""Tối thiểu > 0, Tối đa > 0, Tối thiểu < Tối đa""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Tối thiểu = 1, Tối đa = 2 (biên dưới hợp lệ) → upload thành công","Boundary Value","Medium","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-01-0001"" QT = Thỏa thuận, ""Có chỉnh sửa"" = ""Yes"".
+4. File Excel: Tối thiểu = 1, Tối đa = 2.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.","(i) Nghiệp vụ/Logic: 1 < 2, cả 2 > 0. Upload thành công.
+(ii) UI: Code phí hiển thị Tối thiểu = 1, Tối đa = 2.","","","",""
+"US07-TC-031","SC-31","BA xác nhận: ""Tối đa phải > Tối thiểu""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Tối thiểu = Tối đa (VD: cả 2 = 100) → lỗi vì phải Tối thiểu < Tối đa (strict)","Boundary Value","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-01-0001"" QT = Thỏa thuận.
+4. File Excel: Tối thiểu = 100, Tối đa = 100.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. 100 = 100, vi phạm Tối thiểu < Tối đa.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","","","",""
+"US07-TC-032","SC-32","BA xác nhận: ""Tối đa phải > Tối thiểu""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Tối thiểu > Tối đa (VD: 500 > 100) → lỗi","Boundary Value","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-01-0001"" QT = Thỏa thuận.
+4. File Excel: Tối thiểu = 500, Tối đa = 100.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. 500 > 100, vi phạm.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","","","",""
+"US07-TC-033","SC-33","Template – ""giá trị nhập vào phải là số và > 0""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Tối thiểu = 0 (biên dưới, phải > 0) → lỗi","Boundary Value","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-01-0001"" QT = Thỏa thuận.
+4. File Excel: Tối thiểu = 0.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Tối thiểu = 0, vi phạm > 0.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","","","",""
+"US07-TC-034","SC-34","Template – ""Trường hợp không có số Tối đa, bỏ trống""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Chỉ nhập Tối thiểu, bỏ trống Tối đa → hợp lệ","Boundary Value","Medium","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-01-0001"" QT = Thỏa thuận.
+4. File Excel: Tối thiểu = 100, Tối đa bỏ trống.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.","(i) Nghiệp vụ/Logic: Upload thành công. Tối đa được phép bỏ trống.
+(ii) UI: Code phí hiển thị Tối thiểu = 100, Tối đa trống.","","","",""
+"US07-TC-035","SC-35","Template – ""Số cố định phải >= 0""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Số cố định = -100 (số âm) → lỗi","Boundary Value","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-02-0001"" QT = Số cố định.
+4. File Excel: Số cố định = -100.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. -100 < 0, vi phạm >= 0.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","","","",""
+"US07-TC-036","SC-36","VA SC-32 – ""Không giới hạn số lượng bản ghi""","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","Upload file 2000 dòng → đảm bảo performance không timeout","Boundary Value","Medium","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. File Excel: sheet Code phí chứa 2000 Code phí hợp lệ (tất cả ""Có chỉnh sửa"" = ""No"").","1. Click ""Tải lên"" → chọn file 2000 dòng → ""Open"".
+2. Chờ hệ thống validate.
+3. Ghi nhận thời gian xử lý.","(i) Nghiệp vụ/Logic: Upload thành công. Không timeout. Hệ thống thay thế toàn bộ Code phí cũ.
+(ii) UI: Phân vùng Thông tin chi tiết hiển thị 2000 Code phí.","[Nguồn: VA Review] Performance test","","",""
+"US07-TC-037","SC-37","Table 3 – tất cả trường CÁC TRƯỜNG THÔNG TIN đều ◎ (readonly)","US07 - Upload danh sách Code phí vào Biểu phí","Màn hình lỗi","Tất cả trường trên màn hình lỗi ở trạng thái readonly (◎) — không cho chỉnh sửa trên UI","Field Validation","Medium","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. File Excel có lỗi (VD: Code phí không tồn tại) → đã hiển thị màn hình lỗi.","1. Tại màn hình ""Danh sách code phí upload lỗi"", tab Code phí.
+2. Kiểm tra các cột: Mã phí, Có chỉnh sửa, Chi tiết lỗi.
+3. Thử click vào bất kỳ ô dữ liệu nào.
+4. Lặp lại cho tab Điều kiện tính phí và tab Quy tắc tính phí.","(i) Nghiệp vụ/Logic: Tất cả dữ liệu trên 3 tab đều readonly, không cho phép chỉnh sửa.
+(ii) UI: Không có ô nào cho phép nhập liệu. Các trường hiển thị dạng text thuần.","","","",""
+"US07-TC-038","SC-38","Table 3 – trường ""Tổng số lỗi"" và ""Chi tiết lỗi"" trên mỗi tab","US07 - Upload danh sách Code phí vào Biểu phí","Màn hình lỗi","Mỗi tab hiển thị đúng Tổng số lỗi và cột Chi tiết lỗi cho từng dòng","Field Validation","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. File Excel có 3 dòng lỗi ở sheet Code phí (VD: 1 không tồn tại, 1 trùng lặp, 1 bỏ trống).","1. Upload file → màn hình lỗi.
+2. Tại tab Code phí, kiểm tra ""Tổng số lỗi"".
+3. Kiểm tra cột ""Chi tiết lỗi"" từng dòng.
+4. Lặp lại cho tab Điều kiện và Quy tắc (nếu có lỗi).","(i) Nghiệp vụ/Logic: Tổng số lỗi = 3 tại tab Code phí. Mỗi dòng có Chi tiết lỗi mô tả cụ thể.
+(ii) UI: ""Tổng số lỗi"" hiển thị số 3. Cột Chi tiết lỗi có nội dung lỗi riêng cho từng dòng.","","","",""
+"US07-TC-039","SC-39","Table 3, nút ""Đóng"" – Áp dụng QTC-15","US07 - Upload danh sách Code phí vào Biểu phí","Màn hình lỗi","Nhấn nút ""Đóng"" trên màn hình lỗi → thoát không popup, quay về màn hình Biểu phí","Field Validation","Medium","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Đang ở màn hình ""Danh sách code phí upload lỗi"".","1. Tại màn hình lỗi, click nút ""Đóng"".
+2. Quan sát hành vi hệ thống.","(i) Nghiệp vụ/Logic: Hệ thống đóng màn hình lỗi. Không lưu, không thay đổi dữ liệu Biểu phí.
+(ii) UI: Không hiển thị popup xác nhận. Quay về màn hình Biểu phí.","[Theo QTC-15]","","",""
+"US07-TC-040","SC-40","Table 3, nút ""Upload lại"" – ""Thực hiện lại luồng upload file excel""","US07 - Upload danh sách Code phí vào Biểu phí","Màn hình lỗi","Nhấn nút ""Upload lại"" → mở lại luồng upload file Excel","Field Validation","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Đang ở màn hình ""Danh sách code phí upload lỗi"".","1. Tại màn hình lỗi, click nút ""Upload lại"".
+2. Quan sát hành vi hệ thống.","(i) Nghiệp vụ/Logic: Hệ thống mở lại dialog chọn file để upload file mới.
+(ii) UI: Dialog chọn file xuất hiện.","","","",""
+"US07-TC-041","SC-41","VA SC-33 – ""Hệ thống mặc định bỏ qua""","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","Code phí = No nhưng user vẫn nhập data ở sheet Điều kiện/Quy tắc → hệ thống bỏ qua, không lỗi","Field Validation","Medium","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. File Excel: Code phí ""228-01-0002"" với ""Có chỉnh sửa"" = ""No"".
+4. Sheet Điều kiện có dòng ParentId = ""228-01-0002"" với dữ liệu bất kỳ.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Kiểm tra kết quả.","(i) Nghiệp vụ/Logic: Hệ thống bỏ qua dữ liệu ở sheet con cho ""228-01-0002"" (vì = No). Upload thành công nếu các Code phí khác hợp lệ.
+(ii) UI: Không hiển thị lỗi cho ""228-01-0002"".","[Nguồn: VA Review]","","",""
+"US07-TC-042","SC-42","VA SC-23 – ""Với KH=No, người dùng để trống Segment""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Nhập Segment khi Code phí có ""Khai báo theo nhóm KH"" = No → lỗi tại tab Quy tắc","Field Validation","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-02-0001"" có ""Khai báo theo nhóm KH"" = No.
+4. File Excel: sheet Quy tắc, ParentId = ""228-02-0001"", Segment = ""KH thông thường"" (phải bỏ trống).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Code phí KH=No phải bỏ trống Segment.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","[Nguồn: VA Review]","","",""
+"US07-TC-043","SC-43","BA xác nhận – ""chỉ cho chỉnh sửa khi trạng thái biểu phí là chưa hiệu lực""","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","Upload file khi Biểu phí chưa hiệu lực → ghi đè toàn bộ Code phí cũ thành công","Business Logic","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Biểu phí đã có Code phí A, B, C (đã duyệt trước đó).
+4. File Excel: chứa Code phí D, E, F (tất cả hợp lệ, ""Có chỉnh sửa"" = ""No"").","1. Mở Chỉnh sửa Biểu phí → click ""Tải lên"".
+2. Chọn file → ""Open"".
+3. Chờ validate.
+4. Kiểm tra phân vùng Thông tin chi tiết.","(i) Nghiệp vụ/Logic: Code phí A, B, C bị thay thế hoàn toàn bởi D, E, F (Replace All). Chỉ cho phép vì Biểu phí chưa hiệu lực.
+(ii) UI: Phân vùng Thông tin chi tiết chỉ hiển thị D, E, F.","","","",""
+"US07-TC-044","SC-44","BA xác nhận – ""highlight tại sheet code phí"" (QA-03.3)","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Code phí","Chỉnh sửa = Yes nhưng thiếu dữ liệu ở sheet Điều kiện/Quy tắc → lỗi tại tab Code phí","Business Logic","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-01-0001"" hợp lệ, ""Có chỉnh sửa"" = ""Yes"".
+4. File Excel: sheet Điều kiện và sheet Quy tắc KHÔNG có dòng nào với ParentId = ""228-01-0001"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Code phí ""228-01-0001"" khai báo chỉnh sửa nhưng thiếu dữ liệu sheet con.
+(ii) UI: Tab Code phí hiển thị lỗi ""thiếu dữ liệu tại sheet con"" cho ""228-01-0001"".","","","",""
+"US07-TC-045","SC-45","BA xác nhận – ""nhóm KH chỉ có Hoạt động/Không hoạt động""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Segment nhập Nhóm KH đang Không hoạt động (Inactive) → lỗi","Business Logic","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-01-0001"" có ""Khai báo theo nhóm KH"" = Yes.
+4. Nhóm KH ""NSNN-Gold"" đang ở trạng thái ""Không hoạt động"".
+5. File Excel: sheet Quy tắc, Segment = ""NSNN-Gold"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Nhóm KH ""NSNN-Gold"" đang Không hoạt động.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi cho Segment ""NSNN-Gold"".","","","",""
+"US07-TC-046","SC-46","BA xác nhận – ""exact match"" (QA-03.1)","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Điều kiện tính phí","Trường readonly nhập sai case (VD: ""etl khách hàng"" thay vì ""ETL Khách hàng"") → exact match → lỗi","Business Logic","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Code phí ""228-01-0001"" có Nguồn DL = ""ETL Khách hàng"" (exact).
+4. File Excel: Nguồn dữ liệu = ""etl khách hàng"" (sai case).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Điều kiện.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. ""etl khách hàng"" không exact match ""ETL Khách hàng"".
+(ii) UI: Tab Điều kiện hiển thị dòng lỗi.","","","",""
+"US07-TC-047","SC-47","Bước 4.1 và Bước 5 – ""Tham chiếu tới luồng Thêm mới/Sửa Biểu phí tại US06""","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","Upload thành công → dữ liệu hiển thị trên phân vùng Thông tin chi tiết → tham chiếu US06","Business Logic","High","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. File Excel hợp lệ chứa 5 Code phí.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate thành công.
+3. Kiểm tra phân vùng Thông tin chi tiết.
+4. Thực hiện lưu Biểu phí (tham chiếu US06).
++ 4. Kiểm tra danh sách Code phí mới hiển thị đầy đủ trên phân vùng Thông tin chi tiết.","(i) Bước 3 — 5 Code phí mới hiển thị... Bước 4 — Tiếp tục luồng US06...
+(i) Nghiệp vụ/Logic: 5 Code phí mới thay thế Code phí cũ trên Phân vùng Thông tin chi tiết.
+Dữ liệu chưa được lưu vào DB (chỉ hiển thị tạm trên FE).
+Maker phải click ""Xác nhận"" (US06) để tạo tác vụ Chờ duyệt.
+(ii) UI: Phân vùng Thông tin chi tiết hiển thị 5 Code phí mới.
+Nút ""Xác nhận"" của màn hình Chỉnh sửa Biểu phí vẫn enabled.","[Theo QTC-12]","","",""
+"US07-TC-048","SC-48","QTC-11 + NFR – chống spam click cho hành động upload","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","Spam click nút ""Tải lên"" (double-click) → hệ thống chỉ xử lý 1 lần","NFR","Medium","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. File Excel hợp lệ.","1. Tại màn hình Chỉnh sửa Biểu phí, double-click nhanh nút ""Tải lên"".
+2. Quan sát số lượng dialog chọn file xuất hiện.","(i) Nghiệp vụ/Logic: Hệ thống chỉ xử lý 1 request upload, không tạo trùng lặp.
+(ii) UI: Chỉ mở 1 dialog chọn file.","[Theo QTC-11]","","",""
+"US07-TC-049","SC-49","NFR – chống spam click cho nút Upload lại","US07 - Upload danh sách Code phí vào Biểu phí","Màn hình lỗi","Spam click nút ""Upload lại"" → chỉ mở 1 dialog chọn file","NFR","Medium","1. User Maker, quyền Chỉnh sửa Biểu phí.
+2. Biểu phí trạng thái ""Chưa hiệu lực"".
+3. Đang ở màn hình ""Danh sách code phí upload lỗi"".","1. Double-click nhanh nút ""Upload lại"".
+2. Quan sát số lượng dialog chọn file.","(i) Nghiệp vụ/Logic: Hệ thống chỉ mở 1 dialog, không mở trùng.
+(ii) UI: 1 dialog chọn file duy nhất.","","","",""
+"US07-TC-050","SC-50","QTC-10 – ""Phân quyền dữ liệu theo Block""","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","User không có quyền Chỉnh sửa Biểu phí → không thấy hoặc disabled nút ""Tải lên""","NFR","High","1. User đăng nhập nhưng KHÔNG có quyền Thêm mới/Chỉnh sửa Biểu phí.","1. Truy cập Tham số >> Danh mục Biểu phí.
+2. Kiểm tra quyền truy cập chức năng Thêm mới/Chỉnh sửa.
+3. Nếu có thể truy cập, kiểm tra nút ""Tải lên"".","(i) Nghiệp vụ/Logic: User không có quyền không thể thực hiện upload.
+(ii) UI: Nút ""Tải lên"" không hiển thị hoặc bị disabled.","[Theo QTC-10]","","",""
+"US07-TC-051","SC-51","[Luồng Thêm mới] Mục ""Yêu cầu nghiệp vụ"" – ""Các thông tin Code phí hợp lệ sẽ thay thế toàn bộ danh sách các code phí cũ""","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","Upload file Excel hợp lệ chứa danh sách Code phí (Có chỉnh sửa = No) → hệ thống thêm Code phí vào lưới Thông tin chi tiết","Happy Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. File Excel (.xlsx) hợp lệ gồm 3 sheet: Code phí, Điều kiện tính phí, Quy tắc tính phí.
+4. Sheet Code phí chứa Code phí D, E với cột ""Có chỉnh sửa chi tiết Code phí hay không?"" = ""No"".","1. Tại màn hình Thêm mới Biểu phí, click nút ""Tải lên"".
+2. Chọn file Excel đã chuẩn bị → click ""Open"".
+3. Chờ hệ thống xử lý validate.","(i) Nghiệp vụ/Logic: Hệ thống thêm danh sách Code phí (D, E) vào lưới Thông tin chi tiết. Upload thành công.
+(ii) UI: Phân vùng Thông tin chi tiết hiển thị danh sách Code phí mới gồm D, E.","[Luồng Thêm mới — Nguồn: US07-TC-001]","","",""
+"US07-TC-052","SC-52","[Luồng Thêm mới] Bảng template upload, Sheet Quy tắc tính phí – ""Tối thiểu > 0, Tối đa > 0, Tối thiểu < Tối đa""","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","Upload file hợp lệ với Code phí Thỏa thuận, Chỉnh sửa = Yes → thay đổi Tối thiểu/Tối đa thành công","Happy Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-01-0001"" có Quy tắc tính phí = Thỏa thuận, Tối thiểu hiện tại = 100, Tối đa = 500.
+4. File Excel: sheet Code phí có ""228-01-0001"" với ""Có chỉnh sửa"" = ""Yes"".
+5. Sheet Quy tắc tính phí: ParentId = ""228-01-0001"", Quy tắc = ""Thỏa thuận"", Tối thiểu = 200, Tối đa = 1000.","1. Tại màn hình Thêm mới Biểu phí, click nút ""Tải lên"".
+2. Chọn file Excel đã chuẩn bị → click ""Open"".
+3. Chờ hệ thống validate 3 bước.
+4. Kiểm tra phân vùng Thông tin chi tiết.","(i) Nghiệp vụ/Logic: Hệ thống cập nhật Code phí ""228-01-0001"" với Tối thiểu = 200, Tối đa = 1000. Dữ liệu Quy tắc tính phí được thay thế thành công.
+(ii) UI: Phân vùng Thông tin chi tiết hiển thị Code phí ""228-01-0001"" với giá trị Tối thiểu/Tối đa mới.","[Luồng Thêm mới — Nguồn: US07-TC-002]","","",""
+"US07-TC-053","SC-53","[Luồng Thêm mới] Bảng template upload, Sheet Quy tắc tính phí – ""Số cố định >= 0""","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","Upload file hợp lệ với Code phí Số cố định, Chỉnh sửa = Yes → thay đổi Số cố định thành công","Happy Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-02-0001"" có Quy tắc = Số cố định, Số cố định hiện tại = 50000.
+4. File Excel: ""228-02-0001"" với ""Có chỉnh sửa"" = ""Yes"".
+5. Sheet Quy tắc: ParentId = ""228-02-0001"", Số cố định = 75000, Tối thiểu và Tối đa bỏ trống.","1. Tại màn hình Thêm mới Biểu phí, click nút ""Tải lên"".
+2. Chọn file Excel → click ""Open"".
+3. Chờ hệ thống validate.
+4. Kiểm tra phân vùng Thông tin chi tiết.","(i) Nghiệp vụ/Logic: Hệ thống cập nhật Số cố định của ""228-02-0001"" từ 50000 thành 75000.
+(ii) UI: Phân vùng Thông tin chi tiết hiển thị Code phí ""228-02-0001"" với Số cố định = 75,000.","[Luồng Thêm mới — Nguồn: US07-TC-003]","","",""
+"US07-TC-054","SC-54","[Luồng Thêm mới] Bảng ""Xử lý tự động"", Bước 2 – ""Hệ thống sẽ kiểm tra và thay thế dữ liệu Mô tả cũ và Giá trị cũ""","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","Upload file hợp lệ với Chỉnh sửa = Yes → thay đổi Mô tả và Giá trị tại sheet Điều kiện tính phí thành công","Happy Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-01-0001"" có Điều kiện: Nguồn DL = ""ETL Khách hàng"", Tên trường = ""TARGET"", Operator = ""="", Mô tả hiện tại = ""Loại KH"", Giá trị hiện tại = ""1000"".
+4. File Excel: ""228-01-0001"" với ""Có chỉnh sửa"" = ""Yes"".
+5. Sheet Điều kiện: ParentId = ""228-01-0001"", Nguồn DL = ""ETL Khách hàng"", Tên trường = ""TARGET"", Operator = ""="", Mô tả = ""Loại hình KH cá nhân/doanh nghiệp"", Giá trị = ""4000"".","1. Click nút ""Tải lên"" tại Thêm mới Biểu phí.
+2. Chọn file Excel → click ""Open"".
+3. Chờ validate.
+4. Kiểm tra phân vùng Thông tin chi tiết → xem Điều kiện tính phí của ""228-01-0001"".","(i) Nghiệp vụ/Logic: Hệ thống thay thế Mô tả cũ = ""Loại KH"" bằng ""Loại hình KH cá nhân/doanh nghiệp"" và Giá trị cũ = ""1000"" bằng ""4000"".
+(ii) UI: Điều kiện tính phí của Code phí ""228-01-0001"" hiển thị Mô tả và Giá trị mới.","[Luồng Thêm mới — Nguồn: US07-TC-004]","","",""
+"US07-TC-055","SC-55","[Luồng Thêm mới] Bảng ""Xử lý tự động"", Bước 1 – ""Với code phí = No, hệ thống sẽ không kiểm tra sheet con""","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","Upload file hỗn hợp Code phí Yes/No → hệ thống chỉ validate sheet con cho Yes, bỏ qua cho No","Happy Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. File Excel chứa 3 Code phí:
+4. - ""228-01-0001"": ""Có chỉnh sửa"" = ""Yes"" (có dữ liệu ĐK/QT đầy đủ, hợp lệ)
+5. - ""228-01-0002"": ""Có chỉnh sửa"" = ""No""
+6. - ""228-01-0003"": ""Có chỉnh sửa"" = ""No""
+7. Sheet Điều kiện và Quy tắc chỉ có ParentId = ""228-01-0001"".","1. Click nút ""Tải lên"" tại Thêm mới Biểu phí.
+2. Chọn file Excel → click ""Open"".
+3. Chờ validate.
+4. Kiểm tra danh sách Code phí trên phân vùng Thông tin chi tiết.","(i) Nghiệp vụ/Logic: Hệ thống validate và update chi tiết cho ""228-01-0001"" (Yes). Không validate sheet con cho ""228-01-0002"" và ""228-01-0003"" (No). Upload thành công.
+(ii) UI: Phân vùng Thông tin chi tiết hiển thị 3 Code phí. Code phí ""228-01-0001"" có dữ liệu ĐK/QT được cập nhật.","[Luồng Thêm mới — Nguồn: US07-TC-005]","","",""
+"US07-TC-056","SC-56","[Luồng Thêm mới] Mockup màn hình lỗi – nút ""Upload lại"": ""Thực hiện lại luồng upload file excel""","US07 - Upload danh sách Code phí vào Biểu phí","Màn hình lỗi","Upload file lỗi → hiển thị màn hình 3 tab → nhấn ""Upload lại"" → chọn file mới thành công","Happy Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. File Excel lỗi (file_loi.xlsx): chứa Code phí không tồn tại.
+4. File Excel hợp lệ (file_ok.xlsx): chứa Code phí hợp lệ.","1. Click nút ""Tải lên"" → chọn file_loi.xlsx → click ""Open"".
+2. Hệ thống hiển thị màn hình ""Danh sách code phí upload lỗi"" với 3 tab.
+3. Click nút ""Upload lại"".
+4. Chọn file_ok.xlsx → click ""Open"".
+5. Chờ hệ thống validate.","(i) Nghiệp vụ/Logic: Bước 2 — hệ thống hiển thị lỗi tại tab Code phí. Bước 5 — hệ thống upload thành công, thêm Code phí vào lưới.
+(ii) UI: Bước 2 — Màn hình lỗi hiển thị 3 tab (Code phí, Điều kiện tính phí, Quy tắc tính phí). Bước 5 — Phân vùng Thông tin chi tiết hiển thị danh sách Code phí từ file_ok.xlsx.","[Luồng Thêm mới — Nguồn: US07-TC-006]","","",""
+"US07-TC-057","SC-57","[Luồng Thêm mới] Bước 1 – ""Code phí không tồn tại trong hệ thống""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Code phí","Upload file chứa Mã code phí không tồn tại trong hệ thống → Chi tiết lỗi tại tab Code phí","Negative Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. File Excel: sheet Code phí chứa mã ""999-99-9999"" (không tồn tại trong hệ thống).","1. Click ""Tải lên"" → chọn file Excel → click ""Open"".
+2. Chờ hệ thống validate.
+3. Quan sát màn hình lỗi.","(i) Nghiệp vụ/Logic: Hệ thống chặn toàn bộ file (All-or-Nothing). Không import bất kỳ dòng nào.
+(ii) UI: Hiển thị màn hình ""Danh sách code phí upload lỗi"" → tab Code phí hiển thị dòng ""999-99-9999"" với Chi tiết lỗi.","[Luồng Thêm mới — Nguồn: US07-TC-007]","","",""
+"US07-TC-058","SC-58","[Luồng Thêm mới] Bước 1 – ""Code phí có trạng thái hoạt động = Hủy""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Code phí","Upload file chứa Code phí trạng thái = Hủy → Chi tiết lỗi tại tab Code phí","Negative Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-01-0099"" tồn tại trong hệ thống nhưng trạng thái = Hủy.
+4. File Excel: sheet Code phí chứa ""228-01-0099"".","1. Click ""Tải lên"" → chọn file Excel → click ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn toàn bộ file. Code phí ""228-01-0099"" bị đánh lỗi vì trạng thái = Hủy.
+(ii) UI: Tab Code phí hiển thị ""228-01-0099"" với Chi tiết lỗi tương ứng.","[Luồng Thêm mới — Nguồn: US07-TC-008]","","",""
+"US07-TC-059","SC-59","[Luồng Thêm mới] Bước 1 – ""Code phí đang tồn tại tác vụ Chỉnh sửa ở trạng thái Chờ duyệt""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Code phí","Upload file chứa Code phí đang Chờ duyệt → Chi tiết lỗi tại tab Code phí","Negative Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-01-0050"" đang tồn tại tác vụ Chỉnh sửa ở trạng thái Chờ duyệt.
+4. File Excel chứa ""228-01-0050"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. ""228-01-0050"" bị lỗi vì đang Chờ duyệt, tránh xung đột Maker-Checker.
+(ii) UI: Tab Code phí hiển thị Chi tiết lỗi cho ""228-01-0050"".","[Luồng Thêm mới — Nguồn: US07-TC-009]","","",""
+"US07-TC-060","SC-60","[Luồng Thêm mới] Bước 1 – ""Code phí bị trùng lặp trong danh sách (hiển thị lỗi ở tất cả bản ghi trùng)""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Code phí","Upload file chứa Code phí trùng lặp (2 dòng cùng Mã) → lỗi ở TẤT CẢ dòng trùng tại tab Code phí","Negative Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. File Excel: sheet Code phí có 2 dòng cùng mã ""228-01-0001"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. CẢ 2 dòng ""228-01-0001"" bị đánh lỗi trùng lặp.
+(ii) UI: Tab Code phí hiển thị 2 dòng ""228-01-0001"" đều có Chi tiết lỗi ""trùng lặp"". Tổng số lỗi >= 2.","[Luồng Thêm mới — Nguồn: US07-TC-010]","","",""
+"US07-TC-061","SC-61","[Luồng Thêm mới] Bước 1 – ""QT = Công thức và Có thay đổi = Yes""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Code phí","Code phí QT Công thức + Có chỉnh sửa = Yes → lỗi tại tab Code phí","Negative Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-03-0001"" có Quy tắc tính phí = Công thức.
+4. File Excel: ""228-03-0001"" với ""Có chỉnh sửa chi tiết Code phí hay không?"" = ""Yes"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Code phí loại Công thức không cho phép chỉnh sửa chi tiết.
+(ii) UI: Tab Code phí hiển thị ""228-03-0001"" với Chi tiết lỗi.","[Luồng Thêm mới — Nguồn: US07-TC-011]","","",""
+"US07-TC-062","SC-62","[Luồng Thêm mới] Bước 1 – ""Không điền đầy đủ các trường bắt buộc điền""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Code phí","Bỏ trống trường bắt buộc trên sheet Code phí → lỗi tại tab Code phí","Negative Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. File Excel: sheet Code phí có 1 dòng bỏ trống cột ""Có chỉnh sửa chi tiết Code phí hay không?"" (trường bắt buộc).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Dòng thiếu trường bắt buộc bị báo lỗi.
+(ii) UI: Tab Code phí hiển thị dòng lỗi với Chi tiết lỗi ""Không điền đầy đủ trường bắt buộc"".","[Luồng Thêm mới — Nguồn: US07-TC-012]","","",""
+"US07-TC-063","SC-63","[Luồng Thêm mới] Bước 2 – ""ParentID không thuộc danh sách Code phí ở sheet Code phí""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Điều kiện tính phí","ParentId ở sheet Điều kiện không thuộc danh sách Code phí → lỗi tại tab Điều kiện tính phí","Negative Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. File Excel: sheet Code phí chứa ""228-01-0001"" (hợp lệ).
+4. Sheet Điều kiện tính phí có ParentId = ""228-99-0099"" (không có trong sheet Code phí).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Điều kiện tính phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. ParentId ""228-99-0099"" không khớp danh sách Code phí.
+(ii) UI: Tab Điều kiện tính phí hiển thị dòng lỗi với Chi tiết lỗi ""ParentId không khớp"".","[Luồng Thêm mới — Nguồn: US07-TC-013]","","",""
+"US07-TC-064","SC-64","[Luồng Thêm mới] Bước 2 – ""Nguồn dữ liệu không thuộc các nguồn dữ liệu tại Thông tin Code phí""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Điều kiện tính phí","Nguồn dữ liệu không thuộc danh sách hợp lệ của Code phí → lỗi tại tab Điều kiện tính phí","Negative Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-01-0001"" có Loại tính phí = Theo giao dịch (Nguồn DL hợp lệ: API Giao dịch).
+4. File Excel: sheet Điều kiện, ParentId = ""228-01-0001"", Nguồn dữ liệu = ""ETL Thẻ"" (không hợp lệ với Loại tính phí).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Điều kiện tính phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Nguồn dữ liệu ""ETL Thẻ"" không thuộc danh sách hợp lệ của Code phí ""228-01-0001"".
+(ii) UI: Tab Điều kiện tính phí hiển thị dòng lỗi với Chi tiết lỗi.","[Luồng Thêm mới — Nguồn: US07-TC-014]","","",""
+"US07-TC-065","SC-65","[Luồng Thêm mới] Bước 2 – ""Tên trường + Operator không có dữ liệu trùng khớp với dữ liệu hiện hữu""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Điều kiện tính phí","Tên trường + Operator không trùng khớp dữ liệu hiện hữu → lỗi tại tab Điều kiện","Negative Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-01-0001"" có ĐK: Tên trường = ""TARGET"", Operator = ""="".
+4. File Excel: Tên trường = ""INVALID_FIELD"", Operator = ""="" cho ParentId ""228-01-0001"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Điều kiện tính phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Tên trường ""INVALID_FIELD"" + Operator ""="" không khớp dữ liệu hiện hữu.
+(ii) UI: Tab Điều kiện hiển thị dòng lỗi.","[Luồng Thêm mới — Nguồn: US07-TC-015]","","",""
+"US07-TC-066","SC-66","[Luồng Thêm mới] Bước 2 – ""Tên trường + Operator bị trùng lặp trong cùng một Code phí""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Điều kiện tính phí","Trùng lặp Tên trường + Operator cho cùng ParentId → lỗi TẤT CẢ dòng trùng tại tab Điều kiện","Negative Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. File Excel: sheet Điều kiện có 2 dòng: ParentId = ""228-01-0001"", Tên trường = ""TARGET"", Operator = ""="".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Điều kiện.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Cả 2 dòng trùng Tên trường + Operator bị báo lỗi.
+(ii) UI: Tab Điều kiện hiển thị 2 dòng đều có Chi tiết lỗi ""trùng lặp"".","[Luồng Thêm mới — Nguồn: US07-TC-016]","","",""
+"US07-TC-067","SC-67","[Luồng Thêm mới] Bước 2 – ""Số lượng điều kiện tính phí không trùng khớp"" → lỗi tại tab Code phí","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Điều kiện tính phí","Số lượng điều kiện không khớp → Chi tiết lỗi tại tab Code phí (không phải tab Điều kiện)","Negative Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-01-0001"" có 5 điều kiện trên hệ thống.
+4. File Excel: sheet Điều kiện chỉ có 3 dòng cho ParentId ""228-01-0001"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Số lượng điều kiện upload (3) không khớp hiện hữu (5).
+(ii) UI: Tab Code phí (KHÔNG phải tab Điều kiện) hiển thị Chi tiết lỗi ""Số lượng điều kiện tính phí không trùng khớp"" cho ""228-01-0001"".","[Luồng Thêm mới — Nguồn: US07-TC-017] Lưu ý: Lỗi hiển thị tại tab Code phí theo tài liệu v2.","","",""
+"US07-TC-068","SC-68","[Luồng Thêm mới] Bước 2 – ""Kiểm tra Mô tả và Giá trị hợp lệ""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Điều kiện tính phí","Giá trị sai kiểu dữ liệu (VD: text thay vì number) → lỗi tại tab Điều kiện","Negative Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-01-0001"" có ĐK: Tên trường = ""TARGET"", kiểu dữ liệu = Number.
+4. File Excel: cột Giá trị nhập ""abc"" (text thay vì number).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Điều kiện.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Giá trị ""abc"" không đúng kiểu dữ liệu Number.
+(ii) UI: Tab Điều kiện hiển thị dòng lỗi cho TARGET với Chi tiết lỗi.","[Luồng Thêm mới — Nguồn: US07-TC-018]","","",""
+"US07-TC-069","SC-69","[Luồng Thêm mới] Bước 3 – ""ParentID không thuộc danh sách Code phí → lỗi tab Điều kiện tính phí""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","ParentId ở sheet QT không thuộc Code phí → lỗi tại tab Điều kiện tính phí","Negative Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. File Excel: sheet Code phí chứa ""228-01-0001"".
+4. Sheet Quy tắc có ParentId = ""228-99-0099"" (không có trong sheet Code phí).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Điều kiện tính phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. ParentId ""228-99-0099"" từ sheet QT không khớp.
+(ii) UI: Tab Điều kiện tính phí hiển thị dòng lỗi.","[Luồng Thêm mới — Nguồn: US07-TC-019] Lưu ý: Theo tài liệu v2, lỗi sheet QT hiển thị tại tab Điều kiện tính phí.","","",""
+"US07-TC-070","SC-70","[Luồng Thêm mới] Bước 3 – ""upload thiếu Quy tắc tính phí hoặc Thiếu Nhóm khách hàng → tab Code phí""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Thiếu Quy tắc tính phí → lỗi tại tab Code phí","Negative Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-01-0001"" có ""Chỉnh sửa"" = ""Yes"" nhưng sheet Quy tắc không có dòng nào cho ParentId ""228-01-0001"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Thiếu Quy tắc tính phí cho ""228-01-0001"".
+(ii) UI: Tab Code phí hiển thị lỗi cho ""228-01-0001"".","[Luồng Thêm mới — Nguồn: US07-TC-020]","","",""
+"US07-TC-071","SC-71","[Luồng Thêm mới] Bảng diễn giải lưu đồ, Bước 4 – ""Nếu không có dữ liệu → Bước 4.a hiển thị thông báo lỗi""","US07 - Upload danh sách Code phí vào Biểu phí","Validate File Upload","Upload file rỗng (đúng template nhưng 0 dòng dữ liệu) → hiển thị thông báo lỗi","Negative Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. File Excel (.xlsx) đúng template (3 sheet) nhưng tất cả sheet đều rỗng (chỉ có header).","1. Click ""Tải lên"" → chọn file rỗng → ""Open"".
+2. Quan sát phản hồi hệ thống.","(i) Nghiệp vụ/Logic: Hệ thống phát hiện không có dữ liệu → Bước 4.a.
+(ii) UI: Hiển thị thông báo lỗi (toast hoặc popup). Không chuyển sang màn hình lỗi 3 tab.","[Luồng Thêm mới — Nguồn: US07-TC-021]","","",""
+"US07-TC-072","SC-72","[Luồng Thêm mới] Áp dụng QTC-07 – ""Upload file định dạng .xlsx""","US07 - Upload danh sách Code phí vào Biểu phí","Validate File Upload","Upload file sai định dạng (.doc) → FE chặn, toast lỗi","Negative Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. File định dạng .doc (không phải .xlsx).","1. Click ""Tải lên"" → chọn file .doc → ""Open"".
+2. Quan sát phản hồi FE.","(i) Nghiệp vụ/Logic: FE chặn file không gửi BE. File .doc không hợp lệ.
+(ii) UI: Toast thông báo lỗi ""Định dạng file không hợp lệ"" hoặc tương đương.","[Luồng Thêm mới — Nguồn: US07-TC-022] [Theo QTC-07]","","",""
+"US07-TC-073","SC-73","[Luồng Thêm mới] Áp dụng QTC-07 – ""Validate dung lượng file upload""","US07 - Upload danh sách Code phí vào Biểu phí","Validate File Upload","Upload file vượt dung lượng cho phép → FE chặn, toast lỗi","Negative Path","Medium","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. File Excel (.xlsx) có dung lượng vượt quá giới hạn cho phép.","1. Click ""Tải lên"" → chọn file quá lớn → ""Open"".
+2. Quan sát phản hồi FE.","(i) Nghiệp vụ/Logic: FE chặn file, không gửi BE.
+(ii) UI: Toast thông báo lỗi dung lượng.","[Luồng Thêm mới — Nguồn: US07-TC-023] [Theo QTC-07]","","",""
+"US07-TC-074","SC-74","[Luồng Thêm mới] BA xác nhận: ""chặn toàn bộ file nếu có 1 bản ghi lỗi"" (QA-01.2)","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","File có lỗi ở nhiều sheet → All-or-Nothing, không import dòng nào","Negative Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. File Excel: sheet Code phí có 1 dòng trùng lặp + sheet Điều kiện có 1 dòng ParentId orphan + sheet Quy tắc có 1 dòng Tối thiểu > Tối đa.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát màn hình lỗi cả 3 tab.","(i) Nghiệp vụ/Logic: Hệ thống chặn toàn bộ file. Không import bất kỳ Code phí nào. All-or-Nothing.
+(ii) UI: Màn hình lỗi hiển thị 3 tab đều có dòng lỗi tương ứng.","[Luồng Thêm mới — Nguồn: US07-TC-024]","","",""
+"US07-TC-075","SC-75","[Luồng Thêm mới] Mockup tab Code phí – ""Y"" bị highlight lỗi; BA xác nhận chỉ ""Yes""/""No""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Code phí","Nhập ""Y"" thay vì ""Yes"" vào cột Có chỉnh sửa → lỗi tại tab Code phí","Negative Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. File Excel: sheet Code phí có Code phí ""228-01-0001"" với cột ""Có chỉnh sửa"" = ""Y"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Giá trị ""Y"" không hợp lệ. Chỉ chấp nhận ""Yes"" hoặc ""No"".
+(ii) UI: Tab Code phí hiển thị ""228-01-0001"" với ""Y"" và Chi tiết lỗi.","[Luồng Thêm mới — Nguồn: US07-TC-025]","","",""
+"US07-TC-076","SC-76","[Luồng Thêm mới] Template – ""bỏ trống khi QT là Số cố định""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","QT Số cố định nhưng nhập Tối thiểu/Tối đa → lỗi tại tab Quy tắc","Negative Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-02-0001"" có QT = Số cố định.
+4. File Excel: sheet Quy tắc, ParentId = ""228-02-0001"", Số cố định = 50000, Tối thiểu = 100 (phải bỏ trống).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc tính phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. QT = Số cố định thì Tối thiểu/Tối đa phải bỏ trống.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","[Luồng Thêm mới — Nguồn: US07-TC-026]","","",""
+"US07-TC-077","SC-77","[Luồng Thêm mới] Template – ""bỏ trống khi QT là Thỏa thuận""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","QT Thỏa thuận nhưng nhập Số cố định → lỗi tại tab Quy tắc","Negative Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-01-0001"" có QT = Thỏa thuận.
+4. File Excel: sheet Quy tắc, ParentId = ""228-01-0001"", Số cố định = 50000 (phải bỏ trống), Tối thiểu = 100, Tối đa = 500.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. QT = Thỏa thuận thì Số cố định phải bỏ trống.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","[Luồng Thêm mới — Nguồn: US07-TC-027]","","",""
+"US07-TC-078","SC-78","[Luồng Thêm mới] VA SC-25 – ""Dữ liệu readonly phải trùng khớp (Số cố định / Thỏa thuận)""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Cột Quy tắc tính phí readonly nhập sai giá trị → lỗi tại tab Quy tắc","Negative Path","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-02-0001"" có QT = ""Số cố định"" trên hệ thống.
+4. File Excel: sheet Quy tắc, ParentId = ""228-02-0001"", cột Quy tắc tính phí = ""Thỏa thuận"" (sai so với hệ thống).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Cột Quy tắc tính phí là readonly, phải trùng khớp hệ thống.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","[Luồng Thêm mới — Nguồn: US07-TC-028] [Nguồn: VA Review]","","",""
+"US07-TC-079","SC-79","[Luồng Thêm mới] Template – ""Số cố định phải >= 0""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Số cố định = 0 (biên dưới) → hợp lệ, upload thành công","Boundary Value","Medium","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-02-0001"" có QT = Số cố định, ""Có chỉnh sửa"" = ""Yes"".
+4. File Excel: Số cố định = 0, Tối thiểu/Tối đa bỏ trống.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Kiểm tra kết quả.","(i) Nghiệp vụ/Logic: Hệ thống chấp nhận Số cố định = 0 (>= 0 hợp lệ). Upload thành công.
+(ii) UI: Phân vùng Thông tin chi tiết hiển thị Code phí với Số cố định = 0.","[Luồng Thêm mới — Nguồn: US07-TC-029]","","",""
+"US07-TC-080","SC-80","[Luồng Thêm mới] Template – ""Tối thiểu > 0, Tối đa > 0, Tối thiểu < Tối đa""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Tối thiểu = 1, Tối đa = 2 (biên dưới hợp lệ) → upload thành công","Boundary Value","Medium","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-01-0001"" QT = Thỏa thuận, ""Có chỉnh sửa"" = ""Yes"".
+4. File Excel: Tối thiểu = 1, Tối đa = 2.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.","(i) Nghiệp vụ/Logic: 1 < 2, cả 2 > 0. Upload thành công.
+(ii) UI: Code phí hiển thị Tối thiểu = 1, Tối đa = 2.","[Luồng Thêm mới — Nguồn: US07-TC-030]","","",""
+"US07-TC-081","SC-81","[Luồng Thêm mới] BA xác nhận: ""Tối đa phải > Tối thiểu""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Tối thiểu = Tối đa (VD: cả 2 = 100) → lỗi vì phải Tối thiểu < Tối đa (strict)","Boundary Value","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-01-0001"" QT = Thỏa thuận.
+4. File Excel: Tối thiểu = 100, Tối đa = 100.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. 100 = 100, vi phạm Tối thiểu < Tối đa.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","[Luồng Thêm mới — Nguồn: US07-TC-031]","","",""
+"US07-TC-082","SC-82","[Luồng Thêm mới] BA xác nhận: ""Tối đa phải > Tối thiểu""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Tối thiểu > Tối đa (VD: 500 > 100) → lỗi","Boundary Value","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-01-0001"" QT = Thỏa thuận.
+4. File Excel: Tối thiểu = 500, Tối đa = 100.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. 500 > 100, vi phạm.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","[Luồng Thêm mới — Nguồn: US07-TC-032]","","",""
+"US07-TC-083","SC-83","[Luồng Thêm mới] Template – ""giá trị nhập vào phải là số và > 0""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Tối thiểu = 0 (biên dưới, phải > 0) → lỗi","Boundary Value","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-01-0001"" QT = Thỏa thuận.
+4. File Excel: Tối thiểu = 0.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Tối thiểu = 0, vi phạm > 0.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","[Luồng Thêm mới — Nguồn: US07-TC-033]","","",""
+"US07-TC-084","SC-84","[Luồng Thêm mới] Template – ""Trường hợp không có số Tối đa, bỏ trống""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Chỉ nhập Tối thiểu, bỏ trống Tối đa → hợp lệ","Boundary Value","Medium","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-01-0001"" QT = Thỏa thuận.
+4. File Excel: Tối thiểu = 100, Tối đa bỏ trống.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.","(i) Nghiệp vụ/Logic: Upload thành công. Tối đa được phép bỏ trống.
+(ii) UI: Code phí hiển thị Tối thiểu = 100, Tối đa trống.","[Luồng Thêm mới — Nguồn: US07-TC-034]","","",""
+"US07-TC-085","SC-85","[Luồng Thêm mới] Template – ""Số cố định phải >= 0""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Số cố định = -100 (số âm) → lỗi","Boundary Value","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-02-0001"" QT = Số cố định.
+4. File Excel: Số cố định = -100.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. -100 < 0, vi phạm >= 0.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","[Luồng Thêm mới — Nguồn: US07-TC-035]","","",""
+"US07-TC-086","SC-86","[Luồng Thêm mới] VA SC-32 – ""Không giới hạn số lượng bản ghi""","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","Upload file 2000 dòng → đảm bảo performance không timeout","Boundary Value","Medium","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. File Excel: sheet Code phí chứa 2000 Code phí hợp lệ (tất cả ""Có chỉnh sửa"" = ""No"").","1. Click ""Tải lên"" → chọn file 2000 dòng → ""Open"".
+2. Chờ hệ thống validate.
+3. Ghi nhận thời gian xử lý.","(i) Nghiệp vụ/Logic: Upload thành công. Không timeout. Hệ thống thêm danh sách Code phí vào lưới.
+(ii) UI: Phân vùng Thông tin chi tiết hiển thị 2000 Code phí.","[Luồng Thêm mới — Nguồn: US07-TC-036] [Nguồn: VA Review] Performance test","","",""
+"US07-TC-087","SC-87","[Luồng Thêm mới] Table 3 – tất cả trường CÁC TRƯỜNG THÔNG TIN đều ◎ (readonly)","US07 - Upload danh sách Code phí vào Biểu phí","Màn hình lỗi","Tất cả trường trên màn hình lỗi ở trạng thái readonly (◎) — không cho chỉnh sửa trên UI","Field Validation","Medium","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. File Excel có lỗi (VD: Code phí không tồn tại) → đã hiển thị màn hình lỗi.","1. Tại màn hình ""Danh sách code phí upload lỗi"", tab Code phí.
+2. Kiểm tra các cột: Mã phí, Có chỉnh sửa, Chi tiết lỗi.
+3. Thử click vào bất kỳ ô dữ liệu nào.
+4. Lặp lại cho tab Điều kiện tính phí và tab Quy tắc tính phí.","(i) Nghiệp vụ/Logic: Tất cả dữ liệu trên 3 tab đều readonly, không cho phép chỉnh sửa.
+(ii) UI: Không có ô nào cho phép nhập liệu. Các trường hiển thị dạng text thuần.","[Luồng Thêm mới — Nguồn: US07-TC-037]","","",""
+"US07-TC-088","SC-88","[Luồng Thêm mới] Table 3 – trường ""Tổng số lỗi"" và ""Chi tiết lỗi"" trên mỗi tab","US07 - Upload danh sách Code phí vào Biểu phí","Màn hình lỗi","Mỗi tab hiển thị đúng Tổng số lỗi và cột Chi tiết lỗi cho từng dòng","Field Validation","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. File Excel có 3 dòng lỗi ở sheet Code phí (VD: 1 không tồn tại, 1 trùng lặp, 1 bỏ trống).","1. Upload file → màn hình lỗi.
+2. Tại tab Code phí, kiểm tra ""Tổng số lỗi"".
+3. Kiểm tra cột ""Chi tiết lỗi"" từng dòng.
+4. Lặp lại cho tab Điều kiện và Quy tắc (nếu có lỗi).","(i) Nghiệp vụ/Logic: Tổng số lỗi = 3 tại tab Code phí. Mỗi dòng có Chi tiết lỗi mô tả cụ thể.
+(ii) UI: ""Tổng số lỗi"" hiển thị số 3. Cột Chi tiết lỗi có nội dung lỗi riêng cho từng dòng.","[Luồng Thêm mới — Nguồn: US07-TC-038]","","",""
+"US07-TC-089","SC-89","[Luồng Thêm mới] Table 3, nút ""Đóng"" – Áp dụng QTC-15","US07 - Upload danh sách Code phí vào Biểu phí","Màn hình lỗi","Nhấn nút ""Đóng"" trên màn hình lỗi → thoát không popup, quay về màn hình Biểu phí","Field Validation","Medium","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Đang ở màn hình ""Danh sách code phí upload lỗi"".","1. Tại màn hình lỗi, click nút ""Đóng"".
+2. Quan sát hành vi hệ thống.","(i) Nghiệp vụ/Logic: Hệ thống đóng màn hình lỗi. Không lưu, không thay đổi dữ liệu Biểu phí.
+(ii) UI: Không hiển thị popup xác nhận. Quay về màn hình Biểu phí.","[Luồng Thêm mới — Nguồn: US07-TC-039] [Theo QTC-15]","","",""
+"US07-TC-090","SC-90","[Luồng Thêm mới] Table 3, nút ""Upload lại"" – ""Thực hiện lại luồng upload file excel""","US07 - Upload danh sách Code phí vào Biểu phí","Màn hình lỗi","Nhấn nút ""Upload lại"" → mở lại luồng upload file Excel","Field Validation","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Đang ở màn hình ""Danh sách code phí upload lỗi"".","1. Tại màn hình lỗi, click nút ""Upload lại"".
+2. Quan sát hành vi hệ thống.","(i) Nghiệp vụ/Logic: Hệ thống mở lại dialog chọn file để upload file mới.
+(ii) UI: Dialog chọn file xuất hiện.","[Luồng Thêm mới — Nguồn: US07-TC-040]","","",""
+"US07-TC-091","SC-91","[Luồng Thêm mới] VA SC-33 – ""Hệ thống mặc định bỏ qua""","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","Code phí = No nhưng user vẫn nhập data ở sheet Điều kiện/Quy tắc → hệ thống bỏ qua, không lỗi","Field Validation","Medium","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. File Excel: Code phí ""228-01-0002"" với ""Có chỉnh sửa"" = ""No"".
+4. Sheet Điều kiện có dòng ParentId = ""228-01-0002"" với dữ liệu bất kỳ.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Kiểm tra kết quả.","(i) Nghiệp vụ/Logic: Hệ thống bỏ qua dữ liệu ở sheet con cho ""228-01-0002"" (vì = No). Upload thành công nếu các Code phí khác hợp lệ.
+(ii) UI: Không hiển thị lỗi cho ""228-01-0002"".","[Luồng Thêm mới — Nguồn: US07-TC-041] [Nguồn: VA Review]","","",""
+"US07-TC-092","SC-92","[Luồng Thêm mới] VA SC-23 – ""Với KH=No, người dùng để trống Segment""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Nhập Segment khi Code phí có ""Khai báo theo nhóm KH"" = No → lỗi tại tab Quy tắc","Field Validation","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-02-0001"" có ""Khai báo theo nhóm KH"" = No.
+4. File Excel: sheet Quy tắc, ParentId = ""228-02-0001"", Segment = ""KH thông thường"" (phải bỏ trống).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Code phí KH=No phải bỏ trống Segment.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi.","[Luồng Thêm mới — Nguồn: US07-TC-042] [Nguồn: VA Review]","","",""
+"US07-TC-093","SC-93","[Luồng Thêm mới] BA xác nhận – ""highlight tại sheet code phí"" (QA-03.3)","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Code phí","Chỉnh sửa = Yes nhưng thiếu dữ liệu ở sheet Điều kiện/Quy tắc → lỗi tại tab Code phí","Business Logic","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-01-0001"" hợp lệ, ""Có chỉnh sửa"" = ""Yes"".
+4. File Excel: sheet Điều kiện và sheet Quy tắc KHÔNG có dòng nào với ParentId = ""228-01-0001"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Code phí.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Code phí ""228-01-0001"" khai báo chỉnh sửa nhưng thiếu dữ liệu sheet con.
+(ii) UI: Tab Code phí hiển thị lỗi ""thiếu dữ liệu tại sheet con"" cho ""228-01-0001"".","[Luồng Thêm mới — Nguồn: US07-TC-044]","","",""
+"US07-TC-094","SC-94","[Luồng Thêm mới] BA xác nhận – ""nhóm KH chỉ có Hoạt động/Không hoạt động""","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Quy tắc tính phí","Segment nhập Nhóm KH đang Không hoạt động (Inactive) → lỗi","Business Logic","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-01-0001"" có ""Khai báo theo nhóm KH"" = Yes.
+4. Nhóm KH ""NSNN-Gold"" đang ở trạng thái ""Không hoạt động"".
+5. File Excel: sheet Quy tắc, Segment = ""NSNN-Gold"".","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Quy tắc.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. Nhóm KH ""NSNN-Gold"" đang Không hoạt động.
+(ii) UI: Tab Quy tắc hiển thị dòng lỗi cho Segment ""NSNN-Gold"".","[Luồng Thêm mới — Nguồn: US07-TC-045]","","",""
+"US07-TC-095","SC-95","[Luồng Thêm mới] BA xác nhận – ""exact match"" (QA-03.1)","US07 - Upload danh sách Code phí vào Biểu phí","Validate Sheet Điều kiện tính phí","Trường readonly nhập sai case (VD: ""etl khách hàng"" thay vì ""ETL Khách hàng"") → exact match → lỗi","Business Logic","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Code phí ""228-01-0001"" có Nguồn DL = ""ETL Khách hàng"" (exact).
+4. File Excel: Nguồn dữ liệu = ""etl khách hàng"" (sai case).","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate.
+3. Quan sát tab Điều kiện.","(i) Nghiệp vụ/Logic: Hệ thống chặn file. ""etl khách hàng"" không exact match ""ETL Khách hàng"".
+(ii) UI: Tab Điều kiện hiển thị dòng lỗi.","[Luồng Thêm mới — Nguồn: US07-TC-046]","","",""
+"US07-TC-096","SC-96","[Luồng Thêm mới] Bước 4.1 và Bước 5 – ""Tham chiếu tới luồng Thêm mới/Sửa Biểu phí tại US06""","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","Upload thành công → dữ liệu hiển thị trên phân vùng Thông tin chi tiết → tham chiếu US06","Business Logic","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. File Excel hợp lệ chứa 5 Code phí.","1. Click ""Tải lên"" → chọn file → ""Open"".
+2. Chờ validate thành công.
+3. Kiểm tra phân vùng Thông tin chi tiết.
+4. Thực hiện lưu Biểu phí (tham chiếu US06).
++ 4. Kiểm tra danh sách Code phí mới hiển thị đầy đủ trên phân vùng Thông tin chi tiết.","(i) Bước 3 — 5 Code phí mới hiển thị... Bước 4 — Tiếp tục luồng US06...
+(i) Nghiệp vụ/Logic: 5 Code phí mới được thêm vào Phân vùng Thông tin chi tiết.
+Dữ liệu chưa được lưu vào DB (chỉ hiển thị tạm trên FE).
+Maker phải click ""Xác nhận"" (US06) để tạo tác vụ Chờ duyệt.
+(ii) UI: Phân vùng Thông tin chi tiết hiển thị 5 Code phí mới.
+Nút ""Xác nhận"" của màn hình Thêm mới Biểu phí vẫn enabled.","[Luồng Thêm mới — Nguồn: US07-TC-047] [Theo QTC-12]","","",""
+"US07-TC-097","SC-97","[Luồng Thêm mới] QTC-11 + NFR – chống spam click cho hành động upload","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","Spam click nút ""Tải lên"" (double-click) → hệ thống chỉ xử lý 1 lần","NFR","Medium","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. File Excel hợp lệ.","1. Tại màn hình Thêm mới Biểu phí, double-click nhanh nút ""Tải lên"".
+2. Quan sát số lượng dialog chọn file xuất hiện.","(i) Nghiệp vụ/Logic: Hệ thống chỉ xử lý 1 request upload, không tạo trùng lặp.
+(ii) UI: Chỉ mở 1 dialog chọn file.","[Luồng Thêm mới — Nguồn: US07-TC-048] [Theo QTC-11]","","",""
+"US07-TC-098","SC-98","[Luồng Thêm mới] NFR – chống spam click cho nút Upload lại","US07 - Upload danh sách Code phí vào Biểu phí","Màn hình lỗi","Spam click nút ""Upload lại"" → chỉ mở 1 dialog chọn file","NFR","Medium","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).
+3. Đang ở màn hình ""Danh sách code phí upload lỗi"".","1. Double-click nhanh nút ""Upload lại"".
+2. Quan sát số lượng dialog chọn file.","(i) Nghiệp vụ/Logic: Hệ thống chỉ mở 1 dialog, không mở trùng.
+(ii) UI: 1 dialog chọn file duy nhất.","[Luồng Thêm mới — Nguồn: US07-TC-049]","","",""
+"US07-TC-099","SC-99","[Luồng Thêm mới] QTC-10 – ""Phân quyền dữ liệu theo Block""","US07 - Upload danh sách Code phí vào Biểu phí","Upload file Excel","User không có quyền Thêm mới Biểu phí → không thấy hoặc disabled nút ""Tải lên""","NFR","High","1. User đăng nhập với vai trò Maker, có quyền Thêm mới Biểu phí.
+2. User đang ở màn hình Thêm mới Biểu phí (tham chiếu US06).","1. Truy cập Tham số >> Danh mục Biểu phí.
+2. Kiểm tra quyền truy cập chức năng Thêm mới/Chỉnh sửa.
+3. Nếu có thể truy cập, kiểm tra nút ""Tải lên"".","(i) Nghiệp vụ/Logic: User không có quyền không thể thực hiện upload.
+(ii) UI: Nút ""Tải lên"" không hiển thị hoặc bị disabled.","[Luồng Thêm mới — Nguồn: US07-TC-050] [Theo QTC-10]","","",""

@@ -1,0 +1,121 @@
+HƯỚNG DẪN CHI TIẾT NGHIỆP VỤ — DÀNH CHO ĐỊNH (TEST LEAD) — PHẦN 2/2
+DỰ ÁN PROFIX PHASE 1 — ENGINE XỬ LÝ TỰ ĐỘNG
+
+========================================
+NHÓM 3: TÍNH PHÍ GIAO DỊCH TỰ ĐỘNG
+========================================
+
+--- User Story 33: Tự động tính phí giao dịch trên kênh Online ---
+
+Đây là tính năng cốt lõi nhất của ProfiX. Khi khách hàng phát sinh giao dịch có tính phí trên kênh online như Internet Banking hoặc Mobile Banking, hệ thống tự động tính toán số tiền phí cần thu.
+
+Cơ chế đồng bộ dữ liệu nguồn: ProfiX không trực tiếp đọc dữ liệu khách hàng từ Core Banking theo thời gian thực. Thay vào đó, ProfiX nhận đồng bộ dữ liệu nguồn gồm Khách hàng, Tài khoản, Thẻ với độ trễ T trừ 1, tức là dữ liệu của ngày hôm qua, từ Data Warehouse. Thời điểm đồng bộ được kích hoạt sau khi ngân hàng hoàn tất khóa sổ cuối ngày. Trường hợp trong ngày T có mã khách hàng được mở mới hoặc cập nhật thông tin ảnh hưởng tới tính phí, cần có cơ chế ghi nhận và cập nhật lại bảng dữ liệu T trừ 1 đã đồng bộ trước đó.
+
+Luồng xử lý chi tiết: Khi khách hàng tạo giao dịch trên kênh online, hệ thống giao dịch gọi API tới ProfiX để tính phí. ProfiX kết hợp nhiều nguồn dữ liệu gồm thông tin khách hàng đã đồng bộ, thông tin cụ thể của giao dịch như loại giao dịch, số tiền, loại tiền, và các tham số cấu hình code phí và chương trình ưu đãi đã thiết lập trên ProfiX.
+
+Sau khi ProfiX gửi lại phản hồi về số tiền phí đã bao gồm thông tin ưu đãi, nếu khách hàng sửa lại thông tin giao dịch ví dụ sửa kênh chuyển tiền hoặc sửa số tiền chuyển, hệ thống sẽ gọi lại API để tính lại phí theo thông tin mới. ProfiX chỉ lưu lịch sử kết nối, lịch sử thu phí chính thức chỉ được ghi nhận sau khi giao dịch thu phí được duyệt thành công.
+
+Sau khi kênh online hiển thị thông tin phí cho khách hàng, có 2 trường hợp. Nếu khách hàng hủy và không nhấn xác nhận giao dịch, giao dịch không được ghi nhận và ProfiX không xử lý gì thêm. Nếu khách hàng nhấn xác nhận, hệ thống kiểm tra giao dịch có yêu cầu phê duyệt không. Nếu không cần phê duyệt, hệ thống giao dịch gọi API đến ProfiX ghi nhận thu phí thành công và gọi Core T24 để hạch toán. Nếu cần phê duyệt, phải đợi duyệt xong mới gọi API ghi nhận, trường hợp bị từ chối duyệt thì ProfiX không xử lý gì thêm.
+
+Điểm test cực kỳ quan trọng: Khi ghi nhận thu phí thành công, ProfiX kiểm tra lại chương trình ưu đãi đang áp dụng đã vượt quá ngưỡng dừng ưu đãi đối với khách hàng hay chưa. Nếu đã vượt ngưỡng thì báo lỗi để người dùng thực hiện lại giao dịch.
+
+--- User Story 34: Tự động tính phí giao dịch trên kênh Quầy và Nội bộ ---
+
+Tính năng này tương tự User Story 33 nhưng dành cho giao dịch tại quầy. Có 2 trường hợp chính:
+
+Trường hợp 1: Hạch toán thu phí kèm theo giao dịch gốc. Ví dụ khi khách hàng chuyển tiền hoặc phát hành bảo lãnh tại quầy, phí được tính và thu cùng lúc với giao dịch chính. Luồng xử lý tương tự User Story 33, nhưng có thêm một tính năng quan trọng: Người dùng tại quầy được phép sửa số tiền phí cần thu. Hệ thống sẽ kiểm tra số tiền người dùng nhập có nằm trong khoảng Số tiền phí tối thiểu và tối đa theo Code phí không, nếu nằm ngoài khoảng thì báo lỗi.
+
+Trường hợp 2: Thu phí rời, hay còn gọi là thu phí rời. Áp dụng khi hệ thống giao dịch không hỗ trợ hạch toán phí kèm giao dịch gốc, ví dụ phí sao kê tài khoản, phí xác nhận số dư, phí cấp bản sao hồ sơ tài sản bảo đảm. Người dùng được phép chọn Sản phẩm dịch vụ cần thu phí từ danh sách được đồng bộ. Hệ thống gọi API sang ProfiX lấy danh sách code phí theo điều kiện: code phí thuộc Sản phẩm dịch vụ đã chọn, không phải phí thu định kỳ, và nếu code phí có khai báo theo nhóm khách hàng thì chỉ lấy công thức tính phí tương ứng với nhóm khách hàng của mã khách hàng đang thu.
+
+Khi chọn Code phí cần thu, tùy theo quy tắc tính phí:
+Nếu là Số cố định, hệ thống hiển thị ngay số tiền, người dùng có thể sửa.
+Nếu là Thỏa thuận, người dùng tự nhập số tiền.
+Nếu là Công thức, người dùng chọn phương thức Thủ công để nhập trực tiếp, hoặc Tự động để nhập Giá trị, Ngày bắt đầu, Ngày kết thúc rồi hệ thống tính theo công thức.
+
+--- User Story 39: Tự động tính phí trả nợ trước hạn ---
+
+Phí trả nợ trước hạn là khoản tiền người vay phải trả khi thanh toán gốc trước thời hạn hợp đồng, thường là một tỷ lệ phần trăm trên số tiền trả trước hạn. Phí này được quy định tương ứng với gói Ưu đãi lãi suất mà khách hàng đăng ký và chia thành các bậc thang theo thời điểm trả nợ.
+
+Ví dụ: Khách hàng tham gia chương trình cho vay ưu đãi có lãi suất ưu đãi 3 tháng đầu bằng 4.99 phần trăm trên năm, khi trả nợ trước hạn sẽ chịu phí theo bậc thang:
+Nếu thời hạn khoản vay nhỏ hơn hoặc bằng 12 tháng thì phí bằng 3 phần trăm nhân số tiền trả trước hạn.
+Nếu từ 12 đến 18 tháng thì 2.5 phần trăm.
+Nếu từ 18 đến 24 tháng thì 2 phần trăm.
+Nếu từ 24 đến 36 tháng thì 1 phần trăm.
+Nếu lớn hơn 36 tháng hoặc lớn hơn 70 phần trăm thời hạn hợp đồng thì miễn phí.
+
+ProfiX cần được đồng bộ dữ liệu tài khoản tiền vay gọi là LD, bao gồm: mã khách hàng, Số LD, Loại tiền, Thời hạn khoản vay, Số tháng tồn tại tính đến ngày đồng bộ, Mã hạch toán để xác định chương trình ưu đãi cho vay, Ngày hiệu lực, Ngày đáo hạn, và Trạng thái.
+
+========================================
+NHÓM 4: THU PHÍ ĐỊNH KỲ VÀ TRUY THU NỢ
+========================================
+
+--- User Story 35: Tự động thu các loại phí định kỳ theo lịch ---
+
+Đến lịch thu phí định kỳ đã cài đặt, ProfiX sẽ sinh dữ liệu các khoản phí cần thu và gửi sang Core T24. Core T24 hạch toán thu phí và cập nhật kết quả về ProfiX.
+
+Đối tượng tính phí định kỳ gồm 3 loại:
+Loại 1: Khách hàng, ví dụ phí tin nhắn SMS, phí quản lý Merchant, phí PV connect. Thu theo tài khoản thanh toán mặc định của khách hàng.
+Loại 2: Tài khoản, ví dụ phí quản lý tài khoản thanh toán, thu trên chính tài khoản đó.
+Loại 3: Thẻ, ví dụ phí thường niên thẻ, thu trên chính số thẻ đó.
+
+Tần suất thu: Với Khách hàng và Tài khoản, phí thu hàng tháng vào một ngày cố định. Với Thẻ, phí thu hàng năm tròn năm tính từ ngày kích hoạt thẻ.
+
+Quy tắc chọn tài khoản thu phí cho đối tượng Khách hàng: Ưu tiên tài khoản thu phí mặc định, nhưng phải đủ 3 điều kiện: cùng loại tiền với code phí, sản phẩm tài khoản phải thuộc danh sách được phép trích thu phí, và trạng thái tài khoản được phép trích thu. Nếu tài khoản mặc định không đủ điều kiện, hệ thống tìm tài khoản thay thế ưu tiên số dư lớn nhất, nếu nhiều tài khoản cùng số dư thì chọn ngẫu nhiên.
+
+Hệ thống cũng cho phép cài đặt thứ tự ưu tiên nghiệp vụ phí, ví dụ ưu tiên thu phí tin nhắn SMS trước phí quản lý tài khoản.
+
+Cơ chế truyền dữ liệu: ProfiX ghi danh sách phí cần thu vào Topic Kafka theo thứ tự ưu tiên. Core T24 đọc Topic và thực hiện thu phí, sau đó ghi kết quả vào Topic kết quả thu phí để ProfiX đọc và cập nhật.
+
+Các trạng thái của khoản phí định kỳ gồm: Thêm mới là mới sinh dữ liệu chưa gửi đi, Đang xử lý là đã gửi nhưng chưa có kết quả, Thanh toán toàn bộ, Thanh toán một phần là tận thu được một phần do số dư không đủ, Chưa thanh toán là thu thất bại hoàn toàn, và Xóa nợ là đã miễn giảm.
+
+--- User Story 36: Tự động truy thu và tận thu nợ phí định kỳ ---
+
+Khi khách hàng chưa thanh toán hết phí định kỳ, hệ thống tự động truy thu và tận thu theo 2 cơ chế:
+
+Cơ chế 1: Truy thu đầu ngày. Đầu mỗi ngày làm việc, khi mã khách hàng còn nợ phí và tồn tại tài khoản có số dư khả dụng T trừ 1 lớn hơn 0, hệ thống thực hiện truy thu song song cùng quy trình thu phí định kỳ đúng hạn. Nếu khách hàng có nhiều kỳ nợ phí, thứ tự ưu tiên là: nghiệp vụ từ thấp đến cao theo nhóm code phí, ngày đến hạn từ xa đến gần. Nếu cùng mức ưu tiên, hệ thống chọn kỳ ngẫu nhiên. Nếu khách hàng có nhiều tài khoản có số dư, ưu tiên tài khoản có số dư lớn nhất.
+
+Cơ chế 2: Truy thu khi tài khoản phát sinh ghi có. Sau khi hoàn tất quy trình thu phí đầu ngày, ProfiX chuyển sang chế độ truy thu trong ngày. ProfiX gửi danh sách tài khoản của khách hàng còn nợ phí cho Core T24 theo dõi. Khi tài khoản nào phát sinh sự kiện ghi có, Core T24 ghi vào Topic biến động số dư. ProfiX đọc Topic này và gửi yêu cầu truy thu vào Topic thu phí. Luồng này vận hành liên tục trong ngày theo yêu cầu ngân hàng.
+
+Xóa nợ phí: Hệ thống cho phép kết nối API để lấy danh sách kỳ nợ phí theo khách hàng. Một hệ thống quản lý luồng phê duyệt nội bộ sẽ lấy danh sách nợ, người dùng chọn đề xuất miễn giảm, sau khi được cấp thẩm quyền phê duyệt, hệ thống gửi yêu cầu xóa nợ sang ProfiX để cập nhật trạng thái và ngừng truy thu các kỳ nợ đó.
+
+--- User Story 37: Tự động khởi tạo Chương trình ưu đãi từ hệ thống Phê duyệt ---
+
+Chương trình ưu đãi có thể được khởi tạo tự động từ 2 hệ thống bên ngoài:
+
+Từ hệ thống Pricing: Sau khi cấp thẩm quyền phê duyệt tờ trình trên Pricing, Pricing tự động kết nối API với ProfiX để khởi tạo chương trình ưu đãi. Chương trình tạo từ Pricing vẫn hiển thị trên lưới quản lý và người dùng có thể tìm kiếm, xem chi tiết hoặc chỉnh sửa.
+
+Từ hệ thống iDoc: Sau khi duyệt trên iDoc, người dùng phải tự cấu hình thủ công trên ProfiX.
+
+Chương trình ưu đãi ngoại lệ cho một khách hàng: Pricing gửi sang ProfiX các thông tin gồm Tên, Ngày hiệu lực, Ngày hết hiệu lực, Số văn bản, Email đầu mối, Đối tượng thu phí, Khối, Loại ưu đãi, Hình thức luôn là Liên tục và không đánh giá định kỳ, và Chi tiết ưu đãi gồm Mã Sản phẩm dịch vụ, Loại tiền tối thiểu tối đa, Số tiền phí tối thiểu, Số tiền phí tối đa.
+
+ProfiX kiểm tra tính hợp lệ dữ liệu giống như khi kiểm tra trên màn hình thêm mới. Nếu hợp lệ, hệ thống tự sinh mã theo nguyên tắc User Story 04 và hiển thị trên lưới với trạng thái Đã duyệt. Nếu không hợp lệ, thông báo lỗi lại cho Pricing.
+
+--- User Story 38: Tự động thu phí bảo lãnh định kỳ ---
+
+Bảo lãnh chưa xác định thời hạn là cam kết bảo lãnh không quy định ngày chấm dứt cụ thể, hiệu lực kéo dài cho đến khi nghĩa vụ hoàn thành. Ngân hàng tính và thu phí 1 tháng một lần, thu lần đầu ngay khi phát hành bảo lãnh.
+
+Khi phát hành bảo lãnh, T24 gọi API yêu cầu ProfiX tính phí kỳ đầu tiên theo luồng User Story 34. Lưu ý khoảng thời gian tính phí gửi cho ProfiX là số ngày của tháng hiện tại, ví dụ phát hành ngày 7 tháng 5 năm 2026 thì số ngày tháng hiện tại là 31.
+
+Sau đó, dữ liệu bảo lãnh được đồng bộ vào bảng dữ liệu đồng bộ Tài khoản của ProfiX, bao gồm: Loại tài khoản mặc định là MD, mã khách hàng, Số MD, Loại tiền, Sản phẩm bảo lãnh, Trạng thái, Xác định thời hạn Có hay Không, Giá trị bảo lãnh, Có ký quỹ không, Tỷ lệ ký quỹ, Giá trị ký quỹ, Có tài sản bảo đảm không, Loại tài sản bảo đảm, Giá trị bảo đảm, Tần suất thu phí theo Tháng hoặc Quý, và Thu phí tự động Có hay Không.
+
+Hằng ngày đầu ngày, ProfiX tự động kiểm tra các khoản bảo lãnh đến hạn thu phí. Nếu Thu phí tự động bằng Có, hệ thống tiếp tục xử lý theo User Story 35. Nếu bằng Không, hệ thống không xử lý. Các khoản phí chưa thu thành công sẽ được người dùng thu thủ công.
+
+--- User Story 40: Xử lý phát sinh phí khác ---
+
+Tính năng này xử lý thu phí Merchant cho giao dịch thanh toán qua QR. Phí Merchant được thu ngay khi giao dịch thanh toán thành công.
+
+Khi ngân hàng nhận bản tin thanh toán từ Napas, hệ thống gọi sang ProfiX để kiểm tra điều kiện và tính toán số tiền phí cần thu từ Merchant. Dữ liệu Merchant được đánh dấu trường Merchant bằng Yes trong bảng dữ liệu đồng bộ Khách hàng, đồng thời được cập nhật thêm dữ liệu từ hệ thống MCC của ngân hàng.
+
+Sau khi tính toán xong số tiền phí đã bao gồm thuế giá trị gia tăng, hệ thống gửi thông tin về T24 để hạch toán ghi có giao dịch gốc và ghi nợ phí dịch vụ vào tài khoản thanh quyết toán của Merchant.
+
+========================================
+KẾT THÚC PHẦN 2/2
+========================================
+
+Trên đây là toàn bộ nội dung chi tiết nghiệp vụ của 17 User Story mà anh Định phụ trách. Các điểm quan trọng nhất cần ghi nhớ:
+
+Một, cơ chế đồng bộ dữ liệu luôn có độ trễ T trừ 1, cần test kỹ trường hợp khách hàng mở mới hoặc cập nhật trong ngày T.
+Hai, luồng truyền dữ liệu qua Kafka Topic là bất đồng bộ, cần test trạng thái Đang xử lý khi chưa nhận kết quả.
+Ba, quy tắc ưu tiên tài khoản thu phí và thứ tự ưu tiên nghiệp vụ phí là điểm test phức tạp nhất.
+Bốn, kiểm tra ngưỡng dừng ưu đãi khi ghi nhận thu phí thành công.
+Năm, kiểm tra công thức tính toán trên báo cáo và Dashboard phải khớp với dữ liệu thu phí thực tế.

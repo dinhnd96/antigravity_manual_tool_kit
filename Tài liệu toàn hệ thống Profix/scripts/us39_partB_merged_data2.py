@@ -1,0 +1,126 @@
+# US39 Part B Merged - Data file 2 (HM2, HM3, HM4)
+# Format: (ID, Reference, Issue, Category, Proposal, BA_Answer, Source)
+
+QA_DATA_2 = [
+    # ===== HM2: Giới hạn hệ thống & Exception =====
+    ("US39-QA-02.1",
+     "Lưu đồ, Bước 3→4 – *\"Call API đến ProfiX để tính phí\" → \"Thực hiện tính toán phí\"*",
+     "Tài liệu không mô tả xử lý khi API call thất bại (timeout, lỗi mạng, ProfiX down). T24 phản hồi user như thế nào? Có cơ chế retry không? Giao dịch bị block hoàn toàn hay T24 có cơ chế fallback (cho phép nhập phí thủ công)?",
+     "Giới hạn",
+     "Đề xuất: Định nghĩa SLA timeout cho API tính phí và hành vi fallback của T24: block giao dịch hay cho phép nhập phí thủ công với ghi chú lý do.",
+     "", "AI+VA"),
+
+    ("US39-QA-02.2",
+     "Mục \"Yêu cầu nghiệp vụ\", đoạn \"T24 kiểm tra số tiền phí... nằm ngoài khoảng Số tiền phí tối thiểu/tối đa (nếu có)\"",
+     "Trường hợp Code phí KHÔNG khai báo min/max (để trống/null): (1) T24 có validate không hay bỏ qua? User được sửa thành BẤT KỲ giá trị nào (kể cả 0 hoặc số âm)? (2) Giá trị biên: nếu số tiền phí = Min hoặc = Max, có được accept không? Rule là Min ≤ Phí thực thu ≤ Max hay Min < Phí < Max?",
+     "Giới hạn",
+     "Đề xuất: Làm rõ rule khi Min/Max null (T24 bỏ qua validate hay không giới hạn). Xác nhận rule biên: Min ≤ Phí ≤ Max. Khi không có Min/Max, T24 vẫn phải validate số tiền phí > 0.",
+     "", "AI+VA"),
+
+    ("US39-QA-02.3",
+     "Mục \"Yêu cầu nghiệp vụ\", đoạn \"hệ thống ProfiX cần được đồng bộ dữ liệu LD vào bảng ETL\"",
+     "Nếu dữ liệu LD chưa được ETL vào ProfiX (ví dụ: LD mới phát sinh hôm nay, chưa có trong DWH T-1), khi T24 gọi API tính phí, ProfiX không tìm thấy LD. ProfiX trả về response gì (HTTP status code, thông điệp lỗi)? T24 hiển thị gì cho Maker? Maker có thể xử lý tiếp hay phải chờ ngày hôm sau?",
+     "Giới hạn",
+     "Đề xuất: Định nghĩa HTTP response code và thông điệp lỗi khi ProfiX không tìm thấy LD. Bổ sung hướng dẫn cho Maker khi gặp trường hợp này.",
+     "", "AI+VA"),
+
+    ("US39-QA-02.4",
+     "Mục \"Yêu cầu nghiệp vụ\" – *\"Nếu THKV≤12M: 3%\", \"Nếu 12M<THKV≤18M: 2,5%\", \"Nếu 18M<THKV≤24M: 2%\", \"Nếu 24M<THKV≤36M: 1%\"*",
+     "Điều kiện bậc thang dùng ký hiệu '≤' và '<'. Câu hỏi về boundary: Khi THKV = đúng 12M, khoản vay thuộc bậc THKV≤12M (3%) hay 12M<THKV≤18M (2.5%)? Khi THKV = đúng 18M, 24M, 36M thuộc bậc nào? Tài liệu dùng ≤ nhưng cần xác nhận kỹ để thiết kế test case boundary.",
+     "Giới hạn",
+     "Đề xuất: Xác nhận rõ ràng từng mốc boundary: THKV = 12M thuộc bậc đầu (≤12M). Cung cấp bảng ví dụ cụ thể cho từng mốc boundary (12M, 18M, 24M, 36M).",
+     "", "VA"),
+
+    ("US39-QA-02.5",
+     "Mục \"Yêu cầu nghiệp vụ\", đoạn \"Mỗi Chương trình ưu đãi sẽ có Mã hạch toán riêng\"",
+     "Trường hợp LD có Mã hạch toán nhưng Mã hạch toán đó KHÔNG match với bất kỳ Code phí nào trong Biểu phí CTƯĐ (VD: CTƯĐ đã hết hiệu lực, Code phí bị vô hiệu hóa). ProfiX xử lý thế nào? Trả phí = 0? Trả lỗi? Hay fallback sang Biểu phí dịch vụ chung?",
+     "Giới hạn",
+     "Đề xuất: BA làm rõ logic fallback: (1) Không match CTƯĐ → áp dụng Biểu phí chung, hoặc (2) Trả lỗi để user xử lý thủ công.",
+     "", "AI"),
+
+    ("US39-QA-02.6",
+     "Lưu đồ, Bước 8 (T24 call API → ProfiX ghi nhận thu phí thành công)",
+     "Sau khi Checker duyệt, T24 call API ghi nhận thu phí thành công lên ProfiX. Nếu API call này thất bại (bước 8): T24 đã hoàn tất hạch toán nhưng ProfiX chưa ghi nhận → dữ liệu mất đồng bộ. Có cơ chế reconciliation / retry / compensating transaction không?",
+     "Giới hạn",
+     "Đề xuất: Cần có cơ chế retry tự động hoặc job đối soát (reconciliation) giữa T24 và ProfiX để xử lý trường hợp API bước 8 thất bại.",
+     "", "AI+VA"),
+
+    # ===== HM3: Toàn vẹn dữ liệu =====
+    ("US39-QA-03.1",
+     "Mục \"Yêu cầu nghiệp vụ\" – *\"Dự kiến một số trường dữ liệu của LD tối thiểu cần được đồng bộ bao gồm:\"*",
+     "Tài liệu liệt kê \"dự kiến một số trường dữ liệu LD tối thiểu cần được đồng bộ\" — dùng từ \"dự kiến\" và \"tối thiểu\". Danh sách này đã chốt chưa? Có thêm trường nào khác cần ETL (VD: Lãi suất, Số tiền giải ngân, Ngày giải ngân)?",
+     "Toàn vẹn dữ liệu",
+     "Đề xuất: BA chốt danh sách trường ETL chính thức. Trường \"Ngày giải ngân\" quan trọng vì ảnh hưởng đến tính THKV.",
+     "", "AI"),
+
+    ("US39-QA-03.2",
+     "Mục \"Yêu cầu nghiệp vụ\", đoạn \"Số tháng tồn tại của khoản vay tính đến ngày ETL\"",
+     "THKV được tính đến \"ngày ETL\" (tức T-1). Nhưng giao dịch trả nợ trước hạn xảy ra tại ngày T. Vậy có sai lệch 1 ngày giữa THKV (tính đến T-1) và thời điểm thực tế trả nợ (ngày T). Sai lệch này có thể ảnh hưởng khi LD rơi vào đúng ranh giới bậc thang (VD: THKV = 12 tháng tại T-1 nhưng = 12 tháng + 1 ngày tại T). BA xác nhận chấp nhận sai lệch T-1 hay cần tính real-time?",
+     "Toàn vẹn dữ liệu",
+     "Đề xuất: BA xác nhận chấp nhận sai lệch T-1 hay cần tính THKV real-time tại ngày giao dịch. Nếu dùng T-1, cần xử lý đặc biệt cho ngày boundary.",
+     "", "AI+VA"),
+
+    ("US39-QA-03.3",
+     "Mục \"Yêu cầu nghiệp vụ\" – *\"Mỗi Chương trình ưu đãi sẽ có 'Mã hạch toán' riêng và dữ liệu này được khai báo từ khi khởi tạo tài khoản vay (LD)\"*",
+     "Mã hạch toán có thể thay đổi sau khi LD đã được tạo không (VD: KH đổi sang gói vay khác, ngân hàng thay đổi mã hạch toán của CTƯĐ)? Nếu có, thay đổi này được cập nhật vào ETL ngay không, và ảnh hưởng thế nào đến tính phí trả nợ trước hạn sau đó?",
+     "Toàn vẹn dữ liệu",
+     "Đề xuất: Làm rõ tính bất biến của Mã hạch toán trong LD: có thể thay đổi không, và nếu có thì cơ chế đồng bộ và áp dụng cho phí trả nợ trước hạn như thế nào.",
+     "", "VA"),
+
+    ("US39-QA-03.4",
+     "Mục \"Yêu cầu nghiệp vụ\", đoạn \"T24 hiển thị thông tin phí và cho phép người dùng sửa số tiền phí cần thu\"",
+     "Khi Maker sửa số tiền phí thực thu (khác với số tiền ProfiX tính), ProfiX lưu thông tin giao dịch thu phí thành công với số tiền nào: số tiền ProfiX đã tính ban đầu hay số tiền Maker đã sửa? Lịch sử thu phí (Audit Trail) có ghi nhận cả 2 giá trị (phí tính toán và phí thực thu) không?",
+     "Toàn vẹn dữ liệu",
+     "Đề xuất: Xác nhận ProfiX lưu cả \"Số tiền phí tính toán\" và \"Số tiền phí thực thu\" để phục vụ kiểm soát nội bộ và báo cáo.",
+     "", "VA"),
+
+    ("US39-QA-03.5",
+     "Mục \"Yêu cầu nghiệp vụ\", đoạn \"Trạng thái: mặc định chỉ lấy các tài khoản còn hoạt động\"",
+     "ETL chỉ lấy tài khoản LD \"còn hoạt động\". Nếu 1 LD được đóng (trạng thái không hoạt động) sau ETL nhưng trước khi user khởi tạo giao dịch trả nợ trước hạn → LD vẫn tồn tại trên ProfiX (do ETL T-1). ProfiX có validate trạng thái LD tại thời điểm tính phí không? Hay dựa hoàn toàn vào dữ liệu ETL snapshot?",
+     "Toàn vẹn dữ liệu",
+     "Đề xuất: ProfiX nên validate trạng thái LD real-time hoặc T24 phải chặn giao dịch trên LD đã đóng trước khi call API ProfiX.",
+     "", "AI"),
+
+    ("US39-QA-03.6",
+     "Mục \"Yêu cầu nghiệp vụ\", đoạn \"DWH thực hiện ETL dữ liệu nguồn LD vào bảng dữ liệu Tài khoản\"",
+     "ProfiX dùng chung một bảng Tài khoản cho cả LD (tiền vay), MD (bảo lãnh – US38), và ACC (CASA)? Hay mỗi loại tài khoản có bảng riêng? Điều này ảnh hưởng đến logic tìm kiếm LD khi ProfiX nhận số tài khoản từ T24 — cần filter theo \"Loại tài khoản = LD\" hay không.",
+     "Toàn vẹn dữ liệu",
+     "Đề xuất: Xác nhận cấu trúc bảng ETL Tài khoản: dùng chung hay riêng theo loại tài khoản, và field \"Loại tài khoản\" (LD/MD/ACC) là điều kiện lọc bắt buộc trong API tính phí.",
+     "", "VA"),
+
+    ("US39-QA-03.7",
+     "Bảng diễn giải, Bước 0 – *\"Mô tả chi tiết về các bảng dữ liệu ETL sẽ được các bên thống nhất trong quá trình triển khai\"*",
+     "Tài liệu ghi \"Mô tả chi tiết về các bảng dữ liệu ETL sẽ được các bên thống nhất trong quá trình triển khai\". Khi nào sẽ có tài liệu ETL mapping chính thức? Test team có cần chờ tài liệu này để viết test case ETL không?",
+     "Toàn vẹn dữ liệu",
+     "Đề xuất: BA cung cấp timeline dự kiến chốt tài liệu ETL mapping. Test team cần tài liệu này để thiết kế test data và test case cho Module 0.",
+     "", "AI"),
+
+    ("US39-QA-03.8",
+     "Bảng diễn giải – *Cột \"Bước\" chỉ có giá trị \"0\" ở dòng đầu, các dòng còn lại bị trống STT (không khớp Flowchart bước 1→9)*",
+     "Bảng diễn giải TABLE 0 có nhiều dòng bước không có giá trị cột \"Bước\" (STT bị trống). Flowchart đánh số bước 0→1→2→3→4→5→6→6.1→7→8→9 nhưng bảng TABLE 0 không có số tương ứng cho các bước từ bước 2 trở đi. Lỗi định dạng này gây khó khăn khi Tester cần trace test case theo bước.",
+     "Toàn vẹn dữ liệu",
+     "Đề xuất: Bổ sung số thứ tự đầy đủ cho tất cả bước trong bảng TABLE 0 khớp với số bước trong Flowchart (1→9).",
+     "", "VA"),
+
+    # ===== HM4: UI/UX =====
+    ("US39-QA-04.1",
+     "Mục \"Yêu cầu nghiệp vụ\", đoạn \"hệ thống T24 hiển thị thông tin phí\"",
+     "Thông tin phí mà T24 hiển thị cho user bao gồm những gì? Chỉ có số tiền phí? Hay bao gồm: Code phí, Tên Code phí, Tên CTƯĐ (nếu có), Tỷ lệ phí, Biểu phí áp dụng, Số tiền phí tối thiểu/tối đa, bậc thang THKV đang áp dụng?",
+     "UI-UX",
+     "Đề xuất: Mô tả cấu trúc API response ProfiX → T24 bao gồm: Số tiền phí, Tên Code phí, Tên CTƯĐ (nếu có), Min/Max, bậc thang đang áp dụng.",
+     "", "AI+VA"),
+
+    ("US39-QA-04.2",
+     "Mục \"Giao diện\" – đoạn \"Màn hình: N/A\" và \"Mô tả chi tiết các trường: N/A\"",
+     "US39 không có Mockup UI (toàn bộ UI ở phía T24). Trên ProfiX có màn hình nào để người dùng (không phải T24) có thể tra cứu lịch sử tính phí trả nợ trước hạn theo KH/LD không? Hay toàn bộ lịch sử này chỉ xem được trên màn hình Lịch sử thu phí chung? Phạm vi test QA ProfiX chỉ bao gồm API?",
+     "UI-UX",
+     "Đề xuất: Xác nhận phạm vi test QA ProfiX: (1) Chỉ test API + logic tính phí, hoặc (2) Cần phối hợp test E2E trên T24. Nếu (1), cần API spec chi tiết.",
+     "", "AI+VA"),
+
+    ("US39-QA-04.3",
+     "Mục \"Yêu cầu nghiệp vụ\" – *\"Khai báo 01 Biểu phí dành riêng cho các Chương trình ưu đãi cho vay và gắn các Code phí nêu trên vào Biểu phí này\"*",
+     "Biểu phí dành riêng cho CTƯĐ cho vay có hiển thị trên màn hình Quản lý Biểu phí (các US biểu phí) như các Biểu phí thông thường không? Hay đây là Biểu phí đặc biệt chỉ được hệ thống tham chiếu tự động và không cho phép Maker chỉnh sửa thủ công từ giao diện?",
+     "UI-UX",
+     "Đề xuất: Xác nhận Biểu phí CTƯĐ cho vay có xuất hiện và được quản lý trên màn hình Biểu phí thông thường không, hay là loại đặc biệt chỉ-đọc.",
+     "", "VA"),
+]

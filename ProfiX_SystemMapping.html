@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProfiX — Hệ thống Quản lý Phí Tập trung — System Mapping</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+:root {
+  --bg: #0f0f1a; --card: #16213e; --card2: #1a1a2e;
+  --border: #0f3460; --accent: #e94560; --accent2: #53a8b6;
+  --text: #e0e0e0; --text2: #a0a0b0; --text3: #6a6a7a;
+  --success: #4ecca3; --warn: #ffc857; --info: #53a8b6;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+.hero { background: linear-gradient(135deg, #0f3460 0%, #16213e 50%, #1a1a2e 100%);
+  padding: 60px 40px; text-align: center; border-bottom: 2px solid var(--accent); }
+.hero h1 { font-size: 2.2em; font-weight: 700; color: #fff;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero .sub { color: var(--text2); font-size: 1.1em; margin-top: 10px; }
+.hero .stats { display: flex; justify-content: center; gap: 30px; margin-top: 20px; flex-wrap: wrap; }
+.hero .stat { background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+  border-radius: 12px; padding: 12px 24px; }
+.hero .stat .num { font-size: 1.8em; font-weight: 700; color: var(--accent); }
+.hero .stat .label { font-size: 0.85em; color: var(--text2); }
+nav { position: sticky; top: 0; z-index: 100; background: rgba(15,15,26,0.85);
+  backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+  padding: 12px 20px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+nav a { color: var(--accent2); text-decoration: none; padding: 6px 16px;
+  border-radius: 20px; font-size: 0.9em; font-weight: 500;
+  transition: all 0.3s; border: 1px solid transparent; }
+nav a:hover { background: rgba(83,168,182,0.15); border-color: var(--accent2); }
+.container { max-width: 1200px; margin: 0 auto; padding: 30px 20px; }
+.section { margin-bottom: 50px; }
+.section-title { font-size: 1.6em; font-weight: 700; color: var(--accent);
+  border-left: 4px solid var(--accent); padding-left: 16px; margin-bottom: 24px; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  padding: 24px; margin-bottom: 20px; transition: transform 0.2s, box-shadow 0.2s; }
+.card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(233,69,96,0.1); }
+.card h3 { color: var(--accent2); font-size: 1.15em; margin-bottom: 12px; }
+.card h4 { color: var(--text); font-size: 0.95em; margin: 16px 0 8px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.88em; margin-top: 12px; }
+th { background: var(--card2); color: var(--accent2); padding: 10px 12px;
+  text-align: left; font-weight: 600; border-bottom: 2px solid var(--accent); }
+td { padding: 8px 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+tr.even td { background: rgba(255,255,255,0.02); }
+tr:hover td { background: rgba(83,168,182,0.08); }
+code { background: rgba(233,69,96,0.12); color: var(--accent); padding: 2px 6px;
+  border-radius: 4px; font-size: 0.9em; }
+.sub-detail { border-left: 3px solid var(--accent2); background: rgba(83,168,182,0.06);
+  padding: 10px 16px; margin: 10px 0; font-size: 0.92em; border-radius: 0 8px 8px 0; }
+.callout { padding: 12px 16px; border-radius: 8px; margin: 8px 0; font-size: 0.9em; }
+.callout.warning { background: rgba(255,200,87,0.1); border-left: 4px solid var(--warn); color: var(--warn); }
+.callout.info { background: rgba(83,168,182,0.1); border-left: 4px solid var(--info); color: var(--info); }
+.callout.tip { background: rgba(78,204,163,0.1); border-left: 4px solid var(--success); color: var(--success); }
+.mermaid { background: var(--card2); border-radius: 10px; padding: 20px; margin: 16px 0;
+  overflow-x: auto; }
+ol { padding-left: 20px; }
+ol li { margin: 6px 0; font-size: 0.92em; }
+.badge-m { background: var(--accent); color: #fff; padding: 2px 8px; border-radius: 10px;
+  font-size: 0.75em; font-weight: 600; }
+.badge-o { background: var(--text3); color: #fff; padding: 2px 8px; border-radius: 10px;
+  font-size: 0.75em; font-weight: 600; }
+footer { text-align: center; padding: 30px; color: var(--text3); font-size: 0.85em;
+  border-top: 1px solid var(--border); }
+@media (max-width: 768px) {
+  .hero { padding: 30px 16px; }
+  .hero h1 { font-size: 1.5em; }
+  .container { padding: 16px 12px; }
+  table { font-size: 0.8em; }
+}
+
+.module-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin-top:12px;}
+.module-card{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:16px;transition:all .3s;}
+.module-card:hover{border-color:var(--accent2);transform:translateY(-2px);box-shadow:0 4px 20px rgba(83,168,182,.15);}
+.module-header{font-size:1.05rem;font-weight:700;color:var(--accent);margin-bottom:6px;}
+.module-desc{font-size:.82rem;color:var(--text2);margin-bottom:10px;}
+.module-stories{font-size:.82rem;color:var(--text);line-height:1.8;}
+.module-count{margin-top:8px;font-size:.75rem;color:var(--accent2);font-weight:600;text-align:right;}
+.api-chip{display:inline-block;background:var(--border);color:var(--accent2);padding:1px 6px;border-radius:4px;font-size:.72rem;font-weight:600;margin-right:4px;}
+.topic-chip{display:inline-block;background:rgba(78,204,163,.15);color:var(--success);padding:1px 6px;border-radius:4px;font-size:.72rem;font-weight:600;margin-right:4px;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>📊 ProfiX — Hệ thống Quản lý Phí Tập trung</h1>
+  <div class="sub">Tài liệu Đặc tả Tích hợp (ISD) — PVcomBank × HTC Holdings Việt Nam — v0.1</div>
+  <div class="stats">
+    <div class="stat"><div class="num">10</div><div class="label">Modules</div></div>
+    <div class="stat"><div class="num">32</div><div class="label">APIs</div></div>
+    <div class="stat"><div class="num">5</div><div class="label">Luồng nghiệp vụ</div></div>
+    <div class="stat"><div class="num">6</div><div class="label">Hệ thống tích hợp</div></div>
+  </div>
+</div>
+
+<nav><a href="#arch">Kiến trúc</a><a href="#glossary">Thuật ngữ</a><a href="#matrix">Ma trận API</a><a href="#etl">ETL</a><a href="#workflows">Luồng nghiệp vụ</a><a href="#risks">Rủi ro</a></nav>
+
+<div class="container">
+
+<!-- SECTION 1: Architecture -->
+<div class="section" id="arch">
+  <h2 class="section-title">🏗️ Kiến trúc Hệ thống</h2>
+
+  <div class="card" id="feature-tree">
+    <h3>🌳 Feature Tree — Cây phân rã chức năng</h3>
+    <p>Toàn bộ hệ thống được nhóm thành 10 module tích hợp chính, bao gồm 32 API endpoints và 6 Kafka topics.</p>
+    <div class="module-grid">
+      <div class="module-card">
+        <div class="module-header">⚡ M01: Tính phí & Thu phí theo GD</div>
+        <div class="module-desc">Tính phí realtime khi KH thực hiện giao dịch trên kênh online hoặc hệ thống nội bộ</div>
+        <div class="module-stories"><span class="api-chip">API</span> FeeDepositCalculate — Tiền gửi<br><span class="api-chip">API</span> FeeCreditCalculate — Tín dụng<br><span class="api-chip">API</span> FeeEBankCalculate — Ngân hàng điện tử<br><span class="api-chip">API</span> FeeFundCalculate — Ngân quỹ<br><span class="api-chip">API</span> FeeDomesticTransferCalculate — Chuyển tiền<br><span class="api-chip">API</span> FeeAccountCalculate — Tài khoản<br><span class="api-chip">API</span> FeeCardCalculate — Thẻ<br><span class="api-chip">API</span> FeeMerchantCalculate — ĐVCNTT<br><span class="api-chip">API</span> FeeTFCalculate — Thanh toán quốc tế<br><span class="api-chip">API</span> FeeMDCalculate — Bảo lãnh<br><span class="api-chip">API</span> FeeCollected — Ghi nhận thu phí<br></div>
+        <div class="module-count">11 APIs · REST (Sync) · Realtime</div>
+      </div>
+      <div class="module-card">
+        <div class="module-header">📋 M02: Thu phí Adhoc</div>
+        <div class="module-desc">Thu phí đột xuất theo yêu cầu — lấy danh mục SPDV, mã phí, rồi thực hiện thu</div>
+        <div class="module-stories"><span class="api-chip">API</span> GetListProduct — Danh mục SPDV<br><span class="api-chip">API</span> GetListFeeCode — Mã phí theo CIF<br><span class="api-chip">API</span> FeeCollected — Ghi nhận thu phí<br></div>
+        <div class="module-count">3 APIs · REST (Sync) · Theo yêu cầu</div>
+      </div>
+      <div class="module-card">
+        <div class="module-header">🔄 M03: Thu phí định kỳ đúng hạn</div>
+        <div class="module-desc">Hệ thống tự động thu phí định kỳ theo lịch qua Kafka message</div>
+        <div class="module-stories"><span class="topic-chip">TOPIC</span> FEE_REQUEST — Yêu cầu thu phí<br><span class="topic-chip">TOPIC</span> FEE_RESULT — Kết quả thu phí<br></div>
+        <div class="module-count">2 Topics · Kafka (Async) · Batch job</div>
+      </div>
+      <div class="module-card">
+        <div class="module-header">💰 M04: Truy thu & Tận thu nợ phí</div>
+        <div class="module-desc">Thu nợ phí từ kỳ trước: truy thu đầu ngày hoặc tận thu khi TK KH ghi có</div>
+        <div class="module-stories"><span class="topic-chip">TOPIC</span> CREDIT_BALANCE — Biến động số dư<br><span class="topic-chip">TOPIC</span> FEE_REQUEST — Yêu cầu truy thu<br><span class="topic-chip">TOPIC</span> FEE_RESULT — Kết quả truy thu<br></div>
+        <div class="module-count">3 Topics · Kafka (Async) · Event-driven</div>
+      </div>
+      <div class="module-card">
+        <div class="module-header">🗑️ M05: Xóa nợ phí</div>
+        <div class="module-desc">Xóa các khoản nợ phí theo quyết định nghiệp vụ (Maker-Checker)</div>
+        <div class="module-stories"><span class="api-chip">API</span> GetListFeeDebt — DS kỳ nợ phí theo KH<br><span class="api-chip">API</span> UpdateStatusFeeDebt — Cập nhật xóa nợ<br></div>
+        <div class="module-count">2 APIs · REST (Sync) · Theo yêu cầu</div>
+      </div>
+      <div class="module-card">
+        <div class="module-header">🔗 M06: Đồng bộ dữ liệu (ETL)</div>
+        <div class="module-desc">Đồng bộ KH, Tài khoản, Thẻ từ Core Banking làm điều kiện tính phí</div>
+        <div class="module-stories"><span class="topic-chip">TOPIC</span> Customer (INSERT/UPDATE)<br>📋 Bảng Customer — 29 fields<br>📋 Bảng Account — 15 fields<br>📋 Bảng Card — 20 fields<br></div>
+        <div class="module-count">1 Topic · Kafka + ETL · Event-driven</div>
+      </div>
+      <div class="module-card">
+        <div class="module-header">🏛️ M07: Thu phí bảo lãnh định kỳ</div>
+        <div class="module-desc">Khởi tạo lịch thu phí bảo lãnh (BG) định kỳ, cập nhật trạng thái hợp đồng MD</div>
+        <div class="module-stories"><span class="api-chip">API</span> CreateBGSchedFee — Tạo lịch thu phí BG<br><span class="api-chip">API</span> GetBGSchedule — DS phí BG đến hạn<br><span class="api-chip">API</span> FeeCollected — Ghi nhận thu phí<br><span class="api-chip">API</span> UpdateMDStatus — Cập nhật trạng thái MD<br></div>
+        <div class="module-count">4 APIs · REST (Sync) · Theo lịch</div>
+      </div>
+      <div class="module-card">
+        <div class="module-header">🔍 M08: API truy vấn hệ thống ngoài</div>
+        <div class="module-desc">Cung cấp API cho hệ thống ngoài truy vấn biểu phí, CTƯĐ, lịch sử phí</div>
+        <div class="module-stories"><span class="api-chip">API</span> GetListFeeSchedule — DS Biểu phí<br><span class="api-chip">API</span> GetFeeSchedDetail — Chi tiết Biểu phí<br><span class="api-chip">API</span> GetFeeCodeDetail — Chi tiết Code phí<br><span class="api-chip">API</span> GetListPromotion — DS CTƯĐ<br><span class="api-chip">API</span> GetPromotionDetail — Chi tiết CTƯĐ<br><span class="api-chip">API</span> GetFeeTransByCus — Lịch sử phí KH<br><span class="api-chip">API</span> GetFeeScheduleByCus — Lịch thu phí KH<br></div>
+        <div class="module-count">7 APIs · REST (Sync) · Theo yêu cầu</div>
+      </div>
+      <div class="module-card">
+        <div class="module-header">🎁 M09: Ưu đãi ngoại lệ theo KH</div>
+        <div class="module-desc">Tạo CTƯĐ ngoại lệ cho KH cụ thể từ hệ thống Pricing</div>
+        <div class="module-stories"><span class="api-chip">API</span> GetListProduct — Danh mục SPDV<br><span class="api-chip">API</span> CreatePromotionForCus — Tạo CTƯĐ ngoại lệ<br></div>
+        <div class="module-count">2 APIs · REST (Sync) · Từ Pricing</div>
+      </div>
+      <div class="module-card">
+        <div class="module-header">🏷️ M10: Ưu đãi theo thể lệ</div>
+        <div class="module-desc">Tạo CTƯĐ theo thể lệ chung (theo thẻ, tài khoản, KH) từ Pricing</div>
+        <div class="module-stories"><span class="api-chip">API</span> GetListProduct — Danh mục SPDV<br><span class="api-chip">API</span> GetListCondition — DS điều kiện<br><span class="api-chip">API</span> CreatePromotion — Tạo CTƯĐ theo thể lệ<br></div>
+        <div class="module-count">3 APIs · REST (Sync) · Từ Pricing</div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+  <div class="card">
+    <h3>📋 Quick Reference — Tổng quan Modules</h3>
+    <table>
+      <thead><tr><th>Mã</th><th>Module</th><th>Mô tả</th><th>Giao thức</th><th>Số API/Topic</th><th>Trigger</th></tr></thead>
+      <tbody><tr class="even">
+  <td>M01</td><td>Tính phí & Thu phí theo giao dịch</td>
+  <td>Tính phí realtime khi khách hàng thực hiện giao dịch trên kênh online hoặc hệ thống nội bộ</td><td>REST API (Sync)</td>
+  <td>11</td><td>Realtime — khi giao dịch xảy ra</td>
+</tr>
+<tr>
+  <td>M02</td><td>Thu phí Adhoc</td>
+  <td>Thu phí đột xuất theo yêu cầu — lấy danh mục SPDV, mã phí, rồi thực hiện thu</td><td>REST API (Sync)</td>
+  <td>3</td><td>Theo yêu cầu nghiệp vụ</td>
+</tr>
+<tr class="even">
+  <td>M03</td><td>Thu phí định kỳ đúng hạn</td>
+  <td>Hệ thống tự động thu phí định kỳ theo lịch (batch/scheduled) qua Kafka message</td><td>Kafka (Async)</td>
+  <td>2</td><td>Batch job — chạy theo lịch</td>
+</tr>
+<tr>
+  <td>M04</td><td>Truy thu & Tận thu nợ phí</td>
+  <td>Thu nợ phí từ kỳ trước: truy thu đầu ngày hoặc tận thu khi tài khoản KH ghi có</td><td>Kafka (Async)</td>
+  <td>3</td><td>Đầu ngày + Event ghi có tài khoản</td>
+</tr>
+<tr class="even">
+  <td>M05</td><td>Xóa nợ phí</td>
+  <td>Cho phép xóa các khoản nợ phí theo quyết định nghiệp vụ (Maker-Checker)</td><td>REST API (Sync)</td>
+  <td>2</td><td>Theo yêu cầu nghiệp vụ</td>
+</tr>
+<tr>
+  <td>M06</td><td>Đồng bộ dữ liệu nguồn (ETL)</td>
+  <td>Đồng bộ dữ liệu KH, Tài khoản, Thẻ từ Core Banking làm điều kiện tính phí</td><td>Kafka (Async) + ETL</td>
+  <td>1</td><td>Event-driven + Batch ETL</td>
+</tr>
+<tr class="even">
+  <td>M07</td><td>Thu phí bảo lãnh định kỳ</td>
+  <td>Khởi tạo và quản lý lịch thu phí bảo lãnh (BG) định kỳ, cập nhật trạng thái hợp đồng MD</td><td>REST API (Sync)</td>
+  <td>4</td><td>Theo lịch + theo yêu cầu</td>
+</tr>
+<tr>
+  <td>M08</td><td>API truy vấn cho hệ thống ngoài</td>
+  <td>Cung cấp API cho các hệ thống bên ngoài truy vấn thông tin biểu phí, CTƯĐ, lịch sử phí</td><td>REST API (Sync)</td>
+  <td>7</td><td>Theo yêu cầu từ hệ thống ngoài</td>
+</tr>
+<tr class="even">
+  <td>M09</td><td>Ưu đãi ngoại lệ theo KH</td>
+  <td>Tạo CTƯĐ ngoại lệ cho KH cụ thể từ hệ thống Pricing</td><td>REST API (Sync)</td>
+  <td>2</td><td>Từ Pricing</td>
+</tr>
+<tr>
+  <td>M10</td><td>Ưu đãi theo thể lệ</td>
+  <td>Tạo CTƯĐ theo thể lệ chung (theo thẻ, tài khoản, KH) từ hệ thống Pricing</td><td>REST API (Sync)</td>
+  <td>3</td><td>Từ Pricing</td>
+</tr>
+</tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>🔗 Integration Map — Bản đồ tích hợp</h3>
+    <div class="mermaid">flowchart LR
+  PFX["ProfiX"]
+  style PFX fill:#e94560,color:#fff,stroke:#0f3460,stroke-width:3px
+  S0["Core Banking T24"]
+  PFX <-->|"REST API + Kafka"| S0
+  S1["Pricing System"]
+  S1 -->|"REST API"| PFX
+  S2["Channel Online"]
+  S2 -->|"REST API"| PFX
+  S3["He thong noi bo"]
+  S3 -->|"REST API"| PFX
+  S4["External Systems"]
+  S4 -->|"REST API"| PFX
+  S5["Kafka Broker"]
+  PFX <-->|"Kafka Topics"| S5</div>
+    <table>
+      <thead><tr><th>Hệ thống</th><th>Hướng</th><th>Modules</th><th>Mục đích</th><th>Giao thức</th></tr></thead>
+      <tbody><tr class=even><td><strong>Core Banking (T24)</strong></td><td>Bidirectional</td><td>M01, M02, M03, M04, M05, M06, M07</td><td>Quản lý tài khoản, giao dịch, thu/trích phí, đồng bộ dữ liệu KH</td><td><code>REST API + Kafka</code></td></tr><tr><td><strong>Pricing System</strong></td><td>Pricing → ProfiX</td><td>M09, M10</td><td>Tạo CTƯĐ ngoại lệ và theo thể lệ</td><td><code>REST API</code></td></tr><tr class=even><td><strong>Kênh Online (eBanking, Mobile)</strong></td><td>Channel → ProfiX</td><td>M01</td><td>Gọi API tính phí realtime khi KH giao dịch online</td><td><code>REST API</code></td></tr><tr><td><strong>Hệ thống nội bộ (Counter/Teller)</strong></td><td>Internal → ProfiX</td><td>M01, M02</td><td>Gọi API tính phí khi giao viên thực hiện giao dịch</td><td><code>REST API</code></td></tr><tr class=even><td><strong>Hệ thống ngoài (External Query)</strong></td><td>External → ProfiX</td><td>M08</td><td>Truy vấn biểu phí, CTƯĐ, lịch sử thu phí</td><td><code>REST API</code></td></tr><tr><td><strong>Kafka Message Broker</strong></td><td>Bidirectional</td><td>M03, M04, M06</td><td>Giao tiếp bất đồng bộ: thu phí định kỳ, truy thu, đồng bộ ETL</td><td><code>Kafka Topics</code></td></tr></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 2: Glossary -->
+<div class="section" id="glossary">
+  <h2 class="section-title">📖 Bảng Thuật ngữ (Glossary)</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th style="width:25%">Thuật ngữ</th><th>Giải thích</th></tr></thead>
+      <tbody><tr class="even"><td><strong>ProfiX</strong></td><td>Tên hệ thống quản lý phí tập trung (Centralized Fee Management System) của PVcomBank</td></tr>
+<tr><td><strong>ISD</strong></td><td>Integration System Design — Tài liệu đặc tả tích hợp hệ thống</td></tr>
+<tr class="even"><td><strong>CIF</strong></td><td>Customer Information File — Mã khách hàng duy nhất trong hệ thống Core Banking</td></tr>
+<tr><td><strong>SPDV</strong></td><td>Sản phẩm Dịch vụ — Mã phân loại sản phẩm/dịch vụ của ngân hàng</td></tr>
+<tr class="even"><td><strong>CTƯĐ</strong></td><td>Chương trình ưu đãi — Promotion Program áp dụng cho khách hàng</td></tr>
+<tr><td><strong>Maker-Checker</strong></td><td>Quy trình phê duyệt 2 bước: Maker tạo yêu cầu, Checker phê duyệt</td></tr>
+<tr class="even"><td><strong>Adhoc Fee</strong></td><td>Phí thu theo yêu cầu đột xuất, không theo lịch định kỳ</td></tr>
+<tr><td><strong>ETL</strong></td><td>Extract-Transform-Load — Quy trình đồng bộ dữ liệu từ hệ thống nguồn</td></tr>
+<tr class="even"><td><strong>Fee Schedule</strong></td><td>Biểu phí — Bảng quy định mức phí áp dụng cho từng loại dịch vụ</td></tr>
+<tr><td><strong>Fee Code</strong></td><td>Mã phí — Định danh duy nhất cho một loại phí cụ thể</td></tr>
+<tr class="even"><td><strong>Fee Debt</strong></td><td>Nợ phí — Khoản phí chưa thu được do tài khoản KH không đủ số dư</td></tr>
+<tr><td><strong>Core Banking</strong></td><td>Hệ thống ngân hàng lõi quản lý tài khoản, giao dịch (T24/Temenos)</td></tr>
+<tr class="even"><td><strong>Kafka Topic</strong></td><td>Kênh message queue dùng để giao tiếp bất đồng bộ giữa các hệ thống</td></tr>
+<tr><td><strong>ĐVCNTT</strong></td><td>Đơn vị Chấp nhận Thanh toán — Merchant accepting payments</td></tr>
+<tr class="even"><td><strong>BG</strong></td><td>Bank Guarantee — Bảo lãnh ngân hàng</td></tr>
+<tr><td><strong>MD</strong></td><td>Hợp đồng Master Deal — Hợp đồng chính trong nghiệp vụ bảo lãnh</td></tr>
+<tr class="even"><td><strong>Pricing</strong></td><td>Hệ thống định giá phí bên phía PVcomBank</td></tr>
+<tr><td><strong>Channel</strong></td><td>Kênh giao dịch (Online Banking, Mobile Banking, Counter, Internal...)</td></tr>
+<tr class="even"><td><strong>KHCN</strong></td><td>Khách hàng Cá nhân</td></tr>
+<tr><td><strong>KHTC</strong></td><td>Khách hàng Tổ chức</td></tr>
+<tr class="even"><td><strong>DNSN</strong></td><td>Doanh nghiệp siêu nhỏ</td></tr>
+<tr><td><strong>CBNV</strong></td><td>Cán bộ Nhân viên</td></tr>
+<tr class="even"><td><strong>Truy thu</strong></td><td>Collecting overdue fees — Thu phí còn nợ từ các kỳ trước</td></tr>
+<tr><td><strong>Tận thu</strong></td><td>Exhaustive collection — Thu nợ phí khi tài khoản phát sinh ghi có</td></tr>
+</tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 3: API Matrix -->
+<div class="section" id="matrix">
+  <h2 class="section-title">🔌 Ma trận API</h2>
+  <div class="card">
+    <h3>📡 Danh mục toàn bộ API</h3>
+    <div class="sub-detail">Tổng cộng <strong>32</strong> API endpoints. Tất cả sử dụng giao thức REST (JSON over HTTPS) trừ các module Kafka-based.</div>
+    <table>
+      <thead><tr><th>Module</th><th>API</th><th>Mô tả</th><th>Giao thức</th></tr></thead>
+      <tbody><tr class="even">
+  <td>M01</td><td><code>FeeDepositCalculate</code></td>
+  <td>Tính phí nghiệp vụ Tiền gửi</td><td>REST API (Sync)</td>
+</tr>
+<tr>
+  <td>M01</td><td><code>FeeCreditCalculate</code></td>
+  <td>Tính phí nghiệp vụ Tín dụng</td><td>REST API (Sync)</td>
+</tr>
+<tr class="even">
+  <td>M01</td><td><code>FeeEBankCalculate</code></td>
+  <td>Tính phí nghiệp vụ Ngân hàng điện tử</td><td>REST API (Sync)</td>
+</tr>
+<tr>
+  <td>M01</td><td><code>FeeFundCalculate</code></td>
+  <td>Tính phí nghiệp vụ Ngân quỹ</td><td>REST API (Sync)</td>
+</tr>
+<tr class="even">
+  <td>M01</td><td><code>FeeDomesticTransferCalculate</code></td>
+  <td>Tính phí Chuyển tiền trong nước</td><td>REST API (Sync)</td>
+</tr>
+<tr>
+  <td>M01</td><td><code>FeeAccountCalculate</code></td>
+  <td>Tính phí nghiệp vụ Tài khoản</td><td>REST API (Sync)</td>
+</tr>
+<tr class="even">
+  <td>M01</td><td><code>FeeCardCalculate</code></td>
+  <td>Tính phí nghiệp vụ Thẻ</td><td>REST API (Sync)</td>
+</tr>
+<tr>
+  <td>M01</td><td><code>FeeMerchantCalculate</code></td>
+  <td>Tính phí nghiệp vụ ĐVCNTT</td><td>REST API (Sync)</td>
+</tr>
+<tr class="even">
+  <td>M01</td><td><code>FeeTFCalculate</code></td>
+  <td>Tính phí Thanh toán quốc tế</td><td>REST API (Sync)</td>
+</tr>
+<tr>
+  <td>M01</td><td><code>FeeMDCalculate</code></td>
+  <td>Tính phí nghiệp vụ Bảo lãnh</td><td>REST API (Sync)</td>
+</tr>
+<tr class="even">
+  <td>M01</td><td><code>FeeCollected</code></td>
+  <td>Ghi nhận thu phí thành công</td><td>REST API (Sync)</td>
+</tr>
+<tr>
+  <td>M02</td><td><code>GetListProduct</code></td>
+  <td>Lấy danh mục SPDV có hiệu lực</td><td>REST API (Sync)</td>
+</tr>
+<tr class="even">
+  <td>M02</td><td><code>GetListFeeCode</code></td>
+  <td>Lấy danh sách code phí theo CIF và SPDV</td><td>REST API (Sync)</td>
+</tr>
+<tr>
+  <td>M02</td><td><code>FeeCollected</code></td>
+  <td>Ghi nhận thu phí thành công</td><td>REST API (Sync)</td>
+</tr>
+<tr class="even">
+  <td>M05</td><td><code>GetListFeeDebt</code></td>
+  <td>Lấy danh sách kỳ nợ phí theo KH</td><td>REST API (Sync)</td>
+</tr>
+<tr>
+  <td>M05</td><td><code>UpdateStatusFeeDebt</code></td>
+  <td>Cập nhật trạng thái xóa nợ phí</td><td>REST API (Sync)</td>
+</tr>
+<tr class="even">
+  <td>M07</td><td><code>CreateBGSchedFee</code></td>
+  <td>Khởi tạo lịch thu phí BG định kỳ</td><td>REST API (Sync)</td>
+</tr>
+<tr>
+  <td>M07</td><td><code>GetBGSchedule</code></td>
+  <td>Lấy danh sách phí BG đến hạn</td><td>REST API (Sync)</td>
+</tr>
+<tr class="even">
+  <td>M07</td><td><code>FeeCollected</code></td>
+  <td>Ghi nhận thu phí thành công</td><td>REST API (Sync)</td>
+</tr>
+<tr>
+  <td>M07</td><td><code>UpdateMDStatus</code></td>
+  <td>Cập nhật trạng thái hợp đồng MD</td><td>REST API (Sync)</td>
+</tr>
+<tr class="even">
+  <td>M08</td><td><code>GetListFeeSchedule</code></td>
+  <td>Lấy danh sách Biểu phí có hiệu lực</td><td>REST API (Sync)</td>
+</tr>
+<tr>
+  <td>M08</td><td><code>GetFeeSchedDetail</code></td>
+  <td>Chi tiết Biểu phí</td><td>REST API (Sync)</td>
+</tr>
+<tr class="even">
+  <td>M08</td><td><code>GetFeeCodeDetail</code></td>
+  <td>Chi tiết Code phí</td><td>REST API (Sync)</td>
+</tr>
+<tr>
+  <td>M08</td><td><code>GetListPromotion</code></td>
+  <td>Danh sách CTƯĐ</td><td>REST API (Sync)</td>
+</tr>
+<tr class="even">
+  <td>M08</td><td><code>GetPromotionDetail</code></td>
+  <td>Chi tiết CTƯĐ</td><td>REST API (Sync)</td>
+</tr>
+<tr>
+  <td>M08</td><td><code>GetFeeTransByCus</code></td>
+  <td>Tra cứu lịch sử thu phí theo KH</td><td>REST API (Sync)</td>
+</tr>
+<tr class="even">
+  <td>M08</td><td><code>GetFeeScheduleByCus</code></td>
+  <td>Lịch thu phí dự kiến theo KH</td><td>REST API (Sync)</td>
+</tr>
+<tr>
+  <td>M09</td><td><code>GetListProduct</code></td>
+  <td>Lấy danh mục SPDV</td><td>REST API (Sync)</td>
+</tr>
+<tr class="even">
+  <td>M09</td><td><code>CreatePromotionForCus</code></td>
+  <td>Tạo CTƯĐ ngoại lệ cho KH</td><td>REST API (Sync)</td>
+</tr>
+<tr>
+  <td>M10</td><td><code>GetListProduct</code></td>
+  <td>Lấy danh mục SPDV</td><td>REST API (Sync)</td>
+</tr>
+<tr class="even">
+  <td>M10</td><td><code>GetListCondition</code></td>
+  <td>Lấy danh sách điều kiện</td><td>REST API (Sync)</td>
+</tr>
+<tr>
+  <td>M10</td><td><code>CreatePromotion</code></td>
+  <td>Tạo CTƯĐ theo thể lệ</td><td>REST API (Sync)</td>
+</tr>
+</tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>📨 Kafka Topics</h3>
+    <table>
+      <thead><tr><th>Module</th><th>Topic</th><th>Mục đích</th></tr></thead>
+      <tbody>
+        <tr class="even"><td>M03</td><td><code>FEE_REQUEST</code></td><td>Yêu cầu thu phí định kỳ</td></tr>
+        <tr><td>M03</td><td><code>FEE_RESULT</code></td><td>Kết quả thu phí</td></tr>
+        <tr class="even"><td>M04</td><td><code>CREDIT_BALANCE</code></td><td>Biến động số dư (ghi có)</td></tr>
+        <tr><td>M04</td><td><code>FEE_REQUEST</code></td><td>Yêu cầu truy thu nợ phí</td></tr>
+        <tr class="even"><td>M04</td><td><code>FEE_RESULT</code></td><td>Kết quả truy thu</td></tr>
+        <tr><td>M06</td><td><code>CUSTOMER (INSERT/UPDATE)</code></td><td>Đồng bộ dữ liệu KH/TK/Thẻ</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 4: ETL -->
+<div class="section" id="etl">
+  <h2 class="section-title">🔄 Đồng bộ Dữ liệu (ETL)</h2>
+  <div class="callout info">ℹ️ Dữ liệu KH, Tài khoản, Thẻ được đồng bộ từ Core Banking qua Kafka topic. ProfiX sử dụng dữ liệu này làm điều kiện tính phí (loại KH, trạng thái TK, loại thẻ...).</div>
+  
+<div class="card">
+  <h3>📋 Bảng Customer</h3>
+  <p class="sub-detail">Sync: <code>Kafka Topic customer (INSERT/UPDATE)</code></p>
+  <table><thead><tr><th>Field</th><th>Bắt buộc</th><th>Mô tả</th></tr></thead>
+  <tbody><tr class="even"><td><code>cif</code></td><td><span class="badge-m">M</span></td><td>Mã khách hàng</td></tr>
+<tr><td><code>name</code></td><td><span class="badge-m">M</span></td><td>Tên khách hàng</td></tr>
+<tr class="even"><td><code>customer_type</code></td><td><span class="badge-m">M</span></td><td>Loại KH (KHCN/CBNV/KHTC/DNSN)</td></tr>
+<tr><td><code>employee_code</code></td><td><span class="badge-o">O</span></td><td>Mã nhân viên (khi type=CBNV)</td></tr>
+<tr class="even"><td><code>customer_status</code></td><td><span class="badge-o">O</span></td><td>Nhóm khách hàng</td></tr>
+<tr><td><code>branch_code</code></td><td><span class="badge-m">M</span></td><td>Chi nhánh mở CIF</td></tr>
+<tr class="even"><td><code>open_date</code></td><td><span class="badge-m">M</span></td><td>Ngày mở</td></tr>
+</tbody></table>
+</div>
+<div class="card">
+  <h3>📋 Bảng Account</h3>
+  <p class="sub-detail">Sync: <code>Kafka Topic customer (INSERT/UPDATE)</code></p>
+  <table><thead><tr><th>Field</th><th>Bắt buộc</th><th>Mô tả</th></tr></thead>
+  <tbody><tr class="even"><td><code>acctno</code></td><td><span class="badge-m">M</span></td><td>Số tài khoản</td></tr>
+<tr><td><code>cif</code></td><td><span class="badge-m">M</span></td><td>Mã khách hàng</td></tr>
+<tr class="even"><td><code>currency</code></td><td><span class="badge-m">M</span></td><td>Loại tiền</td></tr>
+<tr><td><code>balance</code></td><td><span class="badge-m">M</span></td><td>Số dư</td></tr>
+<tr class="even"><td><code>alter_account_list</code></td><td><span class="badge-m">M</span></td><td>DS tài khoản liên quan</td></tr>
+<tr><td><code>status</code></td><td><span class="badge-m">M</span></td><td>Trạng thái (ACTIVE/INACTIVE/CLOSED)</td></tr>
+<tr class="even"><td><code>product_code</code></td><td><span class="badge-m">M</span></td><td>Mã SPDV</td></tr>
+<tr><td><code>branch_code</code></td><td><span class="badge-m">M</span></td><td>Chi nhánh</td></tr>
+<tr class="even"><td><code>open_date</code></td><td><span class="badge-m">M</span></td><td>Ngày mở</td></tr>
+</tbody></table>
+</div>
+<div class="card">
+  <h3>📋 Bảng Card</h3>
+  <p class="sub-detail">Sync: <code>Kafka Topic customer (INSERT/UPDATE)</code></p>
+  <table><thead><tr><th>Field</th><th>Bắt buộc</th><th>Mô tả</th></tr></thead>
+  <tbody><tr class="even"><td><code>cardno</code></td><td><span class="badge-m">M</span></td><td>Số thẻ (masked)</td></tr>
+<tr><td><code>cif</code></td><td><span class="badge-m">M</span></td><td>Mã khách hàng</td></tr>
+<tr class="even"><td><code>currency</code></td><td><span class="badge-m">M</span></td><td>Loại tiền</td></tr>
+<tr><td><code>open_date</code></td><td><span class="badge-m">M</span></td><td>Ngày mở</td></tr>
+<tr class="even"><td><code>active_date</code></td><td><span class="badge-m">M</span></td><td>Ngày kích hoạt</td></tr>
+<tr><td><code>expridate_date</code></td><td><span class="badge-m">M</span></td><td>Ngày hết hạn</td></tr>
+<tr class="even"><td><code>card_type</code></td><td><span class="badge-m">M</span></td><td>Loại thẻ (DEBIT/CREDIT)</td></tr>
+<tr><td><code>card_product</code></td><td><span class="badge-m">M</span></td><td>SPDV thẻ</td></tr>
+<tr class="even"><td><code>card_status</code></td><td><span class="badge-m">M</span></td><td>Trạng thái thẻ</td></tr>
+<tr><td><code>branch_code</code></td><td><span class="badge-m">M</span></td><td>Chi nhánh</td></tr>
+</tbody></table>
+</div>
+</div>
+
+<!-- SECTION 5: Workflows -->
+<div class="section" id="workflows">
+  <h2 class="section-title">🔄 Luồng Nghiệp vụ Cốt lõi</h2>
+  
+<div class="card">
+  <h3>🔄 Flow 1: Thu phí theo giao dịch (Online)</h3>
+  <p>KH thực hiện giao dịch trên kênh Online → Channel gọi ProfiX tính phí → ProfiX tra biểu phí, áp dụng ưu đãi → trả kết quả phí → Channel thực hiện giao dịch + thu phí → gọi FeeCollected</p>
+  <p class="sub-detail">Modules liên quan: <strong>M01</strong></p>
+  <div class="mermaid">sequenceDiagram
+  participant KH as Khach hang
+  participant CH as Channel Online
+  participant PFX as ProfiX
+  participant CB as Core Banking
+  KH->>CH: Thuc hien giao dich
+  CH->>PFX: Goi API FeeXxxCalculate
+  PFX->>PFX: Tra bieu phi, kiem tra CTUD
+  PFX-->>CH: Tra response so tien phi
+  CH-->>KH: Hien thi phi de xac nhan
+  KH->>CH: Xac nhan giao dich
+  CH->>CB: Thuc hien GD + trich phi
+  CB-->>CH: Tra ket qua thanh cong
+  CH->>PFX: Goi API FeeCollected ghi nhan</div>
+  <h4>Các bước chi tiết:</h4>
+  <ol><li>KH thực hiện giao dịch trên kênh Online</li>
+<li>Channel gọi API FeeXxxCalculate tới ProfiX</li>
+<li>ProfiX tra biểu phí, kiểm tra CTƯĐ áp dụng</li>
+<li>ProfiX trả response: số tiền phí, chi tiết tính</li>
+<li>Channel hiển thị phí cho KH xác nhận</li>
+<li>KH xác nhận → Channel gọi Core Banking thực hiện giao dịch + trích phí</li>
+<li>Core Banking trả kết quả thành công</li>
+<li>Channel gọi API FeeCollected để ProfiX ghi nhận</li>
+</ol>
+  <h4>Rủi ro cần lưu ý:</h4>
+  <div class="callout warning">⚠️ API timeout khi Core Banking chậm → KH chờ lâu</div>
+<div class="callout warning">⚠️ Sai biểu phí nếu dữ liệu ETL chưa đồng bộ kịp</div>
+<div class="callout warning">⚠️ Race condition nếu nhiều giao dịch cùng CIF đồng thời</div>
+
+</div>
+<div class="card">
+  <h3>🔄 Flow 2: Thu phí định kỳ đúng hạn (Batch)</h3>
+  <p>Job scheduler publish message vào Kafka topic thu phí → ProfiX xử lý batch → tính phí cho từng KH/TK/Thẻ → gọi Core Banking trích phí → publish kết quả</p>
+  <p class="sub-detail">Modules liên quan: <strong>M03</strong></p>
+  <div class="mermaid">sequenceDiagram
+  participant JOB as Job Scheduler
+  participant KFK as Kafka
+  participant PFX as ProfiX
+  participant CB as Core Banking
+  JOB->>KFK: Trigger theo lich daily/monthly
+  KFK->>PFX: Publish FEE_REQUEST
+  PFX->>PFX: Xac dinh doi tuong tinh phi
+  PFX->>PFX: Tra bieu phi, tinh so tien
+  PFX->>CB: Goi Core Banking trich phi
+  CB-->>PFX: Ket qua thu phi
+  alt Thu thanh cong
+    PFX->>KFK: Publish FEE_RESULT SUCCESS
+  else Khong du so du
+    PFX->>PFX: Ghi nhan no phi
+    PFX->>KFK: Publish FEE_RESULT DEBT
+  end</div>
+  <h4>Các bước chi tiết:</h4>
+  <ol><li>Job Scheduler trigger theo lịch (daily/monthly)</li>
+<li>Publish FEE_REQUEST message lên Kafka topic thu phí</li>
+<li>ProfiX consume message, xác định đối tượng tính phí (CUSTOMER/ACCOUNT/CARD)</li>
+<li>ProfiX tra biểu phí, tính số tiền phí cho từng đối tượng</li>
+<li>ProfiX gọi Core Banking trích phí từ tài khoản KH</li>
+<li>Nếu thu thành công → publish FEE_RESULT (status=SUCCESS)</li>
+<li>Nếu không đủ số dư → ghi nhận nợ phí, publish FEE_RESULT (status=DEBT)</li>
+</ol>
+  <h4>Rủi ro cần lưu ý:</h4>
+  <div class="callout warning">⚠️ Batch size lớn → ảnh hưởng hiệu năng hệ thống</div>
+<div class="callout warning">⚠️ Message bị mất/trùng → cần idempotency</div>
+<div class="callout warning">⚠️ Nợ phí tích lũy nếu KH liên tục không đủ số dư</div>
+
+</div>
+<div class="card">
+  <h3>🔄 Flow 3: Truy thu & Tận thu nợ phí</h3>
+  <p>Đầu ngày: ProfiX quét danh sách nợ phí → gửi FEE_REQUEST cho từng khoản nợ. Khi KH ghi có: Core Banking publish CREDIT_BALANCE → ProfiX kiểm tra nợ phí → thu nợ</p>
+  <p class="sub-detail">Modules liên quan: <strong>M04</strong></p>
+  <div class="mermaid">sequenceDiagram
+  participant BATCH as Batch Job
+  participant KFK as Kafka
+  participant PFX as ProfiX
+  participant CB as Core Banking
+  Note over BATCH,CB: Scenario 1 - Truy thu dau ngay
+  BATCH->>PFX: Trigger batch job dau ngay
+  PFX->>PFX: Quet danh sach no phi ton dong
+  PFX->>KFK: Publish FEE_REQUEST cho tung khoan no
+  KFK->>CB: Chuyen yeu cau trich phi
+  CB-->>PFX: Tra ket qua thu no
+  PFX->>KFK: Publish FEE_RESULT
+  Note over BATCH,CB: Scenario 2 - Tan thu khi ghi co
+  CB->>KFK: Publish CREDIT_BALANCE khi TK ghi co
+  KFK->>PFX: Consume su kien ghi co
+  PFX->>PFX: Kiem tra CIF/TK co no phi khong
+  PFX->>KFK: Publish FEE_REQUEST de trich no
+  KFK->>CB: Chuyen yeu cau trich phi
+  CB-->>PFX: Tra ket qua thu no</div>
+  <h4>Các bước chi tiết:</h4>
+  <ol><li>Scenario 1 - Đầu ngày: Batch job trigger</li>
+<li>ProfiX quét danh sách nợ phí còn tồn đọng</li>
+<li>Publish FEE_REQUEST cho từng khoản nợ phí</li>
+<li>Core Banking xử lý trích phí → trả kết quả</li>
+<li>Scenario 2 - Tận thu: Core Banking publish CREDIT_BALANCE khi TK ghi có</li>
+<li>ProfiX consume, kiểm tra CIF/TK có nợ phí không</li>
+<li>Nếu có nợ → publish FEE_REQUEST để trích nợ</li>
+<li>Publish FEE_RESULT với kết quả thu nợ</li>
+</ol>
+  <h4>Rủi ro cần lưu ý:</h4>
+  <div class="callout warning">⚠️ Vòng lặp thu nợ nếu logic kiểm tra không chặt</div>
+<div class="callout warning">⚠️ Thu nhầm nếu ghi có là khoản tạm (hold/pending)</div>
+<div class="callout warning">⚠️ Thứ tự thu nợ (FIFO hay ưu tiên kỳ cũ nhất) cần rõ ràng</div>
+
+</div>
+<div class="card">
+  <h3>🔄 Flow 4: Đồng bộ dữ liệu ETL</h3>
+  <p>Core Banking đẩy dữ liệu KH/TK/Thẻ qua Kafka → ProfiX consume và lưu vào bảng nội bộ để làm điều kiện tính phí</p>
+  <p class="sub-detail">Modules liên quan: <strong>M06</strong></p>
+  <div class="mermaid">sequenceDiagram
+  participant CB as Core Banking
+  participant KFK as Kafka
+  participant PFX as ProfiX
+  CB->>KFK: Publish INSERT/UPDATE len topic customer
+  KFK->>PFX: Consume message
+  PFX->>PFX: Parse du lieu Customer/Account/Card
+  alt eventType = INSERT
+    PFX->>PFX: Tao moi record trong bang noi bo
+  else eventType = UPDATE
+    PFX->>PFX: Cap nhat cac field thay doi
+  end
+  Note over PFX: Du lieu dung de tra cuu dieu kien tinh phi</div>
+  <h4>Các bước chi tiết:</h4>
+  <ol><li>Core Banking publish message INSERT/UPDATE lên Kafka topic customer</li>
+<li>ProfiX consume message</li>
+<li>Parse dữ liệu theo cấu trúc bảng (Customer/Account/Card)</li>
+<li>Nếu INSERT → tạo mới record trong bảng nội bộ</li>
+<li>Nếu UPDATE → chỉ cập nhật các field có thay đổi</li>
+<li>ProfiX dùng dữ liệu này để tra cứu điều kiện tính phí</li>
+</ol>
+  <h4>Rủi ro cần lưu ý:</h4>
+  <div class="callout warning">⚠️ Dữ liệu không đồng bộ kịp → tính phí sai</div>
+<div class="callout warning">⚠️ Message UPDATE thiếu field → mất dữ liệu cũ</div>
+<div class="callout warning">⚠️ Không có retry/DLQ → message bị mất</div>
+
+</div>
+<div class="card">
+  <h3>🔄 Flow 5: Tạo CTƯĐ từ Pricing</h3>
+  <p>Pricing gọi ProfiX để tạo CTƯĐ ngoại lệ cho KH hoặc CTƯĐ theo thể lệ chung</p>
+  <p class="sub-detail">Modules liên quan: <strong>M09, M10</strong></p>
+  <div class="mermaid">sequenceDiagram
+  participant PRC as Pricing
+  participant PFX as ProfiX
+  PRC->>PFX: GetListProduct - Lay danh muc SPDV
+  PFX-->>PRC: Tra danh sach SPDV
+  PRC->>PFX: GetListCondition - Lay dieu kien (chi M10)
+  PFX-->>PRC: Tra danh sach dieu kien
+  PRC->>PFX: CreatePromotionForCus (M09) hoac CreatePromotion (M10)
+  PFX->>PFX: Validate du lieu, tao CTUD
+  PFX-->>PRC: Tra response voi promotionCode
+  Note over PFX: CTUD duoc ap dung khi tinh phi cho KH</div>
+  <h4>Các bước chi tiết:</h4>
+  <ol><li>Pricing gọi GetListProduct lấy danh mục SPDV</li>
+<li>Pricing gọi GetListCondition lấy điều kiện (chỉ M10)</li>
+<li>Pricing gọi CreatePromotionForCus (M09) hoặc CreatePromotion (M10)</li>
+<li>ProfiX validate dữ liệu, tạo CTƯĐ trong hệ thống</li>
+<li>ProfiX trả response thành công với promotionCode</li>
+<li>CTƯĐ được áp dụng khi tính phí cho KH tương ứng</li>
+</ol>
+  <h4>Rủi ro cần lưu ý:</h4>
+  <div class="callout warning">⚠️ CTƯĐ trùng lặp nếu Pricing gọi nhiều lần</div>
+<div class="callout warning">⚠️ Ưu đãi conflict: ngoại lệ KH vs thể lệ chung → ưu tiên nào?</div>
+<div class="callout warning">⚠️ Thiếu validation ngày hiệu lực → CTƯĐ áp dụng sai thời điểm</div>
+
+</div>
+</div>
+
+<!-- SECTION 6: Risks -->
+<div class="section" id="risks">
+  <h2 class="section-title">⚠️ Tổng hợp Rủi ro & Lưu ý</h2>
+  <div class="card">
+    <h3>🎯 Rủi ro theo Module</h3>
+    <table>
+      <thead><tr><th>Luồng</th><th>Rủi ro</th></tr></thead>
+      <tbody><tr class=even><td><strong>Thu phí theo giao dịch (Online)</strong></td><td>API timeout khi Core Banking chậm → KH chờ lâu</td></tr><tr><td><strong>Thu phí theo giao dịch (Online)</strong></td><td>Sai biểu phí nếu dữ liệu ETL chưa đồng bộ kịp</td></tr><tr class=even><td><strong>Thu phí theo giao dịch (Online)</strong></td><td>Race condition nếu nhiều giao dịch cùng CIF đồng thời</td></tr><tr><td><strong>Thu phí định kỳ đúng hạn (Batch)</strong></td><td>Batch size lớn → ảnh hưởng hiệu năng hệ thống</td></tr><tr class=even><td><strong>Thu phí định kỳ đúng hạn (Batch)</strong></td><td>Message bị mất/trùng → cần idempotency</td></tr><tr><td><strong>Thu phí định kỳ đúng hạn (Batch)</strong></td><td>Nợ phí tích lũy nếu KH liên tục không đủ số dư</td></tr><tr class=even><td><strong>Truy thu & Tận thu nợ phí</strong></td><td>Vòng lặp thu nợ nếu logic kiểm tra không chặt</td></tr><tr><td><strong>Truy thu & Tận thu nợ phí</strong></td><td>Thu nhầm nếu ghi có là khoản tạm (hold/pending)</td></tr><tr class=even><td><strong>Truy thu & Tận thu nợ phí</strong></td><td>Thứ tự thu nợ (FIFO hay ưu tiên kỳ cũ nhất) cần rõ ràng</td></tr><tr><td><strong>Đồng bộ dữ liệu ETL</strong></td><td>Dữ liệu không đồng bộ kịp → tính phí sai</td></tr><tr class=even><td><strong>Đồng bộ dữ liệu ETL</strong></td><td>Message UPDATE thiếu field → mất dữ liệu cũ</td></tr><tr><td><strong>Đồng bộ dữ liệu ETL</strong></td><td>Không có retry/DLQ → message bị mất</td></tr><tr class=even><td><strong>Tạo CTƯĐ từ Pricing</strong></td><td>CTƯĐ trùng lặp nếu Pricing gọi nhiều lần</td></tr><tr><td><strong>Tạo CTƯĐ từ Pricing</strong></td><td>Ưu đãi conflict: ngoại lệ KH vs thể lệ chung → ưu tiên nào?</td></tr><tr class=even><td><strong>Tạo CTƯĐ từ Pricing</strong></td><td>Thiếu validation ngày hiệu lực → CTƯĐ áp dụng sai thời điểm</td></tr></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>🔍 Điểm cần làm rõ với BA/Dev</h3>
+    <div class="callout warning">⚠️ Bảng Từ viết tắt và Tài liệu liên quan trong ISD gốc đang <strong>trống</strong> — cần bổ sung.</div>
+    <div class="callout warning">⚠️ Error Code table cho hầu hết API đều <strong>trống</strong> — cần định nghĩa cụ thể các mã lỗi.</div>
+    <div class="callout warning">⚠️ Sequence Diagram trong ISD là hình ảnh nhúng — không có mô tả text chi tiết các bước.</div>
+    <div class="callout warning">⚠️ Chưa rõ thứ tự ưu tiên khi có nhiều CTƯĐ (ngoại lệ vs thể lệ) cùng áp dụng cho 1 KH.</div>
+    <div class="callout warning">⚠️ Chưa rõ cơ chế retry/DLQ cho các Kafka message thất bại.</div>
+    <div class="callout warning">⚠️ Chưa rõ Rate Limit cho API — đặc biệt khi batch job chạy nhiều request đồng thời.</div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  📊 ProfiX — Hệ thống Quản lý Phí Tập trung — System Mapping v0.1 | Sinh tự động từ ISD 2026-04-15<br>
+  <em>Tài liệu này cô đọng toàn bộ nội dung ISD gốc thành dạng trực quan, phục vụ team Tester & Dev.</em>
+</footer>
+
+<script>
+mermaid.initialize({
+  startOnLoad: true,
+  theme: 'dark',
+  themeVariables: {
+    primaryColor: '#e94560',
+    primaryTextColor: '#fff',
+    primaryBorderColor: '#0f3460',
+    lineColor: '#53a8b6',
+    secondaryColor: '#16213e',
+    tertiaryColor: '#1a1a2e',
+    fontSize: '14px'
+  },
+  mindmap: { padding: 20 },
+  flowchart: { curve: 'basis' },
+  sequence: { mirrorActors: false }
+});
+</script>
+
+</body>
+</html>

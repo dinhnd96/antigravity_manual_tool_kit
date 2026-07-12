@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="vi"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>uTest Freelance Testing Platform — System Mapping</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+:root{--bg:#0f0f1a;--card:#16213e;--border:#0f3460;--accent:#e94560;--accent2:#53a8b6;--text:#e0e0e0;--dim:#a0a0b0;--ok:#4ade80;--warn:#fbbf24;--info:#60a5fa}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+.hero{background:linear-gradient(135deg,#0f0f1a,#1a1a2e,#16213e);padding:60px 20px;text-align:center;border-bottom:3px solid var(--accent)}
+.hero h1{font-size:2.4em;font-weight:800;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:var(--dim);font-size:1.1em;margin-top:12px;max-width:700px;margin-inline:auto}
+.stats{display:flex;gap:30px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+.stat{background:rgba(255,255,255,.05);padding:12px 24px;border-radius:12px}
+.stat-val{font-size:1.8em;font-weight:700;color:var(--accent)}
+.stat-label{font-size:.85em;color:var(--dim)}
+nav{position:sticky;top:0;z-index:100;background:rgba(15,15,26,.85);backdrop-filter:blur(12px);padding:12px 20px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;border-bottom:1px solid var(--border)}
+nav a{color:var(--accent2);text-decoration:none;padding:6px 14px;border-radius:20px;font-size:.88em;font-weight:500;transition:all .2s}
+nav a:hover{background:var(--accent);color:#fff}
+.container{max-width:1100px;margin:0 auto;padding:20px}
+.section{margin:40px 0}
+.section h2{font-size:1.6em;font-weight:700;color:var(--accent);margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--border)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;margin:16px 0;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(233,69,96,.1)}
+.card h3{color:var(--accent2);font-size:1.2em;margin-bottom:12px}
+.card p{color:var(--dim);font-size:.95em}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.9em}
+th{background:var(--accent);color:#fff;padding:12px 16px;text-align:left;font-weight:600}
+td{padding:10px 16px;border-bottom:1px solid var(--border)}
+tr:nth-child(even){background:rgba(255,255,255,.03)}
+tr:hover{background:rgba(83,168,182,.1)}
+.mermaid-wrap{background:rgba(0,0,0,.3);border-radius:12px;padding:20px;margin:16px 0;overflow-x:auto}
+.callout{padding:14px 18px;border-radius:10px;margin:10px 0;font-size:.92em}
+.callout-info{background:rgba(96,165,250,.1);border-left:4px solid var(--info)}
+.callout-tip{background:rgba(74,222,128,.1);border-left:4px solid var(--ok)}
+.callout-warning{background:rgba(251,191,36,.1);border-left:4px solid var(--warn)}
+.sub-detail{border-left:3px solid var(--accent2);background:rgba(83,168,182,.05);padding:16px;margin:12px 0;border-radius:0 10px 10px 0;font-size:.92em}
+footer{text-align:center;padding:40px 20px;color:var(--dim);font-size:.85em;border-top:1px solid var(--border);margin-top:40px}
+@media(max-width:768px){.hero h1{font-size:1.6em}.stats{flex-direction:column;align-items:center}nav{gap:4px}nav a{font-size:.78em;padding:4px 10px}table{font-size:.8em}th,td{padding:8px}}
+</style></head><body>
+<div class="hero"><h1>🧪 uTest Freelance Testing Platform</h1>
+<p>Bản đồ kiến thức toàn diện giúp Tester lâu năm nhanh chóng nắm bắt hệ sinh thái uTest</p>
+<div class="stats">
+<div class="stat"><div class="stat-val">13</div><div class="stat-label">AI Skills</div></div>
+<div class="stat"><div class="stat-val">113</div><div class="stat-label">Thuật ngữ</div></div>
+<div class="stat"><div class="stat-val">8</div><div class="stat-label">Loại Test</div></div>
+<div class="stat"><div class="stat-val">6</div><div class="stat-label">Bước Career</div></div>
+</div></div>
+<nav><a href="#arch">🏗️ Kiến trúc</a><a href="#glossary">📖 Thuật ngữ</a><a href="#matrix">📊 Ma trận</a><a href="#workflow">🔄 Luồng</a><a href="#career">🚀 Lộ trình</a><a href="#ai">🤖 AI</a><a href="#privacy">🔒 Privacy</a><a href="#tips">💡 Tips</a><a href="#skills">🛠️ Skills</a></nav>
+<div class="container">
+
+<div class="section" id="arch"><h2>🏗️ 1. Kiến trúc Hệ sinh thái uTest</h2>
+<div class="card"><h3>1.1 Feature Tree</h3><div class="mermaid-wrap"><pre class="mermaid">
+mindmap
+  root((uTest Platform))
+    Tester Ecosystem
+      Registration
+      uTest Academy
+      Test Cycle
+      Bug Reporting
+      Rating System
+    Testing Types
+      Functional
+      Usability
+      Localization
+      Security
+      Payment
+      AI/ML Training
+    Career Path
+      Rated → Gold
+      Test Team Lead
+      Dedicated Tester
+    Operations
+      Payment System
+      Project Matching
+      Community
+      AI Policy
+      Privacy
+</pre></div></div>
+<div class="card"><h3>1.2 Role Mapping</h3><table><thead><tr><th>Vai trò</th><th>Mô tả</th><th>Cấp độ</th></tr></thead><tbody><tr><td>Tester (Freelance)</td><td>Tìm bug, thực thi test case, báo cáo lỗi</td><td>★</td></tr><tr><td>TTL</td><td>Quản lý test cycle, triage bug, hỗ trợ Tester</td><td>★★★</td></tr><tr><td>TE</td><td>Xây dựng test cycle, điều phối team</td><td>★★★★</td></tr><tr><td>TSM</td><td>Làm việc trực tiếp với khách hàng</td><td>★★★★★</td></tr><tr><td>SDM</td><td>Đầu mối chính của customer</td><td>★★★★★</td></tr></tbody></table>
+<div class="sub-detail"><strong>💡 Bạn bắt đầu ở Tester (Freelance).</strong> Mục tiêu: TTL sau 6 tháng + 100 bug + Bronze rating.</div></div>
+<div class="card"><h3>1.3 Rating Lifecycle</h3><div class="mermaid-wrap"><pre class="mermaid">
+stateDiagram-v2
+    [*] --> Unrated: Đăng ký mới
+    Unrated --> Rated: Hoàn thành Academy
+    Rated --> Proven: Hoạt động đều đặn
+    Proven --> Bronze: Chất lượng tốt
+    Bronze --> Silver: Xuất sắc
+    Silver --> Gold: Top Performer
+    Gold --> Silver: Giảm hoạt động
+    Silver --> Bronze: Giảm chất lượng
+</pre></div><table><thead><tr><th>Cấp độ</th><th>Mô tả</th><th>Premium</th><th>Lời mời</th></tr></thead><tbody><tr><td>Unrated</td><td>Chưa có hoạt động</td><td>0%</td><td>—</td></tr><tr><td>Rated</td><td>Có kết quả cơ bản</td><td>0%</td><td>Cơ bản</td></tr><tr><td>Proven</td><td>Chứng minh năng lực</td><td>0%</td><td>Nhiều hơn</td></tr><tr><td>Bronze</td><td>Ổn định, chất lượng tốt</td><td>2.5%</td><td>Đáng kể</td></tr><tr><td>Silver</td><td>Xuất sắc</td><td>5%</td><td>Cao</td></tr><tr><td>Gold</td><td>Top performer</td><td>10%</td><td>Ưu tiên cao nhất</td></tr></tbody></table>
+<div class="sub-detail"><strong>⚡ Rating tính hàng ngày, theo từng loại test, so sánh với cộng đồng. Có thể TỤT nếu giảm hoạt động.</strong></div></div>
+<div class="card"><h3>1.4 Integration Map</h3><div class="mermaid-wrap"><pre class="mermaid">
+flowchart LR
+    subgraph uTest Platform
+        A[Dashboard] --> B[Academy]
+        A --> C[Test Cycle Engine]
+        C --> D[Bug Tracker]
+    end
+    subgraph External
+        E[PayPal] & F[Payoneer] & G[Wise]
+        H["Customer App (SUT)"]
+        I[Charles Proxy]
+    end
+    C --> H
+    C --> E & F & G
+    A --> I
+</pre></div></div>
+<div class="card"><h3>1.5 Các loại Testing</h3><table><thead><tr><th>Loại</th><th>Mô tả</th><th>Tần suất</th><th>Độ khó</th></tr></thead><tbody><tr><td>Functional</td><td>Tìm bug logic/workflow/crash</td><td>Cao nhất</td><td>★★★</td></tr><tr><td>Usability</td><td>Đánh giá UX/UI</td><td>Trung bình</td><td>★★</td></tr><tr><td>Localization</td><td>Kiểm tra bản dịch</td><td>Trung bình</td><td>★★★</td></tr><tr><td>Security</td><td>Pen-test thủ công</td><td>Thấp</td><td>★★★★★</td></tr><tr><td>Payment</td><td>Test thanh toán thật</td><td>Trung bình</td><td>★★★</td></tr><tr><td>Bug Fix Verify</td><td>Xác nhận bug đã fix</td><td>Trung bình</td><td>★</td></tr><tr><td>AI/ML Training</td><td>Cung cấp data train AI</td><td>Tăng nhanh</td><td>★★</td></tr><tr><td>Exploratory</td><td>Test khám phá tự do</td><td>Cao</td><td>★★★★</td></tr></tbody></table></div></div>
+
+<div class="section" id="glossary"><h2>📖 2. Bảng Thuật ngữ Toàn diện (113 terms)</h2>
+<div class="callout callout-info"><span>ℹ️</span> Tổng hợp từ trang <strong>Helpful Definitions</strong> của uTest Academy — phân nhóm và giải thích Tiếng Việt chi tiết.</div>
+<div class="card"><h3>👥 Testing Team — Đội ngũ Kiểm thử</h3><table><thead><tr><th>Thuật ngữ</th><th>Giải thích Tiếng Việt</th></tr></thead><tbody><tr><td><strong>Client / Customer</strong></td><td>Công ty thuê Applause và cộng đồng uTest kiểm thử sản phẩm của họ. Đây là 'khách hàng' — người trả tiền cho công việc test.</td></tr><tr><td><strong>Tester</strong></td><td>Thành viên cộng đồng uTest, tham gia test cycle bằng cách tìm bug, phản hồi hoặc thực thi test case. Đây là VAI TRÒ CỦA BẠN.</td></tr><tr><td><strong>TTL (Test Team Lead)</strong></td><td>Trưởng nhóm kiểm thử — đầu mối chính của Tester. TTL hỗ trợ Tester trong cycle, review bug report và test case. Mục tiêu thăng tiến của bạn.</td></tr><tr><td><strong>TE (Test Engineer)</strong></td><td>Kỹ sư kiểm thử — người xây dựng test cycle, tập hợp đội test, chịu trách nhiệm tổng thể. TE điều phối team hoàn thành mục tiêu.</td></tr><tr><td><strong>TSM (Testing Services Manager)</strong></td><td>Quản lý dịch vụ kiểm thử (trước đây gọi là Test Architect/TA). Làm việc trực tiếp với khách hàng, quản lý đội TTL và TE.</td></tr><tr><td><strong>SDM (Solution Delivery Manager)</strong></td><td>Đầu mối chính của khách hàng, làm việc trực tiếp với customer. Cấp cao hơn TSM.</td></tr><tr><td><strong>CM (Community Manager)</strong></td><td>Quản lý cộng đồng — giúp Tester học hỏi, tìm dự án trả tiền, kết nối với nhau. Họ là 'người hướng dẫn' của bạn.</td></tr><tr><td><strong>CE (Community Engineer)</strong></td><td>Kỹ sư cộng đồng — hỗ trợ CM trong các công việc quản lý cộng đồng.</td></tr><tr><td><strong>DT (Dedicated Tester)</strong></td><td>Tester chuyên trách — tập trung sâu vào 1 dự án, chuyên gia trong lĩnh vực cụ thể. Được TSM/TE mời dựa trên lịch sử làm việc xuất sắc.</td></tr><tr><td><strong>ACE (Accessibility Expert)</strong></td><td>Chuyên gia Accessibility — dẫn dắt nhiều audit đồng thời, mentor team và trình bày kết quả cho khách hàng.</td></tr><tr><td><strong>ACA (Accessibility Auditor)</strong></td><td>Auditor Accessibility — tham gia audit bằng cách report bug và hoàn thành test case accessibility.</td></tr><tr><td><strong>TCW (Test Case Writer)</strong></td><td>Người viết Test Case — đảm bảo các bước rõ ràng, chi tiết, dễ follow. Kiểm tra tài liệu khách hàng và điều chỉnh nếu cần.</td></tr></tbody></table></div>
+<div class="card"><h3>📋 Test Cycle — Chu kỳ Kiểm thử</h3><table><thead><tr><th>Thuật ngữ</th><th>Giải thích Tiếng Việt</th></tr></thead><tbody><tr><td><strong>Project / Test Cycle</strong></td><td>Một lần kiểm thử cụ thể cho sản phẩm của khách hàng. Mỗi cycle có nhiều Tester, hướng dẫn riêng. Tester PHẢI đọc kỹ overview trước khi test.</td></tr><tr><td><strong>Test Case</strong></td><td>Bộ bước đã định sẵn mà Tester phải follow để test tính năng cụ thể. Mỗi TC có steps + expected result rõ ràng.</td></tr><tr><td><strong>Slot</strong></td><td>Vị trí được đặt trước trong test cycle cho Tester có yêu cầu cụ thể (thiết bị, OS, location). Slot không gắn TC = Exploratory slot (test tự do trong scope).</td></tr><tr><td><strong>Issue / Bug Report</strong></td><td>Bản tóm tắt lỗi cụ thể trong sản phẩm. Phải chứa đủ thông tin để hiểu, tái hiện và fix bug. ĐÂY LÀ SẢN PHẨM KIẾM TIỀN CHÍNH.</td></tr></tbody></table></div>
+<div class="card"><h3>🔬 Testing Types — Các loại Kiểm thử</h3><table><thead><tr><th>Thuật ngữ</th><th>Giải thích Tiếng Việt</th></tr></thead><tbody><tr><td><strong>Fn - Functional</strong></td><td>Kiểm thử chức năng — test features/functionality để tìm lỗi logic, workflow. LOẠI PHỔ BIẾN NHẤT trên uTest.</td></tr><tr><td><strong>Ln - Localization</strong></td><td>Kiểm thử bản địa hóa — kiểm tra chất lượng sản phẩm cho từng ngôn ngữ/vùng miền cụ thể.</td></tr><tr><td><strong>Ux - Usability</strong></td><td>Kiểm thử khả dụng — đo mức độ dễ sử dụng bằng cách test với người dùng thật.</td></tr><tr><td><strong>Security Testing</strong></td><td>Kiểm thử bảo mật — phát hiện lỗ hổng trong cơ chế bảo mật sản phẩm.</td></tr><tr><td><strong>Automation Testing</strong></td><td>Kiểm thử tự động — dùng tool chạy lại các bước test lặp lại, khó làm thủ công.</td></tr><tr><td><strong>PT/PI (Payment Testing)</strong></td><td>Kiểm thử thanh toán — test yêu cầu dùng phương tiện thanh toán thật (thẻ, ví điện tử...).</td></tr><tr><td><strong>AC - Accessibility</strong></td><td>Kiểm thử khả năng tiếp cận — đảm bảo sản phẩm dùng được bởi người khuyết tật (thị giác, thính giác, tuổi cao...).</td></tr><tr><td><strong>API Testing</strong></td><td>Kiểm thử API — xác nhận tính năng, độ tin cậy, hiệu suất và bảo mật của giao diện lập trình.</td></tr><tr><td><strong>Voice Testing</strong></td><td>Kiểm thử giọng nói — test sản phẩm voice-enabled với người bản ngữ. Kết hợp functional + usability + payment testing.</td></tr><tr><td><strong>Bug Hunt Testing</strong></td><td>Test thăm dò chuyên sâu — chỉ tìm bug cụ thể hoặc trên thiết bị cụ thể. PHẢI đọc kỹ scope, không report ngoài phạm vi.</td></tr><tr><td><strong>On-site Testing</strong></td><td>Kiểm thử tại chỗ — đến địa điểm vật lý đánh giá chất lượng dịch vụ và thu thập phản hồi.</td></tr><tr><td><strong>Live Testing</strong></td><td>Kiểm thử trực tiếp — test vào thời điểm cụ thể, không được sớm/muộn.</td></tr><tr><td><strong>ET - Exploratory Testing</strong></td><td>Kiểm thử khám phá — vừa học, vừa thiết kế test, vừa thực thi. Hành động tiếp theo phụ thuộc vào quan sát trước đó. Kỹ năng và kinh nghiệm cá nhân là yếu tố then chốt.</td></tr></tbody></table></div>
+<div class="card"><h3>🏷️ uTest Terms — Thuật ngữ nền tảng</h3><table><thead><tr><th>Thuật ngữ</th><th>Giải thích Tiếng Việt</th></tr></thead><tbody><tr><td><strong>SRS (Special Requirement Survey)</strong></td><td>Khảo sát yêu cầu đặc biệt — công cụ tuyển Tester cho cycle cần dữ liệu mà platform chưa capture (ví dụ: sở hữu smart TV cụ thể).</td></tr><tr><td><strong>KI (Known Issue)</strong></td><td>Vấn đề đã biết — lỗi đã tìm thấy ở cycle trước hoặc khách hàng đã biết. LUÔN kiểm tra KI trước khi test để tránh submit trùng → bị reject.</td></tr><tr><td><strong>BFV (Bug Fix Verification)</strong></td><td>Xác minh sửa lỗi — kiểm tra xem bug đã report có thực sự được fix chưa khi có bản build mới.</td></tr><tr><td><strong>NDA (Non-Disclosure Agreement)</strong></td><td>Thỏa thuận bảo mật — hợp đồng ràng buộc giữa Tester và Applause. Cam kết KHÔNG tiết lộ thông tin dự án. VI PHẠM = BAN.</td></tr><tr><td><strong>IR (Info Request)</strong></td><td>Yêu cầu thông tin — TTL/TE yêu cầu bổ sung thông tin cho bug report hoặc test case. Phải phản hồi kịp thời, không bỏ qua.</td></tr><tr><td><strong>Environment</strong></td><td>Môi trường test — thiết bị, OS, phiên bản OS, trình duyệt, hoặc setup cụ thể dùng để test.</td></tr><tr><td><strong>Triage / Triaging</strong></td><td>Quy trình review bug report/test case → gửi IR hoặc recommend approve/reject. TTL thực hiện bước này.</td></tr><tr><td><strong>Placeholder</strong></td><td>Bug report tạm — submit chưa đầy đủ thông tin để giữ vị trí, sau đó sẽ edit bổ sung hoàn chỉnh.</td></tr><tr><td><strong>Reproduction</strong></td><td>Tái hiện lỗi — lặp lại bug theo steps trong bug report. Bug phải reproduce được ≥3 lần mới nên submit.</td></tr><tr><td><strong>Turnaround Time</strong></td><td>Thời hạn nộp — giới hạn thời gian phải submit kết quả test. VD: slot 6 giờ = phải nộp trong 6 giờ sau khi claim.</td></tr><tr><td><strong>PB (Projects Board)</strong></td><td>Bảng dự án — nơi hiển thị các test cycle có sẵn và lời mời.</td></tr></tbody></table></div>
+<div class="card"><h3>❌ Bug Rejection Types — Lý do Bug bị Reject</h3><table><thead><tr><th>Thuật ngữ</th><th>Giải thích Tiếng Việt</th></tr></thead><tbody><tr><td><strong>WAD (Working As Designed)</strong></td><td>Hoạt động đúng thiết kế — hành vi đó là chủ ý, không phải lỗi. Tester cần hiểu rõ spec trước khi report.</td></tr><tr><td><strong>DUP (Duplicate)</strong></td><td>Trùng lặp — bug đã được Tester khác report hoặc là Known Issue. LUÔN kiểm tra trước khi submit.</td></tr><tr><td><strong>OOS (Out Of Scope)</strong></td><td>Ngoài phạm vi — bug ở khu vực không nằm trong scope test. Đọc kỹ overview để biết scope.</td></tr><tr><td><strong>DNFI (Did Not Follow Instructions)</strong></td><td>Không tuân theo hướng dẫn — Tester bỏ qua instructions rõ ràng, ảnh hưởng kết quả. LÝ DO REJECT PHỔ BIẾN NHẤT.</td></tr><tr><td><strong>INF (Need More Info)</strong></td><td>Cần thêm thông tin — Tester không cung cấp thông tin bổ sung khi có IR. Phải phản hồi IR!</td></tr><tr><td><strong>Other</strong></td><td>Lý do khác — khi khách hàng có lý do reject đặc biệt.</td></tr></tbody></table></div>
+<div class="card"><h3>✅ Bug Approval Types — Mức độ Bug được Approve</h3><table><thead><tr><th>Thuật ngữ</th><th>Giải thích Tiếng Việt</th></tr></thead><tbody><tr><td><strong>Somewhat Valuable</strong></td><td>Có giá trị — bug ảnh hưởng một phần đến sản phẩm. Payout thấp nhất.</td></tr><tr><td><strong>Very Valuable</strong></td><td>Rất có giá trị — bug ảnh hưởng đáng kể. Payout trung bình.</td></tr><tr><td><strong>Exceptionally Valuable</strong></td><td>Cực kỳ giá trị — bug nghiêm trọng, buộc phải fix. Payout CAO NHẤT. Mục tiêu hướng đến!</td></tr><tr><td><strong>WNF (Won't Fix)</strong></td><td>Không sửa — bug hợp lệ, được approve NHƯNG khách hàng không dự định fix. Vẫn được tính tiền.</td></tr></tbody></table></div>
+<div class="card"><h3>⭐ Tester Ratings — Cấp độ Tester</h3><table><thead><tr><th>Thuật ngữ</th><th>Giải thích Tiếng Việt</th></tr></thead><tbody><tr><td><strong>G - Gold</strong></td><td>Cao nhất — Top performer. Premium +10% trên mỗi payout. Ưu tiên nhận nhiều cycle nhất.</td></tr><tr><td><strong>S - Silver</strong></td><td>Xuất sắc — Premium +5%. Nhiều lời mời cycle.</td></tr><tr><td><strong>B - Bronze</strong></td><td>Tốt — Premium +2.5%. Đủ điều kiện ứng tuyển TTL.</td></tr><tr><td><strong>P - Proven</strong></td><td>Đã chứng minh năng lực — chưa có premium nhưng được mời cycle thường xuyên.</td></tr><tr><td><strong>R - Rated</strong></td><td>Đã được đánh giá — mức cơ bản, cần cải thiện để lên Proven.</td></tr><tr><td><strong>U - Unrated</strong></td><td>Chưa đánh giá — mới đăng ký, cần hoàn thành Academy trước.</td></tr></tbody></table></div>
+<div class="card"><h3>🏅 Badges — Huy hiệu</h3><table><thead><tr><th>Thuật ngữ</th><th>Giải thích Tiếng Việt</th></tr></thead><tbody><tr><td><strong>U (blue orb)</strong></td><td>Nhân viên uTest — biểu tượng màu xanh ở góc phải avatar.</td></tr><tr><td><strong>M (orange orb)</strong></td><td>Moderator — quản trị viên diễn đàn/cộng đồng. Biểu tượng cam chữ M.</td></tr><tr><td><strong>TTL badge</strong></td><td>Huy hiệu Test Team Lead cho các cycle uTest.</td></tr></tbody></table></div>
+<div class="card"><h3>🧪 Testing & QA — Thuật ngữ Kiểm thử chung</h3><table><thead><tr><th>Thuật ngữ</th><th>Giải thích Tiếng Việt</th></tr></thead><tbody><tr><td><strong>SDLC (Software Development Lifecycle)</strong></td><td>Vòng đời phát triển phần mềm — quy trình phát triển, bảo trì, thay thế và nâng cấp phần mềm. Gồm: Requirement → Design → Code → Test → Deploy → Maintain.</td></tr><tr><td><strong>STLC (Software Testing Life Cycle)</strong></td><td>Vòng đời kiểm thử — các giai đoạn kiểm thử: Plan → Design → Execute → Report → Close.</td></tr><tr><td><strong>QA (Quality Assurance)</strong></td><td>Đảm bảo chất lượng — quy trình đảm bảo sản phẩm đáp ứng tiêu chuẩn chất lượng.</td></tr><tr><td><strong>SUT (System Under Test)</strong></td><td>Hệ thống đang được kiểm thử — ứng dụng/website mà bạn đang test.</td></tr><tr><td><strong>AUT (Application Under Test)</strong></td><td>Ứng dụng đang được kiểm thử — tương tự SUT nhưng cụ thể cho app.</td></tr><tr><td><strong>SPA (Single Page Application)</strong></td><td>Ứng dụng trang đơn — web app tải 1 lần, cập nhật nội dung động (React, Angular...).</td></tr><tr><td><strong>BAT (Business Analysis Testing)</strong></td><td>Kiểm thử phân tích nghiệp vụ — test dựa trên yêu cầu business.</td></tr><tr><td><strong>API (Application Programming Interface)</strong></td><td>Giao diện lập trình ứng dụng — cách các phần mềm giao tiếp với nhau.</td></tr><tr><td><strong>TF (TestFlight)</strong></td><td>Nền tảng của Apple để phân phối bản beta iOS/macOS cho Tester.</td></tr><tr><td><strong>BTS (Bug Tracking System)</strong></td><td>Hệ thống theo dõi lỗi — công cụ quản lý bug (Jira, Bugzilla...).</td></tr><tr><td><strong>UAT (User Acceptance Testing)</strong></td><td>Kiểm thử chấp nhận người dùng — người dùng cuối test trước khi go-live. Còn gọi Beta Testing.</td></tr><tr><td><strong>RAD (Rapid Application Development)</strong></td><td>Phát triển ứng dụng nhanh — mô hình phát triển lặp, prototype sớm.</td></tr><tr><td><strong>ISTQB</strong></td><td>International Software Testing Qualifications Board — tổ chức chứng nhận quốc tế về kiểm thử phần mềm. Có chứng chỉ CTFL, CTAL...</td></tr><tr><td><strong>SDET (Software Dev Engineer in Test)</strong></td><td>Kỹ sư phát triển phần mềm kiểm thử — vừa code vừa test, viết automation framework.</td></tr><tr><td><strong>BBST (Black Box Software Testing)</strong></td><td>Kiểm thử hộp đen — test mà không biết mã nguồn bên trong. Tester uTest chủ yếu làm loại này.</td></tr><tr><td><strong>UX Bug</strong></td><td>Lỗi trải nghiệm người dùng — UI/flow khó sử dụng, gây nhầm lẫn.</td></tr><tr><td><strong>UI Bug</strong></td><td>Lỗi giao diện — layout sai, text bị cắt, màu sắc sai, responsive lỗi.</td></tr><tr><td><strong>SIT (System Integration Testing)</strong></td><td>Kiểm thử tích hợp hệ thống — test sự tương tác giữa các module/hệ thống.</td></tr><tr><td><strong>CMS (Content Management System)</strong></td><td>Hệ quản trị nội dung — WordPress, Drupal... Thường gặp trong localization testing.</td></tr><tr><td><strong>E2E (End to End)</strong></td><td>Kiểm thử từ đầu đến cuối — test toàn bộ luồng nghiệp vụ hoàn chỉnh.</td></tr></tbody></table></div>
+<div class="card"><h3>🌐 Networks & Protocols — Mạng và Giao thức</h3><table><thead><tr><th>Thuật ngữ</th><th>Giải thích Tiếng Việt</th></tr></thead><tbody><tr><td><strong>FTP (File Transfer Protocol)</strong></td><td>Giao thức truyền file — dùng để upload/download file giữa client và server.</td></tr><tr><td><strong>HTML (HyperText Markup Language)</strong></td><td>Ngôn ngữ đánh dấu siêu văn bản — nền tảng xây dựng trang web.</td></tr><tr><td><strong>HTTPS (Secure HTTP)</strong></td><td>HTTP bảo mật — mã hóa dữ liệu truyền tải. URL có ổ khóa = HTTPS.</td></tr><tr><td><strong>VPN (Virtual Private Network)</strong></td><td>Mạng riêng ảo — mã hóa kết nối internet, thường dùng khi test cần IP vùng cụ thể.</td></tr><tr><td><strong>IP (Internet Protocol)</strong></td><td>Giao thức Internet — địa chỉ IP xác định thiết bị trên mạng.</td></tr></tbody></table></div>
+<div class="card"><h3>💻 IT, Developer & Programming</h3><table><thead><tr><th>Thuật ngữ</th><th>Giải thích Tiếng Việt</th></tr></thead><tbody><tr><td><strong>OS (Operating System)</strong></td><td>Hệ điều hành — Windows, macOS, iOS, Android. Ghi rõ phiên bản khi report bug!</td></tr><tr><td><strong>URL (Uniform Resource Locator)</strong></td><td>Địa chỉ web — đường dẫn đến trang/tài nguyên trên internet.</td></tr><tr><td><strong>XML (Extensible Markup Language)</strong></td><td>Ngôn ngữ đánh dấu mở rộng — dùng trong API, config, data exchange.</td></tr><tr><td><strong>AWS (Amazon Web Services)</strong></td><td>Dịch vụ cloud của Amazon — nhiều ứng dụng chạy trên AWS.</td></tr><tr><td><strong>VM (Virtual Machine)</strong></td><td>Máy ảo — mô phỏng máy tính trong phần mềm. Hữu ích khi cần test trên OS khác.</td></tr><tr><td><strong>SEO (Search Engine Optimization)</strong></td><td>Tối ưu hóa công cụ tìm kiếm — liên quan đến content testing.</td></tr><tr><td><strong>SDK (Software Development Kit)</strong></td><td>Bộ công cụ phát triển — thư viện và tool để build app.</td></tr><tr><td><strong>IDE (Integrated Development Environment)</strong></td><td>Môi trường phát triển tích hợp — VS Code, Android Studio, Xcode...</td></tr></tbody></table></div>
+<div class="card"><h3>📦 Miscellaneous — Thuật ngữ khác</h3><table><thead><tr><th>Thuật ngữ</th><th>Giải thích Tiếng Việt</th></tr></thead><tbody><tr><td><strong>SMB (Small Medium Business)</strong></td><td>Doanh nghiệp vừa và nhỏ — phân loại khách hàng.</td></tr><tr><td><strong>GUI (Graphical User Interface)</strong></td><td>Giao diện đồ họa — phần người dùng tương tác bằng chuột/touch.</td></tr><tr><td><strong>ROI (Return on Investment)</strong></td><td>Lợi nhuận đầu tư — chỉ số đo hiệu quả.</td></tr><tr><td><strong>AI (Artificial Intelligence)</strong></td><td>Trí tuệ nhân tạo — nhớ đọc kỹ AI Policy của uTest!</td></tr><tr><td><strong>POS (Point Of Sale)</strong></td><td>Điểm bán hàng — máy tính tiền, terminal thanh toán tại cửa hàng.</td></tr><tr><td><strong>CTA (Call To Action)</strong></td><td>Kêu gọi hành động — nút/link yêu cầu người dùng thao tác (Buy Now, Sign Up...).</td></tr><tr><td><strong>PLP (Product Listing Page)</strong></td><td>Trang danh sách sản phẩm — trang hiển thị nhiều sản phẩm (kết quả tìm kiếm, danh mục).</td></tr><tr><td><strong>PDP (Product Detail Page)</strong></td><td>Trang chi tiết sản phẩm — trang hiển thị 1 sản phẩm cụ thể.</td></tr><tr><td><strong>STB (Set-top Box)</strong></td><td>Đầu thu — thiết bị kết nối TV với dịch vụ streaming/truyền hình.</td></tr><tr><td><strong>PIP (Picture In Picture)</strong></td><td>Hình trong hình — tính năng xem video nhỏ chồng lên nội dung khác.</td></tr><tr><td><strong>CC (Closed Captions)</strong></td><td>Phụ đề đóng — phụ đề bật/tắt được, thường test trong accessibility.</td></tr><tr><td><strong>VOD (Video On Demand)</strong></td><td>Video theo yêu cầu — Netflix, YouTube... xem khi nào tùy ý.</td></tr><tr><td><strong>CTV (Connected TV)</strong></td><td>TV kết nối — Smart TV có internet (Samsung, LG, Fire TV...).</td></tr><tr><td><strong>OTP (One Time Password)</strong></td><td>Mật khẩu dùng một lần — mã xác thực gửi qua SMS/email.</td></tr><tr><td><strong>MFA (Multi-Factor Authentication)</strong></td><td>Xác thực đa yếu tố — kết hợp ≥2 phương thức xác thực (mật khẩu + OTP + vân tay...).</td></tr><tr><td><strong>2FA (Two-Factor Authentication)</strong></td><td>Xác thực 2 yếu tố — dạng phổ biến nhất của MFA, 2 bước xác thực.</td></tr><tr><td><strong>SSO (Single Sign-On)</strong></td><td>Đăng nhập một lần — 1 tài khoản truy cập nhiều hệ thống (Google SSO, Microsoft SSO...).</td></tr><tr><td><strong>CVV/CVC/CSC/CVN</strong></td><td>Mã xác minh thẻ — 3-4 số sau thẻ tín dụng/ghi nợ. Dùng trong Payment Testing.</td></tr><tr><td><strong>PM (Private Message)</strong></td><td>Tin nhắn riêng — nhắn riêng trên nền tảng uTest.</td></tr><tr><td><strong>FAQ (Frequently Asked Questions)</strong></td><td>Câu hỏi thường gặp.</td></tr><tr><td><strong>DMCA (Digital Millennium Copyright Act)</strong></td><td>Luật bản quyền số — quy định về bảo vệ nội dung số của Mỹ.</td></tr></tbody></table></div>
+</div>
+
+<div class="section" id="matrix"><h2>📊 3. Ma trận — Bug Report Format</h2>
+<div class="card"><h3>3.1 Cấu trúc Bug Report chuẩn</h3>
+<p>Bug Report = sản phẩm kiếm tiền. Viết đúng format = approve = được trả tiền.</p>
+<table><thead><tr><th>Trường</th><th>Nội dung</th><th>Lưu ý</th></tr></thead><tbody><tr><td>Issue Title</td><td>[Device/OS] - [Feature] - [Mô tả ngắn]</td><td>Theo format cycle</td></tr><tr><td>Issue Type</td><td>Functional / Visual / Content / Performance / Crash</td><td>Chọn đúng loại</td></tr><tr><td>Steps to Reproduce</td><td>Danh sách bước đánh số, cụ thể</td><td>Re-produce ≥3 lần</td></tr><tr><td>Expected Result</td><td>Kết quả đúng theo spec</td><td>Dựa trên tài liệu</td></tr><tr><td>Actual Result</td><td>Kết quả thực tế</td><td>Kèm evidence</td></tr><tr><td>Frequency</td><td>Every time / Sometimes / Rarely</td><td>Ghi rõ tỷ lệ</td></tr><tr><td>Attachments</td><td>Screenshot (đánh dấu), Video</td><td>BẮT BUỘC</td></tr></tbody></table>
+<div class="callout callout-warning"><span>⚠️</span> Luôn re-produce bug <strong>≥3 lần</strong> trước khi submit.</div>
+<div class="callout callout-tip"><span>💡</span> Mỗi cycle có format riêng — đọc kỹ Instructions!</div></div></div>
+
+<div class="section" id="workflow"><h2>🔄 4. Luồng Nghiệp vụ</h2>
+<div class="card"><h3>4.1 Tester Journey — Từ đăng ký đến nhận tiền</h3><div class="mermaid-wrap"><pre class="mermaid">
+sequenceDiagram
+    participant T as 🧑‍💻 Tester
+    participant P as 📋 Platform
+    participant TTL as 👨‍💼 TTL
+    participant C as 🏢 Customer
+    T->>P: 1. Đăng ký + Profile
+    P->>T: 2. Mở Academy
+    T->>P: 3. Practice Cycles
+    P->>T: 4. Lời mời Test Cycle
+    T->>P: 5. Accept & Claim Slot
+    P->>T: 6. Instructions + App Build
+    T->>P: 7. Submit Bug Reports
+    P->>TTL: 8. Triage & Review
+    TTL->>P: 9. Approve/Reject
+    P->>C: 10. Deliver Results
+    P->>T: 11. Thanh toán (15th & EOM)
+</pre></div>
+<div class="sub-detail"><strong>📌</strong> Academy (bước 3) = bắt buộc, không trả tiền. Thanh toán: ngày 15 + cuối tháng.</div></div>
+<div class="card"><h3>4.2 TTL Management</h3><div class="mermaid-wrap"><pre class="mermaid">
+sequenceDiagram
+    participant T as 🧑‍💻 Testers
+    participant TTL as 👨‍💼 TTL
+    participant PM as 📋 PM
+    participant C as 🏢 Customer
+    PM->>TTL: Assign Test Cycle
+    TTL->>T: Gửi Instructions
+    T->>TTL: Submit Bug Reports
+    TTL->>TTL: Triage & Deduplicate
+    TTL->>PM: Forward Approved Bugs
+    PM->>C: Deliver Report
+</pre></div></div></div>
+
+<div class="section" id="career"><h2>🚀 5. Lộ trình Freelancer</h2>
+<div class="card"><table><thead><tr><th>Bước</th><th>Chi tiết</th></tr></thead><tbody><tr><td>1. Đăng ký & Profile</td><td>Tạo tài khoản, thêm TẤT CẢ thiết bị, setup PayPal/Payoneer</td></tr><tr><td>2. uTest Academy</td><td>Hoàn thành khóa học + practice cycles (bắt buộc, không trả tiền)</td></tr><tr><td>3. Test Cycle đầu tiên</td><td>Chờ lời mời, đọc kỹ hướng dẫn, claim slot ngay</td></tr><tr><td>4. Bug Report chất lượng</td><td>Quality > Quantity. Re-produce 3 lần</td></tr><tr><td>5. Xây dựng Rating</td><td>Rated → Proven → Bronze → Silver → Gold</td></tr><tr><td>6. Trở thành TTL</td><td>6 tháng, 100 bug approved, 30 TC, Bronze+ rating</td></tr></tbody></table>
+<div class="callout callout-info"><span>ℹ️</span> Coi uTest là <strong>side-gig</strong>. $50-$300+/tháng tùy level.</div></div></div>
+
+<div class="section" id="ai"><h2>🤖 6. Chính sách AI (Generative AI Policy)</h2>
+<div class="card"><p>Vi phạm AI Policy = BAN vĩnh viễn.</p><table><thead><tr><th>Quy tắc</th><th>Chi tiết</th></tr></thead><tbody><tr><td>Tuân thủ NDA</td><td>KHÔNG nhập dữ liệu dự án vào AI công khai</td></tr><tr><td>Chịu trách nhiệm</td><td>100% trách nhiệm về nội dung submit</td></tr><tr><td>Không gian lận</td><td>CẤM dùng AI giả mạo kết quả</td></tr><tr><td>Bảo mật</td><td>Không share screenshots, logs, app build ra ngoài</td></tr><tr><td>Hậu quả</td><td>Vi phạm → BAN vĩnh viễn</td></tr></tbody></table>
+<div class="callout callout-warning"><span>⚠️</span> TUYỆT ĐỐI KHÔNG nhập thông tin dự án vào ChatGPT/Gemini/Claude.</div>
+<div class="sub-detail"><strong>✅ Được:</strong> Học kỹ năng chung, cải thiện tiếng Anh, nghiên cứu tool.<br>
+<strong>❌ Không:</strong> Paste screenshot/log dự án, dùng AI viết bug report từ data dự án thật.</div></div></div>
+
+<div class="section" id="privacy"><h2>🔒 7. Privacy Policy</h2>
+<div class="card"><table><thead><tr><th>Hạng mục</th><th>Chi tiết</th></tr></thead><tbody><tr><td>Dữ liệu thu thập</td><td>Tên, email, SĐT, thiết bị, IP, payment info</td></tr><tr><td>Mục đích</td><td>Vận hành cộng đồng, matching dự án, thanh toán</td></tr><tr><td>GDPR</td><td>Tuân thủ nghiêm ngặt, tối thiểu hóa dữ liệu</td></tr><tr><td>AI/ML</td><td>KHÔNG dùng data cá nhân train AI model</td></tr><tr><td>Tự nguyện</td><td>Mọi dự án đều tự nguyện tham gia</td></tr><tr><td>Bảo mật</td><td>Blur thông tin nhạy cảm, không share qua email</td></tr></tbody></table>
+<div class="callout callout-tip"><span>💡</span> uTest cam kết KHÔNG dùng data cá nhân Tester để train AI model.</div></div></div>
+
+<div class="section" id="tips"><h2>💡 8. Rủi ro & Tips thực chiến</h2>
+<div class="card"><div class="callout callout-warning"><span>⚠️</span> <strong>⚠️ Thu nhập không ổn định</strong>: $50-$300+/tháng. Side-gig, không full-time.</div><div class="callout callout-warning"><span>⚠️</span> <strong>⚠️ Review lâu</strong>: Bug report mất đến 35 ngày để approve.</div><div class="callout callout-tip"><span>💡</span> <strong>💡 Thiết bị = Cơ hội</strong>: Càng nhiều thiết bị → càng nhiều lời mời.</div><div class="callout callout-tip"><span>💡</span> <strong>💡 Đọc kỹ Instructions</strong>: 90% reject vì không đọc kỹ hướng dẫn.</div><div class="callout callout-tip"><span>💡</span> <strong>💡 Tránh duplicate</strong>: Kiểm tra bug đã report chưa trước khi submit.</div><div class="callout callout-tip"><span>💡</span> <strong>💡 Profile cập nhật</strong>: Thêm thiết bị mới, update OS version ngay.</div><div class="callout callout-warning"><span>⚠️</span> <strong>🚫 Không nhận cycle không làm được</strong>: Accept rồi không làm → giảm rating nghiêm trọng.</div></div></div>
+
+<div class="section" id="skills">
+<h2>🛠️ 9. Skills Toolkit — Bộ công cụ AI hỗ trợ Freelancer</h2>
+<div class="callout callout-warning"><span>⚠️</span> <strong>⚠️ LƯU Ý NDA:</strong> Khi sử dụng bất kỳ skill nào với AI, <strong>TUYỆT ĐỐI KHÔNG</strong> paste thông tin dự án thật (screenshot, log, app build, tên khách hàng) vào prompt. Chỉ dùng thông tin tổng quát hoặc đã anonymize.</div>
+<div class="callout callout-tip"><span>💡</span> <strong>🏆 Top 5 Skills thiết yếu nhất cho uTest Freelancer:</strong><br>
+1. <strong>bug_reporter</strong> — Sản phẩm kiếm tiền, phải master đầu tiên<br>
+2. <strong>manual_requirement_analyzer</strong> — Đọc hiểu scope = tránh OOS/DNFI<br>
+3. <strong>test_strategy_planner</strong> — Test thông minh trong turnaround time<br>
+4. <strong>log_troubleshooter</strong> — Nâng cấp chất lượng bug report<br>
+5. <strong>test_lead_assistant</strong> — Khi hướng tới TTL</div>
+<div class="card">
+<h3>🐛 bug_reporter — Viết Bug Report chuẩn mực</h3>
+<table><tbody>
+<tr><td><strong>🎯 Ứng dụng trên uTest</strong></td><td>SẢN PHẨM KIẾM TIỀN CHÍNH trên uTest. Skill này sinh bug report đúng format: Title, Environment, Steps, Expected/Actual, Severity. Đặc biệt hữu ích khi cần viết bằng tiếng Anh chuyên nghiệp.</td></tr>
+<tr><td><strong>⭐ Mức độ hữu ích</strong></td><td>★★★★★</td></tr>
+<tr><td><strong>⏰ Khi nào dùng</strong></td><td>Mỗi lần submit bug trên uTest</td></tr>
+<tr><td><strong>💬 Prompt mẫu</strong></td><td><em>"Tôi tìm thấy lỗi X trên app Y, thiết bị Z. Giúp tôi viết bug report chuẩn uTest format."</em></td></tr>
+</tbody></table></div>
+<div class="card">
+<h3>🔍 log_troubleshooter — Phân tích Log & Stack Trace</h3>
+<table><tbody>
+<tr><td><strong>🎯 Ứng dụng trên uTest</strong></td><td>Khi test trên uTest, nhiều cycle yêu cầu capture console log hoặc dùng Charles Proxy. Skill giúp phân tích log nhanh, xác định Root Cause và mô tả lỗi chính xác hơn trong bug report.</td></tr>
+<tr><td><strong>⭐ Mức độ hữu ích</strong></td><td>★★★★</td></tr>
+<tr><td><strong>⏰ Khi nào dùng</strong></td><td>Khi cycle yêu cầu attach log/proxy data</td></tr>
+<tr><td><strong>💬 Prompt mẫu</strong></td><td><em>"Phân tích log console này và cho tôi biết lỗi gì đang xảy ra, thuộc tầng nào."</em></td></tr>
+</tbody></table></div>
+<div class="card">
+<h3>📋 manual_requirement_analyzer — Phân tích tài liệu yêu cầu</h3>
+<table><tbody>
+<tr><td><strong>🎯 Ứng dụng trên uTest</strong></td><td>Khi nhận test cycle mới, Overview thường rất dài và phức tạp. Skill giúp bóc tách nhanh scope, luồng nghiệp vụ, và các điểm cần chú ý — giảm thiểu rủi ro bị reject do OOS/DNFI.</td></tr>
+<tr><td><strong>⭐ Mức độ hữu ích</strong></td><td>★★★★★</td></tr>
+<tr><td><strong>⏰ Khi nào dùng</strong></td><td>Nhận test cycle mới — đọc hiểu Overview/Instructions</td></tr>
+<tr><td><strong>💬 Prompt mẫu</strong></td><td><em>"Phân tích Overview test cycle này, chỉ ra scope, luồng chính, và các điểm cần đặc biệt chú ý."</em></td></tr>
+</tbody></table></div>
+<div class="card">
+<h3>✅ qa_test_case_generator — Sinh Test Case chi tiết</h3>
+<table><tbody>
+<tr><td><strong>🎯 Ứng dụng trên uTest</strong></td><td>Khi uTest cycle có scripted test cases hoặc khi bạn muốn tự tạo checklist cá nhân trước khi exploratory testing. Đảm bảo không bỏ sót edge case.</td></tr>
+<tr><td><strong>⭐ Mức độ hữu ích</strong></td><td>★★★★</td></tr>
+<tr><td><strong>⏰ Khi nào dùng</strong></td><td>Chuẩn bị test approach trước khi bắt đầu cycle</td></tr>
+<tr><td><strong>💬 Prompt mẫu</strong></td><td><em>"Dựa trên scope cycle này, sinh danh sách test case bao phủ Happy Path, Negative, và Boundary."</em></td></tr>
+</tbody></table></div>
+<div class="card">
+<h3>🔎 qa_test_case_reviewer — Review & đối soát Test Case</h3>
+<table><tbody>
+<tr><td><strong>🎯 Ứng dụng trên uTest</strong></td><td>Khi cycle có sẵn scripted test cases, skill giúp review nhanh xem có gap nào không. Tìm thêm bug ngoài những gì test case đã cover — tăng cơ hội tìm Exceptionally Valuable bug.</td></tr>
+<tr><td><strong>⭐ Mức độ hữu ích</strong></td><td>★★★</td></tr>
+<tr><td><strong>⏰ Khi nào dùng</strong></td><td>Review test cases có sẵn trong cycle để tìm gap</td></tr>
+<tr><td><strong>💬 Prompt mẫu</strong></td><td><em>"Review bộ test case này, tìm các kịch bản còn thiếu mà tôi có thể exploit để tìm bug."</em></td></tr>
+</tbody></table></div>
+<div class="card">
+<h3>📊 test_data_generator — Sinh dữ liệu kiểm thử</h3>
+<table><tbody>
+<tr><td><strong>🎯 Ứng dụng trên uTest</strong></td><td>Tạo nhanh test data (email, phone, address, payment info giả) cho các cycle yêu cầu đăng ký tài khoản, test form, hoặc payment testing. Đặc biệt hữu ích cho Localization testing.</td></tr>
+<tr><td><strong>⭐ Mức độ hữu ích</strong></td><td>★★★★</td></tr>
+<tr><td><strong>⏰ Khi nào dùng</strong></td><td>Khi cycle yêu cầu nhiều test account/data</td></tr>
+<tr><td><strong>💬 Prompt mẫu</strong></td><td><em>"Sinh 10 bộ test data đăng ký tài khoản: tên, email, phone, address cho vùng US và VN."</em></td></tr>
+</tbody></table></div>
+<div class="card">
+<h3>🗺️ system_mapping_synthesizer — Tổng hợp tài liệu → HTML mapping</h3>
+<table><tbody>
+<tr><td><strong>🎯 Ứng dụng trên uTest</strong></td><td>Khi nhận được tài liệu dài (Overview, scope document) của cycle mới, skill chuyển thành bản đồ trực quan giúp nắm bắt hệ thống nhanh chóng.</td></tr>
+<tr><td><strong>⭐ Mức độ hữu ích</strong></td><td>★★★</td></tr>
+<tr><td><strong>⏰ Khi nào dùng</strong></td><td>Cycle phức tạp cần mapping hệ thống</td></tr>
+<tr><td><strong>💬 Prompt mẫu</strong></td><td><em>"Tổng hợp tài liệu scope này thành bản đồ HTML trực quan."</em></td></tr>
+</tbody></table></div>
+<div class="card">
+<h3>📈 test_strategy_planner — Lập chiến lược kiểm thử</h3>
+<table><tbody>
+<tr><td><strong>🎯 Ứng dụng trên uTest</strong></td><td>Khi bạn muốn tiếp cận test cycle một cách có hệ thống. Xác định ưu tiên test vùng nào trước, risk assessment, phân bổ thời gian hợp lý trong turnaround time.</td></tr>
+<tr><td><strong>⭐ Mức độ hữu ích</strong></td><td>★★★★</td></tr>
+<tr><td><strong>⏰ Khi nào dùng</strong></td><td>Cycle lớn, scope rộng, turnaround time hạn chế</td></tr>
+<tr><td><strong>💬 Prompt mẫu</strong></td><td><em>"Với scope này và 6 giờ turnaround, lập chiến lược test: vùng nào ưu tiên cao, rủi ro nào cần cover trước."</em></td></tr>
+</tbody></table></div>
+<div class="card">
+<h3>🔬 qa_innovator_researcher — Nghiên cứu công cụ & PoC</h3>
+<table><tbody>
+<tr><td><strong>🎯 Ứng dụng trên uTest</strong></td><td>Nghiên cứu và so sánh các tool hỗ trợ test: Charles Proxy, Fiddler, ADB, Browser DevTools. Setup nhanh các công cụ cần thiết cho cycle.</td></tr>
+<tr><td><strong>⭐ Mức độ hữu ích</strong></td><td>★★★</td></tr>
+<tr><td><strong>⏰ Khi nào dùng</strong></td><td>Cần setup tool mới cho cycle đặc biệt</td></tr>
+<tr><td><strong>💬 Prompt mẫu</strong></td><td><em>"So sánh Charles Proxy vs Fiddler cho iOS traffic capture, cái nào dễ setup hơn?"</em></td></tr>
+</tbody></table></div>
+<div class="card">
+<h3>🏗️ qa_process_architect — Thiết lập quy trình chuẩn</h3>
+<table><tbody>
+<tr><td><strong>🎯 Ứng dụng trên uTest</strong></td><td>Khi bạn muốn xây dựng quy trình cá nhân chuyên nghiệp: checklist trước khi submit bug, naming convention, workflow cá nhân. Đặc biệt hữu ích khi hướng tới TTL.</td></tr>
+<tr><td><strong>⭐ Mức độ hữu ích</strong></td><td>★★★</td></tr>
+<tr><td><strong>⏰ Khi nào dùng</strong></td><td>Xây dựng workflow cá nhân chuyên nghiệp</td></tr>
+<tr><td><strong>💬 Prompt mẫu</strong></td><td><em>"Giúp tôi xây dựng checklist cá nhân trước khi submit bug report trên uTest."</em></td></tr>
+</tbody></table></div>
+<div class="card">
+<h3>👨‍💼 test_lead_assistant — Trợ lý Test Lead / TTL</h3>
+<table><tbody>
+<tr><td><strong>🎯 Ứng dụng trên uTest</strong></td><td>Khi bạn đạt đến level TTL trên uTest. Skill hỗ trợ: soạn thông báo cho team, triage bug report, tóm tắt kết quả cycle, giao tiếp với PM/TE.</td></tr>
+<tr><td><strong>⭐ Mức độ hữu ích</strong></td><td>★★★★★</td></tr>
+<tr><td><strong>⏰ Khi nào dùng</strong></td><td>Khi trở thành TTL — quản lý test cycle</td></tr>
+<tr><td><strong>💬 Prompt mẫu</strong></td><td><em>"Tôi là TTL, tóm tắt kết quả cycle hôm nay: 15 bug submitted, 3 rejected. Soạn báo cáo cho PM."</em></td></tr>
+</tbody></table></div>
+<div class="card">
+<h3>📉 qa_metrics_specialist — Phân tích chỉ số chất lượng</h3>
+<table><tbody>
+<tr><td><strong>🎯 Ứng dụng trên uTest</strong></td><td>Theo dõi performance cá nhân trên uTest: tỷ lệ bug approve/reject, tracking rating trend, phân tích nguyên nhân bug bị reject để cải thiện.</td></tr>
+<tr><td><strong>⭐ Mức độ hữu ích</strong></td><td>★★★</td></tr>
+<tr><td><strong>⏰ Khi nào dùng</strong></td><td>Phân tích hiệu suất cá nhân định kỳ</td></tr>
+<tr><td><strong>💬 Prompt mẫu</strong></td><td><em>"Phân tích 20 bug report tháng này: 15 approved, 5 rejected. Tìm nguyên nhân và đề xuất cải thiện."</em></td></tr>
+</tbody></table></div>
+<div class="card">
+<h3>📝 qa_management_report — Báo cáo cho cấp quản lý</h3>
+<table><tbody>
+<tr><td><strong>🎯 Ứng dụng trên uTest</strong></td><td>Khi bạn là TTL và cần báo cáo kết quả test cycle cho PM/TSM. Tạo executive summary chuyên nghiệp.</td></tr>
+<tr><td><strong>⭐ Mức độ hữu ích</strong></td><td>★★★</td></tr>
+<tr><td><strong>⏰ Khi nào dùng</strong></td><td>TTL báo cáo kết quả cho PM/TSM</td></tr>
+<tr><td><strong>💬 Prompt mẫu</strong></td><td><em>"Tổng hợp kết quả cycle XYZ thành báo cáo executive: tóm tắt, metrics, rủi ro, next steps."</em></td></tr>
+</tbody></table></div>
+
+
+<h2 style="margin-top:40px;font-size:1.4em;color:var(--accent);padding-bottom:10px;border-bottom:2px solid var(--border);">📍 Lộ trình áp dụng Skills theo Career Path</h2>
+<div class="card"><h3>🌱 Giai đoạn 1: Mới bắt đầu (Unrated → Rated)</h3>
+<table><thead><tr><th>Skill</th><th>Ứng dụng</th></tr></thead>
+<tbody><tr><td><strong>manual_requirement_analyzer</strong></td><td>Đọc hiểu Overview/Instructions test cycle</td></tr><tr><td><strong>bug_reporter</strong></td><td>Viết bug report chuẩn format lần đầu</td></tr><tr><td><strong>test_data_generator</strong></td><td>Tạo test data cho practice cycles</td></tr><tr><td><strong>system_mapping_synthesizer</strong></td><td>Mapping scope cycle phức tạp</td></tr></tbody></table></div>
+<div class="card"><h3>📈 Giai đoạn 2: Xây dựng Rating (Rated → Bronze)</h3>
+<table><thead><tr><th>Skill</th><th>Ứng dụng</th></tr></thead>
+<tbody><tr><td><strong>bug_reporter</strong></td><td>Nâng cấp chất lượng bug report → tăng approve rate</td></tr><tr><td><strong>log_troubleshooter</strong></td><td>Phân tích log → viết bug report chuyên sâu hơn</td></tr><tr><td><strong>test_strategy_planner</strong></td><td>Lập chiến lược test → tìm bug hiệu quả hơn</td></tr><tr><td><strong>qa_test_case_generator</strong></td><td>Tự tạo checklist cá nhân trước khi test</td></tr><tr><td><strong>qa_metrics_specialist</strong></td><td>Theo dõi & cải thiện tỷ lệ approve</td></tr></tbody></table></div>
+<div class="card"><h3>⭐ Giai đoạn 3: Nâng cao (Bronze → Gold)</h3>
+<table><thead><tr><th>Skill</th><th>Ứng dụng</th></tr></thead>
+<tbody><tr><td><strong>qa_test_case_reviewer</strong></td><td>Tìm gap trong test cases → bug Exceptionally Valuable</td></tr><tr><td><strong>qa_innovator_researcher</strong></td><td>Master các tool: Charles Proxy, ADB, DevTools</td></tr><tr><td><strong>qa_process_architect</strong></td><td>Xây quy trình cá nhân chuyên nghiệp</td></tr></tbody></table></div>
+<div class="card"><h3>👑 Giai đoạn 4: TTL & Beyond</h3>
+<table><thead><tr><th>Skill</th><th>Ứng dụng</th></tr></thead>
+<tbody><tr><td><strong>test_lead_assistant</strong></td><td>Quản lý cycle, triage bug, giao tiếp PM</td></tr><tr><td><strong>qa_management_report</strong></td><td>Báo cáo kết quả cho PM/TSM</td></tr><tr><td><strong>qa_metrics_specialist</strong></td><td>Dashboard chỉ số chất lượng cycle</td></tr></tbody></table></div>
+
+</div>
+</div>
+<footer><p>📄 uTest Freelance Testing Platform — System Mapping</p>
+<p>Nguồn: utest.com/ai-guidelines, utest.com/privacy-policy, uTest Academy Helpful Definitions</p>
+<p>Ngày tạo: 2026-05-17 • Phiên bản: 2.0 (Expanded Glossary)</p></footer>
+<script>mermaid.initialize({startOnLoad:true,theme:'dark',securityLevel:'loose',themeVariables:{primaryColor:'#16213e',primaryTextColor:'#e0e0e0',primaryBorderColor:'#0f3460',lineColor:'#53a8b6',secondaryColor:'#1a1a2e',tertiaryColor:'#0f0f1a'}});</script>
+</body></html>
